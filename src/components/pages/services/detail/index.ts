@@ -1,0 +1,9 @@
+export { ServiceDetailHeader } from "./Header";
+export { ServiceDetailFeatures } from "./Features";
+export { ServiceDetailProcess } from "./Process";
+export { ServiceDetailRelated } from "./Related";
+export { ServiceDetailOthers } from "./Others";
+export { ServiceDetailCta } from "./Cta";
+export { ServiceDetailSkeleton } from "./Skeleton";
+export { ServiceDetailNotFound } from "./NotFound";
+export { ServiceDetailError } from "./Error";
