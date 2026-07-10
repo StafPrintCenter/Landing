@@ -16,8 +16,8 @@ export function EmptyState({
   className = "col-span-full",
   animated = true,
 }: EmptyStateProps) {
-  const content = (
-    <div className={`flex flex-col items-center justify-center gap-4 rounded-2xl border border-dashed border-border bg-muted/30 py-20 text-center ${className}`}>
+  const inner = (
+    <div className="flex flex-col items-center justify-center gap-4 rounded-2xl border border-dashed border-border bg-muted/30 py-20 text-center">
       <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-border bg-card">
         <Icon size={28} className="text-muted-foreground/60" />
       </div>
@@ -28,7 +28,9 @@ export function EmptyState({
     </div>
   );
 
-  if (!animated) return content;
+  if (!animated) {
+    return <div className={className}>{inner}</div>;
+  }
 
   return (
     <motion.div
@@ -36,8 +38,9 @@ export function EmptyState({
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
+      className={className}
     >
-      {content}
+      {inner}
     </motion.div>
   );
 }
