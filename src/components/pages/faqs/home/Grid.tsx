@@ -27,7 +27,7 @@ export function FaqHomeGrid({ isLoading, faqs, openId }: FaqHomeGridProps) {
     return (
       <div className="mt-8 grid gap-4 md:grid-cols-2">
         {Array.from({ length: 6 }).map((_, idx) => (
-          <div key={`faq-skeleton-${idx}`} className="h-[68px] animate-pulse rounded-xl border border-border bg-card" />
+          <div key={`faq-skeleton-${idx}`} className="h-17 animate-pulse rounded-xl border border-border bg-card" />
         ))}
       </div>
     );
