@@ -4,7 +4,7 @@ import { Search, X, Clock, History, Trash2, ArrowRight } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { searchItems, TYPE_LABELS, type SearchItem } from "@/lib/search";
 import { useSearchHistory } from "@/hooks/use-search-history";
-import { useServicesStore, useProjectsStore, useFormationsStore, useArticlesStore, useFaqsStore } from "@/stores";
+import { useGlobalSearchData } from "@/hooks/use-global-search-data";
 import logos from "@/assets/logos.json";
 
 type Props = { open: boolean; onOpenChange: (v: boolean) => void };
@@ -14,11 +14,7 @@ export function SearchDialog({ open, onOpenChange }: Props) {
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
   const { queries, pages, pushPage, pushQuery, clearAll } = useSearchHistory();
-  const { services } = useServicesStore({ perPage: 100 });
-  const { projects } = useProjectsStore({ perPage: 100 });
-  const { formations } = useFormationsStore({ perPage: 100 });
-  const { articles } = useArticlesStore({ perPage: 100 });
-  const { faqs } = useFaqsStore({ perPage: 100 });
+  const { services, projects, formations, articles, faqs } = useGlobalSearchData();
 
   useEffect(() => {
     if (open) setTimeout(() => inputRef.current?.focus(), 50);
@@ -36,15 +32,9 @@ export function SearchDialog({ open, onOpenChange }: Props) {
     onOpenChange(false);
 
     if (item.type === "project" && item.projectId) {
-      navigate({
-        to: "/projects",
-        search: { open: item.projectId } as never,
-      });
+      navigate({ to: "/projects", search: { open: item.projectId } as never });
     } else if (item.type === "faq" && item.faqId) {
-      navigate({
-        to: "/faqs",
-        search: { open: item.faqId } as never,
-      });
+      navigate({ to: "/faqs", search: { open: item.faqId } as never });
     } else {
       navigate({ to: item.routePattern as never, params: item.params as never });
     }
@@ -138,6 +128,9 @@ export function SearchDialog({ open, onOpenChange }: Props) {
                                 if (p.type === "project") {
                                   const projectId = p.id.replace(/^project-/, "");
                                   navigate({ to: "/projects", search: { open: projectId } as never });
+                                } else if (p.type === "faq") {
+                                  const faqId = p.id.replace(/^faq-/, "");
+                                  navigate({ to: "/faqs", search: { open: faqId } as never });
                                 } else {
                                   navigate({ to: p.url as never });
                                 }
@@ -173,20 +166,10 @@ export function SearchDialog({ open, onOpenChange }: Props) {
                     className="flex w-full items-start gap-3 rounded-md p-3 text-left hover:bg-muted"
                   >
                     {item.image ? (
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="h-12 w-12 shrink-0 rounded object-cover"
-                        loading="lazy"
-                      />
+                      <img src={item.image} alt={item.title} className="h-12 w-12 shrink-0 rounded object-cover" loading="lazy" />
                     ) : (
                       <div className="grid h-12 w-12 shrink-0 place-items-center rounded bg-primary/5">
-                        <img
-                          src={logos.mc}
-                          alt={item.title}
-                          className="h-8 w-8 object-contain opacity-90"
-                          loading="lazy"
-                        />
+                        <img src={logos.mc} alt={item.title} className="h-8 w-8 object-contain opacity-90" loading="lazy" />
                       </div>
                     )}
                     <span className="min-w-0 flex-1">
