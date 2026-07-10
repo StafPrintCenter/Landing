@@ -9,6 +9,8 @@ import { useSearchHistory } from "@/hooks/use-search-history";
 import { buildShareUrl } from "@/lib/share/build-share-url";
 import { useGlobalSearchData } from "@/hooks/use-global-search-data";
 import { SITE } from "@/data/site";
+import { FilterMobileTrigger } from "@/components/shared/FilterMobileTrigger";
+import { FilterMobileSheet } from "@/components/shared/FilterMobileSheet";
 import {
   SearchHeader,
   SearchBar,
