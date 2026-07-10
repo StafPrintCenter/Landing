@@ -2,7 +2,7 @@ export function ArticleHomeSkeleton() {
   return (
     <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm animate-pulse">
       {/* Cover placeholder */}
-      <div className="aspect-[16/10] bg-muted" />
+      <div className="aspect-16/10 bg-muted" />
 
       {/* Body */}
       <div className="flex flex-1 flex-col p-5">
