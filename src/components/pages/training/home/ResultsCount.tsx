@@ -13,7 +13,6 @@ export function FormationHomeResultsCount({ theme, ...rest }: FormationHomeResul
     <ResultsCountText
       {...rest}
       category={theme}
-      isAllValue="Tout"
       unit={{ singular: "formation", plural: "formations" }}
       foundParticiple={{ singular: "trouvée", plural: "trouvées" }}
     />
