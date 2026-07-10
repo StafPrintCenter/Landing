@@ -10,12 +10,19 @@ interface SearchResultCardProps {
 
 export function SearchResultCard({ item, onNavigate }: SearchResultCardProps) {
   const isProject = item.type === "project" && !!item.projectId;
+  const isFaq = item.type === "faq" && !!item.faqId;
+
+  const searchParam = isProject
+    ? ({ open: item.projectId } as never)
+    : isFaq
+      ? ({ open: item.faqId } as never)
+      : undefined;
 
   return (
     <Link
       to={item.routePattern as never}
       params={item.params as never}
-      search={isProject ? ({ open: item.projectId } as never) : undefined}
+      search={searchParam}
       onClick={onNavigate}
       className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition hover:shadow-md"
     >
