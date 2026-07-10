@@ -16,8 +16,6 @@ import {
   SearchFilters,
   SearchResultsCount,
   SearchGrid,
-  SearchMobileTrigger,
-  SearchMobileSheet,
   SEARCH_SORT_OPTIONS,
   SEARCH_SORT_DIRECTIONS,
   type SearchSortOption,
