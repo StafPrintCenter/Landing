@@ -3,21 +3,7 @@ import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { format, addDays, startOfDay, isBefore, isSameDay } from "date-fns";
 import { fr } from "date-fns/locale";
-import {
-  CalendarIcon,
-  Clock,
-  MapPin,
-  Video,
-  ChevronLeft,
-  ChevronRight,
-  Check,
-  User,
-  Mail,
-  Phone,
-  FileText,
-  MessageSquare,
-  Send,
-} from "lucide-react";
+import { CalendarIcon, Clock, MapPin, Video, ChevronLeft, ChevronRight, Check, User, Mail, Phone, FileText, MessageSquare, Send, } from "lucide-react";
 import { SiteShell } from "@/components/site/SiteShell";
 import { Reveal } from "@/components/site/Reveal";
 import { Calendar } from "@/components/ui/calendar";
