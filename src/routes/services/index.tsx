@@ -25,7 +25,7 @@ import {
 const CATEGORY_VALUES = SERVICE_CATEGORIES.map((c) => c.value);
 
 const servicesSearchSchema = z.object({
-  category: z.enum(["all", ...CATEGORY_VALUES] as [string, ...string[]]).catch("all").default("all"),
+  category: z.enum(["Tout", ...CATEGORY_VALUES] as [string, ...string[]]).catch("Tout").default("Tout"),
   sortBy: z.enum(SERVICE_SORT_OPTIONS).catch("default").default("default"),
   sortDir: z.enum(SERVICE_SORT_DIRECTIONS).catch("asc").default("asc"),
   query: z.string().catch("").default(""),
@@ -86,7 +86,7 @@ function ServicesPage() {
     updateSearch({ sortBy: s, sortDir: "asc" });
   };
 
-  const activeFilterCount = (category !== "all" ? 1 : 0) + (sortBy !== "default" ? 1 : 0);
+  const activeFilterCount = (category !== "Tout" ? 1 : 0) + (sortBy !== "default" ? 1 : 0);
 
   const filtersPanel = (
     <ServiceHomeFilters
