@@ -1,4 +1,3 @@
-// src/stores/useServicesStore.ts
 import { createResourceStore } from "./createResourceStore";
 import { type APIService } from "@/data/services";
 
