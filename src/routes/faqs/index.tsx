@@ -19,7 +19,7 @@ import {
   FAQ_SORT_DIRECTIONS,
   type FaqSortOption,
   type FaqSortDirection,
-} from "@/components/pages/faqs/home";
+} from "@/components/pages/faqs";
 
 const faqsSearchSchema = z.object({
   category: z.enum(["Tout", ...DISCIPLINES] as [string, ...string[]]).catch("Tout").default("Tout"),
