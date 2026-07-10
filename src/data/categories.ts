@@ -72,8 +72,8 @@ const SERVICE_CATEGORY_LABELS:
 };
 
 // Construit dynamiquement la liste des filtres de service à partir de DISCIPLINES,
-export const SERVICE_CATEGORIES: { value: ServiceCategory | "all"; label: string }[] = [
-  { value: "all", label: "Tous" },
+export const SERVICE_CATEGORIES: { value: ServiceCategory | "Tout"; label: string }[] = [
+  { value: "Tout", label: "Tous" },
   ...Array.from(
     new Set(
       SERVICE_RELEVANT_DISCIPLINES.map(
