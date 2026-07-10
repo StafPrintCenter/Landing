@@ -9,5 +9,8 @@ interface RealisationHomeResultsCountProps {
 }
 
 export function RealisationHomeResultsCount(props: RealisationHomeResultsCountProps) {
-  return <ResultsCountText {...props} unit={{ singular: "projet", plural: "projets" }} />;
+  return <ResultsCountText
+    {...props}
+    unit={{ singular: "projet", plural: "projets" }}
+  />;
 }
