@@ -9,10 +9,6 @@ interface SearchResultCardProps {
 }
 
 export function SearchResultCard({ item, onNavigate }: SearchResultCardProps) {
-  // Un résultat de type "projet" doit ouvrir directement le lightbox de /projects,
-  // exactement comme le fait SearchDialog — il faut donc aussi transmettre
-  // search={{ open: projectId }}, sinon le Link atterrit sur /projects sans
-  // jamais déclencher l'ouverture du lightbox.
   const isProject = item.type === "project" && !!item.projectId;
 
   return (
