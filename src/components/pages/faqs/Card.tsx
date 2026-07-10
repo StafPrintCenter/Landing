@@ -12,8 +12,13 @@ interface FaqHomeCardProps {
 
 export function FaqHomeCard({ faq: item, isOpen, onToggle, cardRef }: FaqHomeCardProps) {
   return (
-    <div
+    <motion.div
       ref={cardRef}
+      layout
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.97 }}
+      transition={{ duration: 0.25 }}
       className="overflow-hidden rounded-xl border border-border bg-card transition-colors duration-200"
     >
       <button
@@ -48,6 +53,6 @@ export function FaqHomeCard({ faq: item, isOpen, onToggle, cardRef }: FaqHomeCar
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }
