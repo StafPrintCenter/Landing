@@ -23,7 +23,7 @@ export const Route = createFileRoute("/appointment")({
       { property: "og:description", content: "Réservez facilement un créneau en ligne ou en présentiel." },
       { property: "og:url", content: "/rendez-vous" },
     ],
-    links: [{ rel: "canonical", href: "/rendez-vous" }],
+    links: [{ rel: "canonical", href: "/appointment" }],
   }),
   component: RendezVousPage,
 });
