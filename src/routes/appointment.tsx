@@ -423,7 +423,7 @@ function StepSlot({
                     disabled={past}
                     onClick={() => update("time", s)}
                     className={cn(
-                      "rounded-lg border px-2 py-2 text-sm font-medium transition-colors",
+                      "cursor-pointer rounded-lg border px-2 py-2 text-sm font-medium transition-colors",
                       active
                         ? "border-primary bg-primary text-primary-foreground"
                         : "border-border hover:bg-muted",
