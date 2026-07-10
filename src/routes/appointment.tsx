@@ -165,7 +165,7 @@ ${data.message || "—"}`;
             </div>
             <h1 className="text-2xl md:text-3xl font-bold">Demande envoyée !</h1>
             <p className="mt-3 text-muted-foreground">
-              Votre client mail s'est ouvert avec le récapitulatif. Vous pouvez également nous prévenir sur WhatsApp pour accélérer la confirmation.
+              Nous avons bien reçu votre demande de rendez-vous et vous enverrons une confirmation par email très prochainement. Vous pouvez également nous en envoyer une copie sur WhatsApp pour accélérer la confirmation.
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <button
