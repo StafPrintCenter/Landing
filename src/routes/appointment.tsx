@@ -176,7 +176,7 @@ ${data.message || "—"}`;
               </button>
               <Link
                 to="/"
-                className="rounded-full border border-border bg-background px-5 py-3 text-sm font-semibold hover:bg-muted"
+                className="cursor-pointer rounded-full border border-border bg-background px-5 py-3 text-sm font-semibold hover:bg-muted"
               >
                 Retour à l'accueil
               </Link>
