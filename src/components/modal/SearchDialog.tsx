@@ -40,6 +40,11 @@ export function SearchDialog({ open, onOpenChange }: Props) {
         to: "/projects",
         search: { open: item.projectId } as never,
       });
+    } else if (item.type === "faq" && item.faqId) {
+      navigate({
+        to: "/faqs",
+        search: { open: item.faqId } as never,
+      });
     } else {
       navigate({ to: item.routePattern as never, params: item.params as never });
     }
