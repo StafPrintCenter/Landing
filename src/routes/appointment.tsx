@@ -76,7 +76,9 @@ function slotsForDate(d: Date): string[] {
 
 function isDateDisabled(d: Date) {
   const today = startOfDay(new Date());
-  if (isBefore(d, today)) return true;
+  // Minimum 48h à l'avance : aujourd'hui et demain verrouillés
+  const minDate = addDays(today, 2);
+  if (isBefore(d, minDate)) return true;
   if (isBefore(addDays(today, 60), d)) return true;
   return d.getDay() === 0;
 }
@@ -129,10 +131,8 @@ ${data.message || "—"}`;
   };
 
   const submit = () => {
-    const body = buildRecap();
-    const subject = `Rendez-vous — ${data.firstName} ${data.lastName} (${data.date ? format(data.date, "dd/MM/yyyy") : ""} ${data.time ?? ""})`;
-    const mail = `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mail;
+    // TODO: envoyer un email automatiquement via backend
+    // Pour l'instant, on affiche juste la confirmation ; l'utilisateur peut envoyer une copie WhatsApp.
     setSent(true);
   };
 
