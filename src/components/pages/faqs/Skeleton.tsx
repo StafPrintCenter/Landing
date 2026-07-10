@@ -8,7 +8,7 @@ export function FaqHomeSkeleton() {
           <div className="h-4 w-48 rounded bg-muted sm:w-64" />
         </div>
         {/* Placeholder icône Plus/Minus */}
-        <div className="mt-1 h-[18px] w-[18px] shrink-0 rounded-full bg-muted" />
+        <div className="mt-1 h-4.5 w-4.5 shrink-0 rounded-full bg-muted" />
       </div>
     </div>
   );
