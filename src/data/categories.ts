@@ -50,6 +50,10 @@ export type ServiceCategory = "impression" | "digital" | "formation";
 // Disciplines qui ont un équivalent en tant que famille de service
 const SERVICE_RELEVANT_DISCIPLINES: Discipline[] = ["Design", "Web", "Vidéo", "Impression", "Formation"];
 
+// ── FAQ ──
+export type FaqCategory = Discipline;
+export const FAQ_CATEGORIES: FaqCategory[] = DISCIPLINES;
+
 export const DISCIPLINE_TO_SERVICE_CATEGORY:
   Record<Exclude<Discipline, "Conseils" | "Actus">,
     ServiceCategory> = {
@@ -81,13 +85,14 @@ export const SERVICE_CATEGORIES: { value: ServiceCategory | "all"; label: string
 
 // ── Recherche ──
 // Source unique pour les types de contenu recherchables.
-export type SearchType = "service" | "project" | "formation" | "article";
+export type SearchType = "service" | "project" | "formation" | "article" | "faq";
 
 export const SEARCH_TYPE_LABELS: Record<SearchType, string> = {
   service: "Service",
   project: "Réalisation",
   formation: "Formation",
   article: "Article",
+  faq: "Faq",
 };
 
 export const SEARCH_TYPES: Array<{ value: SearchType | "all"; label: string }> = [
@@ -104,6 +109,7 @@ export const SEARCH_TYPE_COLORS: Record<SearchType, string> = {
   project: "bg-orange-500/10 text-orange-600 dark:text-orange-400 dark:bg-orange-500/20 border-orange-500/20",
   formation: "bg-violet-500/10 text-violet-600 dark:text-violet-400 dark:bg-violet-500/20 border-violet-500/20",
   article: "bg-fuchsia-500/10 text-fuchsia-600 dark:text-fuchsia-400 dark:bg-fuchsia-500/20 border-fuchsia-500/20",
+  faq: "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 dark:bg-yellow-500/20 border-yellow-500/20",
 };
 
 export function getSearchTypeColorClass(type: SearchType): string {
