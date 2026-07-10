@@ -21,7 +21,7 @@ export const Route = createFileRoute("/appointment")({
       { name: "description", content: "Réservez un rendez-vous en ligne ou en présentiel avec STAF PRINT CENTER à Porto-Novo. Choisissez votre créneau et confirmez en quelques étapes." },
       { property: "og:title", content: `Prendre rendez-vous | ${SITE.name}` },
       { property: "og:description", content: "Réservez facilement un créneau en ligne ou en présentiel." },
-      { property: "og:url", content: "/rendez-vous" },
+      { property: "og:url", content: "/appointment" },
     ],
     links: [{ rel: "canonical", href: "/appointment" }],
   }),
