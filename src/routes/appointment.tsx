@@ -325,7 +325,7 @@ function StepType({
               key={o.id}
               onClick={() => update("mode", o.id)}
               className={cn(
-                "text-left rounded-2xl border p-5 transition-all",
+                "cursor-pointer text-left rounded-2xl border p-5 transition-all",
                 active
                   ? "border-primary bg-primary/5 ring-2 ring-primary/20"
                   : "border-border hover:border-primary/50 hover:bg-muted/50",
