@@ -158,7 +158,7 @@ function SearchPage() {
           <SearchBar value={input} onChange={setInput} onSubmit={submit} />
         </div>
 
-        <SearchMobileTrigger activeFilterCount={activeFilterCount} onOpen={() => setFiltersOpen(true)} />
+        <FilterMobileTrigger activeFilterCount={activeFilterCount} onOpen={() => setFiltersOpen(true)} />
 
         <div className="mt-6 grid gap-8 md:grid-cols-[260px_1fr] md:items-start lg:grid-cols-[280px_1fr]">
           {/* Sidebar — desktop only */}
