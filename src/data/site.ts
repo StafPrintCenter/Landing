@@ -28,6 +28,7 @@ export const NAV_LINKS = [
   { label: "Réalisations", to: "/projects" },
   { label: "Formations", to: "/training" },
   { label: "Blog", to: "/articles" },
+  { label: "FAQs", to: "/faqs" },
 ] as const;
 
 export const LEGAL_LINKS = [
