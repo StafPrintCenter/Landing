@@ -7,11 +7,7 @@ import { searchItems, categoriesForType, TYPE_LABELS } from "@/lib/search";
 import { type SearchType } from "@/data/categories";
 import { useSearchHistory } from "@/hooks/use-search-history";
 import { buildShareUrl } from "@/lib/share/build-share-url";
-import { useServicesStore } from "@/stores/useServicesStore";
-import { useProjectsStore } from "@/stores/useProjectsStore";
-import { useFormationsStore } from "@/stores/useFormationsStore";
-import { useArticlesStore } from "@/stores/useArticlesStore";
-import { useFaqsStore } from "@/stores/useFaqsStore";
+import { useServicesStore, useProjectsStore, useFormationsStore, useArticlesStore, useFaqsStore } from "@/stores";
 import { SITE } from "@/data/site";
 import {
   SearchHeader,
