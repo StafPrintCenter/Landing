@@ -1,4 +1,4 @@
-export function ArticleHomeSkeleton() {
+export function FaqHomeSkeleton() {
   return (
     <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm animate-pulse">
       {/* Cover placeholder */}
