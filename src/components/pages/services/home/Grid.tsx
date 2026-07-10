@@ -1,8 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import { ServiceHomeSkeleton } from "./Skeleton";
-import { ArrowRight, Star, SearchX } from "lucide-react";
+import { ArrowRight, Star } from "lucide-react";
 import { SERVICE_CATEGORIES, type APIService, getServiceIcon } from "@/data/services";
+import { EmptyState } from "@/components/shared/EmptyState";
 
 interface ServiceHomeGridProps {
   isLoading: boolean;
@@ -83,23 +84,7 @@ export function ServiceHomeGrid({ isLoading, services }: ServiceHomeGridProps) {
           })
         ) : (
           // 4. Aucun résultat
-          <motion.div
-            key="empty"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            className="col-span-full flex flex-col items-center justify-center gap-4 rounded-2xl border border-dashed border-border bg-muted/30 py-20 text-center"
-          >
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-border bg-card">
-              <SearchX size={28} className="text-muted-foreground/60" />
-            </div>
-            <div>
-              <p className="font-display text-lg font-semibold text-foreground">Aucun résultat</p>
-              <p className="mt-1 max-w-xs text-sm text-muted-foreground">
-                Aucun service ne correspond aux critères sélectionnés. Essayez un autre filtre.
-              </p>
-            </div>
-          </motion.div>
+          <EmptyState description="Aucun service ne correspond aux critères sélectionnés. Essayez un autre filtre." />
         )}
       </AnimatePresence>
     </div>
