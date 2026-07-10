@@ -1,3 +1,4 @@
+// src/components/pages/articles/home/ResultsCount.tsx
 import { ResultsCountText } from "@/components/shared/ResultsCountText";
 
 interface ArticleHomeResultsCountProps {
@@ -12,10 +13,8 @@ export function ArticleHomeResultsCount(props: ArticleHomeResultsCountProps) {
   return (
     <ResultsCountText
       {...props}
-      isAllValue="Tout"
       unit={{ singular: "article", plural: "articles" }}
       globalParticiple={{ singular: "rédigé", plural: "rédigés" }}
-      className="mt-6 text-sm text-muted-foreground"
     />
   );
 }
