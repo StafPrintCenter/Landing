@@ -7,7 +7,7 @@ import { searchItems, categoriesForType, TYPE_LABELS } from "@/lib/search";
 import { type SearchType } from "@/data/categories";
 import { useSearchHistory } from "@/hooks/use-search-history";
 import { buildShareUrl } from "@/lib/share/build-share-url";
-import { useServicesStore, useProjectsStore, useFormationsStore, useArticlesStore, useFaqsStore } from "@/stores";
+import { useGlobalSearchData } from "@/hooks/use-global-search-data";
 import { SITE } from "@/data/site";
 import {
   SearchHeader,
