@@ -282,7 +282,7 @@ ${data.message || "—"}`;
             ) : (
               <button
                 onClick={submit}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground shadow hover:opacity-90"
+                className="cursor-pointer inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground shadow hover:opacity-90"
               >
                 <Send size={16} /> Confirmer et envoyer
               </button>
