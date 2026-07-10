@@ -275,7 +275,7 @@ ${data.message || "—"}`;
               <button
                 onClick={next}
                 disabled={!canNext}
-                className="inline-flex items-center justify-center gap-1 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground shadow hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed"
+                className="cursor-pointer inline-flex items-center justify-center gap-1 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground shadow hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 Continuer <ChevronRight size={16} />
               </button>
