@@ -267,7 +267,7 @@ ${data.message || "—"}`;
             <button
               onClick={back}
               disabled={step === 0}
-              className="inline-flex items-center justify-center gap-1 rounded-full border border-border bg-background px-5 py-2.5 text-sm font-semibold disabled:opacity-40 disabled:cursor-not-allowed hover:bg-muted"
+              className="cursor-pointer inline-flex items-center justify-center gap-1 rounded-full border border-border bg-background px-5 py-2.5 text-sm font-semibold disabled:opacity-40 disabled:cursor-not-allowed hover:bg-muted"
             >
               <ChevronLeft size={16} /> Retour
             </button>
