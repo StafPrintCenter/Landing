@@ -35,4 +35,5 @@ export const LEGAL_LINKS = [
   { label: "Mentions légales", to: "/legal/mentions" },
   { label: "Conditions Générales de Vente", to: "/legal/cgv" },
   { label: "Confidentialité", to: "/legal/privacy" },
+  { label: "Rendez-vous", to: "/appointment" },
 ] as const;
