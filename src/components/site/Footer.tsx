@@ -11,7 +11,7 @@ export function Footer() {
   const footerServices = [
     ...(services || []).filter((s) => s.featured),
     ...(services || []).filter((s) => !s.featured),
-  ].slice(0, 4);
+  ].slice(0, 5);
 
   return (
     <footer className="mt-24 border-t border-border bg-secondary text-secondary-foreground">
