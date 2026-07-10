@@ -31,7 +31,7 @@ export const NAV_LINKS = [
   { label: "FAQs", to: "/faqs" },
 ] as const;
 
-export const LEGAL_LINKS = [
+export const FOOTER_LINKS = [
   { label: "Mentions légales", to: "/legal/mentions" },
   { label: "Conditions Générales de Vente", to: "/legal/cgv" },
   { label: "Confidentialité", to: "/legal/privacy" },
