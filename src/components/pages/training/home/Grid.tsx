@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { SearchX } from "lucide-react";
+import { AnimatePresence } from "framer-motion";
 import { FormationHomeCard } from "./Card";
 import { FormationHomeSkeleton } from "./Skeleton";
 import { TrainningRegistration } from "@/components/modal";
 import type { APIFormation } from "@/data/formations";
+import { EmptyState } from "@/components/shared/EmptyState";
 
 interface FormationGridProps {
   isLoading: boolean;
@@ -33,23 +33,7 @@ export function FormationHomeGrid({ isLoading, formations }: FormationGridProps)
             />
           ))
         ) : (
-          <motion.div
-            key="empty"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            className="col-span-full flex flex-col items-center justify-center gap-4 rounded-2xl border border-dashed border-border bg-muted/30 py-20 text-center"
-          >
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-border bg-card">
-              <SearchX size={28} className="text-muted-foreground/60" />
-            </div>
-            <div>
-              <p className="font-display text-lg font-semibold text-foreground">Aucun résultat</p>
-              <p className="mt-1 max-w-xs text-sm text-muted-foreground">
-                Aucune formation ne correspond aux critères sélectionnés. Essayez un autre filtre.
-              </p>
-            </div>
-          </motion.div>
+          <EmptyState description="Aucune formation ne correspond aux critères sélectionnés. Essayez un autre filtre." />
         )}
       </AnimatePresence>
 
