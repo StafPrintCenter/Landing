@@ -7,6 +7,10 @@ type FaqsResponse = {
   meta: any;
 };
 
+type FaqResponse = {
+  data: APIFaq;
+};
+
 export interface FetchFaqsParams {
   category?: string;
   query?: string;
@@ -47,10 +51,18 @@ export async function fetchPublicFaqs(params: FetchFaqsParams = {}): Promise<Faq
   return response.json();
 }
 
+
+
+
+
+
+
+
+
+
+
 /**
  * Store / Hook customisé servant de source de vérité unique pour les FAQs.
- * Utilisable avec ou sans filtre de catégorie — la future page FAQ globale
- * appellera useFaqsStore({ perPage: 100 }) pour tout récupérer.
  */
 export function useFaqsStore(params: FetchFaqsParams = {}) {
   const query = useQuery({
