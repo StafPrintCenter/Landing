@@ -47,8 +47,8 @@ export const Route = createFileRoute("/projects/")({
 });
 
 function RealisationsPage() {
-  const { category, sortBy, sortDir, query, page, perPage, open } = useSearch({ from: "/projects" });
-  const navigate = useNavigate({ from: "/projects" });
+  const { category, sortBy, sortDir, query, page, perPage, open } = useSearch({ from: "/projects/" });
+  const navigate = useNavigate({ from: "/projects/" });
 
   const { lightboxIndex, openLightbox, closeLightbox, setLightboxIndex } = useUI();
 
