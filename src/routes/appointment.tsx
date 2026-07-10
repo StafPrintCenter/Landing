@@ -170,7 +170,7 @@ ${data.message || "—"}`;
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <button
                 onClick={openWhatsapp}
-                className="rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow hover:opacity-90"
+                className="cursor-pointer rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow hover:opacity-90"
               >
                 Envoyer sur WhatsApp
               </button>
