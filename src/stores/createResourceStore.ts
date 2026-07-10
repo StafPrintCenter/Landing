@@ -20,32 +20,25 @@ interface DetailResponse<T> {
 }
 
 interface CreateResourceStoreOptions {
-  /** Nom de la ressource au pluriel, utilisé pour la queryKey (ex: "services", "projects") */
   resourceKey: string;
-  /** URL de base de la liste, relative à /api/public (ex: "services/list") */
   listEndpoint: string;
-  /** URL de base du détail, relative à /api/public (ex: "services/get") — optionnel si pas de détail unitaire */
   detailEndpoint?: string;
-  /** Valeurs de category à ignorer (ne pas envoyer en query param) */
-  allCategoryValues?: string[];
   staleTime?: number;
 }
 
 /**
- * Fabrique un couple (fetchList, fetchById, useXStore) pour une ressource
- * suivant le contrat commun de l'API publique (pagination, filtres, tri).
+ * Fabrique un couple (fetchList, fetchById, useResourceStore) pour une ressource
  */
 export function createResourceStore<T>({
   resourceKey,
   listEndpoint,
   detailEndpoint,
-  allCategoryValues = ["all", "Tout"],
   staleTime = 1000 * 60 * 5,
 }: CreateResourceStoreOptions) {
   async function fetchList(params: BaseFetchParams = {}): Promise<ListResponse<T>> {
     const queryParams = new URLSearchParams();
 
-    if (params.category && !allCategoryValues.includes(params.category)) {
+    if (params.category && params.category !== "Tout") {
       queryParams.append("category", params.category);
     }
     if (params.query) queryParams.append("query", params.query);
