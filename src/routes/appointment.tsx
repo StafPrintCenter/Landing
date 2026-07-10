@@ -522,7 +522,7 @@ function StepRecap({
         <div className="rounded-2xl border border-border bg-background p-5">
           <div className="flex items-center justify-between">
             <h3 className="font-semibold">Rendez-vous</h3>
-            <button onClick={() => onEdit(0)} className="text-xs font-semibold text-primary hover:underline">Modifier</button>
+            <button onClick={() => onEdit(0)} className="cursor-pointer text-xs font-semibold text-primary hover:underline">Modifier</button>
           </div>
           <div className="mt-2">
             <Row label="Type" value={modeLabel} />
