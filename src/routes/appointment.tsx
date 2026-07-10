@@ -355,7 +355,7 @@ function StepType({
                 key={d}
                 onClick={() => update("duration", d)}
                 className={cn(
-                  "rounded-full border px-4 py-2 text-sm font-medium transition-colors",
+                  "cursor-pointer rounded-full border px-4 py-2 text-sm font-medium transition-colors",
                   active ? "border-primary bg-primary text-primary-foreground" : "border-border hover:bg-muted",
                 )}
               >
