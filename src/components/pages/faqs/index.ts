@@ -4,5 +4,5 @@ export { FaqHomeFilters, FAQ_SORT_OPTIONS, FAQ_SORT_DIRECTIONS, type FaqSortOpti
 export { FaqHomeMobileTrigger } from "./MobileTrigger";
 export { FaqHomeMobileSheet } from "./MobileSheet";
 export { FaqHomeResultsCount } from "./ResultsCount";
-export { ArticleHomeSkeleton } from "./Skeleton";
+export { FaqHomeSkeleton } from "./Skeleton";
 export { FaqHomeGrid } from "./Grid";
