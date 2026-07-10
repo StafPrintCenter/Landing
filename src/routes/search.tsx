@@ -8,6 +8,10 @@ import { type SearchType } from "@/data/categories";
 import { useSearchHistory } from "@/hooks/use-search-history";
 import { buildShareUrl } from "@/lib/share/build-share-url";
 import { useServicesStore } from "@/stores/useServicesStore";
+import { useProjectsStore } from "@/stores/useProjectsStore";
+import { useFormationsStore } from "@/stores/useFormationsStore";
+import { useArticlesStore } from "@/stores/useArticlesStore";
+import { useFaqsStore } from "@/stores/useFaqsStore";
 import { SITE } from "@/data/site";
 import {
   SearchHeader,
@@ -26,7 +30,7 @@ import {
 // 1. Schéma de validation dérivé des sources uniques
 const searchSchema = z.object({
   q: fallback(z.string(), "").default(""),
-  type: fallback(z.enum(["all", "service", "project", "formation", "article"]), "all").default("all"),
+  type: fallback(z.enum(["all", "service", "project", "formation", "article", "faq"]), "all").default("all"),
   category: fallback(z.string(), "Toutes").default("Toutes"),
   sortBy: fallback(z.enum(SEARCH_SORT_OPTIONS), "relevance").default("relevance"),
   sortDir: fallback(z.enum(SEARCH_SORT_DIRECTIONS), "asc").default("asc"),
@@ -37,7 +41,7 @@ export const Route = createFileRoute("/search")({
   head: () => ({
     meta: [
       { title: `Recherche | ${SITE.name}` },
-      { name: "description", content: "Recherchez parmi nos services, réalisations, formations et articles." },
+      { name: "description", content: "Recherchez parmi nos services, réalisations, formations, articles et questions fréquentes." },
       { property: "og:title", content: `Recherche | ${SITE.name}` },
       { property: "og:url", content: "/search" },
       { name: "robots", content: "noindex" },
@@ -54,7 +58,12 @@ function SearchPage() {
   const [input, setInput] = useState(q);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const { pushQuery, pushPage } = useSearchHistory();
+
   const { services } = useServicesStore({ perPage: 100 });
+  const { projects } = useProjectsStore({ perPage: 100 });
+  const { formations } = useFormationsStore({ perPage: 100 });
+  const { articles } = useArticlesStore({ perPage: 100 });
+  const { faqs } = useFaqsStore({ perPage: 100 });
 
   useEffect(() => setInput(q), [q]);
 
@@ -68,8 +77,15 @@ function SearchPage() {
     }
   }, [filtersOpen]);
 
-  const categories = useMemo(() => categoriesForType(type, services), [type, services]);
-  const matched = useMemo(() => searchItems(q, services, { type, category }), [q, services, type, category]);
+  const categories = useMemo(
+    () => categoriesForType(type, services, projects, formations, articles, faqs),
+    [type, services, projects, formations, articles, faqs]
+  );
+
+  const matched = useMemo(
+    () => searchItems(q, services, projects, formations, articles, faqs, { type, category }),
+    [q, services, projects, formations, articles, faqs, type, category]
+  );
 
   // 3. Tri appliqué après le filtrage
   const results = useMemo(() => {
@@ -96,7 +112,7 @@ function SearchPage() {
     if (q.trim()) pushQuery(q);
   }, [q, pushQuery]);
 
-  // 4. Centralisation de la mise à jour de l'URL, comme dans training/index.tsx
+  // 4. Centralisation de la mise à jour de l'URL
   const updateSearch = (params: Partial<z.infer<typeof searchSchema>>) => {
     navigate({ to: "/search", search: (prev) => ({ ...prev, ...params }) });
   };
