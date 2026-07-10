@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Twitter } from "lucide-react";
-import { SITE, NAV_LINKS, LEGAL_LINKS } from "@/data/site";
+import { SITE, NAV_LINKS, FOOTER_LINKS } from "@/data/site";
 import { useServicesStore } from "@/stores/useServicesStore";
 import logo from "@/assets/logos.json";
 import { WhatsAppIcon } from "./icons/WhatsAppIcon";
@@ -106,12 +106,12 @@ export function Footer() {
         <div className="container-x flex flex-col items-center justify-center gap-3 py-5 text-xs text-secondary-foreground/60 md:flex-row md:justify-between">
           <p>© {new Date().getFullYear()}  {SITE.name} - Tous droits réservés.</p>
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
-            {LEGAL_LINKS.map((l, i) => (
+            {FOOTER_LINKS.map((l, i) => (
               <span key={l.to} className="flex items-center gap-4">
                 <Link to={l.to} className="hover:text-accent transition-colors">
                   {l.label}
                 </Link>
-                {i < LEGAL_LINKS.length - 1 && (
+                {i < FOOTER_LINKS.length - 1 && (
                   <span className="hidden h-3 w-px bg-secondary-foreground/20 md:inline-block" aria-hidden />
                 )}
               </span>
