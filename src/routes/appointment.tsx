@@ -172,7 +172,7 @@ ${data.message || "—"}`;
                 onClick={openWhatsapp}
                 className="cursor-pointer rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow hover:opacity-90"
               >
-                Envoyer sur WhatsApp
+                Envoyer une copie sur WhatsApp
               </button>
               <Link
                 to="/"
