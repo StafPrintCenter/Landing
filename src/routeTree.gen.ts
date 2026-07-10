@@ -15,6 +15,7 @@ import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TrainingIndexRouteImport } from './routes/training/index'
 import { Route as ServicesIndexRouteImport } from './routes/services/index'
+import { Route as FaqsIndexRouteImport } from './routes/faqs/index'
 import { Route as ArticlesIndexRouteImport } from './routes/articles/index'
 import { Route as TrainingIdRouteImport } from './routes/training/$id'
 import { Route as ServicesSlugRouteImport } from './routes/services/$slug'
@@ -51,6 +52,11 @@ const TrainingIndexRoute = TrainingIndexRouteImport.update({
 const ServicesIndexRoute = ServicesIndexRouteImport.update({
   id: '/services/',
   path: '/services/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqsIndexRoute = FaqsIndexRouteImport.update({
+  id: '/faqs/',
+  path: '/faqs/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ArticlesIndexRoute = ArticlesIndexRouteImport.update({
@@ -101,6 +107,7 @@ export interface FileRoutesByFullPath {
   '/services/$slug': typeof ServicesSlugRoute
   '/training/$id': typeof TrainingIdRoute
   '/articles/': typeof ArticlesIndexRoute
+  '/faqs/': typeof FaqsIndexRoute
   '/services/': typeof ServicesIndexRoute
   '/training/': typeof TrainingIndexRoute
 }
@@ -116,6 +123,7 @@ export interface FileRoutesByTo {
   '/services/$slug': typeof ServicesSlugRoute
   '/training/$id': typeof TrainingIdRoute
   '/articles': typeof ArticlesIndexRoute
+  '/faqs': typeof FaqsIndexRoute
   '/services': typeof ServicesIndexRoute
   '/training': typeof TrainingIndexRoute
 }
@@ -132,6 +140,7 @@ export interface FileRoutesById {
   '/services/$slug': typeof ServicesSlugRoute
   '/training/$id': typeof TrainingIdRoute
   '/articles/': typeof ArticlesIndexRoute
+  '/faqs/': typeof FaqsIndexRoute
   '/services/': typeof ServicesIndexRoute
   '/training/': typeof TrainingIndexRoute
 }
@@ -149,6 +158,7 @@ export interface FileRouteTypes {
     | '/services/$slug'
     | '/training/$id'
     | '/articles/'
+    | '/faqs/'
     | '/services/'
     | '/training/'
   fileRoutesByTo: FileRoutesByTo
@@ -164,6 +174,7 @@ export interface FileRouteTypes {
     | '/services/$slug'
     | '/training/$id'
     | '/articles'
+    | '/faqs'
     | '/services'
     | '/training'
   id:
@@ -179,6 +190,7 @@ export interface FileRouteTypes {
     | '/services/$slug'
     | '/training/$id'
     | '/articles/'
+    | '/faqs/'
     | '/services/'
     | '/training/'
   fileRoutesById: FileRoutesById
@@ -195,6 +207,7 @@ export interface RootRouteChildren {
   ServicesSlugRoute: typeof ServicesSlugRoute
   TrainingIdRoute: typeof TrainingIdRoute
   ArticlesIndexRoute: typeof ArticlesIndexRoute
+  FaqsIndexRoute: typeof FaqsIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
   TrainingIndexRoute: typeof TrainingIndexRoute
 }
@@ -241,6 +254,13 @@ declare module '@tanstack/react-router' {
       path: '/services'
       fullPath: '/services/'
       preLoaderRoute: typeof ServicesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faqs/': {
+      id: '/faqs/'
+      path: '/faqs'
+      fullPath: '/faqs/'
+      preLoaderRoute: typeof FaqsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/articles/': {
@@ -307,6 +327,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesSlugRoute: ServicesSlugRoute,
   TrainingIdRoute: TrainingIdRoute,
   ArticlesIndexRoute: ArticlesIndexRoute,
+  FaqsIndexRoute: FaqsIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,
   TrainingIndexRoute: TrainingIndexRoute,
 }
