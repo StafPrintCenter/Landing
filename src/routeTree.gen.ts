@@ -11,10 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SearchRouteImport } from './routes/search'
-import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TrainingIndexRouteImport } from './routes/training/index'
 import { Route as ServicesIndexRouteImport } from './routes/services/index'
+import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
 import { Route as FaqsIndexRouteImport } from './routes/faqs/index'
 import { Route as ArticlesIndexRouteImport } from './routes/articles/index'
 import { Route as TrainingIdRouteImport } from './routes/training/$id'
@@ -34,11 +34,6 @@ const SearchRoute = SearchRouteImport.update({
   path: '/search',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProjectsRoute = ProjectsRouteImport.update({
-  id: '/projects',
-  path: '/projects',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -52,6 +47,11 @@ const TrainingIndexRoute = TrainingIndexRouteImport.update({
 const ServicesIndexRoute = ServicesIndexRouteImport.update({
   id: '/services/',
   path: '/services/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
+  id: '/projects/',
+  path: '/projects/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqsIndexRoute = FaqsIndexRouteImport.update({
@@ -97,7 +97,6 @@ const ArticlesSlugRoute = ArticlesSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/projects': typeof ProjectsRoute
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/articles/$slug': typeof ArticlesSlugRoute
@@ -108,12 +107,12 @@ export interface FileRoutesByFullPath {
   '/training/$id': typeof TrainingIdRoute
   '/articles/': typeof ArticlesIndexRoute
   '/faqs/': typeof FaqsIndexRoute
+  '/projects/': typeof ProjectsIndexRoute
   '/services/': typeof ServicesIndexRoute
   '/training/': typeof TrainingIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/projects': typeof ProjectsRoute
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/articles/$slug': typeof ArticlesSlugRoute
@@ -124,13 +123,13 @@ export interface FileRoutesByTo {
   '/training/$id': typeof TrainingIdRoute
   '/articles': typeof ArticlesIndexRoute
   '/faqs': typeof FaqsIndexRoute
+  '/projects': typeof ProjectsIndexRoute
   '/services': typeof ServicesIndexRoute
   '/training': typeof TrainingIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/projects': typeof ProjectsRoute
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/articles/$slug': typeof ArticlesSlugRoute
@@ -141,6 +140,7 @@ export interface FileRoutesById {
   '/training/$id': typeof TrainingIdRoute
   '/articles/': typeof ArticlesIndexRoute
   '/faqs/': typeof FaqsIndexRoute
+  '/projects/': typeof ProjectsIndexRoute
   '/services/': typeof ServicesIndexRoute
   '/training/': typeof TrainingIndexRoute
 }
@@ -148,7 +148,6 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/projects'
     | '/search'
     | '/sitemap.xml'
     | '/articles/$slug'
@@ -159,12 +158,12 @@ export interface FileRouteTypes {
     | '/training/$id'
     | '/articles/'
     | '/faqs/'
+    | '/projects/'
     | '/services/'
     | '/training/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/projects'
     | '/search'
     | '/sitemap.xml'
     | '/articles/$slug'
@@ -175,12 +174,12 @@ export interface FileRouteTypes {
     | '/training/$id'
     | '/articles'
     | '/faqs'
+    | '/projects'
     | '/services'
     | '/training'
   id:
     | '__root__'
     | '/'
-    | '/projects'
     | '/search'
     | '/sitemap.xml'
     | '/articles/$slug'
@@ -191,13 +190,13 @@ export interface FileRouteTypes {
     | '/training/$id'
     | '/articles/'
     | '/faqs/'
+    | '/projects/'
     | '/services/'
     | '/training/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ProjectsRoute: typeof ProjectsRoute
   SearchRoute: typeof SearchRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ArticlesSlugRoute: typeof ArticlesSlugRoute
@@ -208,6 +207,7 @@ export interface RootRouteChildren {
   TrainingIdRoute: typeof TrainingIdRoute
   ArticlesIndexRoute: typeof ArticlesIndexRoute
   FaqsIndexRoute: typeof FaqsIndexRoute
+  ProjectsIndexRoute: typeof ProjectsIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
   TrainingIndexRoute: typeof TrainingIndexRoute
 }
@@ -226,13 +226,6 @@ declare module '@tanstack/react-router' {
       path: '/search'
       fullPath: '/search'
       preLoaderRoute: typeof SearchRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/projects': {
-      id: '/projects'
-      path: '/projects'
-      fullPath: '/projects'
-      preLoaderRoute: typeof ProjectsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -254,6 +247,13 @@ declare module '@tanstack/react-router' {
       path: '/services'
       fullPath: '/services/'
       preLoaderRoute: typeof ServicesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects/': {
+      id: '/projects/'
+      path: '/projects'
+      fullPath: '/projects/'
+      preLoaderRoute: typeof ProjectsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faqs/': {
@@ -317,7 +317,6 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ProjectsRoute: ProjectsRoute,
   SearchRoute: SearchRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ArticlesSlugRoute: ArticlesSlugRoute,
@@ -328,6 +327,7 @@ const rootRouteChildren: RootRouteChildren = {
   TrainingIdRoute: TrainingIdRoute,
   ArticlesIndexRoute: ArticlesIndexRoute,
   FaqsIndexRoute: FaqsIndexRoute,
+  ProjectsIndexRoute: ProjectsIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,
   TrainingIndexRoute: TrainingIndexRoute,
 }
