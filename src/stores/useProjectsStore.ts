@@ -1,4 +1,3 @@
-// src/stores/useProjectsStore.ts
 import { createResourceStore } from "./createResourceStore";
 import { type APIProject } from "@/data/projects";
 
