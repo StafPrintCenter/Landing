@@ -554,8 +554,8 @@ function StepRecap({
       </div>
 
       <div className="mt-5 rounded-xl bg-primary/5 border border-primary/20 p-4 text-sm text-foreground/80">
-        En confirmant, votre client email s'ouvrira avec le récapitulatif à destination de{" "}
-        <span className="font-semibold">{SITE.email}</span>. Vous pourrez également l'envoyer via WhatsApp ensuite.
+        En confirmant, votre demande est enregistrée et une confirmation vous sera envoyée par email à{" "}
+        <span className="font-semibold">{data.email || "votre adresse"}</span>. Vous pourrez également en envoyer une copie via WhatsApp ensuite.
       </div>
     </div>
   );
