@@ -17,7 +17,7 @@ import { SITE } from "@/data/site";
 export const Route = createFileRoute("/appointment")({
   head: () => ({
     meta: [
-      { title: "Prendre rendez-vous — STAF PRINT CENTER" },
+      { title: `Prendre rendez-vous | ${SITE.name}` },
       { name: "description", content: "Réservez un rendez-vous en ligne ou en présentiel avec STAF PRINT CENTER à Porto-Novo. Choisissez votre créneau et confirmez en quelques étapes." },
       { property: "og:title", content: "Prendre rendez-vous — STAF PRINT CENTER" },
       { property: "og:description", content: "Réservez facilement un créneau en ligne ou en présentiel." },
