@@ -293,7 +293,7 @@ function StepType({
 }) {
   const options: Array<{ id: Mode; icon: typeof MapPin; title: string; desc: string }> = [
     { id: "presentiel", icon: MapPin, title: "Présentiel", desc: "À notre atelier de Porto-Novo" },
-    { id: "en-ligne", icon: Video, title: "En ligne", desc: "Visio (Google Meet / WhatsApp)" },
+    { id: "en-ligne", icon: Video, title: "En ligne", desc: "Visio (Google Meet / Microoft Teams)" },
   ];
   const durations: Duration[] = [30, 45, 60];
 
