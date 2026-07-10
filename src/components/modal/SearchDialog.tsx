@@ -4,7 +4,7 @@ import { Search, X, Clock, History, Trash2, ArrowRight } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { searchItems, TYPE_LABELS, type SearchItem } from "@/lib/search";
 import { useSearchHistory } from "@/hooks/use-search-history";
-import { useServicesStore, useProjectsStore, useFormationsStore, useArticlesStore } from "@/stores";
+import { useServicesStore, useProjectsStore, useFormationsStore, useArticlesStore, useFaqsStore } from "@/stores";
 import logos from "@/assets/logos.json";
 
 type Props = { open: boolean; onOpenChange: (v: boolean) => void };
@@ -18,6 +18,7 @@ export function SearchDialog({ open, onOpenChange }: Props) {
   const { projects } = useProjectsStore({ perPage: 100 });
   const { formations } = useFormationsStore({ perPage: 100 });
   const { articles } = useArticlesStore({ perPage: 100 });
+  const { faqs } = useFaqsStore({ perPage: 100 });
 
   useEffect(() => {
     if (open) setTimeout(() => inputRef.current?.focus(), 50);
@@ -25,8 +26,8 @@ export function SearchDialog({ open, onOpenChange }: Props) {
   }, [open]);
 
   const results = useMemo(
-    () => searchItems(q, services, projects, formations, articles, { limit: 8 }),
-    [q, services, projects, formations, articles]
+    () => searchItems(q, services, projects, formations, articles, faqs, { limit: 8 }),
+    [q, services, projects, formations, articles, faqs]
   );
 
   const goToItem = (item: SearchItem) => {
@@ -71,7 +72,7 @@ export function SearchDialog({ open, onOpenChange }: Props) {
             value={q}
             onChange={(e) => setQ(e.target.value)}
             onKeyDown={onKeyDown}
-            placeholder="Rechercher services, réalisations, formations, articles…"
+            placeholder="Rechercher services, réalisations, formations, articles, FAQ…"
             className="h-14 w-full bg-transparent text-base outline-none placeholder:text-muted-foreground"
           />
 
@@ -100,7 +101,7 @@ export function SearchDialog({ open, onOpenChange }: Props) {
             <div className="p-4">
               {queries.length === 0 && pages.length === 0 ? (
                 <p className="p-6 text-center text-sm text-muted-foreground">
-                  Cherchez un service, un projet, une formation ou un article.
+                  Cherchez un service, un projet, une formation, un article ou une question fréquente.
                 </p>
               ) : (
                 <>
