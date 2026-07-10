@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { Plus, Minus, SearchX } from "lucide-react";
-import { getDisciplineColorClass } from "@/data/categories";
+import { SearchX } from "lucide-react";
+import { FaqHomeCard } from "./Card";
 import type { APIFaq } from "@/data/faqs";
 
 interface FaqHomeGridProps {
@@ -26,9 +25,9 @@ export function FaqHomeGrid({ isLoading, faqs, openId }: FaqHomeGridProps) {
 
   if (isLoading) {
     return (
-      <div className="mt-8 space-y-3">
+      <div className="mt-8 grid gap-4 md:grid-cols-2">
         {Array.from({ length: 6 }).map((_, idx) => (
-          <div key={`faq-skeleton-${idx}`} className="h-13 animate-pulse rounded-xl border border-border bg-card" />
+          <div key={`faq-skeleton-${idx}`} className="h-[68px] animate-pulse rounded-xl border border-border bg-card" />
         ))}
       </div>
     );
@@ -51,46 +50,15 @@ export function FaqHomeGrid({ isLoading, faqs, openId }: FaqHomeGridProps) {
   }
 
   return (
-    <div className="mt-8 space-y-3">
+    <div className="mt-8 grid gap-4 md:grid-cols-2">
       {faqs.map((item, i) => (
-        <div
+        <FaqHomeCard
           key={item.id}
-          ref={(el) => { itemRefs.current[item.id] = el; }}
-          className="overflow-hidden rounded-xl border border-border bg-card transition-colors duration-200"
-        >
-          <button
-            onClick={() => setOpenIndex(openIndex === i ? null : i)}
-            className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-medium text-foreground/90 hover:text-primary transition-colors cursor-pointer"
-          >
-            <span className="flex flex-wrap items-center gap-2">
-              <span
-                className={[
-                  "rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider",
-                  getDisciplineColorClass(item.category),
-                ].join(" ")}
-              >
-                {item.category}
-              </span>
-              <span className="text-sm sm:text-base">{item.question}</span>
-            </span>
-            {openIndex === i ? <Minus size={18} className="text-primary shrink-0" /> : <Plus size={18} className="text-primary shrink-0" />}
-          </button>
-          <AnimatePresence initial={false}>
-            {openIndex === i && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                className="overflow-hidden"
-              >
-                <p className="border-t border-border/60 px-5 py-4 text-sm text-muted-foreground leading-relaxed bg-muted/10">
-                  {item.answer}
-                </p>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+          faq={item}
+          isOpen={openIndex === i}
+          onToggle={() => setOpenIndex(openIndex === i ? null : i)}
+          cardRef={(el) => { itemRefs.current[item.id] = el; }}
+        />
       ))}
     </div>
   );
