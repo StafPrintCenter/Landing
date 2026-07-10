@@ -1,4 +1,3 @@
-// src/components/pages/projects/ResultsCount.tsx
 import { ResultsCountText } from "@/components/shared/ResultsCountText";
 
 interface RealisationHomeResultsCountProps {
