@@ -2,6 +2,7 @@ import { type APIService } from "@/data/services";
 import { type APIProject } from "@/data/projects";
 import { type APIFormation } from "@/data/formations";
 import { type APIArticle } from "@/data/articles";
+import { type APIFaq } from "@/data/faqs";
 import { type SearchType, SEARCH_TYPE_LABELS } from "@/data/categories";
 
 export type { SearchType };
@@ -16,9 +17,10 @@ export type SearchItem = {
   image?: string;
   url: string;
   params?: Record<string, string>;
-  routePattern: "/projects" | "/training" | "/training/$id" | "/articles/$slug" | "/services/$slug";
+  routePattern: "/projects" | "/training" | "/training/$id" | "/articles/$slug" | "/services/$slug" | "/faqs";
   keywords: string;
   projectId?: string;
+  faqId?: string;
 };
 
 function norm(s: string): string {
@@ -29,18 +31,21 @@ function norm(s: string): string {
 }
 
 /**
- * Génère l'index de recherche dynamiquement en injectant les services, projets, formations et articles récupérés de l'API
+ * Génère l'index de recherche dynamiquement en injectant les services,
+ * projets, formations, articles et FAQ récupérés de l'API
  */
 function buildSearchIndex(
   apiServices: APIService[],
   apiProjects: APIProject[],
   apiFormations: APIFormation[],
-  apiArticles: APIArticle[]
+  apiArticles: APIArticle[],
+  apiFaqs: APIFaq[]
 ): SearchItem[] {
   const services = Array.isArray(apiServices) ? apiServices : [];
   const projects = Array.isArray(apiProjects) ? apiProjects : [];
   const formations = Array.isArray(apiFormations) ? apiFormations : [];
   const articles = Array.isArray(apiArticles) ? apiArticles : [];
+  const faqs = Array.isArray(apiFaqs) ? apiFaqs : [];
 
   return [
     ...services.map<SearchItem>((s) => ({
@@ -89,6 +94,17 @@ function buildSearchIndex(
       routePattern: "/articles/$slug",
       keywords: norm(`${a.title} ${a.excerpt} ${a.category}`),
     })),
+    ...faqs.map<SearchItem>((f) => ({
+      id: `faq-${f.id}`,
+      type: "faq",
+      title: f.question,
+      description: f.answer,
+      category: f.category,
+      url: `/faqs?open=${f.id}`,
+      routePattern: "/faqs",
+      keywords: norm(`${f.question} ${f.answer} ${f.category}`),
+      faqId: f.id,
+    })),
   ];
 }
 
@@ -98,6 +114,7 @@ export function searchItems(
   apiProjects: APIProject[],
   apiFormations: APIFormation[],
   apiArticles: APIArticle[],
+  apiFaqs: APIFaq[],
   opts?: { type?: SearchType | "all"; category?: string; limit?: number }
 ): SearchItem[] {
   const q = norm(query.trim());
@@ -105,7 +122,7 @@ export function searchItems(
   const category = opts?.category;
   const limit = opts?.limit;
 
-  let items = buildSearchIndex(apiServices, apiProjects, apiFormations, apiArticles);
+  let items = buildSearchIndex(apiServices, apiProjects, apiFormations, apiArticles, apiFaqs);
 
   if (type !== "all") items = items.filter((i) => i.type === type);
   if (category && category !== "Toutes")
@@ -138,10 +155,11 @@ export function categoriesForType(
   apiServices: APIService[],
   apiProjects: APIProject[],
   apiFormations: APIFormation[],
-  apiArticles: APIArticle[]
+  apiArticles: APIArticle[],
+  apiFaqs: APIFaq[]
 ): string[] {
   const set = new Set<string>();
-  const items = buildSearchIndex(apiServices, apiProjects, apiFormations, apiArticles);
+  const items = buildSearchIndex(apiServices, apiProjects, apiFormations, apiArticles, apiFaqs);
 
   for (const i of items) {
     if (type !== "all" && i.type !== type) continue;
