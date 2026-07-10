@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { SearchX } from "lucide-react";
+import { AnimatePresence } from "framer-motion";
 import { FaqHomeCard } from "./Card";
+import { FaqHomeSkeleton } from "./Skeleton";
+import { EmptyState } from "@/components/shared/EmptyState";
 import type { APIFaq } from "@/data/faqs";
 
 interface FaqHomeGridProps {
@@ -23,43 +25,29 @@ export function FaqHomeGrid({ isLoading, faqs, openId }: FaqHomeGridProps) {
     }
   }, [openId, faqs]);
 
-  if (isLoading) {
-    return (
-      <div className="mt-8 grid gap-4 md:grid-cols-2">
-        {Array.from({ length: 6 }).map((_, idx) => (
-          <div key={`faq-skeleton-${idx}`} className="h-17 animate-pulse rounded-xl border border-border bg-card" />
-        ))}
-      </div>
-    );
-  }
-
-  if (faqs.length === 0) {
-    return (
-      <div className="mt-8 flex flex-col items-center justify-center gap-4 rounded-2xl border border-dashed border-border bg-muted/30 py-20 text-center">
-        <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-border bg-card">
-          <SearchX size={28} className="text-muted-foreground/60" />
-        </div>
-        <div>
-          <p className="font-display text-lg font-semibold text-foreground">Aucun résultat</p>
-          <p className="mt-1 max-w-xs text-sm text-muted-foreground">
-            Aucune question ne correspond aux critères sélectionnés. Essayez un autre filtre.
-          </p>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="mt-8 grid gap-4 md:grid-cols-2">
-      {faqs.map((item, i) => (
-        <FaqHomeCard
-          key={item.id}
-          faq={item}
-          isOpen={openIndex === i}
-          onToggle={() => setOpenIndex(openIndex === i ? null : i)}
-          cardRef={(el) => { itemRefs.current[item.id] = el; }}
-        />
-      ))}
+      <AnimatePresence mode="popLayout">
+        {isLoading ? (
+          Array.from({ length: 6 }).map((_, idx) => (
+            <div key={`faq-skeleton-${idx}`}>
+              <FaqHomeSkeleton />
+            </div>
+          ))
+        ) : faqs.length > 0 ? (
+          faqs.map((item, i) => (
+            <FaqHomeCard
+              key={item.id}
+              faq={item}
+              isOpen={openIndex === i}
+              onToggle={() => setOpenIndex(openIndex === i ? null : i)}
+              cardRef={(el) => { itemRefs.current[item.id] = el; }}
+            />
+          ))
+        ) : (
+          <EmptyState description="Aucune question ne correspond aux critères sélectionnés. Essayez un autre filtre." />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
