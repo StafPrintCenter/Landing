@@ -51,16 +51,6 @@ export async function fetchPublicFaqs(params: FetchFaqsParams = {}): Promise<Faq
   return response.json();
 }
 
-
-
-
-
-
-
-
-
-
-
 /**
  * Store / Hook customisé servant de source de vérité unique pour les FAQs.
  */
