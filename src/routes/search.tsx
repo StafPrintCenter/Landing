@@ -53,12 +53,7 @@ function SearchPage() {
   const [input, setInput] = useState(q);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const { pushQuery, pushPage } = useSearchHistory();
-
-  const { services } = useServicesStore({ perPage: 100 });
-  const { projects } = useProjectsStore({ perPage: 100 });
-  const { formations } = useFormationsStore({ perPage: 100 });
-  const { articles } = useArticlesStore({ perPage: 100 });
-  const { faqs } = useFaqsStore({ perPage: 100 });
+  const { services, projects, formations, articles, faqs } = useGlobalSearchData();
 
   useEffect(() => setInput(q), [q]);
 
@@ -178,9 +173,9 @@ function SearchPage() {
       </section>
 
       {/* Tiroir de filtres mobile — pas de recherche ici, déjà visible en haut de page */}
-      <SearchMobileSheet isOpen={filtersOpen} onClose={() => setFiltersOpen(false)} resultCount={results.length}>
+      <FilterMobileSheet isOpen={filtersOpen} onClose={() => setFiltersOpen(false)} resultCount={results.length} unitLabel="résultat">
         {filtersPanel}
-      </SearchMobileSheet>
+      </FilterMobileSheet>
     </SiteShell>
   );
 }
