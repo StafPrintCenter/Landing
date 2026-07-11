@@ -79,6 +79,7 @@ export function ArticleDetailHeader({ article: a }: ArticleDetailHeaderProps) {
         url={shareUrl}
         title={a.title}
         text={a.excerpt}
+        shortlinkCategory="blog"
       />
     </header>
   );
