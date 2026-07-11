@@ -137,8 +137,14 @@ export function ShareModal({ url, title, text, isOpen, onClose, shortlinkCategor
             onClick={handleCopy}
             className="inline-flex shrink-0 cursor-pointer items-center gap-1.5 rounded-full bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground transition-opacity hover:opacity-90 "
           >
-            {copied ? <Check size={13} /> : <Link2 size={13} />}
-            {copied ? "Copié" : "Copier"}
+            {isLoading ? (
+              <Loader2 size={13} className="animate-spin" />
+            ) : copied ? (
+              <Check size={13} />
+            ) : (
+              <Link2 size={13} />
+            )}
+            {isLoading ? "Traitement…" : copied ? "Copié" : "Copier"}
           </button>
         </div>
 
