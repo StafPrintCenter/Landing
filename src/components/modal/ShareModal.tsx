@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { Facebook, Linkedin, Twitter, X, Share2, Link2, Check } from "lucide-react";
 import { WhatsAppIcon } from "@/components/site/icons/WhatsAppIcon";
+import { useShortUrl } from "@/hooks/use-short-url";
 import {
   buildWhatsAppShareLink,
   buildFacebookShareLink,
@@ -16,11 +17,19 @@ import {
 interface ShareModalProps extends ShareContent {
   isOpen: boolean;
   onClose: () => void;
+  /**
+   * Catégorie du lien court côté API (ex: "blog", "project", "training", "service", "faq").
+   * Si omise, le lien long d'origine est affiché tel quel, sans raccourcissement.
+   */
+  shortlinkCategory?: string;
 }
 
-export function ShareModal({ url, title, text, isOpen, onClose }: ShareModalProps) {
+export function ShareModal({ url, title, text, isOpen, onClose, shortlinkCategory }: ShareModalProps) {
   const [mounted, setMounted] = useState(false);
   const [copied, setCopied] = useState(false);
+
+  const { shortUrl } = useShortUrl(url, shortlinkCategory ?? "", !!shortlinkCategory);
+  const displayUrl = shortlinkCategory ? shortUrl : url;
 
   useEffect(() => setMounted(true), []);
 
@@ -37,10 +46,10 @@ export function ShareModal({ url, title, text, isOpen, onClose }: ShareModalProp
 
   if (!isOpen || !mounted) return null;
 
-  const content: ShareContent = { url, title, text };
+  const content: ShareContent = { url: displayUrl, title, text };
 
   const handleCopy = async () => {
-    const ok = await copyShareLink(url);
+    const ok = await copyShareLink(displayUrl);
     if (ok) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -126,7 +135,7 @@ export function ShareModal({ url, title, text, isOpen, onClose }: ShareModalProp
 
         <div className="flex items-center gap-2 rounded-xl border border-border bg-muted px-3 py-2.5">
           <Link2 size={16} className="shrink-0 text-muted-foreground" />
-          <span className="flex-1 truncate text-sm text-muted-foreground">{url}</span>
+          <span className="flex-1 truncate text-sm text-muted-foreground">{displayUrl}</span>
           <button
             onClick={handleCopy}
             className="inline-flex shrink-0 cursor-pointer items-center gap-1.5 rounded-full bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground transition-opacity hover:opacity-90 "
