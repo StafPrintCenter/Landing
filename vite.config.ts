@@ -19,12 +19,12 @@ export default defineConfig(({ mode }) => {
         preset: "netlify",
         devProxy: {
           "/api": {
-            target: apiOrigin,
+            target: `${apiOrigin}/api`,
             changeOrigin: true,
           },
         },
         routeRules: {
-          "/api/**": { proxy: `${apiOrigin}/**` },
+          "/api/**": { proxy: `${apiOrigin}/api/**` },
         },
       }),
     ],
