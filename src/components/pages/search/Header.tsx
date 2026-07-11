@@ -36,6 +36,7 @@ export function SearchHeader({ shareUrl, query }: SearchHeaderProps) {
         url={shareUrl}
         title={shareTitle}
         text="Services, réalisations, formations et articles."
+        shortlinkCategory="other"
       />
     </div>
   );
