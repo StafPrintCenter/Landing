@@ -4,43 +4,41 @@ import { resolveShortlink } from "@/stores/useShortlinksStore";
 import { buildShareUrl } from "@/lib/share/build-share-url";
 import type { APIShortlink } from "@/data/shortlinks";
 
+type CheckStatus = "idle" | "loading" | "done" | "error";
+
 export function ShortlinkChecker() {
   const [open, setOpen] = useState(false);
-  const [isChecking, setIsChecking] = useState(false);
-  const [result, setResult] = useState<APIShortlink | null>(null);
-  const [checked, setChecked] = useState(false);
-  const [error, setError] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [status, setStatus] = useState<CheckStatus>("idle");
+  const [shortLink, setShortLink] = useState<APIShortlink | null>(null);
+  const [longUrl, setLongUrl] = useState("");
+  const [copiedTarget, setCopiedTarget] = useState<"long" | "short" | null>(null);
 
   const handleCheck = async () => {
-    setIsChecking(true);
-    setError(false);
-    setCopied(false);
+    setStatus("loading");
+    setCopiedTarget(null);
     try {
       const currentUrl = buildShareUrl(window.location.pathname + window.location.search);
+      setLongUrl(currentUrl);
       const found = await resolveShortlink(currentUrl);
-      setResult(found);
-      setChecked(true);
+      setShortLink(found);
+      setStatus("done");
     } catch {
-      setError(true);
-    } finally {
-      setIsChecking(false);
+      setStatus("error");
     }
   };
 
-  const handleCopy = async () => {
-    if (!result) return;
-    await navigator.clipboard.writeText(result.shortUrl);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopy = async (value: string, target: "long" | "short") => {
+    await navigator.clipboard.writeText(value);
+    setCopiedTarget(target);
+    setTimeout(() => setCopiedTarget(null), 2000);
   };
 
   return (
-    <div className="fixed bottom-24 right-5 z-50">
+    <div className="fixed bottom-5 left-5 z-50">
       {open && (
         <div className="mb-3 w-72 rounded-2xl border border-border bg-card p-4 shadow-xl">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-semibold">Lien court de cette page</h3>
+            <h3 className="text-sm font-semibold">Lien de cette page</h3>
             <button
               onClick={() => setOpen(false)}
               aria-label="Fermer"
@@ -50,29 +48,64 @@ export function ShortlinkChecker() {
             </button>
           </div>
 
-          <button
-            onClick={handleCheck}
-            disabled={isChecking}
-            className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-muted px-3 py-2 text-xs font-medium hover:bg-muted/70 disabled:opacity-60 cursor-pointer"
-          >
-            {isChecking ? <Loader2 size={14} className="animate-spin" /> : <Search size={14} />}
-            {isChecking ? "Vérification…" : "Vérifier le lien court"}
-          </button>
+          {status === "idle" && (
+            <button
+              onClick={handleCheck}
+              className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-muted px-3 py-2 text-xs font-medium hover:bg-muted/70 cursor-pointer"
+            >
+              <Search size={14} />
+              Obtenir le lien de la page
+            </button>
+          )}
 
-          {checked && !isChecking && (
-            <div className="mt-3">
-              {error ? (
-                <p className="text-xs text-destructive">Erreur lors de la vérification.</p>
-              ) : result ? (
-                <div className="flex items-center gap-2 rounded-xl border border-border bg-muted px-3 py-2">
-                  <Link2 size={14} className="shrink-0 text-muted-foreground" />
-                  <span className="flex-1 truncate text-xs text-muted-foreground">{result.shortUrl}</span>
+          {status === "loading" && (
+            <div className="mt-3 flex items-center justify-center gap-2 rounded-xl border border-border bg-muted px-3 py-3 text-xs text-muted-foreground">
+              <Loader2 size={14} className="animate-spin" />
+              Vérification…
+            </div>
+          )}
+
+          {status === "error" && (
+            <div className="mt-3 space-y-2">
+              <p className="text-xs text-destructive">Erreur lors de la vérification.</p>
+              <button
+                onClick={handleCheck}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-muted px-3 py-2 text-xs font-medium hover:bg-muted/70 cursor-pointer"
+              >
+                <Search size={14} />
+                Réessayer
+              </button>
+            </div>
+          )}
+
+          {status === "done" && (
+            <div className="mt-3 space-y-2">
+              {/* URL longue — copiable seulement si aucun lien court n'existe */}
+              <div className="flex items-center gap-2 rounded-xl border border-border bg-muted px-3 py-2">
+                <Link2 size={14} className="shrink-0 text-muted-foreground" />
+                <span className="flex-1 truncate text-xs text-muted-foreground">{longUrl}</span>
+                {!shortLink && (
                   <button
-                    onClick={handleCopy}
-                    aria-label="Copier"
+                    onClick={() => handleCopy(longUrl, "long")}
+                    aria-label="Copier le lien complet"
                     className="shrink-0 rounded-full bg-primary p-1.5 text-primary-foreground cursor-pointer"
                   >
-                    {copied ? <Check size={12} /> : <Copy size={12} />}
+                    {copiedTarget === "long" ? <Check size={12} /> : <Copy size={12} />}
+                  </button>
+                )}
+              </div>
+
+              {/* Lien court — affiché uniquement s'il existe */}
+              {shortLink ? (
+                <div className="flex items-center gap-2 rounded-xl border border-primary/30 bg-primary/5 px-3 py-2">
+                  <Link2 size={14} className="shrink-0 text-primary" />
+                  <span className="flex-1 truncate text-xs font-medium text-foreground">{shortLink.shortUrl}</span>
+                  <button
+                    onClick={() => handleCopy(shortLink.shortUrl, "short")}
+                    aria-label="Copier le lien court"
+                    className="shrink-0 rounded-full bg-primary p-1.5 text-primary-foreground cursor-pointer"
+                  >
+                    {copiedTarget === "short" ? <Check size={12} /> : <Copy size={12} />}
                   </button>
                 </div>
               ) : (
@@ -85,7 +118,7 @@ export function ShortlinkChecker() {
 
       <button
         onClick={() => setOpen((prev) => !prev)}
-        aria-label="Vérifier le lien court de cette page"
+        aria-label="Obtenir le lien de la page"
         className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg hover:opacity-90 cursor-pointer transition"
       >
         <Link2 size={20} />
