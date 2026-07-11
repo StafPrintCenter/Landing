@@ -1,18 +1,24 @@
+import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, Mail, Star } from "lucide-react";
+import { ArrowLeft, ArrowRight, Mail, Share2, Star } from "lucide-react";
 import { WhatsAppIcon } from "@/components/site/icons/WhatsAppIcon";
 import { createServiceQuoteEmailLink } from "@/lib/message/email";
 import { createServiceQuoteWhatsAppLink } from "@/lib/message/whatsapp";
 import { SERVICE_CATEGORIES, type APIService, getServiceIcon } from "@/data/services";
+import { getShortlinkCategory } from "@/data/shortlinks";
+import { ShareModal } from "@/components/modal";
+import { buildShareUrl } from "@/lib/share/build-share-url";
 
 interface ServiceDetailHeaderProps {
   service: APIService;
 }
 
 export function ServiceDetailHeader({ service }: ServiceDetailHeaderProps) {
+  const [isShareOpen, setIsShareOpen] = useState(false);
   const Icon = getServiceIcon(service.icon);
 
   const categoryLabel = SERVICE_CATEGORIES.find((c) => c.value === service.category)?.label || service.category;
+  const shareUrl = buildShareUrl(`/services/${service.slug}`);
 
   return (
     <section className="relative overflow-hidden bg-secondary text-secondary-foreground">
@@ -22,13 +28,22 @@ export function ServiceDetailHeader({ service }: ServiceDetailHeaderProps) {
       </div>
 
       <div className="container-x relative py-16 md:py-24">
-        <Link
-          to="/services"
-          search={{ category: "all", sortBy: "default", sortDir: "asc", query: "", page: 1, perPage: 9 }}
-          className="inline-flex items-center gap-2 text-sm font-medium text-secondary-foreground/70 transition hover:text-accent"
-        >
-          <ArrowLeft size={14} /> Tous les services
-        </Link>
+        <div className="flex items-center justify-between">
+          <Link
+            to="/services"
+            search={{ category: "all", sortBy: "default", sortDir: "asc", query: "", page: 1, perPage: 9 }}
+            className="inline-flex items-center gap-2 text-sm font-medium text-secondary-foreground/70 transition hover:text-accent"
+          >
+            <ArrowLeft size={14} /> Tous les services
+          </Link>
+
+          <button
+            onClick={() => setIsShareOpen(true)}
+            className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/5 px-3.5 py-1.5 text-sm font-medium text-secondary-foreground/80 transition-colors hover:border-accent/50 hover:text-accent cursor-pointer"
+          >
+            <Share2 size={14} /> Partager
+          </button>
+        </div>
 
         <div className="md:max-w-xl lg:max-w-2xl">
           <div className="mt-6 flex items-center">
@@ -105,6 +120,15 @@ export function ServiceDetailHeader({ service }: ServiceDetailHeaderProps) {
           )}
         </div>
       </div>
+
+      <ShareModal
+        isOpen={isShareOpen}
+        onClose={() => setIsShareOpen(false)}
+        url={shareUrl}
+        title={service.title}
+        text={service.short}
+        shortlinkCategory={getShortlinkCategory(service.projectCategory)}
+      />
     </section>
   );
 }
