@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { Facebook, Linkedin, Twitter, X, Share2, Link2, Check, Loader2 } from "lucide-react";
 import { WhatsAppIcon } from "@/components/site/icons/WhatsAppIcon";
 import { useShortUrl } from "@/hooks/use-short-url";
+import type { ShortlinkCategory } from "@/data/shortlinks";
 import {
   buildWhatsAppShareLink,
   buildFacebookShareLink,
@@ -17,11 +18,7 @@ import {
 interface ShareModalProps extends ShareContent {
   isOpen: boolean;
   onClose: () => void;
-  /**
-   * Catégorie du lien court côté API. Optionnelle — le backend la définit
-   * à "other" si elle n'est pas fournie. Un lien court est toujours tenté.
-   */
-  shortlinkCategory?: string;
+  shortlinkCategory?: ShortlinkCategory;
 }
 
 export function ShareModal({ url, title, text, isOpen, onClose, shortlinkCategory }: ShareModalProps) {
