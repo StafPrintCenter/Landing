@@ -94,6 +94,7 @@ export function RealisationHomeLightbox({ current, onClose, onPrev, onNext }: Re
           url={shareUrl}
           title={current.title}
           text={current.description}
+          shortlinkCategory={getShortlinkCategory(current.category)}
         />
       )}
     </>
