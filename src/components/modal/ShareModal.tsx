@@ -18,8 +18,8 @@ interface ShareModalProps extends ShareContent {
   isOpen: boolean;
   onClose: () => void;
   /**
-   * Catégorie du lien court côté API (ex: "blog", "project", "training", "service", "faq").
-   * Si omise, le lien long d'origine est affiché tel quel, sans raccourcissement.
+   * Catégorie du lien court côté API. Optionnelle — le backend la définit
+   * à "other" si elle n'est pas fournie. Un lien court est toujours tenté.
    */
   shortlinkCategory?: string;
 }
