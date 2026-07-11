@@ -1,4 +1,5 @@
 import { useQuery, type UseQueryResult } from "@tanstack/react-query";
+import { resolveApiUrl } from "@/lib/api-url";
 
 export interface BaseFetchParams {
   category?: string;
@@ -47,7 +48,7 @@ export function createResourceStore<T>({
     if (params.page) queryParams.append("page", String(params.page));
     if (params.perPage) queryParams.append("perPage", String(params.perPage));
 
-    const url = `/api/public/${listEndpoint}?${queryParams.toString()}`;
+    const url = resolveApiUrl(`/api/public/${listEndpoint}?${queryParams.toString()}`);
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`Erreur lors de la récupération de la ressource "${resourceKey}"`);
@@ -59,7 +60,8 @@ export function createResourceStore<T>({
     if (!detailEndpoint) {
       throw new Error(`Aucun endpoint de détail configuré pour "${resourceKey}"`);
     }
-    const response = await fetch(`/api/public/${detailEndpoint}/${id}`);
+    const url = resolveApiUrl(`/api/public/${detailEndpoint}/${id}`);
+    const response = await fetch(url);
     if (response.status === 404) return null;
     if (!response.ok) {
       throw new Error(`Erreur lors de la récupération d'un élément de "${resourceKey}"`);
