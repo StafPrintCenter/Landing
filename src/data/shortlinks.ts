@@ -1,3 +1,5 @@
+import { type Discipline } from "@/data/categories";
+
 export type ShortlinkStatus = "active" | "disabled" | string;
 export type ShortlinkCategory = "design" | "web" | "print" | "video" | "formation" | "tips" | "news" | "blog" | "newsletter" | "other";
 
@@ -17,3 +19,22 @@ export type APIShortlink = {
   status: ShortlinkStatus;
   createdAt: string;
 };
+
+const DISCIPLINE_TO_SHORTLINK_CATEGORY: Partial<Record<Discipline, ShortlinkCategory>> = {
+  Design: "design",
+  Web: "web",
+  Impression: "print",
+  Vidéo: "video",
+  Formation: "formation",
+  Conseils: "tips",
+  Actus: "news",
+};
+
+/**
+ * Traduit une discipline du site (Design, Web, Impression, Vidéo, Formation...)
+ * vers la catégorie de shortlink attendue par le backend. Retourne "other" si
+ * la discipline n'a pas d'équivalent direct.
+ */
+export function getShortlinkCategory(discipline?: string): ShortlinkCategory {
+  return DISCIPLINE_TO_SHORTLINK_CATEGORY[discipline as Discipline] ?? "other";
+}
