@@ -135,7 +135,8 @@ export function ShareModal({ url, title, text, isOpen, onClose, shortlinkCategor
           <span className="flex-1 truncate text-sm text-muted-foreground">{displayUrl}</span>
           <button
             onClick={handleCopy}
-            className="inline-flex shrink-0 cursor-pointer items-center gap-1.5 rounded-full bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground transition-opacity hover:opacity-90 "
+            disabled={isLoading}
+            className="inline-flex shrink-0 cursor-pointer items-center gap-1.5 rounded-full bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isLoading ? (
               <Loader2 size={13} className="animate-spin" />
