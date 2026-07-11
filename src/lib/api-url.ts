@@ -5,8 +5,7 @@
  * Côté client : le chemin relatif est retourné tel quel — le navigateur le résout contre
  * l'origine courante.
  *
- * Côté serveur : `fetch` n'a pas de "window.location" pour fournir une origine implicite,
- * donc un chemin relatif fait planter le parsing d'URL. On préfixe alors avec une URL absolue.
+ * Côté serveur : reproduit manuellement la même réécriture que le proxy Vite.
  */
 export function resolveApiUrl(path: string): string {
   if (typeof window !== "undefined") {
