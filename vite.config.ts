@@ -6,7 +6,7 @@ import { nitro } from "nitro/vite";
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
-  const apiUrl = env.VITE_API_BASE_URL;
+  const apiOrigin = env.VITE_API_ORIGIN;
 
   return {
     plugins: [
@@ -19,12 +19,12 @@ export default defineConfig(({ mode }) => {
         preset: "netlify",
         devProxy: {
           "/api": {
-            target: apiUrl,
+            target: apiOrigin,
             changeOrigin: true,
           },
         },
         routeRules: {
-          "/api/**": { proxy: `${apiUrl}/**` },
+          "/api/**": { proxy: `${apiOrigin}/**` },
         },
       }),
     ],
