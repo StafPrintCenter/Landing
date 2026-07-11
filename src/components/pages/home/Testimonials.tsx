@@ -66,18 +66,23 @@ export function Testimonials() {
           {/* Trust card + smaller quotes */}
           <div className="grid gap-6 lg:col-span-5">
             <Reveal delay={0.08}>
-              <div className="rounded-3xl border border-border bg-linear-to-br from-primary/10 via-card to-accent/10 p-6">
+              <a
+                href={SITE.notice}
+                target="_blank"
+                rel="noreferrer"
+                className="group block rounded-3xl border border-border bg-linear-to-br from-primary/10 via-card to-accent/10 p-6 transition hover:border-primary/40 hover:shadow-lg"
+              >
                 <div className="flex items-baseline gap-2">
                   <span className="font-display text-5xl font-bold text-primary">{SITE.opinion.stars}</span>
                   <span className="text-sm font-medium text-muted-foreground">/ 5</span>
                 </div>
                 <div className="mt-2 flex gap-0.5">
-                  {[...Array(5)].map((_, k) => <Star key={k} size={16} className="fill-accent text-accent" />)}
+                  {[...Array(5)].map((_, k) => <Star key={k} size={16} className="fill-accent text-accent transition group-hover:scale-110" />)}
                 </div>
                 <p className="mt-3 text-sm text-muted-foreground">
-                  Note moyenne sur <strong className="text-foreground">{SITE.opinion.nb} avis</strong> clients vérifiés.
+                  Note moyenne sur <strong className="text-foreground underline-offset-4 group-hover:underline">{SITE.opinion.nb} avis</strong> clients vérifiés.
                 </p>
-              </div>
+              </a>
             </Reveal>
 
             {rest.slice(0, 2).map((t, i) => (
@@ -133,6 +138,6 @@ export function Testimonials() {
           ))}
         </div>
       </div>
-    </section>
+    </section >
   );
 }
