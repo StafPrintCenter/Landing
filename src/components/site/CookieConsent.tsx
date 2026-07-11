@@ -84,7 +84,7 @@ export function CookieConsent() {
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-x-3 bottom-3 z-[60] md:inset-x-auto md:right-6 md:bottom-6 md:max-w-md">
+    <div className="fixed inset-x-3 bottom-3 z-60 md:inset-x-auto md:right-6 md:bottom-6 md:max-w-md">
       <div className="rounded-2xl border border-border bg-background/95 p-5 shadow-2xl backdrop-blur-xl">
         <div className="flex items-start gap-3">
           <div className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
