@@ -1,8 +1,7 @@
 import type { ReactNode } from "react";
 import { Nav } from "./Nav";
 import { Footer } from "./Footer";
-import { WhatsAppFab } from "./WhatsAppFab";
-import { ShortlinkChecker } from "./ShortlinkChecker";
+import { WhatsAppFab, ShortlinkChecker, CookieConsent } from "./";
 
 export function SiteShell({ children }: { children: ReactNode }) {
   return (
@@ -12,6 +11,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
       <Footer />
       <WhatsAppFab />
       <ShortlinkChecker />
+      <CookieConsent />
     </div>
   );
 }
