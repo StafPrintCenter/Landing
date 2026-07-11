@@ -1,15 +1,16 @@
-import { type APIShortlink } from "@/data/shortlinks";
+import { type APIShortlink, type ShortlinkCategory } from "@/data/shortlinks";
+import { resolveApiUrl } from "@/lib/api-url";
 
 type ShortlinkResponse = { data: APIShortlink };
 
 /**
  * Vérifie si un lien court existe déjà pour cette URL longue.
- * GET pur, sans effet de bord — safe à appeler de façon spéculative.
  * Retourne null si aucun lien court n'existe encore (404).
  */
 export async function resolveShortlink(longUrl: string): Promise<APIShortlink | null> {
   const params = new URLSearchParams({ long_url: longUrl });
-  const response = await fetch(`/api/public/shortlinks/resolve?${params.toString()}`);
+  const url = resolveApiUrl(`/api/public/shortlinks/resolve?${params.toString()}`);
+  const response = await fetch(url);
   if (response.status === 404) return null;
   if (!response.ok) {
     throw new Error("Erreur lors de la résolution du lien court");
@@ -19,16 +20,17 @@ export async function resolveShortlink(longUrl: string): Promise<APIShortlink | 
 }
 
 /**
- * Crée un lien court pour cette URL longue. Le backend gère lui-même
- * la déduplication (rappelle un lien existant si déjà créé) — le client
- * n'a pas à vérifier l'existence avant d'appeler cette fonction.
+ * Crée un lien court pour cette URL longue. Le backend gère lui-même la déduplication
  */
-export async function createShortlink(longUrl: string, category: string): Promise<APIShortlink> {
+export async function createShortlink(longUrl: string, category?: ShortlinkCategory): Promise<APIShortlink> {
   const formData = new FormData();
   formData.append("long_url", longUrl);
-  formData.append("category", category);
+  if (category) {
+    formData.append("category", category);
+  }
 
-  const response = await fetch(`/api/public/shortlinks/create`, {
+  const url = resolveApiUrl(`/api/public/shortlinks/create`);
+  const response = await fetch(url, {
     method: "POST",
     body: formData,
   });
