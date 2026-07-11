@@ -10,6 +10,7 @@ export const SITE = {
   email: "stafprintcenter@gmail.com",
   url: import.meta.env.VITE_SITE_URL,
   maps: "https://maps.app.goo.gl/4mbhWctm6LnTgYsAA",
+  notice: "https://search.google.com/local/reviews?placeid=ChIJPb8nmaNbOxARzgX2S_y9o_M",
   socials: {
     facebook: "https://web.facebook.com/StafPrintCenter",
     instagram: "https://www.instagram.com/stafprintcenter/",
