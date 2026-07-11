@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { Facebook, Linkedin, Twitter, X, Share2, Link2, Check } from "lucide-react";
+import { Facebook, Linkedin, Twitter, X, Share2, Link2, Check, Loader2 } from "lucide-react";
 import { WhatsAppIcon } from "@/components/site/icons/WhatsAppIcon";
 import { useShortUrl } from "@/hooks/use-short-url";
 import {
