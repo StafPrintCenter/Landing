@@ -4,10 +4,12 @@
  */
 
 export function resolveApiUrl(path: string): string {
+  const versionedPath = path.replace(/^\/api\//, "/api/v1/");
+
   if (typeof window !== "undefined") {
-    return path;
+    return versionedPath;
   }
-  const apiOrigin = import.meta.env.VITE_API_ORIGIN ?? "http://localhost:8000";
-  const backendPath = path.replace(/^\/api\//, "/api/v1/");
-  return `${apiOrigin}${backendPath}`;
+
+  const apiOrigin = import.meta.env.VITE_API_ORIGIN;
+  return `${apiOrigin}${versionedPath}`;
 }
