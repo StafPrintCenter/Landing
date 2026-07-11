@@ -84,11 +84,24 @@ export function Hero() {
           </div>
 
           <div className="mt-10 flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
-            <div className="flex items-center gap-1">
-              {[...Array(5)].map((_, i) => <Star key={i} size={16} className="fill-accent text-accent" />)}
-              <span className="ml-2 font-medium text-foreground">{SITE.opinion.stars}/5</span>
-              <span>· {SITE.opinion.nb} {SITE.opinion.label}</span>
-            </div>
+            <a
+              href={SITE.notice}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-1 transition hover:text-accent-foreground group"
+            >
+              <div className="flex gap-0.5">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} size={16} className="fill-accent text-accent transition group-hover:scale-110" />
+                ))}
+              </div>
+              <span className="ml-2 font-medium text-foreground underline-offset-4 group-hover:underline">
+                {SITE.opinion.stars}/5
+              </span>
+              <span className="underline-offset-4 group-hover:underline">
+                · {SITE.opinion.nb} {SITE.opinion.label}
+              </span>
+            </a>
           </div>
         </div>
       </div>
