@@ -11,6 +11,7 @@ export function resolveApiUrl(path: string): string {
   if (typeof window !== "undefined") {
     return path;
   }
-  const base = import.meta.env.VITE_API_BASE_URL ?? import.meta.env.VITE_SITE_URL ?? "http://localhost:3000";
-  return `${base}${path}`;
+  const apiOrigin = import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8000";
+  const backendPath = path.replace(/^\/api\//, "/api/v1/");
+  return `${apiOrigin}${backendPath}`;
 }
