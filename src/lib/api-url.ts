@@ -3,7 +3,7 @@
  * et côté serveur (SSR / loaders exécutés sur Node).
  *
  * Côté client : le chemin relatif est retourné tel quel — le navigateur le résout contre
- * l'origine courante, et un éventuel proxy de dev (Vite) s'applique normalement.
+ * l'origine courante.
  *
  * Côté serveur : `fetch` n'a pas de "window.location" pour fournir une origine implicite,
  * donc un chemin relatif fait planter le parsing d'URL. On préfixe alors avec une URL absolue.
