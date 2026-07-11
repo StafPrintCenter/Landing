@@ -57,6 +57,7 @@ export function FormationDetailHeader({ formation: f }: FormationDetailHeaderPro
         url={shareUrl}
         title={f.title}
         text={f.short}
+        shortlinkCategory="formation"
       />
     </section>
   );
