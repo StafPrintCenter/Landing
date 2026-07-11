@@ -7,13 +7,15 @@ export type FormationProgramStep = {
   items: string[];
 };
 
+export type FormationLevel = "Débutant" | "Intermédiaire" | "Avancé";
+
 export type APIFormation = {
   id: string;
   title: string;
   theme: FormationTheme;
   duration: string;
   durationHours: number;
-  level: "Débutant" | "Intermédiaire" | "Avancé";
+  level: FormationLevel;
   price: number;
   short: string;
   audience?: string;
