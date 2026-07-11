@@ -25,8 +25,7 @@ export function ShareModal({ url, title, text, isOpen, onClose, shortlinkCategor
   const [mounted, setMounted] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const { shortUrl } = useShortUrl(url, shortlinkCategory ?? "", !!shortlinkCategory);
-  const displayUrl = shortlinkCategory ? shortUrl : url;
+  const { displayUrl, isLoading } = useShortUrl(url, shortlinkCategory);
 
   useEffect(() => setMounted(true), []);
 
@@ -132,7 +131,11 @@ export function ShareModal({ url, title, text, isOpen, onClose, shortlinkCategor
 
         <div className="flex items-center gap-2 rounded-xl border border-border bg-muted px-3 py-2.5">
           <Link2 size={16} className="shrink-0 text-muted-foreground" />
-          <span className="flex-1 truncate text-sm text-muted-foreground">{displayUrl}</span>
+          {isLoading ? (
+            <span className="h-4 flex-1 animate-pulse rounded bg-muted-foreground/20" />
+          ) : (
+            <span className="flex-1 truncate text-sm text-muted-foreground">{displayUrl}</span>
+          )}
           <button
             onClick={handleCopy}
             disabled={isLoading}
@@ -151,7 +154,8 @@ export function ShareModal({ url, title, text, isOpen, onClose, shortlinkCategor
 
         <button
           onClick={handleOther}
-          className="mt-3 inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-border bg-card px-5 py-3 text-sm font-semibold transition-colors hover:bg-muted"
+          disabled={isLoading}
+          className="mt-3 inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-border bg-card px-5 py-3 text-sm font-semibold transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50"
         >
           <Share2 size={14} /> Autres applications…
         </button>
