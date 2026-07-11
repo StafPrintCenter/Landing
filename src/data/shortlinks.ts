@@ -1,5 +1,5 @@
 export type ShortlinkStatus = "active" | "disabled" | string;
-export type ShortlinkCategory = "design" | "web" | "print" | "video" | "formation" | "tips" | "'news" | "blog" | "newsletter" | "other";
+export type ShortlinkCategory = "design" | "web" | "print" | "video" | "formation" | "tips" | "news" | "blog" | "newsletter" | "other";
 
 /**
  * Type aligné sur la réponse de l'API publique /shortlinks
