@@ -4,6 +4,7 @@ import { X, ChevronLeft, ChevronRight, Share2 } from "lucide-react";
 import type { APIProject } from "@/data/projects";
 import { ShareModal } from "@/components/modal";
 import { buildShareUrl } from "@/lib/share/build-share-url";
+import { getShortlinkCategory } from "@/data/shortlinks";
 
 interface RealisationHomeLightboxProps {
   current: APIProject | null;
