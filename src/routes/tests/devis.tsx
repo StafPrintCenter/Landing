@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { SiteShell } from "@/components/site/SiteShell";
 import { SITE } from "@/data/site";
-import { Calculator, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Calculator, ArrowRight, CheckCircle2, Info } from "lucide-react";
 
 export const Route = createFileRoute("/tests/devis")({
   head: () => ({
@@ -32,9 +32,27 @@ const DIGITAL_PRODUCTS = [
 ];
 
 const FINISHES = [
-  { id: "standard", label: "Standard", mult: 1 },
-  { id: "premium", label: "Premium", mult: 1.35 },
-  { id: "express", label: "Express (48h)", mult: 1.6 },
+  {
+    id: "standard",
+    label: "Standard",
+    mult: 1,
+    tooltip:
+      "Finition classique, sans surcoût. Papier / support standard, délai habituel (5 à 7 jours ouvrés). Multiplicateur ×1.",
+  },
+  {
+    id: "premium",
+    label: "Premium",
+    mult: 1.35,
+    tooltip:
+      "Qualité supérieure : papier épais, pelliculage, vernis sélectif ou révisions supplémentaires côté digital. Multiplicateur ×1,35 (+35 %).",
+  },
+  {
+    id: "express",
+    label: "Express (48h)",
+    mult: 1.6,
+    tooltip:
+      "Livraison ou livrable prioritaire sous 48h. Réorganisation de la production / priorisation de l'équipe. Multiplicateur ×1,6 (+60 %).",
+  },
 ];
 
 function DevisPage() {
@@ -118,18 +136,45 @@ function DevisPage() {
             </div>
 
             <div>
-              <label className="mb-2 block text-sm font-medium">Finition / délai</label>
+              <label className="mb-2 flex items-center gap-2 text-sm font-medium">
+                Finition / délai
+                <span className="text-xs font-normal text-foreground/50">(survolez pour le détail)</span>
+              </label>
               <div className="grid grid-cols-3 gap-2">
                 {FINISHES.map((f) => (
-                  <button
-                    key={f.id}
-                    onClick={() => setFinish(f.id)}
-                    className={`cursor-pointer rounded-lg border px-3 py-2 text-sm font-medium transition ${finish === f.id ? "border-primary bg-primary/10 text-primary" : "border-border hover:bg-muted"}`}
-                  >
-                    {f.label}
-                  </button>
+                  <div key={f.id} className="group relative">
+                    <button
+                      onClick={() => setFinish(f.id)}
+                      aria-describedby={`tip-${f.id}`}
+                      className={`inline-flex w-full cursor-pointer items-center justify-center gap-1 rounded-lg border px-3 py-2 text-sm font-medium transition ${finish === f.id ? "border-primary bg-primary/10 text-primary" : "border-border hover:bg-muted"}`}
+                    >
+                      {f.label}
+                      <Info size={13} className="opacity-60" />
+                    </button>
+                    <div
+                      id={`tip-${f.id}`}
+                      role="tooltip"
+                      className="pointer-events-none absolute left-1/2 top-full z-20 mt-2 w-64 -translate-x-1/2 rounded-lg border border-border bg-popover px-3 py-2 text-xs leading-relaxed text-popover-foreground opacity-0 shadow-lg transition-opacity group-hover:opacity-100 group-focus-within:opacity-100"
+                    >
+                      {f.tooltip}
+                    </div>
+                  </div>
                 ))}
               </div>
+              <details className="mt-4 rounded-lg border border-dashed border-border bg-muted/30 p-3 text-xs text-foreground/70">
+                <summary className="cursor-pointer font-medium text-foreground/80">Comment est calculée l'estimation ?</summary>
+                <div className="mt-2 space-y-2">
+                  <p>
+                    Formule : <code className="rounded bg-background px-1 py-0.5">Total = Prix de base × Quantité × Multiplicateur de finition</code>
+                  </p>
+                  <ul className="ml-4 list-disc space-y-1">
+                    <li><b>Prix de base</b> : tarif de départ du produit ou de la prestation (impression : lot / m² ; digital : forfait projet).</li>
+                    <li><b>Quantité</b> : nombre de lots (impression) ou de modules / itérations (digital).</li>
+                    <li><b>Multiplicateur</b> : Standard ×1 · Premium ×1,35 · Express ×1,6.</li>
+                  </ul>
+                  <p className="text-foreground/60">Estimation indicative. Le devis final tient compte des finitions détaillées, du transport et des spécificités du projet.</p>
+                </div>
+              </details>
             </div>
           </div>
 

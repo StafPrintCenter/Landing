@@ -14,6 +14,7 @@ import { Route as SearchRouteImport } from './routes/search'
 import { Route as AppointmentRouteImport } from './routes/appointment'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TrainingIndexRouteImport } from './routes/training/index'
+import { Route as TestsIndexRouteImport } from './routes/tests/index'
 import { Route as ServicesIndexRouteImport } from './routes/services/index'
 import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
 import { Route as FaqsIndexRouteImport } from './routes/faqs/index'
@@ -21,7 +22,10 @@ import { Route as ArticlesIndexRouteImport } from './routes/articles/index'
 import { Route as TrainingIdRouteImport } from './routes/training/$id'
 import { Route as TestsSuivieRouteImport } from './routes/tests/suivie'
 import { Route as TestsRessourcesRouteImport } from './routes/tests/ressources'
+import { Route as TestsNewsletterRouteImport } from './routes/tests/newsletter'
 import { Route as TestsDevisRouteImport } from './routes/tests/devis'
+import { Route as TestsCalendarRouteImport } from './routes/tests/calendar'
+import { Route as TestsAffiliationRouteImport } from './routes/tests/affiliation'
 import { Route as ServicesSlugRouteImport } from './routes/services/$slug'
 import { Route as LegalPrivacyRouteImport } from './routes/legal/privacy'
 import { Route as LegalMentionsRouteImport } from './routes/legal/mentions'
@@ -51,6 +55,11 @@ const IndexRoute = IndexRouteImport.update({
 const TrainingIndexRoute = TrainingIndexRouteImport.update({
   id: '/training/',
   path: '/training/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TestsIndexRoute = TestsIndexRouteImport.update({
+  id: '/tests/',
+  path: '/tests/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesIndexRoute = ServicesIndexRouteImport.update({
@@ -88,9 +97,24 @@ const TestsRessourcesRoute = TestsRessourcesRouteImport.update({
   path: '/tests/ressources',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TestsNewsletterRoute = TestsNewsletterRouteImport.update({
+  id: '/tests/newsletter',
+  path: '/tests/newsletter',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TestsDevisRoute = TestsDevisRouteImport.update({
   id: '/tests/devis',
   path: '/tests/devis',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TestsCalendarRoute = TestsCalendarRouteImport.update({
+  id: '/tests/calendar',
+  path: '/tests/calendar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TestsAffiliationRoute = TestsAffiliationRouteImport.update({
+  id: '/tests/affiliation',
+  path: '/tests/affiliation',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesSlugRoute = ServicesSlugRouteImport.update({
@@ -129,7 +153,10 @@ export interface FileRoutesByFullPath {
   '/legal/mentions': typeof LegalMentionsRoute
   '/legal/privacy': typeof LegalPrivacyRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/tests/affiliation': typeof TestsAffiliationRoute
+  '/tests/calendar': typeof TestsCalendarRoute
   '/tests/devis': typeof TestsDevisRoute
+  '/tests/newsletter': typeof TestsNewsletterRoute
   '/tests/ressources': typeof TestsRessourcesRoute
   '/tests/suivie': typeof TestsSuivieRoute
   '/training/$id': typeof TrainingIdRoute
@@ -137,6 +164,7 @@ export interface FileRoutesByFullPath {
   '/faqs/': typeof FaqsIndexRoute
   '/projects/': typeof ProjectsIndexRoute
   '/services/': typeof ServicesIndexRoute
+  '/tests/': typeof TestsIndexRoute
   '/training/': typeof TrainingIndexRoute
 }
 export interface FileRoutesByTo {
@@ -149,7 +177,10 @@ export interface FileRoutesByTo {
   '/legal/mentions': typeof LegalMentionsRoute
   '/legal/privacy': typeof LegalPrivacyRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/tests/affiliation': typeof TestsAffiliationRoute
+  '/tests/calendar': typeof TestsCalendarRoute
   '/tests/devis': typeof TestsDevisRoute
+  '/tests/newsletter': typeof TestsNewsletterRoute
   '/tests/ressources': typeof TestsRessourcesRoute
   '/tests/suivie': typeof TestsSuivieRoute
   '/training/$id': typeof TrainingIdRoute
@@ -157,6 +188,7 @@ export interface FileRoutesByTo {
   '/faqs': typeof FaqsIndexRoute
   '/projects': typeof ProjectsIndexRoute
   '/services': typeof ServicesIndexRoute
+  '/tests': typeof TestsIndexRoute
   '/training': typeof TrainingIndexRoute
 }
 export interface FileRoutesById {
@@ -170,7 +202,10 @@ export interface FileRoutesById {
   '/legal/mentions': typeof LegalMentionsRoute
   '/legal/privacy': typeof LegalPrivacyRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/tests/affiliation': typeof TestsAffiliationRoute
+  '/tests/calendar': typeof TestsCalendarRoute
   '/tests/devis': typeof TestsDevisRoute
+  '/tests/newsletter': typeof TestsNewsletterRoute
   '/tests/ressources': typeof TestsRessourcesRoute
   '/tests/suivie': typeof TestsSuivieRoute
   '/training/$id': typeof TrainingIdRoute
@@ -178,6 +213,7 @@ export interface FileRoutesById {
   '/faqs/': typeof FaqsIndexRoute
   '/projects/': typeof ProjectsIndexRoute
   '/services/': typeof ServicesIndexRoute
+  '/tests/': typeof TestsIndexRoute
   '/training/': typeof TrainingIndexRoute
 }
 export interface FileRouteTypes {
@@ -192,7 +228,10 @@ export interface FileRouteTypes {
     | '/legal/mentions'
     | '/legal/privacy'
     | '/services/$slug'
+    | '/tests/affiliation'
+    | '/tests/calendar'
     | '/tests/devis'
+    | '/tests/newsletter'
     | '/tests/ressources'
     | '/tests/suivie'
     | '/training/$id'
@@ -200,6 +239,7 @@ export interface FileRouteTypes {
     | '/faqs/'
     | '/projects/'
     | '/services/'
+    | '/tests/'
     | '/training/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -212,7 +252,10 @@ export interface FileRouteTypes {
     | '/legal/mentions'
     | '/legal/privacy'
     | '/services/$slug'
+    | '/tests/affiliation'
+    | '/tests/calendar'
     | '/tests/devis'
+    | '/tests/newsletter'
     | '/tests/ressources'
     | '/tests/suivie'
     | '/training/$id'
@@ -220,6 +263,7 @@ export interface FileRouteTypes {
     | '/faqs'
     | '/projects'
     | '/services'
+    | '/tests'
     | '/training'
   id:
     | '__root__'
@@ -232,7 +276,10 @@ export interface FileRouteTypes {
     | '/legal/mentions'
     | '/legal/privacy'
     | '/services/$slug'
+    | '/tests/affiliation'
+    | '/tests/calendar'
     | '/tests/devis'
+    | '/tests/newsletter'
     | '/tests/ressources'
     | '/tests/suivie'
     | '/training/$id'
@@ -240,6 +287,7 @@ export interface FileRouteTypes {
     | '/faqs/'
     | '/projects/'
     | '/services/'
+    | '/tests/'
     | '/training/'
   fileRoutesById: FileRoutesById
 }
@@ -253,7 +301,10 @@ export interface RootRouteChildren {
   LegalMentionsRoute: typeof LegalMentionsRoute
   LegalPrivacyRoute: typeof LegalPrivacyRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
+  TestsAffiliationRoute: typeof TestsAffiliationRoute
+  TestsCalendarRoute: typeof TestsCalendarRoute
   TestsDevisRoute: typeof TestsDevisRoute
+  TestsNewsletterRoute: typeof TestsNewsletterRoute
   TestsRessourcesRoute: typeof TestsRessourcesRoute
   TestsSuivieRoute: typeof TestsSuivieRoute
   TrainingIdRoute: typeof TrainingIdRoute
@@ -261,6 +312,7 @@ export interface RootRouteChildren {
   FaqsIndexRoute: typeof FaqsIndexRoute
   ProjectsIndexRoute: typeof ProjectsIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
+  TestsIndexRoute: typeof TestsIndexRoute
   TrainingIndexRoute: typeof TrainingIndexRoute
 }
 
@@ -299,6 +351,13 @@ declare module '@tanstack/react-router' {
       path: '/training'
       fullPath: '/training/'
       preLoaderRoute: typeof TrainingIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tests/': {
+      id: '/tests/'
+      path: '/tests'
+      fullPath: '/tests/'
+      preLoaderRoute: typeof TestsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services/': {
@@ -350,11 +409,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TestsRessourcesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tests/newsletter': {
+      id: '/tests/newsletter'
+      path: '/tests/newsletter'
+      fullPath: '/tests/newsletter'
+      preLoaderRoute: typeof TestsNewsletterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tests/devis': {
       id: '/tests/devis'
       path: '/tests/devis'
       fullPath: '/tests/devis'
       preLoaderRoute: typeof TestsDevisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tests/calendar': {
+      id: '/tests/calendar'
+      path: '/tests/calendar'
+      fullPath: '/tests/calendar'
+      preLoaderRoute: typeof TestsCalendarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tests/affiliation': {
+      id: '/tests/affiliation'
+      path: '/tests/affiliation'
+      fullPath: '/tests/affiliation'
+      preLoaderRoute: typeof TestsAffiliationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services/$slug': {
@@ -405,7 +485,10 @@ const rootRouteChildren: RootRouteChildren = {
   LegalMentionsRoute: LegalMentionsRoute,
   LegalPrivacyRoute: LegalPrivacyRoute,
   ServicesSlugRoute: ServicesSlugRoute,
+  TestsAffiliationRoute: TestsAffiliationRoute,
+  TestsCalendarRoute: TestsCalendarRoute,
   TestsDevisRoute: TestsDevisRoute,
+  TestsNewsletterRoute: TestsNewsletterRoute,
   TestsRessourcesRoute: TestsRessourcesRoute,
   TestsSuivieRoute: TestsSuivieRoute,
   TrainingIdRoute: TrainingIdRoute,
@@ -413,6 +496,7 @@ const rootRouteChildren: RootRouteChildren = {
   FaqsIndexRoute: FaqsIndexRoute,
   ProjectsIndexRoute: ProjectsIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,
+  TestsIndexRoute: TestsIndexRoute,
   TrainingIndexRoute: TrainingIndexRoute,
 }
 export const routeTree = rootRouteImport
