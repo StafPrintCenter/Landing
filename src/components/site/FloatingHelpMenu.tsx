@@ -217,8 +217,9 @@ export function FloatingHelpMenu() {
               </button>
             </div>
           </div>
-        </div>
-      )}
+        </div >
+      )
+      }
 
       {/* Bouton d'action principal flottant (Trigger) */}
       <button
