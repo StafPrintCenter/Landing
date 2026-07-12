@@ -35,9 +35,10 @@ function IdTooltip() {
       </button>
       {show && (
         <span className="absolute bottom-full left-1/2 z-20 mb-2 w-64 -translate-x-1/2 rounded-lg border border-border bg-card p-2.5 text-[11px] leading-relaxed text-muted-foreground shadow-lg">
-          Sur une page de service, de formation ou de réalisation, cet identifiant est
-          généralement pré-rempli automatiquement. S'il est vide, laissez-le tel quel et
-          décrivez la ressource concernée dans votre message — notre équipe l'identifiera.
+          Cet identifiant est rempli automatiquement lorsque vous ouvrez ce formulaire depuis la
+          page précise du service, de la formation, de l'article ou de la réalisation concernée.
+          Si ce n'est pas le cas, ouvrez d'abord cette page, puis revenez signaler le problème —
+          le champ se remplira alors tout seul.
         </span>
       )}
     </span>
