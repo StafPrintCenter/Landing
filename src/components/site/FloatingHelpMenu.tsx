@@ -232,6 +232,8 @@ export function FloatingHelpMenu() {
           <HelpCircle size={18} className="animate-in fade-in zoom-in-75 duration-200" />
         )}
       </button>
-    </div>
+
+      <SiteReportModal isOpen={isReportOpen} onClose={() => setIsReportOpen(false)} />
+    </div >
   );
 }
