@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { HelpCircle, CircleX } from "lucide-react";
-import { HelpMenuPanel } from "./floating-help/HelpMenuPanel";
+import { HelpMenuPanel } from "./floatinghelp/HelpMenuPanel";
 
 export function FloatingHelpMenu() {
   const [open, setOpen] = useState(false);
