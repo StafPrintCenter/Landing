@@ -38,7 +38,7 @@ export function Footer() {
           </ul>
         </div>
 
-        {/* ── Services dynamiques ── */}
+        {/* Colonne Services (1 colonne) */}
         <div>
           <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-accent">Services</h4>
           <ul className="mt-4 space-y-2 text-sm text-secondary-foreground/80">
