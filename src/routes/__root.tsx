@@ -12,6 +12,7 @@ const DEFAULT_TITLE = `${SITE.name} - ${SITE.activity}`;
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => {
     const canonicalUrl = buildShareUrl("/");
+    const socialImage = buildShareUrl("/og-image.png");
 
     return {
       meta: [
@@ -25,13 +26,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         { property: "og:description", content: `${SITE.slogan}, ${SITE.activity}` },
         { property: "og:type", content: "website" },
         { property: "og:site_name", content: `${SITE.name}` },
-        { property: "og:image", content: `${logo.meta}` },
+        { property: "og:image", content: socialImage },
+        { property: "og:image:url", content: socialImage },
+        { property: "og:image:secure_url", content: socialImage },
+        { property: "og:image:type", content: "image/png" },
         { property: "og:image:width", content: "1200" },
         { property: "og:image:height", content: "630" },
         { property: "og:image:alt", content: `${SITE.name} - ${SITE.activity}` },
         { property: "og:url", content: canonicalUrl },
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:image", content: `${logo.meta}` },
+        { name: "twitter:image", content: socialImage },
+        { name: "twitter:image:alt", content: `${SITE.name} - ${SITE.activity}` },
         { name: "twitter:title", content: `${SITE.name} - ${SITE.activity}` },
         { name: "twitter:description", content: `${SITE.slogan}, ${SITE.activity}` },
         { name: "twitter:site", content: "@StafPrintCenter" },
