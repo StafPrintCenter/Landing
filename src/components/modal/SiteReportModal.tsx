@@ -121,7 +121,7 @@ export function SiteReportModal({ isOpen, onClose }: SiteReportModalProps) {
       onClick={onClose}
     >
       <div
-        className="w-full max-w-md rounded-t-2xl border border-border bg-card p-6 md:rounded-2xl"
+        className="flex max-h-[85vh] w-full max-w-md flex-col overflow-hidden rounded-t-2xl border border-border bg-card md:rounded-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between">
