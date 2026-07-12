@@ -12,10 +12,6 @@ export interface ReportPrefill {
 
 /**
  * Détecte le contexte de la page courante pour pré-remplir le formulaire de signalement :
- * - Pages de détail (/services/$slug, /training/$id, /articles/$slug, /projects?open=id)
- *   → type + identifiant précis.
- * - Pages listing (/services, /training, /articles, /projects sans ?open=)
- *   → type seul, l'identifiant reste à saisir manuellement.
  */
 export function useReportPrefill(): ReportPrefill {
   const location = useLocation();
