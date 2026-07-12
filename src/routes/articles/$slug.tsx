@@ -12,7 +12,6 @@ import {
   ArticleDetailError,
   ArticleDetailSkeleton,
 } from "@/components/pages/articles/detail";
-import { buildShareUrl } from "@/lib/share/build-share-url";
 
 export const Route = createFileRoute("/articles/$slug")({
   pendingMs: 0,
@@ -26,12 +25,6 @@ export const Route = createFileRoute("/articles/$slug")({
     const title = article ? `${article.title} | ${SITE.name}` : `Article ${SITE.name}`;
     const desc = article ? article.excerpt : "";
     const url = `/articles/${params.slug}`;
-    const absoluteUrl = buildShareUrl(url);
-    const imageUrl = article?.cover
-      ? /^https?:\/\//i.test(article.cover)
-        ? article.cover
-        : buildShareUrl(article.cover)
-      : buildShareUrl("/og-image.png");
 
     return {
       meta: article
@@ -41,18 +34,16 @@ export const Route = createFileRoute("/articles/$slug")({
           { property: "og:type", content: "article" },
           { property: "og:title", content: title },
           { property: "og:description", content: desc },
-          { property: "og:image", content: imageUrl },
-          { property: "og:image:url", content: imageUrl },
-          { property: "og:image:secure_url", content: imageUrl },
+          { property: "og:image", content: article.cover },
           { property: "og:image:alt", content: article.title },
           { name: "twitter:card", content: "summary_large_image" },
           { name: "twitter:title", content: article.title },
           { name: "twitter:description", content: article.excerpt },
-          { name: "twitter:image", content: imageUrl },
-          { property: "og:url", content: absoluteUrl },
+          { name: "twitter:image", content: article.cover },
+          { property: "og:url", content: url },
         ]
         : [],
-      links: [{ rel: "canonical", href: absoluteUrl }],
+      links: [{ rel: "canonical", href: url }],
     };
   },
   component: ArticlePage,
