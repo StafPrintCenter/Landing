@@ -3,6 +3,9 @@ export type { ArticleCategory };
 export { DISCIPLINE_COLORS };
 export const ARTICLE_CATEGORIES: ArticleCategory[] = DISCIPLINES;
 
+/**
+ * Type aligné sur la réponse de l'API publique /articles
+ */
 export type APIArticle = {
   slug: string;
   title: string;
