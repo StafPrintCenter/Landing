@@ -63,7 +63,7 @@ export function SiteReportModal({ isOpen, onClose }: SiteReportModalProps) {
   // Applique le pré-remplissage détecté à chaque ouverture du modal
   useEffect(() => {
     if (!isOpen) return;
-    setReportableType(prefill.reportableType ?? "service");
+    setReportableType(prefill.reportableType ?? "");
     setReportableId(prefill.reportableId);
     setReason("incorrect_info");
     setMessage("");
