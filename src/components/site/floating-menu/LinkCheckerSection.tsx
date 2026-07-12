@@ -52,7 +52,7 @@ export function LinkCheckerSection() {
           className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-muted px-3 py-2 text-xs font-medium hover:bg-muted/70 cursor-pointer transition"
         >
           <Search size={14} />
-          Générer ou obtenir le lien court
+          Lien de la page
         </button>
       )}
 
