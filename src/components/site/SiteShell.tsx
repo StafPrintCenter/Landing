@@ -1,8 +1,7 @@
 import type { ReactNode } from "react";
 import { Nav } from "./Nav";
 import { Footer } from "./Footer";
-import { CookieConsent } from "./";
-import { FloatingHelpMenu } from "./FloatingHelpMenu";
+import { CookieConsent, FloatingHelpMenu } from "./";
 
 export function SiteShell({ children }: { children: ReactNode }) {
   return (
