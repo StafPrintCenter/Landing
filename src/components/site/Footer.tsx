@@ -20,7 +20,7 @@ export function Footer() {
           <Link to="/" className="flex items-center">
             <img src={logo.dw} alt={`LOGO ${SITE.name}`} className="h-14 w-auto" />
           </Link>
-          <p className="mt-3 text-sm text-secondary-foreground/70">
+          <p className="mt-4 max-w-sm text-sm text-secondary-foreground/70 leading-relaxed">
             Depuis 2019, nous accompagnons votre vision jusqu'à ce qu'elle devienne visible.
           </p>
         </div>
