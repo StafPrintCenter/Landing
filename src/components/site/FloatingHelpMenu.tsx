@@ -5,6 +5,7 @@ import { buildShareUrl } from "@/lib/share/build-share-url";
 import { SITE } from "@/data/site";
 import { withWhatsAppMessage } from "@/lib/message/whatsapp";
 import { WhatsAppIcon } from "./icons/WhatsAppIcon";
+import { SiteReportModal } from "@/components/modal/SiteReportModal";
 import type { APIShortlink } from "@/data/shortlinks";
 
 type CheckStatus = "idle" | "loading" | "done" | "error";
