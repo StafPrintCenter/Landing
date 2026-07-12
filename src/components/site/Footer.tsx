@@ -69,8 +69,6 @@ export function Footer() {
         {/* Colonne Contact */}
         <div>
           <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-accent">Contact</h4>
-
-          {/* ── Contacts ── */}
           <ul className="mt-4 space-y-3 text-sm">
             <li className="flex items-start gap-2">
               <MapPin size={16} className="mt-0.5 text-accent" />
