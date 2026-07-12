@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useLocation } from "@tanstack/react-router";
-import { useServicesStore, useArticlesStore } from "@/stores/useServicesStore";
+import { useServicesStore, useArticlesStore } from "@/stores";
 import type { ReportableType } from "@/data/reports";
 
 export interface ReportPrefill {
