@@ -12,6 +12,7 @@ type CheckStatus = "idle" | "loading" | "done" | "error";
 
 export function FloatingHelpMenu() {
   const [open, setOpen] = useState(false);
+  const [isReportOpen, setIsReportOpen] = useState(false);
   const [status, setStatus] = useState<CheckStatus>("idle");
   const [shortLink, setShortLink] = useState<APIShortlink | null>(null);
   const [longUrl, setLongUrl] = useState("");
