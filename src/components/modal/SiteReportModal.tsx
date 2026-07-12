@@ -94,7 +94,7 @@ export function SiteReportModal({ isOpen, onClose }: SiteReportModalProps) {
       return;
     }
     if (!reportableId.trim()) {
-      setError("Merci d'indiquer l'identifiant de la ressource concernée.");
+      setError("L'identifiant de la ressource est obligatoire.");
       return;
     }
 
