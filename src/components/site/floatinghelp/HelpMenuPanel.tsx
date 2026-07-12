@@ -1,5 +1,4 @@
 import { X } from "lucide-react";
-import { ReportSection } from "./ReportSection";
 
 interface HelpMenuPanelProps {
   onClose: () => void;
@@ -23,7 +22,6 @@ export function HelpMenuPanel({ onClose }: HelpMenuPanelProps) {
       </div>
 
       <div className="mt-4 space-y-4">
-        <ReportSection onTriggerOpen={onClose} />
       </div>
     </div>
   );
