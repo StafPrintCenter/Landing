@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { Calendar, Clock, ArrowLeft, Share2 } from "lucide-react";
 import { getArticleCategoryColor, formatArticleDate, type APIArticle } from "@/data/articles";
 import { ShareModal } from "@/components/modal";
+import { getShortlinkCategory } from "@/data/shortlinks";
 import { buildShareUrl } from "@/lib/share/build-share-url";
 
 interface ArticleDetailHeaderProps {
@@ -79,7 +80,7 @@ export function ArticleDetailHeader({ article: a }: ArticleDetailHeaderProps) {
         url={shareUrl}
         title={a.title}
         text={a.excerpt}
-        shortlinkCategory="blog"
+        shortlinkCategory={getShortlinkCategory(a.category)}
       />
     </header>
   );
