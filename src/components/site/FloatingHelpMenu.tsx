@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link2, X, Search, Copy, Check, Loader2, PlusCircle, HelpCircle, MessageSquare } from "lucide-react";
+import { Link2, X, Search, Copy, Check, Loader2, PlusCircle, HelpCircle, MessageSquare, CircleX } from "lucide-react";
 import { resolveShortlink } from "@/stores/useShortlinksStore";
 import { buildShareUrl } from "@/lib/share/build-share-url";
 import { SITE } from "@/data/site";
@@ -208,9 +208,9 @@ export function FloatingHelpMenu() {
         className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-2xl hover:scale-105 active:scale-95 cursor-pointer transition duration-200 ring-4 ring-primary/10"
       >
         {open ? (
-          <X size={12} className="animate-in spin-in-90 duration-200" />
+          <CircleX size={18} className="animate-in spin-in-90 duration-200" />
         ) : (
-          <HelpCircle size={16} className="animate-in fade-in zoom-in-75 duration-200" />
+          <HelpCircle size={18} className="animate-in fade-in zoom-in-75 duration-200" />
         )}
       </button>
     </div>
