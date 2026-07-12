@@ -10,7 +10,7 @@ export interface ReportPrefill {
 }
 
 /**
- * Détecte le contexte de la page courante pour pré-remplir le formulaire de signalement :
+ * Détecte le contexte de la page courante pour pré-remplir le formulaire de signalement
  */
 export function useReportPrefill(): ReportPrefill {
   const location = useLocation();
