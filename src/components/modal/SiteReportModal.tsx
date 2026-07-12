@@ -229,7 +229,7 @@ export function SiteReportModal({ isOpen, onClose }: SiteReportModalProps) {
                 />
               </label>
 
-            {error && <p className="text-xs text-destructive">{error}</p>}
+              {error && <p className="text-xs text-destructive">{error}</p>}
 
               <button
                 type="submit"
