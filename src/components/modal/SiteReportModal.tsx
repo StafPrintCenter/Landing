@@ -218,16 +218,16 @@ export function SiteReportModal({ isOpen, onClose }: SiteReportModalProps) {
                 />
               </label>
 
-            <label className="block">
-              <span className="mb-1.5 block text-sm font-medium">Votre email (optionnel)</span>
-              <input
-                type="email"
-                value={reporterEmail}
-                onChange={(e) => setReporterEmail(e.target.value)}
-                placeholder="vous@exemple.com"
-                className="input w-full"
-              />
-            </label>
+              <label className="block">
+                <span className="mb-1.5 block text-sm font-medium">Votre email (optionnel)</span>
+                <input
+                  type="email"
+                  value={reporterEmail}
+                  onChange={(e) => setReporterEmail(e.target.value)}
+                  placeholder="vous@exemple.com"
+                  className="input w-full"
+                />
+              </label>
 
             {error && <p className="text-xs text-destructive">{error}</p>}
 
