@@ -29,7 +29,7 @@ function RessourcesPage() {
         <div className="mb-8 flex items-center gap-3 text-sm text-foreground/60">
           <Link to="/" className="hover:text-primary">Accueil</Link>
           <span>/</span>
-          <span>Tests</span>
+          <Link to="/tests" className="hover:text-primary">Tests</Link>
           <span>/</span>
           <span className="text-foreground">Ressources gratuites</span>
         </div>
