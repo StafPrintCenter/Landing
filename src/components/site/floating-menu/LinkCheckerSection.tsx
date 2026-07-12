@@ -109,7 +109,7 @@ export function LinkCheckerSection() {
           ) : (
             <div className="space-y-2 rounded-xl bg-accent/30 p-2.5">
               <p className="text-[11px] text-muted-foreground leading-normal">
-                Aucun alias n'est configuré pour cette adresse Web.
+                Aucun alias n'est configuré pour cette page.
               </p>
               <a
                 href={handleBuildCreateLink()}
