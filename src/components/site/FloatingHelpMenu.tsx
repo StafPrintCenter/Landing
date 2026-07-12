@@ -1,12 +1,19 @@
 import { useState, useEffect, useRef } from "react";
 import { HelpCircle, CircleX } from "lucide-react";
-import { HelpMenuPanel } from "./floatinghelp/HelpMenuPanel";
+import { SiteReportModal } from "@/components/modal/SiteReportModal";
+import {
+  HelpMenuHeader,
+  WhatsAppSection,
+  LinkCheckerSection,
+  ReportSection
+} from "./floating-menu";
 
 export function FloatingHelpMenu() {
   const [open, setOpen] = useState(false);
+  const [isReportOpen, setIsReportOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Gestionnaire de clic extérieur pour fermer le menu
+  // Gestionnaire de clic extérieur pour refermer le menu d'aide
   useEffect(() => {
     if (!open) return;
 
@@ -20,10 +27,27 @@ export function FloatingHelpMenu() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [open]);
 
+  const handleOpenReport = () => {
+    setOpen(false);
+    setIsReportOpen(true);
+  };
+
   return (
     <div ref={containerRef} className="fixed bottom-5 right-5 z-50 flex flex-col items-end">
-      {open && <HelpMenuPanel onClose={() => setOpen(false)} />}
+      {/* Fenêtre volante du Centre d'aide */}
+      {open && (
+        <div className="mb-3 w-80 rounded-2xl border border-border bg-card p-4 shadow-2xl animate-in fade-in slide-in-from-bottom-2 duration-200">
+          <HelpMenuHeader onClose={() => setOpen(false)} />
 
+          <div className="mt-4 space-y-4">
+            <WhatsAppSection />
+            <LinkCheckerSection />
+            <ReportSection onOpenReport={handleOpenReport} />
+          </div>
+        </div>
+      )}
+
+      {/* Bouton d'action principal flottant (Trigger) */}
       <button
         onClick={() => setOpen((prev) => !prev)}
         aria-label="Ouvrir le menu d'aide"
@@ -35,6 +59,9 @@ export function FloatingHelpMenu() {
           <HelpCircle size={18} className="animate-in fade-in zoom-in-75 duration-200" />
         )}
       </button>
+
+      {/* Boîte modale de signalement */}
+      <SiteReportModal isOpen={isReportOpen} onClose={() => setIsReportOpen(false)} />
     </div>
   );
 }
