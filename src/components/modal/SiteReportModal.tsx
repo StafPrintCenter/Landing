@@ -231,16 +231,17 @@ export function SiteReportModal({ isOpen, onClose }: SiteReportModalProps) {
 
             {error && <p className="text-xs text-destructive">{error}</p>}
 
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90 disabled:opacity-60 cursor-pointer"
-            >
-              {isSubmitting ? <Loader2 size={16} className="animate-spin" /> : <Flag size={16} />}
-              {isSubmitting ? "Envoi…" : "Envoyer le signalement"}
-            </button>
-          </form>
-        )}
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90 disabled:opacity-60 cursor-pointer"
+              >
+                {isSubmitting ? <Loader2 size={16} className="animate-spin" /> : <Flag size={16} />}
+                {isSubmitting ? "Envoi…" : "Envoyer le signalement"}
+              </button>
+            </form>
+          )}
+        </div>
       </div>
     </div>,
     document.body
