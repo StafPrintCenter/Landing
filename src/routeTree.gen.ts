@@ -19,6 +19,9 @@ import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
 import { Route as FaqsIndexRouteImport } from './routes/faqs/index'
 import { Route as ArticlesIndexRouteImport } from './routes/articles/index'
 import { Route as TrainingIdRouteImport } from './routes/training/$id'
+import { Route as TestsSuivieRouteImport } from './routes/tests/suivie'
+import { Route as TestsRessourcesRouteImport } from './routes/tests/ressources'
+import { Route as TestsDevisRouteImport } from './routes/tests/devis'
 import { Route as ServicesSlugRouteImport } from './routes/services/$slug'
 import { Route as LegalPrivacyRouteImport } from './routes/legal/privacy'
 import { Route as LegalMentionsRouteImport } from './routes/legal/mentions'
@@ -75,6 +78,21 @@ const TrainingIdRoute = TrainingIdRouteImport.update({
   path: '/training/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TestsSuivieRoute = TestsSuivieRouteImport.update({
+  id: '/tests/suivie',
+  path: '/tests/suivie',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TestsRessourcesRoute = TestsRessourcesRouteImport.update({
+  id: '/tests/ressources',
+  path: '/tests/ressources',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TestsDevisRoute = TestsDevisRouteImport.update({
+  id: '/tests/devis',
+  path: '/tests/devis',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesSlugRoute = ServicesSlugRouteImport.update({
   id: '/services/$slug',
   path: '/services/$slug',
@@ -111,6 +129,9 @@ export interface FileRoutesByFullPath {
   '/legal/mentions': typeof LegalMentionsRoute
   '/legal/privacy': typeof LegalPrivacyRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/tests/devis': typeof TestsDevisRoute
+  '/tests/ressources': typeof TestsRessourcesRoute
+  '/tests/suivie': typeof TestsSuivieRoute
   '/training/$id': typeof TrainingIdRoute
   '/articles/': typeof ArticlesIndexRoute
   '/faqs/': typeof FaqsIndexRoute
@@ -128,6 +149,9 @@ export interface FileRoutesByTo {
   '/legal/mentions': typeof LegalMentionsRoute
   '/legal/privacy': typeof LegalPrivacyRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/tests/devis': typeof TestsDevisRoute
+  '/tests/ressources': typeof TestsRessourcesRoute
+  '/tests/suivie': typeof TestsSuivieRoute
   '/training/$id': typeof TrainingIdRoute
   '/articles': typeof ArticlesIndexRoute
   '/faqs': typeof FaqsIndexRoute
@@ -146,6 +170,9 @@ export interface FileRoutesById {
   '/legal/mentions': typeof LegalMentionsRoute
   '/legal/privacy': typeof LegalPrivacyRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/tests/devis': typeof TestsDevisRoute
+  '/tests/ressources': typeof TestsRessourcesRoute
+  '/tests/suivie': typeof TestsSuivieRoute
   '/training/$id': typeof TrainingIdRoute
   '/articles/': typeof ArticlesIndexRoute
   '/faqs/': typeof FaqsIndexRoute
@@ -165,6 +192,9 @@ export interface FileRouteTypes {
     | '/legal/mentions'
     | '/legal/privacy'
     | '/services/$slug'
+    | '/tests/devis'
+    | '/tests/ressources'
+    | '/tests/suivie'
     | '/training/$id'
     | '/articles/'
     | '/faqs/'
@@ -182,6 +212,9 @@ export interface FileRouteTypes {
     | '/legal/mentions'
     | '/legal/privacy'
     | '/services/$slug'
+    | '/tests/devis'
+    | '/tests/ressources'
+    | '/tests/suivie'
     | '/training/$id'
     | '/articles'
     | '/faqs'
@@ -199,6 +232,9 @@ export interface FileRouteTypes {
     | '/legal/mentions'
     | '/legal/privacy'
     | '/services/$slug'
+    | '/tests/devis'
+    | '/tests/ressources'
+    | '/tests/suivie'
     | '/training/$id'
     | '/articles/'
     | '/faqs/'
@@ -217,6 +253,9 @@ export interface RootRouteChildren {
   LegalMentionsRoute: typeof LegalMentionsRoute
   LegalPrivacyRoute: typeof LegalPrivacyRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
+  TestsDevisRoute: typeof TestsDevisRoute
+  TestsRessourcesRoute: typeof TestsRessourcesRoute
+  TestsSuivieRoute: typeof TestsSuivieRoute
   TrainingIdRoute: typeof TrainingIdRoute
   ArticlesIndexRoute: typeof ArticlesIndexRoute
   FaqsIndexRoute: typeof FaqsIndexRoute
@@ -297,6 +336,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TrainingIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tests/suivie': {
+      id: '/tests/suivie'
+      path: '/tests/suivie'
+      fullPath: '/tests/suivie'
+      preLoaderRoute: typeof TestsSuivieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tests/ressources': {
+      id: '/tests/ressources'
+      path: '/tests/ressources'
+      fullPath: '/tests/ressources'
+      preLoaderRoute: typeof TestsRessourcesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tests/devis': {
+      id: '/tests/devis'
+      path: '/tests/devis'
+      fullPath: '/tests/devis'
+      preLoaderRoute: typeof TestsDevisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/$slug': {
       id: '/services/$slug'
       path: '/services/$slug'
@@ -345,6 +405,9 @@ const rootRouteChildren: RootRouteChildren = {
   LegalMentionsRoute: LegalMentionsRoute,
   LegalPrivacyRoute: LegalPrivacyRoute,
   ServicesSlugRoute: ServicesSlugRoute,
+  TestsDevisRoute: TestsDevisRoute,
+  TestsRessourcesRoute: TestsRessourcesRoute,
+  TestsSuivieRoute: TestsSuivieRoute,
   TrainingIdRoute: TrainingIdRoute,
   ArticlesIndexRoute: ArticlesIndexRoute,
   FaqsIndexRoute: FaqsIndexRoute,
