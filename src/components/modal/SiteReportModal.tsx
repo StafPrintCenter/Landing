@@ -173,29 +173,25 @@ export function SiteReportModal({ isOpen, onClose }: SiteReportModalProps) {
                 )}
               </label>
 
-            <label className="block">
-              <span className="mb-1.5 flex items-center gap-1.5 text-sm font-medium">
-                Identifiant de la ressource
-                <IdTooltip />
-              </span>
-              <input
-                type="text"
-                value={reportableId}
-                onChange={(e) => setReportableId(e.target.value)}
-                placeholder="ex: ab93b47d-4e45-4da2-8b81-d033df89bcb6"
-                className="input w-full"
-              />
-              {prefill.reportableId && reportableId === prefill.reportableId && (
-                <span className="mt-1 block text-xs text-muted-foreground">
-                  Rempli automatiquement depuis cette page — modifiable si besoin.
+              <label className="block">
+                <span className="mb-1.5 flex items-center gap-1.5 text-sm font-medium">
+                  Identifiant de la ressource <span className="text-destructive">*</span>
+                  <IdTooltip />
                 </span>
-              )}
-              {prefill.idUnresolved && (
-                <span className="mt-1 block text-xs text-muted-foreground">
-                  Impossible de le détecter automatiquement ici — décrivez la ressource dans votre message.
-                </span>
-              )}
-            </label>
+                <input
+                  type="text"
+                  value={reportableId}
+                  onChange={(e) => setReportableId(e.target.value)}
+                  placeholder="ex: ab93b47d-4e45-4da2-8b81-d033df89bcb6"
+                  className="input w-full"
+                  required
+                />
+                {prefill.reportableId && reportableId === prefill.reportableId && (
+                  <span className="mt-1 block text-xs text-muted-foreground">
+                    Rempli automatiquement depuis cette page — modifiable si besoin.
+                  </span>
+                )}
+              </label>
 
             <label className="block">
               <span className="mb-1.5 block text-sm font-medium">Motif</span>
