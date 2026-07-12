@@ -137,34 +137,41 @@ export function SiteReportModal({ isOpen, onClose }: SiteReportModalProps) {
           </button>
         </div>
 
-        {submitted ? (
-          <div className="mt-4 flex flex-col items-center gap-3 py-4 text-center">
-            <span className="flex h-14 w-14 items-center justify-center rounded-full bg-success/10 text-success">
-              <CheckCircle2 size={28} />
-            </span>
-            <p className="text-sm font-medium">Signalement envoyé, merci.</p>
-            <p className="text-xs text-muted-foreground">Notre équipe l'examinera dans les meilleurs délais.</p>
-            <button
-              onClick={onClose}
-              className="mt-2 w-full rounded-full border border-border bg-card px-4 py-2.5 text-sm font-medium hover:bg-muted cursor-pointer"
-            >
-              Fermer
-            </button>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="mt-4 space-y-4">
-            <label className="block">
-              <span className="mb-1.5 block text-sm font-medium">Type de ressource</span>
-              <select
-                value={reportableType}
-                onChange={(e) => setReportableType(e.target.value as ReportableType)}
-                className="input w-full cursor-pointer"
+        <div className="overflow-y-auto p-6 pt-4">
+          {submitted ? (
+            <div className="flex flex-col items-center gap-3 py-4 text-center">
+              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-success/10 text-success">
+                <CheckCircle2 size={28} />
+              </span>
+              <p className="text-sm font-medium">Signalement envoyé, merci.</p>
+              <p className="text-xs text-muted-foreground">Notre équipe l'examinera dans les meilleurs délais.</p>
+              <button
+                onClick={onClose}
+                className="mt-2 w-full rounded-full border border-border bg-card px-4 py-2.5 text-sm font-medium hover:bg-muted cursor-pointer"
               >
-                {TYPE_OPTIONS.map((t) => (
-                  <option key={t} value={t}>{REPORTABLE_TYPE_LABELS[t]}</option>
-                ))}
-              </select>
-            </label>
+                Fermer
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <label className="block">
+                <span className="mb-1.5 block text-sm font-medium">Type de ressource</span>
+                <select
+                  value={reportableType}
+                  onChange={(e) => setReportableType(e.target.value as ReportableType | "")}
+                  className="input w-full cursor-pointer"
+                >
+                  <option value="" disabled>— Choisir le type —</option>
+                  {TYPE_OPTIONS.map((t) => (
+                    <option key={t} value={t}>{REPORTABLE_TYPE_LABELS[t]}</option>
+                  ))}
+                </select>
+                {prefill.onListingPage && (
+                  <span className="mt-1 block text-xs text-muted-foreground">
+                    Type détecté automatiquement — précisez l'identifiant ci-dessous.
+                  </span>
+                )}
+              </label>
 
             <label className="block">
               <span className="mb-1.5 flex items-center gap-1.5 text-sm font-medium">
