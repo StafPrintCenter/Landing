@@ -208,9 +208,9 @@ export function FloatingHelpMenu() {
         className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-2xl hover:scale-105 active:scale-95 cursor-pointer transition duration-200 ring-4 ring-primary/10"
       >
         {open ? (
-          <X size={24} className="animate-in spin-in-90 duration-200" />
+          <X size={12} className="animate-in spin-in-90 duration-200" />
         ) : (
-          <HelpCircle size={24} className="animate-in fade-in zoom-in-75 duration-200" />
+          <HelpCircle size={16} className="animate-in fade-in zoom-in-75 duration-200" />
         )}
       </button>
     </div>
