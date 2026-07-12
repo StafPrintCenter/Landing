@@ -6,7 +6,6 @@ import type { ReportableType } from "@/data/reports";
 export interface ReportPrefill {
   reportableType: ReportableType | null;
   reportableId: string;
-  /** true si le type est connu mais qu'aucun identifiant précis n'a pu être détecté (page listing) */
   onListingPage: boolean;
 }
 
