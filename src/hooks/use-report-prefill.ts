@@ -1,56 +1,77 @@
 import { useMemo } from "react";
 import { useLocation } from "@tanstack/react-router";
 import { useServicesStore } from "@/stores/useServicesStore";
+import { useArticlesStore } from "@/stores/useArticlesStore";
 import type { ReportableType } from "@/data/reports";
 
 export interface ReportPrefill {
+  /** Type détecté automatiquement — null si la page ne correspond à aucun contexte connu */
   reportableType: ReportableType | null;
+  /** Identifiant détecté automatiquement — vide si non disponible sur cette page */
   reportableId: string;
-  /** true si l'identifiant n'a pas pu être détecté automatiquement sur cette page */
-  idUnresolved: boolean;
+  /** true si le type est connu mais qu'aucun identifiant précis n'a pu être détecté (page listing) */
+  onListingPage: boolean;
 }
 
 /**
- * Détecte si l'utilisateur se trouve sur une page "enfant" (service, formation,
- * réalisation ouverte en lightbox, article) et pré-remplit le type + l'identifiant
- * de la ressource correspondante pour le formulaire de signalement.
+ * Détecte le contexte de la page courante pour pré-remplir le formulaire de signalement :
+ * - Pages de détail (/services/$slug, /training/$id, /articles/$slug, /projects?open=id)
+ *   → type + identifiant précis.
+ * - Pages listing (/services, /training, /articles, /projects sans ?open=)
+ *   → type seul, l'identifiant reste à saisir manuellement.
  */
 export function useReportPrefill(): ReportPrefill {
   const location = useLocation();
   const pathname = location.pathname;
   const search = location.search as Record<string, unknown>;
 
+  const isServicesIndex = pathname === "/services" || pathname === "/services/";
   const serviceSlugMatch = pathname.match(/^\/services\/([^/]+)\/?$/);
+
+  const isTrainingIndex = pathname === "/training" || pathname === "/training/";
   const trainingIdMatch = pathname.match(/^\/training\/([^/]+)\/?$/);
+
+  const isArticlesIndex = pathname === "/articles" || pathname === "/articles/";
   const articleSlugMatch = pathname.match(/^\/articles\/([^/]+)\/?$/);
+
   const isProjectsPage = pathname === "/projects" || pathname === "/projects/";
   const openProjectId = isProjectsPage && typeof search.open === "string" ? search.open : null;
 
-  // Store déjà utilisé/caché ailleurs sur le site (même clé de requête) —
-  // l'appeler ici est quasi gratuit dans la majorité des cas.
   const { services } = useServicesStore({ perPage: 100 });
+  const { articles } = useArticlesStore({ perPage: 100 });
 
   return useMemo<ReportPrefill>(() => {
     if (serviceSlugMatch) {
       const service = services.find((s) => s.slug === serviceSlugMatch[1]);
-      return { reportableType: "service", reportableId: service?.id ?? "", idUnresolved: !service };
+      return { reportableType: "service", reportableId: service?.id ?? "", onListingPage: false };
+    }
+    if (isServicesIndex) {
+      return { reportableType: "service", reportableId: "", onListingPage: true };
     }
 
     if (trainingIdMatch) {
-      return { reportableType: "training", reportableId: trainingIdMatch[1], idUnresolved: false };
+      return { reportableType: "training", reportableId: trainingIdMatch[1], onListingPage: false };
+    }
+    if (isTrainingIndex) {
+      return { reportableType: "training", reportableId: "", onListingPage: true };
     }
 
     if (articleSlugMatch) {
-      // ⚠️ L'API publique des articles n'expose qu'un slug, pas d'UUID —
-      // impossible de pré-remplir automatiquement cet identifiant pour le moment.
-      return { reportableType: "article", reportableId: "", idUnresolved: true };
+      const article = articles.find((a) => a.slug === articleSlugMatch[1]);
+      return { reportableType: "article", reportableId: article?.id ?? "", onListingPage: false };
+    }
+    if (isArticlesIndex) {
+      return { reportableType: "article", reportableId: "", onListingPage: true };
     }
 
     if (openProjectId) {
-      return { reportableType: "project", reportableId: openProjectId, idUnresolved: false };
+      return { reportableType: "project", reportableId: openProjectId, onListingPage: false };
+    }
+    if (isProjectsPage) {
+      return { reportableType: "project", reportableId: "", onListingPage: true };
     }
 
-    return { reportableType: null, reportableId: "", idUnresolved: false };
+    return { reportableType: null, reportableId: "", onListingPage: false };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname, JSON.stringify(search), services]);
+  }, [pathname, JSON.stringify(search), services, articles]);
 }
