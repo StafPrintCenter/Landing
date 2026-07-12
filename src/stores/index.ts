@@ -5,3 +5,4 @@ export { useFormationsStore } from "./useFormationsStore";
 export { useProjectsStore } from "./useProjectsStore";
 export { createReport } from "./useReportsStore";
 export { useServicesStore } from "./useServicesStore";
+export { useServicesStore } from "./useServicesStore";
