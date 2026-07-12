@@ -13,7 +13,6 @@ export function SiteShell({ children }: { children: ReactNode }) {
 
       {/* Menu d'aide centralisé tout-en-un */}
       <FloatingHelpMenu />
-
       <CookieConsent />
     </div>
   );
