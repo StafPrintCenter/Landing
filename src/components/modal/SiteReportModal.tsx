@@ -199,7 +199,7 @@ export function SiteReportModal({ isOpen, onClose }: SiteReportModalProps) {
 
               <label className="block">
                 <span className="mb-1.5 flex items-center gap-1.5 text-sm font-medium">
-                  Identifiant de la ressource <span className="text-destructive">*</span>
+                  Identifiant de la ressource
                   <IdTooltip />
                 </span>
                 <input
