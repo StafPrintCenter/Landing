@@ -89,6 +89,10 @@ export function SiteReportModal({ isOpen, onClose }: SiteReportModalProps) {
     e.preventDefault();
     setError(null);
 
+    if (!reportableType) {
+      setError("Merci de choisir le type de ressource concernée.");
+      return;
+    }
     if (!reportableId.trim()) {
       setError("Merci d'indiquer l'identifiant de la ressource concernée.");
       return;
