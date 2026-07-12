@@ -66,6 +66,7 @@ export function Footer() {
           </ul>
         </div>
 
+        {/* Colonne Contact */}
         <div>
           <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-accent">Contact</h4>
 
