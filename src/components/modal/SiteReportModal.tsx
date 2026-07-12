@@ -124,7 +124,7 @@ export function SiteReportModal({ isOpen, onClose }: SiteReportModalProps) {
         className="flex max-h-[85vh] w-full max-w-md flex-col overflow-hidden rounded-t-2xl border border-border bg-card md:rounded-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between">
+        <div className="flex shrink-0 items-center justify-between border-b border-border p-6 pb-4">
           <h2 className="flex items-center gap-2 font-display text-lg font-bold">
             <Flag size={18} className="text-primary" /> Signaler un problème
           </h2>
