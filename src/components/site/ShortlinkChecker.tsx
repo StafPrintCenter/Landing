@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link2, X, Search, Copy, Check, Loader2 } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Link2, X, Search, Copy, Check, Loader2, PlusCircle } from "lucide-react";
 import { resolveShortlink } from "@/stores/useShortlinksStore";
 import { buildShareUrl } from "@/lib/share/build-share-url";
 import type { APIShortlink } from "@/data/shortlinks";
@@ -12,6 +12,23 @@ export function ShortlinkChecker() {
   const [shortLink, setShortLink] = useState<APIShortlink | null>(null);
   const [longUrl, setLongUrl] = useState("");
   const [copiedTarget, setCopiedTarget] = useState<"long" | "short" | null>(null);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const SHORTEN_SITE_URL = import.meta.env.VITE_SHORTSITE_URL;
+
+  // Gestionnaire du clic extérieur
+  useEffect(() => {
+    if (!open) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [open]);
 
   const handleCheck = async () => {
     setStatus("loading");
@@ -33,8 +50,15 @@ export function ShortlinkChecker() {
     setTimeout(() => setCopiedTarget(null), 2000);
   };
 
+  // Construction du lien vers SHORTEN avec l'URL actuelle en paramètre
+  const handleBuildCreateLink = () => {
+    const currentUrl = buildShareUrl(window.location.pathname + window.location.search);
+    const encodedUrl = encodeURIComponent(currentUrl);
+    return `${SHORTEN_SITE_URL.replace(/\/$/, "")}?create=${encodedUrl}`;
+  };
+
   return (
-    <div className="fixed bottom-5 left-5 z-50">
+    <div ref={containerRef} className="fixed bottom-5 left-5 z-50">
       {open && (
         <div className="mb-3 w-72 rounded-2xl border border-border bg-card p-4 shadow-xl">
           <div className="flex items-center justify-between">
@@ -80,7 +104,7 @@ export function ShortlinkChecker() {
 
           {status === "done" && (
             <div className="mt-3 space-y-2">
-              {/* URL longue — copiable seulement si aucun lien court n'existe */}
+              {/* URL longue */}
               <div className="flex items-center gap-2 rounded-xl border border-border bg-muted px-3 py-2">
                 <Link2 size={14} className="shrink-0 text-muted-foreground" />
                 <span className="flex-1 truncate text-xs text-muted-foreground">{longUrl}</span>
@@ -95,7 +119,7 @@ export function ShortlinkChecker() {
                 )}
               </div>
 
-              {/* Lien court — affiché uniquement s'il existe */}
+              {/* Lien court ou Proposition de création */}
               {shortLink ? (
                 <div className="flex items-center gap-2 rounded-xl border border-primary/30 bg-primary/5 px-3 py-2">
                   <Link2 size={14} className="shrink-0 text-primary" />
@@ -109,7 +133,20 @@ export function ShortlinkChecker() {
                   </button>
                 </div>
               ) : (
-                <p className="text-xs text-muted-foreground">Aucun lien court n'existe encore pour cette page.</p>
+                <div className="space-y-2 pt-1">
+                  <p className="text-xs text-muted-foreground leading-normal">
+                    Aucun lien court n'existe encore pour cette page.
+                  </p>
+                  <a
+                    href={handleBuildCreateLink()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground hover:opacity-90 transition"
+                  >
+                    <PlusCircle size={13} />
+                    Raccourcir ce lien
+                  </a>
+                </div>
               )}
             </div>
           )}
