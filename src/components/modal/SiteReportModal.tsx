@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Flag, X, Loader2, CheckCircle2, Info } from "lucide-react";
 import { createReport } from "@/stores/useReportsStore";
@@ -20,27 +20,52 @@ interface SiteReportModalProps {
 
 function IdTooltip() {
   const [show, setShow] = useState(false);
+  const [coords, setCoords] = useState<{ top: number; left: number } | null>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const updatePosition = () => {
+    const rect = buttonRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    setCoords({
+      top: rect.top - 8, // 8px au-dessus du bouton
+      left: rect.left + rect.width / 2,
+    });
+  };
+
+  const handleShow = () => {
+    updatePosition();
+    setShow(true);
+  };
+
   return (
     <span className="relative inline-flex">
       <button
+        ref={buttonRef}
         type="button"
-        onMouseEnter={() => setShow(true)}
+        onMouseEnter={handleShow}
         onMouseLeave={() => setShow(false)}
-        onFocus={() => setShow(true)}
+        onFocus={handleShow}
         onBlur={() => setShow(false)}
         aria-label="Comment obtenir cet identifiant ?"
         className="inline-flex h-4 w-4 items-center justify-center rounded-full text-muted-foreground hover:text-primary cursor-help"
       >
         <Info size={14} />
       </button>
-      {show && (
-        <span className="absolute bottom-full left-1/2 z-20 mb-2 w-64 -translate-x-1/2 rounded-lg border border-border bg-card p-2.5 text-[11px] leading-relaxed text-muted-foreground shadow-lg">
-          Cet identifiant est rempli automatiquement lorsque vous ouvrez ce formulaire depuis la
-          page précise du service, de la formation, de l'article ou de la réalisation concernée.
-          Si ce n'est pas le cas, ouvrez d'abord cette page, puis revenez signaler le problème —
-          le champ se remplira alors tout seul.
-        </span>
-      )}
+
+      {show && coords && typeof document !== "undefined" &&
+        createPortal(
+          <span
+            role="tooltip"
+            style={{ top: coords.top, left: coords.left }}
+            className="fixed z-[200] w-64 -translate-x-1/2 -translate-y-full rounded-lg border border-border bg-card p-2.5 text-[11px] leading-relaxed text-muted-foreground shadow-lg"
+          >
+            Cet identifiant est rempli automatiquement lorsque vous ouvrez ce formulaire depuis la
+            page précise du service, de la formation, de l'article ou de la réalisation concernée.
+            Si ce n'est pas le cas, ouvrez d'abord cette page, puis revenez signaler le problème —
+            le champ se remplira alors tout seul.
+          </span>,
+          document.body
+        )}
     </span>
   );
 }
@@ -60,7 +85,6 @@ export function SiteReportModal({ isOpen, onClose }: SiteReportModalProps) {
 
   useEffect(() => setMounted(true), []);
 
-  // Applique le pré-remplissage détecté à chaque ouverture du modal
   useEffect(() => {
     if (!isOpen) return;
     setReportableType(prefill.reportableType ?? "");
