@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
 import { Nav } from "./Nav";
 import { Footer } from "./Footer";
-import { WhatsAppFab, ShortlinkChecker, CookieConsent } from "./";
+import { CookieConsent } from "./";
+import { FloatingHelpMenu } from "./FloatingHelpMenu";
 
 export function SiteShell({ children }: { children: ReactNode }) {
   return (
@@ -9,8 +10,10 @@ export function SiteShell({ children }: { children: ReactNode }) {
       <Nav />
       <main className="flex-1 pt-16 md:pt-20">{children}</main>
       <Footer />
-      <WhatsAppFab />
-      <ShortlinkChecker />
+
+      {/* Menu d'aide centralisé tout-en-un */}
+      <FloatingHelpMenu />
+
       <CookieConsent />
     </div>
   );
