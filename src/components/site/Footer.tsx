@@ -104,7 +104,7 @@ export function Footer() {
 
       <div className="border-t border-white/10">
         <div className="container-x flex flex-col items-center justify-center gap-3 py-5 text-xs text-secondary-foreground/60 md:flex-row md:justify-between">
-          <p>© {new Date().getFullYear()}  {SITE.name} - Tous droits réservés.</p>
+          <p>© {new Date().getFullYear()} {SITE.name} - Tous droits réservés.</p>
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
             {FOOTER_LINKS.map((l, i) => (
               <span key={l.to} className="flex items-center gap-4">
