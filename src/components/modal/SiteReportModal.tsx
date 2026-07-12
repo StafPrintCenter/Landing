@@ -57,7 +57,7 @@ function IdTooltip() {
           <span
             role="tooltip"
             style={{ top: coords.top, left: coords.left }}
-            className="fixed z-[200] w-64 -translate-x-1/2 -translate-y-full rounded-lg border border-border bg-card p-2.5 text-[11px] leading-relaxed text-muted-foreground shadow-lg"
+            className="fixed z-200 w-64 -translate-x-1/2 -translate-y-full rounded-lg border border-border bg-card p-2.5 text-[11px] leading-relaxed text-muted-foreground shadow-lg"
           >
             Cet identifiant est rempli automatiquement lorsque vous ouvrez ce formulaire depuis la
             page précise du service, de la formation, de l'article ou de la réalisation concernée.
