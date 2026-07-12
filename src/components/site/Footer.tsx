@@ -16,7 +16,6 @@ export function Footer() {
   return (
     <footer className="mt-24 border-t border-border bg-secondary text-secondary-foreground">
       <div className="container-x grid gap-10 py-14 md:grid-cols-5">
-
         <div className="md:col-span-2">
           <Link to="/" className="flex items-center">
             <img src={logo.dw} alt={`LOGO ${SITE.name}`} className="h-14 w-auto" />
