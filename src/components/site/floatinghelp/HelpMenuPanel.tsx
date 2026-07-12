@@ -1,6 +1,4 @@
 import { X } from "lucide-react";
-import { WhatsAppSection } from "./WhatsAppSection";
-import { ShortlinkSection } from "./ShortlinkSection";
 import { ReportSection } from "./ReportSection";
 
 interface HelpMenuPanelProps {
