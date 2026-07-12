@@ -25,7 +25,7 @@ export function Footer() {
           </p>
         </div>
 
-        {/* Colonne Navigation (1 colonne) */}
+        {/* Colonne Navigation */}
         <div>
           <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-accent">Navigation</h4>
           <ul className="mt-4 space-y-2 text-sm">
