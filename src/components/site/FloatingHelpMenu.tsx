@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link2, X, Search, Copy, Check, Loader2, PlusCircle, HelpCircle, CircleX } from "lucide-react";
+import { Link2, X, Search, Copy, Check, Loader2, PlusCircle, HelpCircle, CircleX, Flag } from "lucide-react";
 import { resolveShortlink } from "@/stores/useShortlinksStore";
 import { buildShareUrl } from "@/lib/share/build-share-url";
 import { SITE } from "@/data/site";
