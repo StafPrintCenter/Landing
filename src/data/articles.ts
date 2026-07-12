@@ -7,6 +7,7 @@ export const ARTICLE_CATEGORIES: ArticleCategory[] = DISCIPLINES;
  * Type aligné sur la réponse de l'API publique /articles
  */
 export type APIArticle = {
+  id: string;
   slug: string;
   title: string;
   author: string;
