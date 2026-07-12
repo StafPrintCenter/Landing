@@ -4,7 +4,6 @@ import { useServicesStore, useArticlesStore } from "@/stores";
 import type { ReportableType } from "@/data/reports";
 
 export interface ReportPrefill {
-  /** Type détecté automatiquement — null si la page ne correspond à aucun contexte connu */
   reportableType: ReportableType | null;
   /** Identifiant détecté automatiquement — vide si non disponible sur cette page */
   reportableId: string;
