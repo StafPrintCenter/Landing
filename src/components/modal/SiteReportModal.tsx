@@ -49,7 +49,7 @@ export function SiteReportModal({ isOpen, onClose }: SiteReportModalProps) {
   const [mounted, setMounted] = useState(false);
   const prefill = useReportPrefill();
 
-  const [reportableType, setReportableType] = useState<ReportableType>("service");
+  const [reportableType, setReportableType] = useState<ReportableType | "">("");
   const [reportableId, setReportableId] = useState("");
   const [reason, setReason] = useState<ReportReason>("incorrect_info");
   const [message, setMessage] = useState("");
