@@ -6,6 +6,7 @@ import { useServicesStore } from "@/stores/useServicesStore";
 import { SITE } from "@/data/site";
 import { buildQuoteMessage } from "@/lib/message/quote";
 import { ContactForm, type ContactInput } from "./ContactForm";
+import { createWhatsAppContactMessage, withWhatsAppMessage } from "@/lib/message/whatsapp";
 
 export function Contact() {
   const [submitted, setSubmitted] = useState(false);
@@ -70,6 +71,11 @@ export function Contact() {
     setTimeout(() => setSubmitted(false), 5000);
   };
 
+  const whatsappContactLink = withWhatsAppMessage(
+    SITE.whatsappLink,
+    createWhatsAppContactMessage(SITE.name)
+  );
+
   return (
     <section id="contact" className="container-x py-24">
       <div className="grid gap-10 lg:grid-cols-12">
@@ -94,7 +100,7 @@ export function Contact() {
             </li>
           </ul>
           <a
-            href={SITE.whatsappLink}
+            href={whatsappContactLink}
             target="_blank"
             rel="noreferrer"
             className="mt-6 inline-flex items-center gap-2 rounded-full bg-secondary px-5 py-3 text-sm font-semibold text-secondary-foreground"
