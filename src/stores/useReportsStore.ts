@@ -35,7 +35,7 @@ export async function createReport(params: CreateReportParams): Promise<APIRepor
   const response = await fetch(url, { method: "POST", body: formData });
 
   if (!response.ok) {
-    let payload: { errors?: Record<string, string[]>; message?: string } | null = null;
+    let payload: ReportErrorPayload | null = null;
     try {
       payload = await response.json();
     } catch { }
