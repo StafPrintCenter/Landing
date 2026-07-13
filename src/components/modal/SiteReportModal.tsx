@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Flag, X, Loader2, CheckCircle2, Info } from "lucide-react";
-import { createReport } from "@/stores/useReportsStore";
+import { createReport, ReportApiError } from "@/stores/useReportsStore";
 import {
   REPORT_REASON_LABELS,
   REPORTABLE_TYPE_LABELS,
