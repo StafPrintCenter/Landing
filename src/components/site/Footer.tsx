@@ -48,7 +48,7 @@ export function Footer() {
                   to="/"
                   hash="services"
                   search={{ service: s.slug }}
-                  className="hover:text-accent transition-colors"
+                  className="block truncate hover:text-accent transition-colors" title={s.title}
                 >
                   {s.title}
                 </Link>
