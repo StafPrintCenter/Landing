@@ -132,8 +132,12 @@ export function SiteReportModal({ isOpen, onClose }: SiteReportModalProps) {
         reporterEmail: reporterEmail.trim() || undefined,
       });
       setSubmitted(true);
-    } catch {
-      setError("Erreur lors de l'envoi du signalement. Réessayez.");
+    } catch (err) {
+      setError(
+        err instanceof ReportApiError
+          ? err.message
+          : "Erreur lors de l'envoi du signalement. Réessayez."
+      );
     } finally {
       setIsSubmitting(false);
     }
