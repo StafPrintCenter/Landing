@@ -11,6 +11,11 @@ export interface CreateReportParams {
   reporterEmail?: string;
 }
 
+type ReportErrorPayload = {
+  errors?: Record<string, string[]>;
+  message?: string;
+};
+
 export class ReportApiError extends Error {
   constructor(message: string, public fieldErrors?: Record<string, string[]>) {
     super(message);
