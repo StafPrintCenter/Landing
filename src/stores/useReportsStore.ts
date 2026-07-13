@@ -22,6 +22,7 @@ export class ReportApiError extends Error {
   constructor(message: string, fieldErrors?: Record<string, string[]>) {
     super(message);
     this.name = "ReportApiError";
+    this.fieldErrors = fieldErrors;
   }
 }
 
