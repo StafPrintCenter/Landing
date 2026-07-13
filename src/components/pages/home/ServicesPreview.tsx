@@ -176,11 +176,13 @@ export function ServicesPreview() {
                     </div>
 
                     {/* Titre & Description */}
-                    <h3 className="mt-5 font-display text-lg font-semibold tracking-tight">
+                    <h3 className="mt-5 font-display text-lg font-semibold tracking-tight truncate"
+                      title={s.title}>
                       {s.title}
                     </h3>
 
-                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed line-clamp-2"
+                      title={s.short}>
                       {s.short}
                     </p>
 
