@@ -33,9 +33,7 @@ export async function createReport(params: CreateReportParams): Promise<APIRepor
     let payload: { errors?: Record<string, string[]>; message?: string } | null = null;
     try {
       payload = await response.json();
-    } catch {
-      // corps non-JSON, on ignore
-    }
+    } catch { }
 
     const firstFieldError = payload?.errors
       ? Object.values(payload.errors)[0]?.[0]
