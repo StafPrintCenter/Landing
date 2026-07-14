@@ -51,7 +51,7 @@ export function LinkCheckerSection() {
           onClick={handleCheck}
           className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-muted px-3 py-2 text-xs font-medium hover:bg-muted/70 cursor-pointer transition"
         >
-          <Search size={14} />
+          <Link size={14} />
           Lien de la page
         </button>
       )}
