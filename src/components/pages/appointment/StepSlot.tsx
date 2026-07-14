@@ -75,32 +75,58 @@ export function StepSlot({ data, update }: StepSlotProps) {
             <p className="text-sm text-muted-foreground">Aucun créneau disponible ce jour.</p>
           )}
 
-          {data.date && !isLoading && !isError && slots.length > 0 && (
-            <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 max-h-80 overflow-y-auto pr-1">
-              {slots.map((s) => {
-                const active = data.time === s;
-                const isToday = data.date ? isSameDay(data.date, new Date()) : false;
-                const now = new Date();
-                const [hh, mm] = s.split(":").map(Number);
-                const past = isToday && (hh < now.getHours() || (hh === now.getHours() && mm <= now.getMinutes()));
-                return (
-                  <button
-                    key={s}
-                    disabled={past}
-                    onClick={() => update("time", s)}
-                    className={cn(
-                      "cursor-pointer rounded-lg border px-2 py-2 text-sm font-medium transition-colors",
-                      active
-                        ? "border-primary bg-primary text-primary-foreground"
-                        : "border-border hover:bg-muted",
-                      past && "opacity-40 cursor-not-allowed line-through",
-                    )}
-                  >
-                    {s}
-                  </button>
-                );
-              })}
-            </div>
+          {data.date && !isLoading && !isError && slotList.length > 0 && (
+            <>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 max-h-80 overflow-y-auto pr-1">
+                {slotList.map(({ time: s, state }) => {
+                  const active = data.time === s;
+                  const isToday = data.date ? isSameDay(data.date, new Date()) : false;
+                  const now = new Date();
+                  const [hh, mm] = s.split(":").map(Number);
+                  const isPastToday = isToday && (hh < now.getHours() || (hh === now.getHours() && mm <= now.getMinutes()));
+                  const unavailable = state !== "available" || isPastToday;
+                  const badge = state !== "available" ? STATE_BADGE[state] : null;
+                  const BadgeIcon = badge?.icon;
+
+                  return (
+                    <button
+                      key={s}
+                      disabled={unavailable}
+                      onClick={() => update("time", s)}
+                      title={badge ? badge.label : undefined}
+                      className={cn(
+                        "cursor-pointer flex flex-col items-center gap-1 rounded-lg border px-2 py-2 text-sm font-medium transition-colors",
+                        active && !unavailable
+                          ? "border-primary bg-primary text-primary-foreground"
+                          : "border-border hover:bg-muted",
+                        unavailable && "cursor-not-allowed opacity-60 hover:bg-transparent",
+                        isPastToday && state === "available" && "line-through",
+                      )}
+                    >
+                      <span className={cn(unavailable && state !== "available" && "line-through")}>{s}</span>
+                      {badge && BadgeIcon && (
+                        <span className={cn("inline-flex items-center gap-1 rounded-full border px-1.5 py-0.5 text-[10px] font-semibold", badge.className)}>
+                          <BadgeIcon size={9} />
+                          {badge.label}
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="mt-3 flex flex-wrap gap-3 text-[11px] text-muted-foreground">
+                <span className="inline-flex items-center gap-1.5">
+                  <span className="h-2.5 w-2.5 rounded-full border border-border bg-card" /> Disponible
+                </span>
+                <span className="inline-flex items-center gap-1.5">
+                  <span className="h-2.5 w-2.5 rounded-full border border-amber-500/30 bg-amber-500/10" /> En attente de confirmation
+                </span>
+                <span className="inline-flex items-center gap-1.5">
+                  <span className="h-2.5 w-2.5 rounded-full border border-border bg-muted" /> Réservé
+                </span>
+              </div>
+            </>
           )}
         </div>
       </div>
