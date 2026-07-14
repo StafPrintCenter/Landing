@@ -4,7 +4,7 @@ import { type APIArticle } from "@/data/articles";
 const { fetchList, fetchById, useResourceStore } = createResourceStore<APIArticle>({
   resourceKey: "articles",
   listEndpoint: "articles/list",
-  detailEndpoint: "articles/get",
+  detailEndpoint: "articles",
 });
 
 export const fetchPublicArticles = fetchList;
