@@ -1,3 +1,4 @@
+export { resolveShortlink, createShortlink } from "./useShortlinksStore";
 export { createResourceStore } from "./createResourceStore";
 export { useArticlesStore } from "./useArticlesStore";
 export { sendContactRequest, trackContactRequest } from "./useContactStore";
