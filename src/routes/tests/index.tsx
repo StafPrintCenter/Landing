@@ -15,7 +15,6 @@ export const Route = createFileRoute("/tests/")({
 
 const TESTS = [
   { to: "/tests/devis", icon: Calculator, title: "Devis intelligent", desc: "Configurateur de prix en temps réel selon produit, quantité et finition." },
-  { to: "/tests/suivie", icon: PackageSearch, title: "Suivi de commande", desc: "Consultation de l'avancement d'une commande via un numéro de suivi." },
   { to: "/tests/ressources", icon: Download, title: "Ressources gratuites", desc: "Zone de templates, guides et outils à télécharger." },
   { to: "/tests/calendar", icon: CalendarDays, title: "Calendrier des sessions", desc: "Agenda public des prochaines sessions de formation." },
   { to: "/tests/affiliation", icon: Users, title: "Programme de parrainage", desc: "Génération de codes de parrainage et paliers de récompenses." },
