@@ -1,6 +1,6 @@
 import { format, isSameDay } from "date-fns";
 import { fr } from "date-fns/locale";
-import { Loader2 } from "lucide-react";
+import { Loader2, Lock, Clock3 } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
 import { useAppointmentSlots } from "@/stores/useAppointmentsStore";
