@@ -5,7 +5,7 @@ import { CalendarDays, PackageSearch, Calculator, Download, Users, Mail, ArrowRi
 export const Route = createFileRoute("/tools/")({
   head: () => ({
     meta: [
-      { title: "Outils en ligne — STAF PRINT CENTER" },
+      { title: `Outils en ligne | ${SITE.name}` },
       { name: "description", content: "Prenez rendez-vous ou suivez l'état de votre demande en ligne, sans appel ni file d'attente." },
       { name: "robots", content: "noindex" },
     ],
