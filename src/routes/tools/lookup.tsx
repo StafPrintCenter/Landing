@@ -162,7 +162,7 @@ function LookupPage() {
               )}
               <div className="flex items-start gap-2 text-muted-foreground">
                 <MessageSquare size={15} className="mt-0.5 shrink-0" />
-                <p className="leading-relaxed">{result.message}</p>
+                <p className="leading-relaxed whitespace-pre-wrap">{result.message}</p>
               </div>
             </div>
           </div>
