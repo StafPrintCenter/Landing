@@ -19,7 +19,7 @@ const AVAILABLE_TOOLS = [
     to: "/tools/appointment",
     icon: CalendarDays,
     title: "Prendre rendez-vous",
-    desc: "Choisissez un créneau disponible et réservez votre passage en atelier en quelques clics.",
+    desc: "Choisissez un créneau disponible et réservez votre passage en atelier ou en ligne en quelques clics.",
   },
   {
     to: "/tools/lookup",
