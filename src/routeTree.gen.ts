@@ -14,13 +14,15 @@ import { Route as SearchRouteImport } from './routes/search'
 import { Route as AppointmentRouteImport } from './routes/appointment'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TrainingIndexRouteImport } from './routes/training/index'
+import { Route as ToolsIndexRouteImport } from './routes/tools/index'
 import { Route as TestsIndexRouteImport } from './routes/tests/index'
 import { Route as ServicesIndexRouteImport } from './routes/services/index'
 import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
 import { Route as FaqsIndexRouteImport } from './routes/faqs/index'
 import { Route as ArticlesIndexRouteImport } from './routes/articles/index'
 import { Route as TrainingIdRouteImport } from './routes/training/$id'
-import { Route as TestsSuivieRouteImport } from './routes/tests/suivie'
+import { Route as ToolsLookupRouteImport } from './routes/tools/lookup'
+import { Route as ToolsAppointmentRouteImport } from './routes/tools/appointment'
 import { Route as TestsRessourcesRouteImport } from './routes/tests/ressources'
 import { Route as TestsNewsletterRouteImport } from './routes/tests/newsletter'
 import { Route as TestsDevisRouteImport } from './routes/tests/devis'
@@ -57,6 +59,11 @@ const TrainingIndexRoute = TrainingIndexRouteImport.update({
   path: '/training/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ToolsIndexRoute = ToolsIndexRouteImport.update({
+  id: '/tools/',
+  path: '/tools/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TestsIndexRoute = TestsIndexRouteImport.update({
   id: '/tests/',
   path: '/tests/',
@@ -87,9 +94,14 @@ const TrainingIdRoute = TrainingIdRouteImport.update({
   path: '/training/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TestsSuivieRoute = TestsSuivieRouteImport.update({
-  id: '/tests/suivie',
-  path: '/tests/suivie',
+const ToolsLookupRoute = ToolsLookupRouteImport.update({
+  id: '/tools/lookup',
+  path: '/tools/lookup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsAppointmentRoute = ToolsAppointmentRouteImport.update({
+  id: '/tools/appointment',
+  path: '/tools/appointment',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TestsRessourcesRoute = TestsRessourcesRouteImport.update({
@@ -158,13 +170,15 @@ export interface FileRoutesByFullPath {
   '/tests/devis': typeof TestsDevisRoute
   '/tests/newsletter': typeof TestsNewsletterRoute
   '/tests/ressources': typeof TestsRessourcesRoute
-  '/tests/suivie': typeof TestsSuivieRoute
+  '/tools/appointment': typeof ToolsAppointmentRoute
+  '/tools/lookup': typeof ToolsLookupRoute
   '/training/$id': typeof TrainingIdRoute
   '/articles/': typeof ArticlesIndexRoute
   '/faqs/': typeof FaqsIndexRoute
   '/projects/': typeof ProjectsIndexRoute
   '/services/': typeof ServicesIndexRoute
   '/tests/': typeof TestsIndexRoute
+  '/tools/': typeof ToolsIndexRoute
   '/training/': typeof TrainingIndexRoute
 }
 export interface FileRoutesByTo {
@@ -182,13 +196,15 @@ export interface FileRoutesByTo {
   '/tests/devis': typeof TestsDevisRoute
   '/tests/newsletter': typeof TestsNewsletterRoute
   '/tests/ressources': typeof TestsRessourcesRoute
-  '/tests/suivie': typeof TestsSuivieRoute
+  '/tools/appointment': typeof ToolsAppointmentRoute
+  '/tools/lookup': typeof ToolsLookupRoute
   '/training/$id': typeof TrainingIdRoute
   '/articles': typeof ArticlesIndexRoute
   '/faqs': typeof FaqsIndexRoute
   '/projects': typeof ProjectsIndexRoute
   '/services': typeof ServicesIndexRoute
   '/tests': typeof TestsIndexRoute
+  '/tools': typeof ToolsIndexRoute
   '/training': typeof TrainingIndexRoute
 }
 export interface FileRoutesById {
@@ -207,13 +223,15 @@ export interface FileRoutesById {
   '/tests/devis': typeof TestsDevisRoute
   '/tests/newsletter': typeof TestsNewsletterRoute
   '/tests/ressources': typeof TestsRessourcesRoute
-  '/tests/suivie': typeof TestsSuivieRoute
+  '/tools/appointment': typeof ToolsAppointmentRoute
+  '/tools/lookup': typeof ToolsLookupRoute
   '/training/$id': typeof TrainingIdRoute
   '/articles/': typeof ArticlesIndexRoute
   '/faqs/': typeof FaqsIndexRoute
   '/projects/': typeof ProjectsIndexRoute
   '/services/': typeof ServicesIndexRoute
   '/tests/': typeof TestsIndexRoute
+  '/tools/': typeof ToolsIndexRoute
   '/training/': typeof TrainingIndexRoute
 }
 export interface FileRouteTypes {
@@ -233,13 +251,15 @@ export interface FileRouteTypes {
     | '/tests/devis'
     | '/tests/newsletter'
     | '/tests/ressources'
-    | '/tests/suivie'
+    | '/tools/appointment'
+    | '/tools/lookup'
     | '/training/$id'
     | '/articles/'
     | '/faqs/'
     | '/projects/'
     | '/services/'
     | '/tests/'
+    | '/tools/'
     | '/training/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -257,13 +277,15 @@ export interface FileRouteTypes {
     | '/tests/devis'
     | '/tests/newsletter'
     | '/tests/ressources'
-    | '/tests/suivie'
+    | '/tools/appointment'
+    | '/tools/lookup'
     | '/training/$id'
     | '/articles'
     | '/faqs'
     | '/projects'
     | '/services'
     | '/tests'
+    | '/tools'
     | '/training'
   id:
     | '__root__'
@@ -281,13 +303,15 @@ export interface FileRouteTypes {
     | '/tests/devis'
     | '/tests/newsletter'
     | '/tests/ressources'
-    | '/tests/suivie'
+    | '/tools/appointment'
+    | '/tools/lookup'
     | '/training/$id'
     | '/articles/'
     | '/faqs/'
     | '/projects/'
     | '/services/'
     | '/tests/'
+    | '/tools/'
     | '/training/'
   fileRoutesById: FileRoutesById
 }
@@ -306,13 +330,15 @@ export interface RootRouteChildren {
   TestsDevisRoute: typeof TestsDevisRoute
   TestsNewsletterRoute: typeof TestsNewsletterRoute
   TestsRessourcesRoute: typeof TestsRessourcesRoute
-  TestsSuivieRoute: typeof TestsSuivieRoute
+  ToolsAppointmentRoute: typeof ToolsAppointmentRoute
+  ToolsLookupRoute: typeof ToolsLookupRoute
   TrainingIdRoute: typeof TrainingIdRoute
   ArticlesIndexRoute: typeof ArticlesIndexRoute
   FaqsIndexRoute: typeof FaqsIndexRoute
   ProjectsIndexRoute: typeof ProjectsIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
   TestsIndexRoute: typeof TestsIndexRoute
+  ToolsIndexRoute: typeof ToolsIndexRoute
   TrainingIndexRoute: typeof TrainingIndexRoute
 }
 
@@ -351,6 +377,13 @@ declare module '@tanstack/react-router' {
       path: '/training'
       fullPath: '/training/'
       preLoaderRoute: typeof TrainingIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/': {
+      id: '/tools/'
+      path: '/tools'
+      fullPath: '/tools/'
+      preLoaderRoute: typeof ToolsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tests/': {
@@ -395,11 +428,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TrainingIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/tests/suivie': {
-      id: '/tests/suivie'
-      path: '/tests/suivie'
-      fullPath: '/tests/suivie'
-      preLoaderRoute: typeof TestsSuivieRouteImport
+    '/tools/lookup': {
+      id: '/tools/lookup'
+      path: '/tools/lookup'
+      fullPath: '/tools/lookup'
+      preLoaderRoute: typeof ToolsLookupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/appointment': {
+      id: '/tools/appointment'
+      path: '/tools/appointment'
+      fullPath: '/tools/appointment'
+      preLoaderRoute: typeof ToolsAppointmentRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tests/ressources': {
@@ -490,13 +530,15 @@ const rootRouteChildren: RootRouteChildren = {
   TestsDevisRoute: TestsDevisRoute,
   TestsNewsletterRoute: TestsNewsletterRoute,
   TestsRessourcesRoute: TestsRessourcesRoute,
-  TestsSuivieRoute: TestsSuivieRoute,
+  ToolsAppointmentRoute: ToolsAppointmentRoute,
+  ToolsLookupRoute: ToolsLookupRoute,
   TrainingIdRoute: TrainingIdRoute,
   ArticlesIndexRoute: ArticlesIndexRoute,
   FaqsIndexRoute: FaqsIndexRoute,
   ProjectsIndexRoute: ProjectsIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,
   TestsIndexRoute: TestsIndexRoute,
+  ToolsIndexRoute: ToolsIndexRoute,
   TrainingIndexRoute: TrainingIndexRoute,
 }
 export const routeTree = rootRouteImport
