@@ -4,7 +4,7 @@ import { type APIProject } from "@/data/projects";
 const { fetchList, fetchById, useResourceStore } = createResourceStore<APIProject>({
   resourceKey: "projects",
   listEndpoint: "projects/list",
-  detailEndpoint: "projects/get",
+  detailEndpoint: "projects",
 });
 
 export const fetchPublicProjects = fetchList;
