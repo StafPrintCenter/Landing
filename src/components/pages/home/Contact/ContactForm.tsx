@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion } from "framer-motion";
-import { Send, CheckCircle2 } from "lucide-react";
+import { Send, CheckCircle2, AlertCircle } from "lucide-react";
 import { useServicesStore } from "@/stores/useServicesStore";
+import { sendContactRequest } from "@/stores/useContactStore";
 import { Field, CharacterCounter } from "./FormFields";
 
 export const contactSchema = z.object({
@@ -29,8 +30,8 @@ export const contactSchema = z.object({
 export type ContactInput = z.infer<typeof contactSchema>;
 
 interface ContactFormProps {
-  onSubmit: (data: ContactInput, resetForm: () => void) => Promise<void>;
-  submitted: boolean;
+  /** Appelé après un envoi réussi — utile pour un tracking ou une redirection côté parent */
+  onSuccess?: (ticketNumber: string) => void;
   initialValues: {
     service: string;
     customService: string;
@@ -38,8 +39,12 @@ interface ContactFormProps {
   };
 }
 
-export function ContactForm({ onSubmit, submitted, initialValues }: ContactFormProps) {
+export function ContactForm({ onSuccess, initialValues }: ContactFormProps) {
   const { services } = useServicesStore({ perPage: 100 });
+
+  const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [ticketNumber, setTicketNumber] = useState<string | null>(null);
 
   const { register, handleSubmit, reset, watch, setValue, formState: { errors, isSubmitting } } = useForm<ContactInput>({
     resolver: zodResolver(contactSchema),
@@ -70,6 +75,7 @@ export function ContactForm({ onSubmit, submitted, initialValues }: ContactFormP
         keepDefaultValues: false
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialValues, reset]);
 
   useEffect(() => {
@@ -78,8 +84,27 @@ export function ContactForm({ onSubmit, submitted, initialValues }: ContactFormP
     }
   }, [watchService, watchCustomService, setValue]);
 
+  const onSubmit = async (data: ContactInput) => {
+    setSubmitError(null);
+    try {
+      const result = await sendContactRequest({
+        name: data.name,
+        email: data.email,
+        service: data.service === "Autre" ? (data.customService?.trim() || "Autre") : data.service,
+        customService: data.service === "Autre" ? data.customService?.trim() : undefined,
+        message: data.message,
+      });
+      setTicketNumber(result.ticketNumber);
+      setSubmitted(true);
+      reset();
+      onSuccess?.(result.ticketNumber);
+    } catch {
+      setSubmitError("Une erreur est survenue lors de l'envoi. Merci de réessayer dans quelques instants.");
+    }
+  };
+
   return (
-    <form onSubmit={handleSubmit((data) => onSubmit(data, reset))} className="rounded-2xl border border-border bg-card p-6 md:p-8">
+    <form onSubmit={handleSubmit(onSubmit)} className="rounded-2xl border border-border bg-card p-6 md:p-8">
       <div className="grid gap-5 md:grid-cols-2">
         <Field
           label="Prénoms & Nom"
@@ -154,13 +179,24 @@ export function ContactForm({ onSubmit, submitted, initialValues }: ContactFormP
         {isSubmitting ? "Envoi..." : <>Envoyer la demande <Send size={16} /></>}
       </button>
 
+      {submitError && (
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mt-4 flex items-center gap-2 rounded-lg bg-destructive/10 px-4 py-3 text-sm text-destructive"
+        >
+          <AlertCircle size={18} /> {submitError}
+        </motion.div>
+      )}
+
       {submitted && (
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           className="mt-4 flex items-center gap-2 rounded-lg bg-[oklch(0.9_0.08_150)] px-4 py-3 text-sm text-[oklch(0.3_0.12_150)]"
         >
-          <CheckCircle2 size={18} /> Message reçu ! Nous vous répondons sous 24h.
+          <CheckCircle2 size={18} />
+          Message reçu ! Référence {ticketNumber} — nous vous répondons sous 24h.
         </motion.div>
       )}
     </form>
