@@ -1,5 +1,3 @@
-// src/routes/tools/lookup.tsx
-
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Search, Loader2, AlertCircle, Mail, Tag, Calendar, MessageSquare, Ticket, RotateCcw } from "lucide-react";
