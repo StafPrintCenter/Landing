@@ -29,6 +29,8 @@ export function StepSlot({ data, update }: StepSlotProps) {
   const dateKey = data.date ? format(data.date, "yyyy-MM-dd") : null;
   const { slots, isLoading, isError } = useAppointmentSlots(dateKey);
 
+  const slotList = buildSlotList(slots);
+
   return (
     <div>
       <h2 className="text-xl font-bold">Date et heure</h2>
