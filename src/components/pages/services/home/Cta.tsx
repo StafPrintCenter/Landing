@@ -17,7 +17,7 @@ export function ServiceHomeCta() {
           search={{
             quote: "autre",
             custom: "Projet sur mesure",
-            details: `Bonjour, \n\nJe souhaite obtenir une étude et un devis personnalisé pour un projet sur mesure qui n'est pas listé dans vos services standards.\n\nVoici la description de mes besoins :\n- Type de service : ex:Enseigne lumineux\n- Besoin principal : [décrivez ici votre idée]\n- Objectif : [résultat attendu]\n\nMerci de me recontacter pour échanger sur les modalités et le devis.`
+            details: `Bonjour, \n\nJe souhaite obtenir une étude et un devis personnalisé pour un projet sur mesure qui n'est pas listé dans vos services standards.\n\nVoici la description de mes besoins :\n- Type de service : ex: Enseigne lumineux\n- Besoin principal : [décrivez ici votre idée]\n- Objectif : [résultat attendu]\n\nMerci de me recontacter pour échanger sur les modalités et le devis.`
           }}
           className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:scale-[1.02]"
         >
