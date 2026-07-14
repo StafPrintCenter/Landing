@@ -93,23 +93,23 @@ export function Contact() {
               <a href={`mailto:${SITE.email}`} className="hover:text-primary">{SITE.email}</a>
             </li>
           </ul>
-
-          href={whatsappContactLink}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-6 inline-flex items-center gap-2 rounded-full bg-secondary px-5 py-3 text-sm font-semibold text-secondary-foreground"
+          <a
+            href={whatsappContactLink}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-secondary px-5 py-3 text-sm font-semibold text-secondary-foreground"
           >
-          Discuter sur WhatsApp <ArrowRight size={16} />
-        </a>
-      </Reveal>
+            Discuter sur WhatsApp <ArrowRight size={16} />
+          </a>
+        </Reveal>
 
-      <Reveal delay={0.1} className="lg:col-span-7">
-        <ContactForm
-          onSuccess={handleFormSuccess}
-          initialValues={formInit}
-        />
-      </Reveal>
-    </div>
+        <Reveal delay={0.1} className="lg:col-span-7">
+          <ContactForm
+            onSuccess={handleFormSuccess}
+            initialValues={formInit}
+          />
+        </Reveal>
+      </div>
     </section >
   );
 }
