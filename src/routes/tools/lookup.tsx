@@ -47,7 +47,7 @@ function LookupPage() {
 
   return (
     <SiteShell>
-      <section className="container-x py-16 md:py-24">
+      <section className="container-x py-16">
         <div className="mx-auto max-w-xl text-center">
           <p className="text-sm font-semibold uppercase tracking-widest text-primary">Suivi de demande</p>
           <h1 className="mt-2 font-display text-3xl font-bold md:text-4xl">Où en est ma demande ?</h1>
