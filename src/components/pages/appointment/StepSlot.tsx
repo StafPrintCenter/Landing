@@ -4,6 +4,7 @@ import { Loader2, Lock, Clock3 } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
 import { useAppointmentSlots } from "@/stores/useAppointmentsStore";
+import { buildSlotList, type SlotState } from "@/data/appointments";
 import { isDateDisabled, type BookingData, type UpdateBooking } from "./types";
 
 interface StepSlotProps {
