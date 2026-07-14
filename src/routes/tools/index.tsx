@@ -1,5 +1,3 @@
-// src/routes/tools/index.tsx
-
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site/SiteShell";
 import {
