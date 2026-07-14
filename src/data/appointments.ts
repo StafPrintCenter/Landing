@@ -1,4 +1,4 @@
-export type AppointmentMode = "presentiel" | "en_ligne"; // ⚠️ valeur "en_ligne" à confirmer côté backend
+export type AppointmentMode = "presentiel" | "en_ligne";
 export type AppointmentStatus = "pending" | "confirmed" | "cancelled" | "completed" | string;
 
 export const APPOINTMENT_MODE_LABELS: Record<AppointmentMode, string> = {
