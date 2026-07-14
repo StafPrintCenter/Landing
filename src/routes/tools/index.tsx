@@ -43,11 +43,6 @@ function ToolsIndexPage() {
         {/* En-tête : aligné à gauche, pas de bloc centré isolé */}
         <div className="flex flex-col gap-6 border-b border-border pb-10 md:flex-row md:items-end md:justify-between">
           <div className="max-w-xl">
-            <div className="mb-3 flex items-center gap-2 text-sm text-foreground/60">
-              <Link to="/" className="hover:text-primary">Accueil</Link>
-              <span>/</span>
-              <span className="text-foreground">Outils</span>
-            </div>
             <h1 className="font-display text-3xl font-bold md:text-4xl">Outils en ligne</h1>
             <p className="mt-3 text-foreground/70">
               Services accessibles dès maintenant, sans appel ni déplacement. D'autres outils
