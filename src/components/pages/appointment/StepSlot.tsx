@@ -71,7 +71,7 @@ export function StepSlot({ data, update }: StepSlotProps) {
             </p>
           )}
 
-          {data.date && !isLoading && !isError && slots.length === 0 && (
+          {data.date && !isLoading && !isError && slotList.length === 0 && (
             <p className="text-sm text-muted-foreground">Aucun créneau disponible ce jour.</p>
           )}
 
