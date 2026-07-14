@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { HelpCircle, CircleX } from "lucide-react";
 import { SiteReportModal } from "@/components/modal/SiteReportModal";
-import { HelpMenuHeader, WhatsAppSection, LinkCheckerSection, ReportSection } from "./floating-menu";
+import { HelpMenuHeader, WhatsAppSection, LinkCheckerSection, ReportSection, ToolsSection } from "./floating-menu";
 
 export function FloatingHelpMenu() {
   const [open, setOpen] = useState(false);
@@ -37,7 +37,9 @@ export function FloatingHelpMenu() {
           <div className="mt-4 space-y-4">
             <WhatsAppSection />
             <LinkCheckerSection />
+            <ToolsSection />
             <ReportSection onOpenReport={handleOpenReport} />
+            <ToolsSection />
           </div>
         </div>
       )}
