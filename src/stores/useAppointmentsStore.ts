@@ -25,7 +25,7 @@ export function useAppointmentSlots(date: string | null) {
   });
 
   return {
-    slots: query.data?.slots ?? [],
+    slots: query.data?.slots ?? { available: [], confirmed: [], pending: [] },
     isLoading: query.isLoading,
     isError: query.isError,
   };
