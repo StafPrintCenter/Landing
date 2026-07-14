@@ -11,7 +11,7 @@ export const Route = createFileRoute("/tools/lookup")({
     meta: [
       { title: `Suivre ma demande | ${SITE.name}` },
       {
-        name: "description", content: `Suivez l'état de votre demande de contact envoyée à STAF PRINT CENTER à l'aide de votre email et de votre numéro de ticket.`
+        name: "description", content: `Suivez l'état de votre demande de contact envoyée à ${SITE.name} à l'aide de votre email et de votre numéro de ticket.`
       },
       { name: "robots", content: "noindex" },
     ],
