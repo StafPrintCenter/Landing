@@ -45,6 +45,17 @@ export type AppointmentSlotsResponse = {
 export type SlotState = "available" | "pending" | "confirmed";
 
 /**
+ * Configuration des badges visuels selon l'état du créneau
+ */
+export const STATE_BADGE: Record<
+  Exclude<SlotState, "available">,
+  { label: string; icon: LucideIcon; className: string }
+> = {
+  pending: { label: "En attente", icon: Clock3, className: "bg-amber-500/10 text-amber-600 border-amber-500/30" },
+  confirmed: { label: "Réservé", icon: Lock, className: "bg-muted text-muted-foreground border-border" },
+};
+
+/**
  * Aplati les 3 listes de la réponse API en une liste triée unique de créneaux,
  * chacun annoté de son état, pour un rendu simple en grille.
  */
