@@ -34,8 +34,8 @@ export function useAppointmentSlots(date: string | null) {
 export interface CreateAppointmentParams {
   mode: AppointmentMode;
   duration: number;
-  date: string; // YYYY-MM-DD
-  time: string; // HH:mm
+  date: string;
+  time: string;
   firstName: string;
   lastName: string;
   email: string;
