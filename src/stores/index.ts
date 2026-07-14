@@ -1,5 +1,6 @@
 export { createResourceStore } from "./createResourceStore";
 export { useArticlesStore } from "./useArticlesStore";
+export { sendContactRequest } from "./useContactStore";
 export { useFaqsStore } from "./useFaqsStore";
 export { useFormationsStore } from "./useFormationsStore";
 export { useProjectsStore } from "./useProjectsStore";
