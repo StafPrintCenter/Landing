@@ -7,6 +7,7 @@ export type APITestimonial = {
   role: string;
   quote: string;
   rating: number;
+  featured: boolean;
 };
 
 /**
