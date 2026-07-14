@@ -232,7 +232,7 @@ export function ContactForm({ onSuccess, initialValues }: ContactFormProps) {
           <p className="mt-2.5 text-xs">
             Conservez ce numéro : vous pouvez suivre l'état de votre demande sur{" "}
             <Link to="/tools/lookup" className="inline-flex items-center gap-0.5 font-semibold underline underline-offset-2">
-              /tools/lookup <ArrowRight size={11} />
+              ici <ArrowRight size={11} />
             </Link>
           </p>
         </motion.div>
