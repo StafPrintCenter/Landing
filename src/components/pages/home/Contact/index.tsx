@@ -5,11 +5,10 @@ import { Reveal } from "@/components/site/Reveal";
 import { useServicesStore } from "@/stores/useServicesStore";
 import { SITE } from "@/data/site";
 import { buildQuoteMessage } from "@/lib/message/quote";
-import { ContactForm, type ContactInput } from "./ContactForm";
+import { ContactForm } from "./ContactForm";
 import { createWhatsAppContactMessage, withWhatsAppMessage } from "@/lib/message/whatsapp";
 
 export function Contact() {
-  const [submitted, setSubmitted] = useState(false);
   const [formInit, setFormInit] = useState({ service: "", customService: "", message: "" });
   const { services } = useServicesStore({ perPage: 100 });
 
@@ -60,15 +59,10 @@ export function Contact() {
     });
   }, [search.quote, search.details, search.custom, navigate, services]);
 
-  const handleFormSubmit = async (data: ContactInput, resetForm: () => void) => {
-    await new Promise((r) => setTimeout(r, 700));
-    const finalService = data.service === "Autre" ? data.customService : data.service;
-    console.log("Contact form submitted:", data.email, "Service:", finalService);
-
-    setSubmitted(true);
-    resetForm();
+  // Réinitialise les valeurs pré-remplies après un envoi réussi, pour que le
+  // prochain montage/relance du formulaire reparte d'un état neutre.
+  const handleFormSuccess = () => {
     setFormInit({ service: "", customService: "", message: "" });
-    setTimeout(() => setSubmitted(false), 5000);
   };
 
   const whatsappContactLink = withWhatsAppMessage(
@@ -99,24 +93,23 @@ export function Contact() {
               <a href={`mailto:${SITE.email}`} className="hover:text-primary">{SITE.email}</a>
             </li>
           </ul>
-          <a
-            href={whatsappContactLink}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-6 inline-flex items-center gap-2 rounded-full bg-secondary px-5 py-3 text-sm font-semibold text-secondary-foreground"
-          >
-            Discuter sur WhatsApp <ArrowRight size={16} />
-          </a>
-        </Reveal>
 
-        <Reveal delay={0.1} className="lg:col-span-7">
-          <ContactForm
-            onSubmit={handleFormSubmit}
-            submitted={submitted}
-            initialValues={formInit}
-          />
-        </Reveal>
-      </div>
-    </section>
+          href={whatsappContactLink}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-6 inline-flex items-center gap-2 rounded-full bg-secondary px-5 py-3 text-sm font-semibold text-secondary-foreground"
+          >
+          Discuter sur WhatsApp <ArrowRight size={16} />
+        </a>
+      </Reveal>
+
+      <Reveal delay={0.1} className="lg:col-span-7">
+        <ContactForm
+          onSuccess={handleFormSuccess}
+          initialValues={formInit}
+        />
+      </Reveal>
+    </div>
+    </section >
   );
 }
