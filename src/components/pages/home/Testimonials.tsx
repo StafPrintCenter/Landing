@@ -5,34 +5,30 @@ import { SITE } from "@/data/site";
 import { getInitials } from "@/data/testimonials";
 import { useStatsStore } from "@/stores/useStatsStore";
 import { useTestimonialsStore } from "@/stores/useTestimonialsStore";
+import { TestimonialsSkeleton } from "@/components/skeleton/HomeTestimonials";
 
 export function Testimonials() {
   const { stats } = useStatsStore();
   const { testimonials, isLoading, isError } = useTestimonialsStore();
+
+  // Le nombre de clients vient de la même ressource /stats que le composant Stats
   const clientsStat = stats.find((s) => s.key === "clients");
 
+  // 1. Gestion de l'état de chargement
+  if (isLoading) {
+    return <TestimonialsSkeleton />;
+  }
+
+  // 2. Gestion de l'état d'erreur
   if (isError) {
     return (
       <section className="py-28">
-        <div className="container-x text-center text-sm text-muted-foreground">
-          Impossible de charger les témoignages pour le moment.
-        </div>
-      </section>
-    );
-  }
-
-  if (isLoading) {
-    return (
-      <section className="relative overflow-hidden py-28">
-        <div className="container-x">
-          <div className="h-10 w-64 animate-pulse rounded-lg bg-muted" />
-          <div className="mt-6 grid gap-6 lg:grid-cols-12">
-            <div className="h-80 animate-pulse rounded-3xl border border-border bg-card lg:col-span-7" />
-            <div className="grid gap-6 lg:col-span-5">
-              <div className="h-24 animate-pulse rounded-3xl border border-border bg-card" />
-              <div className="h-28 animate-pulse rounded-2xl border border-border bg-card" />
-              <div className="h-28 animate-pulse rounded-2xl border border-border bg-card" />
-            </div>
+        <div className="container-x text-center">
+          <div className="inline-block rounded-2xl border border-destructive/20 bg-destructive/5 px-6 py-8 text-destructive max-w-xl mx-auto">
+            <p className="font-semibold text-lg">Oups, une erreur est survenue</p>
+            <p className="mt-1 text-sm text-destructive/80">
+              Impossible de charger les témoignages. Veuillez vérifier votre connexion.
+            </p>
           </div>
         </div>
       </section>
@@ -42,6 +38,9 @@ export function Testimonials() {
   if (testimonials.length === 0) {
     return null;
   }
+
+  // On se base sur le flag explicite plutôt que sur la position dans le tableau,
+  // même si le back trie déjà featured en premier — ceinture et bretelles
   const featured = testimonials.find((t) => t.featured) ?? testimonials[0];
   const rest = testimonials.filter((t) => t.id !== featured.id);
 
