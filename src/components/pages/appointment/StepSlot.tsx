@@ -13,16 +13,8 @@ interface StepSlotProps {
 }
 
 const STATE_BADGE: Record<Exclude<SlotState, "available">, { label: string; icon: typeof Lock; className: string }> = {
-  pending: {
-    label: "En attente",
-    icon: Clock3,
-    className: "bg-amber-500/10 text-amber-600 border-amber-500/30"
-  },
-  confirmed: {
-    label: "Réservé",
-    icon: Lock,
-    className: "bg-muted text-muted-foreground border-border"
-  },
+  pending: { label: "En attente", icon: Clock3, className: "bg-amber-500/10 text-amber-600 border-amber-500/30" },
+  confirmed: { label: "Réservé", icon: Lock, className: "bg-muted text-muted-foreground border-border" },
 };
 
 export function StepSlot({ data, update }: StepSlotProps) {
@@ -55,7 +47,7 @@ export function StepSlot({ data, update }: StepSlotProps) {
         <div>
           <div className="text-sm font-semibold mb-3">
             {data.date
-              ? `Créneaux - ${format(data.date, "EEEE d MMMM", { locale: fr })}`
+              ? `Créneaux — ${format(data.date, "EEEE d MMMM", { locale: fr })}`
               : "Sélectionnez une date"}
           </div>
 
@@ -95,19 +87,23 @@ export function StepSlot({ data, update }: StepSlotProps) {
                       onClick={() => update("time", s)}
                       title={badge ? badge.label : undefined}
                       className={cn(
-                        "cursor-pointer flex flex-col items-center gap-1 rounded-lg border px-2 py-2 text-sm font-medium transition-colors",
+                        "relative h-10 cursor-pointer flex items-center justify-center rounded-lg border text-sm font-medium transition-colors",
                         active && !unavailable
                           ? "border-primary bg-primary text-primary-foreground"
                           : "border-border hover:bg-muted",
                         unavailable && "cursor-not-allowed opacity-60 hover:bg-transparent",
-                        isPastToday && state === "available" && "line-through",
                       )}
                     >
-                      <span className={cn(unavailable && state !== "available" && "line-through")}>{s}</span>
-                      {badge && BadgeIcon && (
-                        <span className={cn("inline-flex items-center gap-1 rounded-full border px-1.5 py-0.5 text-[10px] font-semibold", badge.className)}>
-                          <BadgeIcon size={9} />
+                      {/* Si un badge existe, on masque l'heure textuelle pour afficher uniquement le badge centré */}
+                      {badge && BadgeIcon ? (
+                        <span className={cn("inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-semibold", badge.className)}>
+                          <BadgeIcon size={10} />
                           {badge.label}
+                        </span>
+                      ) : (
+                        // Sinon, on affiche l'heure normalement (avec line-through si c'est aujourd'hui dans le passé)
+                        <span className={cn(isPastToday && "line-through text-muted-foreground")}>
+                          {s}
                         </span>
                       )}
                     </button>
