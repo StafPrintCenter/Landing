@@ -4,7 +4,7 @@ import { type APIService } from "@/data/services";
 const { fetchList, fetchById, useResourceStore } = createResourceStore<APIService>({
   resourceKey: "services",
   listEndpoint: "services/list",
-  detailEndpoint: "services/get",
+  detailEndpoint: "services",
 });
 
 export const fetchPublicServices = fetchList;
