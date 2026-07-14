@@ -51,7 +51,11 @@ export const STATE_BADGE: Record<
   Exclude<SlotState, "available">,
   { label: string; icon: LucideIcon; className: string }
 > = {
-  pending: { label: "En attente", icon: Clock3, className: "bg-amber-500/10 text-amber-600 border-amber-500/30" },
+  pending: {
+    label: "En attente",
+    icon: Clock3,
+    className: "bg-amber-500/10 text-amber-600 border-amber-500/30"
+  },
   confirmed: { label: "Réservé", icon: Lock, className: "bg-muted text-muted-foreground border-border" },
 };
 
