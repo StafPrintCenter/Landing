@@ -21,7 +21,7 @@ export function useAppointmentSlots(date: string | null) {
     queryKey: ["appointments", "slots", date],
     queryFn: () => fetchAppointmentSlots(date as string),
     enabled: !!date,
-    staleTime: 1000 * 30, // les créneaux peuvent se libérer/remplir rapidement
+    staleTime: 1000 * 30,
   });
 
   return {
