@@ -86,15 +86,23 @@ export function StepSlot({ data, update }: StepSlotProps) {
                         active && !unavailable
                           ? "border-primary bg-primary text-primary-foreground"
                           : "border-border hover:bg-muted",
-                        unavailable && "cursor-not-allowed opacity-60 hover:bg-transparent",
+                        unavailable && "cursor-not-allowed opacity-75 hover:bg-transparent",
                       )}
                     >
-                      {/* Si un badge existe, on masque l'heure textuelle pour afficher uniquement le badge centré */}
                       {badge && BadgeIcon ? (
-                        <span className={cn("inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-semibold", badge.className)}>
-                          <BadgeIcon size={10} />
-                          {badge.label}
-                        </span>
+                        <>
+                          <span className="select-none text-xs font-normal text-muted-foreground/30 line-through">
+                            {s}
+                          </span>
+                          {/* Le badge superposé par-dessus */}
+                          <span className={cn(
+                            "absolute inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-semibold shadow-sm backdrop-blur-[1px]",
+                            badge.className
+                          )}>
+                            <BadgeIcon size={10} />
+                            {badge.label}
+                          </span>
+                        </>
                       ) : (
                         /* Affichage standard pour les créneaux libres */
                         <span className={cn(isPastToday && "line-through text-muted-foreground/50")}>
