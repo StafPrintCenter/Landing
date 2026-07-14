@@ -1,6 +1,8 @@
+// src/routes/tools/lookup.tsx
+
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Search, Loader2, AlertCircle, Mail, Tag, Calendar, MessageSquare, Ticket } from "lucide-react";
+import { Search, Loader2, AlertCircle, Mail, Tag, Calendar, MessageSquare, Ticket, RotateCcw } from "lucide-react";
 import { SiteShell } from "@/components/site/SiteShell";
 import { SITE } from "@/data/site";
 import { trackContactRequest } from "@/stores/useContactStore";
@@ -45,6 +47,13 @@ function LookupPage() {
     }
   };
 
+  const handleNewSearch = () => {
+    setResult(null);
+    setState("idle");
+    setEmail("");
+    setTicketNumber("");
+  };
+
   return (
     <SiteShell>
       <section className="container-x py-16">
@@ -57,67 +66,69 @@ function LookupPage() {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="mx-auto mt-10 max-w-xl space-y-4 rounded-2xl border border-border bg-card p-6 md:p-8">
-          <label className="block">
-            <span className="mb-1.5 block text-sm font-medium">Adresse email</span>
-            <div className="relative flex items-center">
-              <Mail size={16} className="absolute left-3 text-muted-foreground" />
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="input w-full pl-10"
-                placeholder="vous@exemple.com"
-              />
-            </div>
-          </label>
+        {state !== "found" && (
+          <form onSubmit={handleSubmit} className="mx-auto mt-10 max-w-xl space-y-4 rounded-2xl border border-border bg-card p-6 md:p-8">
+            <label className="block">
+              <span className="mb-1.5 block text-sm font-medium">Adresse email</span>
+              <div className="relative flex items-center">
+                <Mail size={16} className="absolute left-3 text-muted-foreground" />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="input w-full pl-10"
+                  placeholder="vous@exemple.com"
+                />
+              </div>
+            </label>
 
-          <label className="block">
-            <span className="mb-1.5 block text-sm font-medium">Numéro de ticket</span>
-            <div className="relative flex items-center">
-              <Ticket size={16} className="absolute left-3 text-muted-foreground" />
-              <input
-                type="text"
-                value={ticketNumber}
-                onChange={(e) => setTicketNumber(e.target.value)}
-                required
-                className="input w-full pl-10 font-mono"
-                placeholder="SPC-YYYYMMJJ_HHMMSS-XYZ0"
-              />
-            </div>
-          </label>
+            <label className="block">
+              <span className="mb-1.5 block text-sm font-medium">Numéro de ticket</span>
+              <div className="relative flex items-center">
+                <Ticket size={16} className="absolute left-3 text-muted-foreground" />
+                <input
+                  type="text"
+                  value={ticketNumber}
+                  onChange={(e) => setTicketNumber(e.target.value)}
+                  required
+                  className="input w-full pl-10 font-mono"
+                  placeholder="SPC-YYYYMMJJ_HHMMSS-XYZ0"
+                />
+              </div>
+            </label>
 
-          <button
-            type="submit"
-            disabled={state === "loading"}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60 cursor-pointer"
-          >
-            {state === "loading" ? (
-              <>
-                <Loader2 size={16} className="animate-spin" /> Recherche...
-              </>
-            ) : (
-              <>
-                <Search size={16} /> Rechercher
-              </>
+            <button
+              type="submit"
+              disabled={state === "loading"}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60 cursor-pointer"
+            >
+              {state === "loading" ? (
+                <>
+                  <Loader2 size={16} className="animate-spin" /> Recherche...
+                </>
+              ) : (
+                <>
+                  <Search size={16} /> Rechercher
+                </>
+              )}
+            </button>
+
+            {state === "not-found" && (
+              <div className="flex items-start gap-2 rounded-lg bg-destructive/10 px-4 py-3 text-sm text-destructive">
+                <AlertCircle size={18} className="mt-0.5 shrink-0" />
+                <p>Aucune demande ne correspond à cette adresse email et à ce numéro de ticket. Vérifiez ces informations et réessayez.</p>
+              </div>
             )}
-          </button>
 
-          {state === "not-found" && (
-            <div className="flex items-start gap-2 rounded-lg bg-destructive/10 px-4 py-3 text-sm text-destructive">
-              <AlertCircle size={18} className="mt-0.5 shrink-0" />
-              <p>Aucune demande ne correspond à cette adresse email et à ce numéro de ticket. Vérifiez ces informations et réessayez.</p>
-            </div>
-          )}
-
-          {state === "error" && (
-            <div className="flex items-start gap-2 rounded-lg bg-destructive/10 px-4 py-3 text-sm text-destructive">
-              <AlertCircle size={18} className="mt-0.5 shrink-0" />
-              <p>Une erreur est survenue lors de la recherche. Merci de réessayer dans quelques instants.</p>
-            </div>
-          )}
-        </form>
+            {state === "error" && (
+              <div className="flex items-start gap-2 rounded-lg bg-destructive/10 px-4 py-3 text-sm text-destructive">
+                <AlertCircle size={18} className="mt-0.5 shrink-0" />
+                <p>Une erreur est survenue lors de la recherche. Merci de réessayer dans quelques instants.</p>
+              </div>
+            )}
+          </form>
+        )}
 
         {state === "found" && result && (
           <div className="mx-auto mt-6 max-w-xl rounded-2xl border border-border bg-card p-6 md:p-8">
@@ -165,6 +176,14 @@ function LookupPage() {
                 <p className="leading-relaxed whitespace-pre-wrap">{result.message}</p>
               </div>
             </div>
+
+            <button
+              type="button"
+              onClick={handleNewSearch}
+              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold hover:bg-muted cursor-pointer"
+            >
+              <RotateCcw size={16} /> Nouvelle recherche
+            </button>
           </div>
         )}
       </section>
