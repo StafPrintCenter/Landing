@@ -42,7 +42,7 @@ export function StepSlot({ data, update }: StepSlotProps) {
         <div>
           <div className="text-sm font-semibold mb-3">
             {data.date
-              ? `Créneaux — ${format(data.date, "EEEE d MMMM", { locale: fr })}`
+              ? `Créneaux du ${format(data.date, "EEEE d MMMM", { locale: fr })}`
               : "Sélectionnez une date"}
           </div>
 
