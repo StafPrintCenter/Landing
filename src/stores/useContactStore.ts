@@ -11,6 +11,12 @@ export interface SendContactParams {
   message: string;
 }
 
+export interface TrackContactParams {
+  email: string;
+  ticketNumber: string;
+}
+
+
 export async function sendContactRequest(params: SendContactParams): Promise<APIContactRequest> {
   const formData = new FormData();
   formData.append("name", params.name);
