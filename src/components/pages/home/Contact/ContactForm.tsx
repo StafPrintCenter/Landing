@@ -189,7 +189,7 @@ export function ContactForm({ onSuccess, initialValues }: ContactFormProps) {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60"
+        className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60 cursor-pointer"
       >
         {isSubmitting ? "Envoi..." : <>Envoyer la demande <Send size={16} /></>}
       </button>
