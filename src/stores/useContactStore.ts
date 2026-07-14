@@ -19,7 +19,7 @@ export async function sendContactRequest(params: SendContactParams): Promise<API
   formData.append("custom_service", params.customService ?? "");
   formData.append("message", params.message);
 
-  const url = resolveApiUrl(`/api/public/contact`);
+  const url = resolveApiUrl(`/api/public/contact/create`);
   const response = await fetch(url, { method: "POST", body: formData });
   if (!response.ok) {
     throw new Error("Erreur lors de l'envoi de votre demande de contact");
