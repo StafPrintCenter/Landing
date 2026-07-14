@@ -53,7 +53,7 @@ export function BlogPreview() {
               <Link
                 to="/articles/$slug"
                 params={{ slug: a.slug }}
-                className="group block overflow-hidden rounded-2xl border border-border bg-card h-full flex flex-col"
+                className="group overflow-hidden rounded-2xl border border-border bg-card h-full flex flex-col"
               >
                 <div className="aspect-16/10 overflow-hidden">
                   <img
