@@ -1,5 +1,3 @@
-// src/components/site/floating-menu/ToolsSection.tsx
-
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Wrench, ChevronDown, CalendarCheck, Search, LayoutGrid } from "lucide-react";
