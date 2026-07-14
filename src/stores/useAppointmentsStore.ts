@@ -14,8 +14,7 @@ export async function fetchAppointmentSlots(date: string): Promise<AppointmentSl
 }
 
 /**
- * Hook de récupération des créneaux disponibles pour une date donnée.
- * `date` doit être au format YYYY-MM-DD ; passe null/undefined pour désactiver la requête.
+ * Hook de récupération des créneaux d'une date donnée, répartis par état
  */
 export function useAppointmentSlots(date: string | null) {
   const query = useQuery({
