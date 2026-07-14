@@ -28,6 +28,9 @@ export type APIAppointment = {
   createdAt: string;
 };
 
+/**
+ * Répartition des créneaux d'une journée selon leur disponibilité
+ */
 export type AppointmentSlotsResponse = {
   date: string;
   slots: string[];
