@@ -33,5 +33,24 @@ export type APIAppointment = {
  */
 export type AppointmentSlotsResponse = {
   date: string;
-  slots: string[];
+  slots: {
+    available: string[];
+    confirmed: string[];
+    pending: string[];
+  };
 };
+
+export type SlotState = "available" | "pending" | "confirmed";
+
+/**
+ * Aplati les 3 listes de la réponse API en une liste triée unique de créneaux,
+ * chacun annoté de son état, pour un rendu simple en grille.
+ */
+export function buildSlotList(slots: AppointmentSlotsResponse["slots"]): Array<{ time: string; state: SlotState }> {
+  const entries: Array<{ time: string; state: SlotState }> = [
+    ...slots.available.map((time) => ({ time, state: "available" as const })),
+    ...slots.pending.map((time) => ({ time, state: "pending" as const })),
+    ...slots.confirmed.map((time) => ({ time, state: "confirmed" as const })),
+  ];
+  return entries.sort((a, b) => a.time.localeCompare(b.time));
+}
