@@ -9,8 +9,6 @@ import { useTestimonialsStore } from "@/stores/useTestimonialsStore";
 export function Testimonials() {
   const { stats } = useStatsStore();
   const { testimonials, isLoading, isError } = useTestimonialsStore();
-
-  // Le nombre de clients vient désormais de la même ressource /stats que le composant Stats
   const clientsStat = stats.find((s) => s.key === "clients");
 
   if (isError) {
@@ -44,8 +42,8 @@ export function Testimonials() {
   if (testimonials.length === 0) {
     return null;
   }
-
-  const [featured, ...rest] = testimonials;
+  const featured = testimonials.find((t) => t.featured) ?? testimonials[0];
+  const rest = testimonials.filter((t) => t.id !== featured.id);
 
   return (
     <section className="relative overflow-hidden py-28">
