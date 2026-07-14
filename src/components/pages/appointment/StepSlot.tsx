@@ -96,8 +96,8 @@ export function StepSlot({ data, update }: StepSlotProps) {
                           {badge.label}
                         </span>
                       ) : (
-                        // Sinon, on affiche l'heure normalement (avec line-through si c'est aujourd'hui dans le passé)
-                        <span className={cn(isPastToday && "line-through text-muted-foreground")}>
+                        /* Affichage standard pour les créneaux libres */
+                        <span className={cn(isPastToday && "line-through text-muted-foreground/50")}>
                           {s}
                         </span>
                       )}
