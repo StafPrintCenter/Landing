@@ -1,14 +1,51 @@
 import { Star, Quote } from "lucide-react";
-import { Reveal } from "@/components/site/Reveal";
-import { STATS } from "@/data/stats";
-import { SITE } from "@/data/site";
-import { TESTIMONIALS } from "@/data/testimonials";
 import { motion } from "framer-motion";
+import { Reveal } from "@/components/site/Reveal";
+import { SITE } from "@/data/site";
+import { getInitials } from "@/data/testimonials";
+import { useStatsStore } from "@/stores/useStatsStore";
+import { useTestimonialsStore } from "@/stores/useTestimonialsStore";
 
 export function Testimonials() {
-  const [featured, ...rest] = TESTIMONIALS;
-  const initials = (name: string) =>
-    name.split(" ").map((w) => w[0]).slice(0, 2).join("").toUpperCase();
+  const { stats } = useStatsStore();
+  const { testimonials, isLoading, isError } = useTestimonialsStore();
+
+  // Le nombre de clients vient désormais de la même ressource /stats que le composant Stats
+  const clientsStat = stats.find((s) => s.key === "clients");
+
+  if (isError) {
+    return (
+      <section className="py-28">
+        <div className="container-x text-center text-sm text-muted-foreground">
+          Impossible de charger les témoignages pour le moment.
+        </div>
+      </section>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <section className="relative overflow-hidden py-28">
+        <div className="container-x">
+          <div className="h-10 w-64 animate-pulse rounded-lg bg-muted" />
+          <div className="mt-6 grid gap-6 lg:grid-cols-12">
+            <div className="h-80 animate-pulse rounded-3xl border border-border bg-card lg:col-span-7" />
+            <div className="grid gap-6 lg:col-span-5">
+              <div className="h-24 animate-pulse rounded-3xl border border-border bg-card" />
+              <div className="h-28 animate-pulse rounded-2xl border border-border bg-card" />
+              <div className="h-28 animate-pulse rounded-2xl border border-border bg-card" />
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (testimonials.length === 0) {
+    return null;
+  }
+
+  const [featured, ...rest] = testimonials;
 
   return (
     <section className="relative overflow-hidden py-28">
@@ -25,8 +62,8 @@ export function Testimonials() {
             La confiance <span className="text-gradient-brand">se construit.</span>
           </h2>
           <p className="mt-4 text-muted-foreground">
-            {STATS.clients.suffix}{STATS.clients.n} marques, institutions et créateurs béninois nous confient leur image.
-            Voici ce qu'ils en disent.
+            {clientsStat ? `${clientsStat.suffix}${clientsStat.value}` : ""} marques, institutions et créateurs béninois
+            nous confient leur image. Voici ce qu'ils en disent.
           </p>
         </Reveal>
 
@@ -48,7 +85,7 @@ export function Testimonials() {
 
               <div className="relative mt-8 flex flex-wrap items-center gap-4 border-t border-white/10 pt-6">
                 <div className="grid h-14 w-14 place-items-center rounded-full bg-linear-to-br from-primary to-accent font-display text-lg font-bold text-secondary shadow-lg">
-                  {initials(featured.name)}
+                  {getInitials(featured.name)}
                 </div>
                 <figcaption className="flex-1">
                   <div className="font-display text-lg font-semibold">{featured.name}</div>
@@ -77,7 +114,9 @@ export function Testimonials() {
                   <span className="text-sm font-medium text-muted-foreground">/ 5</span>
                 </div>
                 <div className="mt-2 flex gap-0.5">
-                  {[...Array(5)].map((_, k) => <Star key={k} size={16} className="fill-accent text-accent transition group-hover:scale-110" />)}
+                  {[...Array(5)].map((_, k) => (
+                    <Star key={k} size={16} className="fill-accent text-accent transition group-hover:scale-110" />
+                  ))}
                 </div>
                 <p className="mt-3 text-sm text-muted-foreground">
                   Note moyenne sur <strong className="text-foreground underline-offset-4 group-hover:underline">{SITE.opinion.nb} avis</strong> clients vérifiés.
@@ -86,13 +125,13 @@ export function Testimonials() {
             </Reveal>
 
             {rest.slice(0, 2).map((t, i) => (
-              <Reveal key={t.name} delay={0.15 + i * 0.06}>
+              <Reveal key={t.id} delay={0.15 + i * 0.06}>
                 <motion.figure
                   whileHover={{ y: -3 }}
                   className="group flex h-full items-start gap-4 rounded-2xl border border-border bg-card p-5 transition hover:border-primary/40 hover:shadow-lg"
                 >
                   <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-linear-to-br from-primary to-accent text-sm font-bold text-secondary">
-                    {initials(t.name)}
+                    {getInitials(t.name)}
                   </div>
                   <div className="flex-1">
                     <blockquote className="text-sm leading-relaxed text-foreground/90 line-clamp-3">
@@ -112,7 +151,7 @@ export function Testimonials() {
         {/* Extra row */}
         <div className="mt-6 grid gap-6 md:grid-cols-2">
           {rest.slice(2, 4).map((t, i) => (
-            <Reveal key={t.name} delay={i * 0.06}>
+            <Reveal key={t.id} delay={i * 0.06}>
               <motion.figure
                 whileHover={{ y: -3 }}
                 className="relative flex h-full flex-col rounded-2xl border border-border bg-card p-6 transition hover:border-primary/40 hover:shadow-lg"
@@ -120,7 +159,7 @@ export function Testimonials() {
                 <Quote className="absolute right-5 top-5 text-primary/15" size={40} strokeWidth={1.5} />
                 <div className="flex items-center gap-3">
                   <div className="grid h-11 w-11 place-items-center rounded-full bg-linear-to-br from-primary to-accent text-sm font-bold text-secondary">
-                    {initials(t.name)}
+                    {getInitials(t.name)}
                   </div>
                   <div>
                     <div className="font-semibold">{t.name}</div>
@@ -131,7 +170,9 @@ export function Testimonials() {
                   « {t.quote} »
                 </blockquote>
                 <div className="mt-4 flex gap-0.5">
-                  {[...Array(t.rating)].map((_, k) => <Star key={k} size={14} className="fill-accent text-accent" />)}
+                  {[...Array(t.rating)].map((_, k) => (
+                    <Star key={k} size={14} className="fill-accent text-accent" />
+                  ))}
                 </div>
               </motion.figure>
             </Reveal>
