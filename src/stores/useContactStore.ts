@@ -33,3 +33,22 @@ export async function sendContactRequest(params: SendContactParams): Promise<API
   const json: ContactResponse = await response.json();
   return json.data;
 }
+
+
+/**
+ * Retrouve une demande de contact par email
+ */
+export async function trackContactRequest({ email, ticketNumber }: TrackContactParams): Promise<APIContactRequest | null> {
+  const formData = new FormData();
+  formData.append("email", email);
+  formData.append("ticket_number", ticketNumber);
+
+  const url = resolveApiUrl(`/api/public/contact/track`);
+  const response = await fetch(url, { method: "POST", body: formData });
+  if (response.status === 404) return null;
+  if (!response.ok) {
+    throw new Error("Erreur lors de la recherche de votre demande");
+  }
+  const json: ContactResponse = await response.json();
+  return json.data;
+}
