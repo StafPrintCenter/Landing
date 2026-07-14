@@ -39,7 +39,7 @@ export function FloatingHelpMenu() {
             <LinkCheckerSection />
             <ToolsSection />
             <ReportSection onOpenReport={handleOpenReport} />
-            <ToolsSection />
+
           </div>
         </div>
       )}
