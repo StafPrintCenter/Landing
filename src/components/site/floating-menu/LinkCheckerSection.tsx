@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link2, Search, Copy, Check, Loader2, PlusCircle } from "lucide-react";
+import { Link, Link2, Search, Copy, Check, Loader2, PlusCircle } from "lucide-react";
 import { resolveShortlink } from "@/stores/useShortlinksStore";
 import { buildShareUrl } from "@/lib/share/build-share-url";
 import type { APIShortlink } from "@/data/shortlinks";
