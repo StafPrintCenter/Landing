@@ -37,9 +37,8 @@ export function FloatingHelpMenu() {
           <div className="mt-4 space-y-4">
             <WhatsAppSection />
             <LinkCheckerSection />
-            <ToolsSection />
             <ReportSection onOpenReport={handleOpenReport} />
-
+            <ToolsSection />
           </div>
         </div>
       )}
