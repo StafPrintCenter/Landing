@@ -1,22 +1,10 @@
-export const STATS = {
-  projects: {
-    n: 480,
-    suffix: "+",
-    label: "projets livrés"
-  },
-  clients: {
-    n: 220,
-    suffix: "+",
-    label: "clients satisfaits"
-  },
-  experience: {
-    n: 7,
-    suffix: " ans",
-    label: "d'expérience"
-  },
-  trainings: {
-    n: 10,
-    suffix: "+",
-    label: "formations dispensées"
-  },
+/**
+ * Type aligné sur la réponse de l'API publique /stats
+ */
+export type APIStat = {
+  id: string;
+  key: string;
+  value: number;
+  suffix: string;
+  label: string;
 };
