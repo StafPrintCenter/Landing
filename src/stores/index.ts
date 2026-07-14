@@ -7,4 +7,6 @@ export { useFormationsStore } from "./useFormationsStore";
 export { useProjectsStore } from "./useProjectsStore";
 export { createReport } from "./useReportsStore";
 export { useServicesStore } from "./useServicesStore";
+export { useStatsStore } from "./useStatsStore";
+export { useTestimonialsStore } from "./useTestimonialsStore";
 export { resolveShortlink, createShortlink } from "./useShortlinksStore";
