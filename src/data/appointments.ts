@@ -1,3 +1,5 @@
+import { Lock, Clock3, type LucideIcon } from "lucide-react";
+
 export type AppointmentMode = "presentiel" | "en_ligne";
 export type AppointmentStatus = "pending" | "confirmed" | "cancelled" | "completed" | string;
 
