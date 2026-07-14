@@ -50,7 +50,7 @@ function ToolsIndexPage() {
             </div>
             <h1 className="font-display text-3xl font-bold md:text-4xl">Outils en ligne</h1>
             <p className="mt-3 text-foreground/70">
-              Deux services accessibles dès maintenant, sans appel ni déplacement. D'autres outils
+              Services accessibles dès maintenant, sans appel ni déplacement. D'autres outils
               sont en cours de préparation.
             </p>
           </div>
