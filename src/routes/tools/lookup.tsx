@@ -83,7 +83,7 @@ function LookupPage() {
                 onChange={(e) => setTicketNumber(e.target.value)}
                 required
                 className="input w-full pl-10 font-mono"
-                placeholder="SPC-20260713_165450-ZDZ2"
+                placeholder="SPC-YYYYMMJJ_HHMMSS-XYZ0"
               />
             </div>
           </label>
