@@ -9,7 +9,7 @@ export function ServiceHomeHeader() {
           Un studio complet, <span className="text-gradient-brand">une seule équipe.</span>
         </h1>
         <p className="mt-5 max-w-2xl text-lg text-muted-foreground">
-          Du concept au support imprimé, du logo au site web - huit expertises
+          Du concept au support imprimé, du logo au site web - des expertises
           alignées pour faire briller votre marque.
         </p>
       </Reveal>
