@@ -28,8 +28,7 @@ const AVAILABLE_TOOLS = [
     desc: "Entrez votre email et votre numéro de ticket pour connaître l'état de traitement de votre message.",
   },
   {
-    to: SITE.shortUrl,
-    external: true,
+    href: SITE.shortUrl,
     icon: Link2,
     title: "Raccourcir un lien",
     desc: "Générez des liens courts et faciles à partager pour simplifier votre communication.",
@@ -67,12 +66,9 @@ function ToolsIndexPage() {
         <div className="mt-10 grid gap-5 md:grid-cols-2">
           {AVAILABLE_TOOLS.map((t) => {
             const Icon = t.icon;
-            return (
-              <Link
-                key={t.to}
-                to={t.to}
-                className="group flex flex-col justify-between rounded-2xl border border-border bg-card p-7 transition hover:border-primary/40 hover:shadow-lg"
-              >
+            const isExternal = "href" in t;
+            const content = (
+              <>
                 <div>
                   <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
                     <Icon size={22} />
@@ -83,6 +79,32 @@ function ToolsIndexPage() {
                 <div className="mt-6 flex items-center gap-1.5 text-sm font-semibold text-primary">
                   Ouvrir l'outil <ArrowRight size={14} className="transition group-hover:translate-x-0.5" />
                 </div>
+              </>
+            );
+
+            const className = "group flex flex-col justify-between rounded-2xl border border-border bg-card p-7 transition hover:border-primary/40 hover:shadow-lg";
+
+            if (isExternal) {
+              return (
+                <a
+                  key={t.href}
+                  href={t.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={className}
+                >
+                  {content}
+                </a>
+              );
+            }
+
+            return (
+              <Link
+                key={t.to}
+                to={t.to}
+                className={className}
+              >
+                {content}
               </Link>
             );
           })}
