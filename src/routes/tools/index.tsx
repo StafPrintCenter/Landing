@@ -63,7 +63,7 @@ function ToolsIndexPage() {
         </div>
 
         {/* Outils disponibles : mis en avant, format plus large qu'une simple card de grille */}
-        <div className="mt-10 grid gap-5 md:grid-cols-2">
+        <div className="mt-10 grid gap-5 md:grid-cols-3">
           {AVAILABLE_TOOLS.map((t) => {
             const Icon = t.icon;
             const isExternal = "href" in t;
