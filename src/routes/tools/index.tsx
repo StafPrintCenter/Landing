@@ -32,7 +32,7 @@ const AVAILABLE_TOOLS = [
     external: true,
     icon: Link2,
     title: "Raccourcir un lien",
-    desc: "Transformez une URL longue en un lien court, simple à partager et à suivre.",
+    desc: "Générez des liens courts et faciles à partager pour simplifier votre communication.",
   },
 ] as const;
 
