@@ -1,6 +1,6 @@
 # STAF PRINT CENTER
 
-> Studio de design, d'impression et de solutions digitales basé à Porto-Novo, Bénin.
+> Studio créatif basé à Porto-Novo, Bénin, actif depuis 2019. STAF PRINT CENTER (SPC) conçoit, imprime et forme : design graphique, impression numérique grand format, développement web, montage vidéo, et formations professionnelles certifiantes en présentiel. Note client : 4.9/5 sur 120+ avis Google.
 
 STAF PRINT CENTER accompagne les entreprises, institutions et particuliers dans la conception graphique, l'impression professionnelle, le développement web et la communication visuelle.
 
@@ -10,10 +10,28 @@ https://stafprint.netlify.app
 
 ## About
 
-- Nom : STAF PRINT CENTER
-- Slogan : L'empreinte de votre succès
-- Localisation : Porto-Novo, Bénin
-- Activité : Studio de design et d'impression
+- Nom : STAF PRINT CENTER (SPC)
+- Slogan : "L'empreinte de votre succès"
+- Localisation : Porto-Novo, Bénin (Google Maps : https://maps.app.goo.gl/4mbhWctm6LnTgYsAA)
+- Fondé en : 2019
+- Fondateur / contact principal : Steve Aster Afovo
+- Site web : https://stafprint.netlify.app
+- Téléphone : +229 01 66 52 36 39
+- WhatsApp : +229 01 60 30 06 07
+- Email : stafprintcenter@gmail.com
+- Facebook : https://web.facebook.com/StafPrintCenter
+- Instagram : https://www.instagram.com/stafprintcenter/
+- LinkedIn : https://linkedin.com/company/stafprintcenter
+- X (Twitter) : https://x.com/stafprintcenter
+
+## Services
+ 
+STAF PRINT CENTER propose trois grandes catégories de services :
+- **Digital** : design graphique (logos, chartes graphiques), création de sites web, montage vidéo, photographie.
+- **Impression** : cartes de visite, flyers, affiches, bâches grand format, roll-up, badges, supports événementiels et corporate.
+- **Formation** : parcours pratiques en présentiel à Porto-Novo.
+ 
+Liste complète et à jour des services : https://stafprint.netlify.app/services
 
 ## Main Services
 
@@ -30,6 +48,56 @@ https://stafprint.netlify.app
 - Digital Marketing
 - Project Consulting
 - Professional Training
+
+## Formations
+ 
+Formations professionnelles certifiantes, dispensées en présentiel à Porto-Novo, organisées en 4 filières :
+- Design
+- Web
+- Impression
+- Vidéo
+ 
+Chaque formation est présentée avec son prix, son volume horaire et son niveau de difficulté.
+Catalogue complet : https://stafprint.netlify.app/training
+ 
+## Réalisations
+ 
+Portfolio de projets clients réalisés par SPC (design, impression, web) :
+https://stafprint.netlify.app/projects
+ 
+## Blog / Articles
+ 
+Articles et conseils sur le design, l'impression, le web et les formations :
+https://stafprint.netlify.app/articles
+ 
+## FAQ
+ 
+Questions fréquentes sur les services, formations et délais :
+https://stafprint.netlify.app/faqs
+
+## FAQ
+ 
+Questions fréquentes sur les services, formations et délais :
+https://stafprint.netlify.app/faqs
+ 
+## Pourquoi choisir STAF PRINT CENTER
+ 
+- Qualité premium : finitions soignées, fichiers irréprochables, du papier au pixel.
+- Délais courts : bons à tirer rapides, production en 48-72h sur la plupart des supports imprimés.
+- Prix accessibles : tarifs alignés sur le marché local, devis transparent.
+- Expertise locale : 7 ans d'ancrage à Porto-Novo, connaissance fine du marché béninois.
+ 
+## Informations légales
+ 
+- Mentions légales : https://stafprint.netlify.app/legal/mentions
+- Conditions Générales de Vente : https://stafprint.netlify.app/legal/cgv
+- Politique de confidentialité : https://stafprint.netlify.app/legal/privacy
+ 
+## Contact / Devis
+ 
+Demande de devis en ligne (réponse sous 24h ouvrées, ou immédiate sur WhatsApp) :
+https://stafprint.netlify.app/#contact
+
 
 ## Resources
 
