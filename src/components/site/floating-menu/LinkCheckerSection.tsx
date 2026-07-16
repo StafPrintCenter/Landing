@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Link, Link2, Search, Copy, Check, Loader2, PlusCircle } from "lucide-react";
+import { Link, Link2, Search, Copy, Check, Loader2, PlusCircle, QrCode } from "lucide-react";
 import { resolveShortlink } from "@/stores/useShortlinksStore";
 import { buildShareUrl } from "@/lib/share/build-share-url";
+import { QrCodeModal } from "@/components/modal/QrCodeModal";
 import type { APIShortlink } from "@/data/shortlinks";
 
 type CheckStatus = "idle" | "loading" | "done" | "error";
@@ -11,6 +12,7 @@ export function LinkCheckerSection() {
   const [shortLink, setShortLink] = useState<APIShortlink | null>(null);
   const [longUrl, setLongUrl] = useState("");
   const [copiedTarget, setCopiedTarget] = useState<"long" | "short" | null>(null);
+  const [isQrOpen, setIsQrOpen] = useState(false);
 
   const SHORTEN_SITE_URL = import.meta.env.VITE_SHORTSITE_URL;
 
@@ -81,7 +83,7 @@ export function LinkCheckerSection() {
           {/* URL longue d'origine */}
           <div className="flex items-center gap-2 rounded-xl border border-border bg-muted/50 px-2.5 py-1.5">
             <Link2 size={13} className="shrink-0 text-muted-foreground" />
-            <span className="flex-1 truncate text-[11px] text-muted-foreground">{longUrl}</span>
+            <span className="min-w-0 flex-1 truncate text-[11px] text-muted-foreground">{longUrl}</span>
             {!shortLink && (
               <button
                 onClick={() => handleCopy(longUrl, "long")}
@@ -93,19 +95,29 @@ export function LinkCheckerSection() {
             )}
           </div>
 
-          {/* Lien court ou Proposition de création si absent */}
+          {/* Lien court ou proposition de création si absent */}
           {shortLink ? (
-            <div className="flex items-center gap-2 rounded-xl border border-primary/20 bg-primary/5 px-2.5 py-1.5">
-              <Link2 size={13} className="shrink-0 text-primary" />
-              <span className="flex-1 truncate text-xs font-semibold text-foreground">{shortLink.shortUrl}</span>
+            <>
+              <div className="flex items-center gap-2 rounded-xl border border-primary/20 bg-primary/5 px-2.5 py-1.5">
+                <Link2 size={13} className="shrink-0 text-primary" />
+                <span className="min-w-0 flex-1 truncate text-xs font-semibold text-foreground">{shortLink.shortUrl}</span>
+                <button
+                  onClick={() => handleCopy(shortLink.shortUrl, "short")}
+                  aria-label="Copier le lien court"
+                  className="shrink-0 rounded-lg bg-primary p-1.5 text-primary-foreground cursor-pointer transition hover:opacity-90"
+                >
+                  {copiedTarget === "short" ? <Check size={11} /> : <Copy size={11} />}
+                </button>
+              </div>
+
               <button
-                onClick={() => handleCopy(shortLink.shortUrl, "short")}
-                aria-label="Copier le lien court"
-                className="shrink-0 rounded-lg bg-primary p-1.5 text-primary-foreground cursor-pointer transition hover:opacity-90"
+                onClick={() => setIsQrOpen(true)}
+                className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl border border-border bg-muted px-3 py-2 text-xs font-medium hover:bg-muted/70 cursor-pointer transition"
               >
-                {copiedTarget === "short" ? <Check size={11} /> : <Copy size={11} />}
+                <QrCode size={13} />
+                Afficher le code QR
               </button>
-            </div>
+            </>
           ) : (
             <div className="space-y-2 rounded-xl bg-accent/30 p-2.5">
               <p className="text-[11px] text-muted-foreground leading-normal">
@@ -123,7 +135,19 @@ export function LinkCheckerSection() {
             </div>
           )}
         </div>
-      )}
-    </div>
+      )
+      }
+
+      {
+        shortLink && (
+          <QrCodeModal
+            isOpen={isQrOpen}
+            onClose={() => setIsQrOpen(false)}
+            alias={shortLink.alias}
+            shortUrl={shortLink.shortUrl}
+          />
+        )
+      }
+    </div >
   );
 }
