@@ -1,2 +1,5 @@
 User-agent: *
 Allow: /
+
+llms-txt: https://stafprintcenter.com/llms.txt
+llms-full: https://stafprintcenter.com/llms-full.txt
