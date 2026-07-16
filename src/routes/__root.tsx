@@ -52,7 +52,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
             name: SITE.name,
-            image: "https://stafprint.netlify.app/logo.png",
+            image: logo.meta,
             url: SITE.url,
             alternateName: 'SPC',
             description: "Studio de design graphique, impression numérique, web et formations créatives à Porto-Novo, Bénin.",
