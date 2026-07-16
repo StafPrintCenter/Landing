@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { Facebook, Linkedin, Twitter, X, Share2, Link2, Check, Loader2, QrCode } from "lucide-react";
+import { Facebook, Linkedin, Twitter, X, Share2, Link2, Check, Loader2 } from "lucide-react";
 import { WhatsAppIcon } from "@/components/site/icons/WhatsAppIcon";
 import { useShortUrl } from "@/hooks/use-short-url";
-import { QrCodeModal } from "./QrCodeModal";
+import { QrCodeAutoPanel } from "./QrCodeAutoPanel";
 import type { ShortlinkCategory } from "@/data/shortlinks";
 import {
   buildWhatsAppShareLink,
@@ -25,7 +25,6 @@ interface ShareModalProps extends ShareContent {
 export function ShareModal({ url, title, text, isOpen, onClose, shortlinkCategory }: ShareModalProps) {
   const [mounted, setMounted] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [isQrOpen, setIsQrOpen] = useState(false);
 
   const { displayUrl, alias, isLoading } = useShortUrl(url, shortlinkCategory);
 
@@ -156,42 +155,20 @@ export function ShareModal({ url, title, text, isOpen, onClose, shortlinkCategor
               </button>
             </div>
 
-            <div className="mt-3 flex gap-2">
-              <button
-                onClick={handleOther}
-                disabled={isLoading}
-                className="inline-flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-full border border-border bg-card px-5 py-3 text-sm font-semibold transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50"
-              >
-                <Share2 size={14} /> Autres applications…
-              </button>
-
-              {alias && (
-                <button
-                  onClick={() => setIsQrOpen(true)}
-                  className="inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-full border border-border bg-card px-4 py-3 text-sm font-semibold transition-colors hover:bg-muted"
-                  aria-label="Afficher le code QR"
-                  title="Afficher le code QR"
-                >
-                  <QrCode size={16} />
-                </button>
-              )}
-            </div>
+            <button
+              onClick={handleOther}
+              disabled={isLoading}
+              className="mt-3 inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-border bg-card px-5 py-3 text-sm font-semibold transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              <Share2 size={14} /> Autres applications…
+            </button>
           </div>
         </div >,
         document.body
       )
       }
 
-      {
-        alias && (
-          <QrCodeModal
-            isOpen={isQrOpen}
-            onClose={() => setIsQrOpen(false)}
-            alias={alias}
-            shortUrl={displayUrl}
-          />
-        )
-      }
+      <QrCodeAutoPanel alias={alias} shortUrl={displayUrl} />
     </>
   );
 }
