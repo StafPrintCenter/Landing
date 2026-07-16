@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Link, Link2, Search, Copy, Check, Loader2, PlusCircle, QrCode } from "lucide-react";
+import { Link, Link2, Search, Copy, Check, Loader2, PlusCircle } from "lucide-react";
 import { resolveShortlink } from "@/stores/useShortlinksStore";
 import { buildShareUrl } from "@/lib/share/build-share-url";
-import { QrCodeModal } from "@/components/modal/QrCodeModal";
+import { QrCodeAutoPanel } from "@/components/modal/QrCodeAutoPanel";
 import type { APIShortlink } from "@/data/shortlinks";
 
 type CheckStatus = "idle" | "loading" | "done" | "error";
@@ -12,7 +12,6 @@ export function LinkCheckerSection() {
   const [shortLink, setShortLink] = useState<APIShortlink | null>(null);
   const [longUrl, setLongUrl] = useState("");
   const [copiedTarget, setCopiedTarget] = useState<"long" | "short" | null>(null);
-  const [isQrOpen, setIsQrOpen] = useState(false);
 
   const SHORTEN_SITE_URL = import.meta.env.VITE_SHORTSITE_URL;
 
@@ -80,7 +79,6 @@ export function LinkCheckerSection() {
 
       {status === "done" && (
         <div className="space-y-2">
-          {/* URL longue d'origine */}
           <div className="flex items-center gap-2 rounded-xl border border-border bg-muted/50 px-2.5 py-1.5">
             <Link2 size={13} className="shrink-0 text-muted-foreground" />
             <span className="min-w-0 flex-1 truncate text-[11px] text-muted-foreground">{longUrl}</span>
@@ -95,29 +93,18 @@ export function LinkCheckerSection() {
             )}
           </div>
 
-          {/* Lien court ou proposition de création si absent */}
           {shortLink ? (
-            <>
-              <div className="flex items-center gap-2 rounded-xl border border-primary/20 bg-primary/5 px-2.5 py-1.5">
-                <Link2 size={13} className="shrink-0 text-primary" />
-                <span className="min-w-0 flex-1 truncate text-xs font-semibold text-foreground">{shortLink.shortUrl}</span>
-                <button
-                  onClick={() => handleCopy(shortLink.shortUrl, "short")}
-                  aria-label="Copier le lien court"
-                  className="shrink-0 rounded-lg bg-primary p-1.5 text-primary-foreground cursor-pointer transition hover:opacity-90"
-                >
-                  {copiedTarget === "short" ? <Check size={11} /> : <Copy size={11} />}
-                </button>
-              </div>
-
+            <div className="flex items-center gap-2 rounded-xl border border-primary/20 bg-primary/5 px-2.5 py-1.5">
+              <Link2 size={13} className="shrink-0 text-primary" />
+              <span className="min-w-0 flex-1 truncate text-xs font-semibold text-foreground">{shortLink.shortUrl}</span>
               <button
-                onClick={() => setIsQrOpen(true)}
-                className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl border border-border bg-muted px-3 py-2 text-xs font-medium hover:bg-muted/70 cursor-pointer transition"
+                onClick={() => handleCopy(shortLink.shortUrl, "short")}
+                aria-label="Copier le lien court"
+                className="shrink-0 rounded-lg bg-primary p-1.5 text-primary-foreground cursor-pointer transition hover:opacity-90"
               >
-                <QrCode size={13} />
-                Afficher le code QR
+                {copiedTarget === "short" ? <Check size={11} /> : <Copy size={11} />}
               </button>
-            </>
+            </div>
           ) : (
             <div className="space-y-2 rounded-xl bg-accent/30 p-2.5">
               <p className="text-[11px] text-muted-foreground leading-normal">
@@ -138,16 +125,7 @@ export function LinkCheckerSection() {
       )
       }
 
-      {
-        shortLink && (
-          <QrCodeModal
-            isOpen={isQrOpen}
-            onClose={() => setIsQrOpen(false)}
-            alias={shortLink.alias}
-            shortUrl={shortLink.shortUrl}
-          />
-        )
-      }
+      <QrCodeAutoPanel alias={shortLink?.alias ?? null} shortUrl={shortLink?.shortUrl} />
     </div >
   );
 }
