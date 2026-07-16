@@ -1,7 +1,7 @@
 export const SITE = {
   name: "STAF PRINT CENTER",
   slogan: "L'empreinte de votre succès",
-  activity: 'Studio de design et d\'impression',
+  activity: "Studio de design et d'impression",
   manager: "Steve Aster Afovo",
   city: "Porto-Novo, Bénin",
   phone: "+229 01 66 52 36 39",
