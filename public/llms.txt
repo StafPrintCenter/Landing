@@ -6,7 +6,7 @@ STAF PRINT CENTER accompagne les entreprises, institutions et particuliers dans 
 
 ## Website
 
-https://stafprintcenter.com
+https://stafprint.netlify.app
 
 ## About
 
@@ -71,9 +71,10 @@ Email: stafprintcenter@gmail.com
 
 ## Social Profiles
 
-https://facebook.com/...
-https://instagram.com/...
-https://linkedin.com/...
+https://facebook.com/StafPrintCenter
+https://instagram.com/StafPrintCenter
+https://linkedin.com/company/StafPrintCenter
+https://x.com/StafPrintCenter
 
 ## Preferred Citation
 
