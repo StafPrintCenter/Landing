@@ -52,14 +52,40 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
             name: SITE.name,
+            image: "https://stafprint.netlify.app/logo.png",
+            url: SITE.url,
             alternateName: 'SPC',
             description: "Studio de design graphique, impression numérique, web et formations créatives à Porto-Novo, Bénin.",
             founder: { "@type": "Person", name: SITE.manager },
-            address: { "@type": "PostalAddress", addressLocality: SITE.city, addressCountry: "BJ" },
             telephone: SITE.phone.replace(/\s/g, ""),
             email: SITE.email,
-            areaServed: "Bénin",
+            areaServed: [
+              { "@type": "AdministrativeArea", "name": "Porto-Novo" },
+              { "@type": "AdministrativeArea", "name": "Cotonou" },
+              { "@type": "AdministrativeArea", "name": "Abomey-Calavi" },
+              { "@type": "AdministrativeArea", "name": "Adjarra" },
+              { "@type": "AdministrativeArea", "name": "Bénin" }
+            ],
             priceRange: "$$",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: SITE.city,
+              streetAddress: "Malanhoui Tanmey",
+              addressRegion: "Ouémé",
+              addressCountry: "BJ"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": "6.5333",
+              "longitude": "2.6833"
+            },
+            knowsAbout: [
+              "Impression numérique",
+              "Grand format",
+              "Conception graphique",
+              "Création de sites web",
+              "Montage vidéo"
+            ]
           }),
         },
       ],
