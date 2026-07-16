@@ -4,6 +4,7 @@ import type { ShortlinkCategory } from "@/data/shortlinks";
 
 interface UseShortUrlResult {
   displayUrl: string;
+  alias: string | null;
   isLoading: boolean;
   isReady: boolean;
   hasError: boolean;
@@ -23,6 +24,7 @@ export function useShortUrl(longUrl: string, category?: ShortlinkCategory): UseS
 
   return {
     displayUrl: query.data?.shortUrl ?? longUrl,
+    alias: query.data?.alias ?? null,
     isLoading: query.isLoading,
     isReady: !!query.data,
     hasError: query.isError,
