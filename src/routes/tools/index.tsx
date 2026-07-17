@@ -45,7 +45,6 @@ const UPCOMING_TOOLS = [
   { icon: Calculator, title: "Devis intelligent", desc: "Configurateur de prix selon produit, quantité et finition." },
   { icon: Download, title: "Ressources gratuites", desc: "Templates et guides à télécharger." },
   { icon: Users, title: "Programme de parrainage", desc: "Codes de parrainage et paliers de récompenses." },
-  { icon: Mail, title: "Newsletter", desc: "Inscription avec centres d'intérêt personnalisés." },
 ] as const;
 
 function ToolsIndexPage() {
