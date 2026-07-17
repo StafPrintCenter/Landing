@@ -125,7 +125,7 @@ export function LinkCheckerSection() {
       )
       }
 
-      <QrCodeAutoPanel alias={shortLink?.alias ?? null} shortUrl={shortLink?.shortUrl} />
+      <QrCodeAutoPanel alias={shortLink?.alias ?? null} />
     </div >
   );
 }
