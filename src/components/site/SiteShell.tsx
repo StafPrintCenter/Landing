@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Toaster } from "sonner";
 import { Nav } from "./Nav";
 import { Footer } from "./Footer";
 import { CookieConsent, FloatingHelpMenu } from "./";
@@ -12,6 +13,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
 
       <FloatingHelpMenu />
       <CookieConsent />
+      <Toaster position="bottom-left" richColors closeButton />
     </div>
   );
 }

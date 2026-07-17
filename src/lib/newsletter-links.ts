@@ -5,6 +5,6 @@
  * (/tools/newsletter/unsubscribe) affiche sa propre confirmation stylée.
  */
 export function buildUnsubscribeBackendUrl(token: string): string {
-  const origin = import.meta.env.VITE_API_ORIGIN ?? "http://localhost:8000";
+  const origin = import.meta.env.VITE_API_ORIGIN;
   return `${origin}/newsletter/unsubscribe/${encodeURIComponent(token)}`;
 }

@@ -54,7 +54,7 @@ export function PreferencesForm({ token }: PreferencesFormProps) {
       setSaved(true);
       toast.success("Préférences enregistrées", {
         description: updated.categories.length > 0
-          ? `Vous recevrez des contenus sur : ${updated.categories.map((c) => c.name).join(", ")}.`
+          ? `Vous recevrez désormais des contenus sur ${updated.categories.map((c) => c.name).join(", ")}.`
           : "Vous ne recevrez plus de contenu par sujet spécifique.",
       });
       setTimeout(() => setSaved(false), 3000);
