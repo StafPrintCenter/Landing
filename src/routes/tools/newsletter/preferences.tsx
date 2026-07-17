@@ -14,7 +14,9 @@ export const Route = createFileRoute("/tools/newsletter/preferences")({
   head: () => ({
     meta: [
       { title: `Préférences newsletter | ${SITE.name}` },
-      { name: "description", content: "Gérez vos préférences d'abonnement à la newsletter STAF PRINT CENTER, ou désabonnez-vous." },
+      {
+        name: "description", content: `Gérez vos préférences d'abonnement à la newsletter ${SITE.name}, ou désabonnez-vous.`
+      },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -39,7 +41,7 @@ function PreferencesPage() {
               </div>
               <h2 className="font-display text-xl font-bold">Lien manquant</h2>
               <p className="max-w-sm text-sm text-muted-foreground">
-                Accédez à cette page depuis le lien personnel reçu dans un email de STAF PRINT CENTER.
+                Accédez à cette page depuis le lien personnel reçu dans un email de {SITE.name}.
               </p>
             </div>
           )}

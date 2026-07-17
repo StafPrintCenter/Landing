@@ -24,7 +24,9 @@ export const Route = createFileRoute("/tools/appointment")({
   head: () => ({
     meta: [
       { title: `Prendre rendez-vous | ${SITE.name}` },
-      { name: "description", content: "Réservez un rendez-vous en ligne ou en présentiel avec STAF PRINT CENTER à Porto-Novo. Choisissez votre créneau et confirmez en quelques étapes." },
+      {
+        name: "description", content: `Réservez un rendez-vous en ligne ou en présentiel avec {SITE.name} à Porto-Novo. Choisissez votre créneau et confirmez en quelques étapes.`
+      },
       { property: "og:title", content: `Prendre rendez-vous | ${SITE.name}` },
       { property: "og:description", content: "Réservez facilement un créneau en ligne ou en présentiel." },
       { property: "og:url", content: "/appointment" },
@@ -63,7 +65,7 @@ function RendezVousPage() {
 
   const buildRecap = (appointment: APIAppointment) => {
     const modeLabel = appointment.mode === "presentiel" ? "Présentiel (Porto-Novo)" : "En ligne (visio)";
-    return `Nouvelle demande de rendez-vous — STAF PRINT CENTER
+    return `Nouvelle demande de rendez-vous - ${SITE.name}
 
 Nom : ${appointment.lastName} ${appointment.firstName}
 Email : ${appointment.email}

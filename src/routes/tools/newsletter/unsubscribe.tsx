@@ -51,7 +51,7 @@ function UnsubscribePage() {
             </div>
             <h2 className="font-display text-xl font-bold">Lien manquant</h2>
             <p className="max-w-sm text-sm text-muted-foreground">
-              Accédez à cette page depuis le lien de désinscription reçu dans un email de STAF PRINT CENTER.
+              Accédez à cette page depuis le lien de désinscription reçu dans un email de {SITE.name}.
             </p>
           </div>
         ) : step === "confirm" ? (

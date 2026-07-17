@@ -11,7 +11,9 @@ export const Route = createFileRoute("/tools/newsletter/")({
   head: () => ({
     meta: [
       { title: `Newsletter | ${SITE.name}` },
-      { name: "description", content: "Recevez chaque mois nos conseils design, impression et digital, plus les offres exclusives de STAF PRINT CENTER." },
+      {
+        name: "description", content: `Recevez chaque mois nos conseils design, impression et digital, plus les offres exclusives de ${SITE.name}.`
+      },
       { name: "robots", content: "noindex" },
     ],
   }),

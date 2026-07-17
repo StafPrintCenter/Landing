@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { AlertTriangle } from "lucide-react";
+import { SITE } from "@/data/site";
 
 interface UnsubscribeConfirmProps {
   onConfirm: () => void;
@@ -13,7 +14,7 @@ export function UnsubscribeConfirm({ onConfirm }: UnsubscribeConfirmProps) {
       </div>
       <h2 className="font-display text-xl font-bold">Confirmer la désinscription</h2>
       <p className="max-w-sm text-sm text-muted-foreground">
-        Vous ne recevrez plus aucun email de la newsletter STAF PRINT CENTER. Vous pourrez vous réinscrire à
+        Vous ne recevrez plus aucun email de la newsletter {SITE.name}. Vous pourrez vous réinscrire à
         tout moment.
       </p>
       <div className="mt-2 flex items-center gap-3">
