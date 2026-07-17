@@ -8,6 +8,7 @@ export interface SubscribeNewsletterParams {
   firstName?: string;
   lastName?: string;
   categoryIds: string[];
+  acceptedTerms: boolean;
 }
 
 export async function subscribeNewsletter(params: SubscribeNewsletterParams): Promise<APINewsletterSubscription> {
@@ -16,6 +17,7 @@ export async function subscribeNewsletter(params: SubscribeNewsletterParams): Pr
   if (params.firstName) formData.append("first_name", params.firstName);
   if (params.lastName) formData.append("last_name", params.lastName);
   formData.append("category_ids", params.categoryIds.join(","));
+  formData.append("accepted_terms", params.acceptedTerms ? "true" : "false");
 
   const url = resolveApiUrl(`/api/public/newsletter/subscribe`);
   const response = await fetch(url, { method: "POST", body: formData });
