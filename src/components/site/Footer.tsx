@@ -23,6 +23,13 @@ export function Footer() {
           <p className="mt-4 max-w-sm text-sm text-secondary-foreground/70 leading-relaxed">
             Depuis 2019, nous accompagnons votre vision jusqu'à ce qu'elle devienne visible.
           </p>
+          <Link
+            to="/tools/newsletter"
+            className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:underline"
+          >
+            <Mail size={14} />
+            S'inscrire à la newsletter
+          </Link>
         </div>
 
         {/* Colonne Navigation */}
