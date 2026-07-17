@@ -4,7 +4,6 @@ import { TopicsSelector } from "./TopicsSelector";
 import { NewsletterSuccessScreen } from "./SuccessScreen";
 import { subscribeNewsletter } from "@/stores/useNewsletterStore";
 import type { APINewsletterSubscription } from "@/data/newsletter";
-import { SiteShell } from "@/components/site/SiteShell";
 import { SITE } from "@/data/site";
 
 export function NewsletterSubscribeForm() {
@@ -19,6 +18,15 @@ export function NewsletterSubscribeForm() {
 
   const toggle = (categoryId: string) =>
     setSelected((prev) => (prev.includes(categoryId) ? prev.filter((x) => x !== categoryId) : [...prev, categoryId]));
+
+  const handleReset = () => {
+    setResult(null);
+    setEmail("");
+    setFirstName("");
+    setLastName("");
+    setSelected([]);
+    setConsent(false);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,7 +51,13 @@ export function NewsletterSubscribeForm() {
   };
 
   if (result) {
-    return <NewsletterSuccessScreen subscription={result.subscription} alreadySubscribed={result.alreadySubscribed} />;
+    return (
+      <NewsletterSuccessScreen
+        subscription={result.subscription}
+        alreadySubscribed={result.alreadySubscribed}
+        onReset={handleReset}
+      />
+    );
   }
 
   return (
