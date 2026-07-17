@@ -1,14 +1,11 @@
-import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { UserX } from "lucide-react";
-import { buildUnsubscribeUrl } from "@/lib/newsletter-links";
 
 interface UnsubscribeSectionProps {
   token: string;
 }
 
 export function UnsubscribeSection({ token }: UnsubscribeSectionProps) {
-  const [confirming, setConfirming] = useState(false);
-
   return (
     <div className="mt-8 rounded-2xl border border-destructive/20 bg-destructive/5 p-5">
       <div className="flex items-start gap-3">
@@ -21,32 +18,15 @@ export function UnsubscribeSection({ token }: UnsubscribeSectionProps) {
             Vous ne recevrez plus aucun email de notre newsletter. Cette action est immédiate.
           </p>
 
-          {!confirming ? (
-            <button
-              onClick={() => setConfirming(true)}
-              className="mt-3 cursor-pointer rounded-full border border-destructive/30 px-4 py-2 text-xs font-semibold text-destructive transition hover:bg-destructive/10"
-            >
-              Se désinscrire
-            </button>
-          ) : (
-            <div className="mt-3 flex flex-wrap items-center gap-2">
-              <span className="text-xs text-foreground/70">Confirmez-vous ?</span>
-              <a
-                href={buildUnsubscribeUrl(token)}
-                className="cursor-pointer rounded-full bg-destructive px-4 py-2 text-xs font-semibold text-destructive-foreground transition hover:opacity-90"
-              >
-                Oui, me désinscrire
-              </a>
-              <button
-                onClick={() => setConfirming(false)}
-                className="cursor-pointer rounded-full border border-border px-4 py-2 text-xs font-semibold hover:bg-muted"
-              >
-                Annuler
-              </button>
-            </div>
-          )}
+          <Link
+            to="/tools/newsletter/unsubscribe"
+            search={{ token }}
+            className="mt-3 inline-flex cursor-pointer rounded-full border border-destructive/30 px-4 py-2 text-xs font-semibold text-destructive transition hover:bg-destructive/10"
+          >
+            Se désinscrire
+          </Link>
         </div>
       </div>
-    </div >
+    </div>
   );
 }

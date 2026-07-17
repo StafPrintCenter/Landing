@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { Loader2, AlertCircle, Check, User } from "lucide-react";
 import { CategoryCheckboxList } from "./CategoryCheckboxList";
 import { UnsubscribeSection } from "./UnsubscribeSection";
@@ -51,8 +52,17 @@ export function PreferencesForm({ token }: PreferencesFormProps) {
       const updated = await updateNewsletterPreferences({ token, categoryIds: selected });
       setSubscription(updated);
       setSaved(true);
+      toast.success("Préférences enregistrées", {
+        description: updated.categories.length > 0
+          ? `Vous recevrez des contenus sur : ${updated.categories.map((c) => c.name).join(", ")}.`
+          : "Vous ne recevrez plus de contenu par sujet spécifique.",
+      });
+      setTimeout(() => setSaved(false), 3000);
     } catch {
       setSaveError("Une erreur est survenue lors de l'enregistrement. Merci de réessayer.");
+      toast.error("Échec de l'enregistrement", {
+        description: "Merci de réessayer dans quelques instants.",
+      });
     } finally {
       setIsSaving(false);
     }
