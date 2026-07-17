@@ -10,7 +10,7 @@ export function ToolsSection() {
       <button
         onClick={() => setOpen((prev) => !prev)}
         aria-expanded={open}
-        className="flex w-full items-center justify-between text-left cursor-pointer"
+        className="flex w-full items-center justify-between text-left cursor-pointer group"
       >
         <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
           Outils
