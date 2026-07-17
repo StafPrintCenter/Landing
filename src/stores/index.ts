@@ -1,6 +1,7 @@
 export { useAppointmentSlots, createAppointment } from "./useAppointmentsStore";
 export { createResourceStore } from "./createResourceStore";
 export { useArticlesStore } from "./useArticlesStore";
+export { useArticlesStore } from "./useCategoriesStore";
 export { sendContactRequest, trackContactRequest } from "./useContactStore";
 export { useFaqsStore } from "./useFaqsStore";
 export { useFormationsStore } from "./useFormationsStore";
