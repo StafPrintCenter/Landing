@@ -23,7 +23,6 @@ import { Route as TrainingIdRouteImport } from './routes/training/$id'
 import { Route as ToolsLookupRouteImport } from './routes/tools/lookup'
 import { Route as ToolsAppointmentRouteImport } from './routes/tools/appointment'
 import { Route as TestsRessourcesRouteImport } from './routes/tests/ressources'
-import { Route as TestsNewsletterRouteImport } from './routes/tests/newsletter'
 import { Route as TestsDevisRouteImport } from './routes/tests/devis'
 import { Route as TestsCalendarRouteImport } from './routes/tests/calendar'
 import { Route as TestsAffiliationRouteImport } from './routes/tests/affiliation'
@@ -32,6 +31,7 @@ import { Route as LegalPrivacyRouteImport } from './routes/legal/privacy'
 import { Route as LegalMentionsRouteImport } from './routes/legal/mentions'
 import { Route as LegalCgvRouteImport } from './routes/legal/cgv'
 import { Route as ArticlesSlugRouteImport } from './routes/articles/$slug'
+import { Route as ToolsNewsletterIndexRouteImport } from './routes/tools/newsletter/index'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -103,11 +103,6 @@ const TestsRessourcesRoute = TestsRessourcesRouteImport.update({
   path: '/tests/ressources',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TestsNewsletterRoute = TestsNewsletterRouteImport.update({
-  id: '/tests/newsletter',
-  path: '/tests/newsletter',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const TestsDevisRoute = TestsDevisRouteImport.update({
   id: '/tests/devis',
   path: '/tests/devis',
@@ -148,6 +143,11 @@ const ArticlesSlugRoute = ArticlesSlugRouteImport.update({
   path: '/articles/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ToolsNewsletterIndexRoute = ToolsNewsletterIndexRouteImport.update({
+  id: '/tools/newsletter/',
+  path: '/tools/newsletter/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -161,7 +161,6 @@ export interface FileRoutesByFullPath {
   '/tests/affiliation': typeof TestsAffiliationRoute
   '/tests/calendar': typeof TestsCalendarRoute
   '/tests/devis': typeof TestsDevisRoute
-  '/tests/newsletter': typeof TestsNewsletterRoute
   '/tests/ressources': typeof TestsRessourcesRoute
   '/tools/appointment': typeof ToolsAppointmentRoute
   '/tools/lookup': typeof ToolsLookupRoute
@@ -173,6 +172,7 @@ export interface FileRoutesByFullPath {
   '/tests/': typeof TestsIndexRoute
   '/tools/': typeof ToolsIndexRoute
   '/training/': typeof TrainingIndexRoute
+  '/tools/newsletter/': typeof ToolsNewsletterIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -186,7 +186,6 @@ export interface FileRoutesByTo {
   '/tests/affiliation': typeof TestsAffiliationRoute
   '/tests/calendar': typeof TestsCalendarRoute
   '/tests/devis': typeof TestsDevisRoute
-  '/tests/newsletter': typeof TestsNewsletterRoute
   '/tests/ressources': typeof TestsRessourcesRoute
   '/tools/appointment': typeof ToolsAppointmentRoute
   '/tools/lookup': typeof ToolsLookupRoute
@@ -198,6 +197,7 @@ export interface FileRoutesByTo {
   '/tests': typeof TestsIndexRoute
   '/tools': typeof ToolsIndexRoute
   '/training': typeof TrainingIndexRoute
+  '/tools/newsletter': typeof ToolsNewsletterIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -212,7 +212,6 @@ export interface FileRoutesById {
   '/tests/affiliation': typeof TestsAffiliationRoute
   '/tests/calendar': typeof TestsCalendarRoute
   '/tests/devis': typeof TestsDevisRoute
-  '/tests/newsletter': typeof TestsNewsletterRoute
   '/tests/ressources': typeof TestsRessourcesRoute
   '/tools/appointment': typeof ToolsAppointmentRoute
   '/tools/lookup': typeof ToolsLookupRoute
@@ -224,6 +223,7 @@ export interface FileRoutesById {
   '/tests/': typeof TestsIndexRoute
   '/tools/': typeof ToolsIndexRoute
   '/training/': typeof TrainingIndexRoute
+  '/tools/newsletter/': typeof ToolsNewsletterIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -239,7 +239,6 @@ export interface FileRouteTypes {
     | '/tests/affiliation'
     | '/tests/calendar'
     | '/tests/devis'
-    | '/tests/newsletter'
     | '/tests/ressources'
     | '/tools/appointment'
     | '/tools/lookup'
@@ -251,6 +250,7 @@ export interface FileRouteTypes {
     | '/tests/'
     | '/tools/'
     | '/training/'
+    | '/tools/newsletter/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -264,7 +264,6 @@ export interface FileRouteTypes {
     | '/tests/affiliation'
     | '/tests/calendar'
     | '/tests/devis'
-    | '/tests/newsletter'
     | '/tests/ressources'
     | '/tools/appointment'
     | '/tools/lookup'
@@ -276,6 +275,7 @@ export interface FileRouteTypes {
     | '/tests'
     | '/tools'
     | '/training'
+    | '/tools/newsletter'
   id:
     | '__root__'
     | '/'
@@ -289,7 +289,6 @@ export interface FileRouteTypes {
     | '/tests/affiliation'
     | '/tests/calendar'
     | '/tests/devis'
-    | '/tests/newsletter'
     | '/tests/ressources'
     | '/tools/appointment'
     | '/tools/lookup'
@@ -301,6 +300,7 @@ export interface FileRouteTypes {
     | '/tests/'
     | '/tools/'
     | '/training/'
+    | '/tools/newsletter/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -315,7 +315,6 @@ export interface RootRouteChildren {
   TestsAffiliationRoute: typeof TestsAffiliationRoute
   TestsCalendarRoute: typeof TestsCalendarRoute
   TestsDevisRoute: typeof TestsDevisRoute
-  TestsNewsletterRoute: typeof TestsNewsletterRoute
   TestsRessourcesRoute: typeof TestsRessourcesRoute
   ToolsAppointmentRoute: typeof ToolsAppointmentRoute
   ToolsLookupRoute: typeof ToolsLookupRoute
@@ -327,6 +326,7 @@ export interface RootRouteChildren {
   TestsIndexRoute: typeof TestsIndexRoute
   ToolsIndexRoute: typeof ToolsIndexRoute
   TrainingIndexRoute: typeof TrainingIndexRoute
+  ToolsNewsletterIndexRoute: typeof ToolsNewsletterIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -429,13 +429,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TestsRessourcesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/tests/newsletter': {
-      id: '/tests/newsletter'
-      path: '/tests/newsletter'
-      fullPath: '/tests/newsletter'
-      preLoaderRoute: typeof TestsNewsletterRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/tests/devis': {
       id: '/tests/devis'
       path: '/tests/devis'
@@ -492,6 +485,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArticlesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tools/newsletter/': {
+      id: '/tools/newsletter/'
+      path: '/tools/newsletter'
+      fullPath: '/tools/newsletter/'
+      preLoaderRoute: typeof ToolsNewsletterIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -507,7 +507,6 @@ const rootRouteChildren: RootRouteChildren = {
   TestsAffiliationRoute: TestsAffiliationRoute,
   TestsCalendarRoute: TestsCalendarRoute,
   TestsDevisRoute: TestsDevisRoute,
-  TestsNewsletterRoute: TestsNewsletterRoute,
   TestsRessourcesRoute: TestsRessourcesRoute,
   ToolsAppointmentRoute: ToolsAppointmentRoute,
   ToolsLookupRoute: ToolsLookupRoute,
@@ -519,6 +518,7 @@ const rootRouteChildren: RootRouteChildren = {
   TestsIndexRoute: TestsIndexRoute,
   ToolsIndexRoute: ToolsIndexRoute,
   TrainingIndexRoute: TrainingIndexRoute,
+  ToolsNewsletterIndexRoute: ToolsNewsletterIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
