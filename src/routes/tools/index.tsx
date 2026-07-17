@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site/SiteShell";
-import { CalendarDays, PackageSearch, Calculator, Download, Users, Mail, ArrowRight, Clock, Link2 } from "lucide-react";
+import { CalendarDays, PackageSearch, Calculator, Download, Users, Mail, Newspaper, ArrowRight, Clock, Link2 } from "lucide-react";
 import { SITE } from "@/data/site";
 
 export const Route = createFileRoute("/tools/")({
@@ -26,6 +26,12 @@ const AVAILABLE_TOOLS = [
     icon: PackageSearch,
     title: "Suivre une demande",
     desc: "Entrez votre email et votre numéro de ticket pour connaître l'état de traitement de votre message.",
+  },
+  {
+    to: "/tools/newsletter",
+    icon: Newspaper,
+    title: "Newsletter",
+    desc: "Recevez nos actualités, conseils et offres selon vos centres d'intérêt.",
   },
   {
     href: SITE.shortUrl,
