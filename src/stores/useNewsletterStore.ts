@@ -1,7 +1,7 @@
 import { resolveApiUrl } from "@/lib/api-url";
 import type { APINewsletterSubscription } from "@/data/newsletter";
 
-type SubscriptionResponse = { data: APINewsletterSubscription };
+type SubscriptionResponse = { data: APINewsletterSubscription; message?: string };
 
 export interface SubscribeNewsletterParams {
   email: string;
@@ -11,7 +11,12 @@ export interface SubscribeNewsletterParams {
   acceptedTerms: boolean;
 }
 
-export async function subscribeNewsletter(params: SubscribeNewsletterParams): Promise<APINewsletterSubscription> {
+export interface SubscribeNewsletterResult {
+  subscription: APINewsletterSubscription;
+  alreadySubscribed: boolean;
+}
+
+export async function subscribeNewsletter(params: SubscribeNewsletterParams): Promise<SubscribeNewsletterResult> {
   const formData = new FormData();
   formData.append("email", params.email);
   if (params.firstName) formData.append("first_name", params.firstName);
@@ -25,7 +30,10 @@ export async function subscribeNewsletter(params: SubscribeNewsletterParams): Pr
     throw new Error("Erreur lors de l'inscription à la newsletter");
   }
   const json: SubscriptionResponse = await response.json();
-  return json.data;
+  return {
+    subscription: json.data,
+    alreadySubscribed: response.status === 200,
+  };
 }
 
 /**
