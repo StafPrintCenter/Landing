@@ -27,7 +27,7 @@ function IdTooltip() {
     const rect = buttonRef.current?.getBoundingClientRect();
     if (!rect) return;
     setCoords({
-      top: rect.top - 8, // 8px au-dessus du bouton
+      top: rect.top - 8,
       left: rect.left + rect.width / 2,
     });
   };
@@ -63,6 +63,57 @@ function IdTooltip() {
             page précise du service, de la formation, de l'article ou de la réalisation concernée.
             Si ce n'est pas le cas, ouvrez d'abord cette page, puis revenez signaler le problème —
             le champ se remplira alors tout seul.
+          </span>,
+          document.body
+        )}
+    </span>
+  );
+}
+
+// 👈 Nouveau composant de Tooltip pour l'Email du visiteur
+function EmailTooltip() {
+  const [show, setShow] = useState(false);
+  const [coords, setCoords] = useState<{ top: number; left: number } | null>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const updatePosition = () => {
+    const rect = buttonRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    setCoords({
+      top: rect.top - 8,
+      left: rect.left + rect.width / 2,
+    });
+  };
+
+  const handleShow = () => {
+    updatePosition();
+    setShow(true);
+  };
+
+  return (
+    <span className="relative inline-flex">
+      <button
+        ref={buttonRef}
+        type="button"
+        onMouseEnter={handleShow}
+        onMouseLeave={() => setShow(false)}
+        onFocus={handleShow}
+        onBlur={() => setShow(false)}
+        aria-label="Pourquoi renseigner votre email ?"
+        className="inline-flex h-4 w-4 items-center justify-center rounded-full text-muted-foreground hover:text-primary cursor-help"
+      >
+        <Info size={14} />
+      </button>
+
+      {show && coords && typeof document !== "undefined" &&
+        createPortal(
+          <span
+            role="tooltip"
+            style={{ top: coords.top, left: coords.left }}
+            className="fixed z-200 w-64 -translate-x-1/2 -translate-y-full rounded-lg border border-border bg-card p-2.5 text-[11px] leading-relaxed text-muted-foreground shadow-lg"
+          >
+            Votre adresse nous permettra de vous recontacter si des précisions supplémentaires
+            sont nécessaires pour isoler le bug, ou pour vous informer dès que le problème est résolu.
           </span>,
           document.body
         )}
@@ -246,8 +297,12 @@ export function SiteReportModal({ isOpen, onClose }: SiteReportModalProps) {
                 />
               </label>
 
+              {/* ── Champ Email mis à jour avec le composant EmailTooltip ── */}
               <label className="block">
-                <span className="mb-1.5 block text-sm font-medium">Votre email (optionnel)</span>
+                <span className="mb-1.5 flex items-center gap-1.5 text-sm font-medium">
+                  Votre email (optionnel)
+                  <EmailTooltip />
+                </span>
                 <input
                   type="email"
                   value={reporterEmail}
