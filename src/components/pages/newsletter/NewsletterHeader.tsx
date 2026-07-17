@@ -9,7 +9,7 @@ export function NewsletterHeader() {
           <Mail size={14} /> Newsletter
         </span>
         <h1 className="mt-4 text-3xl md:text-5xl font-bold tracking-tight">
-          La newsletter STAF PRINT CENTER
+          La newsletter SPC
         </h1>
         <p className="mt-3 text-muted-foreground">
           Une fois par mois. Zéro spam. Des idées concrètes pour faire rayonner votre marque.
