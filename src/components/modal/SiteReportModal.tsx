@@ -1,124 +1,17 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { Flag, X, Loader2, CheckCircle2, Info } from "lucide-react";
+import { Flag, X } from "lucide-react";
 import { createReport, ReportApiError } from "@/stores/useReportsStore";
-import {
-  REPORT_REASON_LABELS,
-  REPORTABLE_TYPE_LABELS,
-  type ReportReason,
-  type ReportableType,
-} from "@/data/reports";
+import { type ReportReason, type ReportableType } from "@/data/reports";
 import { useReportPrefill } from "@/hooks/use-report-prefill";
 
-const REASON_OPTIONS = Object.keys(REPORT_REASON_LABELS) as ReportReason[];
-const TYPE_OPTIONS = Object.keys(REPORTABLE_TYPE_LABELS) as ReportableType[];
+// Imports des sous-composants morcelés du sous-dossier
+import { SuccessState } from "./site-report/SuccessState";
+import { ReportForm } from "./site-report/ReportForm";
 
 interface SiteReportModalProps {
   isOpen: boolean;
   onClose: () => void;
-}
-
-function IdTooltip() {
-  const [show, setShow] = useState(false);
-  const [coords, setCoords] = useState<{ top: number; left: number } | null>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
-
-  const updatePosition = () => {
-    const rect = buttonRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    setCoords({
-      top: rect.top - 8,
-      left: rect.left + rect.width / 2,
-    });
-  };
-
-  const handleShow = () => {
-    updatePosition();
-    setShow(true);
-  };
-
-  return (
-    <span className="relative inline-flex">
-      <button
-        ref={buttonRef}
-        type="button"
-        onMouseEnter={handleShow}
-        onMouseLeave={() => setShow(false)}
-        onFocus={handleShow}
-        onBlur={() => setShow(false)}
-        aria-label="Comment obtenir cet identifiant ?"
-        className="inline-flex h-4 w-4 items-center justify-center rounded-full text-muted-foreground hover:text-primary cursor-help"
-      >
-        <Info size={14} />
-      </button>
-
-      {show && coords && typeof document !== "undefined" &&
-        createPortal(
-          <span
-            role="tooltip"
-            style={{ top: coords.top, left: coords.left }}
-            className="fixed z-200 w-64 -translate-x-1/2 -translate-y-full rounded-lg border border-border bg-card p-2.5 text-[11px] leading-relaxed text-muted-foreground shadow-lg"
-          >
-            Cet identifiant est rempli automatiquement lorsque vous ouvrez ce formulaire depuis la
-            page précise du service, de la formation, de l'article ou de la réalisation concernée.
-            Si ce n'est pas le cas, ouvrez d'abord cette page, puis revenez signaler le problème —
-            le champ se remplira alors tout seul.
-          </span>,
-          document.body
-        )}
-    </span>
-  );
-}
-
-// 👈 Nouveau composant de Tooltip pour l'Email du visiteur
-function EmailTooltip() {
-  const [show, setShow] = useState(false);
-  const [coords, setCoords] = useState<{ top: number; left: number } | null>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
-
-  const updatePosition = () => {
-    const rect = buttonRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    setCoords({
-      top: rect.top - 8,
-      left: rect.left + rect.width / 2,
-    });
-  };
-
-  const handleShow = () => {
-    updatePosition();
-    setShow(true);
-  };
-
-  return (
-    <span className="relative inline-flex">
-      <button
-        ref={buttonRef}
-        type="button"
-        onMouseEnter={handleShow}
-        onMouseLeave={() => setShow(false)}
-        onFocus={handleShow}
-        onBlur={() => setShow(false)}
-        aria-label="Pourquoi renseigner votre email ?"
-        className="inline-flex h-4 w-4 items-center justify-center rounded-full text-muted-foreground hover:text-primary cursor-help"
-      >
-        <Info size={14} />
-      </button>
-
-      {show && coords && typeof document !== "undefined" &&
-        createPortal(
-          <span
-            role="tooltip"
-            style={{ top: coords.top, left: coords.left }}
-            className="fixed z-200 w-64 -translate-x-1/2 -translate-y-full rounded-lg border border-border bg-card p-2.5 text-[11px] leading-relaxed text-muted-foreground shadow-lg"
-          >
-            Votre adresse nous permettra de vous recontacter si des précisions supplémentaires
-            sont nécessaires pour isoler le bug, ou pour vous informer dès que le problème est résolu.
-          </span>,
-          document.body
-        )}
-    </span>
-  );
 }
 
 export function SiteReportModal({ isOpen, onClose }: SiteReportModalProps) {
@@ -164,14 +57,8 @@ export function SiteReportModal({ isOpen, onClose }: SiteReportModalProps) {
     e.preventDefault();
     setError(null);
 
-    if (!reportableType) {
-      setError("Merci de choisir le type de ressource concernée.");
-      return;
-    }
-    if (!reportableId.trim()) {
-      setError("L'identifiant de la ressource est obligatoire.");
-      return;
-    }
+    if (!reportableType) return setError("Merci de choisir le type de ressource concernée.");
+    if (!reportableId.trim()) return setError("L'identifiant de la ressource est obligatoire.");
 
     setIsSubmitting(true);
     try {
@@ -184,11 +71,7 @@ export function SiteReportModal({ isOpen, onClose }: SiteReportModalProps) {
       });
       setSubmitted(true);
     } catch (err) {
-      setError(
-        err instanceof ReportApiError
-          ? err.message
-          : "Erreur lors de l'envoi du signalement. Réessayez."
-      );
+      setError(err instanceof ReportApiError ? err.message : "Erreur lors de l'envoi du signalement. Réessayez.");
     } finally {
       setIsSubmitting(false);
     }
@@ -203,6 +86,7 @@ export function SiteReportModal({ isOpen, onClose }: SiteReportModalProps) {
         className="flex max-h-[85vh] w-full max-w-md flex-col overflow-hidden rounded-t-2xl border border-border bg-card md:rounded-2xl"
         onClick={(e) => e.stopPropagation()}
       >
+        {/* Header commun */}
         <div className="flex shrink-0 items-center justify-between border-b border-border p-6 pb-4">
           <h2 className="flex items-center gap-2 font-display text-lg font-bold">
             <Flag size={18} className="text-primary" /> Signaler un problème
@@ -216,113 +100,27 @@ export function SiteReportModal({ isOpen, onClose }: SiteReportModalProps) {
           </button>
         </div>
 
+        {/* Corps avec commutation de composants */}
         <div className="overflow-y-auto p-6 pt-4">
           {submitted ? (
-            <div className="flex flex-col items-center gap-3 py-4 text-center">
-              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-success/10 text-success">
-                <CheckCircle2 size={28} />
-              </span>
-              <p className="text-sm font-medium">Signalement envoyé, merci.</p>
-              <p className="text-xs text-muted-foreground">Notre équipe l'examinera dans les meilleurs délais.</p>
-              <button
-                onClick={onClose}
-                className="mt-2 w-full rounded-full border border-border bg-card px-4 py-2.5 text-sm font-medium hover:bg-muted cursor-pointer"
-              >
-                Fermer
-              </button>
-            </div>
+            <SuccessState onClose={onClose} />
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <label className="block">
-                <span className="mb-1.5 block text-sm font-medium">Type de ressource</span>
-                <select
-                  value={reportableType}
-                  onChange={(e) => setReportableType(e.target.value as ReportableType | "")}
-                  className="input w-full cursor-pointer"
-                >
-                  <option value="" disabled>— Choisir le type —</option>
-                  {TYPE_OPTIONS.map((t) => (
-                    <option key={t} value={t}>{REPORTABLE_TYPE_LABELS[t]}</option>
-                  ))}
-                </select>
-                {prefill.onListingPage && (
-                  <span className="mt-1 block text-xs text-muted-foreground">
-                    Type détecté automatiquement — précisez l'identifiant ci-dessous.
-                  </span>
-                )}
-              </label>
-
-              <label className="block">
-                <span className="mb-1.5 flex items-center gap-1.5 text-sm font-medium">
-                  Identifiant de la ressource
-                  <IdTooltip />
-                </span>
-                <input
-                  type="text"
-                  value={reportableId}
-                  onChange={(e) => setReportableId(e.target.value)}
-                  placeholder="ex: ab93b47d-4e45-4da2-8b81-d033df89bcb6"
-                  className="input w-full"
-                  required
-                />
-                {prefill.reportableId && reportableId === prefill.reportableId && (
-                  <span className="mt-1 block text-xs text-muted-foreground">
-                    Rempli automatiquement depuis cette page — modifiable si besoin.
-                  </span>
-                )}
-              </label>
-
-              <label className="block">
-                <span className="mb-1.5 block text-sm font-medium">Motif</span>
-                <select
-                  value={reason}
-                  onChange={(e) => setReason(e.target.value as ReportReason)}
-                  className="input w-full cursor-pointer"
-                >
-                  {REASON_OPTIONS.map((r) => (
-                    <option key={r} value={r}>{REPORT_REASON_LABELS[r]}</option>
-                  ))}
-                </select>
-              </label>
-
-              <label className="block">
-                <span className="mb-1.5 block text-sm font-medium">Message (optionnel)</span>
-                <textarea
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  maxLength={500}
-                  rows={3}
-                  placeholder="Décrivez le problème rencontré…"
-                  className="input w-full"
-                />
-              </label>
-
-              {/* ── Champ Email mis à jour avec le composant EmailTooltip ── */}
-              <label className="block">
-                <span className="mb-1.5 flex items-center gap-1.5 text-sm font-medium">
-                  Votre email (optionnel)
-                  <EmailTooltip />
-                </span>
-                <input
-                  type="email"
-                  value={reporterEmail}
-                  onChange={(e) => setReporterEmail(e.target.value)}
-                  placeholder="vous@exemple.com"
-                  className="input w-full"
-                />
-              </label>
-
-              {error && <p className="text-xs text-destructive">{error}</p>}
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90 disabled:opacity-60 cursor-pointer"
-              >
-                {isSubmitting ? <Loader2 size={16} className="animate-spin" /> : <Flag size={16} />}
-                {isSubmitting ? "Envoi…" : "Envoyer le signalement"}
-              </button>
-            </form>
+            <ReportForm
+              reportableType={reportableType}
+              reportableId={reportableId}
+              reason={reason}
+              message={message}
+              reporterEmail={reporterEmail}
+              isSubmitting={isSubmitting}
+              error={error}
+              prefill={prefill}
+              setReportableType={setReportableType}
+              setReportableId={setReportableId}
+              setReason={setReason}
+              setMessage={setMessage}
+              setReporterEmail={setReporterEmail}
+              onSubmit={handleSubmit}
+            />
           )}
         </div>
       </div>
