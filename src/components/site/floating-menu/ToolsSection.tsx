@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Wrench, ChevronDown, CalendarCheck, Search, LayoutGrid } from "lucide-react";
+import { ChevronDown, CalendarCheck, Search, LayoutGrid } from "lucide-react";
 
 export function ToolsSection() {
   const [open, setOpen] = useState(false);
