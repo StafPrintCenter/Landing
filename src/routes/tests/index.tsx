@@ -18,7 +18,6 @@ const TESTS = [
   { to: "/tests/ressources", icon: Download, title: "Ressources gratuites", desc: "Zone de templates, guides et outils à télécharger." },
   { to: "/tests/calendar", icon: CalendarDays, title: "Calendrier des sessions", desc: "Agenda public des prochaines sessions de formation." },
   { to: "/tests/affiliation", icon: Users, title: "Programme de parrainage", desc: "Génération de codes de parrainage et paliers de récompenses." },
-  { to: "/tests/newsletter", icon: Mail, title: "Newsletter", desc: "Inscription à la newsletter avec centres d'intérêt." },
 ] as const;
 
 function TestsIndexPage() {
