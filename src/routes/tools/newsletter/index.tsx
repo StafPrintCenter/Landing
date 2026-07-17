@@ -17,7 +17,7 @@ export const Route = createFileRoute("/tools/newsletter/")({
 function NewsletterPage() {
   return (
     <SiteShell>
-      <section className="container-x max-w-5xl py-16 md:py-24">
+      <section className="container-x max-w-5xl py-16">
         <NewsletterHeader />
 
         <div className="mt-10 grid gap-8 md:grid-cols-2">
