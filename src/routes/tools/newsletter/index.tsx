@@ -1,7 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site/SiteShell";
 import { SITE } from "@/data/site";
-import { NewsletterHeader, NewsletterBenefits, NewsletterSubscribeForm } from "@/components/pages/newsletter/home";
+import {
+  NewsletterHeader,
+  NewsletterBenefits,
+  NewsletterSubscribeForm
+} from "@/components/pages/tools/newsletter/home";
 
 export const Route = createFileRoute("/tools/newsletter/")({
   head: () => ({
