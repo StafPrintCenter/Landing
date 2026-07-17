@@ -32,6 +32,7 @@ import { Route as LegalMentionsRouteImport } from './routes/legal/mentions'
 import { Route as LegalCgvRouteImport } from './routes/legal/cgv'
 import { Route as ArticlesSlugRouteImport } from './routes/articles/$slug'
 import { Route as ToolsNewsletterIndexRouteImport } from './routes/tools/newsletter/index'
+import { Route as ToolsNewsletterUnsubscribeRouteImport } from './routes/tools/newsletter/unsubscribe'
 import { Route as ToolsNewsletterPreferencesRouteImport } from './routes/tools/newsletter/preferences'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -149,6 +150,12 @@ const ToolsNewsletterIndexRoute = ToolsNewsletterIndexRouteImport.update({
   path: '/tools/newsletter/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ToolsNewsletterUnsubscribeRoute =
+  ToolsNewsletterUnsubscribeRouteImport.update({
+    id: '/tools/newsletter/unsubscribe',
+    path: '/tools/newsletter/unsubscribe',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ToolsNewsletterPreferencesRoute =
   ToolsNewsletterPreferencesRouteImport.update({
     id: '/tools/newsletter/preferences',
@@ -180,6 +187,7 @@ export interface FileRoutesByFullPath {
   '/tools/': typeof ToolsIndexRoute
   '/training/': typeof TrainingIndexRoute
   '/tools/newsletter/preferences': typeof ToolsNewsletterPreferencesRoute
+  '/tools/newsletter/unsubscribe': typeof ToolsNewsletterUnsubscribeRoute
   '/tools/newsletter/': typeof ToolsNewsletterIndexRoute
 }
 export interface FileRoutesByTo {
@@ -206,6 +214,7 @@ export interface FileRoutesByTo {
   '/tools': typeof ToolsIndexRoute
   '/training': typeof TrainingIndexRoute
   '/tools/newsletter/preferences': typeof ToolsNewsletterPreferencesRoute
+  '/tools/newsletter/unsubscribe': typeof ToolsNewsletterUnsubscribeRoute
   '/tools/newsletter': typeof ToolsNewsletterIndexRoute
 }
 export interface FileRoutesById {
@@ -233,6 +242,7 @@ export interface FileRoutesById {
   '/tools/': typeof ToolsIndexRoute
   '/training/': typeof TrainingIndexRoute
   '/tools/newsletter/preferences': typeof ToolsNewsletterPreferencesRoute
+  '/tools/newsletter/unsubscribe': typeof ToolsNewsletterUnsubscribeRoute
   '/tools/newsletter/': typeof ToolsNewsletterIndexRoute
 }
 export interface FileRouteTypes {
@@ -261,6 +271,7 @@ export interface FileRouteTypes {
     | '/tools/'
     | '/training/'
     | '/tools/newsletter/preferences'
+    | '/tools/newsletter/unsubscribe'
     | '/tools/newsletter/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -287,6 +298,7 @@ export interface FileRouteTypes {
     | '/tools'
     | '/training'
     | '/tools/newsletter/preferences'
+    | '/tools/newsletter/unsubscribe'
     | '/tools/newsletter'
   id:
     | '__root__'
@@ -313,6 +325,7 @@ export interface FileRouteTypes {
     | '/tools/'
     | '/training/'
     | '/tools/newsletter/preferences'
+    | '/tools/newsletter/unsubscribe'
     | '/tools/newsletter/'
   fileRoutesById: FileRoutesById
 }
@@ -340,6 +353,7 @@ export interface RootRouteChildren {
   ToolsIndexRoute: typeof ToolsIndexRoute
   TrainingIndexRoute: typeof TrainingIndexRoute
   ToolsNewsletterPreferencesRoute: typeof ToolsNewsletterPreferencesRoute
+  ToolsNewsletterUnsubscribeRoute: typeof ToolsNewsletterUnsubscribeRoute
   ToolsNewsletterIndexRoute: typeof ToolsNewsletterIndexRoute
 }
 
@@ -506,6 +520,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsNewsletterIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tools/newsletter/unsubscribe': {
+      id: '/tools/newsletter/unsubscribe'
+      path: '/tools/newsletter/unsubscribe'
+      fullPath: '/tools/newsletter/unsubscribe'
+      preLoaderRoute: typeof ToolsNewsletterUnsubscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tools/newsletter/preferences': {
       id: '/tools/newsletter/preferences'
       path: '/tools/newsletter/preferences'
@@ -540,6 +561,7 @@ const rootRouteChildren: RootRouteChildren = {
   ToolsIndexRoute: ToolsIndexRoute,
   TrainingIndexRoute: TrainingIndexRoute,
   ToolsNewsletterPreferencesRoute: ToolsNewsletterPreferencesRoute,
+  ToolsNewsletterUnsubscribeRoute: ToolsNewsletterUnsubscribeRoute,
   ToolsNewsletterIndexRoute: ToolsNewsletterIndexRoute,
 }
 export const routeTree = rootRouteImport
