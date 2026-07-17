@@ -96,7 +96,7 @@ function QrCodePanelUI({ alias, onClose, autoCloseSeconds }: QrCodePanelUIProps)
 
   return createPortal(
     <div
-      className="fixed left-1/2 top-4 z-[110] -translate-x-1/2 sm:left-6 sm:top-auto sm:bottom-6 sm:translate-x-0"
+      className="fixed left-1/2 top-4 z-110 -translate-x-1/2 sm:left-6 sm:top-auto sm:bottom-6 sm:translate-x-0"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
