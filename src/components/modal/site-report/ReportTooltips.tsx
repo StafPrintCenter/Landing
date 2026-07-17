@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { Info } from "lucide-react";
 
 interface BaseTooltipProps {
-  label: string;
+  label: string; // Ce titre sera maintenant bien visible dans la bulle !
   text: string;
 }
 
@@ -32,7 +32,7 @@ function TooltipPortal({ label, text }: BaseTooltipProps) {
         onMouseLeave={() => setShow(false)}
         onFocus={handleShow}
         onBlur={() => setShow(false)}
-        aria-label={label}
+        aria-label={label} // Conservé pour l'accessibilité
         className="inline-flex h-4 w-4 items-center justify-center rounded-full text-muted-foreground hover:text-primary cursor-help"
       >
         <Info size={14} />
@@ -45,6 +45,10 @@ function TooltipPortal({ label, text }: BaseTooltipProps) {
             style={{ top: coords.top, left: coords.left }}
             className="fixed z-200 w-64 -translate-x-1/2 -translate-y-full rounded-lg border border-border bg-card p-2.5 text-[11px] leading-relaxed text-muted-foreground shadow-lg"
           >
+            {/* 🎯 On affiche le label en gras au début de la bulle */}
+            <strong className="block mb-1 text-foreground font-semibold">
+              {label}
+            </strong>
             {text}
           </span>,
           document.body
@@ -56,7 +60,7 @@ function TooltipPortal({ label, text }: BaseTooltipProps) {
 export function IdTooltip() {
   return (
     <TooltipPortal
-      label="Comment obtenir cet identifiant ?"
+      label="Identifiant de ressource"
       text="Cet identifiant est rempli automatiquement lorsque vous ouvrez ce formulaire depuis la page précise du service, de la formation, de l'article ou de la réalisation concernée. Si ce n'est pas le cas, ouvrez d'abord cette page, puis revenez signaler le problème — le champ se remplira alors tout seul."
     />
   );
