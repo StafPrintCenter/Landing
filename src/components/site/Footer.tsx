@@ -25,7 +25,7 @@ export function Footer() {
           </p>
           <Link
             to="/tools/newsletter"
-            className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:underline"
+            className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium text-accent hover:underline"
           >
             <Mail size={14} />
             S'inscrire à la newsletter
