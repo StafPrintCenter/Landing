@@ -18,7 +18,7 @@ import {
   STEPS,
   INITIAL_BOOKING,
   type BookingData,
-} from "@/components/pages/appointment";
+} from "@/components/pages/tools/appointment";
 
 export const Route = createFileRoute("/tools/appointment")({
   head: () => ({
