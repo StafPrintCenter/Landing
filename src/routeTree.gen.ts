@@ -32,6 +32,7 @@ import { Route as LegalMentionsRouteImport } from './routes/legal/mentions'
 import { Route as LegalCgvRouteImport } from './routes/legal/cgv'
 import { Route as ArticlesSlugRouteImport } from './routes/articles/$slug'
 import { Route as ToolsNewsletterIndexRouteImport } from './routes/tools/newsletter/index'
+import { Route as ToolsNewsletterPreferencesRouteImport } from './routes/tools/newsletter/preferences'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -148,6 +149,12 @@ const ToolsNewsletterIndexRoute = ToolsNewsletterIndexRouteImport.update({
   path: '/tools/newsletter/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ToolsNewsletterPreferencesRoute =
+  ToolsNewsletterPreferencesRouteImport.update({
+    id: '/tools/newsletter/preferences',
+    path: '/tools/newsletter/preferences',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -172,6 +179,7 @@ export interface FileRoutesByFullPath {
   '/tests/': typeof TestsIndexRoute
   '/tools/': typeof ToolsIndexRoute
   '/training/': typeof TrainingIndexRoute
+  '/tools/newsletter/preferences': typeof ToolsNewsletterPreferencesRoute
   '/tools/newsletter/': typeof ToolsNewsletterIndexRoute
 }
 export interface FileRoutesByTo {
@@ -197,6 +205,7 @@ export interface FileRoutesByTo {
   '/tests': typeof TestsIndexRoute
   '/tools': typeof ToolsIndexRoute
   '/training': typeof TrainingIndexRoute
+  '/tools/newsletter/preferences': typeof ToolsNewsletterPreferencesRoute
   '/tools/newsletter': typeof ToolsNewsletterIndexRoute
 }
 export interface FileRoutesById {
@@ -223,6 +232,7 @@ export interface FileRoutesById {
   '/tests/': typeof TestsIndexRoute
   '/tools/': typeof ToolsIndexRoute
   '/training/': typeof TrainingIndexRoute
+  '/tools/newsletter/preferences': typeof ToolsNewsletterPreferencesRoute
   '/tools/newsletter/': typeof ToolsNewsletterIndexRoute
 }
 export interface FileRouteTypes {
@@ -250,6 +260,7 @@ export interface FileRouteTypes {
     | '/tests/'
     | '/tools/'
     | '/training/'
+    | '/tools/newsletter/preferences'
     | '/tools/newsletter/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -275,6 +286,7 @@ export interface FileRouteTypes {
     | '/tests'
     | '/tools'
     | '/training'
+    | '/tools/newsletter/preferences'
     | '/tools/newsletter'
   id:
     | '__root__'
@@ -300,6 +312,7 @@ export interface FileRouteTypes {
     | '/tests/'
     | '/tools/'
     | '/training/'
+    | '/tools/newsletter/preferences'
     | '/tools/newsletter/'
   fileRoutesById: FileRoutesById
 }
@@ -326,6 +339,7 @@ export interface RootRouteChildren {
   TestsIndexRoute: typeof TestsIndexRoute
   ToolsIndexRoute: typeof ToolsIndexRoute
   TrainingIndexRoute: typeof TrainingIndexRoute
+  ToolsNewsletterPreferencesRoute: typeof ToolsNewsletterPreferencesRoute
   ToolsNewsletterIndexRoute: typeof ToolsNewsletterIndexRoute
 }
 
@@ -492,6 +506,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsNewsletterIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tools/newsletter/preferences': {
+      id: '/tools/newsletter/preferences'
+      path: '/tools/newsletter/preferences'
+      fullPath: '/tools/newsletter/preferences'
+      preLoaderRoute: typeof ToolsNewsletterPreferencesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -518,6 +539,7 @@ const rootRouteChildren: RootRouteChildren = {
   TestsIndexRoute: TestsIndexRoute,
   ToolsIndexRoute: ToolsIndexRoute,
   TrainingIndexRoute: TrainingIndexRoute,
+  ToolsNewsletterPreferencesRoute: ToolsNewsletterPreferencesRoute,
   ToolsNewsletterIndexRoute: ToolsNewsletterIndexRoute,
 }
 export const routeTree = rootRouteImport
