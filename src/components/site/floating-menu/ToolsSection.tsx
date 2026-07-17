@@ -12,9 +12,21 @@ export function ToolsSection() {
         aria-expanded={open}
         className="flex w-full items-center justify-between text-left cursor-pointer group"
       >
-        <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
-          Outils
-        </span>
+        <div className="flex items-baseline gap-2">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+            Outils
+          </span>
+          {/* L'indice s'affiche uniquement si non replié (!open) */}
+          <span
+            className={`text-[9px] text-muted-foreground/60 transition-all duration-300 ${open
+              ? "opacity-0 translate-x-[-4px] pointer-events-none"
+              : "opacity-100 translate-x-0"
+              }`}
+          >
+            (cliquer pour dérouler)
+          </span>
+        </div>
+
         <ChevronDown
           size={14}
           className={`text-muted-foreground transition-transform duration-200 ${open ? "rotate-180" : ""}`}
