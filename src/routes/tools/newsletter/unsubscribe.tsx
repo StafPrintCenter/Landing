@@ -5,7 +5,7 @@ import { AlertCircle } from "lucide-react";
 import { SiteShell } from "@/components/site/SiteShell";
 import { SITE } from "@/data/site";
 import { buildUnsubscribeBackendUrl } from "@/lib/newsletter-links";
-import { UnsubscribeConfirm, UnsubscribeResult } from "@/components/pages/newsletter/unsubscribe";
+import { UnsubscribeConfirm, UnsubscribeResult } from "@/components/pages/tools/newsletter/unsubscribe";
 
 const unsubscribeSearchSchema = z.object({
   token: z.string().catch("").default(""),

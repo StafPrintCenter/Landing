@@ -3,7 +3,7 @@ import { z } from "zod";
 import { AlertCircle } from "lucide-react";
 import { SiteShell } from "@/components/site/SiteShell";
 import { SITE } from "@/data/site";
-import { PreferencesHeader, PreferencesForm } from "@/components/pages/newsletter/preferences";
+import { PreferencesHeader, PreferencesForm } from "@/components/pages/tools/newsletter/preferences";
 
 const preferencesSearchSchema = z.object({
   token: z.string().catch("").default(""),
