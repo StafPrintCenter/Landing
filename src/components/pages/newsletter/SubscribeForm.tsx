@@ -4,6 +4,8 @@ import { TopicsSelector } from "./TopicsSelector";
 import { NewsletterSuccessScreen } from "./SuccessScreen";
 import { subscribeNewsletter } from "@/stores/useNewsletterStore";
 import type { APINewsletterSubscription } from "@/data/newsletter";
+import { SiteShell } from "@/components/site/SiteShell";
+import { SITE } from "@/data/site";
 
 export function NewsletterSubscribeForm() {
   const [email, setEmail] = useState("");
@@ -13,7 +15,7 @@ export function NewsletterSubscribeForm() {
   const [consent, setConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [subscription, setSubscription] = useState<APINewsletterSubscription | null>(null);
+  const [result, setResult] = useState<{ subscription: APINewsletterSubscription; alreadySubscribed: boolean } | null>(null);
 
   const toggle = (categoryId: string) =>
     setSelected((prev) => (prev.includes(categoryId) ? prev.filter((x) => x !== categoryId) : [...prev, categoryId]));
@@ -25,14 +27,14 @@ export function NewsletterSubscribeForm() {
     setError(null);
     setIsSubmitting(true);
     try {
-      const result = await subscribeNewsletter({
+      const res = await subscribeNewsletter({
         email,
         firstName: firstName.trim() || undefined,
         lastName: lastName.trim() || undefined,
         categoryIds: selected,
         acceptedTerms: consent,
       });
-      setSubscription(result);
+      setResult(res);
     } catch {
       setError("Une erreur est survenue lors de l'inscription. Merci de réessayer.");
     } finally {
@@ -40,8 +42,8 @@ export function NewsletterSubscribeForm() {
     }
   };
 
-  if (subscription) {
-    return <NewsletterSuccessScreen subscription={subscription} />;
+  if (result) {
+    return <NewsletterSuccessScreen subscription={result.subscription} alreadySubscribed={result.alreadySubscribed} />;
   }
 
   return (
@@ -89,7 +91,7 @@ export function NewsletterSubscribeForm() {
           onChange={(e) => setConsent(e.target.checked)}
           className="mt-0.5 cursor-pointer"
         />
-        <span>J'accepte de recevoir la newsletter STAF PRINT CENTER et je peux me désabonner à tout moment.</span>
+        <span>J'accepte de recevoir la newsletter {SITE.name} et je peux me désabonner à tout moment.</span>
       </label>
 
       {error && (
