@@ -13,6 +13,7 @@ export type APINewsletterSubscription = {
   firstName: string | null;
   lastName: string | null;
   categories: NewsletterCategoryRef[];
+  acceptedTerms: boolean;
   isActive: boolean;
   isBlocked: boolean;
   subscribedAt: string;
