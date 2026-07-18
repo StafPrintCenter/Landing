@@ -77,9 +77,21 @@ export async function unsubscribeNewsletter(token: string): Promise<APINewslette
 
   const url = resolveApiUrl(`/api/public/newsletter/unsubscribe`);
   const response = await fetch(url, { method: "POST", body: formData });
+
+  if (response.status === 409) {
+    throw new NewsletterAlreadyUnsubscribedError();
+  }
   if (!response.ok) {
     throw new Error("Erreur lors de la désinscription");
   }
+
   const json: SubscriptionResponse = await response.json();
   return json.data;
+}
+
+export class NewsletterAlreadyUnsubscribedError extends Error {
+  constructor() {
+    super("Cette adresse n'est pas (ou plus) inscrite à la newsletter.");
+    this.name = "NewsletterAlreadyUnsubscribedError";
+  }
 }

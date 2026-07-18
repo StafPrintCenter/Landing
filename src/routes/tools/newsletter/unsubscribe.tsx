@@ -4,7 +4,7 @@ import { z } from "zod";
 import { AlertCircle } from "lucide-react";
 import { SiteShell } from "@/components/site/SiteShell";
 import { SITE } from "@/data/site";
-import { unsubscribeNewsletter } from "@/stores/useNewsletterStore";
+import { unsubscribeNewsletter, NewsletterAlreadyUnsubscribedError } from "@/stores/useNewsletterStore";
 import { UnsubscribeConfirm, UnsubscribeResult } from "@/components/pages/tools/newsletter/unsubscribe";
 
 const unsubscribeSearchSchema = z.object({
@@ -22,7 +22,7 @@ export const Route = createFileRoute("/tools/newsletter/unsubscribe")({
   component: UnsubscribePage,
 });
 
-type Step = "confirm" | "loading" | "done" | "error";
+type Step = "confirm" | "loading" | "done" | "already-unsubscribed" | "error";
 
 function UnsubscribePage() {
   const { token } = Route.useSearch();
@@ -33,8 +33,12 @@ function UnsubscribePage() {
     try {
       await unsubscribeNewsletter(token);
       setStep("done");
-    } catch {
-      setStep("error");
+    } catch (err) {
+      if (err instanceof NewsletterAlreadyUnsubscribedError) {
+        setStep("already-unsubscribed");
+      } else {
+        setStep("error");
+      }
     }
   };
 

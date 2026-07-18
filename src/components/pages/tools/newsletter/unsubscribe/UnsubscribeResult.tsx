@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import { Loader2, CheckCircle2, AlertCircle, Info } from "lucide-react";
 
-type UnsubscribeStatus = "loading" | "done" | "error";
+type UnsubscribeStatus = "loading" | "done" | "already-unsubscribed" | "error";
 
 interface UnsubscribeResultProps {
   status: UnsubscribeStatus;
@@ -13,6 +13,26 @@ export function UnsubscribeResult({ status }: UnsubscribeResultProps) {
       <div className="flex flex-col items-center gap-3 rounded-2xl border border-border bg-card py-16 text-center text-sm text-muted-foreground">
         <Loader2 size={24} className="animate-spin" />
         Désinscription en cours…
+      </div>
+    );
+  }
+
+  if (status === "already-unsubscribed") {
+    return (
+      <div className="flex flex-col items-center gap-3 rounded-2xl border border-border bg-card py-16 text-center">
+        <div className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
+          <Info size={28} />
+        </div>
+        <h2 className="font-display text-xl font-bold">Déjà désinscrit(e)</h2>
+        <p className="max-w-sm text-sm text-muted-foreground">
+          Cette adresse n'est plus inscrite à notre newsletter. Vous pouvez vous réinscrire à tout moment.
+        </p>
+        <Link
+          to="/tools/newsletter"
+          className="mt-2 cursor-pointer rounded-full border border-border px-5 py-2.5 text-sm font-semibold hover:bg-muted"
+        >
+          Retour à la newsletter
+        </Link>
       </div>
     );
   }
