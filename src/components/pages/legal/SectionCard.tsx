@@ -14,13 +14,13 @@ export function LegalSectionCard({ section, setRef }: LegalSectionCardProps) {
 
   const handleCopyLink = (e: React.MouseEvent) => {
     e.preventDefault();
-    
+
     // Génère l'URL absolue actuelle avec le hash de la section
     const sectionUrl = buildShareUrl(`${window.location.pathname}#${section.id}`);
-    
+
     // Met à jour l'URL du navigateur de façon visible pour l'utilisateur
     window.history.pushState(null, "", `#${section.id}`);
-    
+
     // Copie dans le presse-papiers
     navigator.clipboard.writeText(sectionUrl).then(() => {
       setCopied(true);
@@ -75,7 +75,7 @@ export function LegalSectionCard({ section, setRef }: LegalSectionCardProps) {
               )}
             </button>
           </div>
-          
+
           <div className="prose-article mt-3 text-sm leading-relaxed text-foreground/80">
             {section.content}
           </div>
