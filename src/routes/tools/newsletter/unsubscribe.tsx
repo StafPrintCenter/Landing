@@ -4,7 +4,7 @@ import { z } from "zod";
 import { AlertCircle } from "lucide-react";
 import { SiteShell } from "@/components/site/SiteShell";
 import { SITE } from "@/data/site";
-import { buildUnsubscribeBackendUrl } from "@/lib/newsletter-links";
+import { unsubscribeNewsletter } from "@/stores/useNewsletterStore";
 import { UnsubscribeConfirm, UnsubscribeResult } from "@/components/pages/tools/newsletter/unsubscribe";
 
 const unsubscribeSearchSchema = z.object({
@@ -31,10 +31,7 @@ function UnsubscribePage() {
   const handleConfirm = async () => {
     setStep("loading");
     try {
-      // Requête déclenchée en arrière-plan pour appliquer l'effet de bord côté
-      // backend (marquer désinscrit). La page HTML renvoyée n'est pas affichée :
-      // notre propre confirmation stylée prend le relais ci-dessous.
-      await fetch(buildUnsubscribeBackendUrl(token), { mode: "cors" });
+      await unsubscribeNewsletter(token);
       setStep("done");
     } catch {
       setStep("error");
