@@ -28,7 +28,7 @@ function ReviewPage() {
 
   return (
     <SiteShell>
-      <section className="container-x max-w-2xl py-16">
+      <section className="container-x max-w-5xl py-16">
         {isLoading ? (
           <div className="flex flex-col items-center gap-3 py-16 text-center text-sm text-muted-foreground">
             <Loader2 size={24} className="animate-spin" />
