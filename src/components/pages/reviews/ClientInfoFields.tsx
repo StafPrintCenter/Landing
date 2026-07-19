@@ -1,4 +1,5 @@
 import { SITE } from "@/data/site";
+import { Link } from "@tanstack/react-router";
 
 interface ClientInfoFieldsProps {
   clientName: string;
@@ -55,7 +56,17 @@ export function ClientInfoFields({
             onChange={(e) => onAllowPublicationChange(e.target.checked)}
             className="mt-0.5 cursor-pointer"
           />
-          <span>J'accepte que mon avis soit publié publiquement sur le site {SITE.name}.</span>
+          <span>
+            J'accepte la{" "}
+            <Link
+              to="/legal/mentions"
+              onClick={(e) => e.stopPropagation()}
+              className="text-primary underline transition-colors hover:text-primary/80"
+            >
+              politique de confidentialité
+            </Link>{" "}
+            de {SITE.name}. <span className="text-destructive">*</span>
+          </span>
         </label>
 
         <label className="flex items-start gap-2 text-xs text-foreground/70 cursor-pointer">
