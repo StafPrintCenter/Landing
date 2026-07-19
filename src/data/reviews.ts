@@ -52,6 +52,8 @@ export type APIReviewFormPublic = {
   questions: APIReviewQuestion[];
 };
 
+export type ReviewInvitationStatus = "pending" | "opened" | "completed" | "expired" | "revoked";
+
 /** Valeur de réponse selon le type de question */
 export type ReviewAnswerValue = string | number | boolean | string[] | File | null;
 
