@@ -1,6 +1,6 @@
 import type { APIReviewQuestion, ReviewAnswers } from "@/data/reviews";
 
-export function validateAnswers(questions: APIReviewQuestion[], answers: ReviewAnswers): Record<string, string> {
+export function validateQuestionAnswers(questions: APIReviewQuestion[], answers: ReviewAnswers): Record<string, string> {
   const errors: Record<string, string> = {};
 
   for (const q of questions) {
@@ -39,5 +39,13 @@ export function validateAnswers(questions: APIReviewQuestion[], answers: ReviewA
     }
   }
 
+  return errors;
+}
+
+export function validateClientInfo(clientName: string, clientEmail: string, privacyAccepted: boolean): Record<string, string> {
+  const errors: Record<string, string> = {};
+  if (!clientName.trim()) errors.clientName = "Votre nom est requis.";
+  if (!clientEmail.trim() || !/.+@.+\..+/.test(clientEmail)) errors.clientEmail = "Adresse email invalide.";
+  if (!privacyAccepted) errors.privacyAccepted = "Vous devez accepter la politique de confidentialité.";
   return errors;
 }
