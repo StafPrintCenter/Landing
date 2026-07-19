@@ -110,7 +110,7 @@ export function ShareModal({ url, title, text, isOpen, onClose, shortlinkCategor
         </div>
       </BaseModal >
 
-      <QrCodeAutoPanel alias={alias} />
+      {isOpen && <QrCodeAutoPanel alias={alias} />}
     </>
   );
 }
