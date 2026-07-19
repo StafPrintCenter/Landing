@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Loader2, AlertCircle, Send } from "lucide-react";
-import { QuestionRenderer } from "./QuestionRenderer";
-import { ClientInfoFields } from "./ClientInfoFields";
+import { QuestionRenderer, ClientInfoFields } from "./";
 import { validateQuestionAnswers, validateClientInfo } from "./validate-answers";
 import { ReviewSubmittedState } from "./states/SubmittedState";
 import { submitReviewResponse, editReviewResponse } from "@/stores/useReviewsStore";
