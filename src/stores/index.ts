@@ -8,6 +8,7 @@ export { useFormationsStore } from "./useFormationsStore";
 export { subscribeNewsletter, fetchNewsletterPreferences, updateNewsletterPreferences } from "./useNewsletterStore";
 export { useProjectsStore } from "./useProjectsStore";
 export { createReport } from "./useReportsStore";
+export { fetchReviewByToken, submitReviewResponse } from "./useReviewsStore";
 export { useServicesStore } from "./useServicesStore";
 export { useStatsStore } from "./useStatsStore";
 export { useTestimonialsStore } from "./useTestimonialsStore";
