@@ -7,7 +7,7 @@ import { NewsletterPromptModal } from "@/components/modal/NewsletterPromptModal"
 import { useNewsletterPrompt } from "@/hooks/use-newsletter-prompt";
 
 export function SiteShell({ children }: { children: ReactNode }) {
-  const { isOpen, close, handleSubscribed, handleRemindLater, handleNeverAgain } = useNewsletterPrompt();
+  const { isOpen, close, handleRemindLater, handleNeverAgain } = useNewsletterPrompt();
 
   return (
     <div className="min-h-screen flex flex-col">
