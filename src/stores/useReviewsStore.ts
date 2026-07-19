@@ -17,27 +17,82 @@ export async function fetchReviewByToken(token: string): Promise<APIReviewFormPu
 }
 
 /**
- * ⚠️ Endpoint et format de soumission supposés — non confirmés côté backend.
- * À ajuster dès que la vraie spec de POST /public/reviews/{token}/submit est connue.
+ * Convertit les réponses (avec fichiers éventuels) en un objet JSON simple,
+ * conforme au format attendu par le backend : answers = '{"qid": valeur, ...}'.
+ * Les fichiers sont exclus de ce JSON et envoyés séparément en multipart.
  */
-export async function submitReviewResponse(token: string, answers: ReviewAnswers): Promise<void> {
-  const formData = new FormData();
+function buildAnswersPayload(answers: ReviewAnswers): { json: Record<string, unknown>; files: Record<string, File> } {
+  const json: Record<string, unknown> = {};
+  const files: Record<string, File> = {};
 
   for (const [questionId, value] of Object.entries(answers)) {
-    if (value === null || value === undefined) continue;
-
+    if (value === null || value === undefined || value === "") continue;
     if (value instanceof File) {
-      formData.append(`answers[${questionId}]`, value);
-    } else if (Array.isArray(value)) {
-      value.forEach((v) => formData.append(`answers[${questionId}][]`, v));
+      files[questionId] = value;
     } else {
-      formData.append(`answers[${questionId}]`, String(value));
+      json[questionId] = value;
     }
   }
 
-  const url = resolveApiUrl(`/api/public/reviews/${token}/submit`);
+  return { json, files };
+}
+
+export interface SubmitReviewParams {
+  clientName: string;
+  clientEmail: string;
+  answers: ReviewAnswers;
+  allowPublication: boolean;
+  privacyAccepted: boolean;
+}
+
+export async function submitReviewResponse(token: string, params: SubmitReviewParams): Promise<void> {
+  const { json, files } = buildAnswersPayload(params.answers);
+
+  const formData = new FormData();
+  formData.append("client_name", params.clientName);
+  formData.append("client_email", params.clientEmail);
+  formData.append("answers", JSON.stringify(json));
+  formData.append("allow_publication", params.allowPublication ? "true" : "false");
+  formData.append("privacy_accepted", params.privacyAccepted ? "true" : "false");
+
+  // ⚠️ Le curl fourni ne montre pas comment les fichiers s'intègrent au JSON "answers" —
+  // supposition : chaque fichier est envoyé sous une clé distincte answers_files[question_id],
+  // à ajuster dès que le vrai contrat de l'API pour les questions de type "file" est confirmé.
+  for (const [questionId, file] of Object.entries(files)) {
+    formData.append(`answers_files[${questionId}]`, file);
+  }
+
+  const url = resolveApiUrl(`/api/public/reviews/${token}`);
   const response = await fetch(url, { method: "POST", body: formData });
   if (!response.ok) {
     throw new ReviewApiError("Erreur lors de l'envoi de votre avis");
+  }
+}
+
+export interface EditReviewParams {
+  answers: ReviewAnswers;
+  allowPublication: boolean;
+}
+
+/**
+ * Modification d'une réponse déjà soumise — uniquement possible si le formulaire
+ * a allowResponseEdit=true. Contrairement à la soumission initiale, seuls
+ * "answers" et "allow_publication" sont envoyés (pas client_name/email/privacy_accepted).
+ */
+export async function editReviewResponse(token: string, params: EditReviewParams): Promise<void> {
+  const { json, files } = buildAnswersPayload(params.answers);
+
+  const formData = new FormData();
+  formData.append("answers", JSON.stringify(json));
+  formData.append("allow_publication", params.allowPublication ? "true" : "false");
+
+  for (const [questionId, file] of Object.entries(files)) {
+    formData.append(`answers_files[${questionId}]`, file);
+  }
+
+  const url = resolveApiUrl(`/api/public/reviews/${token}/response`);
+  const response = await fetch(url, { method: "PUT", body: formData });
+  if (!response.ok) {
+    throw new ReviewApiError("Erreur lors de la mise à jour de votre avis");
   }
 }
