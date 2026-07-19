@@ -27,6 +27,7 @@ import { Route as TestsDevisRouteImport } from './routes/tests/devis'
 import { Route as TestsCalendarRouteImport } from './routes/tests/calendar'
 import { Route as TestsAffiliationRouteImport } from './routes/tests/affiliation'
 import { Route as ServicesSlugRouteImport } from './routes/services/$slug'
+import { Route as ReviewsTokenRouteImport } from './routes/reviews/$token'
 import { Route as LegalPrivacyRouteImport } from './routes/legal/privacy'
 import { Route as LegalMentionsRouteImport } from './routes/legal/mentions'
 import { Route as LegalCgvRouteImport } from './routes/legal/cgv'
@@ -125,6 +126,11 @@ const ServicesSlugRoute = ServicesSlugRouteImport.update({
   path: '/services/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReviewsTokenRoute = ReviewsTokenRouteImport.update({
+  id: '/reviews/$token',
+  path: '/reviews/$token',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LegalPrivacyRoute = LegalPrivacyRouteImport.update({
   id: '/legal/privacy',
   path: '/legal/privacy',
@@ -171,6 +177,7 @@ export interface FileRoutesByFullPath {
   '/legal/cgv': typeof LegalCgvRoute
   '/legal/mentions': typeof LegalMentionsRoute
   '/legal/privacy': typeof LegalPrivacyRoute
+  '/reviews/$token': typeof ReviewsTokenRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/tests/affiliation': typeof TestsAffiliationRoute
   '/tests/calendar': typeof TestsCalendarRoute
@@ -198,6 +205,7 @@ export interface FileRoutesByTo {
   '/legal/cgv': typeof LegalCgvRoute
   '/legal/mentions': typeof LegalMentionsRoute
   '/legal/privacy': typeof LegalPrivacyRoute
+  '/reviews/$token': typeof ReviewsTokenRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/tests/affiliation': typeof TestsAffiliationRoute
   '/tests/calendar': typeof TestsCalendarRoute
@@ -226,6 +234,7 @@ export interface FileRoutesById {
   '/legal/cgv': typeof LegalCgvRoute
   '/legal/mentions': typeof LegalMentionsRoute
   '/legal/privacy': typeof LegalPrivacyRoute
+  '/reviews/$token': typeof ReviewsTokenRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/tests/affiliation': typeof TestsAffiliationRoute
   '/tests/calendar': typeof TestsCalendarRoute
@@ -255,6 +264,7 @@ export interface FileRouteTypes {
     | '/legal/cgv'
     | '/legal/mentions'
     | '/legal/privacy'
+    | '/reviews/$token'
     | '/services/$slug'
     | '/tests/affiliation'
     | '/tests/calendar'
@@ -282,6 +292,7 @@ export interface FileRouteTypes {
     | '/legal/cgv'
     | '/legal/mentions'
     | '/legal/privacy'
+    | '/reviews/$token'
     | '/services/$slug'
     | '/tests/affiliation'
     | '/tests/calendar'
@@ -309,6 +320,7 @@ export interface FileRouteTypes {
     | '/legal/cgv'
     | '/legal/mentions'
     | '/legal/privacy'
+    | '/reviews/$token'
     | '/services/$slug'
     | '/tests/affiliation'
     | '/tests/calendar'
@@ -337,6 +349,7 @@ export interface RootRouteChildren {
   LegalCgvRoute: typeof LegalCgvRoute
   LegalMentionsRoute: typeof LegalMentionsRoute
   LegalPrivacyRoute: typeof LegalPrivacyRoute
+  ReviewsTokenRoute: typeof ReviewsTokenRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
   TestsAffiliationRoute: typeof TestsAffiliationRoute
   TestsCalendarRoute: typeof TestsCalendarRoute
@@ -485,6 +498,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reviews/$token': {
+      id: '/reviews/$token'
+      path: '/reviews/$token'
+      fullPath: '/reviews/$token'
+      preLoaderRoute: typeof ReviewsTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/legal/privacy': {
       id: '/legal/privacy'
       path: '/legal/privacy'
@@ -545,6 +565,7 @@ const rootRouteChildren: RootRouteChildren = {
   LegalCgvRoute: LegalCgvRoute,
   LegalMentionsRoute: LegalMentionsRoute,
   LegalPrivacyRoute: LegalPrivacyRoute,
+  ReviewsTokenRoute: ReviewsTokenRoute,
   ServicesSlugRoute: ServicesSlugRoute,
   TestsAffiliationRoute: TestsAffiliationRoute,
   TestsCalendarRoute: TestsCalendarRoute,
