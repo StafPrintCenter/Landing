@@ -9,8 +9,7 @@ export function ReviewNotFoundState() {
       </div>
       <h2 className="font-display text-xl font-bold">Lien invalide ou expiré</h2>
       <p className="max-w-sm text-sm text-muted-foreground">
-        Ce lien d'invitation à donner votre avis n'est plus valide. Contactez STAF PRINT CENTER si vous pensez
-        qu'il s'agit d'une erreur.
+        Ce lien d'invitation à donner votre avis n'est plus valide. Contactez nous si vous pensez qu'il s'agit d'une erreur.
       </p>
       <Link to="/" className="mt-2 rounded-full border border-border px-5 py-2.5 text-sm font-semibold hover:bg-muted">
         Retour à l'accueil
