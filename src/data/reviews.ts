@@ -41,8 +41,7 @@ export type APIReviewQuestion = {
 };
 
 /**
- * Type aligné sur la réponse de GET /public/reviews/{token} —
- * le formulaire résolu depuis le token d'invitation, prêt à être rempli.
+ * Type aligné sur la réponse de GET /public/reviews/{token}
  */
 export type APIReviewFormPublic = {
   id: string;
