@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import { Toaster } from "sonner";
-import { Nav, Footer } from "./";
-import { CookieConsent, FloatingHelpMenu } from "./";
+import { Nav, Footer, CookieConsent, FloatingHelpMenu } from "./";
 import { NewsletterPromptModal } from "@/components/modal/NewsletterPromptModal";
 import { useNewsletterPrompt } from "@/hooks/use-newsletter-prompt";
 
