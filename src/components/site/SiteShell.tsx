@@ -22,7 +22,6 @@ export function SiteShell({ children }: { children: ReactNode }) {
       <NewsletterPromptModal
         isOpen={isOpen}
         onClose={close}
-        onSubscribed={handleSubscribed}
         onRemindLater={handleRemindLater}
         onNeverAgain={handleNeverAgain}
       />
