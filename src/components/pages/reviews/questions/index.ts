@@ -4,4 +4,5 @@ export * from "./ContactQuestion";
 export * from "./DateQuestion";
 export * from "./FileQuestion";
 export * from "./NumberQuestion";
+export * from "./RatingQuestion";
 export * from "./TextQuestion";
