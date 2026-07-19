@@ -56,17 +56,7 @@ export function ClientInfoFields({
             onChange={(e) => onAllowPublicationChange(e.target.checked)}
             className="mt-0.5 cursor-pointer"
           />
-          <span>
-            J'accepte la{" "}
-            <Link
-              to="/legal/mentions"
-              onClick={(e) => e.stopPropagation()}
-              className="text-primary underline transition-colors hover:text-primary/80"
-            >
-              politique de confidentialité
-            </Link>{" "}
-            de {SITE.name}. <span className="text-destructive">*</span>
-          </span>
+          <span>J'accepte que mon avis soit publié publiquement sur le site {SITE.name}.</span>
         </label>
 
         <label className="flex items-start gap-2 text-xs text-foreground/70 cursor-pointer">
@@ -76,7 +66,18 @@ export function ClientInfoFields({
             onChange={(e) => onPrivacyAcceptedChange(e.target.checked)}
             className="mt-0.5 cursor-pointer"
           />
-          <span>J'accepte la politique de confidentialité de {SITE.name}. <span className="text-destructive">*</span></span>
+          <span>
+            J'accepte la{" "}
+            <Link
+              to="/legal/mentions"
+              onClick={(e) => e.stopPropagation()}
+              className="text-primary hover:underline"
+            >
+              politique de confidentialité
+            </Link>{" "}
+            de {SITE.name}. <span className="text-destructive">*</span>
+          </span>
+
         </label>
         {errors.privacyAccepted && <p className="text-xs text-destructive">{errors.privacyAccepted}</p>}
       </div>
