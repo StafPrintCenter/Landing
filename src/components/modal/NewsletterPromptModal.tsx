@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 import { Link } from "@tanstack/react-router";
 import { Mail, ArrowRight, Clock, X } from "lucide-react";
+import { BaseModal } from "./BaseModal";
 
 interface NewsletterPromptModalProps {
   isOpen: boolean;
@@ -16,32 +15,9 @@ export function NewsletterPromptModal({
   onRemindLater,
   onNeverAgain,
 }: NewsletterPromptModalProps) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => setMounted(true), []);
-
-  useEffect(() => {
-    if (!isOpen) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-    };
-  }, [isOpen, onClose]);
-
-  if (!isOpen || !mounted) return null;
-
-  return createPortal(
-    <div
-      className="fixed inset-0 z-100 flex items-end justify-center bg-black/60 backdrop-blur-sm md:items-center"
-      onClick={onClose}
-    >
-      <div
-        className="w-full max-w-sm rounded-t-2xl border border-border bg-card p-6 text-center md:rounded-2xl"
-        onClick={(e) => e.stopPropagation()}
-      >
+  return (
+    <BaseModal isOpen={isOpen} onClose={onClose} maxWidthClassName="max-w-sm">
+      <div className="p-6 text-center">
         <div className="flex justify-end">
           <button
             onClick={onClose}
@@ -84,7 +60,6 @@ export function NewsletterPromptModal({
           </button>
         </div>
       </div>
-    </div>,
-    document.body
+    </BaseModal>
   );
 }
