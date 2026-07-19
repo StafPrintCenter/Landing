@@ -75,7 +75,7 @@ export function ReviewForm({ token, form, isEditing = false }: ReviewFormProps) 
     <form onSubmit={handleSubmit} className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:items-start">
       {/* Colonne gauche : identité + consentements */}
       {!isEditing && (
-        <div className="rounded-2xl border border-border bg-card p-6">
+        <div className="rounded-2xl border border-border bg-card p-6 lg:sticky lg:top-24">
           <ClientInfoFields
             clientName={clientName}
             onClientNameChange={setClientName}
