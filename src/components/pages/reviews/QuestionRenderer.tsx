@@ -1,12 +1,14 @@
 import { QuestionField } from "./QuestionField";
-import { TextQuestion } from "./questions/TextQuestion";
-import { ContactQuestion } from "./questions/ContactQuestion";
-import { NumberQuestion } from "./questions/NumberQuestion";
-import { DateQuestion } from "./questions/DateQuestion";
-import { ChoiceQuestion } from "./questions/ChoiceQuestion";
-import { RatingQuestion } from "./questions/RatingQuestion";
-import { BooleanQuestion } from "./questions/BooleanQuestion";
-import { FileQuestion } from "./questions/FileQuestion";
+import {
+  TextQuestion,
+  ContactQuestion,
+  NumberQuestion,
+  DateQuestion,
+  ChoiceQuestion,
+  RatingQuestion,
+  BooleanQuestion,
+  FileQuestion
+} from "./questions";
 import type { APIReviewQuestion, ReviewAnswerValue } from "@/data/reviews";
 
 interface QuestionRendererProps {
