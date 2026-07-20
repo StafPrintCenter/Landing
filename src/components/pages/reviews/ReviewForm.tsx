@@ -87,7 +87,7 @@ export function ReviewForm({
         <div className="rounded-2xl border border-border bg-card p-6 lg:sticky lg:top-24">
           {client.project && (
             <p className="mb-4 text-xs text-muted-foreground">
-              Projet concerné : <span className="font-medium text-foreground">{client.project}</span>
+              Projet : <span className="font-medium text-foreground">{client.project}</span>
             </p>
           )}
           <ClientInfoFields
