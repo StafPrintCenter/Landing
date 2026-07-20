@@ -60,7 +60,6 @@ export type APIReviewClientInfo = {
 
 /**
  * Type aligné sur la réponse réelle de GET /public/reviews/{token} :
- * data = { client, form }
  */
 export type APIReviewInvitationDetails = {
   client: APIReviewClientInfo;
