@@ -17,9 +17,7 @@ export async function fetchReviewByToken(token: string): Promise<APIReviewFormPu
 }
 
 /**
- * Convertit les réponses (avec fichiers éventuels) en un objet JSON simple,
- * conforme au format attendu par le backend : answers = '{"qid": valeur, ...}'.
- * Les fichiers sont exclus de ce JSON et envoyés séparément en multipart.
+ * Convertit les réponses (avec fichiers éventuels) en un objet JSON simple
  */
 function buildAnswersPayload(answers: ReviewAnswers): { json: Record<string, unknown>; files: Record<string, File> } {
   const json: Record<string, unknown> = {};
