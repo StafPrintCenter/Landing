@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Upload, X } from "lucide-react";
+import { useRef, useState } from "react";
+import { Upload, X, FileText } from "lucide-react";
 import type { APIReviewQuestion } from "@/data/reviews";
 
 interface FileQuestionProps {
