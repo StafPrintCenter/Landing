@@ -51,6 +51,22 @@ export type APIReviewFormPublic = {
   questions: APIReviewQuestion[];
 };
 
+/** Infos du client destinataire de l'invitation — pré-remplies, éditables */
+export type APIReviewClientInfo = {
+  name: string;
+  email: string;
+  project: string;
+};
+
+/**
+ * Type aligné sur la réponse réelle de GET /public/reviews/{token} :
+ * data = { client, form }
+ */
+export type APIReviewInvitationDetails = {
+  client: APIReviewClientInfo;
+  form: APIReviewFormPublic;
+};
+
 export type ReviewInvitationStatus = "pending" | "opened" | "completed" | "expired" | "revoked";
 
 /** Valeur de réponse selon le type de question */
