@@ -55,9 +55,6 @@ export async function submitReviewResponse(token: string, params: SubmitReviewPa
   formData.append("allow_publication", params.allowPublication ? "true" : "false");
   formData.append("privacy_accepted", params.privacyAccepted ? "true" : "false");
 
-  // ⚠️ Le curl fourni ne montre pas comment les fichiers s'intègrent au JSON "answers" —
-  // supposition : chaque fichier est envoyé sous une clé distincte answers_files[question_id],
-  // à ajuster dès que le vrai contrat de l'API pour les questions de type "file" est confirmé.
   for (const [questionId, file] of Object.entries(files)) {
     formData.append(`answers_files[${questionId}]`, file);
   }
