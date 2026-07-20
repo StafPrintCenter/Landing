@@ -16,7 +16,14 @@ interface ReviewFormProps {
   existingAllowPublication: boolean;
 }
 
-export function ReviewForm({ token, form, client, isEditing = false }: ReviewFormProps) {
+export function ReviewForm({
+  token,
+  form,
+  client,
+  isEditMode,
+  existingAnswers,
+  existingAllowPublication,
+}: ReviewFormProps) {
   const [clientName, setClientName] = useState(client.name ?? "");
   const [clientEmail, setClientEmail] = useState(client.email ?? "");
   const [allowPublication, setAllowPublication] = useState(false);
