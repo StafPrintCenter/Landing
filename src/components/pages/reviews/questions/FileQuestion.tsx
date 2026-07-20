@@ -9,6 +9,12 @@ interface FileQuestionProps {
   error?: string;
 }
 
+function formatFileSize(bytes: number): string {
+  if (bytes < 1024) return `${bytes} o`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} Ko`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} Mo`;
+}
+
 export function FileQuestion({ question, value, onChange, error: externalError }: FileQuestionProps) {
   const [localError, setLocalError] = useState<string | null>(null);
   const maxSizeKb = question.settings?.max_size_kb;
