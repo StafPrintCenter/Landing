@@ -29,7 +29,7 @@ export function ReviewForm({
   const [allowPublication, setAllowPublication] = useState(isEditMode ? existingAllowPublication : false);
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
 
-  const [answers, setAnswers] = useState<ReviewAnswers>({});
+  const [answers, setAnswers] = useState<ReviewAnswers>(() => (existingAnswers as ReviewAnswers) ?? {});
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
