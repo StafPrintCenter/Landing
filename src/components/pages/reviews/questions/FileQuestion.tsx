@@ -17,6 +17,7 @@ function formatFileSize(bytes: number): string {
 
 export function FileQuestion({ question, value, onChange, error: externalError }: FileQuestionProps) {
   const [localError, setLocalError] = useState<string | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const maxSizeKb = question.settings?.max_size_kb;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
