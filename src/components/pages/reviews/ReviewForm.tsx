@@ -26,7 +26,7 @@ export function ReviewForm({
 }: ReviewFormProps) {
   const [clientName, setClientName] = useState(client.name ?? "");
   const [clientEmail, setClientEmail] = useState(client.email ?? "");
-  const [allowPublication, setAllowPublication] = useState(false);
+  const [allowPublication, setAllowPublication] = useState(isEditMode ? existingAllowPublication : false);
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
 
   const [answers, setAnswers] = useState<ReviewAnswers>({});
