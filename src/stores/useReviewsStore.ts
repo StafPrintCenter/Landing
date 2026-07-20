@@ -1,18 +1,18 @@
 import { resolveApiUrl } from "@/lib/api-url";
-import type { APIReviewFormPublic, ReviewAnswers } from "@/data/reviews";
+import type { APIReviewInvitationDetails, ReviewAnswers } from "@/data/reviews";
 
-type ReviewFormResponse = { data: APIReviewFormPublic };
+type ReviewInvitationResponse = { data: APIReviewInvitationDetails };
 
 export class ReviewApiError extends Error { }
 
-export async function fetchReviewByToken(token: string): Promise<APIReviewFormPublic | null> {
+export async function fetchReviewByToken(token: string): Promise<APIReviewInvitationDetails | null> {
   const url = resolveApiUrl(`/api/public/reviews/${token}`);
   const response = await fetch(url);
   if (response.status === 404 || response.status === 410) return null;
   if (!response.ok) {
     throw new ReviewApiError("Erreur lors de la récupération du formulaire d'avis");
   }
-  const json: ReviewFormResponse = await response.json();
+  const json: ReviewInvitationResponse = await response.json();
   return json.data;
 }
 
