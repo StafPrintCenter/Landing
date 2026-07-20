@@ -44,9 +44,18 @@ export function FileQuestion({ question, value, onChange, error: externalError }
   return (
     <div>
       {value ? (
-        <div className="flex items-center justify-between rounded-lg border border-border bg-muted/40 px-4 py-2.5 text-sm">
-          <span className="truncate">{value.name}</span>
-          <button type="button" onClick={() => onChange(null)} className="ml-2 shrink-0 text-muted-foreground hover:text-destructive cursor-pointer">
+        <div className="flex items-center gap-3 rounded-lg border border-border bg-muted/40 px-4 py-2.5 text-sm">
+          <FileText size={16} className="shrink-0 text-muted-foreground" />
+          <div className="min-w-0 flex-1">
+            <p className="truncate">{value.name}</p>
+            <p className="text-[11px] text-muted-foreground">{formatFileSize(value.size)}</p>
+          </div>
+          <button
+            type="button"
+            onClick={handleRemove}
+            aria-label="Retirer le fichier"
+            className="shrink-0 text-muted-foreground hover:text-destructive cursor-pointer"
+          >
             <X size={16} />
           </button>
         </div>
