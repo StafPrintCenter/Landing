@@ -11,8 +11,9 @@ interface ReviewFormProps {
   token: string;
   form: APIReviewFormPublic;
   client: APIReviewClientInfo;
-  /** true si l'utilisateur a déjà répondu et vient modifier sa réponse (PUT au lieu de POST) */
-  isEditing?: boolean;
+  isEditMode: boolean;
+  existingAnswers: ReviewExistingAnswers | null;
+  existingAllowPublication: boolean;
 }
 
 export function ReviewForm({ token, form, client, isEditing = false }: ReviewFormProps) {
