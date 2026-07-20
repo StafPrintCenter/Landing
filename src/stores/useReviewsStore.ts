@@ -73,8 +73,6 @@ export interface EditReviewParams {
 
 /**
  * Modification d'une réponse déjà soumise — uniquement possible si le formulaire
- * a allowResponseEdit=true. Contrairement à la soumission initiale, seuls
- * "answers" et "allow_publication" sont envoyés (pas client_name/email/privacy_accepted).
  */
 export async function editReviewResponse(token: string, params: EditReviewParams): Promise<void> {
   const { json, files } = buildAnswersPayload(params.answers);
