@@ -4,7 +4,7 @@ import { QuestionRenderer, ClientInfoFields, EditModeBanner } from "./";
 import { validateQuestionAnswers, validateClientInfo } from "./validate-answers";
 import { ReviewSubmittedState } from "./states/SubmittedState";
 import { submitReviewResponse, editReviewResponse } from "@/stores/useReviewsStore";
-import type { APIReviewClientInfo, APIReviewFormPublic, ReviewAnswers, ReviewAnswerValue } from "@/data/reviews";
+import type { APIReviewClientInfo, APIReviewFormPublic, ReviewAnswers, ReviewAnswerValue, ReviewExistingAnswers, } from "@/data/reviews";
 import { SITE } from "@/data/site";
 
 interface ReviewFormProps {
