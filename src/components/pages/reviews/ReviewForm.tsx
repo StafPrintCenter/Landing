@@ -4,19 +4,20 @@ import { QuestionRenderer, ClientInfoFields } from "./";
 import { validateQuestionAnswers, validateClientInfo } from "./validate-answers";
 import { ReviewSubmittedState } from "./states/SubmittedState";
 import { submitReviewResponse, editReviewResponse } from "@/stores/useReviewsStore";
-import type { APIReviewFormPublic, ReviewAnswers, ReviewAnswerValue } from "@/data/reviews";
+import type { APIReviewClientInfo, APIReviewFormPublic, ReviewAnswers, ReviewAnswerValue } from "@/data/reviews";
 import { SITE } from "@/data/site";
 
 interface ReviewFormProps {
   token: string;
   form: APIReviewFormPublic;
+  client: APIReviewClientInfo;
   /** true si l'utilisateur a déjà répondu et vient modifier sa réponse (PUT au lieu de POST) */
   isEditing?: boolean;
 }
 
-export function ReviewForm({ token, form, isEditing = false }: ReviewFormProps) {
-  const [clientName, setClientName] = useState("");
-  const [clientEmail, setClientEmail] = useState("");
+export function ReviewForm({ token, form, client, isEditing = false }: ReviewFormProps) {
+  const [clientName, setClientName] = useState(client.name ?? "");
+  const [clientEmail, setClientEmail] = useState(client.email ?? "");
   const [allowPublication, setAllowPublication] = useState(false);
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
 
@@ -26,7 +27,7 @@ export function ReviewForm({ token, form, isEditing = false }: ReviewFormProps) 
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
 
-  const sortedQuestions = [...form.questions].sort((a, b) => a.order - b.order);
+  const sortedQuestions = [...(form.questions ?? [])].sort((a, b) => a.order - b.order);
 
   const setAnswer = (questionId: string, value: ReviewAnswerValue) => {
     setAnswers((prev) => ({ ...prev, [questionId]: value }));
@@ -75,6 +76,11 @@ export function ReviewForm({ token, form, isEditing = false }: ReviewFormProps) 
       {/* Colonne gauche : identité + consentements */}
       {!isEditing && (
         <div className="rounded-2xl border border-border bg-card p-6 lg:sticky lg:top-24">
+          {client.project && (
+            <p className="mb-4 text-xs text-muted-foreground">
+              Projet concerné : <span className="font-medium text-foreground">{client.project}</span>
+            </p>
+          )}
           <ClientInfoFields
             clientName={clientName}
             onClientNameChange={setClientName}
