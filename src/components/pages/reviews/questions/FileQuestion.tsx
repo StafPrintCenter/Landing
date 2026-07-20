@@ -62,8 +62,8 @@ export function FileQuestion({ question, value, onChange, error: externalError }
       ) : (
         <label className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-dashed border-border bg-background px-4 py-4 text-sm text-muted-foreground hover:bg-muted/40">
           <Upload size={16} />
-          Choisir un fichier
-          <input type="file" onChange={handleChange} className="hidden" />
+          Choisir un fichiedr
+          <input ref={inputRef} type="file" onChange={handleChange} className="hidden" />
         </label>
       )}
       {(localError || externalError) && <p className="mt-1 text-xs text-destructive">{localError ?? externalError}</p>}
