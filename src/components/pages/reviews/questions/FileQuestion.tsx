@@ -27,6 +27,8 @@ export function FileQuestion({ question, value, onChange, error: externalError }
     if (file && maxSizeKb && file.size / 1024 > maxSizeKb) {
       setLocalError(`Fichier trop volumineux (max ${(maxSizeKb / 1024).toFixed(1)} Mo).`);
       onChange(null);
+      // Réinitialise l'input pour permettre de resélectionner un autre fichier immédiatement
+      if (inputRef.current) inputRef.current.value = "";
       return;
     }
 
