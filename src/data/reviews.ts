@@ -59,11 +59,21 @@ export type APIReviewClientInfo = {
 };
 
 /**
+ * Valeurs de réponses déjà soumises — mêmes clés que question.id, mais toujours
+ */
+export type ReviewExistingAnswers = Record<string, string | number | boolean | string[] | null>;
+
+/**
  * Type aligné sur la réponse réelle de GET /public/reviews/{token} :
  */
 export type APIReviewInvitationDetails = {
   client: APIReviewClientInfo;
   form: APIReviewFormPublic;
+  /** true si une réponse a déjà été soumise ET que le formulaire autorise sa modification */
+  isEditMode: boolean;
+  /** Réponses précédemment soumises, à pré-remplir si isEditMode est true */
+  existingAnswers: ReviewExistingAnswers | null;
+  existingAllowPublication: boolean;
 };
 
 export type ReviewInvitationStatus = "pending" | "opened" | "completed" | "expired" | "revoked";
