@@ -38,8 +38,6 @@ export function FileQuestion({ question, value, onChange, error: externalError }
   const handleRemove = () => {
     onChange(null);
     setLocalError(null);
-    // Sans ce reset, sélectionner à nouveau EXACTEMENT le même fichier ne redéclenche
-    // pas l'événement "change" du navigateur (la valeur de l'input n'a pas changé).
     if (inputRef.current) inputRef.current.value = "";
   };
 
