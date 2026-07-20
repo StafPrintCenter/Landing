@@ -40,7 +40,14 @@ function ReviewPage() {
           <>
             <ReviewHeader title={invitation.form.title} description={invitation.form.description} />
             <div className="mt-10">
-              <ReviewForm token={token} form={invitation.form} client={invitation.client} />
+              <ReviewForm
+                token={token}
+                form={invitation.form}
+                client={invitation.client}
+                isEditMode={invitation.isEditMode}
+                existingAnswers={invitation.existingAnswers}
+                existingAllowPublication={invitation.existingAllowPublication}
+              />
             </div>
           </>
         )}
