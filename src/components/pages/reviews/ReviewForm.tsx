@@ -28,7 +28,6 @@ export function ReviewForm({
   const [clientEmail, setClientEmail] = useState(client.email ?? "");
   const [allowPublication, setAllowPublication] = useState(isEditMode ? existingAllowPublication : false);
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
-
   const [answers, setAnswers] = useState<ReviewAnswers>(() => (existingAnswers as ReviewAnswers) ?? {});
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -52,7 +51,7 @@ export function ReviewForm({
     setSubmitError(null);
 
     const questionErrors = validateQuestionAnswers(sortedQuestions, answers);
-    const clientErrors = isEditing ? {} : validateClientInfo(clientName, clientEmail, privacyAccepted);
+    const clientErrors = isEditMode ? {} : validateClientInfo(clientName, clientEmail, privacyAccepted);
     const allErrors = { ...questionErrors, ...clientErrors };
 
     if (Object.keys(allErrors).length > 0) {
@@ -62,7 +61,7 @@ export function ReviewForm({
 
     setIsSubmitting(true);
     try {
-      if (isEditing) {
+      if (isEditMode) {
         await editReviewResponse(token, { answers, allowPublication });
       } else {
         await submitReviewResponse(token, { clientName, clientEmail, answers, allowPublication, privacyAccepted });
@@ -80,9 +79,11 @@ export function ReviewForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:items-start">
-      {/* Colonne gauche : identité + consentements */}
-      {!isEditing && (
+    <form onSubmit={handleSubmit}>
+      {isEditMode && <EditModeBanner />}
+
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:items-start">
+        {/* Colonne gauche : identité + consentements */}
         <div className="rounded-2xl border border-border bg-card p-6 lg:sticky lg:top-24">
           {client.project && (
             <p className="mb-4 text-xs text-muted-foreground">
@@ -99,56 +100,45 @@ export function ReviewForm({
             privacyAccepted={privacyAccepted}
             onPrivacyAcceptedChange={setPrivacyAccepted}
             errors={errors}
+            readOnlyIdentity={isEditMode}
           />
         </div>
-      )}
 
-      {/* Colonne droite : questions du formulaire */}
-      <div className={`space-y-6 rounded-2xl border border-border bg-card p-6 md:p-8 ${isEditing ? "lg:col-span-2" : ""}`}>
-        {isEditing && (
-          <label className="flex items-start gap-2 border-b border-border pb-4 text-xs text-foreground/70 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={allowPublication}
-              onChange={(e) => setAllowPublication(e.target.checked)}
-              className="mt-0.5 cursor-pointer"
+        {/* Colonne droite : questions du formulaire */}
+        <div className="space-y-6 rounded-2xl border border-border bg-card p-6 md:p-8">
+          {sortedQuestions.map((q) => (
+            <QuestionRenderer
+              key={q.id}
+              question={q}
+              value={answers[q.id] ?? null}
+              onChange={(value) => setAnswer(q.id, value)}
+              error={errors[q.id]}
             />
-            <span>J'accepte que mon avis soit publié publiquement sur le site {SITE.name}.</span>
-          </label>
-        )}
+          ))}
 
-        {sortedQuestions.map((q) => (
-          <QuestionRenderer
-            key={q.id}
-            question={q}
-            value={answers[q.id] ?? null}
-            onChange={(value) => setAnswer(q.id, value)}
-            error={errors[q.id]}
-          />
-        ))}
-
-        {submitError && (
-          <div className="flex items-start gap-2 rounded-lg bg-destructive/10 px-3 py-2.5 text-xs text-destructive">
-            <AlertCircle size={14} className="mt-0.5 shrink-0" />
-            <p>{submitError}</p>
-          </div>
-        )}
-
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:opacity-90 disabled:opacity-60 cursor-pointer"
-        >
-          {isSubmitting ? (
-            <>
-              <Loader2 size={16} className="animate-spin" /> Envoi…
-            </>
-          ) : (
-            <>
-              <Send size={16} /> {isEditing ? "Mettre à jour mon avis" : "Envoyer mon avis"}
-            </>
+          {submitError && (
+            <div className="flex items-start gap-2 rounded-lg bg-destructive/10 px-3 py-2.5 text-xs text-destructive">
+              <AlertCircle size={14} className="mt-0.5 shrink-0" />
+              <p>{submitError}</p>
+            </div>
           )}
-        </button>
+
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:opacity-90 disabled:opacity-60 cursor-pointer"
+          >
+            {isSubmitting ? (
+              <>
+                <Loader2 size={16} className="animate-spin" /> Envoi…
+              </>
+            ) : (
+              <>
+                <Send size={16} /> {isEditMode ? "Mettre à jour mon avis" : "Envoyer mon avis"}
+              </>
+            )}
+          </button>
+        </div>
       </div>
     </form>
   );
