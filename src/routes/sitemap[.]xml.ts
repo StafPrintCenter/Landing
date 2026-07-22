@@ -20,7 +20,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/", changefreq: "weekly", priority: "1.0" },
           { path: "/services", changefreq: "weekly", priority: "0.8" },
           { path: "/projects", changefreq: "weekly", priority: "0.8" },
-          { path: "/training", changefreq: "weekly", priority: "0.8" },
+          { path: "/trainings", changefreq: "weekly", priority: "0.8" },
           { path: "/articles", changefreq: "weekly", priority: "0.7" },
           { path: "/legal/mentions", changefreq: "yearly", priority: "0.2" },
           { path: "/legal/cgv", changefreq: "yearly", priority: "0.2" },
@@ -38,7 +38,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           entries.push({ path: `/services/${s.slug}`, changefreq: "monthly", priority: "0.7" });
         }
         for (const f of formationsRes.data) {
-          entries.push({ path: `/training/${f.id}`, changefreq: "monthly", priority: "0.7" });
+          entries.push({ path: `/trainings/${f.id}`, changefreq: "monthly", priority: "0.7" });
         }
         for (const a of articlesRes.data) {
           entries.push({ path: `/articles/${a.slug}`, changefreq: "monthly", priority: "0.6" });
