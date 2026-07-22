@@ -66,7 +66,7 @@ export function FormationsPreview() {
                 {/* ── Boutons ── */}
                 <div className="mt-6 grid grid-cols-2 gap-2.5 border-t border-border/60 pt-4">
                   <Link
-                    to="/training/$id"
+                    to="/trainings/$id"
                     params={{ id: f.id }}
                     className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-border bg-card px-3 py-2.5 text-xs font-semibold text-foreground transition hover:bg-muted"
                   >
@@ -86,7 +86,7 @@ export function FormationsPreview() {
         </div>
 
         <div className="mt-10 text-center">
-          <Link to="/training"
+          <Link to="/trainings"
             search={{ theme: "Tout", sortBy: "default", sortDir: "asc", query: "", page: 1, perPage: 9 }}
             className="inline-flex items-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-secondary-foreground transition hover:bg-secondary/90"
           >
