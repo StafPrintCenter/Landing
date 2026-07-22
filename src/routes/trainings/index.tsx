@@ -128,6 +128,7 @@ function FormationsPage() {
         )}
       </section>
 
+      {/* FAQ intégrant le CTA sur desktop */}
       <FormationHomeFAQ />
 
       {/* Tiroir de filtres mobile */}
