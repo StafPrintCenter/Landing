@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { Toaster } from "sonner";
 import { Nav, Footer, CookieConsent, FloatingHelpMenu } from "./";
 import { NewsletterPromptModal } from "@/components/modal/NewsletterPromptModal";
 import { useNewsletterPrompt } from "@/hooks/use-newsletter-prompt";
@@ -15,7 +14,6 @@ export function SiteShell({ children }: { children: ReactNode }) {
 
       <FloatingHelpMenu />
       <CookieConsent />
-      <Toaster position="bottom-left" richColors closeButton />
 
       <NewsletterPromptModal
         isOpen={isOpen}
