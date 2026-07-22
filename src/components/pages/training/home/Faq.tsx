@@ -13,7 +13,7 @@ export function FormationHomeFAQ() {
     <section className="bg-muted/40 border-t border-border/40">
       <div className="container-x py-20">
         <Reveal>
-          <h2 className="font-display text-3xl font-bold md:text-4xl">Questions & Sur-mesure</h2>
+          <h2 className="font-display text-3xl font-bold md:text-4xl">Questions courantes</h2>
           <p className="text-sm text-muted-foreground mt-1">Tout ce que vous devez savoir avant de nous rejoindre.</p>
         </Reveal>
 
