@@ -12,14 +12,14 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as TrainingIndexRouteImport } from './routes/training/index'
+import { Route as TrainingsIndexRouteImport } from './routes/trainings/index'
 import { Route as ToolsIndexRouteImport } from './routes/tools/index'
 import { Route as TestsIndexRouteImport } from './routes/tests/index'
 import { Route as ServicesIndexRouteImport } from './routes/services/index'
 import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
 import { Route as FaqsIndexRouteImport } from './routes/faqs/index'
 import { Route as ArticlesIndexRouteImport } from './routes/articles/index'
-import { Route as TrainingIdRouteImport } from './routes/training/$id'
+import { Route as TrainingsIdRouteImport } from './routes/trainings/$id'
 import { Route as ToolsLookupRouteImport } from './routes/tools/lookup'
 import { Route as ToolsAppointmentRouteImport } from './routes/tools/appointment'
 import { Route as TestsRessourcesRouteImport } from './routes/tests/ressources'
@@ -51,9 +51,9 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TrainingIndexRoute = TrainingIndexRouteImport.update({
-  id: '/training/',
-  path: '/training/',
+const TrainingsIndexRoute = TrainingsIndexRouteImport.update({
+  id: '/trainings/',
+  path: '/trainings/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ToolsIndexRoute = ToolsIndexRouteImport.update({
@@ -86,9 +86,9 @@ const ArticlesIndexRoute = ArticlesIndexRouteImport.update({
   path: '/articles/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TrainingIdRoute = TrainingIdRouteImport.update({
-  id: '/training/$id',
-  path: '/training/$id',
+const TrainingsIdRoute = TrainingsIdRouteImport.update({
+  id: '/trainings/$id',
+  path: '/trainings/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ToolsLookupRoute = ToolsLookupRouteImport.update({
@@ -185,14 +185,14 @@ export interface FileRoutesByFullPath {
   '/tests/ressources': typeof TestsRessourcesRoute
   '/tools/appointment': typeof ToolsAppointmentRoute
   '/tools/lookup': typeof ToolsLookupRoute
-  '/training/$id': typeof TrainingIdRoute
+  '/trainings/$id': typeof TrainingsIdRoute
   '/articles/': typeof ArticlesIndexRoute
   '/faqs/': typeof FaqsIndexRoute
   '/projects/': typeof ProjectsIndexRoute
   '/services/': typeof ServicesIndexRoute
   '/tests/': typeof TestsIndexRoute
   '/tools/': typeof ToolsIndexRoute
-  '/training/': typeof TrainingIndexRoute
+  '/trainings/': typeof TrainingsIndexRoute
   '/tools/newsletter/preferences': typeof ToolsNewsletterPreferencesRoute
   '/tools/newsletter/unsubscribe': typeof ToolsNewsletterUnsubscribeRoute
   '/tools/newsletter/': typeof ToolsNewsletterIndexRoute
@@ -213,14 +213,14 @@ export interface FileRoutesByTo {
   '/tests/ressources': typeof TestsRessourcesRoute
   '/tools/appointment': typeof ToolsAppointmentRoute
   '/tools/lookup': typeof ToolsLookupRoute
-  '/training/$id': typeof TrainingIdRoute
+  '/trainings/$id': typeof TrainingsIdRoute
   '/articles': typeof ArticlesIndexRoute
   '/faqs': typeof FaqsIndexRoute
   '/projects': typeof ProjectsIndexRoute
   '/services': typeof ServicesIndexRoute
   '/tests': typeof TestsIndexRoute
   '/tools': typeof ToolsIndexRoute
-  '/training': typeof TrainingIndexRoute
+  '/trainings': typeof TrainingsIndexRoute
   '/tools/newsletter/preferences': typeof ToolsNewsletterPreferencesRoute
   '/tools/newsletter/unsubscribe': typeof ToolsNewsletterUnsubscribeRoute
   '/tools/newsletter': typeof ToolsNewsletterIndexRoute
@@ -242,14 +242,14 @@ export interface FileRoutesById {
   '/tests/ressources': typeof TestsRessourcesRoute
   '/tools/appointment': typeof ToolsAppointmentRoute
   '/tools/lookup': typeof ToolsLookupRoute
-  '/training/$id': typeof TrainingIdRoute
+  '/trainings/$id': typeof TrainingsIdRoute
   '/articles/': typeof ArticlesIndexRoute
   '/faqs/': typeof FaqsIndexRoute
   '/projects/': typeof ProjectsIndexRoute
   '/services/': typeof ServicesIndexRoute
   '/tests/': typeof TestsIndexRoute
   '/tools/': typeof ToolsIndexRoute
-  '/training/': typeof TrainingIndexRoute
+  '/trainings/': typeof TrainingsIndexRoute
   '/tools/newsletter/preferences': typeof ToolsNewsletterPreferencesRoute
   '/tools/newsletter/unsubscribe': typeof ToolsNewsletterUnsubscribeRoute
   '/tools/newsletter/': typeof ToolsNewsletterIndexRoute
@@ -272,14 +272,14 @@ export interface FileRouteTypes {
     | '/tests/ressources'
     | '/tools/appointment'
     | '/tools/lookup'
-    | '/training/$id'
+    | '/trainings/$id'
     | '/articles/'
     | '/faqs/'
     | '/projects/'
     | '/services/'
     | '/tests/'
     | '/tools/'
-    | '/training/'
+    | '/trainings/'
     | '/tools/newsletter/preferences'
     | '/tools/newsletter/unsubscribe'
     | '/tools/newsletter/'
@@ -300,14 +300,14 @@ export interface FileRouteTypes {
     | '/tests/ressources'
     | '/tools/appointment'
     | '/tools/lookup'
-    | '/training/$id'
+    | '/trainings/$id'
     | '/articles'
     | '/faqs'
     | '/projects'
     | '/services'
     | '/tests'
     | '/tools'
-    | '/training'
+    | '/trainings'
     | '/tools/newsletter/preferences'
     | '/tools/newsletter/unsubscribe'
     | '/tools/newsletter'
@@ -328,14 +328,14 @@ export interface FileRouteTypes {
     | '/tests/ressources'
     | '/tools/appointment'
     | '/tools/lookup'
-    | '/training/$id'
+    | '/trainings/$id'
     | '/articles/'
     | '/faqs/'
     | '/projects/'
     | '/services/'
     | '/tests/'
     | '/tools/'
-    | '/training/'
+    | '/trainings/'
     | '/tools/newsletter/preferences'
     | '/tools/newsletter/unsubscribe'
     | '/tools/newsletter/'
@@ -357,14 +357,14 @@ export interface RootRouteChildren {
   TestsRessourcesRoute: typeof TestsRessourcesRoute
   ToolsAppointmentRoute: typeof ToolsAppointmentRoute
   ToolsLookupRoute: typeof ToolsLookupRoute
-  TrainingIdRoute: typeof TrainingIdRoute
+  TrainingsIdRoute: typeof TrainingsIdRoute
   ArticlesIndexRoute: typeof ArticlesIndexRoute
   FaqsIndexRoute: typeof FaqsIndexRoute
   ProjectsIndexRoute: typeof ProjectsIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
   TestsIndexRoute: typeof TestsIndexRoute
   ToolsIndexRoute: typeof ToolsIndexRoute
-  TrainingIndexRoute: typeof TrainingIndexRoute
+  TrainingsIndexRoute: typeof TrainingsIndexRoute
   ToolsNewsletterPreferencesRoute: typeof ToolsNewsletterPreferencesRoute
   ToolsNewsletterUnsubscribeRoute: typeof ToolsNewsletterUnsubscribeRoute
   ToolsNewsletterIndexRoute: typeof ToolsNewsletterIndexRoute
@@ -393,11 +393,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/training/': {
-      id: '/training/'
-      path: '/training'
-      fullPath: '/training/'
-      preLoaderRoute: typeof TrainingIndexRouteImport
+    '/trainings/': {
+      id: '/trainings/'
+      path: '/trainings'
+      fullPath: '/trainings/'
+      preLoaderRoute: typeof TrainingsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tools/': {
@@ -442,11 +442,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArticlesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/training/$id': {
-      id: '/training/$id'
-      path: '/training/$id'
-      fullPath: '/training/$id'
-      preLoaderRoute: typeof TrainingIdRouteImport
+    '/trainings/$id': {
+      id: '/trainings/$id'
+      path: '/trainings/$id'
+      fullPath: '/trainings/$id'
+      preLoaderRoute: typeof TrainingsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tools/lookup': {
@@ -573,14 +573,14 @@ const rootRouteChildren: RootRouteChildren = {
   TestsRessourcesRoute: TestsRessourcesRoute,
   ToolsAppointmentRoute: ToolsAppointmentRoute,
   ToolsLookupRoute: ToolsLookupRoute,
-  TrainingIdRoute: TrainingIdRoute,
+  TrainingsIdRoute: TrainingsIdRoute,
   ArticlesIndexRoute: ArticlesIndexRoute,
   FaqsIndexRoute: FaqsIndexRoute,
   ProjectsIndexRoute: ProjectsIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,
   TestsIndexRoute: TestsIndexRoute,
   ToolsIndexRoute: ToolsIndexRoute,
-  TrainingIndexRoute: TrainingIndexRoute,
+  TrainingsIndexRoute: TrainingsIndexRoute,
   ToolsNewsletterPreferencesRoute: ToolsNewsletterPreferencesRoute,
   ToolsNewsletterUnsubscribeRoute: ToolsNewsletterUnsubscribeRoute,
   ToolsNewsletterIndexRoute: ToolsNewsletterIndexRoute,
