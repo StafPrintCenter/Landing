@@ -59,7 +59,7 @@ export function FormationHomeFAQ() {
             )}
           </div>
 
-          {/* CTA Formation sur mesure - Occupe 5 colonnes sur desktop */}
+          {/* CTA Formation sur mesure */}
           <div className="lg:col-span-5 lg:sticky lg:top-24">
             <FormationHomeCta />
           </div>
