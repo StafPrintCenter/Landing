@@ -42,8 +42,8 @@ export const Route = createFileRoute("/trainings/")({
 });
 
 function FormationsPage() {
-  const { theme, sortBy, sortDir, query, page, perPage } = useSearch({ from: "/training/" });
-  const navigate = useNavigate({ from: "/training/" });
+  const { theme, sortBy, sortDir, query, page, perPage } = useSearch({ from: "/trainings/" });
+  const navigate = useNavigate({ from: "/trainings/" });
 
   const { formations: processedList, meta, isLoading: storeLoading } = useFormationsStore({ category: theme, sortBy, sortDir, query, page, perPage, });
 
