@@ -1,9 +1,9 @@
 import { Link } from "@tanstack/react-router";
-import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Twitter } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { SITE, NAV_LINKS, FOOTER_LINKS } from "@/data/site";
 import { useServicesStore } from "@/stores/useServicesStore";
 import logo from "@/assets/logos.json";
-import { WhatsAppIcon } from "./icons/WhatsAppIcon";
+import { WhatsAppIcon, FacebookIcon, InstagramIcon, LinkedinIcon, XIcon } from "./icons";
 
 export function Footer() {
   const { services } = useServicesStore({ perPage: 100 });
@@ -101,10 +101,10 @@ export function Footer() {
 
           {/* ── Liens sociaux ── */}
           <div className="mt-4 flex gap-3">
-            <a href={SITE.socials.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-accent hover:text-accent-foreground"><Facebook size={16} /></a>
-            <a href={SITE.socials.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-accent hover:text-accent-foreground"><Instagram size={16} /></a>
-            <a href={SITE.socials.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-accent hover:text-accent-foreground"><Linkedin size={16} /></a>
-            <a href={SITE.socials.x} target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-accent hover:text-accent-foreground"><Twitter size={16} /></a>
+            <a href={SITE.socials.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-accent hover:text-accent-foreground"><FacebookIcon size={16} /></a>
+            <a href={SITE.socials.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-accent hover:text-accent-foreground"><InstagramIcon size={16} /></a>
+            <a href={SITE.socials.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-accent hover:text-accent-foreground"><LinkedinIcon size={16} /></a>
+            <a href={SITE.socials.x} target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-accent hover:text-accent-foreground"><XIcon size={16} /></a>
           </div>
         </div>
       </div>
