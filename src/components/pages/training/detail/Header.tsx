@@ -20,7 +20,7 @@ export function FormationDetailHeader({ formation: f }: FormationDetailHeaderPro
       <div className="container-x py-12 md:py-16">
         <div className="flex items-center justify-between">
           <Link
-            to="/training"
+            to="/trainings"
             search={{ theme: "Tout", sortBy: "default", sortDir: "asc", query: "", page: 1, perPage: 9 }}
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary"
           >
