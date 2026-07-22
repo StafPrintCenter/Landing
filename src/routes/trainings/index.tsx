@@ -30,7 +30,7 @@ const trainingSearchSchema = z.object({
   perPage: z.number().catch(4).default(4),
 });
 
-export const Route = createFileRoute("/training/")({
+export const Route = createFileRoute("/trainings/")({
   validateSearch: (search) => trainingSearchSchema.parse(search),
   head: () => ({
     meta: [
