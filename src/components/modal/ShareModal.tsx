@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Facebook, Linkedin, Twitter, Share2, Link2, Check, Loader2 } from "lucide-react";
-import { WhatsAppIcon } from "@/components/site/icons/WhatsAppIcon";
+import { Share2, Link2, Check, Loader2 } from "lucide-react";
+import { WhatsAppIcon, FacebookIcon, LinkedinIcon, XIcon } from "@/components/site/icons";
 import { useShortUrl } from "@/hooks/use-short-url";
 import { QrCodeAutoPanel } from "./QrCodeAutoPanel";
 import { BaseModal, ModalHeader } from "./";
@@ -43,9 +43,9 @@ export function ShareModal({ url, title, text, isOpen, onClose, shortlinkCategor
 
   const socials = [
     { name: "WhatsApp", icon: <WhatsAppIcon size={20} />, href: buildWhatsAppShareLink(content), className: "bg-[#25D366] text-white" },
-    { name: "Facebook", icon: <Facebook size={20} />, href: buildFacebookShareLink(content), className: "bg-[#1877F2] text-white" },
-    { name: "LinkedIn", icon: <Linkedin size={20} />, href: buildLinkedInShareLink(content), className: "bg-[#0A66C2] text-white" },
-    { name: "Twitter / X", icon: <Twitter size={20} />, href: buildTwitterShareLink(content), className: "bg-black text-white" },
+    { name: "Facebook", icon: <FacebookIcon size={20} />, href: buildFacebookShareLink(content), className: "bg-[#1877F2] text-white" },
+    { name: "LinkedIn", icon: <LinkedinIcon size={20} />, href: buildLinkedInShareLink(content), className: "bg-[#0A66C2] text-white" },
+    { name: "Twitter / X", icon: <XIcon size={20} />, href: buildTwitterShareLink(content), className: "bg-black text-white" },
   ];
 
   return (
