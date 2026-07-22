@@ -16,7 +16,7 @@ export function FormationDetailRelated({ related }: FormationRelatedProps) {
           {related.map((r) => (
             <Link
               key={r.id}
-              to="/training/$id"
+              to="/trainings/$id"
               params={{ id: r.id }}
               className="group rounded-2xl border border-border bg-card p-6 transition hover:border-primary"
             >
