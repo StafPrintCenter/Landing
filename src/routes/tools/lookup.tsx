@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Search, Loader2, AlertCircle, Mail, Tag, Calendar, MessageSquare, Ticket, RotateCcw } from "lucide-react";
+import { Search, Loader2, AlertCircle, Mail, Tag, Calendar, MessageSquare, Ticket, RotateCcw, UserCheck, FileText } from "lucide-react";
 import { SiteShell } from "@/components/site/SiteShell";
 import { SITE } from "@/data/site";
 import { trackContactRequest } from "@/stores/useContactStore";
@@ -52,6 +52,13 @@ function LookupPage() {
     setState("idle");
     setEmail("");
     setTicketNumber("");
+  };
+
+  const formatDate = (dateStr?: string) => {
+    if (!dateStr) return "";
+    return new Date(dateStr.replace("Z", "")).toLocaleString("fr-FR", {
+      dateStyle: "full", timeStyle: "medium",
+    });
   };
 
   return (
@@ -144,37 +151,66 @@ function LookupPage() {
               </span>
             </div>
 
-            <div className="mt-5 space-y-3 border-t border-border pt-4 text-sm">
+            <div className="mt-5 space-y-3.5 border-t border-border pt-4 text-sm">
               <div className="flex items-start gap-2 text-muted-foreground">
                 <Tag size={15} className="mt-0.5 shrink-0" />
                 <span>
                   Service : <span className="font-medium text-foreground">{result.customService ?? result.service}</span>
                 </span>
               </div>
+
               <div className="flex items-start gap-2 text-muted-foreground">
                 <Calendar size={15} className="mt-0.5 shrink-0" />
                 <span>
-                  Envoyée le{" "}
-                  <span className="font-medium text-foreground">
-                    {new Date(result.createdAt).toLocaleDateString("fr-FR", { day: "2-digit", month: "long", year: "numeric" })}
-                  </span>
+                  Envoyée le : <span className="font-medium text-foreground">{formatDate(result.createdAt)}</span>
                 </span>
               </div>
+
+              {/* Traité par */}
+              {result.handledBy && (
+                <div className="flex items-start gap-2 text-muted-foreground">
+                  <UserCheck size={15} className="mt-0.5 shrink-0" />
+                  <span>
+                    Pris en charge par : <span className="font-medium text-foreground">{result.handledBy}</span>
+                  </span>
+                </div>
+              )}
+
+              {/* Traitée le */}
               {result.handledAt && (
                 <div className="flex items-start gap-2 text-muted-foreground">
                   <Calendar size={15} className="mt-0.5 shrink-0" />
                   <span>
-                    Traitée le{" "}
-                    <span className="font-medium text-foreground">
-                      {new Date(result.handledAt).toLocaleDateString("fr-FR", { day: "2-digit", month: "long", year: "numeric" })}
-                    </span>
+                    Traitée le : <span className="font-medium text-foreground">{formatDate(result.handledAt)}</span>
                   </span>
                 </div>
               )}
-              <div className="flex items-start gap-2 text-muted-foreground">
+
+              {/* Message initial */}
+              <div className="flex items-start gap-2 text-muted-foreground pt-1">
                 <MessageSquare size={15} className="mt-0.5 shrink-0" />
-                <p className="leading-relaxed whitespace-pre-wrap">{result.message}</p>
+                <div>
+                  <span className="text-xs uppercase tracking-wider font-semibold text-muted-foreground/80 block mb-1">Votre message</span>
+                  <p className="leading-relaxed whitespace-pre-wrap rounded-xl bg-muted/40 p-3.5 text-foreground border border-border/60">
+                    {result.message}
+                  </p>
+                </div>
               </div>
+
+              {/* Note / Réponse de l'administration */}
+              {result.adminNotes && (
+                <div className="flex items-start gap-2 text-muted-foreground pt-2">
+                  <FileText size={15} className="mt-0.5 shrink-0 text-primary" />
+                  <div className="w-full">
+                    <span className="text-xs uppercase tracking-wider font-semibold text-primary block mb-1">
+                      Note de l'équipe
+                    </span>
+                    <div className="rounded-xl bg-primary/5 p-3.5 text-foreground border border-primary/20 leading-relaxed whitespace-pre-wrap">
+                      {result.adminNotes}
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
 
             <button
