@@ -18,7 +18,7 @@ export function FormationHomeFAQ() {
         </Reveal>
 
         <div className="mt-8 grid gap-8 lg:grid-cols-12 items-start">
-          {/* FAQ - Occupe 7 colonnes sur desktop */}
+          {/* FAQ */}
           <div className="space-y-3 lg:col-span-7">
             {isLoading ? (
               Array.from({ length: 5 }).map((_, idx) => (
