@@ -1,10 +1,4 @@
-export function FacebookIcon({
-  size = 16,
-  className = "",
-}: {
-  size?: number;
-  className?: string;
-}) {
+export function FacebookIcon({ size = 16, className = "", }: { size?: number; className?: string; }) {
   return (
     <svg
       width={size}
