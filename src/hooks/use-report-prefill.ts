@@ -20,7 +20,7 @@ export function useReportPrefill(): ReportPrefill {
   const isServicesIndex = pathname === "/services" || pathname === "/services/";
   const serviceSlugMatch = pathname.match(/^\/services\/([^/]+)\/?$/);
 
-  const isTrainingIndex = pathname === "/training" || pathname === "/training/";
+  const isTrainingIndex = pathname === "/trainings" || pathname === "/trainings/";
   const trainingIdMatch = pathname.match(/^\/training\/([^/]+)\/?$/);
 
   const isArticlesIndex = pathname === "/articles" || pathname === "/articles/";
