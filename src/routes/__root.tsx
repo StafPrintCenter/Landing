@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Outlet, createRootRouteWithContext, HeadContent, Scripts } from "@tanstack/react-router";
 import { type ReactNode } from "react";
+import { Toaster } from "sonner";
 import appCss from "../styles.css?url";
 import { SITE } from "@/data/site";
 import logo from "@/assets/logos.json";
@@ -118,6 +119,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      <Toaster richColors position="bottom-left" closeButton />
     </QueryClientProvider>
   );
 }
