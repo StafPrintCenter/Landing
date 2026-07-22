@@ -45,7 +45,7 @@ function FormationsPage() {
   const { theme, sortBy, sortDir, query, page, perPage } = useSearch({ from: "/trainings/" });
   const navigate = useNavigate({ from: "/trainings/" });
 
-  const { formations: processedList, meta, isLoading: storeLoading } = useFormationsStore({ category: theme, sortBy, sortDir, query, page, perPage, });
+  const { formations: processedList, meta, isLoading: storeLoading } = useFormationsStore({ category: theme, sortBy, sortDir, query, page, perPage });
 
   const [isLoading, setIsLoading] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
