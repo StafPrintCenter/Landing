@@ -25,6 +25,7 @@ export type APIContactRequest = {
   service: string;
   customService: string | null;
   message: string;
+  adminNotes: string;
   status: ContactStatus;
   handledBy: string | null;
   handledAt: string | null;
