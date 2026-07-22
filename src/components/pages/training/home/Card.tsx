@@ -48,7 +48,7 @@ export function FormationHomeCard({ formation: f, onRegister }: FormationCardPro
       <div className="mt-6 flex flex-wrap gap-2 pt-4 border-t border-border/40">
         {/* Bouton Voir détails */}
         <Link
-          to="/training/$id"
+          to="/trainings/$id"
           params={{ id: f.id }}
           className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-semibold hover:bg-muted transition"
         >
