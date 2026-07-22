@@ -13,7 +13,7 @@ import {
   FormationDetailError,
 } from "@/components/pages/training/detail";
 
-export const Route = createFileRoute("/training/$id")({
+export const Route = createFileRoute("/trainings/$id")({
   pendingMs: 0,
 
   loader: async ({ params }) => {
