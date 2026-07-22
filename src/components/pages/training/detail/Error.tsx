@@ -39,7 +39,7 @@ export function FormationDetailError({ error, reset }: FormationErrorProps) {
             <RefreshCw size={15} /> Réessayer
           </button>
           <Link
-            to="/training"
+            to="/trainings"
             search={{ theme: "Tout", sortBy: "default", sortDir: "asc", query: "", page: 1, perPage: 9 }}
             className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold hover:bg-muted transition-all"
           >
