@@ -8,3 +8,4 @@ export { FormationHomeResultsCount } from "./ResultsCount";
 export { FormationHomeGrid } from "./Grid";
 export { FormationHomeCard } from "./Card";
 export { FormationHomeFAQ } from "./Faq";
+export { FormationHomeCta } from "./Cta";
