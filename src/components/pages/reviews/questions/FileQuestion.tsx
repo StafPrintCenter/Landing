@@ -17,11 +17,12 @@ function formatFileSize(bytes: number): string {
 
 export function FileQuestion({ question, value, onChange, error: externalError }: FileQuestionProps) {
   const [localError, setLocalError] = useState<string | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const dragCounter = useRef(0);
   const maxSizeKb = question.settings?.max_size_kb;
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] ?? null;
+  const applyFile = (file: File | null) => {
     setLocalError(null);
 
     if (file && maxSizeKb && file.size / 1024 > maxSizeKb) {
@@ -35,10 +36,48 @@ export function FileQuestion({ question, value, onChange, error: externalError }
     onChange(file);
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    applyFile(e.target.files?.[0] ?? null);
+  };
+
   const handleRemove = () => {
     onChange(null);
     setLocalError(null);
     if (inputRef.current) inputRef.current.value = "";
+  };
+
+  const handleDragEnter = (e: React.DragEvent<HTMLLabelElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.dataTransfer.types.includes("Files")) {
+      dragCounter.current += 1;
+      setIsDragging(true);
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLLabelElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleDragLeave = (e: React.DragEvent<HTMLLabelElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dragCounter.current -= 1;
+    if (dragCounter.current <= 0) {
+      dragCounter.current = 0;
+      setIsDragging(false);
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLLabelElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dragCounter.current = 0;
+    setIsDragging(false);
+
+    const file = e.dataTransfer.files?.[0] ?? null;
+    applyFile(file);
   };
 
   return (
@@ -60,9 +99,26 @@ export function FileQuestion({ question, value, onChange, error: externalError }
           </button>
         </div>
       ) : (
-        <label className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-dashed border-border bg-background px-4 py-4 text-sm text-muted-foreground hover:bg-muted/40">
-          <Upload size={16} />
-          Choisir un fichiedr
+        <label
+          onDragEnter={handleDragEnter}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+          className={`flex cursor-pointer flex-col items-center justify-center gap-1 rounded-lg border border-dashed px-4 py-6 text-sm transition-colors ${
+            isDragging
+              ? "border-primary bg-primary/5 text-primary"
+              : "border-border bg-background text-muted-foreground hover:bg-muted/40"
+          }`}
+        >
+          <Upload size={18} className={isDragging ? "text-primary" : "text-muted-foreground"} />
+          <span>
+            {isDragging ? "Déposez le fichier ici" : "Glissez-déposez un fichier ou cliquez pour parcourir"}
+          </span>
+          {maxSizeKb && (
+            <span className="text-[11px] text-muted-foreground/80">
+              Taille max : {(maxSizeKb / 1024).toFixed(1)} Mo
+            </span>
+          )}
           <input ref={inputRef} type="file" onChange={handleChange} className="hidden" />
         </label>
       )}
