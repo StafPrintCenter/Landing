@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { MessageSquare } from "lucide-react";
-import type { APIFormation } from "@/data/formations";
+import type { APIFormation } from "@/data/trainings";
 import type { StepProps } from "./types";
 
 interface StepSummaryProps extends StepProps {
