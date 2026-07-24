@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type { } from "@tanstack/react-start";
-import { fetchPublicServices } from "@/stores/useServicesStore";
 import { fetchPublicServices, fetchPublicFormations } from "@/stores/useTrainingsStore";
 import { fetchPublicArticles } from "@/stores/useArticlesStore";
 
