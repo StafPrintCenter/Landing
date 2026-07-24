@@ -1,5 +1,5 @@
 import { SlidersHorizontal, ArrowDownUp, ArrowUpDown } from "lucide-react";
-import { FORMATION_THEMES, type FormationTheme } from "@/data/formations";
+import { FORMATION_THEMES, type FormationTheme } from "@/data/trainings";
 
 const THEMES: Array<"Tout" | FormationTheme> = ["Tout", ...FORMATION_THEMES];
 
