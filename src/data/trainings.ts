@@ -38,6 +38,17 @@ export function getThemeColor(theme: string): string {
 export type TrainingRegistrationSchedule = "Semaine" | "Weekend" | "Planning";
 export type TrainingRegistrationStatus = "pending" | "contacted" | "accepted" | "rejected" | "cancelled";
 
+export interface CreateTrainingRegistrationParams {
+  trainingId: string;
+  fullName: string;
+  phone: string;
+  email: string;
+  schedulePreference: TrainingRegistrationSchedule;
+  notes?: string;
+  programRead: boolean;
+  consentAccepted: boolean;
+}
+
 /**
  * Type aligné sur la réponse de POST
  */
