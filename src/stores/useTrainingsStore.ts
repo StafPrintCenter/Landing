@@ -1,5 +1,6 @@
 import { resolveApiUrl } from "@/lib/api-url";
 import { createResourceStore } from "./createResourceStore";
+import { resolveApiUrl } from "@/lib/api-url";
 ff
 import { type APIFormation } from "@/data/trainings";
 
