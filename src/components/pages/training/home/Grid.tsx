@@ -3,7 +3,7 @@ import { AnimatePresence } from "framer-motion";
 import { FormationHomeCard } from "./Card";
 import { FormationHomeSkeleton } from "./Skeleton";
 import { TrainningRegistration } from "@/components/modal";
-import type { APIFormation } from "@/data/formations";
+import type { APIFormation } from "@/data/trainings";
 import { EmptyState } from "@/components/shared/EmptyState";
 
 interface FormationGridProps {
