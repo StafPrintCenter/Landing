@@ -1,6 +1,6 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site/SiteShell";
-import { type APIFormation } from "@/data/formations";
+import { type APIFormation } from "@/data/trainings";
 import { fetchFormationById, useFormationsStore } from "@/stores/useFormationsStore";
 import { SITE } from "@/data/site";
 import {
