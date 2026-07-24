@@ -5,7 +5,7 @@ import { AnimatePresence } from "framer-motion";
 import { X, ArrowRight, ArrowLeft, AlertCircle, Loader2 } from "lucide-react";
 import { type APIFormation } from "@/data/trainings";
 import { BaseModal } from "./BaseModal";
-import { createTrainingRegistration } from "@/stores/useTrainingtrationsStore";
+import { createTrainingRegistration } from "@/stores/useTrainingsStore";
 import {
   ProgressBar,
   StepContact,
