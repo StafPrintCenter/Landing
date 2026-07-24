@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft, Clock, BarChart3, Share2 } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
-import { getThemeColor, type APIFormation } from "@/data/formations";
+import { getThemeColor, type APIFormation } from "@/data/trainings";
 import { ShareModal } from "@/components/modal";
 import { getShortlinkCategory } from "@/data/shortlinks";
 import { buildShareUrl } from "@/lib/share/build-share-url";
