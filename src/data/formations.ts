@@ -33,3 +33,27 @@ export type APIFormation = {
 export function getThemeColor(theme: string): string {
   return DISCIPLINE_COLORS[theme as FormationTheme] || "border-border bg-muted text-muted-foreground";
 }
+
+
+export type TrainingRegistrationSchedule = "Semaine" | "Weekend" | "Planning";
+export type TrainingRegistrationStatus = "pending" | "accepted" | "rejected" | string;
+
+/**
+ * Type aligné sur la réponse de POST /public/trainings/registrations/create
+ */
+export type APITrainingRegistration = {
+  id: string;
+  trainingId: string;
+  training: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  schedulePreference: TrainingRegistrationSchedule;
+  notes: string | null;
+  programRead: boolean;
+  status: TrainingRegistrationStatus;
+  studentId: string | null;
+  reviewedAt: string | null;
+  createdAt: string;
+};
