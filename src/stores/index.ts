@@ -9,6 +9,7 @@ export { useProjectsStore } from "./useProjectsStore";
 export { createReport } from "./useReportsStore";
 export { fetchReviewByToken, submitReviewResponse, editReviewResponse } from "./useReviewsStore";
 export { useServicesStore } from "./useServicesStore";
+export { resolveShortlink, createShortlink } from "./useShortlinksStore";
 export { useStatsStore } from "./useStatsStore";
 export { useTestimonialsStore } from "./useTestimonialsStore";
 export { useFormationsStore, createTrainingRegistration } from "./useTrainingsStore";
