@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { Reveal } from "@/components/site/Reveal";
 import { getThemeColor, type APIFormation } from "@/data/trainings";
-import { useFormationsStore } from "@/stores/useFormationsStore";
+import { useFormationsStore } from "@/stores/useTrainingsStore";
 import { TrainningRegistration } from "@/components/modal";
 import { FormationsSkeleton } from "@/components/skeleton/HomeFormations";
 
