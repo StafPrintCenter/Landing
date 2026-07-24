@@ -1,5 +1,5 @@
 import { resolveApiUrl } from "@/lib/api-url";
-import type { APITrainingRegistration, TrainingRegistrationSchedule } from "@/data/training-registrations";
+import type { APITrainingRegistration, TrainingRegistrationSchedule } from "@/data/trainings";
 
 type RegistrationResponse = { data: APITrainingRegistration };
 
