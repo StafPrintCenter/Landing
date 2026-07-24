@@ -1,5 +1,5 @@
 import { CheckCircle2, Users, Award, BookOpen, Calendar } from "lucide-react";
-import { type APIFormation } from "@/data/formations";
+import { type APIFormation } from "@/data/trainings";
 import { SITE } from "@/data/site";
 
 interface FormationDetailProgramProps {
