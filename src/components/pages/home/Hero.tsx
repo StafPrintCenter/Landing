@@ -61,8 +61,8 @@ export function Hero() {
           </h1>
 
           <p className="mt-6 max-w-xl text-lg text-muted-foreground">
-            Studio de création basé à Porto-Novo. <span className="font-extrabold">De la carte de visite à la
-              bâche grand format, du logo au site web.</span>Un seul interlocuteur,
+            Studio de création basé à Porto-Novo. De la carte de visite à la
+            bâche grand format, du logo au site web. Un seul interlocuteur,
             une exécution irréprochable.
           </p>
 
