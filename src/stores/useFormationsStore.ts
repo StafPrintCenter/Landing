@@ -3,7 +3,7 @@ import { type APIFormation } from "@/data/formations";
 
 const { fetchList, fetchById, useResourceStore } = createResourceStore<APIFormation>({
   resourceKey: "formations",
-  listEndpoint: "training/list",
+  listEndpoint: "trainings/list",
   detailEndpoint: "training",
 });
 
