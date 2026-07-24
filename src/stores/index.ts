@@ -4,7 +4,7 @@ export { useArticlesStore } from "./useArticlesStore";
 export { fetchCategories, useCategoriesStore } from "./useCategoriesStore";
 export { sendContactRequest, trackContactRequest } from "./useContactStore";
 export { useFaqsStore } from "./useFaqsStore";
-export { useFormationsStore } from "./useTrainingsStore";
+export { useFormationsStore, createTrainingRegistration } from "./useTrainingsStore";
 export { subscribeNewsletter, fetchNewsletterPreferences, updateNewsletterPreferences } from "./useNewsletterStore";
 export { useProjectsStore } from "./useProjectsStore";
 export { createReport } from "./useReportsStore";
