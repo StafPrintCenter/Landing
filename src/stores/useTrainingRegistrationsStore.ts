@@ -5,17 +5,6 @@ type RegistrationResponse = { data: APITrainingRegistration };
 
 export class TrainingRegistrationApiError extends Error { }
 
-export interface CreateTrainingRegistrationParams {
-  trainingId: string;
-  fullName: string;
-  phone: string;
-  email: string;
-  schedulePreference: TrainingRegistrationSchedule;
-  notes?: string;
-  programRead: boolean;
-  consentAccepted: boolean;
-}
-
 export async function createTrainingRegistration(params: CreateTrainingRegistrationParams): Promise<APITrainingRegistration> {
   const formData = new FormData();
   formData.append("training_id", params.trainingId);
