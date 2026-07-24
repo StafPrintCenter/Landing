@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { z } from "zod";
 import { SiteShell } from "@/components/site/SiteShell";
 import { SITE } from "@/data/site";
-import { FORMATION_THEMES } from "@/data/formations";
+import { FORMATION_THEMES } from "@/data/trainings";
 import { useFormationsStore } from "@/stores/useFormationsStore";
 import { Pagination } from "@/components/site/Pagination";
 import {
