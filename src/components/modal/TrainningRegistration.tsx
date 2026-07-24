@@ -102,13 +102,13 @@ export function TrainningRegistration({ formation: f, isOpen, onClose }: Trainni
           {/* Navigation Footer */}
           <div className="mt-8 flex items-center justify-between border-t border-border pt-4">
             {step > 1 ? (
-              <button type="button" onClick={prevStep} className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground">
+              <button type="button" onClick={prevStep} className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground cursor-pointer">
                 <ArrowLeft size={16} /> Retour
               </button>
             ) : <div />}
 
             {step < 3 ? (
-              <button type="button" onClick={nextStep} className="inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground">
+              <button type="button" onClick={nextStep} className="inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground cursor-pointer">
                 Continuer <ArrowRight size={16} />
               </button>
             ) : (
@@ -116,7 +116,7 @@ export function TrainningRegistration({ formation: f, isOpen, onClose }: Trainni
                 type="button"
                 disabled={isSubmitting}
                 onClick={handleSubmit(onSubmitForm)}
-                className="inline-flex items-center gap-1.5 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
+                className="inline-flex items-center gap-1.5 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground disabled:opacity-60 cursor-pointer"
               >
                 {isSubmitting ? (
                   <>
