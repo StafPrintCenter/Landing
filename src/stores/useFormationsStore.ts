@@ -1,5 +1,5 @@
 import { createResourceStore } from "./createResourceStore";
-import { type APIFormation } from "@/data/formations";
+import { type APIFormation } from "@/data/trainings";
 
 const { fetchList, fetchById, useResourceStore } = createResourceStore<APIFormation>({
   resourceKey: "formations",
