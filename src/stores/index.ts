@@ -12,4 +12,3 @@ export { useServicesStore } from "./useServicesStore";
 export { useStatsStore } from "./useStatsStore";
 export { useTestimonialsStore } from "./useTestimonialsStore";
 export { useFormationsStore, createTrainingRegistration } from "./useTrainingsStore";
-export { resolveShortlink, createShortlink } from "./useShortlinksStore";
