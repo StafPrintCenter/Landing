@@ -7,7 +7,7 @@ type RegistrationResponse = { data: APITrainingRegistration };
 
 const { fetchList, fetchById, useResourceStore } = createResourceStore<APIFormation>({
   resourceKey: "formations",
-  listEndpoint: "trainings/list",
+  listEndpoint: "trainings/catalogs/list",
   detailEndpoint: "catalogs/trainings",
 });
 
