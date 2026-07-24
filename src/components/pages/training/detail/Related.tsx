@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { type APIFormation } from "@/data/formations";
+import { type APIFormation } from "@/data/trainings";
 
 interface FormationRelatedProps {
   related: APIFormation[];
