@@ -4,7 +4,6 @@ import { Reveal } from "@/components/site/Reveal";
 import { SITE } from "@/data/site";
 import { getInitials } from "@/data/testimonials";
 import { useStatsStore, useTestimonialsStore } from "@/stores/useStatsStore";
-import { useTestimonialsStore } from "@/stores/useTestimonialsStore";
 import { TestimonialsSkeleton } from "@/components/skeleton/HomeTestimonials";
 
 export function Testimonials() {
