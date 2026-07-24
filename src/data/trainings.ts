@@ -39,7 +39,7 @@ export type TrainingRegistrationSchedule = "Semaine" | "Weekend" | "Planning";
 export type TrainingRegistrationStatus = "pending" | "contacted" | "accepted" | "rejected" | "cancelled";
 
 /**
- * Type aligné sur la réponse de POST /public/trainings/registrations/create
+ * Type aligné sur la réponse de POST
  */
 export type APITrainingRegistration = {
   id: string;
