@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { Clock, BarChart3, ArrowRight } from "lucide-react";
-import { getThemeColor, type APIFormation } from "@/data/formations";
+import { getThemeColor, type APIFormation } from "@/data/trainings";
 
 interface FormationCardProps {
   formation: APIFormation;
