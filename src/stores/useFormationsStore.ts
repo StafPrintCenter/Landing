@@ -4,7 +4,7 @@ import { type APIFormation } from "@/data/formations";
 const { fetchList, fetchById, useResourceStore } = createResourceStore<APIFormation>({
   resourceKey: "formations",
   listEndpoint: "trainings/list",
-  detailEndpoint: "training",
+  detailEndpoint: "trainings",
 });
 
 export const fetchPublicFormations = fetchList;
