@@ -6,9 +6,7 @@ import { X, ArrowRight, ArrowLeft, AlertCircle, Loader2 } from "lucide-react";
 import { type APIFormation } from "@/data/trainings";
 import { BaseModal } from "./BaseModal";
 import { createTrainingRegistration } from "@/stores/useTrainingsStore";
-import {
-  ProgressBar, StepContact, StepAvailability, StepSummary, SuccessScreen, registerSchema, type RegisterInput,
-} from "./training-registration";
+import { ProgressBar, StepContact, StepAvailability, StepSummary, SuccessScreen, registerSchema, type RegisterInput, } from "./training-registration";
 
 interface TrainningRegistrationProps {
   formation: APIFormation;
