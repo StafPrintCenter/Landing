@@ -1,6 +1,6 @@
 import { type APIService } from "@/data/services";
 import { type APIProject } from "@/data/projects";
-import { type APIFormation } from "@/data/formations";
+import { type APIFormation } from "@/data/trainings";
 import { type APIArticle } from "@/data/articles";
 import { type APIFaq } from "@/data/faqs";
 import { type SearchType, SEARCH_TYPE_LABELS } from "@/data/categories";
