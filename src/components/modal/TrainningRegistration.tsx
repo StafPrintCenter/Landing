@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, User, Phone, Calendar, ArrowRight, ArrowLeft, CheckCircle2, MessageSquare, Mail } from "lucide-react";
-import { type APIFormation } from "@/data/formations";
+import { type APIFormation } from "@/data/trainings";
 import { SITE } from "@/data/site";
 import { BaseModal } from "./BaseModal";
 
