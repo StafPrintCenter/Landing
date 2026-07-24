@@ -1,5 +1,6 @@
 import { resolveApiUrl } from "@/lib/api-url";
 import { createResourceStore } from "./createResourceStore";
+ff
 import { type APIFormation } from "@/data/trainings";
 
 const { fetchList, fetchById, useResourceStore } = createResourceStore<APIFormation>({
