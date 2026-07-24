@@ -4,7 +4,7 @@ export { useArticlesStore } from "./useArticlesStore";
 export { fetchCategories, useCategoriesStore } from "./useCategoriesStore";
 export { sendContactRequest, trackContactRequest } from "./useContactStore";
 export { useFaqsStore } from "./useFaqsStore";
-export { useFormationsStore } from "./useFormationsStore";
+export { useFormationsStore } from "./useTrainingsStore";
 export { subscribeNewsletter, fetchNewsletterPreferences, updateNewsletterPreferences } from "./useNewsletterStore";
 export { useProjectsStore } from "./useProjectsStore";
 export { createReport } from "./useReportsStore";
@@ -12,4 +12,5 @@ export { fetchReviewByToken, submitReviewResponse, editReviewResponse } from "./
 export { useServicesStore } from "./useServicesStore";
 export { useStatsStore } from "./useStatsStore";
 export { useTestimonialsStore } from "./useTestimonialsStore";
+export { createTrainingRegistration } from "./useTrainingRegistrationsStore";
 export { resolveShortlink, createShortlink } from "./useShortlinksStore";
