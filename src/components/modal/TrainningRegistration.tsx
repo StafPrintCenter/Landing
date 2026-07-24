@@ -7,12 +7,8 @@ import { type APIFormation } from "@/data/trainings";
 import { BaseModal } from "./BaseModal";
 import { createTrainingRegistration } from "@/stores/useTrainingsStore";
 import {
-  ProgressBar,
-  StepContact,
-  StepAvailability,
-  StepSummary,
-  SuccessScreen,
-  registerSchema,
+  ProgressBar, StepContact, StepAvailability,
+  StepSummary, SuccessScreen, registerSchema,
   type RegisterInput,
 } from "./training-registration";
 
