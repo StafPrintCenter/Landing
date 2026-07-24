@@ -36,7 +36,7 @@ export function getThemeColor(theme: string): string {
 
 
 export type TrainingRegistrationSchedule = "Semaine" | "Weekend" | "Planning";
-export type TrainingRegistrationStatus = "pending" | "accepted" | "rejected" | string;
+export type TrainingRegistrationStatus = "pending" | "contacted" | "accepted" | "rejected" | "cancelled";
 
 /**
  * Type aligné sur la réponse de POST /public/trainings/registrations/create
