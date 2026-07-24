@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type { } from "@tanstack/react-start";
-import { fetchPublicServices, fetchPublicFormations, fetchPublicArticles } from "@/stores";
+import { fetchPublicServices } from "@/stores/useServicesStore";
+import { fetchPublicFormations } from "@/stores/useTrainingsStore";
+import { fetchPublicArticles } from "@/stores/useArticlesStore";
 
 const BASE_URL = import.meta.env.VITE_SITE_URL;
 
