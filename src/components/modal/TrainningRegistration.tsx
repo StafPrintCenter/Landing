@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence } from "framer-motion";
 import { X, ArrowRight, ArrowLeft, AlertCircle, Loader2 } from "lucide-react";
-import { type APIFormation } from "@/data/formations";
+import { type APIFormation } from "@/data/trainings";
 import { BaseModal } from "./BaseModal";
 import { createTrainingRegistration } from "@/stores/useTrainingRegistrationsStore";
 import {
