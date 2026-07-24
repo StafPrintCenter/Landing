@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { Reveal } from "@/components/site/Reveal";
-import { getThemeColor, type APIFormation } from "@/data/formations";
+import { getThemeColor, type APIFormation } from "@/data/trainings";
 import { useFormationsStore } from "@/stores/useFormationsStore";
 import { TrainningRegistration } from "@/components/modal";
 import { FormationsSkeleton } from "@/components/skeleton/HomeFormations";
