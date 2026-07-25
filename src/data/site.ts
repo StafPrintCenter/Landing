@@ -7,7 +7,7 @@ export const SITE = {
   phone: "+229 01 66 52 36 39",
   whatsapp: "+229 01 60 30 06 07",
   whatsappLink: "https://wa.me/2290160300607",
-  email: "stafprintcenter@gmail.com",
+  email: "contact@stafprint.com",
   url: import.meta.env.VITE_SITE_URL,
   shortUrl: import.meta.env.VITE_SHORTSITE_URL,
   maps: "https://maps.app.goo.gl/4mbhWctm6LnTgYsAA",
