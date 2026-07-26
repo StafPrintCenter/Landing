@@ -1,7 +1,7 @@
 import { createResourceStore } from "./createResourceStore";
 import { resolveApiUrl } from "@/lib/api-url";
 import { type APIFormation } from "@/data/trainings";
-import type { APITrainingRegistration, CreateTrainingRegistrationParams } from "@/data/trainings";
+import type { APITrainingRegistration, CreateTrainingRegistrationParams, TrainingRegistrationSchedule, TrainingRegistrationErrorReason, TrainingRegistrationErrorPayload, } from "@/data/trainings";
 
 type RegistrationResponse = { data: APITrainingRegistration };
 
@@ -20,7 +20,19 @@ export function useFormationsStore(params: Parameters<typeof useResourceStore>[0
 }
 
 
-export class TrainingRegistrationApiError extends Error { }
+
+export class TrainingRegistrationApiError extends Error {
+  status: number;
+  reason?: TrainingRegistrationErrorReason;
+  fieldErrors?: Record<string, string[]>;
+
+  constructor(message: string, status: number, reason?: TrainingRegistrationErrorReason, fieldErrors?: Record<string, string[]>) {
+    super(message);
+    this.status = status;
+    this.reason = reason;
+    this.fieldErrors = fieldErrors;
+  }
+}
 
 export async function createTrainingRegistration(params: CreateTrainingRegistrationParams): Promise<APITrainingRegistration> {
   const formData = new FormData();
@@ -36,8 +48,18 @@ export async function createTrainingRegistration(params: CreateTrainingRegistrat
   const url = resolveApiUrl(`/api/public/trainings/registrations/create`);
   const response = await fetch(url, { method: "POST", body: formData });
   if (!response.ok) {
-    throw new TrainingRegistrationApiError("Erreur lors de l'envoi de votre inscription.");
+    let payload: TrainingRegistrationErrorPayload = {};
+    try { payload = await response.json(); }
+    catch { }
+
+    throw new TrainingRegistrationApiError(
+      payload.message ?? "Une erreur est survenue lors de l'envoi de votre inscription.",
+      response.status,
+      payload.reason,
+      payload.errors
+    );
   }
+
   const json: RegistrationResponse = await response.json();
   return json.data;
 }
