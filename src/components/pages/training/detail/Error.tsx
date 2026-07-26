@@ -40,7 +40,7 @@ export function FormationDetailError({ error, reset }: FormationErrorProps) {
           </button>
           <Link
             to="/trainings"
-            search={{ theme: "Tout", sortBy: "default", sortDir: "asc", query: "", page: 1, perPage: 9 }}
+            search={{ theme: "Tout", sortBy: "default", sortDir: "asc", query: "", availableOnly: false, page: 1, perPage: 9 }}
             className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold hover:bg-muted transition-all"
           >
             <ArrowLeft size={15} /> Retour aux formations
