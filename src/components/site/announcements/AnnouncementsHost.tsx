@@ -3,7 +3,7 @@ import { AnimatePresence } from "framer-motion";
 import { useRouterState } from "@tanstack/react-router";
 import { useAnnouncementsStore, trackAnnouncementEvent } from "@/stores/useAnnouncementsStore";
 import { getVisitorId } from "@/lib/announces/visitor";
-import { getDismissedAnnouncementIds, dismissAnnouncement } from "@/lib/announcements-storage";
+import { getDismissedAnnouncementIds, dismissAnnouncement } from "@/lib/announces/storage";
 import { type APIAnnouncement } from "@/data/announcements";
 import { AnnouncementBanner } from "./AnnouncementBanner";
 import { AnnouncementToast } from "./AnnouncementToast";
