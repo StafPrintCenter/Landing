@@ -23,7 +23,7 @@ export function FormationDetailNotFound() {
         <div className="mt-8 flex flex-col sm:flex-row gap-3">
           <Link
             to="/trainings"
-            search={{ theme: "Tout", sortBy: "default", sortDir: "asc", query: "", page: 1, perPage: 9 }}
+            search={{ theme: "Tout", sortBy: "default", sortDir: "asc", query: "", availableOnly: false, page: 1, perPage: 9 }}
             className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 transition-all"
           >
             <ArrowLeft size={16} /> Parcourir les formations
