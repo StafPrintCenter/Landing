@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight, Mail } from "lucide-react";
+import { ArrowRight, Mail, Users } from "lucide-react";
 import { type APIFormation } from "@/data/trainings";
 import { SITE } from "@/data/site";
 import { WhatsAppIcon } from "@/components/site/icons/WhatsAppIcon";
@@ -15,6 +15,14 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isFull = f.seatsRemaining !== null && f.seatsRemaining <= 0;
 
+  // Calcul du libellé pour les places (ex: "5 / 20 places" ou "5 places")
+  const seatsFormatted = (() => {
+    if (f.seatsRemaining === null) return null;
+    if (isFull) return "Session complète";
+    if (f.maxSeats !== null) return `${f.seatsRemaining} / ${f.maxSeats} places`;
+    return `${f.seatsRemaining} place${f.seatsRemaining > 1 ? "s" : ""}`;
+  })();
+
   // Utilisation du helper WhatsApp
   const whatsappText = [
     `Bonjour ${SITE.name},`,
@@ -22,7 +30,7 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
     `- Tarif : *${f.price.toLocaleString("fr-FR")} FCFA*`,
     `- Niveau : *${f.level}*`,
     `- Durée : *${f.duration}*`,
-    f.seatsRemaining !== null ? `- Places restants : *${f.seatsRemaining}*` : "",
+    seatsFormatted ? `- Places restantes : *${seatsFormatted}*` : "",
     "",
     `Pouvez-vous me communiquer :`,
     `- Les prochaines dates de session`,
@@ -68,17 +76,11 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
               <span className="text-muted-foreground">Niveau</span>
               <span className="font-medium">{f.level}</span>
             </li>
-            {f.maxSeats !== null && (
-              <li className="flex justify-between">
-                <span className="text-muted-foreground">Capacité totale</span>
-                <span className="font-medium">{f.maxSeats} places</span>
-              </li>
-            )}
-            {f.seatsRemaining !== null && (
+            {seatsFormatted && (
               <li className="flex justify-between items-center">
-                <span className="text-muted-foreground">Places restants</span>
-                <span className={`font-semibold ${isFull ? "text-destructive" : "text-primary"}`}>
-                  {isFull ? "Session complète" : `${f.seatsRemaining} place${f.seatsRemaining > 1 ? "s" : ""}`}
+                <span className="text-muted-foreground">Places restantes</span>
+                <span className={`font-semibold ${isFull ? "text-destructive" : "text-foreground"}`}>
+                  {seatsFormatted}
                 </span>
               </li>
             )}
