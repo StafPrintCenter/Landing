@@ -26,6 +26,7 @@ const trainingSearchSchema = z.object({
   sortBy: z.enum(FORMATION_SORT_OPTIONS).catch("default"),
   sortDir: z.enum(FORMATION_SORT_DIRECTIONS).catch("asc"),
   query: z.string().catch(""),
+  available_only: z.boolean().catch(false).default(false),
   page: z.number().catch(1).default(1),
   perPage: z.number().catch(4).default(4),
 });
@@ -42,10 +43,18 @@ export const Route = createFileRoute("/trainings/")({
 });
 
 function FormationsPage() {
-  const { theme, sortBy, sortDir, query, page, perPage } = useSearch({ from: "/trainings/" });
+  const { theme, sortBy, sortDir, query, available_only, page, perPage } = useSearch({ from: "/trainings/" });
   const navigate = useNavigate({ from: "/trainings/" });
 
-  const { formations: processedList, meta, isLoading: storeLoading } = useFormationsStore({ category: theme, sortBy, sortDir, query, page, perPage });
+  const { formations: processedList, meta, isLoading: storeLoading } = useFormationsStore({
+    category: theme,
+    sortBy,
+    sortDir,
+    query,
+    available_only,
+    page,
+    perPage,
+  });
 
   const [isLoading, setIsLoading] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
@@ -54,7 +63,7 @@ function FormationsPage() {
     setIsLoading(true);
     const timer = setTimeout(() => setIsLoading(false), 400);
     return () => clearTimeout(timer);
-  }, [theme, sortBy, sortDir, query, page, perPage]);
+  }, [theme, sortBy, sortDir, query, available_only, page, perPage]);
 
   // Verrouille le scroll pendant que le tiroir de filtres mobile est ouvert
   useEffect(() => {
@@ -80,16 +89,21 @@ function FormationsPage() {
     updateSearch({ sortBy: s, sortDir: "asc" });
   };
 
-  const activeFilterCount = (theme !== "Tout" ? 1 : 0) + (sortBy !== "default" ? 1 : 0);
+  const activeFilterCount =
+    (theme !== "Tout" ? 1 : 0) +
+    (sortBy !== "default" ? 1 : 0) +
+    (available_only ? 1 : 0);
 
   const filtersPanel = (
     <FormationHomeFilters
       theme={theme}
       sortBy={sortBy as FormationSortOption}
       sortDir={sortDir as FormationSortDirection}
+      availableOnly={available_only}
       onThemeChange={(t) => updateSearch({ theme: t })}
       onSortChange={handleSortChange}
       onSortDirChange={(d) => updateSearch({ sortDir: d })}
+      onAvailableOnlyChange={(available) => updateSearch({ available_only: available })}
     />
   );
 
