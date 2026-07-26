@@ -1,4 +1,4 @@
-import { SlidersHorizontal, ArrowDownUp, ArrowUpDown } from "lucide-react";
+import { SlidersHorizontal, ArrowDownUp, ArrowUpDown, UserCheck } from "lucide-react";
 import { FORMATION_THEMES, type FormationTheme } from "@/data/trainings";
 
 const THEMES: Array<"Tout" | FormationTheme> = ["Tout", ...FORMATION_THEMES];
@@ -21,18 +21,22 @@ interface FormationFiltersProps {
   theme: "Tout" | FormationTheme;
   sortBy: FormationSortOption;
   sortDir: FormationSortDirection;
+  availableOnly: boolean;
   onThemeChange: (t: "Tout" | FormationTheme) => void;
   onSortChange: (s: FormationSortOption) => void;
   onSortDirChange: (d: FormationSortDirection) => void;
+  onAvailableOnlyChange: (available: boolean) => void;
 }
 
 export function FormationHomeFilters({
   theme,
   sortBy,
   sortDir,
+  availableOnly,
   onThemeChange,
   onSortChange,
   onSortDirChange,
+  onAvailableOnlyChange,
 }: FormationFiltersProps) {
   const isSortable = sortBy !== "default";
   const directionLabel = DIRECTION_LABELS[sortBy][sortDir];
@@ -61,37 +65,55 @@ export function FormationHomeFilters({
           ))}
         </div>
 
-        {/* Tri */}
-        <div className="flex items-center gap-2 self-start lg:self-auto">
-          <SlidersHorizontal size={16} className="shrink-0 text-muted-foreground" />
-
-          <select
-            value={sortBy}
-            onChange={(e) => onSortChange(e.target.value as FormationSortOption)}
-            className="rounded-lg border border-border bg-card px-3 py-2 text-sm font-medium focus:border-primary focus:outline-none cursor-pointer"
-          >
-            <option value="default">Trier par défaut</option>
-            <option value="alpha">Ordre alphabétique</option>
-            <option value="price">Prix</option>
-            <option value="duration">Volume horaire</option>
-            <option value="level">Niveau de difficulté</option>
-          </select>
-
+        {/* Option de tri et filtre Places Disponibles */}
+        <div className="flex flex-wrap items-center gap-2 self-start lg:self-auto">
+          {/* Badge Filtrer par places disponibles */}
           <button
             type="button"
-            onClick={toggleDirection}
-            disabled={!isSortable}
-            title={isSortable ? `Inverser : ${directionLabel}` : "Choisissez un critère de tri"}
-            aria-label="Inverser l'ordre de tri"
-            className={[
-              "inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border transition-all duration-200",
-              isSortable
-                ? "border-border bg-card text-foreground hover:border-primary hover:text-primary cursor-pointer"
-                : "border-border/50 bg-muted text-muted-foreground/40 cursor-not-allowed",
-            ].join(" ")}
+            onClick={() => onAvailableOnlyChange(!availableOnly)}
+            className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-2 text-sm font-medium transition cursor-pointer ${availableOnly
+              ? "border-primary/40 bg-primary/10 text-primary font-semibold"
+              : "border-border bg-card text-muted-foreground hover:border-primary/50 hover:text-foreground"
+              }`}
           >
-            {sortDir === "asc" ? <ArrowDownUp size={16} /> : <ArrowUpDown size={16} />}
+            <UserCheck size={16} />
+            <span>Places disponibles</span>
           </button>
+
+          <div className="h-6 w-px bg-border/60 hidden sm:block" />
+
+          {/* Tri */}
+          <div className="flex items-center gap-2">
+            <SlidersHorizontal size={16} className="shrink-0 text-muted-foreground" />
+
+            <select
+              value={sortBy}
+              onChange={(e) => onSortChange(e.target.value as FormationSortOption)}
+              className="rounded-lg border border-border bg-card px-3 py-2 text-sm font-medium focus:border-primary focus:outline-none cursor-pointer"
+            >
+              <option value="default">Trier par défaut</option>
+              <option value="alpha">Ordre alphabétique</option>
+              <option value="price">Prix</option>
+              <option value="duration">Volume horaire</option>
+              <option value="level">Niveau de difficulté</option>
+            </select>
+
+            <button
+              type="button"
+              onClick={toggleDirection}
+              disabled={!isSortable}
+              title={isSortable ? `Inverser : ${directionLabel}` : "Choisissez un critère de tri"}
+              aria-label="Inverser l'ordre de tri"
+              className={[
+                "inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border transition-all duration-200",
+                isSortable
+                  ? "border-border bg-card text-foreground hover:border-primary hover:text-primary cursor-pointer"
+                  : "border-border/50 bg-muted text-muted-foreground/40 cursor-not-allowed",
+              ].join(" ")}
+            >
+              {sortDir === "asc" ? <ArrowDownUp size={16} /> : <ArrowUpDown size={16} />}
+            </button>
+          </div>
         </div>
       </div>
     </div>
