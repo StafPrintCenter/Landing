@@ -21,6 +21,8 @@ interface SubmitErrorState {
   fieldErrors?: Record<string, string[]>;
 }
 
+const TERMINAL_REASONS: TrainingRegistrationErrorReason[] = ["blocked", "has_account", "in_progress", "pending_account", "full",];
+
 export function TrainningRegistration({ formation: f, isOpen, onClose }: TrainningRegistrationProps) {
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
@@ -30,6 +32,8 @@ export function TrainningRegistration({ formation: f, isOpen, onClose }: Trainni
     resolver: zodResolver(registerSchema),
     defaultValues: { fullName: "", phone: "", email: "", notes: "", programRead: false, consent: undefined },
   });
+
+  const isTerminalError = !!submitError?.reason && TERMINAL_REASONS.includes(submitError.reason);
 
   const nextStep = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -120,31 +124,48 @@ export function TrainningRegistration({ formation: f, isOpen, onClose }: Trainni
 
           {/* Navigation Footer */}
           <div className="mt-8 flex items-center justify-between border-t border-border pt-4">
-            {step > 1 ? (
-              <button type="button" onClick={prevStep} className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground">
-                <ArrowLeft size={16} /> Retour
-              </button>
-            ) : <div />}
-
-            {step < 3 ? (
-              <button type="button" onClick={nextStep} className="inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground">
-                Continuer <ArrowRight size={16} />
-              </button>
+            {isTerminalError ? (
+              // Erreur non récupérable : retenter ne sert à rien, on ne propose plus
+              // que de fermer le formulaire.
+              <>
+                <div />
+                <button
+                  type="button"
+                  onClick={handleClose}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-border px-6 py-2.5 text-sm font-semibold hover:bg-muted"
+                >
+                  Fermer
+                </button>
+              </>
             ) : (
-              <button
-                type="button"
-                disabled={isSubmitting}
-                onClick={handleSubmit(onSubmitForm)}
-                className="inline-flex items-center gap-1.5 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 size={16} className="animate-spin" /> Validation...
-                  </>
+              <>
+                {step > 1 ? (
+                  <button type="button" onClick={prevStep} className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground">
+                    <ArrowLeft size={16} /> Retour
+                  </button>
+                ) : <div />}
+
+                {step < 3 ? (
+                  <button type="button" onClick={nextStep} className="inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground">
+                    Continuer <ArrowRight size={16} />
+                  </button>
                 ) : (
-                  "Confirmer mon inscription"
+                  <button
+                    type="button"
+                    disabled={isSubmitting}
+                    onClick={handleSubmit(onSubmitForm)}
+                    className="inline-flex items-center gap-1.5 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 size={16} className="animate-spin" /> Validation...
+                      </>
+                    ) : (
+                      "Confirmer mon inscription"
+                    )}
+                  </button>
                 )}
-              </button>
+              </>
             )}
           </div>
         </form>
