@@ -2,15 +2,8 @@ import * as Icons from "lucide-react";
 import { Megaphone, type LucideIcon } from "lucide-react";
 
 export type AnnouncementType = "banner" | "toast" | "popup" | "modal";
+export type AnnouncementPosition = | "top" | "bottom" | "top-left" | "top-right" | "bottom-left" | "bottom-right" | "center";
 export type AnnouncementStyle = "info" | "success" | "warning" | "danger" | "neutral";
-export type AnnouncementPosition =
-  | "top"
-  | "bottom"
-  | "top-left"
-  | "top-right"
-  | "bottom-left"
-  | "bottom-right"
-  | "center";
 
 export type AnnouncementAction = {
   label: string;
@@ -35,9 +28,9 @@ export type APIAnnouncement = {
 };
 
 /**
- * Classes Tailwind associées à chaque style d'annonce, avec fallback neutre
- */
-export function getAnnouncementStyleClasses(style: AnnouncementStyle): string {
+* Style translucide pour la bannière
+*/
+export function getAnnouncementBarClasses(style: AnnouncementStyle): string {
   switch (style) {
     case "success":
       return "border-emerald-500/30 bg-emerald-500/10 text-emerald-700";
@@ -50,6 +43,29 @@ export function getAnnouncementStyleClasses(style: AnnouncementStyle): string {
     case "info":
     default:
       return "border-primary/30 bg-primary/10 text-primary";
+  }
+}
+
+/**
+ * Style opaque pour les surfaces flottantes (Toast, Popup, Modal) : fond plein
+ * (bg-card), accent coloré en bordure/icône seulement. Évite tout effet de
+ * transparence ou de flou qui laisserait deviner le contenu de la page derrière.
+ */
+export function getAnnouncementSurfaceClasses(style: AnnouncementStyle): {
+  card: string; accent: string; icon: string;
+} {
+  switch (style) {
+    case "success":
+      return { card: "border-emerald-500/30 bg-card", accent: "bg-emerald-500", icon: "text-emerald-600" };
+    case "warning":
+      return { card: "border-amber-500/30 bg-card", accent: "bg-amber-500", icon: "text-amber-600" };
+    case "danger":
+      return { card: "border-destructive/30 bg-card", accent: "bg-destructive", icon: "text-destructive" };
+    case "neutral":
+      return { card: "border-border bg-card", accent: "bg-muted-foreground", icon: "text-muted-foreground" };
+    case "info":
+    default:
+      return { card: "border-primary/30 bg-card", accent: "bg-primary", icon: "text-primary" };
   }
 }
 
