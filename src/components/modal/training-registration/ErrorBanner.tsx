@@ -1,10 +1,12 @@
-import { AlertCircle, Ban, UserCheck, Clock, MailQuestion, Users } from "lucide-react";
+import { AlertCircle, Ban, UserCheck, Clock, MailQuestion, Users, ArrowRight } from "lucide-react";
 import type { TrainingRegistrationErrorReason } from "@/data/trainings";
+import { buildStudentLoginUrl } from "@/lib/student-links";
 
 interface ReasonContent {
   icon: typeof AlertCircle;
   title: string;
   hint?: string;
+  action?: { label: string; href: string };
 }
 
 const REASON_CONTENT: Record<TrainingRegistrationErrorReason, ReasonContent> = {
@@ -17,6 +19,7 @@ const REASON_CONTENT: Record<TrainingRegistrationErrorReason, ReasonContent> = {
     icon: UserCheck,
     title: "Vous avez déjà un compte étudiant.",
     hint: "Connectez-vous à votre espace pour vous inscrire à cette formation.",
+    action: { label: "Se connecter à mon espace", href: buildStudentLoginUrl() },
   },
   in_progress: {
     icon: Clock,
@@ -47,11 +50,22 @@ export function ErrorBanner({ message, reason }: ErrorBannerProps) {
   return (
     <div className="mt-4 flex items-start gap-2.5 rounded-lg bg-destructive/10 px-3 py-2.5 text-xs text-destructive">
       <Icon size={16} className="mt-0.5 shrink-0" />
-      <div>
+      <div className="flex-1">
         <p className="font-medium">{content?.title ?? message}</p>
         {content?.hint && <p className="mt-0.5 text-destructive/80">{content.hint}</p>}
         {!content && <p className="mt-0.5 text-destructive/80">{message}</p>}
+
+        {content?.action && (
+          <a
+            href={content.action.href}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-2 inline-flex items-center gap-1 rounded-full bg-destructive px-3 py-1.5 text-[11px] font-semibold text-destructive-foreground hover:opacity-90"
+          >
+            {content.action.label} <ArrowRight size={11} />
+          </a>
+        )}
       </div>
-    </div>
+    </div >
   );
 }
