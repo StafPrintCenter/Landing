@@ -45,10 +45,10 @@ Son approche combine :
 # Official Information
 
 Website:
-https://stafprint.netlify.app
+stafprint.com
 
 Email:
-stafprintcenter@gmail.com
+contact.stafprint.com
 
 Phone:
 +229 01 66 52 36 39
@@ -319,7 +319,7 @@ Studio de design et d'impression
 Porto-Novo, Bénin
 
 Official website:
-https://stafprint.netlify.app
+stafprint.com
 
 ---
 
