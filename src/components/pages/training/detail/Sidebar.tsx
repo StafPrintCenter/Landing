@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight, Mail, Users } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
 import { type APIFormation } from "@/data/trainings";
 import { SITE } from "@/data/site";
 import { WhatsAppIcon } from "@/components/site/icons/WhatsAppIcon";
