@@ -79,7 +79,7 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
             {seatsFormatted && (
               <li className="flex justify-between items-center">
                 <span className="text-muted-foreground">Places restantes</span>
-                <span className={`font-semibold ${isFull ? "text-destructive" : "text-foreground"}`}>
+                <span className={`font-medium ${isFull ? "text-destructive" : "text-foreground"}`}>
                   {seatsFormatted}
                 </span>
               </li>
