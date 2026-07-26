@@ -17,6 +17,7 @@ export type APIFormation = {
   durationHours: number;
   level: FormationLevel;
   price: number;
+  maxSeats: number;
   seatsRemaining: number;
   short: string;
   audience?: string;
@@ -69,3 +70,20 @@ export type APITrainingRegistration = {
   reviewedAt: string | null;
   createdAt: string;
 };
+
+/**
+ * Raisons métier renvoyées par l'API en cas d'échec (403/409),
+ * en plus des erreurs de validation classiques (422).
+ */
+export type TrainingRegistrationErrorReason =
+  | "blocked"
+  | "has_account"
+  | "in_progress"
+  | "pending_account"
+  | "full";
+
+export interface TrainingRegistrationErrorPayload {
+  message?: string;
+  reason?: TrainingRegistrationErrorReason;
+  errors?: Record<string, string[]>;
+}
