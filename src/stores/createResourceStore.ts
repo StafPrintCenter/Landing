@@ -6,6 +6,7 @@ export interface BaseFetchParams {
   query?: string;
   sortBy?: string;
   sortDir?: string;
+  availableOnly?: boolean;
   page?: number;
   perPage?: number;
 }
