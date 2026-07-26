@@ -22,7 +22,7 @@ export function FormationDetailHeader({ formation: f }: FormationDetailHeaderPro
         <div className="flex items-center justify-between">
           <Link
             to="/trainings"
-            search={{ theme: "Tout", sortBy: "default", sortDir: "asc", query: "", page: 1, perPage: 9 }}
+            search={{ theme: "Tout", sortBy: "default", sortDir: "asc", query: "", availableOnly: false, page: 1, perPage: 9 }}
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary"
           >
             <ArrowLeft size={14} /> Toutes les formations
