@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
 import { motion } from "framer-motion";
-import { type APIAnnouncement, getAnnouncementStyleClasses, getAnnouncementIcon } from "@/data/announcements";
+import { type APIAnnouncement, getAnnouncementBarClasses, getAnnouncementIcon } from "@/data/announcements";
 
 interface AnnouncementBannerProps {
   announcement: APIAnnouncement;
@@ -20,7 +20,7 @@ export function AnnouncementBanner({ announcement, onClose, onAction }: Announce
       className={[
         "fixed inset-x-0 z-40 border-b",
         isBottom ? "bottom-0" : "top-16",
-        getAnnouncementStyleClasses(announcement.style),
+        getAnnouncementBarClasses(announcement.style),
       ].join(" ")}
     >
       <div className="container-x flex flex-wrap items-center justify-center gap-3 py-2.5 text-center text-sm">
