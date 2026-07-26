@@ -6,7 +6,7 @@ STAF PRINT CENTER accompagne les entreprises, institutions et particuliers dans 
 
 ## Website
 
-https://stafprint.netlify.app
+stafprint.com
 
 ## About
 
@@ -15,7 +15,7 @@ https://stafprint.netlify.app
 - Localisation : Porto-Novo, Bénin (Google Maps : https://maps.app.goo.gl/4mbhWctm6LnTgYsAA)
 - Fondé en : 2019
 - Fondateur / contact principal : Steve Aster Afovo
-- Site web : https://stafprint.netlify.app
+- Site web : stafprint.com
 - Téléphone : +229 01 66 52 36 39
 - WhatsApp : +229 01 60 30 06 07
 - Email : stafprintcenter@gmail.com
@@ -31,7 +31,7 @@ STAF PRINT CENTER propose trois grandes catégories de services :
 - **Impression** : cartes de visite, flyers, affiches, bâches grand format, roll-up, badges, supports événementiels et corporate.
 - **Formation** : parcours pratiques en présentiel à Porto-Novo.
  
-Liste complète et à jour des services : https://stafprint.netlify.app/services
+Liste complète et à jour des services : stafprint.com/services
 
 ## Main Services
 
@@ -58,27 +58,27 @@ Formations professionnelles certifiantes, dispensées en présentiel à Porto-No
 - Vidéo
  
 Chaque formation est présentée avec son prix, son volume horaire et son niveau de difficulté.
-Catalogue complet : https://stafprint.netlify.app/training
+Catalogue complet : stafprint.com/trainings
  
 ## Réalisations
  
 Portfolio de projets clients réalisés par SPC (design, impression, web) :
-https://stafprint.netlify.app/projects
+stafprint.com/projects
  
 ## Blog / Articles
  
 Articles et conseils sur le design, l'impression, le web et les formations :
-https://stafprint.netlify.app/articles
+stafprint.com/articles
  
 ## FAQ
  
 Questions fréquentes sur les services, formations et délais :
-https://stafprint.netlify.app/faqs
+stafprint.com/faqs
 
 ## FAQ
  
 Questions fréquentes sur les services, formations et délais :
-https://stafprint.netlify.app/faqs
+stafprint.com/faqs
  
 ## Pourquoi choisir STAF PRINT CENTER
  
@@ -89,14 +89,14 @@ https://stafprint.netlify.app/faqs
  
 ## Informations légales
  
-- Mentions légales : https://stafprint.netlify.app/legal/mentions
-- Conditions Générales de Vente : https://stafprint.netlify.app/legal/cgv
-- Politique de confidentialité : https://stafprint.netlify.app/legal/privacy
+- Mentions légales : stafprint.com/legal/mentions
+- Conditions Générales de Vente : stafprint.com/legal/cgv
+- Politique de confidentialité : stafprint.com/legal/privacy
  
 ## Contact / Devis
  
 Demande de devis en ligne (réponse sous 24h ouvrées, ou immédiate sur WhatsApp) :
-https://stafprint.netlify.app/#contact
+stafprint.com/#contact
 
 
 ## Resources
@@ -135,7 +135,7 @@ STAF PRINT CENTER specializes in:
 
 Phone: +229 01 66 52 36 39
 WhatsApp: +229 01 60 30 06 07
-Email: stafprintcenter@gmail.com
+Email: contact@stafprint.com
 
 ## Social Profiles
 
