@@ -17,6 +17,7 @@ export type APIFormation = {
   durationHours: number;
   level: FormationLevel;
   price: number;
+  seatsRemaining: number;
   short: string;
   audience?: string;
   objectives: string[];
