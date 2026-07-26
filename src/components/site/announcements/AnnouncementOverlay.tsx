@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
 import { motion } from "framer-motion";
-import { type APIAnnouncement, getAnnouncementStyleClasses, getAnnouncementIcon } from "@/data/announcements";
+import { type APIAnnouncement, getAnnouncementSurfaceClasses, getAnnouncementIcon } from "@/data/announcements";
 
 interface AnnouncementOverlayProps {
   announcement: APIAnnouncement;
@@ -10,6 +10,7 @@ interface AnnouncementOverlayProps {
 
 export function AnnouncementOverlay({ announcement, onClose, onAction }: AnnouncementOverlayProps) {
   const Icon = getAnnouncementIcon(announcement.icon);
+  const { card, icon } = getAnnouncementSurfaceClasses(announcement.style);
 
   return (
     <motion.div
@@ -24,23 +25,20 @@ export function AnnouncementOverlay({ announcement, onClose, onAction }: Announc
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 10 }}
         onClick={(e) => e.stopPropagation()}
-        className={[
-          "relative w-full max-w-md rounded-3xl border bg-card p-6 shadow-2xl",
-          getAnnouncementStyleClasses(announcement.style),
-        ].join(" ")}
+        className={["relative w-full max-w-md rounded-3xl border p-6 shadow-2xl", card].join(" ")}
       >
         {announcement.isClosable && (
           <button
             type="button"
             onClick={onClose}
             aria-label="Fermer"
-            className="absolute right-4 top-4 rounded-full p-1 hover:bg-black/10 cursor-pointer"
+            className="absolute right-4 top-4 rounded-full p-1 text-muted-foreground hover:bg-muted cursor-pointer"
           >
             <X size={16} />
           </button>
         )}
 
-        <Icon size={28} className="mb-3" />
+        <Icon size={28} className={["mb-3", icon].join(" ")} />
         <h3 className="font-display text-lg font-semibold text-foreground">{announcement.title}</h3>
         {announcement.message && <p className="mt-2 text-sm text-muted-foreground">{announcement.message}</p>}
 
