@@ -10,7 +10,6 @@ export type FormationProgramStep = {
 export type FormationLevel = "Débutant" | "Intermédiaire" | "Avancé";
 
 export type APIFormation = {
-  seatsRemaining: number;
   id: string;
   title: string;
   theme: FormationTheme;
