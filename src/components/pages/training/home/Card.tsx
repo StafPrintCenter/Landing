@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
-import { Clock, BarChart3, ArrowRight } from "lucide-react";
+import { Clock, BarChart3, ArrowRight, Users } from "lucide-react";
 import { getThemeColor, type APIFormation } from "@/data/trainings";
 
 interface FormationCardProps {
@@ -9,6 +9,8 @@ interface FormationCardProps {
 }
 
 export function FormationHomeCard({ formation: f, onRegister }: FormationCardProps) {
+  const isFull = f.seatsRemaining !== null && f.seatsRemaining <= 0;
+
   return (
     <motion.div
       layout
@@ -31,9 +33,22 @@ export function FormationHomeCard({ formation: f, onRegister }: FormationCardPro
       <h3 className="mt-4 font-display text-xl font-semibold tracking-tight text-foreground">{f.title}</h3>
       <p className="mt-2 text-sm text-muted-foreground leading-relaxed flex-1">{f.short}</p>
 
-      <div className="mt-4 flex gap-4 text-xs font-medium text-muted-foreground">
-        <span className="inline-flex items-center gap-1 bg-muted px-2.5 py-1 rounded-md"><Clock size={13} /> {f.duration}</span>
-        <span className="inline-flex items-center gap-1 bg-muted px-2.5 py-1 rounded-md"><BarChart3 size={13} /> {f.level}</span>
+      <div className="mt-4 flex flex-wrap gap-2 text-xs font-medium text-muted-foreground">
+        <span className="inline-flex items-center gap-1 bg-muted px-2.5 py-1 rounded-md">
+          <Clock size={13} /> {f.duration}
+        </span>
+        <span className="inline-flex items-center gap-1 bg-muted px-2.5 py-1 rounded-md">
+          <BarChart3 size={13} /> {f.level}
+        </span>
+        {f.seatsRemaining !== null && (
+          <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md ${isFull
+            ? "bg-destructive/10 text-destructive font-semibold"
+            : "bg-muted"
+            }`}>
+            <Users size={13} />
+            {isFull ? "Complet" : `${f.seatsRemaining} place${f.seatsRemaining > 1 ? "s" : ""} restante${f.seatsRemaining > 1 ? "s" : ""}`}
+          </span>
+        )}
       </div>
 
       <ul className="mt-5 space-y-2 text-sm text-foreground/80">
@@ -58,9 +73,13 @@ export function FormationHomeCard({ formation: f, onRegister }: FormationCardPro
         {/* Bouton S'inscrire */}
         <button
           onClick={onRegister}
-          className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition shadow-sm cursor-pointer"
+          disabled={isFull}
+          className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition shadow-sm ${isFull
+            ? "bg-muted text-muted-foreground cursor-not-allowed"
+            : "bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer"
+            }`}
         >
-          S'inscrire
+          {isFull ? "Complet" : "S'inscrire"}
         </button>
       </div>
     </motion.div>
