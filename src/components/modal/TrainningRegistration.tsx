@@ -2,11 +2,12 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence } from "framer-motion";
-import { X, ArrowRight, ArrowLeft, AlertCircle, Loader2 } from "lucide-react";
+import { X, ArrowRight, ArrowLeft, Loader2 } from "lucide-react";
 import { type APIFormation } from "@/data/trainings";
 import { BaseModal } from "./BaseModal";
-import { createTrainingRegistration } from "@/stores/useTrainingsStore";
-import { ProgressBar, StepContact, StepAvailability, StepSummary, SuccessScreen, registerSchema, type RegisterInput, } from "./training-registration";
+import { createTrainingRegistration, TrainingRegistrationApiError } from "@/stores/useTrainingsStore";
+import type { TrainingRegistrationErrorReason } from "@/data/trainings";
+import { ProgressBar, StepContact, StepAvailability, StepSummary, SuccessScreen, ErrorBanner, FieldErrorsBanner, registerSchema, type RegisterInput, } from "./training-registration";
 
 interface TrainningRegistrationProps {
   formation: APIFormation;
@@ -14,10 +15,16 @@ interface TrainningRegistrationProps {
   onClose: () => void;
 }
 
+interface SubmitErrorState {
+  message: string;
+  reason?: TrainingRegistrationErrorReason;
+  fieldErrors?: Record<string, string[]>;
+}
+
 export function TrainningRegistration({ formation: f, isOpen, onClose }: TrainningRegistrationProps) {
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
-  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [submitError, setSubmitError] = useState<SubmitErrorState | null>(null);
 
   const { register, handleSubmit, trigger, watch, reset, formState: { errors, isSubmitting } } = useForm<RegisterInput>({
     resolver: zodResolver(registerSchema),
@@ -31,10 +38,16 @@ export function TrainningRegistration({ formation: f, isOpen, onClose }: Trainni
     if (step === 2) fieldsToValidate = ["schedulePref", "consent"];
 
     const isValid = await trigger(fieldsToValidate);
-    if (isValid) setStep((prev) => prev + 1);
+    if (isValid) {
+      setSubmitError(null);
+      setStep((prev) => prev + 1);
+    }
   };
 
-  const prevStep = () => setStep((prev) => prev - 1);
+  const prevStep = () => {
+    setSubmitError(null);
+    setStep((prev) => prev - 1);
+  };
 
   const onSubmitForm = async (data: RegisterInput) => {
     setSubmitError(null);
@@ -50,8 +63,15 @@ export function TrainningRegistration({ formation: f, isOpen, onClose }: Trainni
         consentAccepted: data.consent,
       });
       setSubmitted(true);
-    } catch {
-      setSubmitError("Une erreur est survenue lors de l'envoi de votre inscription. Merci de réessayer.");
+    } catch (err) {
+      if (err instanceof TrainingRegistrationApiError) {
+        setSubmitError({ message: err.message, reason: err.reason, fieldErrors: err.fieldErrors });
+        if (err.status === 422) {
+          setStep(1);
+        }
+      } else {
+        setSubmitError({ message: "Une erreur inattendue est survenue. Merci de réessayer." });
+      }
     }
   };
 
@@ -92,23 +112,22 @@ export function TrainningRegistration({ formation: f, isOpen, onClose }: Trainni
             {step === 3 && <StepSummary register={register} errors={errors} watch={watch} formation={f} />}
           </AnimatePresence>
 
-          {submitError && (
-            <div className="mt-4 flex items-start gap-2 rounded-lg bg-destructive/10 px-3 py-2.5 text-xs text-destructive">
-              <AlertCircle size={14} className="mt-0.5 shrink-0" />
-              <p>{submitError}</p>
-            </div>
-          )}
+          {submitError && submitError.fieldErrors && Object.keys(submitError.fieldErrors).length > 0 ? (
+            <FieldErrorsBanner fieldErrors={submitError.fieldErrors} />
+          ) : submitError ? (
+            <ErrorBanner message={submitError.message} reason={submitError.reason} />
+          ) : null}
 
           {/* Navigation Footer */}
           <div className="mt-8 flex items-center justify-between border-t border-border pt-4">
             {step > 1 ? (
-              <button type="button" onClick={prevStep} className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground cursor-pointer">
+              <button type="button" onClick={prevStep} className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground">
                 <ArrowLeft size={16} /> Retour
               </button>
             ) : <div />}
 
             {step < 3 ? (
-              <button type="button" onClick={nextStep} className="inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground cursor-pointer">
+              <button type="button" onClick={nextStep} className="inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground">
                 Continuer <ArrowRight size={16} />
               </button>
             ) : (
@@ -116,7 +135,7 @@ export function TrainningRegistration({ formation: f, isOpen, onClose }: Trainni
                 type="button"
                 disabled={isSubmitting}
                 onClick={handleSubmit(onSubmitForm)}
-                className="inline-flex items-center gap-1.5 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground disabled:opacity-60 cursor-pointer"
+                className="inline-flex items-center gap-1.5 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
               >
                 {isSubmitting ? (
                   <>
