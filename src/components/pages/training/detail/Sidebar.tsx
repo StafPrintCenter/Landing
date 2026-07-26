@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight, Mail } from "lucide-react";
+import { ArrowRight, Mail, Users } from "lucide-react";
 import { type APIFormation } from "@/data/trainings";
 import { SITE } from "@/data/site";
 import { WhatsAppIcon } from "@/components/site/icons/WhatsAppIcon";
@@ -13,6 +13,7 @@ interface FormationDetailSidebarProps {
 
 export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const isFull = f.seatsRemaining !== null && f.seatsRemaining <= 0;
 
   // Utilisation du helper WhatsApp
   const whatsappText = [
@@ -21,6 +22,7 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
     `- Tarif : *${f.price.toLocaleString("fr-FR")} FCFA*`,
     `- Niveau : *${f.level}*`,
     `- Durée : *${f.duration}*`,
+    f.seatsRemaining !== null ? `- Places restants : *${f.seatsRemaining}*` : "",
     "",
     `Pouvez-vous me communiquer :`,
     `- Les prochaines dates de session`,
@@ -28,7 +30,7 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
     `- Les modalités de paiement`,
     "",
     "Merci d'avance pour votre retour.",
-  ].join("\n");
+  ].filter(Boolean).join("\n");
 
   const richWhatsappLink = withWhatsAppMessage(SITE.whatsappLink, whatsappText);
 
@@ -37,7 +39,7 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
   const emailBody = [
     `Bonjour,`,
     ``,
-    `Je souhaite obtenir des informations complémentaires sur la formation "${f.title}" de ${f.price.toLocaleString("fr-FR")} FCFA, d'une durée de ${f.duration} pour niveau ${f.level}`,
+    `Je souhaite obtenir des informations complémentaires sur la formation "${f.title}" de ${f.price.toLocaleString("fr-FR")} FCFA, d'une durée de ${f.duration} pour niveau ${f.level}.`,
     ``,
     `Merci de me préciser :`,
     `- Les prochaines dates de session`,
@@ -66,6 +68,20 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
               <span className="text-muted-foreground">Niveau</span>
               <span className="font-medium">{f.level}</span>
             </li>
+            {f.maxSeats !== null && (
+              <li className="flex justify-between">
+                <span className="text-muted-foreground">Capacité totale</span>
+                <span className="font-medium">{f.maxSeats} places</span>
+              </li>
+            )}
+            {f.seatsRemaining !== null && (
+              <li className="flex justify-between items-center">
+                <span className="text-muted-foreground">Places restants</span>
+                <span className={`font-semibold ${isFull ? "text-destructive" : "text-primary"}`}>
+                  {isFull ? "Session complète" : `${f.seatsRemaining} place${f.seatsRemaining > 1 ? "s" : ""}`}
+                </span>
+              </li>
+            )}
             <li className="flex justify-between">
               <span className="text-muted-foreground">Format</span>
               <span className="font-medium">Présentiel</span>
@@ -80,9 +96,13 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
             {/* Action 1: S'inscrire (Ouvre la modal) */}
             <button
               onClick={() => setIsModalOpen(true)}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity cursor-pointer"
+              disabled={isFull}
+              className={`inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition ${isFull
+                ? "bg-muted text-muted-foreground cursor-not-allowed"
+                : "bg-primary text-primary-foreground hover:opacity-90 cursor-pointer"
+                }`}
             >
-              S'inscrire maintenant <ArrowRight size={14} />
+              {isFull ? "Session complète" : "S'inscrire maintenant"} <ArrowRight size={14} />
             </button>
 
             {/* Action 2: Plus d'infos WhatsApp */}
