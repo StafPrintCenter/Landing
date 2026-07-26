@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowLeft, Clock, BarChart3, Share2 } from "lucide-react";
+import { ArrowLeft, Clock, BarChart3, Share2, Users } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { getThemeColor, type APIFormation } from "@/data/trainings";
 import { ShareModal } from "@/components/modal";
@@ -14,6 +14,7 @@ interface FormationDetailHeaderProps {
 export function FormationDetailHeader({ formation: f }: FormationDetailHeaderProps) {
   const [isShareOpen, setIsShareOpen] = useState(false);
   const shareUrl = buildShareUrl(`/training/${f.id}`);
+  const isFull = f.seatsRemaining !== null && f.seatsRemaining <= 0;
 
   return (
     <section className="border-b border-border bg-muted">
@@ -45,9 +46,24 @@ export function FormationDetailHeader({ formation: f }: FormationDetailHeaderPro
           <h1 className="mt-3 font-display text-4xl font-bold md:text-5xl">{f.title}</h1>
           <p className="mt-4 max-w-2xl text-lg text-muted-foreground">{f.short}</p>
           <div className="mt-6 flex flex-wrap gap-4 text-sm">
-            <span className="inline-flex items-center gap-2 rounded-full bg-card px-4 py-2 border border-border"><Clock size={14} />{f.duration}</span>
-            <span className="inline-flex items-center gap-2 rounded-full bg-card px-4 py-2 border border-border"><BarChart3 size={14} />Niveau {f.level}</span>
-            <span className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 font-semibold text-primary-foreground">{f.price.toLocaleString("fr-FR")} FCFA</span>
+            <span className="inline-flex items-center gap-2 rounded-full bg-card px-4 py-2 border border-border">
+              <Clock size={14} />{f.duration}
+            </span>
+            <span className="inline-flex items-center gap-2 rounded-full bg-card px-4 py-2 border border-border">
+              <BarChart3 size={14} />Niveau {f.level}
+            </span>
+            {f.seatsRemaining !== null && (
+              <span className={`inline-flex items-center gap-2 rounded-full px-4 py-2 border ${isFull
+                ? "bg-destructive/10 border-destructive/20 text-destructive font-semibold"
+                : "bg-card border-border text-muted-foreground"
+                }`}>
+                <Users size={14} />
+                {isFull ? "Session complète" : `${f.seatsRemaining} place${f.seatsRemaining > 1 ? "s" : ""} disponible${f.seatsRemaining > 1 ? "s" : ""}`}
+              </span>
+            )}
+            <span className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 font-semibold text-primary-foreground">
+              {f.price.toLocaleString("fr-FR")} FCFA
+            </span>
           </div>
         </Reveal>
       </div>
