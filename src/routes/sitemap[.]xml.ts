@@ -4,7 +4,7 @@ import { fetchPublicServices } from "@/stores/useServicesStore";
 import { fetchPublicFormations } from "@/stores/useTrainingsStore";
 import { fetchPublicArticles } from "@/stores/useArticlesStore";
 
-const BASE_URL = import.meta.env.VITE_SITE_URL;
+const BASE_URL = import.meta.env.VITE_FRONTEND_URL;
 
 interface SitemapEntry {
   path: string;
