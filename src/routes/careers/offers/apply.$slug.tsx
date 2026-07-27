@@ -6,7 +6,7 @@ import { SITE } from "@/data/site";
 import { fetchJobOfferBySlug } from "@/stores/useJobsStore";
 import { ApplyForm } from "@/components/pages/careers/apply";
 import { JobOfferNotFoundState } from "@/components/pages/careers/detail";
-import { isJobOfferExpired, type APIJobOffer } from "@/data/jobs";
+import { formatSalaryRange, isJobOfferExpired, type APIJobOffer } from "@/data/jobs";
 
 export const Route = createFileRoute("/careers/offers/apply/$slug")({
   loader: async ({ params }) => {
@@ -30,6 +30,7 @@ export const Route = createFileRoute("/careers/offers/apply/$slug")({
 
 function ApplyPage() {
   const { offer } = Route.useLoaderData() as { offer: APIJobOffer };
+  const salary = formatSalaryRange(offer.salaryMin, offer.salaryMax);
   const expired = isJobOfferExpired(offer);
 
   return (
@@ -43,6 +44,12 @@ function ApplyPage() {
           <span className="inline-flex items-center gap-2 rounded-full bg-card border border-border px-4 py-2">
             <Clock size={14} /> Postuler avant le {new Date(offer.expiresAt).toLocaleDateString("fr-FR")}
           </span>
+          <span className="inline-flex items-center gap-2 rounded-full bg-card border border-border px-4 py-2"><MapPin size={14} /> {offer.location}</span>
+          {salary && <span className="inline-flex items-center gap-2 rounded-full bg-card border border-border px-4 py-2"><Briefcase size={14} /> {salary}</span>}
+          <div>
+            <h2 className="font-display text-xl font-bold">Description du poste</h2>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground whitespace-pre-line">{offer.description}</p>
+          </div>
         </Reveal>
 
         <div className="mt-8">
