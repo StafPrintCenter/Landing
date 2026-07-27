@@ -44,7 +44,6 @@ function ApplyPage() {
           <span className="inline-flex items-center gap-2 rounded-full bg-card border border-border px-4 py-2">
             <Clock size={14} /> Postuler avant le {new Date(offer.expiresAt).toLocaleDateString("fr-FR")}
           </span>
-          <span className="inline-flex items-center gap-2 rounded-full bg-card border border-border px-4 py-2"><MapPin size={14} /> {offer.location}</span>
           {salary && <span className="inline-flex items-center gap-2 rounded-full bg-card border border-border px-4 py-2"><Briefcase size={14} /> {salary}</span>}
           <div>
             <h2 className="font-display text-xl font-bold">Description du poste</h2>
