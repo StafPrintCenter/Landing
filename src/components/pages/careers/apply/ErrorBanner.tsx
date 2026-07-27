@@ -1,4 +1,4 @@
-import { AlertCircle, Ban, ArrowLeft } from "lucide-react";
+import { Ban, ArrowLeft } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
 interface ApplyErrorBannerProps {
