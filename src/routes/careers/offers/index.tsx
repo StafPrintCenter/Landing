@@ -69,7 +69,10 @@ function CareersPage() {
           onContractTypeChange={(v) => updateSearch({ contractType: v })}
         />
 
-        <CareersHomeResultsCount count={meta?.total ?? offers.length} isLoading={uiLoading || isLoading} />
+        <CareersHomeResultsCount
+          count={meta?.total ?? offers.length}
+          isLoading={uiLoading || isLoading}
+        />
 
         <CareersHomeGrid isLoading={uiLoading || isLoading} offers={offers} />
 
