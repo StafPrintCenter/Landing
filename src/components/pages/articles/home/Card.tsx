@@ -19,7 +19,7 @@ export function ArticleHomeCard({ article: a }: ArticleCardProps) {
     >
       <Link to="/articles/$slug" params={{ slug: a.slug }} className="block flex-1 flex flex-col">
         {/* Cover */}
-        <div className="aspect-[16/10] overflow-hidden">
+        <div className="aspect-16/10 overflow-hidden">
           <img
             src={a.cover}
             alt={a.title}
