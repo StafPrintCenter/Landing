@@ -33,10 +33,11 @@ function ApplyPage() {
 
   return (
     <SiteShell>
-      <section className="container-x max-w-2xl py-16 md:py-24">
+      <section className="container-x max-w-2xl py-16">
         <Reveal>
           <p className="text-sm font-semibold uppercase tracking-widest text-primary">Candidature</p>
           <h1 className="mt-2 font-display text-3xl font-bold">{offer.title}</h1>
+          <p className="mt-2 text-muted-foreground">{offer.department} · {offer.location}</p>
           <p className="mt-2 text-muted-foreground">{offer.department} · {offer.location}</p>
         </Reveal>
 
