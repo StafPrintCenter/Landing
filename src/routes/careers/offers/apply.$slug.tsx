@@ -1,7 +1,7 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site/SiteShell";
 import { Reveal } from "@/components/site/Reveal";
-import { MapPin, Briefcase, Clock } from "lucide-react";
+import { Briefcase, Clock } from "lucide-react";
 import { SITE } from "@/data/site";
 import { fetchJobOfferBySlug } from "@/stores/useJobsStore";
 import { ApplyForm } from "@/components/pages/careers/apply";
