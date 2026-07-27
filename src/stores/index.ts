@@ -5,7 +5,7 @@ export { fetchCategories, useCategoriesStore } from "./useCategoriesStore";
 export { sendContactRequest, trackContactRequest } from "./useContactStore";
 export { useFaqsStore } from "./useFaqsStore";
 export * from "./useJobsStore";
-export { subscribeNewsletter, fetchNewsletterPreferences, updateNewsletterPreferences } from "./useNewsletterStore";
+export * from "./useNewsletterStore";
 export { useProjectsStore } from "./useProjectsStore";
 export { createReport } from "./useReportsStore";
 export { fetchReviewByToken, submitReviewResponse, editReviewResponse } from "./useReviewsStore";
