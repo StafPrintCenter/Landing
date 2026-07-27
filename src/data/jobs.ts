@@ -23,6 +23,7 @@ export type APIJobOffer = {
   salaryMin: number | null;
   salaryMax: number | null;
   expiresAt: string;
+  createdAt: string;
 };
 
 export type JobApplicationStatus = "pending" | "accepted" | "rejected" | string;
