@@ -17,7 +17,7 @@ export function ArticleHomeCard({ article: a }: ArticleCardProps) {
       transition={{ duration: 0.25 }}
       className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm hover:shadow-md transition-shadow"
     >
-      <Link to="/articles/$slug" params={{ slug: a.slug }} className="block flex-1 flex flex-col">
+      <Link to="/articles/$slug" params={{ slug: a.slug }} className="flex flex-1 flex-col">
         {/* Cover */}
         <div className="aspect-16/10 overflow-hidden">
           <img
