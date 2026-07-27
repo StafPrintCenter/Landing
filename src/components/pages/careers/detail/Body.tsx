@@ -8,9 +8,9 @@ interface JobOfferDetailBodyProps {
 
 export function JobOfferDetailBody({ offer }: JobOfferDetailBodyProps) {
   return (
-    <div className="container-x py-12">
-      <div className="grid gap-12 lg:grid-cols-3">
-        {/* Contenu principal */}
+    <section className="container-x py-12">
+      <div className="grid gap-12 items-start lg:grid-cols-3">
+        {/* Contenu principal (2 colonnes sur desktop) */}
         <div className="space-y-10 lg:col-span-2">
           {/* Description */}
           <div>
@@ -57,9 +57,9 @@ export function JobOfferDetailBody({ offer }: JobOfferDetailBodyProps) {
           )}
         </div>
 
-        {/* Sidebar stylisée */}
+        {/* Sidebar (1 colonne sur desktop) */}
         <JobOfferDetailSidebar offer={offer} />
       </div>
-    </div>
+    </section>
   );
 }
