@@ -1,6 +1,7 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site/SiteShell";
 import { Reveal } from "@/components/site/Reveal";
+import { MapPin, Briefcase, Clock } from "lucide-react";
 import { SITE } from "@/data/site";
 import { fetchJobOfferBySlug } from "@/stores/useJobsStore";
 import { ApplyForm } from "@/components/pages/careers/apply";
@@ -39,6 +40,9 @@ function ApplyPage() {
           <h1 className="mt-2 font-display text-3xl font-bold">{offer.title}</h1>
           <p className="mt-2 text-muted-foreground">{offer.department} · {offer.location}</p>
           <p className="mt-2 text-muted-foreground">{offer.department} · {offer.location}</p>
+          <span className="inline-flex items-center gap-2 rounded-full bg-card border border-border px-4 py-2">
+            <Clock size={14} /> Postuler avant le {new Date(offer.expiresAt).toLocaleDateString("fr-FR")}
+          </span>
         </Reveal>
 
         <div className="mt-8">
