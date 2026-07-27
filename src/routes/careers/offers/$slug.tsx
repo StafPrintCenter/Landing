@@ -1,64 +1,40 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site/SiteShell";
-import { fetchServiceBySlug } from "@/stores/useServicesStore";
-import { type APIService, getServiceProcess } from "@/data/services";
 import { SITE } from "@/data/site";
-import {
-  ServiceDetailHeader,
-  ServiceDetailFeatures,
-  ServiceDetailProcess,
-  ServiceDetailRelated,
-  ServiceDetailOthers,
-  ServiceDetailCta,
-  ServiceDetailSkeleton,
-  ServiceDetailNotFound,
-  ServiceDetailError,
-} from "@/components/pages/services/detail";
+import { fetchJobOfferBySlug } from "@/stores/useJobsStore";
+import { JobOfferDetailHeader, JobOfferDetailBody, JobOfferNotFoundState } from "@/components/pages/careers/detail";
+import type { APIJobOffer } from "@/data/jobs";
 
 export const Route = createFileRoute("/careers/offers/$slug")({
-  pendingMs: 0,
-
   loader: async ({ params }) => {
-    const service = await fetchServiceBySlug(params.slug);
-    if (!service) throw notFound();
-    return { service };
+    const offer = await fetchJobOfferBySlug(params.slug);
+    if (!offer) throw notFound();
+    return { offer };
   },
-
-  head: ({ loaderData, params }) => {
-    const s = loaderData?.service;
-    const title = s ? `${s.title} | ${SITE.name}` : `Service | ${SITE.name}`;
-    const desc = s ? s.long : "";
-    const url = `/services/${params.slug}`;
+  head: ({ loaderData }) => {
+    const offer = loaderData?.offer;
     return {
       meta: [
-        { title },
-        { name: "description", content: desc },
-        { property: "og:title", content: title },
-        { property: "og:description", content: desc },
-        { property: "og:url", content: url },
+        { title: offer ? `${offer.title} | ${SITE.name}` : `Offre | ${SITE.name}` },
+        { name: "description", content: offer?.description ?? "" },
       ],
-      links: [{ rel: "canonical", href: url }],
     };
   },
-
-  component: ServiceDetailPage,
-  pendingComponent: ServiceDetailSkeleton,
-  notFoundComponent: ServiceDetailNotFound,
-  errorComponent: ServiceDetailError,
+  component: JobOfferDetailPage,
+  notFoundComponent: () => (
+    <SiteShell>
+      <JobOfferNotFoundState />
+    </SiteShell>
+  ),
 });
 
-function ServiceDetailPage() {
-  const data = Route.useLoaderData() as { service: APIService };
-  const s = data.service;
+function JobOfferDetailPage() {
+  const { offer } = Route.useLoaderData() as { offer: APIJobOffer };
 
   return (
     <SiteShell>
-      <ServiceDetailHeader service={s} />
-      <ServiceDetailFeatures features={s.features} />
-      <ServiceDetailProcess process={getServiceProcess(s)} />
-      <ServiceDetailRelated projectCategory={s.projectCategory} />
-      <ServiceDetailOthers currentSlug={s.slug} />
-      <ServiceDetailCta serviceSlug={s.slug} />
+      <JobOfferDetailHeader offer={offer} />
+      <JobOfferDetailBody offer={offer} />
     </SiteShell>
   );
 }
