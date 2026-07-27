@@ -61,7 +61,7 @@ function CareersPage() {
 
   return (
     <SiteShell>
-      <section className="container-x py-16 md:py-24">
+      <section className="container-x py-16">
         <CareersHomeHeader />
 
         <CareersHomeFilters
