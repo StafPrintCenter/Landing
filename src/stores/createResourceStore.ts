@@ -3,6 +3,7 @@ import { resolveApiUrl } from "@/lib/api-url";
 
 export interface BaseFetchParams {
   category?: string;
+  contractType?: string;
   query?: string;
   sortBy?: string;
   sortDir?: string;
