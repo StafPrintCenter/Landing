@@ -1,15 +1,24 @@
+import { ResultsCountText } from "@/components/shared/ResultsCountText";
+
 interface CareersHomeResultsCountProps {
-  count: number;
+  contractType: string;
+  query: string;
+  filteredCount: number;
+  totalCount: number;
   isLoading?: boolean;
 }
 
-export function CareersHomeResultsCount({ count, isLoading }: CareersHomeResultsCountProps) {
-  if (isLoading) {
-    return <div className="mt-6 h-5 w-40 animate-pulse rounded bg-muted" />;
-  }
+export function CareersHomeResultsCount(props: CareersHomeResultsCountProps) {
   return (
-    <p className="mt-6 text-sm text-muted-foreground">
-      {count} offre{count > 1 ? "s" : ""} disponible{count > 1 ? "s" : ""}
-    </p>
+    <ResultsCountText
+      category={props.contractType}
+      query={props.query}
+      filteredCount={props.filteredCount}
+      totalCount={props.totalCount}
+      isLoading={props.isLoading}
+      unit={{ singular: "offre d'emploi", plural: "offres d'emploi" }}
+      foundParticiple={{ singular: "trouvée", plural: "trouvées" }}
+      globalParticiple={{ singular: "disponible", plural: "disponibles" }}
+    />
   );
 }
