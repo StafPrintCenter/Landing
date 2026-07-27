@@ -18,6 +18,7 @@ import { Route as TestsIndexRouteImport } from './routes/tests/index'
 import { Route as ServicesIndexRouteImport } from './routes/services/index'
 import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
 import { Route as FaqsIndexRouteImport } from './routes/faqs/index'
+import { Route as CarrerIndexRouteImport } from './routes/carrer/index'
 import { Route as ArticlesIndexRouteImport } from './routes/articles/index'
 import { Route as TrainingsIdRouteImport } from './routes/trainings/$id'
 import { Route as ToolsLookupRouteImport } from './routes/tools/lookup'
@@ -31,6 +32,7 @@ import { Route as ReviewsTokenRouteImport } from './routes/reviews/$token'
 import { Route as LegalPrivacyRouteImport } from './routes/legal/privacy'
 import { Route as LegalMentionsRouteImport } from './routes/legal/mentions'
 import { Route as LegalCgvRouteImport } from './routes/legal/cgv'
+import { Route as CarrerSlugRouteImport } from './routes/carrer/$slug'
 import { Route as ArticlesSlugRouteImport } from './routes/articles/$slug'
 import { Route as ToolsNewsletterIndexRouteImport } from './routes/tools/newsletter/index'
 import { Route as ToolsNewsletterUnsubscribeRouteImport } from './routes/tools/newsletter/unsubscribe'
@@ -79,6 +81,11 @@ const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
 const FaqsIndexRoute = FaqsIndexRouteImport.update({
   id: '/faqs/',
   path: '/faqs/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CarrerIndexRoute = CarrerIndexRouteImport.update({
+  id: '/carrer/',
+  path: '/carrer/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ArticlesIndexRoute = ArticlesIndexRouteImport.update({
@@ -146,6 +153,11 @@ const LegalCgvRoute = LegalCgvRouteImport.update({
   path: '/legal/cgv',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CarrerSlugRoute = CarrerSlugRouteImport.update({
+  id: '/carrer/$slug',
+  path: '/carrer/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ArticlesSlugRoute = ArticlesSlugRouteImport.update({
   id: '/articles/$slug',
   path: '/articles/$slug',
@@ -174,6 +186,7 @@ export interface FileRoutesByFullPath {
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/articles/$slug': typeof ArticlesSlugRoute
+  '/carrer/$slug': typeof CarrerSlugRoute
   '/legal/cgv': typeof LegalCgvRoute
   '/legal/mentions': typeof LegalMentionsRoute
   '/legal/privacy': typeof LegalPrivacyRoute
@@ -187,6 +200,7 @@ export interface FileRoutesByFullPath {
   '/tools/lookup': typeof ToolsLookupRoute
   '/trainings/$id': typeof TrainingsIdRoute
   '/articles/': typeof ArticlesIndexRoute
+  '/carrer/': typeof CarrerIndexRoute
   '/faqs/': typeof FaqsIndexRoute
   '/projects/': typeof ProjectsIndexRoute
   '/services/': typeof ServicesIndexRoute
@@ -202,6 +216,7 @@ export interface FileRoutesByTo {
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/articles/$slug': typeof ArticlesSlugRoute
+  '/carrer/$slug': typeof CarrerSlugRoute
   '/legal/cgv': typeof LegalCgvRoute
   '/legal/mentions': typeof LegalMentionsRoute
   '/legal/privacy': typeof LegalPrivacyRoute
@@ -215,6 +230,7 @@ export interface FileRoutesByTo {
   '/tools/lookup': typeof ToolsLookupRoute
   '/trainings/$id': typeof TrainingsIdRoute
   '/articles': typeof ArticlesIndexRoute
+  '/carrer': typeof CarrerIndexRoute
   '/faqs': typeof FaqsIndexRoute
   '/projects': typeof ProjectsIndexRoute
   '/services': typeof ServicesIndexRoute
@@ -231,6 +247,7 @@ export interface FileRoutesById {
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/articles/$slug': typeof ArticlesSlugRoute
+  '/carrer/$slug': typeof CarrerSlugRoute
   '/legal/cgv': typeof LegalCgvRoute
   '/legal/mentions': typeof LegalMentionsRoute
   '/legal/privacy': typeof LegalPrivacyRoute
@@ -244,6 +261,7 @@ export interface FileRoutesById {
   '/tools/lookup': typeof ToolsLookupRoute
   '/trainings/$id': typeof TrainingsIdRoute
   '/articles/': typeof ArticlesIndexRoute
+  '/carrer/': typeof CarrerIndexRoute
   '/faqs/': typeof FaqsIndexRoute
   '/projects/': typeof ProjectsIndexRoute
   '/services/': typeof ServicesIndexRoute
@@ -261,6 +279,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/sitemap.xml'
     | '/articles/$slug'
+    | '/carrer/$slug'
     | '/legal/cgv'
     | '/legal/mentions'
     | '/legal/privacy'
@@ -274,6 +293,7 @@ export interface FileRouteTypes {
     | '/tools/lookup'
     | '/trainings/$id'
     | '/articles/'
+    | '/carrer/'
     | '/faqs/'
     | '/projects/'
     | '/services/'
@@ -289,6 +309,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/sitemap.xml'
     | '/articles/$slug'
+    | '/carrer/$slug'
     | '/legal/cgv'
     | '/legal/mentions'
     | '/legal/privacy'
@@ -302,6 +323,7 @@ export interface FileRouteTypes {
     | '/tools/lookup'
     | '/trainings/$id'
     | '/articles'
+    | '/carrer'
     | '/faqs'
     | '/projects'
     | '/services'
@@ -317,6 +339,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/sitemap.xml'
     | '/articles/$slug'
+    | '/carrer/$slug'
     | '/legal/cgv'
     | '/legal/mentions'
     | '/legal/privacy'
@@ -330,6 +353,7 @@ export interface FileRouteTypes {
     | '/tools/lookup'
     | '/trainings/$id'
     | '/articles/'
+    | '/carrer/'
     | '/faqs/'
     | '/projects/'
     | '/services/'
@@ -346,6 +370,7 @@ export interface RootRouteChildren {
   SearchRoute: typeof SearchRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ArticlesSlugRoute: typeof ArticlesSlugRoute
+  CarrerSlugRoute: typeof CarrerSlugRoute
   LegalCgvRoute: typeof LegalCgvRoute
   LegalMentionsRoute: typeof LegalMentionsRoute
   LegalPrivacyRoute: typeof LegalPrivacyRoute
@@ -359,6 +384,7 @@ export interface RootRouteChildren {
   ToolsLookupRoute: typeof ToolsLookupRoute
   TrainingsIdRoute: typeof TrainingsIdRoute
   ArticlesIndexRoute: typeof ArticlesIndexRoute
+  CarrerIndexRoute: typeof CarrerIndexRoute
   FaqsIndexRoute: typeof FaqsIndexRoute
   ProjectsIndexRoute: typeof ProjectsIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
@@ -433,6 +459,13 @@ declare module '@tanstack/react-router' {
       path: '/faqs'
       fullPath: '/faqs/'
       preLoaderRoute: typeof FaqsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/carrer/': {
+      id: '/carrer/'
+      path: '/carrer'
+      fullPath: '/carrer/'
+      preLoaderRoute: typeof CarrerIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/articles/': {
@@ -526,6 +559,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LegalCgvRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/carrer/$slug': {
+      id: '/carrer/$slug'
+      path: '/carrer/$slug'
+      fullPath: '/carrer/$slug'
+      preLoaderRoute: typeof CarrerSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/articles/$slug': {
       id: '/articles/$slug'
       path: '/articles/$slug'
@@ -562,6 +602,7 @@ const rootRouteChildren: RootRouteChildren = {
   SearchRoute: SearchRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ArticlesSlugRoute: ArticlesSlugRoute,
+  CarrerSlugRoute: CarrerSlugRoute,
   LegalCgvRoute: LegalCgvRoute,
   LegalMentionsRoute: LegalMentionsRoute,
   LegalPrivacyRoute: LegalPrivacyRoute,
@@ -575,6 +616,7 @@ const rootRouteChildren: RootRouteChildren = {
   ToolsLookupRoute: ToolsLookupRoute,
   TrainingsIdRoute: TrainingsIdRoute,
   ArticlesIndexRoute: ArticlesIndexRoute,
+  CarrerIndexRoute: CarrerIndexRoute,
   FaqsIndexRoute: FaqsIndexRoute,
   ProjectsIndexRoute: ProjectsIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,
