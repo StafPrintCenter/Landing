@@ -37,6 +37,7 @@ import { Route as CareersOffersIndexRouteImport } from './routes/careers/offers/
 import { Route as ToolsNewsletterUnsubscribeRouteImport } from './routes/tools/newsletter/unsubscribe'
 import { Route as ToolsNewsletterPreferencesRouteImport } from './routes/tools/newsletter/preferences'
 import { Route as CareersOffersSlugRouteImport } from './routes/careers/offers/$slug'
+import { Route as CareersOffersApplySlugRouteImport } from './routes/careers/offers/apply.$slug'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -180,6 +181,11 @@ const CareersOffersSlugRoute = CareersOffersSlugRouteImport.update({
   path: '/careers/offers/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CareersOffersApplySlugRoute = CareersOffersApplySlugRouteImport.update({
+  id: '/careers/offers/apply/$slug',
+  path: '/careers/offers/apply/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -210,6 +216,7 @@ export interface FileRoutesByFullPath {
   '/tools/newsletter/unsubscribe': typeof ToolsNewsletterUnsubscribeRoute
   '/careers/offers/': typeof CareersOffersIndexRoute
   '/tools/newsletter/': typeof ToolsNewsletterIndexRoute
+  '/careers/offers/apply/$slug': typeof CareersOffersApplySlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -240,6 +247,7 @@ export interface FileRoutesByTo {
   '/tools/newsletter/unsubscribe': typeof ToolsNewsletterUnsubscribeRoute
   '/careers/offers': typeof CareersOffersIndexRoute
   '/tools/newsletter': typeof ToolsNewsletterIndexRoute
+  '/careers/offers/apply/$slug': typeof CareersOffersApplySlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -271,6 +279,7 @@ export interface FileRoutesById {
   '/tools/newsletter/unsubscribe': typeof ToolsNewsletterUnsubscribeRoute
   '/careers/offers/': typeof CareersOffersIndexRoute
   '/tools/newsletter/': typeof ToolsNewsletterIndexRoute
+  '/careers/offers/apply/$slug': typeof CareersOffersApplySlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -303,6 +312,7 @@ export interface FileRouteTypes {
     | '/tools/newsletter/unsubscribe'
     | '/careers/offers/'
     | '/tools/newsletter/'
+    | '/careers/offers/apply/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -333,6 +343,7 @@ export interface FileRouteTypes {
     | '/tools/newsletter/unsubscribe'
     | '/careers/offers'
     | '/tools/newsletter'
+    | '/careers/offers/apply/$slug'
   id:
     | '__root__'
     | '/'
@@ -363,6 +374,7 @@ export interface FileRouteTypes {
     | '/tools/newsletter/unsubscribe'
     | '/careers/offers/'
     | '/tools/newsletter/'
+    | '/careers/offers/apply/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -394,6 +406,7 @@ export interface RootRouteChildren {
   ToolsNewsletterUnsubscribeRoute: typeof ToolsNewsletterUnsubscribeRoute
   CareersOffersIndexRoute: typeof CareersOffersIndexRoute
   ToolsNewsletterIndexRoute: typeof ToolsNewsletterIndexRoute
+  CareersOffersApplySlugRoute: typeof CareersOffersApplySlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -594,6 +607,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CareersOffersSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/careers/offers/apply/$slug': {
+      id: '/careers/offers/apply/$slug'
+      path: '/careers/offers/apply/$slug'
+      fullPath: '/careers/offers/apply/$slug'
+      preLoaderRoute: typeof CareersOffersApplySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -626,6 +646,7 @@ const rootRouteChildren: RootRouteChildren = {
   ToolsNewsletterUnsubscribeRoute: ToolsNewsletterUnsubscribeRoute,
   CareersOffersIndexRoute: CareersOffersIndexRoute,
   ToolsNewsletterIndexRoute: ToolsNewsletterIndexRoute,
+  CareersOffersApplySlugRoute: CareersOffersApplySlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
