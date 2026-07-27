@@ -36,6 +36,7 @@ import { Route as ToolsNewsletterIndexRouteImport } from './routes/tools/newslet
 import { Route as CareersOffersIndexRouteImport } from './routes/careers/offers/index'
 import { Route as ToolsNewsletterUnsubscribeRouteImport } from './routes/tools/newsletter/unsubscribe'
 import { Route as ToolsNewsletterPreferencesRouteImport } from './routes/tools/newsletter/preferences'
+import { Route as CareersOffersSlugRouteImport } from './routes/careers/offers/$slug'
 import { Route as CareersOffersApplySlugRouteImport } from './routes/careers/offers/apply.$slug'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -175,6 +176,11 @@ const ToolsNewsletterPreferencesRoute =
     path: '/tools/newsletter/preferences',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CareersOffersSlugRoute = CareersOffersSlugRouteImport.update({
+  id: '/careers/offers/$slug',
+  path: '/careers/offers/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CareersOffersApplySlugRoute = CareersOffersApplySlugRouteImport.update({
   id: '/careers/offers/apply/$slug',
   path: '/careers/offers/apply/$slug',
@@ -205,6 +211,7 @@ export interface FileRoutesByFullPath {
   '/tests/': typeof TestsIndexRoute
   '/tools/': typeof ToolsIndexRoute
   '/trainings/': typeof TrainingsIndexRoute
+  '/careers/offers/$slug': typeof CareersOffersSlugRoute
   '/tools/newsletter/preferences': typeof ToolsNewsletterPreferencesRoute
   '/tools/newsletter/unsubscribe': typeof ToolsNewsletterUnsubscribeRoute
   '/careers/offers/': typeof CareersOffersIndexRoute
@@ -235,6 +242,7 @@ export interface FileRoutesByTo {
   '/tests': typeof TestsIndexRoute
   '/tools': typeof ToolsIndexRoute
   '/trainings': typeof TrainingsIndexRoute
+  '/careers/offers/$slug': typeof CareersOffersSlugRoute
   '/tools/newsletter/preferences': typeof ToolsNewsletterPreferencesRoute
   '/tools/newsletter/unsubscribe': typeof ToolsNewsletterUnsubscribeRoute
   '/careers/offers': typeof CareersOffersIndexRoute
@@ -266,6 +274,7 @@ export interface FileRoutesById {
   '/tests/': typeof TestsIndexRoute
   '/tools/': typeof ToolsIndexRoute
   '/trainings/': typeof TrainingsIndexRoute
+  '/careers/offers/$slug': typeof CareersOffersSlugRoute
   '/tools/newsletter/preferences': typeof ToolsNewsletterPreferencesRoute
   '/tools/newsletter/unsubscribe': typeof ToolsNewsletterUnsubscribeRoute
   '/careers/offers/': typeof CareersOffersIndexRoute
@@ -298,6 +307,7 @@ export interface FileRouteTypes {
     | '/tests/'
     | '/tools/'
     | '/trainings/'
+    | '/careers/offers/$slug'
     | '/tools/newsletter/preferences'
     | '/tools/newsletter/unsubscribe'
     | '/careers/offers/'
@@ -328,6 +338,7 @@ export interface FileRouteTypes {
     | '/tests'
     | '/tools'
     | '/trainings'
+    | '/careers/offers/$slug'
     | '/tools/newsletter/preferences'
     | '/tools/newsletter/unsubscribe'
     | '/careers/offers'
@@ -358,6 +369,7 @@ export interface FileRouteTypes {
     | '/tests/'
     | '/tools/'
     | '/trainings/'
+    | '/careers/offers/$slug'
     | '/tools/newsletter/preferences'
     | '/tools/newsletter/unsubscribe'
     | '/careers/offers/'
@@ -389,6 +401,7 @@ export interface RootRouteChildren {
   TestsIndexRoute: typeof TestsIndexRoute
   ToolsIndexRoute: typeof ToolsIndexRoute
   TrainingsIndexRoute: typeof TrainingsIndexRoute
+  CareersOffersSlugRoute: typeof CareersOffersSlugRoute
   ToolsNewsletterPreferencesRoute: typeof ToolsNewsletterPreferencesRoute
   ToolsNewsletterUnsubscribeRoute: typeof ToolsNewsletterUnsubscribeRoute
   CareersOffersIndexRoute: typeof CareersOffersIndexRoute
@@ -587,6 +600,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsNewsletterPreferencesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/careers/offers/$slug': {
+      id: '/careers/offers/$slug'
+      path: '/careers/offers/$slug'
+      fullPath: '/careers/offers/$slug'
+      preLoaderRoute: typeof CareersOffersSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/careers/offers/apply/$slug': {
       id: '/careers/offers/apply/$slug'
       path: '/careers/offers/apply/$slug'
@@ -621,6 +641,7 @@ const rootRouteChildren: RootRouteChildren = {
   TestsIndexRoute: TestsIndexRoute,
   ToolsIndexRoute: ToolsIndexRoute,
   TrainingsIndexRoute: TrainingsIndexRoute,
+  CareersOffersSlugRoute: CareersOffersSlugRoute,
   ToolsNewsletterPreferencesRoute: ToolsNewsletterPreferencesRoute,
   ToolsNewsletterUnsubscribeRoute: ToolsNewsletterUnsubscribeRoute,
   CareersOffersIndexRoute: CareersOffersIndexRoute,
