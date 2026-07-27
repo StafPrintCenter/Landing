@@ -53,8 +53,8 @@ export function JobOfferDetailSidebar({ offer }: JobOfferDetailSidebarProps) {
   const richEmailLink = createEmailLink(SITE.email, emailSubject, emailBody);
 
   return (
-    <aside className="space-y-6">
-      <div className="sticky top-24 rounded-2xl border border-border bg-card p-6 shadow-sm">
+    <aside className="sticky top-24 h-fit space-y-6">
+      <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
         <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
           Aperçu de l'offre
         </p>
