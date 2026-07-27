@@ -15,7 +15,7 @@ export const Route = createFileRoute("/careers/offers/apply/$slug")({
   },
   head: ({ loaderData }) => ({
     meta: [
-      { title: loaderData?.offer ? `Postuler — ${loaderData.offer.title} | ${SITE.name}` : `Candidature | ${SITE.name}` },
+      { title: loaderData?.offer ? `Postuler : ${loaderData.offer.title} | ${SITE.name}` : `Candidature | ${SITE.name}` },
       { name: "robots", content: "noindex" },
     ],
   }),
