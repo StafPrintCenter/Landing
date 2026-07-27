@@ -11,7 +11,7 @@ export function Footer() {
   const footerServices = [
     ...(services || []).filter((s) => s.featured),
     ...(services || []).filter((s) => !s.featured),
-  ].slice(0, 5);
+  ].slice(0, 6);
 
   return (
     <footer className="mt-24 border-t border-border bg-secondary text-secondary-foreground">
@@ -42,6 +42,7 @@ export function Footer() {
               </li>
             ))}
             <li><Link to="/" hash="contact" className="hover:text-accent">Contact</Link></li>
+            <li><Link to="/careers/offers" className="hover:text-accent">Offre d'emploi</Link></li>
           </ul>
         </div>
 
