@@ -17,7 +17,7 @@ export function ApplyErrorBanner({ message, status, slug }: ApplyErrorBannerProp
         <p className="font-medium">{message}</p>
         {isAlreadyApplied && (
           <Link
-            to="/careers/offers/check"
+            to="/careers/check-offer"
             className="mt-2 inline-flex items-center gap-1 text-xs font-semibold underline underline-offset-2"
           >
             <ArrowLeft size={11} /> Suivre ma candidature existante
