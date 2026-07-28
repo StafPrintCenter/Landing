@@ -159,7 +159,7 @@ export function ApplyForm({ offer }: ApplyFormProps) {
             <input
               type="email"
               required
-              placeholder="jean.dupont@example.com"
+              placeholder="votre.nom@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-sm outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
