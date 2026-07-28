@@ -1,6 +1,6 @@
-import { Building2, MapPin, Calendar, Briefcase, ArrowLeft, BriefcaseBusiness, } from "lucide-react";
+import { Building2, MapPin, Calendar, Briefcase, ArrowLeft, BriefcaseBusiness, Users, GraduationCap } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import { JOB_CONTRACT_TYPE_LABELS, formatSalaryRange, isJobOfferExpired, type APIJobOffer, } from "@/data/jobs";
+import { JOB_CONTRACT_TYPE_LABELS, formatSalaryRange, isJobOfferExpired, type APIJobOffer } from "@/data/jobs";
 
 interface ApplySidebarProps {
   offer: APIJobOffer;
@@ -31,8 +31,18 @@ export function ApplySidebar({ offer }: ApplySidebarProps) {
 
       {/* Carte récapitulative de l'offre */}
       <div className="rounded-2xl border border-border bg-card p-6 shadow-xs">
-        <div className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-          {JOB_CONTRACT_TYPE_LABELS[offer.contractType]}
+        <div className="flex items-center justify-between gap-2">
+          <div className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+            {JOB_CONTRACT_TYPE_LABELS[offer.contractType]}
+          </div>
+
+          {/* Nombre de postes si disponible */}
+          {offer.positionsCount && offer.positionsCount > 0 && (
+            <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
+              <Users size={12} className="text-primary" />
+              {offer.positionsCount} poste{offer.positionsCount > 1 ? "s" : ""}
+            </span>
+          )}
         </div>
 
         <h1 className="mt-3 font-display text-xl font-bold leading-tight text-foreground">
@@ -52,6 +62,7 @@ export function ApplySidebar({ offer }: ApplySidebarProps) {
               </strong>
             </span>
           </li>
+
           <li className="flex items-center gap-2.5 text-muted-foreground">
             <MapPin size={16} className="shrink-0 text-primary" />
             <span>
@@ -61,6 +72,20 @@ export function ApplySidebar({ offer }: ApplySidebarProps) {
               </strong>
             </span>
           </li>
+
+          {/* Niveau d'études requis (si présent sur l'offre) */}
+          {offer.educationLevel && (
+            <li className="flex items-center gap-2.5 text-muted-foreground">
+              <GraduationCap size={16} className="shrink-0 text-primary" />
+              <span>
+                Niveau d'études :{" "}
+                <strong className="text-foreground font-medium">
+                  {offer.educationLevel}
+                </strong>
+              </span>
+            </li>
+          )}
+
           {salary && (
             <li className="flex items-center gap-2.5 text-muted-foreground">
               <Briefcase size={16} className="shrink-0 text-primary" />
@@ -70,6 +95,7 @@ export function ApplySidebar({ offer }: ApplySidebarProps) {
               </span>
             </li>
           )}
+
           <li className="flex items-center gap-2.5 text-muted-foreground">
             <Calendar size={16} className="shrink-0 text-primary" />
             <span>
