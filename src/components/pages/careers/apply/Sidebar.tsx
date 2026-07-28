@@ -1,18 +1,6 @@
-import {
-  Building2,
-  MapPin,
-  Calendar,
-  Briefcase,
-  ArrowLeft,
-  BriefcaseBusiness,
-} from "lucide-react";
+import { Building2, MapPin, Calendar, Briefcase, ArrowLeft, BriefcaseBusiness, } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import {
-  JOB_CONTRACT_TYPE_LABELS,
-  formatSalaryRange,
-  isJobOfferExpired,
-  type APIJobOffer,
-} from "@/data/jobs";
+import { JOB_CONTRACT_TYPE_LABELS, formatSalaryRange, isJobOfferExpired, type APIJobOffer, } from "@/data/jobs";
 
 interface ApplySidebarProps {
   offer: APIJobOffer;
