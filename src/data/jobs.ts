@@ -10,20 +10,32 @@ export const JOB_CONTRACT_TYPE_LABELS: Record<JobContractType, string> = {
   alternance: "Alternance",
 };
 
+export type JobWorkMode = "presentiel" | "hybride" | "teletravail";
+
+export const JOB_WORK_MODE_LABELS: Record<JobWorkMode, string> = {
+  presentiel: "Présentiel",
+  hybride: "Hybride",
+  teletravail: "Télétravail",
+};
+
 export type APIJobOffer = {
   id: string;
   title: string;
   slug: string;
+  summary: string;
   department: string;
   contractType: JobContractType;
+  workMode: JobWorkMode;
   location: string;
+  numPositions: number;
   description: string;
-  responsibilities: string[];
-  requirements: string[];
+  missions: string[];
+  profile: string[];
+  educationLevel: string | null;
   salaryMin: number | null;
   salaryMax: number | null;
   expiresAt: string;
-  createdAt: string;
+  createdAt?: string;
 };
 
 export type JobApplicationStatus = "pending" | "accepted" | "rejected" | string;
@@ -36,7 +48,9 @@ export type APIJobApplication = {
   lastName: string;
   email: string;
   phone: string;
+  educationLevel?: string | null;
   coverLetter: string | null;
+  coverLetterPath?: string | null;
   cvUrl: string;
   status: JobApplicationStatus;
   reviewedAt: string | null;
