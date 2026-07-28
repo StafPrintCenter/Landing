@@ -19,7 +19,7 @@ import {
   CAREER_SORT_DIRECTIONS,
   type CareerSortOption,
   type CareerSortDirection,
-} from "@/components/pages/careers/home";
+} from "@/components/pages/careers/offers/home";
 
 const careersSearchSchema = z.object({
   contractType: z.enum(["Tout", ...JOB_CONTRACT_TYPES] as [string, ...string[]]).catch("Tout").default("Tout"),
