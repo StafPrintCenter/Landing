@@ -5,12 +5,6 @@ import {  STATUS_CONFIG,  getEducationLevelLabel,  type APIJobApplication,} from
 import { resolveStorageUrl } from "@/lib/file-url";
 import { FilePreviewModal } from "./FilePreviewModal";
 
-const STATUS_CONFIG: Record<string, { label: string; className: string; icon: typeof Clock }> = {
-  pending: { label: "En attente d'examen", className: "bg-amber-500/10 text-amber-600 border-amber-500/20", icon: Clock },
-  accepted: { label: "Candidature Retenue", className: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20", icon: CheckCircle2 },
-  rejected: { label: "Non retenue", className: "bg-muted text-muted-foreground border-border", icon: XCircle },
-};
-
 interface ApplicationResultProps {
   application: APIJobApplication;
   onReset: () => void;
