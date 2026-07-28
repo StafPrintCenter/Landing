@@ -86,6 +86,8 @@ export function JobOfferDetailHeader({ offer }: JobOfferDetailHeaderProps) {
       ? JOB_EDUCATION_LEVEL_LABELS[offer.educationLevel as JobEducationLevel]
       : offer.educationLevel;
 
+  const formattedDate = new Date(offer.expiresAt).toLocaleDateString("fr-FR");
+
   return (
     <>
       <header className="container-x pt-10 md:pt-14">
