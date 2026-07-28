@@ -17,7 +17,7 @@ export function CheckForm({ email, onEmailChange, token, onTokenChange, onSubmit
         <input type="email" required value={email} onChange={(e) => onEmailChange(e.target.value)} className="input w-full" placeholder="vous@exemple.com" />
       </label>
       <label className="block">
-        <span className="mb-1.5 flex items-center gap-1.5 text-sm font-medium"><KeyRound size={14} /> Token de suivi</span>
+        <span className="mb-1.5 flex items-center gap-1.5 text-sm font-medium"><KeyRound size={14} /> Clé de suivi</span>
         <input type="text" required value={token} onChange={(e) => onTokenChange(e.target.value)} className="input w-full font-mono text-sm" placeholder="Reçu par email" />
       </label>
 
