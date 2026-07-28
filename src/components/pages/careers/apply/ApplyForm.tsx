@@ -44,7 +44,7 @@ export function ApplyForm({ offer }: ApplyFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!cv || !consent) return;
+    if (!cv || !consent || !educationLevel) return;
 
     setErrorMessage(null);
     setFieldErrors(undefined);
@@ -56,7 +56,7 @@ export function ApplyForm({ offer }: ApplyFormProps) {
         lastName,
         email,
         phone,
-        educationLevel: educationLevel || undefined,
+        educationLevel,
         coverLetter: coverLetter.trim() || undefined,
         cv,
         consentAccepted: consent,
@@ -153,18 +153,20 @@ export function ApplyForm({ offer }: ApplyFormProps) {
           </label>
         </div>
 
-        {/* Niveau d'études */}
+        {/* Niveau d'études (OBLIGATOIRE) */}
         <label className="block space-y-1.5">
           <span className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
-            <GraduationCap size={14} className="text-primary" /> Niveau d'études{" "}
-            <span className="text-xs font-normal text-muted-foreground">(Optionnel)</span>
+            <GraduationCap size={14} className="text-primary" /> Niveau d'études <span className="text-destructive">*</span>
           </span>
           <select
+            required
             value={educationLevel}
             onChange={(e) => setEducationLevel(e.target.value)}
             className="w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-sm outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20 cursor-pointer"
           >
-            <option value="">Sélectionnez votre niveau d'études</option>
+            <option value="" disabled>
+              Sélectionnez votre niveau d'études
+            </option>
             {EDUCATION_LEVEL_OPTIONS.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
@@ -173,7 +175,7 @@ export function ApplyForm({ offer }: ApplyFormProps) {
           </select>
         </label>
 
-        {/* Votre motivation (Ex-Lettre de motivation) */}
+        {/* Votre motivation (Optionnel) */}
         <label className="block space-y-1.5">
           <span className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
             <FileText size={14} className="text-primary" /> Votre motivation{" "}
@@ -189,7 +191,7 @@ export function ApplyForm({ offer }: ApplyFormProps) {
           />
         </label>
 
-        {/* Upload du CV */}
+        {/* Upload du CV (OBLIGATOIRE) */}
         <div className="space-y-1.5">
           <span className="block text-xs font-semibold text-foreground">
             Votre CV <span className="text-destructive">*</span>{" "}
@@ -260,7 +262,7 @@ export function ApplyForm({ offer }: ApplyFormProps) {
         {/* Bouton de soumission */}
         <button
           type="submit"
-          disabled={isSubmitting || !cv || !consent}
+          disabled={isSubmitting || !cv || !consent || !educationLevel}
           className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:opacity-90 disabled:opacity-50 cursor-pointer shadow-sm"
         >
           {isSubmitting ? (
