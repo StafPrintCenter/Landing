@@ -1,10 +1,13 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Mail, MapPin, Briefcase, Calendar, Building2 } from "lucide-react";
+import { ArrowRight, Mail, MapPin, Briefcase, Calendar, Building2, Laptop, Users, GraduationCap } from "lucide-react";
 import {
   JOB_CONTRACT_TYPE_LABELS,
+  JOB_WORK_MODE_LABELS,
+  JOB_EDUCATION_LEVEL_LABELS,
   formatSalaryRange,
   isJobOfferExpired,
   type APIJobOffer,
+  type JobEducationLevel,
 } from "@/data/jobs";
 import { SITE } from "@/data/site";
 import { WhatsAppIcon } from "@/components/site/icons/WhatsAppIcon";
@@ -19,12 +22,19 @@ export function JobOfferDetailSidebar({ offer }: JobOfferDetailSidebarProps) {
   const expired = isJobOfferExpired(offer);
   const salary = formatSalaryRange(offer.salaryMin, offer.salaryMax);
 
+  const workModeLabel = JOB_WORK_MODE_LABELS[offer.workMode] ?? offer.workMode;
+  const educationLabel =
+    offer.educationLevel && offer.educationLevel in JOB_EDUCATION_LEVEL_LABELS
+      ? JOB_EDUCATION_LEVEL_LABELS[offer.educationLevel as JobEducationLevel]
+      : offer.educationLevel;
+
   // Helper message WhatsApp
   const whatsappText = [
     `Bonjour ${SITE.name},`,
     `Je vous contacte au sujet de l'offre d'emploi : *${offer.title}*.`,
     `- Département : *${offer.department}*`,
-    `- Type de contrat : *${JOB_CONTRACT_TYPE_LABELS[offer.contractType]}*`,
+    `- Type de contrat : *${JOB_CONTRACT_TYPE_LABELS[offer.contractType] ?? offer.contractType}*`,
+    `- Mode de travail : *${workModeLabel}*`,
     `- Localisation : *${offer.location}*`,
     salary ? `- Rémunération : *${salary}*` : "",
     "",
@@ -44,7 +54,8 @@ export function JobOfferDetailSidebar({ offer }: JobOfferDetailSidebarProps) {
     ``,
     `Je souhaite obtenir des informations complémentaires ou postuler à l'offre de "${offer.title}" (${offer.department}) chez ${SITE.name}.`,
     ``,
-    `Type de contrat : ${JOB_CONTRACT_TYPE_LABELS[offer.contractType]}`,
+    `Type de contrat : ${JOB_CONTRACT_TYPE_LABELS[offer.contractType] ?? offer.contractType}`,
+    `Mode de travail : ${workModeLabel}`,
     `Lieu : ${offer.location}`,
     ``,
     `Cordialement,`,
@@ -60,7 +71,7 @@ export function JobOfferDetailSidebar({ offer }: JobOfferDetailSidebarProps) {
         </p>
 
         <p className="mt-2 font-display text-2xl font-bold text-foreground">
-          {JOB_CONTRACT_TYPE_LABELS[offer.contractType]}
+          {JOB_CONTRACT_TYPE_LABELS[offer.contractType] ?? offer.contractType}
         </p>
 
         <div className="my-5 h-px bg-border" />
@@ -71,7 +82,14 @@ export function JobOfferDetailSidebar({ offer }: JobOfferDetailSidebarProps) {
             <span className="inline-flex items-center gap-1.5 text-muted-foreground">
               <Building2 size={15} /> Département
             </span>
-            <span className="font-medium text-foreground">{offer.department}</span>
+            <span className="font-medium text-foreground text-right">{offer.department}</span>
+          </li>
+
+          <li className="flex items-center justify-between gap-2">
+            <span className="inline-flex items-center gap-1.5 text-muted-foreground">
+              <Laptop size={15} /> Présence
+            </span>
+            <span className="font-medium text-foreground">{workModeLabel}</span>
           </li>
 
           <li className="flex items-center justify-between gap-2">
@@ -81,12 +99,30 @@ export function JobOfferDetailSidebar({ offer }: JobOfferDetailSidebarProps) {
             <span className="font-medium text-foreground">{offer.location}</span>
           </li>
 
+          {offer.numPositions > 0 && (
+            <li className="flex items-center justify-between gap-2">
+              <span className="inline-flex items-center gap-1.5 text-muted-foreground">
+                <Users size={15} /> Postes
+              </span>
+              <span className="font-medium text-foreground">{offer.numPositions}</span>
+            </li>
+          )}
+
+          {educationLabel && (
+            <li className="flex items-center justify-between gap-2">
+              <span className="inline-flex items-center gap-1.5 text-muted-foreground">
+                <GraduationCap size={15} /> Diplôme
+              </span>
+              <span className="font-medium text-foreground text-right">{educationLabel}</span>
+            </li>
+          )}
+
           {salary && (
             <li className="flex items-center justify-between gap-2">
               <span className="inline-flex items-center gap-1.5 text-muted-foreground">
                 <Briefcase size={15} /> Rémunération
               </span>
-              <span className="font-medium text-primary">{salary}</span>
+              <span className="font-medium text-primary text-right">{salary}</span>
             </li>
           )}
 
