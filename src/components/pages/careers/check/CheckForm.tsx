@@ -8,7 +8,6 @@ interface CheckFormProps {
   onTokenChange: (v: string) => void;
   onSubmit: (e: React.FormEvent) => void;
   isLoading: boolean;
-  error?: string | null;
 }
 
 export function CheckForm({
@@ -18,16 +17,9 @@ export function CheckForm({
   onTokenChange,
   onSubmit,
   isLoading,
-  error,
 }: CheckFormProps) {
   return (
     <form onSubmit={onSubmit} className="space-y-4 rounded-2xl border border-border bg-card p-6 md:p-8 shadow-xs">
-      {error && (
-        <div className="rounded-xl border border-destructive/20 bg-destructive/10 p-3 text-xs text-destructive font-medium">
-          {error}
-        </div>
-      )}
-
       <label className="block">
         <span className="mb-1.5 flex items-center gap-1.5 text-sm font-medium">
           <Mail size={14} /> Adresse Email
@@ -52,7 +44,7 @@ export function CheckForm({
           value={token}
           onChange={(e) => onTokenChange(e.target.value)}
           className="input w-full font-mono text-sm"
-          placeholder="Ex: 6b4e4224-3c72..."
+          placeholder="Ex: EZTmFYzAE3bJ5kyXnE97..."
         />
       </label>
 
