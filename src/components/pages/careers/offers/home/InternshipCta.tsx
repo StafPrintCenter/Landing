@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { GraduationCap, ArrowRight } from "lucide-react";
 
-export function InternshipCta() {
+export function CareersHomeInternshipCta() {
   return (
     <div className="mt-10 flex flex-col items-center gap-4 rounded-2xl border border-primary/20 bg-primary/5 p-6 text-center sm:flex-row sm:justify-between sm:text-left">
       <div className="flex items-center gap-3">
