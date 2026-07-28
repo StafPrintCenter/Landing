@@ -2,11 +2,7 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site/SiteShell";
 import { SITE } from "@/data/site";
 import { fetchJobOfferBySlug } from "@/stores/useJobsStore";
-import {
-  JobOfferDetailHeader,
-  JobOfferDetailBody,
-  JobOfferNotFoundState,
-} from "@/components/pages/careers/detail";
+import { JobOfferDetailHeader, JobOfferDetailBody, JobOfferDetailSidebar, JobOfferNotFoundState, } from "@/components/pages/careers/detail";
 import type { APIJobOffer } from "@/data/jobs";
 
 export const Route = createFileRoute("/careers/offers/$slug")({
@@ -83,7 +79,17 @@ function JobOfferDetailPage() {
   return (
     <SiteShell>
       <JobOfferDetailHeader offer={offer} />
-      <JobOfferDetailBody offer={offer} />
+
+      {/* Conteneur principal Grille de la page */}
+      <section className="container-x py-12">
+        <div className="grid gap-12 items-start lg:grid-cols-3">
+          {/* Contenu principal (2 colonnes) */}
+          <JobOfferDetailBody offer={offer} />
+
+          {/* Sidebar Sticky (1 colonne) */}
+          <JobOfferDetailSidebar offer={offer} />
+        </div>
+      </section>
     </SiteShell>
   );
 }
