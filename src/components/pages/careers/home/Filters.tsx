@@ -3,7 +3,8 @@ import { JOB_CONTRACT_TYPES, JOB_CONTRACT_TYPE_LABELS, type JobContractType } fr
 
 const CONTRACT_TYPES: Array<"Tout" | JobContractType> = ["Tout", ...JOB_CONTRACT_TYPES];
 
-export const CAREER_SORT_OPTIONS = ["default", "recent", "alpha", "salary"] as const;
+export const CAREER_SORT_OPTIONS = ["default", "recent", "alpha", "salary", "positions", "work_mode",] as const;
+
 export type CareerSortOption = (typeof CAREER_SORT_OPTIONS)[number];
 
 export const CAREER_SORT_DIRECTIONS = ["asc", "desc"] as const;
@@ -14,6 +15,8 @@ const DIRECTION_LABELS: Record<CareerSortOption, { asc: string; desc: string }> 
   recent: { asc: "Anciennes → Récentes", desc: "Récentes → Anciennes" },
   alpha: { asc: "Titre A → Z", desc: "Titre Z → A" },
   salary: { asc: "Salaire croissant", desc: "Salaire décroissant" },
+  positions: { asc: "Moins de postes", desc: "Plus de postes" },
+  work_mode: { asc: "Mode de travail (A → Z)", desc: "Mode de travail (Z → A)" },
 };
 
 interface CareersFiltersProps {
@@ -34,7 +37,7 @@ export function CareersHomeFilters({
   onSortDirChange,
 }: CareersFiltersProps) {
   const isSortable = sortBy !== "default";
-  const directionLabel = DIRECTION_LABELS[sortBy][sortDir];
+  const directionLabel = DIRECTION_LABELS[sortBy]?.[sortDir] ?? "";
 
   const toggleDirection = () => {
     if (!isSortable) return;
@@ -74,6 +77,8 @@ export function CareersHomeFilters({
             <option value="recent">Date de publication</option>
             <option value="alpha">Ordre alphabétique</option>
             <option value="salary">Niveau de salaire</option>
+            <option value="positions">Nombre de postes</option>
+            <option value="work_mode">Mode de travail</option>
           </select>
 
           <button
