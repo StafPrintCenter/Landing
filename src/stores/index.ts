@@ -4,6 +4,7 @@ export { useArticlesStore } from "./useArticlesStore";
 export { fetchCategories, useCategoriesStore } from "./useCategoriesStore";
 export { sendContactRequest, trackContactRequest } from "./useContactStore";
 export { useFaqsStore } from "./useFaqsStore";
+export * from "./useInternshipsStore";
 export * from "./useJobsStore";
 export * from "./useNewsletterStore";
 export { useProjectsStore } from "./useProjectsStore";
