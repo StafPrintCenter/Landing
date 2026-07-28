@@ -2,8 +2,8 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site/SiteShell";
 import { SITE } from "@/data/site";
 import { fetchJobOfferBySlug } from "@/stores/useJobsStore";
-import { ApplyForm, ApplySidebar } from "@/components/pages/careers/apply";
-import { JobOfferNotFoundState } from "@/components/pages/careers/detail";
+import { ApplyForm, ApplySidebar } from "@/components/pages/careers/offers/apply";
+import { JobOfferNotFoundState } from "@/components/pages/careers/offers/detail";
 import { isJobOfferExpired, type APIJobOffer } from "@/data/jobs";
 
 export const Route = createFileRoute("/careers/offers/apply/$slug")({
