@@ -151,19 +151,15 @@ export function JobOfferDetailHeader({ offer }: JobOfferDetailHeaderProps) {
             )}
 
             <span className="inline-flex items-center gap-2 rounded-full bg-card border border-border px-4 py-2">
-              <Clock size={14} /> Jusqu'au {new Date(offer.expiresAt).toLocaleDateString("fr-FR")}
-            </span>
-
-            {/* Inscription de la date + Compte à rebours dynamique */}
-            <span className="inline-flex items-center gap-2 rounded-full bg-card border border-border px-4 py-2">
-              <Clock size={14} className={countdown ? "text-primary animate-pulse" : "text-muted-foreground"} />
-              {countdown ? (
-                <span>
-                  Expire dans <strong className="font-semibold text-foreground">{countdown}</strong>
-                </span>
-              ) : (
-                <span>Clôturée le {new Date(offer.expiresAt).toLocaleDateString("fr-FR")}</span>
-              )}
+              <Clock size={14} className={countdown.formatted ? "text-primary" : "text-muted-foreground"} />
+              <span>
+                Jusqu'au {formattedDate}
+                {countdown.formatted && (
+                  <span className="ml-1 text-xs font-semibold text-primary">
+                    ({countdown.formatted})
+                  </span>
+                )}
+              </span>
             </span>
           </div>
         </div>
