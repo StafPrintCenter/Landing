@@ -150,6 +150,7 @@ export function JobOfferDetailHeader({ offer }: JobOfferDetailHeaderProps) {
               </span>
             )}
 
+            {/* Conserve le "Jusqu'au ..." tout en ajoutant le compte à rebours dynamique */}
             <span className="inline-flex items-center gap-2 rounded-full bg-card border border-border px-4 py-2">
               <Clock size={14} /> Jusqu'au {new Date(offer.expiresAt).toLocaleDateString("fr-FR")}
             </span>
