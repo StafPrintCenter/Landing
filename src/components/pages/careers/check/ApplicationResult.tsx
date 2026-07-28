@@ -93,7 +93,7 @@ export function ApplicationResult({ application, onReset }: ApplicationResultPro
           </div>
 
           {application.reviewedAt && (
-            <div className="flex items-center gap-3 p-3 rounded-xl bg-muted/40 border border-border/50">
+            <div className="sm:col-span-2 flex items-center gap-3 p-3 rounded-xl bg-muted/40 border border-border/50">
               <Clock size={18} className="text-primary shrink-0" />
               <div>
                 <p className="text-xs text-muted-foreground">Dernière mise à jour</p>
