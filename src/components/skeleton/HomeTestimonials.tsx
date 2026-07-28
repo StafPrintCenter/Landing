@@ -9,9 +9,9 @@ export function TestimonialsSkeleton() {
         <div className="mt-14 grid gap-6 lg:grid-cols-12">
           <div className="h-80 animate-pulse rounded-3xl border border-border bg-card lg:col-span-7" />
           <div className="grid gap-6 lg:col-span-5">
-            <div className="h-24 animate-pulse rounded-3xl border border-border bg-card" />
-            <div className="h-28 animate-pulse rounded-2xl border border-border bg-card" />
-            <div className="h-28 animate-pulse rounded-2xl border border-border bg-card" />
+            <div className="h-20 animate-pulse rounded-3xl border border-border bg-card" />
+            <div className="h-24 animate-pulse rounded-2xl border border-border bg-card" />
+            <div className="h-24 animate-pulse rounded-2xl border border-border bg-card" />
           </div>
         </div>
 
