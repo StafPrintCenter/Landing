@@ -1,4 +1,3 @@
-// src/components/pages/careers/check/CheckErrorState.tsx
 import { AlertTriangle, RotateCcw, Briefcase } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
