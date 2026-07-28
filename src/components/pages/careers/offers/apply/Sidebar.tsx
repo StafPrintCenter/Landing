@@ -1,17 +1,12 @@
 import { Building2, MapPin, Calendar, Briefcase, ArrowLeft, BriefcaseBusiness, Users, GraduationCap } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import { JOB_CONTRACT_TYPE_LABELS, formatSalaryRange, isJobOfferExpired, type APIJobOffer } from "@/data/jobs";
-
-// Helper de correspondance pour le niveau d'études
-const EDUCATION_LEVEL_LABELS: Record<string, string> = {
-  sans_diplome: "Sans diplôme",
-  bepc: "BEPC",
-  bac: "BAC",
-  "bac+2": "BAC +2 (BTS, DUT...)",
-  "bac+3": "BAC +3 (Licence...)",
-  master: "BAC +5 (Master, DEA...)",
-  doctorat: "Doctorat",
-};
+import {
+  JOB_CONTRACT_TYPE_LABELS,
+  getEducationLevelLabel,
+  formatSalaryRange,
+  isJobOfferExpired,
+  type APIJobOffer
+} from "@/data/jobs";
 
 interface ApplySidebarProps {
   offer: APIJobOffer;
@@ -20,11 +15,9 @@ interface ApplySidebarProps {
 export function ApplySidebar({ offer }: ApplySidebarProps) {
   const salary = formatSalaryRange(offer.salaryMin, offer.salaryMax);
   const expired = isJobOfferExpired(offer);
-  const positions = offer.numPositions ?? offer.numPositions;
-
-  // Libellé propre pour le niveau d'études
+  const positions = offer.numPositions;
   const formattedEducationLevel = offer.educationLevel
-    ? EDUCATION_LEVEL_LABELS[offer.educationLevel] || offer.educationLevel
+    ? getEducationLevelLabel(offer.educationLevel)
     : null;
 
   return (
