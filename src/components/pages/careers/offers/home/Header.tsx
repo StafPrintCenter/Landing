@@ -37,7 +37,7 @@ export function CareersHomeHeader() {
           </div>
 
           <Link
-            to="/careers/internships"
+            to="/careers/internship"
             className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
           >
             Demander un stage <ArrowRight size={14} />
