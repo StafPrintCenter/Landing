@@ -2,6 +2,17 @@ import { Building2, MapPin, Calendar, Briefcase, ArrowLeft, BriefcaseBusiness, U
 import { Link } from "@tanstack/react-router";
 import { JOB_CONTRACT_TYPE_LABELS, formatSalaryRange, isJobOfferExpired, type APIJobOffer } from "@/data/jobs";
 
+// Helper de correspondance pour le niveau d'études
+const EDUCATION_LEVEL_LABELS: Record<string, string> = {
+  sans_diplome: "Sans diplôme",
+  bepc: "BEPC",
+  bac: "BAC",
+  "bac+2": "BAC +2 (BTS, DUT...)",
+  "bac+3": "BAC +3 (Licence...)",
+  master: "BAC +5 (Master, DEA...)",
+  doctorat: "Doctorat",
+};
+
 interface ApplySidebarProps {
   offer: APIJobOffer;
 }
@@ -9,6 +20,12 @@ interface ApplySidebarProps {
 export function ApplySidebar({ offer }: ApplySidebarProps) {
   const salary = formatSalaryRange(offer.salaryMin, offer.salaryMax);
   const expired = isJobOfferExpired(offer);
+  const positions = offer.numPositions ?? offer.numPositions;
+
+  // Libellé propre pour le niveau d'études
+  const formattedEducationLevel = offer.educationLevel
+    ? EDUCATION_LEVEL_LABELS[offer.educationLevel] || offer.educationLevel
+    : null;
 
   return (
     <aside className="sticky top-24 self-start space-y-4 lg:col-span-4">
@@ -33,14 +50,14 @@ export function ApplySidebar({ offer }: ApplySidebarProps) {
       <div className="rounded-2xl border border-border bg-card p-6 shadow-xs">
         <div className="flex items-center justify-between gap-2">
           <div className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-            {JOB_CONTRACT_TYPE_LABELS[offer.contractType]}
+            {JOB_CONTRACT_TYPE_LABELS[offer.contractType] || offer.contractType?.toUpperCase()}
           </div>
 
-          {/* Nombre de postes si disponible */}
-          {offer.positionsCount && offer.positionsCount > 0 && (
+          {/* Nombre de postes */}
+          {positions !== undefined && positions > 0 && (
             <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
               <Users size={12} className="text-primary" />
-              {offer.positionsCount} poste{offer.positionsCount > 1 ? "s" : ""}
+              {positions} poste{positions > 1 ? "s" : "dd"}
             </span>
           )}
         </div>
@@ -73,14 +90,14 @@ export function ApplySidebar({ offer }: ApplySidebarProps) {
             </span>
           </li>
 
-          {/* Niveau d'études requis (si présent sur l'offre) */}
-          {offer.educationLevel && (
+          {/* Niveau d'études requis */}
+          {formattedEducationLevel && (
             <li className="flex items-center gap-2.5 text-muted-foreground">
               <GraduationCap size={16} className="shrink-0 text-primary" />
               <span>
                 Niveau d'études :{" "}
                 <strong className="text-foreground font-medium">
-                  {offer.educationLevel}
+                  {formattedEducationLevel}
                 </strong>
               </span>
             </li>
@@ -118,14 +135,16 @@ export function ApplySidebar({ offer }: ApplySidebarProps) {
         </ul>
 
         {/* Aperçu de la description */}
-        <div className="mt-6 border-t border-border pt-4">
-          <p className="text-xs font-semibold uppercase tracking-wider text-foreground">
-            Aperçu du poste
-          </p>
-          <p className="mt-2 text-xs leading-relaxed text-muted-foreground line-clamp-5">
-            {offer.description}
-          </p>
-        </div>
+        {offer.description && (
+          <div className="mt-6 border-t border-border pt-4">
+            <p className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Aperçu du poste
+            </p>
+            <p className="mt-2 text-xs leading-relaxed text-muted-foreground line-clamp-5">
+              {offer.description}
+            </p>
+          </div>
+        )}
       </div>
     </aside>
   );
