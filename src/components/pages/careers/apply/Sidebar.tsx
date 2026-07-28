@@ -57,7 +57,7 @@ export function ApplySidebar({ offer }: ApplySidebarProps) {
           {positions !== undefined && positions > 0 && (
             <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
               <Users size={12} className="text-primary" />
-              {positions} poste{positions > 1 ? "s" : "dd"}
+              {positions} poste{positions > 1 ? "s" : ""}
             </span>
           )}
         </div>
