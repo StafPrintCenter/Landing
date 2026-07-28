@@ -3,6 +3,7 @@ import type { } from "@tanstack/react-start";
 import { fetchPublicServices } from "@/stores/useServicesStore";
 import { fetchPublicFormations } from "@/stores/useTrainingsStore";
 import { fetchPublicArticles } from "@/stores/useArticlesStore";
+import { fetchPublicJobOffers } from "@/stores/useJobsStore";
 
 const BASE_URL = import.meta.env.VITE_FRONTEND_URL;
 
@@ -22,16 +23,19 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/projects", changefreq: "weekly", priority: "0.8" },
           { path: "/trainings", changefreq: "weekly", priority: "0.8" },
           { path: "/articles", changefreq: "weekly", priority: "0.7" },
+          { path: "/faqs", changefreq: "weekly", priority: "0.7" },
+          { path: "/careers/offers", changefreq: "weekly", priority: "0.7" },
           { path: "/legal/mentions", changefreq: "yearly", priority: "0.2" },
           { path: "/legal/cgv", changefreq: "yearly", priority: "0.2" },
           { path: "/legal/privacy", changefreq: "yearly", priority: "0.2" },
         ];
 
         // Récupération dynamique depuis l'API — perPage élevé pour tout couvrir
-        const [servicesRes, formationsRes, articlesRes] = await Promise.all([
+        const [servicesRes, formationsRes, articlesRes, jobsRes] = await Promise.all([
           fetchPublicServices({ perPage: 500 }),
           fetchPublicFormations({ perPage: 500 }),
           fetchPublicArticles({ perPage: 500 }),
+          fetchPublicJobOffers({ perPage: 500 }),
         ]);
 
         for (const s of servicesRes.data) {
@@ -42,6 +46,9 @@ export const Route = createFileRoute("/sitemap.xml")({
         }
         for (const a of articlesRes.data) {
           entries.push({ path: `/articles/${a.slug}`, changefreq: "monthly", priority: "0.6" });
+        }
+        for (const a of jobsRes.data) {
+          entries.push({ path: `/careers/offers${a.slug}`, changefreq: "monthly", priority: "0.6" });
         }
 
         const urls = entries.map((e) =>
