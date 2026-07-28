@@ -72,6 +72,7 @@ export type APIJobApplication = {
   coverLetter: string | null;
   coverLetterPath?: string | null;
   cvUrl: string;
+  coverLetterFileUrl: string;
   status: JobApplicationStatus;
   reviewedAt: string | null;
   createdAt: string;
