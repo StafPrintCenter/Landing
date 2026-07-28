@@ -104,7 +104,6 @@ function CareersPage() {
     <SiteShell>
       <section className="container-x py-16">
         <CareersHomeHeader />
-        <CareersHomeInternshipCta />
 
         <div className="mt-10 pb-6">
           <CareersHomeSearchBar value={query} onChange={(q) => updateSearch({ query: q })} />
