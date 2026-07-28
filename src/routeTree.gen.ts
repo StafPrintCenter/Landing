@@ -31,6 +31,7 @@ import { Route as ReviewsTokenRouteImport } from './routes/reviews/$token'
 import { Route as LegalPrivacyRouteImport } from './routes/legal/privacy'
 import { Route as LegalMentionsRouteImport } from './routes/legal/mentions'
 import { Route as LegalCgvRouteImport } from './routes/legal/cgv'
+import { Route as CareersCheckOfferRouteImport } from './routes/careers/check-offer'
 import { Route as ArticlesSlugRouteImport } from './routes/articles/$slug'
 import { Route as ToolsNewsletterIndexRouteImport } from './routes/tools/newsletter/index'
 import { Route as CareersOffersIndexRouteImport } from './routes/careers/offers/index'
@@ -149,6 +150,11 @@ const LegalCgvRoute = LegalCgvRouteImport.update({
   path: '/legal/cgv',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CareersCheckOfferRoute = CareersCheckOfferRouteImport.update({
+  id: '/careers/check-offer',
+  path: '/careers/check-offer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ArticlesSlugRoute = ArticlesSlugRouteImport.update({
   id: '/articles/$slug',
   path: '/articles/$slug',
@@ -192,6 +198,7 @@ export interface FileRoutesByFullPath {
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/articles/$slug': typeof ArticlesSlugRoute
+  '/careers/check-offer': typeof CareersCheckOfferRoute
   '/legal/cgv': typeof LegalCgvRoute
   '/legal/mentions': typeof LegalMentionsRoute
   '/legal/privacy': typeof LegalPrivacyRoute
@@ -223,6 +230,7 @@ export interface FileRoutesByTo {
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/articles/$slug': typeof ArticlesSlugRoute
+  '/careers/check-offer': typeof CareersCheckOfferRoute
   '/legal/cgv': typeof LegalCgvRoute
   '/legal/mentions': typeof LegalMentionsRoute
   '/legal/privacy': typeof LegalPrivacyRoute
@@ -255,6 +263,7 @@ export interface FileRoutesById {
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/articles/$slug': typeof ArticlesSlugRoute
+  '/careers/check-offer': typeof CareersCheckOfferRoute
   '/legal/cgv': typeof LegalCgvRoute
   '/legal/mentions': typeof LegalMentionsRoute
   '/legal/privacy': typeof LegalPrivacyRoute
@@ -288,6 +297,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/sitemap.xml'
     | '/articles/$slug'
+    | '/careers/check-offer'
     | '/legal/cgv'
     | '/legal/mentions'
     | '/legal/privacy'
@@ -319,6 +329,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/sitemap.xml'
     | '/articles/$slug'
+    | '/careers/check-offer'
     | '/legal/cgv'
     | '/legal/mentions'
     | '/legal/privacy'
@@ -350,6 +361,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/sitemap.xml'
     | '/articles/$slug'
+    | '/careers/check-offer'
     | '/legal/cgv'
     | '/legal/mentions'
     | '/legal/privacy'
@@ -382,6 +394,7 @@ export interface RootRouteChildren {
   SearchRoute: typeof SearchRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ArticlesSlugRoute: typeof ArticlesSlugRoute
+  CareersCheckOfferRoute: typeof CareersCheckOfferRoute
   LegalCgvRoute: typeof LegalCgvRoute
   LegalMentionsRoute: typeof LegalMentionsRoute
   LegalPrivacyRoute: typeof LegalPrivacyRoute
@@ -565,6 +578,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LegalCgvRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/careers/check-offer': {
+      id: '/careers/check-offer'
+      path: '/careers/check-offer'
+      fullPath: '/careers/check-offer'
+      preLoaderRoute: typeof CareersCheckOfferRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/articles/$slug': {
       id: '/articles/$slug'
       path: '/articles/$slug'
@@ -622,6 +642,7 @@ const rootRouteChildren: RootRouteChildren = {
   SearchRoute: SearchRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ArticlesSlugRoute: ArticlesSlugRoute,
+  CareersCheckOfferRoute: CareersCheckOfferRoute,
   LegalCgvRoute: LegalCgvRoute,
   LegalMentionsRoute: LegalMentionsRoute,
   LegalPrivacyRoute: LegalPrivacyRoute,
