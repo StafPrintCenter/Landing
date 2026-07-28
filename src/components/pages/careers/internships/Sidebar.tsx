@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 
 export function InternshipSidebar() {
   return (
-    <aside className="sticky top-24 self-start space-y-4 lg:col-span-4">
+    <aside className="relative lg:sticky lg:top-24 self-start space-y-4 lg:col-span-4">
       {/* Bouton de retour */}
       <div className="flex flex-wrap items-center gap-2.5">
         <Link
