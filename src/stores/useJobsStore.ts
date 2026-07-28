@@ -42,6 +42,7 @@ export interface ApplyToJobOfferParams {
   phone: string;
   educationLevel: string;
   coverLetter?: string;
+  coverLetterFile?: File;
   cv: File;
   consentAccepted: boolean;
 }
@@ -56,7 +57,10 @@ export async function applyToJobOffer(
   formData.append("email", params.email);
   formData.append("phone", params.phone);
   formData.append("education_level", params.educationLevel);
+
   if (params.coverLetter) formData.append("cover_letter", params.coverLetter);
+  if (params.coverLetterFile) formData.append("cover_letter_file", params.coverLetterFile);
+
   formData.append("cv", params.cv);
   formData.append("consent_accepted", params.consentAccepted ? "true" : "false");
 
