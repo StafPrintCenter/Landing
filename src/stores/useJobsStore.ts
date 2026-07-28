@@ -40,7 +40,7 @@ export interface ApplyToJobOfferParams {
   lastName: string;
   email: string;
   phone: string;
-  educationLevel?: string;
+  educationLevel: string;
   coverLetter?: string;
   cv: File;
   consentAccepted: boolean;
