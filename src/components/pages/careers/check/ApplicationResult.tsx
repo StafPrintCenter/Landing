@@ -1,7 +1,9 @@
 // src/components/pages/careers/check/ApplicationResult.tsx
-import { Mail, Phone, Calendar, FileText, User, GraduationCap, CheckCircle2, Clock, XCircle, ArrowLeft } from "lucide-react";
+import { useState } from "react";
+import { Mail, Phone, Calendar, FileText, User, GraduationCap, CheckCircle2, Clock, XCircle, ArrowLeft, Eye } from "lucide-react";
 import type { APIJobApplication } from "@/data/jobs";
 import { resolveStorageUrl } from "@/lib/file-url";
+import { FilePreviewModal } from "./FilePreviewModal";
 
 const STATUS_CONFIG: Record<string, { label: string; className: string; icon: typeof Clock }> = {
   pending: { label: "En attente d'examen", className: "bg-amber-500/10 text-amber-600 border-amber-500/20", icon: Clock },
@@ -15,6 +17,8 @@ interface ApplicationResultProps {
 }
 
 export function ApplicationResult({ application, onReset }: ApplicationResultProps) {
+  const [activePreview, setActivePreview] = useState<{ url: string; title: string } | null>(null);
+
   const status = STATUS_CONFIG[application.status] ?? {
     label: application.status,
     className: "bg-muted text-muted-foreground border-border",
@@ -28,7 +32,7 @@ export function ApplicationResult({ application, onReset }: ApplicationResultPro
   return (
     <div className="w-full space-y-6">
       <div className="rounded-2xl border border-border bg-card p-6 md:p-8 shadow-sm space-y-6">
-        {/* En-tête : Titre + Badge de statut */}
+        {/* En-tête */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border pb-6">
           <div className="space-y-1">
             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
@@ -47,7 +51,7 @@ export function ApplicationResult({ application, onReset }: ApplicationResultPro
           </div>
         </div>
 
-        {/* Grille d'informations candidat */}
+        {/* Grille d'infos */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
           <div className="flex items-center gap-3 p-3 rounded-xl bg-muted/40 border border-border/50">
             <User size={18} className="text-primary shrink-0" />
@@ -104,7 +108,7 @@ export function ApplicationResult({ application, onReset }: ApplicationResultPro
           )}
         </div>
 
-        {/* Lettre de motivation rédigée */}
+        {/* Lettre de motivation texte */}
         {application.coverLetter && (
           <div className="space-y-2 rounded-xl bg-muted/30 p-4 border border-border">
             <p className="text-xs font-semibold text-foreground uppercase tracking-wider">
@@ -116,35 +120,31 @@ export function ApplicationResult({ application, onReset }: ApplicationResultPro
           </div>
         )}
 
-        {/* Fichiers joints */}
+        {/* Boutons d'Aperçu des Fichiers */}
         <div className="flex flex-wrap gap-3 border-t border-border pt-5">
           {cvProxyUrl && (
-            <a
-              href={cvProxyUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl border border-primary/20 bg-primary/5 px-4 py-2.5 text-xs font-semibold text-primary hover:bg-primary hover:text-primary-foreground transition-all"
+            <button
+              onClick={() => setActivePreview({ url: cvProxyUrl, title: `CV - ${application.firstName} ${application.lastName}` })}
+              className="inline-flex items-center gap-2 rounded-xl border border-primary/20 bg-primary/5 px-4 py-2.5 text-xs font-semibold text-primary hover:bg-primary hover:text-primary-foreground transition-all cursor-pointer"
             >
-              <FileText size={15} />
-              Consulter le CV envoyé
-            </a>
+              <Eye size={15} />
+              Aperçu du CV
+            </button>
           )}
 
           {coverLetterProxyUrl && (
-            <a
-              href={coverLetterProxyUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-2.5 text-xs font-semibold text-foreground hover:bg-muted transition-colors"
+            <button
+              onClick={() => setActivePreview({ url: coverLetterProxyUrl, title: `Lettre de motivation - ${application.firstName} ${application.lastName}` })}
+              className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-2.5 text-xs font-semibold text-foreground hover:bg-muted transition-colors cursor-pointer"
             >
               <FileText size={15} />
-              Fichier lettre de motivation
-            </a>
+              Aperçu Lettre de motivation (Fichier)
+            </button>
           )}
         </div>
       </div>
 
-      {/* Bouton de retour / réinitialisation centré */}
+      {/* Bouton réinitialiser */}
       <div className="text-center">
         <button
           onClick={onReset}
@@ -153,6 +153,15 @@ export function ApplicationResult({ application, onReset }: ApplicationResultPro
           <ArrowLeft size={14} /> Effectuer une autre recherche
         </button>
       </div>
+
+      {/* Modale d'Aperçu Intégrée */}
+      {activePreview && (
+        <FilePreviewModal
+          url={activePreview.url}
+          title={activePreview.title}
+          onClose={() => setActivePreview(null)}
+        />
+      )}
     </div>
   );
 }
