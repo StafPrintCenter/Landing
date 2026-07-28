@@ -26,7 +26,7 @@ export function JobOfferDetailBody({ offer }: JobOfferDetailBodyProps) {
 
         {/* Accroche / Summary si disponible */}
         {offer.summary && (
-          <div className="mt-6 rounded-xl border-l-4 border-primary bg-muted/40 p-4 text-sm font-medium italic text-foreground/90">
+          <div className="mt-6 rounded-xl bg-muted/40 p-4 text-sm font-medium italic text-foreground/90">
             « {offer.summary} »
           </div>
         )}
@@ -93,7 +93,7 @@ export function JobOfferDetailBody({ offer }: JobOfferDetailBodyProps) {
             {offer.profile.map((item, index) => (
               <li
                 key={index}
-                className="flex items-start gap-3 rounded-xl border border-border/50 bg-card p-3.5 text-sm transition-all hover:border-primary/30 hover:shadow-2xs"
+                className="flex items-start gap-3 rounded-xl border border-border/50 bg-card p-3.5 text-sm transition-all"
               >
                 <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-primary" />
                 <span className="font-medium leading-relaxed text-foreground/90">
