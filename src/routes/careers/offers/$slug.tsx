@@ -2,7 +2,7 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site/SiteShell";
 import { SITE } from "@/data/site";
 import { fetchJobOfferBySlug } from "@/stores/useJobsStore";
-import { JobOfferDetailHeader, JobOfferDetailBody, JobOfferDetailSidebar, JobOfferNotFoundState, } from "@/components/pages/careers/detail";
+import { JobOfferDetailHeader, JobOfferDetailBody, JobOfferDetailSidebar, JobOfferNotFoundState, } from "@/components/pages/careers/offers/detail";
 import type { APIJobOffer } from "@/data/jobs";
 
 export const Route = createFileRoute("/careers/offers/$slug")({
