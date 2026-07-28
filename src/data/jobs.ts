@@ -1,5 +1,4 @@
-// src/data/jobs.ts
-import { Clock, CheckCircle2, XCircle } from "lucide-react";
+import { Search, ListChecks, Clock, CheckCircle2, XCircle, LucideIcon } from "lucide-react";
 
 export type JobContractType = "cdi" | "cdd" | "stage" | "freelance" | "alternance";
 
@@ -75,23 +74,48 @@ export type APIJobOffer = {
 // --- Configuration des statuts de candidature ---
 export type JobApplicationStatus = "pending" | "accepted" | "rejected" | string;
 
+export interface JobApplicationStatusConfig {
+  label: string;
+  className: string;
+  icon: LucideIcon;
+}
+
 export const STATUS_CONFIG: Record<
-  string,
-  { label: string; className: string; icon: typeof Clock }
+  JobApplicationStatus,
+  JobApplicationStatusConfig
 > = {
   pending: {
     label: "En attente d'examen",
-    className: "bg-amber-500/10 text-amber-600 border-amber-500/20",
+    className:
+      "border-amber-500/20 bg-amber-500/10 text-amber-600",
     icon: Clock,
   },
+
+  reviewing: {
+    label: "En cours d'examen",
+    className:
+      "border-blue-500/20 bg-blue-500/10 text-blue-600",
+    icon: Search,
+  },
+
+  shortlisted: {
+    label: "Présélectionnée",
+    className:
+      "border-violet-500/20 bg-violet-500/10 text-violet-600",
+    icon: ListChecks,
+  },
+
   accepted: {
-    label: "Candidature Retenue",
-    className: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20",
+    label: "Candidature retenue",
+    className:
+      "border-emerald-500/20 bg-emerald-500/10 text-emerald-600",
     icon: CheckCircle2,
   },
+
   rejected: {
     label: "Non retenue",
-    className: "bg-muted text-muted-foreground border-border",
+    className:
+      "border-muted-foreground/20 bg-muted text-muted-foreground",
     icon: XCircle,
   },
 };
