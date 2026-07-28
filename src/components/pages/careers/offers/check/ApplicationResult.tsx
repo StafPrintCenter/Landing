@@ -3,7 +3,7 @@ import { Mail, Phone, Calendar, FileText, User, GraduationCap, Clock, ArrowLeft,
 import { Link } from "@tanstack/react-router";
 import { STATUS_CONFIG, getEducationLevelLabel, type APIJobApplication, } from "@/data/jobs";
 import { resolveStorageUrl } from "@/lib/file-url";
-import { FilePreviewModal } from "./FilePreviewModal";
+import { FilePreviewModal } from "@/components/modal";
 
 interface ApplicationResultProps {
   application: APIJobApplication;
