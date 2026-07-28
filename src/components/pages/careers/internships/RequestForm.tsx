@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Loader2, User, Mail, Phone, School, BookOpen, Calendar, Timer, MessageSquare, Upload, X } from "lucide-react";
+import { Loader2, User, Mail, Phone, School, BookOpen, Calendar, Timer, MessageSquare, Upload, X, Check, ShieldCheck } from "lucide-react";
 import { createInternshipRequest, InternshipApiError } from "@/stores/useInternshipsStore";
 import { SuccessScreen } from "./SuccessScreen";
+import { SITE } from "@/data/site";
 
 const FIELD_LABELS: Record<string, string> = {
   first_name: "Prénom",
@@ -30,10 +31,34 @@ export function InternshipRequestForm() {
   const [cv, setCv] = useState<File | null>(null);
   const [consent, setConsent] = useState(false);
 
+  // État Drag & Drop pour le CV
+  const [isCvDragging, setIsCvDragging] = useState(false);
+
+  // Soumission et gestion des erreurs
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[]> | undefined>();
   const [submitted, setSubmitted] = useState(false);
+
+  // Handlers pour Drag & Drop
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsCvDragging(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsCvDragging(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsCvDragging(false);
+    const droppedFile = e.dataTransfer.files?.[0];
+    if (droppedFile) {
+      setCv(droppedFile);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -74,90 +99,258 @@ export function InternshipRequestForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-border bg-card p-6 md:p-8">
-      <div className="grid gap-4 sm:grid-cols-2">
-        <label className="block">
-          <span className="mb-1.5 flex items-center gap-1.5 text-sm font-medium"><User size={14} /> Prénom</span>
-          <input type="text" required value={firstName} onChange={(e) => setFirstName(e.target.value)} className="input w-full" />
-        </label>
-        <label className="block">
-          <span className="mb-1.5 flex items-center gap-1.5 text-sm font-medium"><User size={14} /> Nom</span>
-          <input type="text" required value={lastName} onChange={(e) => setLastName(e.target.value)} className="input w-full" />
-        </label>
-        <label className="block">
-          <span className="mb-1.5 flex items-center gap-1.5 text-sm font-medium"><Mail size={14} /> Email</span>
-          <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="input w-full" />
-        </label>
-        <label className="block">
-          <span className="mb-1.5 flex items-center gap-1.5 text-sm font-medium"><Phone size={14} /> Téléphone</span>
-          <input type="tel" required value={phone} onChange={(e) => setPhone(e.target.value)} className="input w-full" />
-        </label>
-        <label className="block">
-          <span className="mb-1.5 flex items-center gap-1.5 text-sm font-medium"><School size={14} /> Établissement (optionnel)</span>
-          <input type="text" value={institution} onChange={(e) => setInstitution(e.target.value)} className="input w-full" />
-        </label>
-        <label className="block">
-          <span className="mb-1.5 flex items-center gap-1.5 text-sm font-medium"><BookOpen size={14} /> Filière (optionnel)</span>
-          <input type="text" value={fieldOfStudy} onChange={(e) => setFieldOfStudy(e.target.value)} className="input w-full" />
-        </label>
-        <label className="block">
-          <span className="mb-1.5 flex items-center gap-1.5 text-sm font-medium"><Calendar size={14} /> Date de début souhaitée (optionnel)</span>
-          <input type="date" value={desiredStartDate} onChange={(e) => setDesiredStartDate(e.target.value)} className="input w-full" />
-        </label>
-        <label className="block">
-          <span className="mb-1.5 flex items-center gap-1.5 text-sm font-medium"><Timer size={14} /> Durée souhaitée (optionnel)</span>
-          <input type="text" placeholder="Ex: 3 mois" value={duration} onChange={(e) => setDuration(e.target.value)} className="input w-full" />
-        </label>
+    <div className="rounded-2xl border border-border bg-card p-6 shadow-xs md:p-8">
+      <div className="mb-6">
+        <h2 className="font-display text-2xl font-bold text-foreground">
+          Formulaire de demande de stage
+        </h2>
+        <p className="mt-1 text-xs text-muted-foreground">
+          Renseignez vos informations et téléversez votre CV pour nous transmettre votre candidature.
+        </p>
       </div>
 
-      <label className="block">
-        <span className="mb-1.5 flex items-center gap-1.5 text-sm font-medium"><MessageSquare size={14} /> Message (optionnel)</span>
-        <textarea rows={4} maxLength={2000} value={message} onChange={(e) => setMessage(e.target.value)} className="input w-full" placeholder="Motivation, projet de stage, contexte académique…" />
-      </label>
-
-      <div>
-        <span className="mb-1.5 block text-sm font-medium">CV (optionnel — PDF, DOC, DOCX, 5 Mo max)</span>
-        {cv ? (
-          <div className="flex items-center justify-between rounded-lg border border-border bg-muted/40 px-4 py-2.5 text-sm">
-            <span className="truncate">{cv.name}</span>
-            <button type="button" onClick={() => setCv(null)} className="ml-2 shrink-0 text-muted-foreground hover:text-destructive cursor-pointer">
-              <X size={16} />
-            </button>
-          </div>
-        ) : (
-          <label className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-dashed border-border bg-background px-4 py-4 text-sm text-muted-foreground hover:bg-muted/40">
-            <Upload size={16} /> Choisir un fichier
-            <input type="file" accept=".pdf,.doc,.docx" onChange={(e) => setCv(e.target.files?.[0] ?? null)} className="hidden" />
+      <form onSubmit={handleSubmit} className="space-y-5">
+        {/* Prénom & Nom */}
+        <div className="grid gap-4 sm:grid-cols-2">
+          <label className="block space-y-1.5">
+            <span className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
+              <User size={14} className="text-primary" /> Prénom <span className="text-destructive">*</span>
+            </span>
+            <input
+              type="text"
+              required
+              placeholder="Ex: Tony"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              className="w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-sm outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
+            />
           </label>
-        )}
-      </div>
 
-      <label className="flex items-start gap-2 text-xs text-foreground/70 cursor-pointer">
-        <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5 cursor-pointer" required />
-        <span>J'accepte que mes données soient utilisées dans le cadre du traitement de ma demande de stage.</span>
-      </label>
-
-      {fieldErrors && Object.keys(fieldErrors).length > 0 && (
-        <div className="rounded-lg bg-destructive/10 px-4 py-3 text-xs text-destructive">
-          <p className="font-medium">Merci de corriger les points suivants :</p>
-          <ul className="mt-1 list-disc space-y-0.5 pl-4">
-            {Object.entries(fieldErrors).map(([field, messages]) => (
-              <li key={field}><span className="font-medium">{FIELD_LABELS[field] ?? field}</span> : {messages.join(" ")}</li>
-            ))}
-          </ul>
+          <label className="block space-y-1.5">
+            <span className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
+              <User size={14} className="text-primary" /> Nom <span className="text-destructive">*</span>
+            </span>
+            <input
+              type="text"
+              required
+              placeholder="Ex: Dossou"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              className="w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-sm outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
+            />
+          </label>
         </div>
-      )}
-      {!fieldErrors && errorMessage && (
-        <p className="rounded-lg bg-destructive/10 px-4 py-3 text-xs text-destructive">{errorMessage}</p>
-      )}
 
-      <button
-        type="submit"
-        disabled={isSubmitting || !consent}
-        className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90 disabled:opacity-60 cursor-pointer"
-      >
-        {isSubmitting ? (<><Loader2 size={16} className="animate-spin" /> Envoi…</>) : "Envoyer ma demande"}
-      </button>
-    </form>
+        {/* Email & Téléphone */}
+        <div className="grid gap-4 sm:grid-cols-2">
+          <label className="block space-y-1.5">
+            <span className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
+              <Mail size={14} className="text-primary" /> Email <span className="text-destructive">*</span>
+            </span>
+            <input
+              type="email"
+              required
+              placeholder="jean.dupont@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-sm outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
+            />
+          </label>
+
+          <label className="block space-y-1.5">
+            <span className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
+              <Phone size={14} className="text-primary" /> Téléphone <span className="text-destructive">*</span>
+            </span>
+            <input
+              type="tel"
+              required
+              placeholder="+229 01 02 03 04"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-sm outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
+            />
+          </label>
+        </div>
+
+        {/* Établissement & Filière */}
+        <div className="grid gap-4 sm:grid-cols-2">
+          <label className="block space-y-1.5">
+            <span className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
+              <School size={14} className="text-primary" /> Établissement{" "}
+              <span className="font-normal text-muted-foreground">(Optionnel)</span>
+            </span>
+            <input
+              type="text"
+              placeholder="Ex: Université d'Abomey-Calavi"
+              value={institution}
+              onChange={(e) => setInstitution(e.target.value)}
+              className="w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-sm outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
+            />
+          </label>
+
+          <label className="block space-y-1.5">
+            <span className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
+              <BookOpen size={14} className="text-primary" /> Filière / Domaine{" "}
+              <span className="font-normal text-muted-foreground">(Optionnel)</span>
+            </span>
+            <input
+              type="text"
+              placeholder="Ex: Informatique, Marketing..."
+              value={fieldOfStudy}
+              onChange={(e) => setFieldOfStudy(e.target.value)}
+              className="w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-sm outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
+            />
+          </label>
+        </div>
+
+        {/* Date de début & Durée */}
+        <div className="grid gap-4 sm:grid-cols-2">
+          <label className="block space-y-1.5">
+            <span className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
+              <Calendar size={14} className="text-primary" /> Date de début souhaitée{" "}
+              <span className="font-normal text-muted-foreground">(Optionnel)</span>
+            </span>
+            <input
+              type="date"
+              value={desiredStartDate}
+              onChange={(e) => setDesiredStartDate(e.target.value)}
+              className="w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-sm outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
+            />
+          </label>
+
+          <label className="block space-y-1.5">
+            <span className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
+              <Timer size={14} className="text-primary" /> Durée souhaitée{" "}
+              <span className="font-normal text-muted-foreground">(Optionnel)</span>
+            </span>
+            <input
+              type="text"
+              placeholder="Ex: 3 mois"
+              value={duration}
+              onChange={(e) => setDuration(e.target.value)}
+              className="w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-sm outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
+            />
+          </label>
+        </div>
+
+        {/* Message de motivation */}
+        <label className="block space-y-1.5">
+          <span className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
+            <MessageSquare size={14} className="text-primary" /> Message / Motivations{" "}
+            <span className="font-normal text-muted-foreground">(Optionnel)</span>
+          </span>
+          <textarea
+            rows={4}
+            maxLength={2000}
+            placeholder="Présentez votre projet académique, vos attentes pour ce stage..."
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            className="w-full rounded-xl border border-border bg-background p-3.5 text-sm outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
+          />
+        </label>
+
+        {/* BLOC : Upload du CV (Drag & Drop) */}
+        <div className="space-y-1.5">
+          <span className="block text-xs font-semibold text-foreground">
+            Votre CV <span className="font-normal text-muted-foreground">(Optionnel - PDF, DOC, DOCX - Max 5 Mo)</span>
+          </span>
+
+          {cv ? (
+            <div className="flex items-center justify-between rounded-xl border border-primary/30 bg-primary/5 px-4 py-3 text-sm">
+              <div className="flex items-center gap-2.5 truncate">
+                <Check size={16} className="text-primary shrink-0" />
+                <span className="truncate font-medium text-foreground">{cv.name}</span>
+                <span className="text-xs text-muted-foreground">
+                  ({(cv.size / (1024 * 1024)).toFixed(2)} MB)
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setCv(null)}
+                className="ml-2 shrink-0 rounded-lg p-1 text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive cursor-pointer"
+                title="Supprimer le fichier"
+              >
+                <X size={16} />
+              </button>
+            </div>
+          ) : (
+            <label
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+              className={`flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed p-6 text-center transition-all ${isCvDragging
+                  ? "border-primary bg-primary/10"
+                  : "border-border bg-background hover:border-primary/50 hover:bg-muted/30"
+                }`}
+            >
+              <div className="rounded-full bg-primary/10 p-3 text-primary">
+                <Upload size={20} />
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-foreground">
+                  Cliquez pour parcourir ou glissez votre CV ici
+                </p>
+                <p className="text-[11px] text-muted-foreground mt-0.5">Formats acceptés : PDF, DOC, DOCX</p>
+              </div>
+              <input
+                type="file"
+                accept=".pdf,.doc,.docx"
+                onChange={(e) => setCv(e.target.files?.[0] ?? null)}
+                className="hidden"
+              />
+            </label>
+          )}
+        </div>
+
+        {/* Consentement */}
+        <label className="flex items-start gap-2.5 rounded-xl border border-border/60 bg-muted/20 p-3.5 text-xs text-muted-foreground cursor-pointer">
+          <input
+            type="checkbox"
+            checked={consent}
+            onChange={(e) => setConsent(e.target.checked)}
+            className="mt-0.5 rounded border-border text-primary focus:ring-primary cursor-pointer"
+            required
+          />
+          <span className="leading-relaxed">
+            J'autorise {SITE.name} à traiter mes données personnelles dans le cadre du traitement de ma demande de stage.
+          </span>
+        </label>
+
+        {/* Gestion des erreurs */}
+        {fieldErrors && Object.keys(fieldErrors).length > 0 ? (
+          <div className="rounded-xl border border-destructive/20 bg-destructive/10 p-4 text-xs text-destructive">
+            <p className="font-semibold">Merci de corriger les champs suivants :</p>
+            <ul className="mt-1.5 list-disc space-y-1 pl-4">
+              {Object.entries(fieldErrors).map(([field, messages]) => (
+                <li key={field}>
+                  <strong className="font-medium">{FIELD_LABELS[field] ?? field}</strong> : {messages.join(" ")}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : errorMessage ? (
+          <div className="rounded-xl border border-destructive/20 bg-destructive/10 p-4 text-xs text-destructive">
+            {errorMessage}
+          </div>
+        ) : null}
+
+        {/* Bouton d'envoi */}
+        <button
+          type="submit"
+          disabled={isSubmitting || !consent}
+          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:opacity-90 disabled:opacity-50 cursor-pointer shadow-sm"
+        >
+          {isSubmitting ? (
+            <>
+              <Loader2 size={18} className="animate-spin" /> Envoi en cours…
+            </>
+          ) : (
+            <>
+              <ShieldCheck size={18} /> Soumettre ma demande de stage
+            </>
+          )}
+        </button>
+      </form>
+    </div>
   );
 }
