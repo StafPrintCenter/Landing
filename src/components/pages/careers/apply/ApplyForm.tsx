@@ -128,7 +128,7 @@ export function ApplyForm({ offer }: ApplyFormProps) {
             <input
               type="text"
               required
-              placeholder="Ex: Jean"
+              placeholder="Ex: Tony"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               className="w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-sm outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
@@ -142,7 +142,7 @@ export function ApplyForm({ offer }: ApplyFormProps) {
             <input
               type="text"
               required
-              placeholder="Ex: Dupont"
+              placeholder="Ex: Dossou"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               className="w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-sm outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
