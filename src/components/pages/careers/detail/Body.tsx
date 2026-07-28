@@ -26,7 +26,7 @@ export function JobOfferDetailBody({ offer }: JobOfferDetailBodyProps) {
 
         {/* Accroche / Summary si disponible */}
         {offer.summary && (
-          <div className="mt-6 rounded-xl bg-muted/40 p-4 text-sm font-medium italic text-foreground/90">
+          <div className="mt-4 rounded-xl border-l-4 border-primary bg-muted/40 p-2 text-sm italic text-foreground/90">
             « {offer.summary} »
           </div>
         )}
