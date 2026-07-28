@@ -124,7 +124,6 @@ function CareersPage() {
         />
 
         <CareersHomeGrid isLoading={isLoading || storeLoading} offers={offers} />
-        <CareersHomeInternshipCta />
 
         {!isLoading && !storeLoading && meta && meta.last_page > 1 && (
           <Pagination
