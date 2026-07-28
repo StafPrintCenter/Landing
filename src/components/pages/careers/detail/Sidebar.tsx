@@ -53,8 +53,8 @@ export function JobOfferDetailSidebar({ offer }: JobOfferDetailSidebarProps) {
   const richEmailLink = createEmailLink(SITE.email, emailSubject, emailBody);
 
   return (
-    <aside className="sticky top-24 h-fit space-y-6">
-      <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+    <aside className="sticky top-24 self-start space-y-6 lg:col-span-1">
+      <div className="rounded-2xl border border-border bg-card p-6 shadow-xs">
         <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
           Aperçu de l'offre
         </p>
@@ -106,7 +106,6 @@ export function JobOfferDetailSidebar({ offer }: JobOfferDetailSidebarProps) {
 
         {/* Actions */}
         <div className="flex flex-col gap-2.5">
-          {/* Action 1 : Postuler */}
           {expired ? (
             <div className="rounded-xl bg-destructive/10 p-3.5 text-center text-xs font-semibold text-destructive">
               Cette offre est clôturée et n'accepte plus de candidatures.
@@ -115,13 +114,12 @@ export function JobOfferDetailSidebar({ offer }: JobOfferDetailSidebarProps) {
             <Link
               to="/careers/offers/apply/$slug"
               params={{ slug: offer.slug }}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-all hover:opacity-90 cursor-pointer shadow-sm"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-all hover:opacity-90 cursor-pointer shadow-xs"
             >
               Postuler maintenant <ArrowRight size={16} />
             </Link>
           )}
 
-          {/* Action 2 : WhatsApp */}
           <a
             href={richWhatsappLink}
             target="_blank"
@@ -131,7 +129,6 @@ export function JobOfferDetailSidebar({ offer }: JobOfferDetailSidebarProps) {
             <WhatsAppIcon size={16} /> Contacter par WhatsApp
           </a>
 
-          {/* Action 3 : Email */}
           <a
             href={richEmailLink}
             className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-border bg-card px-5 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted cursor-pointer"
