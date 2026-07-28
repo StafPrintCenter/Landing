@@ -1,4 +1,3 @@
-// src/components/pages/careers/check/FilePreviewModal.tsx
 import { X, ExternalLink, Download, FileSpreadsheet, AlertCircle } from "lucide-react";
 
 interface FilePreviewModalProps {
