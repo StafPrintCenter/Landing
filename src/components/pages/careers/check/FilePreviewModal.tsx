@@ -87,7 +87,7 @@ export function FilePreviewModal({ url, title, onClose }: FilePreviewModalProps)
                   Aperçu non disponible en local
                 </h5>
                 <p className="text-xs text-muted-foreground">
-                  Les fichiers Word requirent un serveur public accessible pour la prévisualisation intégrée. En production, l'aperçu s'affichera directement.
+                  Les fichiers Word requirent un serveur public accessible pour la prévisualisation intégrée.
                 </p>
               </div>
               <a
