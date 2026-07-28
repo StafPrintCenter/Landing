@@ -31,8 +31,8 @@ export function ApplicationResult({ application, onReset }: ApplicationResultPro
 
   return (
     <div className="w-full space-y-6">
-      <div className="rounded-2xl border border-border bg-card p-6 md:p-8 shadow-sm space-y-6">
-        {/* En-tête */}
+      <div className="rounded-2xl border border-border bg-card p-6 md:p-8 shadow-xs space-y-6">
+        {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border pb-6">
           <div className="space-y-1">
             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
@@ -51,7 +51,7 @@ export function ApplicationResult({ application, onReset }: ApplicationResultPro
           </div>
         </div>
 
-        {/* Grille d'infos */}
+        {/* Dynamic Details */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
           <div className="flex items-center gap-3 p-3 rounded-xl bg-muted/40 border border-border/50">
             <User size={18} className="text-primary shrink-0" />
@@ -108,7 +108,7 @@ export function ApplicationResult({ application, onReset }: ApplicationResultPro
           )}
         </div>
 
-        {/* Lettre de motivation texte */}
+        {/* Text Cover Letter */}
         {application.coverLetter && (
           <div className="space-y-2 rounded-xl bg-muted/30 p-4 border border-border">
             <p className="text-xs font-semibold text-foreground uppercase tracking-wider">
@@ -120,7 +120,7 @@ export function ApplicationResult({ application, onReset }: ApplicationResultPro
           </div>
         )}
 
-        {/* Boutons d'Aperçu des Fichiers */}
+        {/* Action Preview Buttons */}
         <div className="flex flex-wrap gap-3 border-t border-border pt-5">
           {cvProxyUrl && (
             <button
@@ -144,7 +144,6 @@ export function ApplicationResult({ application, onReset }: ApplicationResultPro
         </div>
       </div>
 
-      {/* Bouton réinitialiser */}
       <div className="text-center">
         <button
           onClick={onReset}
@@ -154,7 +153,6 @@ export function ApplicationResult({ application, onReset }: ApplicationResultPro
         </button>
       </div>
 
-      {/* Modale d'Aperçu Intégrée */}
       {activePreview && (
         <FilePreviewModal
           url={activePreview.url}
