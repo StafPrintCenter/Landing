@@ -53,7 +53,8 @@ export function ApplicationResult({ application, onReset }: ApplicationResultPro
 
         {/* Dynamic Details */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-          <div className="flex items-center gap-3 p-3 rounded-xl bg-muted/40 border border-border/50">
+          {/* Bloc Candidat prend toute la largeur sur 2 colonnes */}
+          <div className="sm:col-span-2 flex items-center gap-3 p-3 rounded-xl bg-muted/40 border border-border/50">
             <User size={18} className="text-primary shrink-0" />
             <div className="overflow-hidden">
               <p className="text-xs text-muted-foreground">Candidat</p>
