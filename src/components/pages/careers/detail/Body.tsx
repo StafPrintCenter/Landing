@@ -8,7 +8,7 @@ interface JobOfferDetailBodyProps {
 export function JobOfferDetailBody({ offer }: JobOfferDetailBodyProps) {
   return (
     <div className="space-y-10 lg:col-span-2">
-      {/* Description */}
+      {/* Description du poste */}
       <div>
         <h2 className="font-display text-2xl font-bold text-foreground">
           Description du poste
@@ -18,17 +18,17 @@ export function JobOfferDetailBody({ offer }: JobOfferDetailBodyProps) {
         </p>
       </div>
 
-      {/* Responsabilités */}
-      {offer.responsibilities && offer.responsibilities.length > 0 && (
+      {/* Missions principales */}
+      {offer.missions && offer.missions.length > 0 && (
         <div>
           <h2 className="font-display text-2xl font-bold text-foreground">
-            Responsabilités principales
+            Missions principales
           </h2>
           <ul className="mt-4 space-y-3">
-            {offer.responsibilities.map((resp, i) => (
+            {offer.missions.map((mission, i) => (
               <li key={i} className="flex items-start gap-3 text-sm text-foreground">
                 <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-primary" />
-                <span className="leading-relaxed">{resp}</span>
+                <span className="leading-relaxed">{mission}</span>
               </li>
             ))}
           </ul>
@@ -36,16 +36,16 @@ export function JobOfferDetailBody({ offer }: JobOfferDetailBodyProps) {
       )}
 
       {/* Profil recherché */}
-      {offer.requirements && offer.requirements.length > 0 && (
+      {offer.profile && offer.profile.length > 0 && (
         <div>
           <h2 className="font-display text-2xl font-bold text-foreground">
             Profil & Compétences requises
           </h2>
           <ul className="mt-4 space-y-3">
-            {offer.requirements.map((req, i) => (
+            {offer.profile.map((item, i) => (
               <li key={i} className="flex items-start gap-3 text-sm text-foreground">
                 <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-primary" />
-                <span className="leading-relaxed">{req}</span>
+                <span className="leading-relaxed">{item}</span>
               </li>
             ))}
           </ul>
