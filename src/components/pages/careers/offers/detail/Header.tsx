@@ -78,8 +78,6 @@ export function JobOfferDetailHeader({ offer }: JobOfferDetailHeaderProps) {
   const salary = formatSalaryRange(offer.salaryMin, offer.salaryMax);
   const expired = isJobOfferExpired(offer);
   const shareUrl = buildShareUrl(`/careers/offers/${offer.slug}`);
-
-  // Utilisation du compte à rebours en temps réel
   const countdown = useCountdown(offer.expiresAt);
 
   const workModeLabel = JOB_WORK_MODE_LABELS[offer.workMode] ?? offer.workMode;
