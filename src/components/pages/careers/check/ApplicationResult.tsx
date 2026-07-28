@@ -1,6 +1,7 @@
 // src/components/pages/careers/check/ApplicationResult.tsx
 import { useState } from "react";
-import { Mail, Phone, Calendar, FileText, User, GraduationCap, CheckCircle2, Clock, XCircle, ArrowLeft, Eye } from "lucide-react";
+import { Mail, Phone, Calendar, FileText, User, GraduationCap, CheckCircle2, Clock, XCircle, ArrowLeft, Eye, Home } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import type { APIJobApplication } from "@/data/jobs";
 import { resolveStorageUrl } from "@/lib/file-url";
 import { FilePreviewModal } from "./FilePreviewModal";
@@ -145,13 +146,23 @@ export function ApplicationResult({ application, onReset }: ApplicationResultPro
         </div>
       </div>
 
-      <div className="text-center">
+      {/* Navigation de bas de page */}
+      <div className="flex flex-wrap items-center justify-center gap-4">
         <button
           onClick={onReset}
           className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
         >
           <ArrowLeft size={14} /> Effectuer une autre recherche
         </button>
+
+        <span className="text-muted-foreground/40">•</span>
+
+        <Link
+          to="/"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <Home size={14} /> Retour à l'accueil
+        </Link>
       </div>
 
       {activePreview && (
