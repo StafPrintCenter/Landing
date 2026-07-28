@@ -7,7 +7,6 @@ import { FieldErrorsBanner } from "./FieldErrorsBanner";
 import type { APIJobOffer } from "@/data/jobs";
 import { SITE } from "@/data/site";
 
-// Options pour le niveau d'études
 const EDUCATION_LEVEL_OPTIONS = [
   { value: "sans_diplome", label: "Sans diplôme" },
   { value: "bepc", label: "BEPC" },
@@ -29,17 +28,45 @@ export function ApplyForm({ offer }: ApplyFormProps) {
   const [phone, setPhone] = useState("");
   const [educationLevel, setEducationLevel] = useState("");
   const [coverLetter, setCoverLetter] = useState("");
+
+  // Fichiers
+  const [coverLetterFile, setCoverLetterFile] = useState<File | null>(null);
   const [cv, setCv] = useState<File | null>(null);
   const [consent, setConsent] = useState(false);
 
+  // États Drag & Drop
+  const [isCvDragging, setIsCvDragging] = useState(false);
+  const [isCoverLetterDragging, setIsCoverLetterDragging] = useState(false);
+
+  // Soumission et erreurs
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [errorStatus, setErrorStatus] = useState<number | undefined>();
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[]> | undefined>();
   const [submitted, setSubmitted] = useState(false);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCv(e.target.files?.[0] ?? null);
+  // Handlers pour Drag & Drop
+  const handleDragOver = (e: React.DragEvent, setDragging: (state: boolean) => void) => {
+    e.preventDefault();
+    setDragging(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent, setDragging: (state: boolean) => void) => {
+    e.preventDefault();
+    setDragging(false);
+  };
+
+  const handleDrop = (
+    e: React.DragEvent,
+    setFile: (file: File | null) => void,
+    setDragging: (state: boolean) => void
+  ) => {
+    e.preventDefault();
+    setDragging(false);
+    const droppedFile = e.dataTransfer.files?.[0];
+    if (droppedFile) {
+      setFile(droppedFile);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -58,6 +85,7 @@ export function ApplyForm({ offer }: ApplyFormProps) {
         phone,
         educationLevel,
         coverLetter: coverLetter.trim() || undefined,
+        coverLetterFile: coverLetterFile ?? undefined,
         cv,
         consentAccepted: consent,
       });
@@ -91,7 +119,7 @@ export function ApplyForm({ offer }: ApplyFormProps) {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-5">
-        {/* Champs Prénom & Nom */}
+        {/* Prénom & Nom */}
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="block space-y-1.5">
             <span className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
@@ -122,7 +150,7 @@ export function ApplyForm({ offer }: ApplyFormProps) {
           </label>
         </div>
 
-        {/* Champs Email & Téléphone */}
+        {/* Email & Téléphone */}
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="block space-y-1.5">
             <span className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
@@ -175,7 +203,7 @@ export function ApplyForm({ offer }: ApplyFormProps) {
           </select>
         </label>
 
-        {/* Votre motivation (Optionnel) */}
+        {/* Motivation en texte (Optionnel) */}
         <label className="block space-y-1.5">
           <span className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
             <FileText size={14} className="text-primary" /> Votre motivation{" "}
@@ -191,7 +219,61 @@ export function ApplyForm({ offer }: ApplyFormProps) {
           />
         </label>
 
-        {/* Upload du CV (OBLIGATOIRE) */}
+        {/* BLOC 1 : Fichier de Lettre de Motivation (Optionnel) */}
+        <div className="space-y-1.5">
+          <span className="block text-xs font-semibold text-foreground">
+            Fichier de lettre de motivation{" "}
+            <span className="font-normal text-muted-foreground">(Optionnel - PDF, DOC, DOCX - Max 5 Mo)</span>
+          </span>
+
+          {coverLetterFile ? (
+            <div className="flex items-center justify-between rounded-xl border border-primary/30 bg-primary/5 px-4 py-3 text-sm">
+              <div className="flex items-center gap-2.5 truncate">
+                <Check size={16} className="text-primary shrink-0" />
+                <span className="truncate font-medium text-foreground">{coverLetterFile.name}</span>
+                <span className="text-xs text-muted-foreground">
+                  ({(coverLetterFile.size / (1024 * 1024)).toFixed(2)} MB)
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setCoverLetterFile(null)}
+                className="ml-2 shrink-0 rounded-lg p-1 text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive cursor-pointer"
+                title="Supprimer la lettre"
+              >
+                <X size={16} />
+              </button>
+            </div>
+          ) : (
+            <label
+              onDragOver={(e) => handleDragOver(e, setIsCoverLetterDragging)}
+              onDragLeave={(e) => handleDragLeave(e, setIsCoverLetterDragging)}
+              onDrop={(e) => handleDrop(e, setCoverLetterFile, setIsCoverLetterDragging)}
+              className={`flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed p-6 text-center transition-all ${isCoverLetterDragging
+                ? "border-primary bg-primary/10"
+                : "border-border bg-background hover:border-primary/50 hover:bg-muted/30"
+                }`}
+            >
+              <div className="rounded-full bg-primary/10 p-3 text-primary">
+                <Upload size={20} />
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-foreground">
+                  Cliquez pour parcourir ou glissez votre lettre de motivation ici
+                </p>
+                <p className="text-[11px] text-muted-foreground mt-0.5">Formats acceptés : PDF, DOC, DOCX</p>
+              </div>
+              <input
+                type="file"
+                accept=".pdf,.doc,.docx"
+                onChange={(e) => setCoverLetterFile(e.target.files?.[0] ?? null)}
+                className="hidden"
+              />
+            </label>
+          )}
+        </div>
+
+        {/* BLOC 2 : Upload du CV (OBLIGATOIRE) */}
         <div className="space-y-1.5">
           <span className="block text-xs font-semibold text-foreground">
             Votre CV <span className="text-destructive">*</span>{" "}
@@ -217,7 +299,15 @@ export function ApplyForm({ offer }: ApplyFormProps) {
               </button>
             </div>
           ) : (
-            <label className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-border bg-background p-6 text-center transition-all hover:border-primary/50 hover:bg-muted/30">
+            <label
+              onDragOver={(e) => handleDragOver(e, setIsCvDragging)}
+              onDragLeave={(e) => handleDragLeave(e, setIsCvDragging)}
+              onDrop={(e) => handleDrop(e, setCv, setIsCvDragging)}
+              className={`flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed p-6 text-center transition-all ${isCvDragging
+                ? "border-primary bg-primary/10"
+                : "border-border bg-background hover:border-primary/50 hover:bg-muted/30"
+                }`}
+            >
               <div className="rounded-full bg-primary/10 p-3 text-primary">
                 <Upload size={20} />
               </div>
@@ -230,7 +320,7 @@ export function ApplyForm({ offer }: ApplyFormProps) {
               <input
                 type="file"
                 accept=".pdf,.doc,.docx"
-                onChange={handleFileChange}
+                onChange={(e) => setCv(e.target.files?.[0] ?? null)}
                 className="hidden"
                 required
               />
@@ -238,7 +328,7 @@ export function ApplyForm({ offer }: ApplyFormProps) {
           )}
         </div>
 
-        {/* Case de consentement */}
+        {/* Consentement */}
         <label className="flex items-start gap-2.5 rounded-xl border border-border/60 bg-muted/20 p-3.5 text-xs text-muted-foreground cursor-pointer">
           <input
             type="checkbox"
@@ -252,14 +342,14 @@ export function ApplyForm({ offer }: ApplyFormProps) {
           </span>
         </label>
 
-        {/* Messages d'erreur */}
+        {/* Bannières d'erreur */}
         {fieldErrors && Object.keys(fieldErrors).length > 0 ? (
           <FieldErrorsBanner fieldErrors={fieldErrors} />
         ) : errorMessage ? (
           <ApplyErrorBanner message={errorMessage} status={errorStatus} slug={offer.slug} />
         ) : null}
 
-        {/* Bouton de soumission */}
+        {/* Bouton d'envoi */}
         <button
           type="submit"
           disabled={isSubmitting || !cv || !consent || !educationLevel}
