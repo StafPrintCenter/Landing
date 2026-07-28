@@ -18,6 +18,26 @@ export const JOB_WORK_MODE_LABELS: Record<JobWorkMode, string> = {
   teletravail: "Télétravail",
 };
 
+// --- NOUVEAU : Mapping pour JobEducationLevel ---
+export type JobEducationLevel =
+  | "sans_diplome"
+  | "bepc"
+  | "bac"
+  | "bac+2"
+  | "bac+3"
+  | "master"
+  | "doctorat";
+
+export const JOB_EDUCATION_LEVEL_LABELS: Record<JobEducationLevel, string> = {
+  sans_diplome: "Sans diplôme / Autodidacte",
+  bepc: "BEPC",
+  bac: "BAC",
+  "bac+2": "BAC +2 (BTS, DUT, DEUG)",
+  "bac+3": "BAC +3 (Licence)",
+  master: "BAC +5 (Master, DEA, Ingénieur)",
+  doctorat: "Doctorat (PhD)",
+};
+
 export type APIJobOffer = {
   id: string;
   title: string;
@@ -31,7 +51,7 @@ export type APIJobOffer = {
   description: string;
   missions: string[];
   profile: string[];
-  educationLevel: string | null;
+  educationLevel: JobEducationLevel | string | null;
   salaryMin: number | null;
   salaryMax: number | null;
   expiresAt: string;
@@ -48,7 +68,7 @@ export type APIJobApplication = {
   lastName: string;
   email: string;
   phone: string;
-  educationLevel?: string | null;
+  educationLevel?: JobEducationLevel | string | null;
   coverLetter: string | null;
   coverLetterPath?: string | null;
   cvUrl: string;
