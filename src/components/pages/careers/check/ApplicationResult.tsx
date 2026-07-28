@@ -1,5 +1,5 @@
 // src/components/pages/careers/check/ApplicationResult.tsx
-import { Mail, Phone, Calendar, FileText, User, GraduationCap, CheckCircle2, Clock, XCircle } from "lucide-react";
+import { Mail, Phone, Calendar, FileText, User, GraduationCap, CheckCircle2, Clock, XCircle, ArrowLeft } from "lucide-react";
 import type { APIJobApplication } from "@/data/jobs";
 import { resolveStorageUrl } from "@/lib/file-url";
 
@@ -26,98 +26,131 @@ export function ApplicationResult({ application, onReset }: ApplicationResultPro
   const coverLetterProxyUrl = resolveStorageUrl(application.coverLetterFileUrl);
 
   return (
-    <div className="rounded-2xl border border-border bg-card p-6 md:p-8 shadow-xs space-y-6">
-      {/* En-tête statut */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border pb-5">
-        <div>
-          <span className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">Offre postulée</span>
-          <h3 className="font-display text-xl font-bold text-foreground">{application.jobOffer}</h3>
-        </div>
-        <span className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold ${status.className}`}>
-          <StatusIcon size={14} />
-          {status.label}
-        </span>
-      </div>
+    <div className="w-full space-y-6">
+      <div className="rounded-2xl border border-border bg-card p-6 md:p-8 shadow-sm space-y-6">
+        {/* En-tête : Titre + Badge de statut */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border pb-6">
+          <div className="space-y-1">
+            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              Poste sollicité
+            </span>
+            <h3 className="font-display text-xl md:text-2xl font-bold text-foreground">
+              {application.jobOffer}
+            </h3>
+          </div>
 
-      {/* Informations Candidat */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-        <div className="flex items-center gap-2.5 text-foreground">
-          <User size={16} className="text-primary shrink-0" />
-          <span>{application.firstName} {application.lastName}</span>
-        </div>
-
-        <div className="flex items-center gap-2.5 text-muted-foreground">
-          <Mail size={16} className="text-primary shrink-0" />
-          <span>{application.email}</span>
+          <div>
+            <span className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-xs font-semibold ${status.className}`}>
+              <StatusIcon size={14} />
+              {status.label}
+            </span>
+          </div>
         </div>
 
-        <div className="flex items-center gap-2.5 text-muted-foreground">
-          <Phone size={16} className="text-primary shrink-0" />
-          <span>{application.phone}</span>
+        {/* Grille d'informations candidat */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+          <div className="flex items-center gap-3 p-3 rounded-xl bg-muted/40 border border-border/50">
+            <User size={18} className="text-primary shrink-0" />
+            <div className="overflow-hidden">
+              <p className="text-xs text-muted-foreground">Candidat</p>
+              <p className="font-semibold text-foreground truncate">{application.firstName} {application.lastName}</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3 p-3 rounded-xl bg-muted/40 border border-border/50">
+            <Mail size={18} className="text-primary shrink-0" />
+            <div className="overflow-hidden">
+              <p className="text-xs text-muted-foreground">Email</p>
+              <p className="font-medium text-foreground truncate">{application.email}</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3 p-3 rounded-xl bg-muted/40 border border-border/50">
+            <Phone size={18} className="text-primary shrink-0" />
+            <div>
+              <p className="text-xs text-muted-foreground">Téléphone</p>
+              <p className="font-medium text-foreground">{application.phone}</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3 p-3 rounded-xl bg-muted/40 border border-border/50">
+            <GraduationCap size={18} className="text-primary shrink-0" />
+            <div>
+              <p className="text-xs text-muted-foreground">Niveau d'études</p>
+              <p className="font-medium text-foreground">{application.educationLevel || "Non renseigné"}</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3 p-3 rounded-xl bg-muted/40 border border-border/50">
+            <Calendar size={18} className="text-primary shrink-0" />
+            <div>
+              <p className="text-xs text-muted-foreground">Date de soumission</p>
+              <p className="font-medium text-foreground">
+                {new Date(application.createdAt).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}
+              </p>
+            </div>
+          </div>
+
+          {application.reviewedAt && (
+            <div className="flex items-center gap-3 p-3 rounded-xl bg-muted/40 border border-border/50">
+              <Clock size={18} className="text-primary shrink-0" />
+              <div>
+                <p className="text-xs text-muted-foreground">Dernière mise à jour</p>
+                <p className="font-medium text-foreground">
+                  {new Date(application.reviewedAt).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}
+                </p>
+              </div>
+            </div>
+          )}
         </div>
 
-        {application.educationLevel && (
-          <div className="flex items-center gap-2.5 text-muted-foreground">
-            <GraduationCap size={16} className="text-primary shrink-0" />
-            <span>Niveau d'études : <strong className="text-foreground font-medium">{application.educationLevel}</strong></span>
+        {/* Lettre de motivation rédigée */}
+        {application.coverLetter && (
+          <div className="space-y-2 rounded-xl bg-muted/30 p-4 border border-border">
+            <p className="text-xs font-semibold text-foreground uppercase tracking-wider">
+              Lettre de motivation
+            </p>
+            <p className="text-xs leading-relaxed text-muted-foreground whitespace-pre-line">
+              {application.coverLetter}
+            </p>
           </div>
         )}
 
-        <div className="flex items-center gap-2.5 text-muted-foreground">
-          <Calendar size={16} className="text-primary shrink-0" />
-          <span>Envoyée le {new Date(application.createdAt).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}</span>
-        </div>
+        {/* Fichiers joints */}
+        <div className="flex flex-wrap gap-3 border-t border-border pt-5">
+          {cvProxyUrl && (
+            <a
+              href={cvProxyUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl border border-primary/20 bg-primary/5 px-4 py-2.5 text-xs font-semibold text-primary hover:bg-primary hover:text-primary-foreground transition-all"
+            >
+              <FileText size={15} />
+              Consulter le CV envoyé
+            </a>
+          )}
 
-        {application.reviewedAt && (
-          <div className="flex items-center gap-2.5 text-muted-foreground">
-            <Clock size={16} className="text-primary shrink-0" />
-            <span>Traitée le {new Date(application.reviewedAt).toLocaleDateString("fr-FR")}</span>
-          </div>
-        )}
+          {coverLetterProxyUrl && (
+            <a
+              href={coverLetterProxyUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-2.5 text-xs font-semibold text-foreground hover:bg-muted transition-colors"
+            >
+              <FileText size={15} />
+              Fichier lettre de motivation
+            </a>
+          )}
+        </div>
       </div>
 
-      {/* Lettre de motivation texte si disponible */}
-      {application.coverLetter && (
-        <div className="rounded-xl bg-muted/50 p-4 border border-border text-xs leading-relaxed space-y-1">
-          <p className="font-semibold text-foreground">Lettre de motivation :</p>
-          <p className="text-muted-foreground whitespace-pre-line">{application.coverLetter}</p>
-        </div>
-      )}
-
-      {/* Fichiers Joints (Proxifiés) */}
-      <div className="flex flex-wrap gap-3 border-t border-border pt-5">
-        {cvProxyUrl && (
-          <a
-            href={cvProxyUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-2.5 text-xs font-semibold text-foreground hover:bg-muted transition-colors"
-          >
-            <FileText size={15} className="text-primary" />
-            Consulter le CV
-          </a>
-        )}
-
-        {coverLetterProxyUrl && (
-          <a
-            href={coverLetterProxyUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-2.5 text-xs font-semibold text-foreground hover:bg-muted transition-colors"
-          >
-            <FileText size={15} className="text-primary" />
-            Consulter la lettre de motivation (Fichier)
-          </a>
-        )}
-      </div>
-
-      {/* Bouton pour faire une nouvelle recherche */}
-      <div className="pt-2">
+      {/* Bouton de retour / réinitialisation centré */}
+      <div className="text-center">
         <button
           onClick={onReset}
-          className="text-xs font-medium text-muted-foreground hover:text-foreground underline cursor-pointer"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
         >
-          Effectuer une autre recherche
+          <ArrowLeft size={14} /> Effectuer une autre recherche
         </button>
       </div>
     </div>
