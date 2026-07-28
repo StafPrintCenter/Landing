@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft, MapPin, Briefcase, Clock, Share2, Users, Laptop, GraduationCap } from "lucide-react";
 import {
@@ -12,62 +12,7 @@ import {
 } from "@/data/jobs";
 import { ShareModal } from "@/components/modal";
 import { buildShareUrl } from "@/lib/share/build-share-url";
-
-/**
- * Helper pour calculer le temps restant avant la date d'expiration
- */
-function calculateTimeLeft(targetDate: string) {
-  const diff = new Date(targetDate).getTime() - new Date().getTime();
-
-  if (diff <= 0) {
-    return null;
-  }
-
-  const SECOND = 1000;
-  const MINUTE = SECOND * 60;
-  const HOUR = MINUTE * 60;
-  const DAY = HOUR * 24;
-  const WEEK = DAY * 7;
-
-  const weeks = Math.floor(diff / WEEK);
-  const days = Math.floor((diff % WEEK) / DAY);
-  const hours = Math.floor((diff % DAY) / HOUR);
-  const minutes = Math.floor((diff % HOUR) / MINUTE);
-  const seconds = Math.floor((diff % MINUTE) / SECOND);
-
-  // Construction dynamique de la chaîne (ex: "2 sem 3 jours 04 h 12 min 08 sec")
-  const parts: string[] = [];
-  if (weeks > 0) parts.push(`${weeks} sem`);
-  if (days > 0) parts.push(`${days} jour${days > 1 ? "s" : ""}`);
-  parts.push(`${hours}h`);
-  parts.push(`${minutes}min`);
-  parts.push(`${seconds}sec`);
-
-  return parts.join(" ");
-}
-
-/**
- * Hook personnalisé pour rafraîchir le compte à rebours chaque seconde
- */
-function useCountdown(targetDate: string) {
-  const [timeLeft, setTimeLeft] = useState<string | null>(() => calculateTimeLeft(targetDate));
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      const remaining = calculateTimeLeft(targetDate);
-      setTimeLeft(remaining);
-
-      // Si l'offre vient d'expirer, on stoppe l'intervalle
-      if (!remaining) {
-        clearInterval(timer);
-      }
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [targetDate]);
-
-  return timeLeft;
-}
+import { useCountdown } from "@/hooks/use-countdown";
 
 interface JobOfferDetailHeaderProps {
   offer: APIJobOffer;
@@ -155,7 +100,7 @@ export function JobOfferDetailHeader({ offer }: JobOfferDetailHeaderProps) {
               <span>
                 Jusqu'au {formattedDate}
                 {countdown.formatted && (
-                  <span className="ml-1 text-xs text-primary">
+                  <span className="ml-1 text-xs">
                     ({countdown.formatted})
                   </span>
                 )}
