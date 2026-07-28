@@ -5,6 +5,7 @@ import { ApplySuccessScreen } from "./SuccessScreen";
 import { ApplyErrorBanner } from "./ErrorBanner";
 import { FieldErrorsBanner } from "./FieldErrorsBanner";
 import type { APIJobOffer } from "@/data/jobs";
+import { SITE } from "@/data/site";
 
 interface ApplyFormProps {
   offer: APIJobOffer;
@@ -212,7 +213,7 @@ export function ApplyForm({ offer }: ApplyFormProps) {
             required
           />
           <span className="leading-relaxed">
-            J'autorise {offer.title} à traiter mes données personnelles dans le cadre strict du recrutement pour cette offre.
+            J'autorise {SITE.name} à traiter mes données personnelles dans le cadre strict du recrutement pour cette offre de {offer.title}.
           </span>
         </label>
 
