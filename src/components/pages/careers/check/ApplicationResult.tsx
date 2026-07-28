@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Mail, Phone, Calendar, FileText, User, GraduationCap, CheckCircle2, Clock, XCircle, ArrowLeft, Eye, Home } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import type { APIJobApplication } from "@/data/jobs";
+import {  STATUS_CONFIG,  getEducationLevelLabel,  type APIJobApplication,} from "@/data/jobs";
 import { resolveStorageUrl } from "@/lib/file-url";
 import { FilePreviewModal } from "./FilePreviewModal";
 
