@@ -1,11 +1,22 @@
 import { useState } from "react";
-import { Loader2, User, Mail, Phone, FileText, Upload, X, Check, ShieldCheck } from "lucide-react";
+import { Loader2, User, Mail, Phone, FileText, Upload, X, Check, ShieldCheck, GraduationCap } from "lucide-react";
 import { applyToJobOffer, JobsApiError } from "@/stores/useJobsStore";
 import { ApplySuccessScreen } from "./SuccessScreen";
 import { ApplyErrorBanner } from "./ErrorBanner";
 import { FieldErrorsBanner } from "./FieldErrorsBanner";
 import type { APIJobOffer } from "@/data/jobs";
 import { SITE } from "@/data/site";
+
+// Options pour le niveau d'études
+const EDUCATION_LEVEL_OPTIONS = [
+  { value: "sans_diplome", label: "Sans diplôme" },
+  { value: "bepc", label: "BEPC" },
+  { value: "bac", label: "BAC" },
+  { value: "bac+2", label: "BAC +2 (BTS, DUT...)" },
+  { value: "bac+3", label: "BAC +3 (Licence...)" },
+  { value: "master", label: "BAC +5 (Master, DEA...)" },
+  { value: "doctorat", label: "Doctorat" },
+];
 
 interface ApplyFormProps {
   offer: APIJobOffer;
@@ -16,6 +27,7 @@ export function ApplyForm({ offer }: ApplyFormProps) {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [educationLevel, setEducationLevel] = useState("");
   const [coverLetter, setCoverLetter] = useState("");
   const [cv, setCv] = useState<File | null>(null);
   const [consent, setConsent] = useState(false);
@@ -44,6 +56,7 @@ export function ApplyForm({ offer }: ApplyFormProps) {
         lastName,
         email,
         phone,
+        educationLevel: educationLevel || undefined,
         coverLetter: coverLetter.trim() || undefined,
         cv,
         consentAccepted: consent,
@@ -140,10 +153,30 @@ export function ApplyForm({ offer }: ApplyFormProps) {
           </label>
         </div>
 
-        {/* Lettre de motivation */}
+        {/* Niveau d'études */}
         <label className="block space-y-1.5">
           <span className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
-            <FileText size={14} className="text-primary" /> Lettre de motivation{" "}
+            <GraduationCap size={14} className="text-primary" /> Niveau d'études{" "}
+            <span className="text-xs font-normal text-muted-foreground">(Optionnel)</span>
+          </span>
+          <select
+            value={educationLevel}
+            onChange={(e) => setEducationLevel(e.target.value)}
+            className="w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-sm outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20 cursor-pointer"
+          >
+            <option value="">Sélectionnez votre niveau d'études</option>
+            {EDUCATION_LEVEL_OPTIONS.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        {/* Votre motivation (Ex-Lettre de motivation) */}
+        <label className="block space-y-1.5">
+          <span className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
+            <FileText size={14} className="text-primary" /> Votre motivation{" "}
             <span className="text-xs font-normal text-muted-foreground">(Optionnel)</span>
           </span>
           <textarea
