@@ -1,3 +1,6 @@
+// src/data/jobs.ts
+import { Clock, CheckCircle2, XCircle } from "lucide-react";
+
 export type JobContractType = "cdi" | "cdd" | "stage" | "freelance" | "alternance";
 
 export const JOB_CONTRACT_TYPES: JobContractType[] = ["cdi", "cdd", "stage", "freelance", "alternance"];
@@ -18,7 +21,7 @@ export const JOB_WORK_MODE_LABELS: Record<JobWorkMode, string> = {
   teletravail: "Télétravail",
 };
 
-// --- NOUVEAU : Mapping pour JobEducationLevel ---
+// --- Mapping pour JobEducationLevel ---
 export type JobEducationLevel =
   | "sans_diplome"
   | "bepc"
@@ -37,6 +40,17 @@ export const JOB_EDUCATION_LEVEL_LABELS: Record<JobEducationLevel, string> = {
   master: "BAC +5 (Master, DEA, Ingénieur)",
   doctorat: "Doctorat (PhD)",
 };
+
+/**
+ * Retourne le libellé formaté pour un niveau d'études.
+ */
+export function getEducationLevelLabel(level?: JobEducationLevel | string | null): string {
+  if (!level) return "Non renseigné";
+  if (level in JOB_EDUCATION_LEVEL_LABELS) {
+    return JOB_EDUCATION_LEVEL_LABELS[level as JobEducationLevel];
+  }
+  return level;
+}
 
 export type APIJobOffer = {
   id: string;
@@ -58,7 +72,29 @@ export type APIJobOffer = {
   createdAt?: string;
 };
 
+// --- Configuration des statuts de candidature ---
 export type JobApplicationStatus = "pending" | "accepted" | "rejected" | string;
+
+export const STATUS_CONFIG: Record<
+  string,
+  { label: string; className: string; icon: typeof Clock }
+> = {
+  pending: {
+    label: "En attente d'examen",
+    className: "bg-amber-500/10 text-amber-600 border-amber-500/20",
+    icon: Clock,
+  },
+  accepted: {
+    label: "Candidature Retenue",
+    className: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20",
+    icon: CheckCircle2,
+  },
+  rejected: {
+    label: "Non retenue",
+    className: "bg-muted text-muted-foreground border-border",
+    icon: XCircle,
+  },
+};
 
 export type APIJobApplication = {
   id: string;
