@@ -76,7 +76,9 @@ export function ApplicationResult({ application, onReset }: ApplicationResultPro
             <GraduationCap size={18} className="text-primary shrink-0" />
             <div>
               <p className="text-xs text-muted-foreground">Niveau d'études</p>
-              <p className="font-medium text-foreground">{application.educationLevel || "Non renseigné"}</p>
+              <p className="font-medium text-foreground">
+                {getEducationLevelLabel(application.educationLevel)}
+              </p>
             </div>
           </div>
 
