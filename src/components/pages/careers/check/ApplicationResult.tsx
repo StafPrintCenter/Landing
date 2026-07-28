@@ -1,4 +1,3 @@
-// src/components/pages/careers/check/ApplicationResult.tsx
 import { useState } from "react";
 import { Mail, Phone, Calendar, FileText, User, GraduationCap, CheckCircle2, Clock, XCircle, ArrowLeft, Eye, Home } from "lucide-react";
 import { Link } from "@tanstack/react-router";
