@@ -155,7 +155,7 @@ export function JobOfferDetailHeader({ offer }: JobOfferDetailHeaderProps) {
               <span>
                 Jusqu'au {formattedDate}
                 {countdown.formatted && (
-                  <span className="ml-1 text-xs font-semibold text-primary">
+                  <span className="ml-1 text-xs text-primary">
                     ({countdown.formatted})
                   </span>
                 )}
