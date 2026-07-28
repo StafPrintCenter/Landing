@@ -1,4 +1,3 @@
-// src/routes/careers/check-offer.tsx
 import { useState, useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { CheckForm } from "@/components/pages/careers/check/CheckForm";
@@ -36,11 +35,8 @@ function CheckOfferPage() {
     setError(null);
 
     try {
-      // 1. Endpoint exact identique à Swagger / Curl
-      // Note: resolveApiUrl convertit /api/public/... en /api/v1/public/...
       const url = resolveApiUrl("/api/public/jobs/applications/check");
 
-      // 2. Construction du FormData (pour matcher multipart/form-data)
       const formData = new FormData();
       formData.append("email", searchEmail);
       formData.append("token", searchToken);
@@ -49,19 +45,17 @@ function CheckOfferPage() {
         method: "POST",
         headers: {
           Accept: "application/json",
-          // Ne PAS mettre de header Content-Type ici : 
-          // le navigateur définit automatiquement multipart/form-data avec le bon boundary
         },
         body: formData,
       });
 
       if (!response.ok) {
         if (response.status === 404) {
-          throw new Error("Aucune candidature trouvée pour cet email et cette clé de suivi.");
+          throw new Error("Aucune candidature trouvée avec cet email et cette clé de suivi.");
         }
         if (response.status === 422) {
           const errData = await response.json();
-          throw new Error(errData.message || "Les données fournies sont invalides.");
+          throw new Error(errData.message || "Les données renseignées sont invalides.");
         }
         throw new Error(`Erreur du serveur (${response.status})`);
       }
@@ -69,14 +63,13 @@ function CheckOfferPage() {
       const json = await response.json();
       setApplication(json.data);
     } catch (err: any) {
-      setError(err.message || "Une erreur est survenue lors de la vérification.");
+      setError(err.message || "Une erreur est survenue lors de la recherche.");
       setApplication(null);
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Auto-soumission au chargement si l'email et le token sont présents dans les param d'URL
   useEffect(() => {
     if (searchParams.email && searchParams.token) {
       performCheck(searchParams.email, searchParams.token);
@@ -95,7 +88,7 @@ function CheckOfferPage() {
   };
 
   return (
-    <div className="container max-w-2xl py-12">
+    <div className="container max-w-2xl mx-auto px-4 py-12 md:py-16">
       <div className="text-center mb-8 space-y-2">
         <h1 className="font-display text-2xl md:text-3xl font-bold text-foreground">
           Suivi de candidature
@@ -105,21 +98,18 @@ function CheckOfferPage() {
         </p>
       </div>
 
-      {/* État de chargement initial */}
       {isLoading && !application && !error && (
-        <div className="flex flex-col items-center justify-center p-12 space-y-3">
+        <div className="flex flex-col items-center justify-center p-12 space-y-3 rounded-2xl border border-border bg-card">
           <Loader2 size={32} className="animate-spin text-primary" />
           <p className="text-sm text-muted-foreground font-medium">
-            Vérification de votre candidature en cours…
+            Vérification de votre dossier…
           </p>
         </div>
       )}
 
-      {/* Résultat si la candidature est trouvée */}
       {application ? (
         <ApplicationResult application={application} onReset={handleReset} />
       ) : (
-        /* Formulaire si aucun résultat n'est encore affiché ou en cas d'erreur */
         (!isLoading || error) && (
           <CheckForm
             email={email}
