@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft, MapPin, Briefcase, Clock, Share2, Users, Laptop, GraduationCap } from "lucide-react";
 import {
@@ -13,6 +13,62 @@ import {
 import { ShareModal } from "@/components/modal";
 import { buildShareUrl } from "@/lib/share/build-share-url";
 
+/**
+ * Helper pour calculer le temps restant avant la date d'expiration
+ */
+function calculateTimeLeft(targetDate: string) {
+  const diff = new Date(targetDate).getTime() - new Date().getTime();
+
+  if (diff <= 0) {
+    return null;
+  }
+
+  const SECOND = 1000;
+  const MINUTE = SECOND * 60;
+  const HOUR = MINUTE * 60;
+  const DAY = HOUR * 24;
+  const WEEK = DAY * 7;
+
+  const weeks = Math.floor(diff / WEEK);
+  const days = Math.floor((diff % WEEK) / DAY);
+  const hours = Math.floor((diff % DAY) / HOUR);
+  const minutes = Math.floor((diff % HOUR) / MINUTE);
+  const seconds = Math.floor((diff % MINUTE) / SECOND);
+
+  // Construction dynamique de la chaîne (ex: "2 sem 3 jours 04 h 12 min 08 sec")
+  const parts: string[] = [];
+  if (weeks > 0) parts.push(`${weeks} sem`);
+  if (days > 0) parts.push(`${days} jour${days > 1 ? "s" : ""}`);
+  parts.push(`${hours}h`);
+  parts.push(`${minutes}min`);
+  parts.push(`${seconds}sec`);
+
+  return parts.join(" ");
+}
+
+/**
+ * Hook personnalisé pour rafraîchir le compte à rebours chaque seconde
+ */
+function useCountdown(targetDate: string) {
+  const [timeLeft, setTimeLeft] = useState<string | null>(() => calculateTimeLeft(targetDate));
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const remaining = calculateTimeLeft(targetDate);
+      setTimeLeft(remaining);
+
+      // Si l'offre vient d'expirer, on stoppe l'intervalle
+      if (!remaining) {
+        clearInterval(timer);
+      }
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [targetDate]);
+
+  return timeLeft;
+}
+
 interface JobOfferDetailHeaderProps {
   offer: APIJobOffer;
 }
@@ -22,6 +78,9 @@ export function JobOfferDetailHeader({ offer }: JobOfferDetailHeaderProps) {
   const salary = formatSalaryRange(offer.salaryMin, offer.salaryMax);
   const expired = isJobOfferExpired(offer);
   const shareUrl = buildShareUrl(`/careers/offers/${offer.slug}`);
+
+  // Utilisation du compte à rebours en temps réel
+  const countdown = useCountdown(offer.expiresAt);
 
   const workModeLabel = JOB_WORK_MODE_LABELS[offer.workMode] ?? offer.workMode;
   const educationLabel =
@@ -93,6 +152,18 @@ export function JobOfferDetailHeader({ offer }: JobOfferDetailHeaderProps) {
 
             <span className="inline-flex items-center gap-2 rounded-full bg-card border border-border px-4 py-2">
               <Clock size={14} /> Jusqu'au {new Date(offer.expiresAt).toLocaleDateString("fr-FR")}
+            </span>
+
+            {/* Inscription de la date + Compte à rebours dynamique */}
+            <span className="inline-flex items-center gap-2 rounded-full bg-card border border-border px-4 py-2">
+              <Clock size={14} className={countdown ? "text-primary animate-pulse" : "text-muted-foreground"} />
+              {countdown ? (
+                <span>
+                  Expire dans <strong className="font-semibold text-foreground">{countdown}</strong>
+                </span>
+              ) : (
+                <span>Clôturée le {new Date(offer.expiresAt).toLocaleDateString("fr-FR")}</span>
+              )}
             </span>
           </div>
         </div>
