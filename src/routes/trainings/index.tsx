@@ -19,7 +19,7 @@ import {
   FORMATION_SORT_DIRECTIONS,
   type FormationSortOption,
   type FormationSortDirection,
-} from "@/components/pages/training/home";
+} from "@/components/pages/trainings/home";
 
 const trainingSearchSchema = z.object({
   theme: z.enum(["Tout", ...FORMATION_THEMES]).catch("Tout"),
