@@ -69,7 +69,7 @@ export async function updateNewsletterPreferences(params: UpdateNewsletterPrefer
 }
 
 /**
- * Désinscrit un abonné via son token personnel — appelée depuis la page
+ * Désinscrit un abonné via son token personnel - appelée depuis la page
  */
 export async function unsubscribeNewsletter(token: string): Promise<APINewsletterSubscription> {
   const formData = new FormData();
