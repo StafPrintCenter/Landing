@@ -34,7 +34,7 @@ export type UpdateBooking = <K extends keyof BookingData>(k: K, v: BookingData[K
 
 export const STEPS = ["Type", "Créneau", "Vos infos", "Récapitulatif"] as const;
 
-/** Contrainte de disponibilité côté calendrier — heuristique avant de connaître les vrais créneaux */
+/** Contrainte de disponibilité côté calendrier - heuristique avant de connaître les vrais créneaux */
 export function isDateDisabled(d: Date): boolean {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
