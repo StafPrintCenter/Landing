@@ -48,7 +48,7 @@ export function JobOfferDetailSidebar({ offer }: JobOfferDetailSidebarProps) {
   const richWhatsappLink = withWhatsAppMessage(SITE.whatsappLink, whatsappText);
 
   // Helper Email
-  const emailSubject = `Candidature / Renseignements — Offre : ${offer.title}`;
+  const emailSubject = `Candidature / Renseignements - Offre : ${offer.title}`;
   const emailBody = [
     `Bonjour,`,
     ``,
