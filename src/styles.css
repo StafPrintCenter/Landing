@@ -44,7 +44,7 @@
 :root {
   --radius: 0.75rem;
 
-  /* Brand palette — bold African contemporary */
+  /* Brand palette - bold African contemporary */
   --ink: oklch(0.18 0.02 60);
   /* near-black warm */
   --cream: oklch(0.97 0.02 85);
