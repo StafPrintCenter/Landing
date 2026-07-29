@@ -1,5 +1,5 @@
 /**
- * URL de connexion de l'espace étudiant — vit sur un sous-domaine externe,
+ * URL de connexion de l'espace étudiant - vit sur un sous-domaine externe,
  * distinct du site principal, du site de raccourcissement et du backoffice.
  */
 export function buildStudentLoginUrl(): string {
