@@ -16,7 +16,7 @@ export function ChoiceQuestion({ question, value, onChange }: ChoiceQuestionProp
         onChange={(e) => onChange(e.target.value)}
         className="w-full cursor-pointer rounded-lg border border-border bg-background px-4 py-3 text-sm"
       >
-        <option value="">— Choisir —</option>
+        <option value="">- Choisir -</option>
         {options.map((o) => (
           <option key={o.value} value={o.value}>{o.label}</option>
         ))}
