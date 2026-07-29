@@ -7,8 +7,8 @@ import { Calculator, ArrowRight, CheckCircle2, Info } from "lucide-react";
 export const Route = createFileRoute("/tests/devis")({
   head: () => ({
     meta: [
-      { title: "Devis intelligent (test) — STAF PRINT CENTER" },
-      { name: "description", content: "Configurateur de devis en ligne — estimation instantanée pour vos impressions et prestations digitales." },
+      { title: "Devis intelligent (test) - STAF PRINT CENTER" },
+      { name: "description", content: "Configurateur de devis en ligne - estimation instantanée pour vos impressions et prestations digitales." },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -119,7 +119,7 @@ function DevisPage() {
                 className="w-full cursor-pointer rounded-lg border border-border bg-background px-4 py-3 text-sm"
               >
                 {products.map((p) => (
-                  <option key={p.id} value={p.id}>{p.label} — dès {p.base.toLocaleString("fr-FR")} FCFA</option>
+                  <option key={p.id} value={p.id}>{p.label} - dès {p.base.toLocaleString("fr-FR")} FCFA</option>
                 ))}
               </select>
             </div>
