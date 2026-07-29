@@ -57,6 +57,7 @@ export function createResourceStore<T>({
 
     const url = resolveApiUrl(`/api/public/${listEndpoint}?${queryParams.toString()}`);
     const response = await fetch(url);
+
     if (!response.ok) {
       throw new Error(`Erreur lors de la récupération de la ressource "${resourceKey}"`);
     }
