@@ -11,7 +11,7 @@ import {
   FormationDetailRelated,
   FormationDetailNotFound,
   FormationDetailError,
-} from "@/components/pages/training/detail";
+} from "@/components/pages/trainings/detail";
 
 export const Route = createFileRoute("/trainings/$id")({
   pendingMs: 0,
