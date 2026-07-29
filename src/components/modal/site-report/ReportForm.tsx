@@ -53,14 +53,14 @@ export function ReportForm({
           onChange={(e) => setReportableType(e.target.value as ReportableType | "")}
           className="input w-full cursor-pointer"
         >
-          <option value="" disabled>— Choisir le type —</option>
+          <option value="" disabled>- Choisir le type -</option>
           {TYPE_OPTIONS.map((t) => (
             <option key={t} value={t}>{REPORTABLE_TYPE_LABELS[t]}</option>
           ))}
         </select>
         {prefill.onListingPage && (
           <span className="mt-1 block text-xs text-muted-foreground">
-            Type détecté automatiquement — précisez l'identifiant ci-dessous.
+            Type détecté automatiquement - précisez l'identifiant ci-dessous.
           </span>
         )}
       </label>
@@ -80,7 +80,7 @@ export function ReportForm({
         />
         {prefill.reportableId && reportableId === prefill.reportableId && (
           <span className="mt-1 block text-xs text-muted-foreground">
-            Rempli automatiquement depuis cette page — modifiable si besoin.
+            Rempli automatiquement depuis cette page - modifiable si besoin.
           </span>
         )}
       </label>
