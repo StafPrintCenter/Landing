@@ -70,7 +70,7 @@ export interface EditReviewParams {
 }
 
 /**
- * Modification d'une réponse déjà soumise — uniquement possible si le formulaire
+ * Modification d'une réponse déjà soumise - uniquement possible si le formulaire
  */
 export async function editReviewResponse(token: string, params: EditReviewParams): Promise<void> {
   const { json, files } = buildAnswersPayload(params.answers);
