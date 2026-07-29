@@ -147,7 +147,7 @@ function SearchPage() {
       <section className="container-x py-10 md:py-14">
         <SearchHeader shareUrl={shareUrl} query={q} />
 
-        {/* Barre de recherche — visible uniquement sur mobile ici, où il n'y a pas de sidebar persistante */}
+        {/* Barre de recherche - visible uniquement sur mobile ici, où il n'y a pas de sidebar persistante */}
         <div className="mt-6 md:hidden">
           <SearchBar value={input} onChange={setInput} onSubmit={submit} />
         </div>
@@ -155,7 +155,7 @@ function SearchPage() {
         <FilterMobileTrigger activeFilterCount={activeFilterCount} onOpen={() => setFiltersOpen(true)} />
 
         <div className="mt-6 grid gap-8 md:grid-cols-[260px_1fr] md:items-start lg:grid-cols-[280px_1fr]">
-          {/* Sidebar — desktop only */}
+          {/* Sidebar - desktop only */}
           <aside className="hidden space-y-8 md:sticky md:top-24 md:block">
             <SearchBar value={input} onChange={setInput} onSubmit={submit} />
             {filtersPanel}
@@ -172,7 +172,7 @@ function SearchPage() {
         </div>
       </section>
 
-      {/* Tiroir de filtres mobile — pas de recherche ici, déjà visible en haut de page */}
+      {/* Tiroir de filtres mobile - pas de recherche ici, déjà visible en haut de page */}
       <FilterMobileSheet isOpen={filtersOpen} onClose={() => setFiltersOpen(false)} resultCount={results.length} unitLabel="résultat">
         {filtersPanel}
       </FilterMobileSheet>
