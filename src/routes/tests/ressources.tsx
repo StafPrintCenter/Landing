@@ -5,7 +5,7 @@ import { Download, FileText, Palette, BookOpen, Layers, Sparkles } from "lucide-
 export const Route = createFileRoute("/tests/ressources")({
   head: () => ({
     meta: [
-      { title: "Ressources gratuites (test) — STAF PRINT CENTER" },
+      { title: "Ressources gratuites (test) - STAF PRINT CENTER" },
       { name: "description", content: "Templates, guides et outils gratuits pour vos projets d'impression et de design." },
       { name: "robots", content: "noindex" },
     ],
