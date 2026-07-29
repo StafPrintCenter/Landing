@@ -24,7 +24,7 @@ const REASON_CONTENT: Record<TrainingRegistrationErrorReason, ReasonContent> = {
   in_progress: {
     icon: Clock,
     title: "Votre inscription est déjà en cours de traitement.",
-    hint: "Un conseiller reviendra vers vous prochainement — inutile de soumettre une nouvelle demande.",
+    hint: "Un conseiller reviendra vers vous prochainement - inutile de soumettre une nouvelle demande.",
   },
   pending_account: {
     icon: MailQuestion,
