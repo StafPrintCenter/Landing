@@ -49,7 +49,7 @@ export async function createInternshipRequest(params: CreateInternshipRequestPar
     try {
       payload = await response.json();
     } catch {
-      // corps non-JSON — repli générique
+      // corps non-JSON - repli générique
     }
     throw new InternshipApiError(
       payload.message ?? "Erreur lors de l'envoi de votre demande de stage.",
