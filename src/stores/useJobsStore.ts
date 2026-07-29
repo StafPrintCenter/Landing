@@ -72,7 +72,7 @@ export async function applyToJobOffer(
     try {
       payload = await response.json();
     } catch {
-      // corps non-JSON — repli sur message générique
+      // corps non-JSON - repli sur message générique
     }
     throw new JobsApiError(
       payload.message ?? "Erreur lors de l'envoi de votre candidature.",
