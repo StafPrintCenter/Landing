@@ -39,7 +39,7 @@ const EMPTY_VALUES: ContactInput = {
 };
 
 interface ContactFormProps {
-  /** Appelé après un envoi réussi — utile pour un tracking ou une redirection côté parent */
+  /** Appelé après un envoi réussi - utile pour un tracking ou une redirection côté parent */
   onSuccess?: (ticketNumber: string) => void;
   initialValues: {
     service: string;
@@ -82,7 +82,7 @@ export function ContactForm({ onSuccess, initialValues }: ContactFormProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialValues, reset]);
 
-  // customService n'a de sens que si "Autre" est sélectionné — vidé automatiquement sinon
+  // customService n'a de sens que si "Autre" est sélectionné - vidé automatiquement sinon
   useEffect(() => {
     if (watchService !== "Autre" && watchCustomService !== "") {
       setValue("customService", "", { shouldValidate: false });
@@ -140,7 +140,7 @@ export function ContactForm({ onSuccess, initialValues }: ContactFormProps) {
 
         <Field label="Service souhaité" error={errors.service?.message} className="md:col-span-2">
           <select {...register("service")} className="input w-full">
-            <option value="">— Choisir un service —</option>
+            <option value="">- Choisir un service -</option>
             {(services || []).map((s) => (<option key={s.slug} value={s.title}>{s.title}</option>))}
             <option value="Autre">Autre (préciser...)</option>
           </select>
