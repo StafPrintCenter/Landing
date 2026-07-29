@@ -16,7 +16,7 @@ export function StepAvailability({ register, errors, watch }: StepProps) {
         <div className="relative flex items-center">
           <Calendar size={16} className="absolute left-3 text-muted-foreground" />
           <select {...register("schedulePref")} className="input w-full pl-10">
-            <option value="">— Choisir un créneau —</option>
+            <option value="">- Choisir un créneau -</option>
             <option value="Semaine">En Semaine (Lundi au Vendredi)</option>
             <option value="Weekend">Le Weekend (Samedi / Dimanche)</option>
             <option value="Planning">Selon le planning de la formation</option>
