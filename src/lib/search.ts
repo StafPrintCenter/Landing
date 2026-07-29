@@ -17,7 +17,7 @@ export type SearchItem = {
   image?: string;
   url: string;
   params?: Record<string, string>;
-  routePattern: "/projects" | "/trainings" | "/training/$id" | "/articles/$slug" | "/services/$slug" | "/faqs";
+  routePattern: "/projects" | "/trainings" | "/training/$id" | "/articles/$slug" | "/services/$slug" | "/faqs" | "/careers/$slug";
   keywords: string;
   projectId?: string;
   faqId?: string;
