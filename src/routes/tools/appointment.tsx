@@ -69,7 +69,7 @@ function RendezVousPage() {
 
 Nom : ${appointment.lastName} ${appointment.firstName}
 Email : ${appointment.email}
-WhatsApp : ${appointment.whatsapp || "—"}
+WhatsApp : ${appointment.whatsapp || "-"}
 
 Type : ${modeLabel}
 Durée : ${appointment.duration} min
@@ -79,7 +79,7 @@ Heure : ${appointment.time}
 Sujet : ${appointment.subject}
 
 Message :
-${appointment.message || "—"}`;
+${appointment.message || "-"}`;
   };
 
   const submit = async () => {
