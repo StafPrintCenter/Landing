@@ -25,7 +25,7 @@ import {
 // 1. Schéma de validation dérivé des sources uniques
 const searchSchema = z.object({
   q: fallback(z.string(), "").default(""),
-  type: fallback(z.enum(["all", "service", "project", "formation", "article", "faq"]), "all").default("all"),
+  type: fallback(z.enum(["all", "service", "project", "formation", "article", "faq", "job"]), "all").default("all"),
   category: fallback(z.string(), "Toutes").default("Toutes"),
   sortBy: fallback(z.enum(SEARCH_SORT_OPTIONS), "relevance").default("relevance"),
   sortDir: fallback(z.enum(SEARCH_SORT_DIRECTIONS), "asc").default("asc"),
@@ -36,7 +36,7 @@ export const Route = createFileRoute("/search")({
   head: () => ({
     meta: [
       { title: `Recherche | ${SITE.name}` },
-      { name: "description", content: "Recherchez parmi nos services, réalisations, formations, articles et questions fréquentes." },
+      { name: "description", content: "Recherchez parmi nos services, réalisations, formations, articles, questions fréquentes et offres d'emploi." },
       { property: "og:title", content: `Recherche | ${SITE.name}` },
       { property: "og:url", content: "/search" },
       { name: "robots", content: "noindex" },
@@ -53,7 +53,7 @@ function SearchPage() {
   const [input, setInput] = useState(q);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const { pushQuery, pushPage } = useSearchHistory();
-  const { services, projects, formations, articles, faqs } = useGlobalSearchData();
+  const { services, projects, formations, articles, faqs, jobs } = useGlobalSearchData();
 
   useEffect(() => setInput(q), [q]);
 
@@ -68,13 +68,13 @@ function SearchPage() {
   }, [filtersOpen]);
 
   const categories = useMemo(
-    () => categoriesForType(type, services, projects, formations, articles, faqs),
-    [type, services, projects, formations, articles, faqs]
+    () => categoriesForType(type, services, projects, formations, articles, faqs, jobs),
+    [type, services, projects, formations, articles, faqs, jobs]
   );
 
   const matched = useMemo(
-    () => searchItems(q, services, projects, formations, articles, faqs, { type, category }),
-    [q, services, projects, formations, articles, faqs, type, category]
+    () => searchItems(q, services, projects, formations, articles, faqs, jobs, { type, category }),
+    [q, services, projects, formations, articles, faqs, jobs, type, category]
   );
 
   // 3. Tri appliqué après le filtrage
