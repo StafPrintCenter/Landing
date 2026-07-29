@@ -25,7 +25,7 @@ export const Route = createFileRoute("/trainings/$id")({
   head: ({ loaderData, params }) => {
     const f = loaderData?.formation;
     const title = f ? `${f.title} | Formation ${SITE.name}` : `Formation ${SITE.name}`;
-    const desc = f ? `${f.short} — ${f.duration}, niveau ${f.level}. ${f.price} à Porto-Novo.` : "";
+    const desc = f ? `${f.short} - ${f.duration}, niveau ${f.level}. ${f.price} à Porto-Novo.` : "";
     const url = `/trainings/${params.id}`;
     return {
       meta: [
