@@ -43,7 +43,7 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
   const richWhatsappLink = withWhatsAppMessage(SITE.whatsappLink, whatsappText);
 
   // Utilisation du helper Email
-  const emailSubject = `Demande d'information — Formation ${f.title}`;
+  const emailSubject = `Demande d'information - Formation ${f.title}`;
   const emailBody = [
     `Bonjour,`,
     ``,
