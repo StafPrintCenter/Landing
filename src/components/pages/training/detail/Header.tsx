@@ -13,7 +13,7 @@ interface FormationDetailHeaderProps {
 
 export function FormationDetailHeader({ formation: f }: FormationDetailHeaderProps) {
   const [isShareOpen, setIsShareOpen] = useState(false);
-  const shareUrl = buildShareUrl(`/training/${f.id}`);
+  const shareUrl = buildShareUrl(`/trainings/${f.id}`);
   const isFull = f.seatsRemaining !== null && f.seatsRemaining <= 0;
 
   return (
