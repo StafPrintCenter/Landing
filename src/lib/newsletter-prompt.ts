@@ -45,7 +45,7 @@ function getState(): StateData {
 
 /**
  * Enregistre une nouvelle visite si ce n'est pas déjà fait pour la session
- * (onglet/navigateur) courante — évite qu'un simple rechargement de page
+ * (onglet/navigateur) courante - évite qu'un simple rechargement de page
  * compte comme une nouvelle visite.
  */
 export function registerVisitOncePerSession(): void {
