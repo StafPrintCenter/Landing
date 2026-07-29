@@ -51,7 +51,7 @@ export type APIReviewFormPublic = {
   questions: APIReviewQuestion[];
 };
 
-/** Infos du client destinataire de l'invitation — pré-remplies, éditables */
+/** Infos du client destinataire de l'invitation - pré-remplies, éditables */
 export type APIReviewClientInfo = {
   name: string;
   email: string;
@@ -59,7 +59,7 @@ export type APIReviewClientInfo = {
 };
 
 /**
- * Valeurs de réponses déjà soumises — mêmes clés que question.id, mais toujours
+ * Valeurs de réponses déjà soumises - mêmes clés que question.id, mais toujours
  */
 export type ReviewExistingAnswers = Record<string, string | number | boolean | string[] | null>;
 
