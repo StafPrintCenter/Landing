@@ -15,7 +15,7 @@ export function createEmailLink(to: string, subject: string, body: string): stri
  * avec sujet et message déjà pré-remplis.
  */
 export function createServiceQuoteEmailLink(serviceTitle: string): string {
-  const subject = `Demande de devis — ${serviceTitle}`;
+  const subject = `Demande de devis - ${serviceTitle}`;
   const body = buildQuoteMessage(serviceTitle);
   return createEmailLink(SITE.email, subject, body);
 }
