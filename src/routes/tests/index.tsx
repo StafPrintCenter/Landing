@@ -5,7 +5,7 @@ import { Calculator, PackageSearch, Download, CalendarDays, Users, Mail, FlaskCo
 export const Route = createFileRoute("/tests/")({
   head: () => ({
     meta: [
-      { title: "Pages de test — STAF PRINT CENTER" },
+      { title: "Pages de test - STAF PRINT CENTER" },
       { name: "description", content: "Index des prototypes et modules en cours de test." },
       { name: "robots", content: "noindex" },
     ],
