@@ -7,7 +7,7 @@ import { Gift, Copy, Check, Users, Sparkles, Trophy } from "lucide-react";
 export const Route = createFileRoute("/tests/affiliation")({
   head: () => ({
     meta: [
-      { title: "Programme de parrainage (test) — STAF PRINT CENTER" },
+      { title: "Programme de parrainage (test) - STAF PRINT CENTER" },
       { name: "description", content: "Parrainez un ami et gagnez des réductions sur vos prochaines commandes et formations." },
       { name: "robots", content: "noindex" },
     ],
