@@ -15,7 +15,7 @@ type Props = {
   lastPage: number;
   onPageChange: (page: number) => void;
   siblingCount?: number;
-  /** Affiche "X — Y sur Z" quand fourni. */
+  /** Affiche "X - Y sur Z" quand fourni. */
   meta?: Pick<PaginationMeta, "from" | "to" | "total">;
   className?: string;
 };
