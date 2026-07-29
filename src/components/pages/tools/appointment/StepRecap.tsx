@@ -14,13 +14,13 @@ function Row({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div className="flex justify-between gap-4 py-2 border-b border-border last:border-0">
       <span className="text-sm text-muted-foreground">{label}</span>
-      <span className="text-sm font-medium text-right">{value || "—"}</span>
+      <span className="text-sm font-medium text-right">{value || "-"}</span>
     </div>
   );
 }
 
 export function StepRecap({ data, onEdit, submitError }: StepRecapProps) {
-  const modeLabel = data.mode ? APPOINTMENT_MODE_LABELS[data.mode] : "—";
+  const modeLabel = data.mode ? APPOINTMENT_MODE_LABELS[data.mode] : "-";
   const dateStr = data.date ? format(data.date, "EEEE d MMMM yyyy", { locale: fr }) : "";
 
   return (
