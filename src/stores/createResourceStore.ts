@@ -44,6 +44,11 @@ export function createResourceStore<T>({
     if (params.category && params.category !== "Tout") {
       queryParams.append("category", params.category);
     }
+
+    if (params.contractType && params.contractType !== "Tout") {
+      queryParams.append("contractType", params.contractType);
+    }
+
     if (params.query) queryParams.append("query", params.query);
     if (params.sortBy) queryParams.append("sortBy", params.sortBy);
     if (params.sortDir) queryParams.append("sortDir", params.sortDir);
