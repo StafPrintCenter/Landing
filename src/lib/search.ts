@@ -18,7 +18,7 @@ export type SearchItem = {
   image?: string;
   url: string;
   params?: Record<string, string>;
-  routePattern: "/projects" | "/trainings" | "/training/$id" | "/articles/$slug" | "/services/$slug" | "/faqs" | "/careers/offers/$slug";
+  routePattern: "/projects" | "/trainings" | "/trainings/$id" | "/articles/$slug" | "/services/$slug" | "/faqs" | "/careers/offers/$slug";
   keywords: string;
   projectId?: string;
   faqId?: string;
@@ -79,9 +79,9 @@ function buildSearchIndex(
       title: f.title,
       description: f.short,
       category: f.theme,
-      url: `/training/${f.id}`,
+      url: `/trainings/${f.id}`,
       params: { id: f.id },
-      routePattern: "/training/$id",
+      routePattern: "/trainings/$id",
       keywords: norm(`${f.title} ${f.short} ${f.theme} ${f.level} ${f.objectives.join(" ")}`),
     })),
     ...articles.map<SearchItem>((a) => ({
