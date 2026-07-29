@@ -7,7 +7,7 @@ import { CalendarDays, MapPin, Users, Clock, Filter } from "lucide-react";
 export const Route = createFileRoute("/tests/calendar")({
   head: () => ({
     meta: [
-      { title: "Calendrier des sessions (test) — STAF PRINT CENTER" },
+      { title: "Calendrier des sessions (test) - STAF PRINT CENTER" },
       { name: "description", content: "Prochaines sessions de formation ouvertes aux inscriptions." },
       { name: "robots", content: "noindex" },
     ],
@@ -22,7 +22,7 @@ const SESSIONS: {
   id: string; title: string; theme: Theme; mode: Mode;
   start: string; duration: string; seatsLeft: number; totalSeats: number; price: string;
 }[] = [
-    { id: "s1", title: "Photoshop & Illustrator — De zéro au pro", theme: "Design", mode: "Présentiel", start: "2026-07-27", duration: "5 semaines", seatsLeft: 4, totalSeats: 12, price: "120 000 FCFA" },
+    { id: "s1", title: "Photoshop & Illustrator - De zéro au pro", theme: "Design", mode: "Présentiel", start: "2026-07-27", duration: "5 semaines", seatsLeft: 4, totalSeats: 12, price: "120 000 FCFA" },
     { id: "s2", title: "WordPress : votre site en 4 semaines", theme: "Web", mode: "Hybride", start: "2026-08-03", duration: "4 semaines", seatsLeft: 7, totalSeats: 10, price: "100 000 FCFA" },
     { id: "s3", title: "Montage vidéo avec Premiere Pro", theme: "Vidéo", mode: "Présentiel", start: "2026-08-10", duration: "3 semaines", seatsLeft: 2, totalSeats: 10, price: "90 000 FCFA" },
     { id: "s4", title: "Préparation de fichiers pour l'impression", theme: "Impression", mode: "En ligne", start: "2026-08-17", duration: "2 weekends", seatsLeft: 9, totalSeats: 15, price: "60 000 FCFA" },
@@ -90,7 +90,7 @@ function CalendrierPage() {
         <div className="grid gap-4">
           {list.map((s) => {
             const almostFull = s.seatsLeft <= 3;
-            const wa = encodeURIComponent(`Bonjour, je souhaite m'inscrire à la session : ${s.title} — démarrage ${formatDate(s.start)} (${s.mode}).`);
+            const wa = encodeURIComponent(`Bonjour, je souhaite m'inscrire à la session : ${s.title} - démarrage ${formatDate(s.start)} (${s.mode}).`);
             return (
               <article key={s.id} className="grid gap-4 rounded-2xl border border-border bg-card p-5 md:grid-cols-[160px_1fr_auto] md:items-center">
                 <div className="rounded-xl bg-primary/10 p-4 text-center">
