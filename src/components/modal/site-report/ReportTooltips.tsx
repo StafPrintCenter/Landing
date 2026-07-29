@@ -61,7 +61,7 @@ export function IdTooltip() {
   return (
     <TooltipPortal
       label="Identifiant de ressource"
-      text="Cet identifiant est rempli automatiquement lorsque vous ouvrez ce formulaire depuis la page précise du service, de la formation, de l'article ou de la réalisation concernée. Si ce n'est pas le cas, ouvrez d'abord cette page, puis revenez signaler le problème — le champ se remplira alors tout seul."
+      text="Cet identifiant est rempli automatiquement lorsque vous ouvrez ce formulaire depuis la page précise du service, de la formation, de l'article ou de la réalisation concernée. Si ce n'est pas le cas, ouvrez d'abord cette page, puis revenez signaler le problème - le champ se remplira alors tout seul."
     />
   );
 }
