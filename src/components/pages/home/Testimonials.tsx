@@ -39,7 +39,7 @@ export function Testimonials() {
   }
 
   // On se base sur le flag explicite plutôt que sur la position dans le tableau,
-  // même si le back trie déjà featured en premier — ceinture et bretelles
+  // même si le back trie déjà featured en premier - ceinture et bretelles
   const featured = testimonials.find((t) => t.featured) ?? testimonials[0];
   const rest = testimonials.filter((t) => t.id !== featured.id);
 
@@ -135,7 +135,7 @@ export function Testimonials() {
                     </blockquote>
                     <figcaption className="mt-3 text-xs">
                       <span className="font-semibold">{t.name}</span>
-                      <span className="text-muted-foreground"> — {t.role}</span>
+                      <span className="text-muted-foreground"> - {t.role}</span>
                     </figcaption>
                   </div>
                 </motion.figure>
