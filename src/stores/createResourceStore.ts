@@ -61,6 +61,7 @@ export function createResourceStore<T>({
     if (!response.ok) {
       throw new Error(`Erreur lors de la récupération de la ressource "${resourceKey}"`);
     }
+
     return response.json();
   }
 
