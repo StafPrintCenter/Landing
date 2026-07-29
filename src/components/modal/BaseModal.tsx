@@ -14,7 +14,7 @@ interface BaseModalProps {
   maxWidthClassName?: string;
   /** Classes additionnelles sur le panneau (ex: flex flex-col max-h-[85vh] overflow-hidden) */
   panelClassName?: string;
-  /** Classe du fond assombri — permet de garder un ton différent si besoin (ex: bg-background/80) */
+  /** Classe du fond assombri - permet de garder un ton différent si besoin (ex: bg-background/80) */
   backdropClassName?: string;
 }
 
