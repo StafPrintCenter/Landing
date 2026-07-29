@@ -13,7 +13,7 @@ export function SearchBar({ value, onChange, onSubmit }: SearchBarProps) {
       onValueChange={onChange}
       onSubmit={onSubmit}
       onClear={() => onChange("")}
-      placeholder="Rechercher services, réalisations, formations, articles, FAQ…"
+      placeholder="Rechercher services, réalisations, formations, articles, FAQ, emploi…"
     />
   );
 }
