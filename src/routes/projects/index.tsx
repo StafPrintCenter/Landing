@@ -109,7 +109,7 @@ function RealisationsPage() {
     return () => window.removeEventListener("keydown", onKey);
   }, [lightboxIndex, singleProject, projects.length, closeLightbox, setLightboxIndex]);
 
-  const current = lightboxIndex !== null ? projects[lightboxIndex] : null;
+  const current = lightboxIndex !== null ? projects[lightboxIndex] : singleProject;
 
   const activeFilterCount = (category !== "Tout" ? 1 : 0) + (sortBy !== "default" ? 1 : 0);
 
