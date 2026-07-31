@@ -107,7 +107,7 @@ function RealisationsPage() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [lightboxIndex, projects.length, closeLightbox, setLightboxIndex]);
+  }, [lightboxIndex, singleProject, projects.length, closeLightbox, setLightboxIndex]);
 
   const current = lightboxIndex !== null ? projects[lightboxIndex] : null;
 
