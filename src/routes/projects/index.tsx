@@ -86,7 +86,7 @@ function RealisationsPage() {
     updateSearch({ sortBy: s, sortDir: "asc" });
   };
 
-  // Ouverture automatique via le paramètre de recherche URL (?open=id), sur la page courante
+  // Ouverture automatique via le paramètre de recherche URL (?open=id)
   useEffect(() => {
     if (open) {
       const targetIndex = projects.findIndex((p) => p.id === open || `project-${p.id}` === open);
