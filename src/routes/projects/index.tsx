@@ -56,6 +56,7 @@ function RealisationsPage() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const [singleProject, setSingleProject] = useState<APIProject | null>(null);
 
   useEffect(() => {
     setIsLoading(true);
