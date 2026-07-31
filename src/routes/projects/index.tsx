@@ -101,9 +101,9 @@ function RealisationsPage() {
   useEffect(() => {
     if (lightboxIndex === null && singleProject === null) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeLightbox();
-      if (e.key === "ArrowRight") setLightboxIndex((lightboxIndex + 1) % projects.length);
-      if (e.key === "ArrowLeft") setLightboxIndex((lightboxIndex - 1 + projects.length) % projects.length);
+      if (e.key === "Escape") handleCloseLightbox();
+      if (e.key === "ArrowRight") handleNext();
+      if (e.key === "ArrowLeft") handlePrev();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
