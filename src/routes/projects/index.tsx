@@ -97,7 +97,9 @@ function RealisationsPage() {
       } else {
         fetchProjectById(open)
           .then((proj) => {
-            if (proj) { setSingleProject(proj); }
+            if (proj) {
+              setSingleProject(proj);
+            }
             updateSearch({ open: undefined });
           })
           .catch((err) => {
