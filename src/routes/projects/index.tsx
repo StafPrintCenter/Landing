@@ -93,10 +93,43 @@ function RealisationsPage() {
       const targetIndex = projects.findIndex((p) => p.id === open || `project-${p.id}` === open);
       if (targetIndex !== -1) {
         setLightboxIndex(targetIndex);
+        updateSearch({ open: undefined });
+      } else {
+        fetchProjectById(open)
+          .then((proj) => {
+            if (proj) { setSingleProject(proj); }
+            updateSearch({ open: undefined });
+          })
+          .catch((err) => {
+            console.error("Erreur lors de la récupération du projet :", err);
+            updateSearch({ open: undefined });
+          });
       }
-      updateSearch({ open: undefined });
     }
-  }, [open, projects, setLightboxIndex]);
+  }, [open, projects, storeLoading, setLightboxIndex]);
+
+  const handleCloseLightbox = () => {
+    closeLightbox();
+    setSingleProject(null);
+  };
+
+  const handlePrev = () => {
+    if (lightboxIndex !== null) {
+      setLightboxIndex((lightboxIndex - 1 + projects.length) % projects.length);
+    } else if (singleProject && projects.length > 0) {
+      setSingleProject(null);
+      setLightboxIndex(projects.length - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (lightboxIndex !== null) {
+      setLightboxIndex((lightboxIndex + 1) % projects.length);
+    } else if (singleProject && projects.length > 0) {
+      setSingleProject(null);
+      setLightboxIndex(0);
+    }
+  };
 
   useEffect(() => {
     if (lightboxIndex === null && singleProject === null) return;
