@@ -99,7 +99,7 @@ function RealisationsPage() {
   }, [open, projects, setLightboxIndex]);
 
   useEffect(() => {
-    if (lightboxIndex === null) return;
+    if (lightboxIndex === null && singleProject === null) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") closeLightbox();
       if (e.key === "ArrowRight") setLightboxIndex((lightboxIndex + 1) % projects.length);
