@@ -159,9 +159,9 @@ function RealisationsPage() {
 
       <RealisationHomeLightbox
         current={current}
-        onClose={closeLightbox}
-        onPrev={() => current && setLightboxIndex((lightboxIndex! - 1 + projects.length) % projects.length)}
-        onNext={() => current && setLightboxIndex((lightboxIndex! + 1) % projects.length)}
+        onClose={handleCloseLightbox}
+        onPrev={handlePrev}
+        onNext={handleNext}
       />
 
       <RealisationHomeMobileSheet
