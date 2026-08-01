@@ -7,7 +7,7 @@ import { CalendarDays, MapPin, Users, Clock, Filter } from "lucide-react";
 export const Route = createFileRoute("/tests/calendar")({
   head: () => ({
     meta: [
-      { title: "Calendrier des sessions (test) - STAF PRINT CENTER" },
+      { title: `Calendrier des sessions (test) | ${SITE.name}` },
       { name: "description", content: "Prochaines sessions de formation ouvertes aux inscriptions." },
       { name: "robots", content: "noindex" },
     ],
