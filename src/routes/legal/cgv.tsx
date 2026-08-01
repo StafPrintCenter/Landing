@@ -167,7 +167,7 @@ function getSections(): LegalSection[] {
               <span className="font-bold">Transfert de propriété :</span>{" "} Les droits de propriété intellectuelle sur les créations (logos, chartes graphiques, maquettes, sites web, montages vidéo) ne sont cédés au Client qu'après paiement intégral du solde dû.
             </li>
             <li>
-              <span className="font-bold">Droit de portfolio (Auto-promotion) :</span>{" "} Sauf clause de confidentialité spécifique signée avant le projet, {SITE.name} se réserve le droit de présenter les réalisations effectuées dans son portfolio, sur son site web et ses réseaux sociaux à des fins de promotion.
+              <span className="font-bold">Droit de portfolio (auto-promotion) :</span>{" "} Les réalisations effectuées pour un client ne sont intégrées au portfolio, au site web ou aux réseaux sociaux de {SITE.name} qu'après avoir obtenu l'accord préalable et explicite du client. En l'absence d'autorisation, les travaux demeurent confidentiels et ne sont utilisés à aucune fin promotionnelle.
             </li>
           </ul>
         </div>
@@ -179,9 +179,16 @@ function getSections(): LegalSection[] {
       icon: Scale,
       title: "Force majeure et règlement des litiges",
       content: (
-        <p>
-          Aucune partie ne pourra être tenue responsable d'un retard résultant d'un cas de force majeure. En cas de différend, les parties s'efforceront de trouver une solution amiable préalablement à toute action contentieuse. À défaut, le litige sera porté devant les tribunaux compétents de Porto-Novo, République du Bénin.
-        </p>
+        <div>
+          <ul className="list-disc pl-5 space-y-2 mt-4">
+            <li>
+              <span className="font-bold">Force majeure :</span>{" "} Aucune des deux parties ne pourra être tenue responsable d'un retard ou d'un défaut d'exécution résultant d'un cas de force majeure (coupures majeures d'électricité/internet hors contrôle, catastrophes naturelles, décisions gouvernementales).
+            </li>
+            <li>
+              <span className="font-bold">Règlement amiable & Juridiction :</span>{" "} En cas de contestation, les parties s'engagent à privilégier une négociation amiable. À défaut d'accord sous un délai de 30 jours, le litige sera soumis à la compétence exclusive des tribunaux compétents de Porto-Novo (République du Bénin).
+            </li>
+          </ul>
+        </div>
       ),
     },
   ];
