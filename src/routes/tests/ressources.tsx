@@ -1,11 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site/SiteShell";
 import { Download, FileText, Palette, BookOpen, Layers, Sparkles } from "lucide-react";
+import { SITE } from "@/data/site";
 
 export const Route = createFileRoute("/tests/ressources")({
   head: () => ({
     meta: [
-      { title: "Ressources gratuites (test) - STAF PRINT CENTER" },
+      { title: `Ressources gratuites (test) | ${SITE.name}` },
       { name: "description", content: "Templates, guides et outils gratuits pour vos projets d'impression et de design." },
       { name: "robots", content: "noindex" },
     ],
