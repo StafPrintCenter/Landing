@@ -87,7 +87,7 @@ function getSections(): LegalSection[] {
     {
       id: "securite-donnees",
       number: "04",
-      icon: ShieldCheck,
+      icon: Lock,
       title: "Sécurité de vos données et fichiers créatifs",
       content: (
         <div>
