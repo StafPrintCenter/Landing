@@ -7,7 +7,7 @@ import { Calculator, ArrowRight, CheckCircle2, Info } from "lucide-react";
 export const Route = createFileRoute("/tests/devis")({
   head: () => ({
     meta: [
-      { title: "Devis intelligent (test) - STAF PRINT CENTER" },
+      { title: `Devis intelligent (test) | ${SITE.name}` },
       { name: "description", content: "Configurateur de devis en ligne - estimation instantanée pour vos impressions et prestations digitales." },
       { name: "robots", content: "noindex" },
     ],
