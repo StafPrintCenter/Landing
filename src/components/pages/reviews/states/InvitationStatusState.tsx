@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Clock, Ban, CheckCircle2 } from "lucide-react";
 import type { ReviewInvitationStatus } from "@/data/reviews";
+import { SITE } from "@/data/site";
 
 interface InvitationStatusStateProps {
   status: Exclude<ReviewInvitationStatus, "pending" | "opened">;
@@ -15,12 +16,12 @@ const CONTENT: Record<string, { icon: typeof Clock; title: string; text: string 
   expired: {
     icon: Clock,
     title: "Invitation expirée",
-    text: "Ce lien d'invitation n'est plus valide. Contactez STAF PRINT CENTER si vous souhaitez donner votre avis.",
+    text: `Ce lien d'invitation n'est plus valide. Contactez ${SITE.name} si vous souhaitez donner votre avis.`,
   },
   revoked: {
     icon: Ban,
     title: "Invitation annulée",
-    text: "Cette invitation a été retirée par STAF PRINT CENTER.",
+    text: `Cette invitation a été retirée par ${SITE.name}.`,
   },
 };
 
