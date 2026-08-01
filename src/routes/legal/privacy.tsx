@@ -19,22 +19,51 @@ function getSections(): LegalSection[] {
       id: "collecte",
       number: "01",
       icon: Database,
-      title: "Collecte des données personnelles",
+      title: "Collecte des données personnelles et de projets",
       content: (
-        <p>
-          {SITE.name} collecte certaines données personnelles transmises volontairement par ses clients et prospects, notamment via le formulaire de contact du site, les demandes de devis (email, WhatsApp) et les inscriptions aux formations. Les données concernées peuvent inclure : nom, prénom, adresse email, numéro de téléphone, nom de l'entreprise, ainsi que les fichiers sources et visuels transmis dans le cadre d'un projet.
-        </p>
+        <div>
+          <p>
+            Nous collectons les informations que vous nous fournissez volontairement lors de l'utilisation de nos services (formulaire de contact, demande de devis via e-mail/WhatsApp, inscription à une formation ou création de compte client) :
+          </p>
+
+          <ul className="list-disc pl-5 space-y-2 mt-4">
+            <li>
+              <span className="font-bold">Données d'identification & contact :</span>{" "}  Nom, prénom, adresse e-mail, numéro de téléphone, nom de l'entreprise.
+            </li>
+            <li>
+              <span className="font-bold">Fichiers & Contenus de projet :</span>{" "}  Fichiers sources, identités visuelles, codes sources, images, maquettes et documents transmis pour l'exécution d'une commande (impression, site web, vidéo, etc.).
+            </li>
+            <li>
+              <span className="font-bold">Données de suivi de formation :</span>{" "} Informations nécessaires à l'organisation et au suivi pédagogique des apprenants
+            </li>
+          </ul>
+        </div>
       ),
     },
     {
       id: "finalites",
       number: "02",
       icon: Target,
-      title: "Finalités du traitement",
+      title: "Finalités et bases légales du traitement",
       content: (
-        <p>
-          Ces données sont exclusivement utilisées pour la gestion de la relation client, le suivi pédagogique des stagiaires inscrits aux formations, l'envoi des livrables finalisés et l'établissement des documents de facturation. Aucune donnée n'est traitée à des fins étrangères à ces finalités sans information préalable et consentement du Client.
-        </p>
+        <div>
+          <p>Vos données sont strictement utilisées pour :</p>
+
+          <ul className="list-disc pl-5 space-y-2 mt-4">
+            <li>
+              <span className="font-bold">La gestion de vos commandes :</span>{" "}  Établissement des devis, facturation, suivi de production et livraison des travaux d'impression ou digitaux.
+            </li>
+            <li>
+              <span className="font-bold">Le suivi pédagogique :</span>{" "} Inscription, communication et accompagnement des apprenants aux formations.
+            </li>
+            <li>
+              <span className="font-bold">Le support & la relation client :</span>{" "} Réponse à vos questions, assistance technique et suivi après-vente.
+            </li>
+            <li>
+              <span className="font-bold">LL'amélioration de nos services  :</span>{" "} Analyses internes pour optimiser nos prestations et la navigation sur notre site.
+            </li>
+          </ul>
+        </div>
       ),
     },
     {
@@ -91,7 +120,7 @@ function ConfidentialitePage() {
       icon={ShieldCheck}
       badge="Protection des données"
       title="Politique de confidentialité"
-      description={`Comment ${SITE.name} collecte, utilise et protège vos données personnelles et vos fichiers de projet.`}
+      description={`Chez ${SITE.name}, nous attachons une importance capitale à la protection de vos données personnelles et à la confidentialité de vos projets créatifs. Cette politique détaille comment nous collectons, utilisons, stockons et protégeons vos informations.`}
       lastUpdated="30 juin 2026"
       sections={getSections()}
       contactQuestion="Une question sur la gestion de vos données personnelles ?"
