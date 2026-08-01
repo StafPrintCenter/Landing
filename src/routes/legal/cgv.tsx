@@ -125,7 +125,7 @@ function getSections(): LegalSection[] {
               <span className="font-bold">Délais de réalisation :</span>{" "} Les délais communiqués sont donnés à titre indicatif et ne courent qu'à compter de la réception de l'ensemble des éléments (fichiers validés, brief complet) et de l'encaissement de l'acompte.
             </li>
             <li>
-              <span className="font-bold">Retrait & livraison physique :</span>{" "} Les produits imprimés sont à retirer au studio {SITE.name} à Porto-Novo. Une livraison sur site (Porto-Novo, Cotonou et environs) ou par transporteur peut être organisée aux frais et risques du Client.
+              <span className="font-bold">Retrait & livraison physique :</span>{" "} Les produits imprimés sont à retirer au studio {SITE.name} à {SITE.city}. Une livraison sur site (Porto-Novo, Cotonou et environs) ou par transporteur peut être organisée aux frais et risques du Client.
             </li>
             <li>
               <span className="font-bold">Livrables digitaux :</span>{" "} Les fichiers sources et accès web sont transmis par voie électronique uniquement après le règlement intégral du solde de la prestation.
@@ -140,16 +140,18 @@ function getSections(): LegalSection[] {
       icon: GraduationCap,
       title: "Spécificités du pôle Formation",
       content: (
-        <div className="space-y-3">
-          <p>
-            La délivrance de l'attestation de fin de formation est conditionnée à une présence effective d'au moins 80% des heures de la session.
-          </p>
-          <p>
-            Toute absence, justifiée ou non, ne donne droit à aucun remboursement. Les supports de cours correspondants sont néanmoins transmis au stagiaire.
-          </p>
-          <p>
-            Le Prestataire se réserve le droit de reporter ou d'annuler une session en cas d'effectif insuffisant ; le Client se voit alors proposer un report ou un remboursement intégral.
-          </p>
+        <div>
+          <ul className="list-disc pl-5 space-y-2 mt-4">
+            <li>
+              <span className="font-bold">Assiduité & Attestation :</span>{" "} La délivrance de l'attestation de fin de formation exige un taux de présence effective d'au moins 80 % des heures de cours prévues.semble des éléments (fichiers validés, brief complet) et de l'encaissement de l'acompte.
+            </li>
+            <li>
+              <span className="font-bold">Absences :</span>{" "} Une absence (justifiée ou non) ne donne droit à aucun remboursement ou compensation financière. Les supports de cours de la session manquée seront néanmoins mis à disposition de l'apprenant.
+            </li>
+            <li>
+              <span className="font-bold">Annulation / Report par l'agence :</span>{" "} En cas d'effectif insuffisant ou de force majeure, {SITE.name} se réserve le droit de reporter ou d'annuler une session. En cas d'annulation définitive, les sommes versées seront intégralement remboursées.
+            </li>
+          </ul>
         </div>
       ),
     },
@@ -157,11 +159,18 @@ function getSections(): LegalSection[] {
       id: "propriete",
       number: "07",
       icon: Copyright,
-      title: "Propriété intellectuelle",
+      title: "Propriété intellectuelle et droit de citation",
       content: (
-        <p>
-          Les droits de propriété intellectuelle sur les créations réalisées (logos, chartes, maquettes, sites, vidéos) ne sont transférés au Client qu'après paiement intégral du solde. Sauf clause de confidentialité formalisée par écrit, le Prestataire conserve le droit de présenter ces réalisations dans son portfolio et ses supports de communication.
-        </p>
+        <div>
+          <ul className="list-disc pl-5 space-y-2 mt-4">
+            <li>
+              <span className="font-bold">Transfert de propriété :</span>{" "} Les droits de propriété intellectuelle sur les créations (logos, chartes graphiques, maquettes, sites web, montages vidéo) ne sont cédés au Client qu'après paiement intégral du solde dû.
+            </li>
+            <li>
+              <span className="font-bold">Droit de portfolio (Auto-promotion) :</span>{" "} Sauf clause de confidentialité spécifique signée avant le projet, {SITE.name} se réserve le droit de présenter les réalisations effectuées dans son portfolio, sur son site web et ses réseaux sociaux à des fins de promotion.
+            </li>
+          </ul>
+        </div>
       ),
     },
     {
