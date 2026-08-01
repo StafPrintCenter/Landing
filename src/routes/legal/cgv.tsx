@@ -80,7 +80,7 @@ function getSections(): LegalSection[] {
               <span className="font-bold">Acompte & Solde :</span>{" "} Sauf accord particulier, un acompte de 50 % est exigé à la validation du devis pour lancer la production. Le solde (50 %) est payable obligatoirement à la livraison ou au retrait des livrables.
             </li>
             <li>
-              <span className="font-bold">Échelonnement (Formations > 100 000 FCFA) :</span>{" "} Pour les formations d'un montant supérieur à 100 000 FCFA, un paiement échelonné en 2 ou 3 tranches peut être accordé sur demande, formalisé par un calendrier d'échéances écrit avant la session.
+              <span className="font-bold">{"Échelonnement (Formations > 100 000 FCFA) :"}</span>{" "} Pour les formations d'un montant supérieur à 100 000 FCFA, un paiement échelonné en 2 ou 3 tranches peut être accordé sur demande, formalisé par un calendrier d'échéances écrit avant la session.
             </li>
             <li>
               <span className="font-bold">Moyens de paiement acceptés :</span>{" "} Espèces, chèque certifié et Mobile Money (MTN Mobile Money, Moov Money, Celtiis Cash).
