@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Building2, Server, Copyright, ShieldCheck, Cookie, Scale, Mail, Phone, MapPin, FileText, type LucideIcon, } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Building2, Server, Copyright, ShieldCheck, Cookie, Scale, Mail, Phone, MapPin, FileText, SquareActivity, Globe, User, type LucideIcon, } from "lucide-react";
 import { LegalLayout, type LegalSection } from "@/components/pages/legal";
 import { SITE } from "@/data/site";
 
@@ -34,12 +34,14 @@ function getSections(): LegalSection[] {
       title: "Éditeur du site",
       content: (
         <dl className="grid gap-x-8 gap-y-3 sm:grid-cols-2">
-          <Field label="Raison sociale" value={SITE.name} />
-          <Field label="Activité" value={SITE.activity} />
-          <Field label="Gérant" value={SITE.manager} />
+          <Field label="Raison sociale" value={SITE.name} icon={Building2} />
+          <Field label="Activité" value={SITE.activity} icon={SquareActivity} />
+          <Field label="Adresse web" value={SITE.url} icon={Globe} />
+          <Field label="Email" value={SITE.email} icon={Mail} />
+          <Field label="Gérant" value={SITE.manager} icon={User} />
           <Field label="Adresse" value={SITE.city} icon={MapPin} />
           <Field label="Téléphone" value={SITE.phone} icon={Phone} />
-          <Field label="Email" value={SITE.email} icon={Mail} />
+          <Field label="WhatsApp" value={SITE.whatsapp} icon={Mail} />
         </dl>
       ),
     },
@@ -50,7 +52,7 @@ function getSections(): LegalSection[] {
       title: "Hébergement",
       content: (
         <p>
-          Ce site est hébergé sur une infrastructure cloud sécurisée, garantissant disponibilité et protection des données échangées via une connexion chiffrée (HTTPS).
+          Le site est hébergé sur une infrastructure cloud sécurisée assurant la disponibilité, l'intégrité et la confidentialité des données échangées via un protocole chiffré (SSL/HTTPS).
         </p>
       ),
     },
@@ -61,7 +63,9 @@ function getSections(): LegalSection[] {
       title: "Propriété intellectuelle",
       content: (
         <p>
-          L'ensemble des contenus présents sur ce site (textes, images, vidéos, logos, identité visuelle) sont la propriété exclusive de {SITE.name}, sauf mention contraire explicite. Toute reproduction, représentation ou diffusion, totale ou partielle, sans autorisation écrite préalable est interdite et pourra donner lieu à des poursuites.
+          L'ensemble des éléments figurant sur ce site (marques, logos, textes, visuels, photographies, éléments graphiques, maquettes, vidéos et code source) est la propriété exclusive de <span className="font-bold">{SITE.name}</span>, sauf mention contraire.
+
+          Toute reproduction, représentation, modification, publication, adaptation ou exploitation totale ou partielle de ces éléments, quel que soit le moyen ou le procédé utilisé, est strictement interdite sans l'autorisation écrite préalable de STAF PRINT CENTER. Toute exploitation non autorisée sera considérée comme constitutive d'une contrefaçon et poursuivie conformément aux lois en vigueur au Bénin.
         </p>
       ),
     },
@@ -69,21 +73,37 @@ function getSections(): LegalSection[] {
       id: "donnees",
       number: "04",
       icon: ShieldCheck,
-      title: "Données personnelles",
+      title: "Protection des données personnelles",
       content: (
-        <p>
-          Les informations collectées via le formulaire de contact sont utilisées uniquement pour répondre à vos demandes et assurer le suivi de votre dossier. Elles ne sont ni revendues ni transmises à des tiers, et sont conservées pour la durée strictement nécessaire au traitement de votre demande. Vous pouvez à tout moment demander leur consultation ou leur suppression en nous contactant.
-        </p>
+        <div>
+          <p>
+            <span className="font-bold">{SITE.name}</span> s'engage à protéger la vie privée des utilisateurs de son site.
+          </p>
+
+          <ul className="list-disc pl-5 space-y-2 mt-4">
+            <li>
+              <span className="font-bold">Données collectées :</span>{" "}  Les informations recueillies via le formulaire de devis ou de contact (nom, e-mail, numéro de téléphone, détail du projet) sont exclusivement destinées au traitement de vos demandes commerciales et au suivi de la relation client.
+            </li>
+            <li>
+              <span className="font-bold">Confidentialité :</span>{" "}  Vos données ne sont en aucun cas cédées, louées ou vendues à des tiers.
+            </li>
+            <li>
+              <span className="font-bold">Droits des utilisateurs :</span>{" "} Conformément à la législation sur la protection des données personnelles en République du Bénin, vous disposez d'un droit d'accès, de rectification,
+              de modification et de suppression des données qui vous concernent.<br />
+              Pour exercer ce droit, vous pouvez nous contacter à :{" "}  <a href={`mailto:${SITE.email}`} className="text-primary underline">{SITE.email}</a>.
+            </li>
+          </ul>
+        </div>
       ),
     },
     {
       id: "cookies",
       number: "05",
       icon: Cookie,
-      title: "Cookies",
+      title: "Gestion des Cookies",
       content: (
         <p>
-          Ce site peut utiliser des cookies techniques strictement nécessaires à son fonctionnement (préférence d'affichage, mémorisation de session). Aucun cookie publicitaire ou de traçage tiers n'est déposé sans votre consentement préalable.
+          Ce site utilise des cookies strictement nécessaires à son bon fonctionnement technique (navigation, mémorisation de session, affichage). Aucun cookie publicitaire ou de suivi comportemental tiers n'est déposé sans votre accord préalable. Vous pouvez configurer votre navigateur pour bloquer ou être informé de la présence de ces cookies.
         </p>
       ),
     },
@@ -91,10 +111,10 @@ function getSections(): LegalSection[] {
       id: "droit",
       number: "06",
       icon: Scale,
-      title: "Droit applicable",
+      title: "Droit applicable et juridiction compétente",
       content: (
         <p>
-          Le présent site et les présentes mentions légales sont soumis au droit béninois. En cas de litige, et après tentative de résolution amiable, les tribunaux compétents de Porto-Novo seront seuls saisis.
+          Le présent site ainsi que ses mentions légales sont régis par le droit béninois. En cas de litige, et après l'échec de toute tentative de recherche d'une solution amiable, les tribunaux compétents de Porto-Novo seront seuls habilités à trancher le différend.
         </p>
       ),
     },
