@@ -96,18 +96,20 @@ function getSections(): LegalSection[] {
       id: "impression",
       number: "04",
       icon: Printer,
-      title: "Spécificités du pôle Impression",
+      title: "Spécificités du Pôle Impression & Signalétique",
       content: (
-        <div className="space-y-3">
-          <p>
-            Le Client est seul responsable de la qualité et de la conformité technique (résolution, mode CMJN, fonds perdus, vectorisation) des fichiers fournis pour impression. Le Prestataire ne saurait être tenu responsable d'un rendu dégradé résultant d'un fichier non conforme.
-          </p>
-          <p>
-            Aucune impression en série ne sera lancée sans validation préalable d'un Bon À Tirer (BAT), numérique ou physique. Toute erreur non signalée à ce stade engage la responsabilité du Client.
-          </p>
-          <p>
-            Le Client reconnaît et accepte que de légères variations de teintes peuvent survenir entre l'aperçu écran (RVB) et le rendu imprimé (CMJN). Ces variations, dans les tolérances usuelles, ne constituent pas un défaut de conformité.
-          </p>
+        <div>
+          <ul className="list-disc pl-5 space-y-2 mt-4">
+            <li>
+              <span className="font-bold">Conformité des fichiers clients :</span>{" "} Le Client est seul responsable de la qualité technique des fichiers qu'il fournit (résolution 300 DPI, mode colorimétrique CMJN, fonds perdus et vectorisation des polices). {SITE.name} décline toute responsabilité en cas de rendu dégradé lié à un fichier non conforme.
+            </li>
+            <li>
+              <span className="font-bold">Bon À Tirer (BAT) :</span>{" "} Aucune impression en série ne sera lancée sans la validation formelle d'un Bon À Tirer (BAT numérique ou épreuve physique). La validation du BAT dégage le Prestataire de toute responsabilité pour toute erreur (coquille, orthographe, disposition) non signalée par le Client à ce stade.
+            </li>
+            <li>
+              <span className="font-bold">Tolérance de teintes :</span>{" "} Le Client accepte que des nuances mineures de teintes puissent exister entre l'affichage sur écran (mode RVB) et l'impression finale (mode CMJN). Ces variations usuelles ne constituent pas un défaut de conformité.
+            </li>
+          </ul>
         </div>
       ),
     },
@@ -115,11 +117,21 @@ function getSections(): LegalSection[] {
       id: "livraison",
       number: "05",
       icon: Truck,
-      title: "Délais et conditions de livraison / retrait",
+      title: "Délais, livraison et retrait",
       content: (
-        <p>
-          Les délais communiqués, digitaux ou physiques, sont indicatifs et calculés à compter de la réception des éléments nécessaires et de l'acompte requis. Les produits du pôle Impression sont disponibles au retrait dans les locaux du Prestataire à Porto-Novo ; une livraison peut être organisée sur demande, aux frais du Client. Les livrables digitaux sont transmis par voie électronique après validation finale et encaissement intégral du solde.
-        </p>
+        <div>
+          <ul className="list-disc pl-5 space-y-2 mt-4">
+            <li>
+              <span className="font-bold">Délais de réalisation :</span>{" "} Les délais communiqués sont donnés à titre indicatif et ne courent qu'à compter de la réception de l'ensemble des éléments (fichiers validés, brief complet) et de l'encaissement de l'acompte.
+            </li>
+            <li>
+              <span className="font-bold">Retrait & livraison physique :</span>{" "} Les produits imprimés sont à retirer au studio {SITE.name} à Porto-Novo. Une livraison sur site (Porto-Novo, Cotonou et environs) ou par transporteur peut être organisée aux frais et risques du Client.
+            </li>
+            <li>
+              <span className="font-bold">Livrables digitaux :</span>{" "} Les fichiers sources et accès web sont transmis par voie électronique uniquement après le règlement intégral du solde de la prestation.
+            </li>
+          </ul>
+        </div>
       ),
     },
     {
