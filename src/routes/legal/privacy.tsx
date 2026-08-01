@@ -49,7 +49,7 @@ function getSections(): LegalSection[] {
         <div>
           <p>Vos données sont strictement utilisées pour :</p>
 
-          <ul className="list-disc pl-5 space-y-2 mt-4">
+          <ol className="list-decimal pl-5 space-y-2 mt-4">
             <li>
               <span className="font-bold">La gestion de vos commandes :</span>{" "}  Établissement des devis, facturation, suivi de production et livraison des travaux d'impression ou digitaux.
             </li>
@@ -60,9 +60,9 @@ function getSections(): LegalSection[] {
               <span className="font-bold">Le support & la relation client :</span>{" "} Réponse à vos questions, assistance technique et suivi après-vente.
             </li>
             <li>
-              <span className="font-bold">LL'amélioration de nos services  :</span>{" "} Analyses internes pour optimiser nos prestations et la navigation sur notre site.
+              <span className="font-bold">L'amélioration de nos services  :</span>{" "} Analyses internes pour optimiser nos prestations et la navigation sur notre site.
             </li>
-          </ul>
+          </ol>
         </div>
       ),
     },
