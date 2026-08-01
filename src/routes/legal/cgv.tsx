@@ -21,10 +21,27 @@ function getSections(): LegalSection[] {
       icon: ScrollText,
       title: "Objet et champ d'application",
       content: (
-        <p>
-          Les présentes Conditions Générales de Vente (« CGV ») régissent l'ensemble des relations contractuelles entre {SITE.name}, studio créatif basé à Porto-Novo, République du Bénin, et toute personne physique ou morale (« le Client »), professionnelle (B2B) ou particulière (B2C). Elles s'appliquent indistinctement aux trois pôles d'activité du Prestataire : Digital (design, sites internet, montage vidéo), Impression (bâches, kakémonos, cartes de visite, badges, sérigraphie) et Formation. Toute commande, quel que soit le canal utilisé (écrit, email, WhatsApp), implique
-          l'adhésion sans réserve du Client aux présentes CGV.
-        </p>
+        <div>
+          <p>
+            Les présentes Conditions Générales de Vente (« CGV ») régissent l'ensemble des relations contractuelles entre <span className="font-bold">{SITE.name}</span>, studio créatif, d'impression et de services digitaux basé à {SITE.city}, et toute personne physique ou morale (« le Client »), professionnelle (B2B) ou particulière (B2C).
+            <br />
+            Elles s'appliquent sans restriction à l'ensemble des pôles d'activité du Prestataire :
+          </p>
+
+          <ul className="list-disc pl-5 space-y-2 mt-4">
+            <li>
+              <span className="font-bold">Pôle Digital :</span>{" "} Design graphique, création de sites web, montage vidéo, référencement et publicité en ligne.
+            </li>
+            <li>
+              <span className="font-bold">Pôle Impression & Signalétique :</span>{" "} Bâches, kakémonos, cartes de visite, badges, étiquettes, enseignes lumineuses et travaux de sérigraphie.
+            </li>
+            <li>
+              <span className="font-bold">Pôle Formation :</span>{" "} Cours pratiques et développement de compétences (InDesign, vidéo, After Effects, etc.).
+            </li>
+          </ul>
+          <br />
+          Toute commande ou inscription, quel que soit le canal utilisé (site web, e-mail, WhatsApp ou en agence), implique l'adhésion pleine et entière du Client aux présentes CGV.
+        </div>
       ),
     },
     {
@@ -33,9 +50,19 @@ function getSections(): LegalSection[] {
       icon: FileSignature,
       title: "Processus de commande et de devis",
       content: (
-        <p>
-          Tout projet débute par l'émission d'un devis détaillé, valable trente (30) jours calendaires. Aucune production, conception ou réservation de créneau de formation ne débute avant validation expresse du devis par le Client, matérialisée par une signature « Bon pour accord » ou une confirmation électronique écrite. Toute modification substantielle du brief après validation du devis initial pourra faire l'objet d'un avenant tarifaire et/ou d'un ajustement des délais.
-        </p>
+        <div>
+          <ul className="list-disc pl-5 space-y-2 mt-4">
+            <li>
+              <span className="font-bold">Émission du devis :</span>{" "} Tout projet fait l'objet d'un devis préalable détaillé, gratuit et valable trente (30) jours calendaires à compter de sa date d'émission.
+            </li>
+            <li>
+              <span className="font-bold">Validation :</span>{" "} Aucune prestation (conception, impression ou réservation de place en formation) ne démarre sans la validation expresse du devis par le Client (mention écrite "Bon pour accord", signature ou confirmation électronique/WhatsApp).
+            </li>
+            <li>
+              <span className="font-bold">Modification de brief :</span>{" "} Toute modification substantielle des spécifications ou du brief initial après validation fera l'objet d'un avenant tarifaire et d'un ajustement des délais de livraison.
+            </li>
+          </ul>
+        </div>
       ),
     },
     {
@@ -44,16 +71,24 @@ function getSections(): LegalSection[] {
       icon: Banknote,
       title: "Conditions tarifaires et modalités de paiement",
       content: (
-        <div className="space-y-3">
-          <p>
-            Tous les prix sont exprimés en Francs CFA (FCFA), toutes taxes comprises sauf mention contraire sur le devis. Sauf accord particulier, toute commande est soumise à un acompte de 50% à la validation, le solde étant exigible à la livraison ou au retrait du produit fini.
-          </p>
-          <p>
-            Pour les formations dont le montant excède 100 000 FCFA, un paiement échelonné en deux ou trois tranches peut être accordé sur demande, avec échéancier formalisé par écrit avant le démarrage de la session.
-          </p>
-          <p>
-            Moyens de paiement acceptés : espèces, chèques, Mobile Money (MTN Mobile Money, Moov Money ou Celtiis Cash). Tout retard de paiement non justifié peut entraîner la suspension de la prestation en cours.
-          </p>
+        <div>
+          <ul className="list-disc pl-5 space-y-2 mt-4">
+            <li>
+              <span className="font-bold">Tarification :</span>{" "} Les prix sont indiqués en francs CFA (FCFA) toutes taxes comprises (TTC), sauf mention contraire sur le devis.
+            </li>
+            <li>
+              <span className="font-bold">Acompte & Solde :</span>{" "} Sauf accord particulier, un acompte de 50 % est exigé à la validation du devis pour lancer la production. Le solde (50 %) est payable obligatoirement à la livraison ou au retrait des livrables.
+            </li>
+            <li>
+              <span className="font-bold">Échelonnement (Formations > 100 000 FCFA) :</span>{" "} Pour les formations d'un montant supérieur à 100 000 FCFA, un paiement échelonné en 2 ou 3 tranches peut être accordé sur demande, formalisé par un calendrier d'échéances écrit avant la session.
+            </li>
+            <li>
+              <span className="font-bold">Moyens de paiement acceptés :</span>{" "} Espèces, chèque certifié et Mobile Money (MTN Mobile Money, Moov Money, Celtiis Cash).
+            </li>
+            <li>
+              <span className="font-bold">Retard de paiement :</span>{" "} Tout retard d'encaissement autorise {SITE.name} à suspendre immédiatement les travaux ou à différer la livraison.
+            </li>
+          </ul>
         </div>
       ),
     },
