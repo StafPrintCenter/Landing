@@ -1,11 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site/SiteShell";
 import { Calculator, PackageSearch, Download, CalendarDays, Users, Mail, FlaskConical, ArrowRight } from "lucide-react";
+import { SITE } from "@/data/site";
 
 export const Route = createFileRoute("/tests/")({
   head: () => ({
     meta: [
-      { title: "Pages de test - STAF PRINT CENTER" },
+      { title: `Pages de test | ${SITE.name}` },
       { name: "description", content: "Index des prototypes et modules en cours de test." },
       { name: "robots", content: "noindex" },
     ],
