@@ -28,7 +28,7 @@ function getSections(): LegalSection[] {
 
           <ul className="list-disc pl-5 space-y-2 mt-4">
             <li>
-              <span className="font-bold">Données d'identification & contact :</span>{" "}  Nom, prénom, adresse e-mail, numéro de téléphone, nom de l'entreprise.
+              <span className="font-bold">Données d'identification & contact :</span>{" "} Nom, prénom, adresse e-mail, numéro de téléphone, nom de l'entreprise.
             </li>
             <li>
               <span className="font-bold">Fichiers & Contenus de projet :</span>{" "}  Fichiers sources, identités visuelles, codes sources, images, maquettes et documents transmis pour l'exécution d'une commande (impression, site web, vidéo, etc.).
@@ -51,7 +51,7 @@ function getSections(): LegalSection[] {
 
           <ol className="list-decimal pl-5 space-y-2 mt-4">
             <li>
-              <span className="font-bold">La gestion de vos commandes :</span>{" "}  Établissement des devis, facturation, suivi de production et livraison des travaux d'impression ou digitaux.
+              <span className="font-bold">La gestion de vos commandes :</span>{" "} Établissement des devis, facturation, suivi de production et livraison des travaux d'impression ou digitaux.
             </li>
             <li>
               <span className="font-bold">Le suivi pédagogique :</span>{" "} Inscription, communication et accompagnement des apprenants aux formations.
@@ -70,45 +70,81 @@ function getSections(): LegalSection[] {
       id: "non-transmission",
       number: "03",
       icon: ShieldCheck,
-      title: "Non-transmission à des tiers",
+      title: "Engagement de non-transmission et confidentialité",
       content: (
-        <p>
-          {SITE.name} s'engage formellement à ne jamais vendre, louer ou céder les données personnelles de ses clients à des entreprises ou organismes tiers à des fins commerciales ou autres. Les données ne sont communiquées qu'aux seules personnes habilitées au sein du Prestataire, dans la stricte mesure nécessaire à l'exécution de la prestation commandée.
-        </p>
+        <div>
+          <ul className="list-disc pl-5 space-y-2 mt-4">
+            <li>
+              <span className="font-bold">Aucune revente :</span>{" "} {SITE.name} s'engage formellement à ne jamais vendre, louer, échanger ou céder vos données personnelles ou vos fichiers de projet à des tiers à des fins commerciales ou publicitaires.
+            </li>
+            <li>
+              <span className="font-bold">Accès restreint :</span>{" "} Seuls les membres habilités de notre équipe (graphistes, imprimeurs, développeurs, formateurs) ont accès aux données strictement nécessaires à la réalisation de leur mission.
+            </li>
+          </ul>
+        </div>
+      ),
+    },
+    {
+      id: "securite-donnees",
+      number: "04",
+      icon: ShieldCheck,
+      title: "Sécurité de vos données et fichiers créatifs",
+      content: (
+        <div>
+          <p>Nous mettons en œuvre des mesures de sécurité techniques et organisationnelles renforcées :</p>
+
+          <ul className="list-disc pl-5 space-y-2 mt-4">
+            <li>
+              <span className="font-bold">Hébergement sécurisé :</span>{" "} Vos données et fichiers sources sont stockés sur des serveurs cloud sécurisés, avec accès restreint et connexions chiffrées (SSL/HTTPS).
+            </li>
+            <li>
+              <span className="font-bold">Confidentialité des projets :</span>{" "} Vos fichiers créatifs (maquettes, logos non publiés, éléments de marque) restent votre propriété et sont traités avec la plus stricte confidentialité pendant et après la prestation.
+            </li>
+          </ul>
+        </div>
       ),
     },
     {
       id: "droits",
-      number: "04",
-      icon: UserCheck,
-      title: "Droits des utilisateurs",
-      content: (
-        <p>
-          Conformément aux principes de protection des données applicables, tout Client ou prospect dispose d'un droit d'accès, de rectification, de limitation et de suppression des données le concernant. Ces droits peuvent être exercés sur simple demande écrite adressée à <span className="font-medium text-foreground">{SITE.email}</span>.
-          Le Prestataire s'engage à répondre dans un délai raisonnable.
-        </p>
-      ),
-    },
-    {
-      id: "securite",
       number: "05",
-      icon: Lock,
-      title: "Sécurité des données et des projets",
+      icon: UserCheck,
+      title: "Vos droits sur vos données",
       content: (
-        <p>
-          L'ensemble des données personnelles ainsi que les fichiers de travail confiés par les clients (codes sources, fichiers graphiques) sont stockés sur des infrastructures cloud sécurisées, accessibles via des connexions chiffrées, afin de garantir leur confidentialité et leur intégrité. Le Prestataire met en œuvre des mesures techniques et organisationnelles raisonnables pour prévenir tout accès non autorisé, perte ou divulgation accidentelle de ces données.
-        </p>
+        <div>
+          <p>Conformément à la réglementation sur la protection des données personnelles, vous disposez des droits suivants :</p>
+
+          <ul className="list-disc pl-5 space-y-2 mt-4">
+            <li>
+              <span className="font-bold">Droit d’accès et de rectification :</span>{" "} Consulter ou corriger vos informations personnelles.
+            </li>
+            <li>
+              <span className="font-bold">Droit à l’effacement ("Droit à l'oubli") :</span>{" "} Demander la suppression de vos données personnelles et fichiers de nos serveurs, sous réserve des obligations légales de conservation (ex. facturation).
+            </li>
+            <li>
+              <span className="font-bold">Droit d’opposition et de limitation :</span>{" "} Refuser ou restreindre certains traitements de vos données.
+            </li>
+          </ul>
+          <br />
+          Pour exercer l'un de ces droits, contactez-nous directement par e-mail à <a href={`mailto:${SITE.email}`} className="text-primary underline">{SITE.email}</a>. Nous traiterons votre demande dans un délai maximal de 72 heures.
+        </div>
       ),
     },
     {
       id: "cookies",
       number: "06",
       icon: ServerCog,
-      title: "Cookies et traçage",
+      title: "Cookies et technologies de suivi",
       content: (
-        <p>
-          Ce site peut utiliser des cookies techniques strictement nécessaires à son fonctionnement (préférence d'affichage, mémorisation de session). Aucun cookie publicitaire ou de traçage tiers n'est déposé sans consentement préalable de l'utilisateur.
-        </p>
+        <div>
+          <ul className="list-disc pl-5 space-y-2 mt-4">
+            <li>
+              <span className="font-bold">Cookies strictement nécessaires :</span>{" "} Utilisés uniquement pour le bon fonctionnement du site (mémorisation de session, préférences d'affichage).
+            </li>
+            <li>
+              <span className="font-bold">Absence de traçage abusif :</span>{" "} Aucun cookie publicitaire ou outil de suivi comportemental tiers n'est déposé sans votre accord préalable explicite. Vous pouvez à tout moment configurer votre navigateur pour bloquer les cookies.
+            </li>
+          </ul>
+        </div>
       ),
     },
   ];
