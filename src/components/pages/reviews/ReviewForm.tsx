@@ -97,6 +97,14 @@ export function ReviewForm({
     <form onSubmit={handleSubmit}>
       {isEditMode && <EditModeBanner />}
 
+      {draftAvailable && !bannerDismissed && !isEditMode && (
+        <DraftBanner
+          savedAgeLabel={getSavedAgeLabel()}
+          onRestore={handleRestoreDraft}
+          onDiscard={handleDiscardDraft}
+        />
+      )}
+
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:items-start">
         {/* Colonne gauche : identité + consentements */}
         <div className="rounded-2xl border border-border bg-card p-6 lg:sticky lg:top-24">
