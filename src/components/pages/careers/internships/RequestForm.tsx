@@ -41,6 +41,38 @@ export function InternshipRequestForm() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[]> | undefined>();
   const [submitted, setSubmitted] = useState(false);
+  const [bannerDismissed, setBannerDismissed] = useState(false);
+
+  // Le CV (fichier) n'est jamais inclus dans le brouillon — non sérialisable, devra être resélectionné manuellement à la restauration.
+  const draftValues = { firstName, lastName, email, phone, institution, fieldOfStudy, desiredStartDate, duration, message };
+  const { draftAvailable, restoreDraft, discardDraft, getSavedAgeLabel } = useFormDraft({
+    formId: "internship-request",
+    version: INTERNSHIP_DRAFT_VERSION,
+    ttlMs: INTERNSHIP_DRAFT_TTL_MS,
+    values: draftValues,
+    enabled: !submitted,
+  });
+
+  const handleRestoreDraft = () => {
+    const draft = restoreDraft();
+    if (draft) {
+      if (draft.firstName !== undefined) setFirstName(draft.firstName as string);
+      if (draft.lastName !== undefined) setLastName(draft.lastName as string);
+      if (draft.email !== undefined) setEmail(draft.email as string);
+      if (draft.phone !== undefined) setPhone(draft.phone as string);
+      if (draft.institution !== undefined) setInstitution(draft.institution as string);
+      if (draft.fieldOfStudy !== undefined) setFieldOfStudy(draft.fieldOfStudy as string);
+      if (draft.desiredStartDate !== undefined) setDesiredStartDate(draft.desiredStartDate as string);
+      if (draft.duration !== undefined) setDuration(draft.duration as string);
+      if (draft.message !== undefined) setMessage(draft.message as string);
+    }
+    setBannerDismissed(true);
+  };
+
+  const handleDiscardDraft = () => {
+    discardDraft();
+    setBannerDismissed(true);
+  };
 
   // Handlers pour Drag & Drop
   const handleDragOver = (e: React.DragEvent) => {
