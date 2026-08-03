@@ -24,7 +24,7 @@ interface ApplyFormProps {
 }
 
 const APPLY_DRAFT_VERSION = 1;
-const APPLY_DRAFT_TTL_MS = 1000 * 60 * 60 * 24; // 24h
+const APPLY_DRAFT_TTL_MS = 1000 * 60 * 60 * 24;
 
 export function ApplyForm({ offer }: ApplyFormProps) {
   const [firstName, setFirstName] = useState("");
