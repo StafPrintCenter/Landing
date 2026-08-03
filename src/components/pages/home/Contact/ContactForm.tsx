@@ -40,6 +40,9 @@ const EMPTY_VALUES: ContactInput = {
   message: "",
 };
 
+const CONTACT_DRAFT_VERSION = 1;
+const CONTACT_DRAFT_TTL_MS = 1000 * 60 * 60 * 6;
+
 interface ContactFormProps {
   /** Appelé après un envoi réussi - utile pour un tracking ou une redirection côté parent */
   onSuccess?: (ticketNumber: string) => void;
