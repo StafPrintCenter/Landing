@@ -60,6 +60,7 @@ export function ContactForm({ onSuccess, initialValues }: ContactFormProps) {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [ticketNumber, setTicketNumber] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [bannerDismissed, setBannerDismissed] = useState(false);
 
   const { register, handleSubmit, reset, watch, setValue, formState: { errors, isSubmitting } } = useForm<ContactInput>({
     resolver: zodResolver(contactSchema),
