@@ -23,6 +23,9 @@ interface ApplyFormProps {
   offer: APIJobOffer;
 }
 
+const APPLY_DRAFT_VERSION = 1;
+const APPLY_DRAFT_TTL_MS = 1000 * 60 * 60 * 24; // 24h
+
 export function ApplyForm({ offer }: ApplyFormProps) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
