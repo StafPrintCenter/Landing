@@ -38,6 +38,7 @@ export function ReviewForm({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [bannerDismissed, setBannerDismissed] = useState(false);
 
   const sortedQuestions = [...(form.questions ?? [])].sort((a, b) => a.order - b.order);
 
