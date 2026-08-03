@@ -148,6 +148,14 @@ export function ContactForm({ onSuccess, initialValues }: ContactFormProps) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="rounded-2xl border border-border bg-card p-6 md:p-8">
+      {draftAvailable && !bannerDismissed && (
+        <DraftBanner
+          savedAgeLabel={getSavedAgeLabel()}
+          onRestore={handleRestoreDraft}
+          onDiscard={handleDiscardDraft}
+        />
+      )}
+
       <div className="grid gap-5 md:grid-cols-2">
         <Field
           label="Prénoms & Nom"
