@@ -50,6 +50,37 @@ export function ApplyForm({ offer }: ApplyFormProps) {
   const [errorStatus, setErrorStatus] = useState<number | undefined>();
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[]> | undefined>();
   const [submitted, setSubmitted] = useState(false);
+  const [bannerDismissed, setBannerDismissed] = useState(false);
+
+  // Un brouillon distinct par offre — postuler à deux offres différentes ne
+  // doit jamais mélanger les champs. Seuls les champs texte sont sauvegardés :
+  // le CV et la lettre de motivation en fichier devront être resélectionnés.
+  const draftValues = { firstName, lastName, email, phone, educationLevel, coverLetter };
+  const { draftAvailable, restoreDraft, discardDraft, getSavedAgeLabel } = useFormDraft({
+    formId: `job-apply-${offer.slug}`,
+    version: APPLY_DRAFT_VERSION,
+    ttlMs: APPLY_DRAFT_TTL_MS,
+    values: draftValues,
+    enabled: !submitted,
+  });
+
+  const handleRestoreDraft = () => {
+    const draft = restoreDraft();
+    if (draft) {
+      if (draft.firstName !== undefined) setFirstName(draft.firstName as string);
+      if (draft.lastName !== undefined) setLastName(draft.lastName as string);
+      if (draft.email !== undefined) setEmail(draft.email as string);
+      if (draft.phone !== undefined) setPhone(draft.phone as string);
+      if (draft.educationLevel !== undefined) setEducationLevel(draft.educationLevel as string);
+      if (draft.coverLetter !== undefined) setCoverLetter(draft.coverLetter as string);
+    }
+    setBannerDismissed(true);
+  };
+
+  const handleDiscardDraft = () => {
+    discardDraft();
+    setBannerDismissed(true);
+  };
 
   // Handlers pour Drag & Drop
   const handleDragOver = (e: React.DragEvent, setDragging: (state: boolean) => void) => {
