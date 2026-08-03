@@ -62,6 +62,19 @@ export function ReviewForm({
     });
   };
 
+  const handleRestoreDraft = () => {
+    const draft = restoreDraft();
+    if (draft) {
+      setAnswers((prev) => ({ ...prev, ...draft }));
+    }
+    setBannerDismissed(true);
+  };
+
+  const handleDiscardDraft = () => {
+    discardDraft();
+    setBannerDismissed(true);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitError(null);
