@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Loader2, User, Mail, Phone, School, BookOpen, Calendar, Timer, MessageSquare, Upload, X, Check, ShieldCheck } from "lucide-react";
 import { createInternshipRequest, InternshipApiError } from "@/stores/useInternshipsStore";
 import { SuccessScreen } from "./SuccessScreen";
+import { useFormDraft } from "@/hooks/use-form-draft";
+import { DraftBanner } from "@/components/shared/DraftBanner";
 import { SITE } from "@/data/site";
 
 const FIELD_LABELS: Record<string, string> = {
