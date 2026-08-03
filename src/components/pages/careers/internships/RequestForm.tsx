@@ -317,8 +317,8 @@ export function InternshipRequestForm() {
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
               className={`flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed p-6 text-center transition-all ${isCvDragging
-                  ? "border-primary bg-primary/10"
-                  : "border-border bg-background hover:border-primary/50 hover:bg-muted/30"
+                ? "border-primary bg-primary/10"
+                : "border-border bg-background hover:border-primary/50 hover:bg-muted/30"
                 }`}
             >
               <div className="rounded-full bg-primary/10 p-3 text-primary">
