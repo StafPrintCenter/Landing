@@ -72,6 +72,16 @@ export function ContactForm({ onSuccess, initialValues }: ContactFormProps) {
   const watchService = watch("service") || "";
   const watchCustomService = watch("customService") || "";
 
+  const currentValues = watch();
+
+  const { draftAvailable, restoreDraft, discardDraft, getSavedAgeLabel } = useFormDraft<ContactInput>({
+    formId: "contact-form",
+    version: CONTACT_DRAFT_VERSION,
+    ttlMs: CONTACT_DRAFT_TTL_MS,
+    values: currentValues,
+    enabled: !submitted,
+  });
+
   useEffect(() => {
     if (initialValues.service) {
       reset({
