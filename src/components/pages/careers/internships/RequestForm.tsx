@@ -21,7 +21,7 @@ const FIELD_LABELS: Record<string, string> = {
 };
 
 const INTERNSHIP_DRAFT_VERSION = 1;
-const INTERNSHIP_DRAFT_TTL_MS = 1000 * 60 * 60 * 24 * 2; // 48h
+const INTERNSHIP_DRAFT_TTL_MS = 1000 * 60 * 60 * 24 * 2;
 
 export function InternshipRequestForm() {
   const [firstName, setFirstName] = useState("");
