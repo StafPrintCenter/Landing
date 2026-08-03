@@ -34,7 +34,8 @@ export function ApplyForm({ offer }: ApplyFormProps) {
   const [educationLevel, setEducationLevel] = useState("");
   const [coverLetter, setCoverLetter] = useState("");
 
-  // Fichiers
+  // Fichiers — jamais inclus dans le brouillon (non sérialisables, retirés
+  // automatiquement par le gestionnaire même si on les y mettait).
   const [coverLetterFile, setCoverLetterFile] = useState<File | null>(null);
   const [cv, setCv] = useState<File | null>(null);
   const [consent, setConsent] = useState(false);
