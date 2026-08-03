@@ -18,6 +18,9 @@ interface ReviewFormProps {
   existingAllowPublication: boolean;
 }
 
+const REVIEW_DRAFT_VERSION = 1;
+const REVIEW_DRAFT_TTL_MS = 1000 * 60 * 60 * 24 * 3;
+
 export function ReviewForm({
   token,
   form,
