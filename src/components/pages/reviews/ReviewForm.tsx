@@ -82,6 +82,7 @@ export function ReviewForm({
         await submitReviewResponse(token, { clientName, clientEmail, answers, allowPublication, privacyAccepted });
       }
       setSubmitted(true);
+      discardDraft(); // formulaire abouti — plus besoin du brouillon
     } catch {
       setSubmitError("Une erreur est survenue lors de l'envoi. Merci de réessayer.");
     } finally {
