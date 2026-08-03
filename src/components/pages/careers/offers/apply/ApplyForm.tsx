@@ -156,6 +156,15 @@ export function ApplyForm({ offer }: ApplyFormProps) {
         </p>
       </div>
 
+      {draftAvailable && !bannerDismissed && (
+        <DraftBanner
+          savedAgeLabel={getSavedAgeLabel()}
+          onRestore={handleRestoreDraft}
+          onDiscard={handleDiscardDraft}
+          hadStrippedFields
+        />
+      )}
+
       <form onSubmit={handleSubmit} className="space-y-5">
         {/* Prénom & Nom */}
         <div className="grid gap-4 sm:grid-cols-2">
