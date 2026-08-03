@@ -4,6 +4,8 @@ import { applyToJobOffer, JobsApiError } from "@/stores/useJobsStore";
 import { ApplySuccessScreen } from "./SuccessScreen";
 import { ApplyErrorBanner } from "./ErrorBanner";
 import { FieldErrorsBanner } from "./FieldErrorsBanner";
+import { useFormDraft } from "@/hooks/use-form-draft";
+import { DraftBanner } from "@/components/shared/DraftBanner";
 import type { APIJobOffer } from "@/data/jobs";
 import { SITE } from "@/data/site";
 
