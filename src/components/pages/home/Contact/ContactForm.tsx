@@ -104,6 +104,19 @@ export function ContactForm({ onSuccess, initialValues }: ContactFormProps) {
     }
   }, [watchService, watchCustomService, setValue]);
 
+  const handleRestoreDraft = () => {
+    const draft = restoreDraft();
+    if (draft) {
+      reset({ ...EMPTY_VALUES, ...draft }, { keepDefaultValues: false });
+    }
+    setBannerDismissed(true);
+  };
+
+  const handleDiscardDraft = () => {
+    discardDraft();
+    setBannerDismissed(true);
+  };
+
   const onSubmit = async (data: ContactInput) => {
     setSubmitError(null);
     try {
