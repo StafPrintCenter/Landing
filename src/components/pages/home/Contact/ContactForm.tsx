@@ -133,6 +133,7 @@ export function ContactForm({ onSuccess, initialValues }: ContactFormProps) {
       setCopied(false);
       // Reset complet et explicite : tous les champs (y compris service et customService) repartent à vide
       reset(EMPTY_VALUES, { keepDefaultValues: false });
+      discardDraft(); // le formulaire a abouti — plus besoin du brouillon
       onSuccess?.(result.ticketNumber);
     } catch {
       setSubmitError("Une erreur est survenue lors de l'envoi. Merci de réessayer dans quelques instants.");
