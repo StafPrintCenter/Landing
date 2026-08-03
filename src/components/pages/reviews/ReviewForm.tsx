@@ -41,6 +41,16 @@ export function ReviewForm({
 
   const sortedQuestions = [...(form.questions ?? [])].sort((a, b) => a.order - b.order);
 
+  // Un brouillon distinct par token d'invitation — deux formulaires différents ne doivent jamais se mélanger. En mode édition, on ne sauvegarde pas de
+  const { draftAvailable, restoreDraft, discardDraft, getSavedAgeLabel } = useFormDraft<ReviewAnswers>({
+    formId: `review-${token}`,
+    version: REVIEW_DRAFT_VERSION,
+    ttlMs: REVIEW_DRAFT_TTL_MS,
+    values: answers,
+    enabled: !submitted && !isEditMode,
+    isEmpty: (values) => Object.keys(values).length === 0,
+  });
+
   const setAnswer = (questionId: string, value: ReviewAnswerValue) => {
     setAnswers((prev) => ({ ...prev, [questionId]: value }));
     setErrors((prev) => {
