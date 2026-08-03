@@ -65,7 +65,10 @@ export function ReviewForm({
   const handleRestoreDraft = () => {
     const draft = restoreDraft();
     if (draft) {
-      setAnswers((prev) => ({ ...prev, ...draft }));
+      const cleanDraft = Object.fromEntries(
+        Object.entries(draft).filter((entry): entry is [string, ReviewAnswerValue] => entry[1] !== undefined)
+      ) satisfies ReviewAnswers;
+      setAnswers((prev) => ({ ...prev, ...cleanDraft }));
     }
     setBannerDismissed(true);
   };
