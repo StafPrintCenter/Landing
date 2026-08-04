@@ -9,7 +9,7 @@ export interface UseFormDraftOptions<T extends Record<string, unknown>> extends 
   enabled?: boolean;
   /** Délai de debounce avant sauvegarde après la dernière frappe (ms) */
   debounceMs?: number;
-  /** Détermine si "values" est encore vierge — évite de sauvegarder un brouillon vide/bruité.
+  /** Détermine si "values" est encore vierge - évite de sauvegarder un brouillon vide/bruité.
    * Par défaut : true si toutes les valeurs sont vides ("", null, undefined, tableau vide). */
   isEmpty?: (values: T) => boolean;
 }
