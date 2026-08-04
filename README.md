@@ -1,4 +1,4 @@
-# STAF PRINT CENTER — Plateforme Web (V1)
+# STAF PRINT CENTER - Plateforme Web (V1)
 
 Ce dépôt contient le code source de la plateforme web officielle de **STAF PRINT CENTER** (`stafprint.com`), studio de création visuelle, d'imprimerie et de formation basé à Porto-Novo, Bénin.
 
