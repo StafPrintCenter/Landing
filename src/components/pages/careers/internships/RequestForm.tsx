@@ -119,7 +119,7 @@ export function InternshipRequestForm() {
         consentAccepted: consent,
       });
       setSubmitted(true);
-      discardDraft(); // formulaire abouti — plus besoin du brouillon
+      discardDraft(); // formulaire abouti - plus besoin du brouillon
     } catch (err) {
       if (err instanceof InternshipApiError) {
         setErrorMessage(err.message);
