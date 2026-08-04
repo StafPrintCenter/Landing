@@ -3,7 +3,7 @@ import { saveDraft, restoreDraft, clearDraft, hasValidDraft, formatDraftAge } fr
 import type { DraftConfig } from "@/lib/drafts/types";
 
 export interface UseFormDraftOptions<T extends Record<string, unknown>> extends DraftConfig {
-  /** État courant du formulaire — surveillé pour déclencher la sauvegarde automatique */
+  /** État courant du formulaire - surveillé pour déclencher la sauvegarde automatique */
   values: T;
   /** Désactive complètement la sauvegarde (ex: après soumission réussie) */
   enabled?: boolean;
