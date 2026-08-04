@@ -25,7 +25,7 @@ Elle s'articule autour des pages suivantes :
 
 ---
 
-## 🛠️ Stack Technique
+## 🛠️ Stack technique
 
 - **Frontend :** HTML5 / CSS3 / JavaScript (ES6+)
 - **SEO & Performances :** Fichiers statiques optimisés, assets minifiés, balisage Open Graph & Schema.org.
