@@ -5,7 +5,7 @@ const DEFAULT_VERSION = 1;
 const DEFAULT_TTL_MS = 1000 * 60 * 60 * 24; // 24h par défaut si non précisé par l'appelant
 
 /**
- * Clés de champs jamais restaurées silencieusement, quel que soit le formulaire —
+ * Clés de champs jamais restaurées silencieusement, quel que soit le formulaire -
  * un consentement/une case légale doit toujours être reconfirmé(e) explicitement
  * par l'utilisateur, jamais réappliqué automatiquement depuis un brouillon.
  */
