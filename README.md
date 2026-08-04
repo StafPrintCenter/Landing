@@ -29,10 +29,10 @@ Elle s'articule autour des pages suivantes :
 
 - **Frontend :**
   React + TanStack Router + TanStack Query, décliné sur plusieurs sous-domaines :
-  - `stafprint.com` — site public
-  - `admin.stafprint.com` — back-office (gestion des services, projets, formations, offres, avis clients, bannières/annonces, newsletter)
-  - `student.stafprint.com` — espace étudiant / formations
-  - `go.stafprint.com` — liens courts / QR codes
+  - `stafprint.com` - site public
+  - `admin.stafprint.com` - back-office (gestion des services, projets, formations, offres, avis clients, bannières/annonces, newsletter)
+  - `student.stafprint.com` - espace étudiant / formations
+  - `go.stafprint.com` - liens courts / QR codes
 
 - **Backend :**
   API REST Laravel 11, PHP 8.4, hébergement mutualisé alwaysdata.
