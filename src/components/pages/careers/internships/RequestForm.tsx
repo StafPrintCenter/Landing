@@ -46,7 +46,7 @@ export function InternshipRequestForm() {
   const [submitted, setSubmitted] = useState(false);
   const [bannerDismissed, setBannerDismissed] = useState(false);
 
-  // Le CV (fichier) n'est jamais inclus dans le brouillon — non sérialisable, devra être resélectionné manuellement à la restauration.
+  // Le CV (fichier) n'est jamais inclus dans le brouillon - non sérialisable, devra être resélectionné manuellement à la restauration.
   const draftValues = { firstName, lastName, email, phone, institution, fieldOfStudy, desiredStartDate, duration, message };
   const { draftAvailable, restoreDraft, discardDraft, getSavedAgeLabel } = useFormDraft({
     formId: "internship-request",
