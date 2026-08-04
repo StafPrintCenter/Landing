@@ -27,8 +27,23 @@ Elle s'articule autour des pages suivantes :
 
 ## 🛠️ Stack technique
 
-- **Frontend :** HTML5 / CSS3 / JavaScript (ES6+)
-- **SEO & Performances :** Fichiers statiques optimisés, assets minifiés, balisage Open Graph & Schema.org.
+- **Frontend :**
+  React + TanStack Router + TanStack Query, décliné sur plusieurs sous-domaines :
+  - `stafprint.com` — site public
+  - `admin.stafprint.com` — back-office (gestion des services, projets, formations, offres, avis clients, bannières/annonces, newsletter)
+  - `student.stafprint.com` — espace étudiant / formations
+  - `go.stafprint.com` — liens courts / QR codes
+
+- **Backend :**
+  API REST Laravel 11, PHP 8.4, hébergement mutualisé alwaysdata.
+  Modules principaux : newsletter, avis clients (formulaire dynamique), pré-inscription aux formations, offres d'emploi & candidatures, demandes de stage, annonces/bannières, gestion des QR codes.
+
+- **Performance & SEO :**
+  - Structure optimisée pour les moteurs de recherche
+  - Metadata Open Graph / Twitter Card
+  - Données structurées Schema.org
+  - Optimisation des ressources statiques (CDN jsDelivr pour les assets)
+
 - **Intégrations :**
   - Webhooks pour la réception des formulaires de contact/devis.
   - API WhatsApp Business pour la mise en relation rapide.
