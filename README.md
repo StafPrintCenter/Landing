@@ -6,7 +6,7 @@ Ce dépôt contient le code source de la plateforme web officielle de **STAF PRI
 
 ---
 
-## 📌 Présentation du Projet
+## 📌 Présentation du projet
 
 La plateforme a pour objectif d'offrir une vitrine moderne et performante aux services de STAF PRINT CENTER :
 - **Print & Design :** Présentation des services d'impression (cartes de visite, bâches, etc.) et de création d'identités visuelles.
