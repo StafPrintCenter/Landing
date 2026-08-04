@@ -121,7 +121,7 @@ export function clearDraft(formId: string): void {
 }
 
 /**
- * Vérifie l'existence d'un brouillon valide sans le charger en entier —
+ * Vérifie l'existence d'un brouillon valide sans le charger en entier -
  * utile pour afficher une bannière "Reprendre où vous en étiez ?" au montage.
  */
 export function hasValidDraft(config: DraftConfig): boolean {
