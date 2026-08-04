@@ -80,7 +80,7 @@ export function saveDraft<T extends Record<string, unknown>>(config: DraftConfig
   try {
     window.localStorage.setItem(storageKey(config.formId), JSON.stringify(record));
   } catch {
-    // Quota dépassé ou stockage indisponible (navigation privée stricte, etc.) —
+    // Quota dépassé ou stockage indisponible (navigation privée stricte, etc.) -
     // le brouillon est un confort, pas une garantie ; on ignore sans bloquer l'utilisateur.
   }
 }
