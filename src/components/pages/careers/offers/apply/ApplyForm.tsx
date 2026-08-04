@@ -52,7 +52,7 @@ export function ApplyForm({ offer }: ApplyFormProps) {
   const [submitted, setSubmitted] = useState(false);
   const [bannerDismissed, setBannerDismissed] = useState(false);
 
-  // Un brouillon distinct par offre — postuler à deux offres différentes ne
+  // Un brouillon distinct par offre - postuler à deux offres différentes ne
   // doit jamais mélanger les champs. Seuls les champs texte sont sauvegardés :
   // le CV et la lettre de motivation en fichier devront être resélectionnés.
   const draftValues = { firstName, lastName, email, phone, educationLevel, coverLetter };
