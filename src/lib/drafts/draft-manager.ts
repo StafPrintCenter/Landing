@@ -57,7 +57,7 @@ function sanitizeForStorage<T extends Record<string, unknown>>(
 
 /**
  * Sauvegarde l'état courant d'un formulaire comme brouillon.
- * Échoue silencieusement (log console) en cas de quota localStorage dépassé —
+ * Échoue silencieusement (log console) en cas de quota localStorage dépassé -
  * un brouillon perdu ne doit jamais faire planter le formulaire.
  */
 export function saveDraft<T extends Record<string, unknown>>(config: DraftConfig, data: T): void {
