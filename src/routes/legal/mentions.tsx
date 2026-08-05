@@ -63,7 +63,7 @@ function getSections(): LegalSection[] {
       title: "Propriété intellectuelle",
       content: (
         <p>
-          L'ensemble des éléments figurant sur ce site (marques, logos, textes, visuels, photographies, éléments graphiques, maquettes, vidéos et code source) est la propriété exclusive de <span className="font-bold">{SITE.name}</span>, sauf mention contraire.
+          L'ensemble des éléments figurant sur ce site (marques, logos, textes, visuels, photographies, éléments graphiques, maquettes, vidéos et code source) est la propriété exclusive de <span className="font-bold">{SITE.name}</span>, sauf mention contraire. <br />
 
           Toute reproduction, représentation, modification, publication, adaptation ou exploitation totale ou partielle de ces éléments, quel que soit le moyen ou le procédé utilisé, est strictement interdite sans l'autorisation écrite préalable de {SITE.name}. Toute exploitation non autorisée sera considérée comme constitutive d'une contrefaçon et poursuivie conformément aux lois en vigueur au Bénin.
         </p>
