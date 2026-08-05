@@ -142,10 +142,10 @@ function getSections(): LegalSection[] {
               Ce site utilise des cookies strictement nécessaires à son bon fonctionnement technique (navigation, mémorisation de session, affichage).
             </li>
 
-      <li>
-        <span className="font-bold">Suivi des annonces et widgets :</span>{" "}
-        Afin de mesurer l'efficacité de nos communications internes (notifications, bannières d'information, offres d'emploi et autres widgets), nous enregistrons le nombre de vues, de clics et de fermetures de ces éléments d'affichage. Ces mesures sont réalisées sans déposer de cookies publicitaires tiers ni mettre en œuvre un suivi comportemental à des fins marketing.
-      </li>
+            <li>
+              <span className="font-bold">Suivi des annonces et widgets :</span>{" "}
+              Afin de mesurer l'efficacité de nos communications internes (notifications, bannières d'information, offres d'emploi et autres widgets), nous enregistrons le nombre de vues, de clics et de fermetures de ces éléments d'affichage. Ces mesures sont réalisées sans déposer de cookies publicitaires tiers ni mettre en œuvre un suivi comportemental à des fins marketing.
+            </li>
 
       <li>
         <span className="font-bold">Configuration :</span>{" "}
