@@ -288,8 +288,7 @@ function getSections(): LegalSection[] {
               </li>
 
               <li>
-                <strong>Session de visite :</strong> prévention des affichages
-                multiples du module de newsletter durant une même session.
+                <strong>Session de visite :</strong> prévention des affichages multiples du module de newsletter durant une même session.
               </li>
             </ul>
           </div>
