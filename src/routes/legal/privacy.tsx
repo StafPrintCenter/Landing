@@ -274,8 +274,7 @@ function getSections(): LegalSection[] {
 
             <ul className="mt-3 list-disc space-y-2 pl-5 text-sm">
               <li>
-                <strong>Annonces & notifications :</strong> mémorisation des
-                bannières et notifications fermées pendant votre session.
+                <strong>Annonces & notifications :</strong> mémorisation des bannières et notifications fermées pendant votre session.
               </li>
 
               <li>
