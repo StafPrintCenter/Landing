@@ -190,15 +190,40 @@ function getSections(): LegalSection[] {
       title: "Cookies et technologies de suivi",
       content: (
         <div>
-          <ul className="list-disc pl-5 space-y-2 mt-4">
-            <li>
-              <span className="font-bold">Cookies strictement nécessaires :</span>{" "} Utilisés uniquement pour le bon fonctionnement du site (mémorisation de session, préférences d'affichage).
-            </li>
-            <li>
-              <span className="font-bold">Absence de traçage abusif :</span>{" "} Aucun cookie publicitaire ou outil de suivi comportemental tiers n'est déposé sans votre accord préalable explicite. Vous pouvez à tout moment configurer votre navigateur pour bloquer les cookies.
-            </li>
-          </ul>
-        </div>
+  <ul className="mt-4 list-disc space-y-2 pl-5">
+    <li>
+      <span className="font-bold">
+        Cookies strictement nécessaires :
+      </span>{" "}
+      Utilisés uniquement afin d'assurer le bon fonctionnement technique du site,
+      notamment la navigation, la mémorisation de session et l'affichage des
+      préférences utilisateur.
+    </li>
+
+    <li>
+      <span className="font-bold">
+        Mesure d'audience interne :
+      </span>{" "}
+      Les statistiques relatives aux redirections effectuées via{" "}
+      <code className="rounded bg-muted px-1.5 py-0.5 text-[13px]">
+        go.stafprint.com
+      </code>{" "}
+      ainsi que le comptage des vues, clics et fermetures de nos annonces sont
+      réalisés exclusivement à des fins statistiques internes, d'amélioration de
+      nos services et de sécurité.
+    </li>
+
+    <li>
+      <span className="font-bold">
+        Absence de traçage tiers :
+      </span>{" "}
+      Aucun cookie publicitaire, outil de profilage ou dispositif de suivi
+      comportemental tiers n'est utilisé à votre insu à des fins commerciales.
+      Vous pouvez à tout moment configurer votre navigateur afin de bloquer,
+      limiter ou supprimer les cookies enregistrés.
+    </li>
+  </ul>
+</div>
       ),
     },
   ];
