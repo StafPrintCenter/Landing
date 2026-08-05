@@ -218,7 +218,7 @@ function getSections(): LegalSection[] {
                     <td className="px-4 py-3">
                       Identifiant visiteur
                       <br />
-                      <code>staf_visitor_id</code>
+                      <code>spc_visitor_id</code>
                     </td>
                     <td className="px-4 py-3">
                       Reconnaissance anonyme des visites récurrentes
