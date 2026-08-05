@@ -339,7 +339,7 @@ function getSections(): LegalSection[] {
       title: "Cookies et technologies de suivi",
       content: (
         <div>
-          <ul className="mt-4 list-disc space-y-2 pl-5">
+          <ul className="list-disc pl-5 space-y-2 mt-2">
             <li>
               <span className="font-bold">
                 Cookies strictement nécessaires :
