@@ -80,28 +80,54 @@ function getSections(): LegalSection[] {
       <span className="font-bold">{SITE.name}</span> s'engage à protéger la vie privée des utilisateurs de ses services et plateformes.
     </p>
 
-          <ul className="list-disc pl-5 space-y-2 mt-4">
-            <li>
-              <span className="font-bold">Données directement fournies :</span>{" "} Les informations recueillies via les formulaires (devis, contact, avis ou candidatures) telles que vos nom, e-mail, téléphone et détails du projet sont utilisées exclusivement pour le traitement de vos demandes commerciales, le suivi de la relation client et la gestion des recrutements.
-            </li>
-            <li>
-              <span className="font-bold">Données de navigation et de redirection :</span>{" "} Lors de l'utilisation de notre site ou de notre service de réduction de liens (go.stafprint.com), nous collectons automatiquement des données techniques anonymisées ou pseudonymisées à des fins statistiques :
-              Horodatage précis des clics et vues.
-- Données de géolocalisation (pays et ville d'origine basés sur l'adresse IP).
-- Informations sur l'appareil et le navigateur utilisé (mobile/desktop, version du navigateur).
-- URL de provenance (Referer).
-            </li>
-            <li>
-              <span className="font-bold">Confidentialité :</span>{" "} Vos données ne sont en aucun cas cédées, louées ou vendues à des tiers.
-            </li>
-            <li>
-              <span className="font-bold">Droits des utilisateurs :</span>{" "} Conformément à la législation sur la protection des données personnelles en République du Bénin, vous disposez d'un droit d'accès, de rectification, de modification et de suppression de vos données. Pour exercer ces droits, contactez-nous à :
-              <br />
-              Pour exercer ce droit, vous pouvez nous contacter à :{" "}  <a href={`mailto:${SITE.email}`} className="text-primary underline">{SITE.email}</a>.
-            </li>
-          </ul>
-        </div>
-      ),
+    <ul className="list-disc space-y-4 pl-5">
+      <li>
+        <span className="font-bold">Données directement fournies :</span>{" "}
+        Les informations recueillies via les formulaires (demande de devis, prise de contact, avis, inscription à une formation ou candidature) telles que vos nom, prénom, adresse e-mail, numéro de téléphone et informations relatives à votre projet sont utilisées exclusivement pour traiter votre demande, assurer le suivi de la relation client et gérer nos activités de recrutement.
+      </li>
+
+      <li>
+        <span className="font-bold">Données de navigation et de redirection :</span>{" "}
+        Lors de l'utilisation de notre site internet ou de notre service de réduction de liens{" "}
+        <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[0.9em]">
+          <a href="https://go.stafprint.com" target="_blank" rel="noopener noreferrer" className="text-primary no-underline hover:underline">go.stafprint.com</a>
+        </code>
+        , certaines informations techniques sont collectées automatiquement à des fins de mesure d'audience, d'analyse statistique et d'amélioration de nos services.
+
+        <ul className="mt-3 list-disc space-y-2 pl-5">
+          <li>Horodatage précis des vues, clics et redirections.</li>
+          <li>Pays et ville estimés à partir de l'adresse IP.</li>
+          <li>Type d'appareil utilisé (ordinateur, tablette ou mobile).</li>
+          <li>Système d'exploitation et navigateur web.</li>
+          <li>Version du navigateur.</li>
+          <li>URL de provenance (Referer).</li>
+          <li>URL de destination de la redirection.</li>
+        </ul>
+      </li>
+
+      <li>
+        <span className="font-bold">Confidentialité :</span>{" "}
+        Les données collectées sont exclusivement utilisées par {SITE.name}. Elles ne sont ni vendues, ni louées, ni cédées à des tiers à des fins commerciales.
+      </li>
+
+      <li>
+        <span className="font-bold">Droits des utilisateurs :</span>{" "}
+        Conformément à la législation applicable en République du Bénin relative à la protection des données personnelles, vous disposez d'un droit d'accès, de rectification, de mise à jour, d'opposition et de suppression de vos données.
+
+        <br />
+        <br />
+
+        Pour exercer ces droits, vous pouvez nous contacter à l'adresse suivante :{" "}
+        <a
+          href={`mailto:${SITE.email}`}
+          className="font-medium text-primary underline underline-offset-4"
+        >
+          {SITE.email}
+        </a>.
+      </li>
+    </ul>
+  </div>
+),
     },
     {
       id: "cookies",
