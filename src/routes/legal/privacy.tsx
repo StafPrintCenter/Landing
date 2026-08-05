@@ -195,8 +195,7 @@ function getSections(): LegalSection[] {
               <span className="font-bold">
                 Cookies strictement nécessaires :
               </span>{" "}
-              Utilisés uniquement afin d'assurer le bon fonctionnement technique du site,
-              notamment la navigation, la mémorisation de session et l'affichage des
+              Utilisés uniquement afin d'assurer le bon fonctionnement technique du site,              notamment la navigation, la mémorisation de session et l'affichage des
               préférences utilisateur.
             </li>
 
