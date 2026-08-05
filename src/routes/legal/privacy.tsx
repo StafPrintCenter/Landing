@@ -43,10 +43,10 @@ function getSections(): LegalSection[] {
             </li>
           </ul>
 
-  <div className="mt-6 rounded-xl border bg-muted/40 p-5">
-    <h4 className="font-semibold">
-      Données collectées automatiquement (Redirections & Interactions)
-    </h4>
+          <div className="mt-6 rounded-xl border bg-muted/40 p-5">
+            <h4 className="font-semibold">
+              Données collectées automatiquement (Redirections & Interactions)
+            </h4>
 
     <p className="mt-2 text-sm text-muted-foreground">
       Lors de l'interaction avec nos liens courts{" "}
