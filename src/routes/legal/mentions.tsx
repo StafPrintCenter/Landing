@@ -113,17 +113,17 @@ function getSections(): LegalSection[] {
               Conformément à la législation applicable en République du Bénin relative à la protection des données personnelles, vous disposez d'un droit d'accès, de rectification, de mise à jour, d'opposition et de suppression de vos données.
               <br /> <br />
 
-        Pour exercer ces droits, vous pouvez nous contacter à l'adresse suivante :{" "}
-        <a
-          href={`mailto:${SITE.email}`}
-          className="font-medium text-primary underline underline-offset-4"
-        >
-          {SITE.email}
-        </a>.
-      </li>
-    </ul>
-  </div>
-),
+              Pour exercer ces droits, vous pouvez nous contacter à l'adresse suivante :{" "}
+              <a
+                href={`mailto:${SITE.email}`}
+                className="font-medium text-primary underline underline-offset-4"
+              >
+                {SITE.email}
+              </a>.
+            </li>
+          </ul>
+        </div>
+      ),
     },
     {
       id: "cookies",
