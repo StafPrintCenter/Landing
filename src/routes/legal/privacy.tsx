@@ -46,7 +46,9 @@ function getSections(): LegalSection[] {
 
           <br />
 
-            <p className="mt-2 text-sm text-muted-foreground">
+          <div>
+            <h3 className="font-semibold">b. Données collectées automatiquement (Redirections & Interactions)</h3>
+            <p>
               Lors de l'interaction avec nos liens courts{" "}
               <code className="rounded bg-muted px-1.5 py-0.5 text-[13px]">
                 go.stafprint.com
