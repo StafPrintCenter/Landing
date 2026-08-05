@@ -32,10 +32,10 @@ function getSections(): LegalSection[] {
               Nom, prénom, adresse e-mail, numéro de téléphone et nom de l'entreprise.
             </li>
 
-    <li>
-      <span className="font-bold">Fichiers & contenus de projet :</span>{" "}
-      Fichiers sources, identités visuelles, codes sources, images, maquettes et tout document transmis dans le cadre d'une prestation.
-    </li>
+            <li>
+              <span className="font-bold">Fichiers & contenus de projet :</span>{" "}
+              Fichiers sources, identités visuelles, codes sources, images, maquettes et tout document transmis dans le cadre d'une prestation.
+            </li>
 
     <li>
       <span className="font-bold">Données de suivi de formation :</span>{" "}
