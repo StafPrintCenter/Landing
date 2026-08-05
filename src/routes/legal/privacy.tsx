@@ -35,7 +35,7 @@ function getSections(): LegalSection[] {
         <div>
           <div>
             <h3 className="font-semibold">a. Données fournies volontairement</h3>
-            <p>
+            <p className="mt-1">
               Nous collectons les informations que vous nous fournissez volontairement lors de l'utilisation de nos services (formulaire de contact, demande de devis, inscription à une formation ou création de compte client).
             </p>
 
