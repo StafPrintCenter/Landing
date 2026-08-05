@@ -279,7 +279,6 @@ function getSections(): LegalSection[] {
               <li>
                 <strong>Navigation :</strong> restauration automatique de la position de défilement lors du retour sur une page précédente.
               </li>
-
               <li>
                 <strong>Session de visite :</strong> prévention des affichages multiples du module de newsletter durant une même session.
               </li>
