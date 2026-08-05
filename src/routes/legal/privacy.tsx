@@ -233,12 +233,10 @@ function getSections(): LegalSection[] {
                     <td className="px-4 py-3">2 jours</td>
                   </tr>
 
-                  <tr className="border-t">
-                    <td className="px-4 py-3">Brouillon : Déposer un avis</td>
-                    <td className="px-4 py-3">
-                      Sauvegarde d'un avis en cours de rédaction
-                    </td>
-                    <td className="px-4 py-3">3 jours</td>
+                  <tr className="hover:bg-muted/30 transition-colors">
+                    <td className="px-4 py-3 font-medium">Brouillon : Déposer un avis</td>
+                    <td className="px-4 py-3">Sauvegarde d'un avis en cours de rédaction</td>
+                    <td className="whitespace-nowrap px-4 py-3 text-muted-foreground">3 jours</td>
                   </tr>
 
                   <tr className="hover:bg-muted/30 transition-colors">
