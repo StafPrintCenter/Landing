@@ -292,7 +292,6 @@ function getSections(): LegalSection[] {
               <li>
                 <strong>Google Analytics (gtag.js) :</strong> utilisé uniquement si vous acceptez les cookies d'analyse. L'anonymisation de l'adresse IP est activée.
               </li>
-
               <li>
                 <strong>Absence de traçage publicitaire :</strong> aucun cookie de ciblage publicitaire ou de profilage commercial tiers n'est déposé sur votre appareil.
               </li>
