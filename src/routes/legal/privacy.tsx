@@ -241,8 +241,8 @@ function getSections(): LegalSection[] {
                     <td className="px-4 py-3">3 jours</td>
                   </tr>
 
-                  <tr className="border-t">
-                    <td className="px-4 py-3">
+                  <tr className="hover:bg-muted/30 transition-colors">
+                    <td className="px-4 py-3 font-medium">
                       Identifiant visiteur
                       <br />
                       <code className="text-xs font-normal text-muted-foreground">staf_visitor_id</code>
