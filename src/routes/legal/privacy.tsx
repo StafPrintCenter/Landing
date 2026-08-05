@@ -54,7 +54,6 @@ function getSections(): LegalSection[] {
               </li>
             </ul>
           </div>
-          <br />
 
           <div className="mt-6">
             <h3 className="font-semibold">b. Données collectées automatiquement (Redirections & Interactions)</h3>
