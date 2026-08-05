@@ -87,13 +87,13 @@ function getSections(): LegalSection[] {
               Les informations recueillies via les formulaires (demande de devis, prise de contact, avis, inscription à une formation ou candidature) telles que vos nom, prénom, adresse e-mail, numéro de téléphone et informations relatives à votre projet sont utilisées exclusivement pour traiter votre demande, assurer le suivi de la relation client et gérer nos activités de recrutement.
             </li>
 
-      <li>
-        <span className="font-bold">Données de navigation et de redirection :</span>{" "}
-        Lors de l'utilisation de notre site internet ou de notre service de réduction de liens{" "}
-        <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[0.9em]">
-          <a href="https://go.stafprint.com" target="_blank" rel="noopener noreferrer" className="text-primary no-underline hover:underline">go.stafprint.com</a>
-        </code>
-        , certaines informations techniques sont collectées automatiquement à des fins de mesure d'audience, d'analyse statistique et d'amélioration de nos services.
+            <li>
+              <span className="font-bold">Données de navigation et de redirection :</span>{" "}
+              Lors de l'utilisation de notre site internet ou de notre service de réduction de liens{" "}
+              <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[0.9em]">
+                <a href="https://go.stafprint.com" target="_blank" rel="noopener noreferrer" className="text-primary no-underline hover:underline">go.stafprint.com</a>
+              </code>
+              , certaines informations techniques sont collectées automatiquement à des fins de mesure d'audience, d'analyse statistique et d'amélioration de nos services.
 
         <ul className="mt-3 list-disc space-y-2 pl-5">
           <li>Horodatage précis des vues, clics et redirections.</li>
