@@ -278,8 +278,7 @@ function getSections(): LegalSection[] {
               </li>
 
               <li>
-                <strong>Navigation :</strong> restauration automatique de la
-                position de défilement lors du retour sur une page précédente.
+                <strong>Navigation :</strong> restauration automatique de la position de défilement lors du retour sur une page précédente.
               </li>
 
               <li>
