@@ -165,9 +165,7 @@ function getSections(): LegalSection[] {
           </p>
 
           <div>
-            <h3 className="font-semibold">
-              a. Stockage local de confort (localStorage)
-            </h3>
+            <h3 className="font-semibold"> a. Stockage local de confort (localStorage)</h3>
 
             <p className="mt-2">
               Ces informations sont enregistrées uniquement sur votre appareil afin
