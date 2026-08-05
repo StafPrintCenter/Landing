@@ -168,8 +168,7 @@ function getSections(): LegalSection[] {
             <h3 className="font-semibold"> a. Stockage local de confort (localStorage)</h3>
 
             <p className="mt-2">
-              Ces informations sont enregistrées uniquement sur votre appareil afin de mémoriser certaines préférences et faciliter votre navigation.
-              Elles ne sont jamais transmises à des tiers.
+              Ces informations sont enregistrées uniquement sur votre appareil afin de mémoriser certaines préférences et faciliter votre navigation. Elles ne sont jamais transmises à des tiers.
             </p>
 
             <div className="mt-4 overflow-x-auto rounded-lg border">
