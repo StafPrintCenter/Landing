@@ -77,19 +77,25 @@ function getSections(): LegalSection[] {
       content: (
         <div>
           <p>
-            <span className="font-bold">{SITE.name}</span> s'engage à protéger la vie privée des utilisateurs de son site.
+            <span className="font-bold">{SITE.name}</span> s'engage à protéger la vie privée des utilisateurs de ses services et plateformes.
           </p>
 
           <ul className="list-disc pl-5 space-y-2 mt-4">
             <li>
-              <span className="font-bold">Données collectées :</span>{" "}  Les informations recueillies via le formulaire de devis ou de contact (nom, e-mail, numéro de téléphone, détail du projet) sont exclusivement destinées au traitement de vos demandes commerciales et au suivi de la relation client.
+              <span className="font-bold">Données directement fournies :</span>{" "} Les informations recueillies via les formulaires (devis, contact, avis ou candidatures) telles que vos nom, e-mail, téléphone et détails du projet sont utilisées exclusivement pour le traitement de vos demandes commerciales, le suivi de la relation client et la gestion des recrutements.
             </li>
             <li>
-              <span className="font-bold">Confidentialité :</span>{" "}  Vos données ne sont en aucun cas cédées, louées ou vendues à des tiers.
+              <span className="font-bold">Données de navigation et de redirection :</span>{" "} Lors de l'utilisation de notre site ou de notre service de réduction de liens (go.stafprint.com), nous collectons automatiquement des données techniques anonymisées ou pseudonymisées à des fins statistiques :
+              Horodatage précis des clics et vues.
+- Données de géolocalisation (pays et ville d'origine basés sur l'adresse IP).
+- Informations sur l'appareil et le navigateur utilisé (mobile/desktop, version du navigateur).
+- URL de provenance (Referer).
             </li>
             <li>
-              <span className="font-bold">Droits des utilisateurs :</span>{" "} Conformément à la législation sur la protection des données personnelles en République du Bénin, vous disposez d'un droit d'accès, de rectification,
-              de modification et de suppression des données qui vous concernent.
+              <span className="font-bold">Confidentialité :</span>{" "} Vos données ne sont en aucun cas cédées, louées ou vendues à des tiers.
+            </li>
+            <li>
+              <span className="font-bold">Droits des utilisateurs :</span>{" "} Conformément à la législation sur la protection des données personnelles en République du Bénin, vous disposez d'un droit d'accès, de rectification, de modification et de suppression de vos données. Pour exercer ces droits, contactez-nous à :
               <br />
               Pour exercer ce droit, vous pouvez nous contacter à :{" "}  <a href={`mailto:${SITE.email}`} className="text-primary underline">{SITE.email}</a>.
             </li>
@@ -101,7 +107,7 @@ function getSections(): LegalSection[] {
       id: "cookies",
       number: "05",
       icon: Cookie,
-      title: "Gestion des Cookies",
+      title: "Gestion des Cookies et Mesure d'Audience",
       content: (
         <p>
           Ce site utilise des cookies strictement nécessaires à son bon fonctionnement technique (navigation, mémorisation de session, affichage). Aucun cookie publicitaire ou de suivi comportemental tiers n'est déposé sans votre accord préalable. Vous pouvez configurer votre navigateur pour bloquer ou être informé de la présence de ces cookies.
