@@ -131,10 +131,10 @@ function getSections(): LegalSection[] {
       icon: Cookie,
       title: "Gestion des Cookies et Mesure d'Audience",
       content: (
-  <div className="space-y-4">
-    <p>
-      Afin d'assurer le bon fonctionnement du site et de mesurer l'utilisation de nos services, nous utilisons exclusivement des technologies nécessaires au fonctionnement de la plateforme et à la production de statistiques internes.
-    </p>
+        <div className="space-y-4">
+          <p>
+            Afin d'assurer le bon fonctionnement du site et de mesurer l'utilisation de nos services, nous utilisons exclusivement des technologies nécessaires au fonctionnement de la plateforme et à la production de statistiques internes.
+          </p>
 
     <ul className="list-disc space-y-4 pl-5">
       <li>
