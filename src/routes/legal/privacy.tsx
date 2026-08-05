@@ -182,9 +182,25 @@ function getSections(): LegalSection[] {
               Ces informations sont enregistrées uniquement sur votre appareil afin de mémoriser certaines préférences et faciliter votre navigation. Elles ne sont jamais transmises à des tiers.
             </p>
 
-            <div className="mt-4 overflow-x-auto rounded-lg border">
-              <table className="w-full text-sm">
-                <thead className="bg-muted/50">
+            {/* 1. VUE MOBILE : Cartes empilées sans aucun risque de débordement */}
+            <div className="mt-4 space-y-2.5 sm:hidden">
+              {localStorageItems.map((item, idx) => (
+                <div key={idx} className="rounded-xl border border-border bg-card p-3.5 shadow-xs space-y-1">
+                  <div className="flex items-start justify-between gap-2">
+                    <span className="font-medium text-xs text-foreground">{item.title}</span>
+                    <span className="shrink-0 rounded-md bg-muted px-2 py-0.5 text-[11px] font-medium text-muted-foreground">
+                      {item.duration}
+                    </span>
+                  </div>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* 2. VUE DESKTOP : Tableau classique propre */}
+            <div className="mt-4 hidden w-full overflow-hidden rounded-xl border border-border bg-card shadow-xs sm:block">
+              <table className="w-full text-left text-sm">
+                <thead className="border-b border-border bg-muted/60 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                   <tr>
                     <th className="px-4 py-3 text-left font-semibold">Donnée / Fonction</th>
                     <th className="px-4 py-3 text-left font-semibold">Finalité</th>
