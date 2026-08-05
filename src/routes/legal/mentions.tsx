@@ -147,13 +147,13 @@ function getSections(): LegalSection[] {
               Afin de mesurer l'efficacité de nos communications internes (notifications, bannières d'information, offres d'emploi et autres widgets), nous enregistrons le nombre de vues, de clics et de fermetures de ces éléments d'affichage. Ces mesures sont réalisées sans déposer de cookies publicitaires tiers ni mettre en œuvre un suivi comportemental à des fins marketing.
             </li>
 
-      <li>
-        <span className="font-bold">Configuration :</span>{" "}
-        Vous pouvez configurer votre navigateur afin de bloquer les cookies ou d'être informé lorsqu'un cookie est enregistré sur votre appareil. Le refus de certains cookies techniques peut toutefois affecter le bon fonctionnement de certaines fonctionnalités du site.
-      </li>
-    </ul>
-  </div>
-),
+            <li>
+              <span className="font-bold">Configuration :</span>{" "}
+              Vous pouvez configurer votre navigateur afin de bloquer les cookies ou d'être informé lorsqu'un cookie est enregistré sur votre appareil. Le refus de certains cookies techniques peut toutefois affecter le bon fonctionnement de certaines fonctionnalités du site.
+            </li>
+          </ul>
+        </div>
+      ),
     },
     {
       id: "droit",
