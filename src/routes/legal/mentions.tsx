@@ -104,7 +104,6 @@ function getSections(): LegalSection[] {
                 <li>URL de destination de la redirection.</li>
               </ul>
             </li>
-
             <li>
               <span className="font-bold">Confidentialité :</span>{" "}
               Les données collectées sont exclusivement utilisées par {SITE.name}. Elles ne sont ni vendues, ni louées, ni cédées à des tiers à des fins commerciales.
