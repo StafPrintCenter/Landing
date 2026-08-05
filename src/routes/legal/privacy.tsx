@@ -14,6 +14,17 @@ export const Route = createFileRoute("/legal/privacy")({
 });
 
 function getSections(): LegalSection[] {
+  const localStorageItems = [
+    { title: "Brouillon : Demande de devis", desc: "Sauvegarde temporaire du formulaire", duration: "6 heures" },
+    { title: "Brouillon : Offre d'emploi", desc: "Sauvegarde temporaire de candidature", duration: "24 heures" },
+    { title: "Brouillon : Demande de stage", desc: "Sauvegarde temporaire du formulaire", duration: "2 jours" },
+    { title: "Brouillon : Déposer un avis", desc: "Sauvegarde d'un avis en cours de rédaction", duration: "3 jours" },
+    { title: "Identifiant visiteur (staf_visitor_id)", desc: "Reconnaissance anonyme des visites récurrentes", duration: "Jusqu'au nettoyage" },
+    { title: "Newsletter", desc: "Mémorisation de votre choix (abonné, masqué ou reporté)", duration: "Persistant" },
+    { title: "Historique de recherche", desc: "Conservation des 8 dernières recherches", duration: "Persistant" },
+    { title: "Consentement cookies", desc: "Mémorisation de votre choix de consentement", duration: "Persistant" },
+  ];
+
   return [
     {
       id: "collecte",
