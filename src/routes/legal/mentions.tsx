@@ -75,10 +75,10 @@ function getSections(): LegalSection[] {
       icon: ShieldCheck,
       title: "Protection des données personnelles",
       content: (
-        <div>
-          <p>
-            <span className="font-bold">{SITE.name}</span> s'engage à protéger la vie privée des utilisateurs de ses services et plateformes.
-          </p>
+  <div className="space-y-4">
+    <p>
+      <span className="font-bold">{SITE.name}</span> s'engage à protéger la vie privée des utilisateurs de ses services et plateformes.
+    </p>
 
           <ul className="list-disc pl-5 space-y-2 mt-4">
             <li>
