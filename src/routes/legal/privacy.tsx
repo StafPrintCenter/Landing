@@ -190,15 +190,15 @@ function getSections(): LegalSection[] {
       title: "Cookies et technologies de suivi",
       content: (
         <div>
-  <ul className="mt-4 list-disc space-y-2 pl-5">
-    <li>
-      <span className="font-bold">
-        Cookies strictement nécessaires :
-      </span>{" "}
-      Utilisés uniquement afin d'assurer le bon fonctionnement technique du site,
-      notamment la navigation, la mémorisation de session et l'affichage des
-      préférences utilisateur.
-    </li>
+          <ul className="mt-4 list-disc space-y-2 pl-5">
+            <li>
+              <span className="font-bold">
+                Cookies strictement nécessaires :
+              </span>{" "}
+              Utilisés uniquement afin d'assurer le bon fonctionnement technique du site,
+              notamment la navigation, la mémorisation de session et l'affichage des
+              préférences utilisateur.
+            </li>
 
             <li>
               <span className="font-bold">
