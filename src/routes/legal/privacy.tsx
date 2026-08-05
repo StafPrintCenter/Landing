@@ -22,9 +22,11 @@ function getSections(): LegalSection[] {
       title: "Collecte des données personnelles et de projets",
       content: (
         <div>
-          <p>
-            Nous collectons les informations que vous nous fournissez volontairement lors de l'utilisation de nos services (formulaire de contact, demande de devis, inscription à une formation ou création de compte client).
-          </p>
+          <div>
+            <h3 className="font-semibold">a. Données collectées automatiquement (Redirections & Interactions)</h3>
+            <p>
+              Nous collectons les informations que vous nous fournissez volontairement lors de l'utilisation de nos services (formulaire de contact, demande de devis, inscription à une formation ou création de compte client).
+            </p>
 
           <ul className="mt-4 list-disc space-y-2 pl-5">
             <li>
