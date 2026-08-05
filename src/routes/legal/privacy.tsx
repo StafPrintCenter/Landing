@@ -28,22 +28,21 @@ function getSections(): LegalSection[] {
               Nous collectons les informations que vous nous fournissez volontairement lors de l'utilisation de nos services (formulaire de contact, demande de devis, inscription à une formation ou création de compte client).
             </p>
 
-          <ul className="mt-4 list-disc space-y-2 pl-5">
-            <li>
-              <span className="font-bold">Données d'identification & contact :</span>{" "}
-              Nom, prénom, adresse e-mail, numéro de téléphone et nom de l'entreprise.
-            </li>
-
-            <li>
-              <span className="font-bold">Fichiers & contenus de projet :</span>{" "}
-              Fichiers sources, identités visuelles, codes sources, images, maquettes et tout document transmis dans le cadre d'une prestation.
-            </li>
-
-            <li>
-              <span className="font-bold">Données de suivi de formation :</span>{" "}
-              Informations nécessaires à l'inscription, à l'accompagnement pédagogique et au suivi des apprenants.
-            </li>
-          </ul>
+            <ul className="mt-4 list-disc space-y-2 pl-5">
+              <li>
+                <span className="font-bold">Données d'identification & contact :</span>{" "}
+                Nom, prénom, adresse e-mail, numéro de téléphone et nom de l'entreprise.
+              </li>
+              <li>
+                <span className="font-bold">Fichiers & contenus de projet :</span>{" "}
+                Fichiers sources, identités visuelles, codes sources, images, maquettes et tout document transmis dans le cadre d'une prestation.
+              </li>
+              <li>
+                <span className="font-bold">Données de suivi de formation :</span>{" "}
+                Informations nécessaires à l'inscription, à l'accompagnement pédagogique et au suivi des apprenants.
+              </li>
+            </ul>
+          </div>
 
           <div className="mt-6 rounded-xl border bg-muted/40 p-5">
             <h4 className="font-semibold">
