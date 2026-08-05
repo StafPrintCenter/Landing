@@ -270,7 +270,7 @@ function getSections(): LegalSection[] {
               </table>
             </div>
 
-            <div className="mt-4 rounded-lg border border-amber-300 bg-amber-50 p-4 text-sm dark:border-amber-900 dark:bg-amber-950/30">
+            <div className="mt-3 rounded-xl border border-amber-300/80 bg-amber-50/80 p-3.5 text-xs leading-relaxed text-amber-900 dark:border-amber-900/50 dark:bg-amber-950/40 dark:text-amber-200 sm:text-sm">
               <strong>Note importante :</strong> Les fichiers joints ainsi que les cases de consentement légal ne sont jamais enregistrés dans les brouillons automatiques.
             </div>
           </div>
