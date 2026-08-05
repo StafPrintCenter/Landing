@@ -67,12 +67,12 @@ function getSections(): LegalSection[] {
         Type d'appareil (mobile ou ordinateur) et navigateur web utilisé.
       </li>
 
-      <li>
-        <span className="font-bold">
-          Données d'horodatage et de provenance :
-        </span>{" "}
-        Date et heure exactes des interactions ainsi que le domaine référent (Referer).
-      </li>
+              <li>
+                <span className="font-bold">
+                  Données d'horodatage et de provenance :
+                </span>{" "}
+                Date et heure exactes des interactions ainsi que le domaine référent (Referer).
+              </li>
 
       <li>
         <span className="font-bold">Métriques d'affichage :</span>{" "}
