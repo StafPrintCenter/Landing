@@ -349,9 +349,7 @@ function getSections(): LegalSection[] {
               <code className="rounded bg-muted px-1.5 py-0.5 text-[13px]">
                 go.stafprint.com
               </code>{" "}
-              ainsi que le comptage des vues, clics et fermetures de nos annonces sont
-              réalisés exclusivement à des fins statistiques internes, d'amélioration de
-              nos services et de sécurité.
+              ainsi que le comptage des vues, clics et fermetures de nos annonces sont réalisés exclusivement à des fins statistiques internes, d'amélioration de nos services et de sécurité.
             </li>
 
             <li>
