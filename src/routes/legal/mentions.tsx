@@ -94,16 +94,16 @@ function getSections(): LegalSection[] {
               </code>
               , certaines informations techniques sont collectées automatiquement à des fins de mesure d'audience, d'analyse statistique et d'amélioration de nos services.
 
-        <ul className="mt-3 list-disc space-y-2 pl-5">
-          <li>Horodatage précis des vues, clics et redirections.</li>
-          <li>Pays et ville estimés à partir de l'adresse IP.</li>
-          <li>Type d'appareil utilisé (ordinateur, tablette ou mobile).</li>
-          <li>Système d'exploitation et navigateur web.</li>
-          <li>Version du navigateur.</li>
-          <li>URL de provenance (Referer).</li>
-          <li>URL de destination de la redirection.</li>
-        </ul>
-      </li>
+              <ul className="mt-3 list-disc space-y-2 pl-5">
+                <li>Horodatage précis des vues, clics et redirections.</li>
+                <li>Pays et ville estimés à partir de l'adresse IP.</li>
+                <li>Type d'appareil utilisé (ordinateur, tablette ou mobile).</li>
+                <li>Système d'exploitation et navigateur web.</li>
+                <li>Version du navigateur.</li>
+                <li>URL de provenance (Referer).</li>
+                <li>URL de destination de la redirection.</li>
+              </ul>
+            </li>
 
       <li>
         <span className="font-bold">Confidentialité :</span>{" "}
