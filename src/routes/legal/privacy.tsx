@@ -202,9 +202,9 @@ function getSections(): LegalSection[] {
               <table className="w-full text-left text-sm">
                 <thead className="border-b border-border bg-muted/60 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                   <tr>
-                    <th className="px-4 py-3 text-left font-semibold">Donnée / Fonction</th>
-                    <th className="px-4 py-3 text-left font-semibold">Finalité</th>
-                    <th className="px-4 py-3 text-left font-semibold">Durée</th>
+                    <th className="px-4 py-3">Donnée / Fonction</th>
+                    <th className="px-4 py-3">Finalité</th>
+                    <th className="px-4 py-3">Durée</th>
                   </tr>
                 </thead>
 
