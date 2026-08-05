@@ -22,22 +22,65 @@ function getSections(): LegalSection[] {
       title: "Collecte des données personnelles et de projets",
       content: (
         <div>
-          <p>
-            Nous collectons les informations que vous nous fournissez volontairement lors de l'utilisation de nos services (formulaire de contact, demande de devis via e-mail/WhatsApp, inscription à une formation ou création de compte client) :
-          </p>
+  <p>
+    Nous collectons les informations que vous nous fournissez volontairement lors de l'utilisation de nos services (formulaire de contact, demande de devis, inscription à une formation ou création de compte client).
+  </p>
 
-          <ul className="list-disc pl-5 space-y-2 mt-4">
-            <li>
-              <span className="font-bold">Données d'identification & contact :</span>{" "} Nom, prénom, adresse e-mail, numéro de téléphone, nom de l'entreprise.
-            </li>
-            <li>
-              <span className="font-bold">Fichiers & Contenus de projet :</span>{" "}  Fichiers sources, identités visuelles, codes sources, images, maquettes et documents transmis pour l'exécution d'une commande (impression, site web, vidéo, etc.).
-            </li>
-            <li>
-              <span className="font-bold">Données de suivi de formation :</span>{" "} Informations nécessaires à l'organisation et au suivi pédagogique des apprenants
-            </li>
-          </ul>
-        </div>
+  <ul className="mt-4 list-disc space-y-2 pl-5">
+    <li>
+      <span className="font-bold">Données d'identification & contact :</span>{" "}
+      Nom, prénom, adresse e-mail, numéro de téléphone et nom de l'entreprise.
+    </li>
+
+    <li>
+      <span className="font-bold">Fichiers & contenus de projet :</span>{" "}
+      Fichiers sources, identités visuelles, codes sources, images, maquettes et tout document transmis dans le cadre d'une prestation.
+    </li>
+
+    <li>
+      <span className="font-bold">Données de suivi de formation :</span>{" "}
+      Informations nécessaires à l'inscription, à l'accompagnement pédagogique et au suivi des apprenants.
+    </li>
+  </ul>
+
+  <div className="mt-6 rounded-xl border bg-muted/40 p-5">
+    <h4 className="font-semibold">
+      Données collectées automatiquement (Redirections & Interactions)
+    </h4>
+
+    <p className="mt-2 text-sm text-muted-foreground">
+      Lors de l'interaction avec nos liens courts{" "}
+      <code className="rounded bg-muted px-1.5 py-0.5 text-[13px]">
+        go.stafprint.com
+      </code>{" "}
+      ou avec nos bannières et annonces d'information, nous collectons automatiquement certaines données techniques anonymisées ou pseudonymisées.
+    </p>
+
+    <ul className="mt-4 list-disc space-y-2 pl-5">
+      <li>
+        <span className="font-bold">Données de géolocalisation :</span>{" "}
+        Pays et ville d'origine déduits de l'adresse IP.
+      </li>
+
+      <li>
+        <span className="font-bold">Informations sur le dispositif :</span>{" "}
+        Type d'appareil (mobile ou ordinateur) et navigateur web utilisé.
+      </li>
+
+      <li>
+        <span className="font-bold">
+          Données d'horodatage et de provenance :
+        </span>{" "}
+        Date et heure exactes des interactions ainsi que le domaine référent (Referer).
+      </li>
+
+      <li>
+        <span className="font-bold">Métriques d'affichage :</span>{" "}
+        Nombre de vues, clics et fermetures des annonces et bannières publiées sur le site.
+      </li>
+    </ul>
+  </div>
+</div>
       ),
     },
     {
