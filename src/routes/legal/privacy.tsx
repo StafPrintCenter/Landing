@@ -43,7 +43,6 @@ function getSections(): LegalSection[] {
               </li>
             </ul>
           </div>
-
           <br />
 
           <div>
