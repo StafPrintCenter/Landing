@@ -155,7 +155,7 @@ function getSections(): LegalSection[] {
     },
     {
       id: "droits",
-      number: "05",
+      number: "06",
       icon: UserCheck,
       title: "Vos droits sur vos données",
       content: (
