@@ -74,13 +74,13 @@ function getSections(): LegalSection[] {
                 Date et heure exactes des interactions ainsi que le domaine référent (Referer).
               </li>
 
-      <li>
-        <span className="font-bold">Métriques d'affichage :</span>{" "}
-        Nombre de vues, clics et fermetures des annonces et bannières publiées sur le site.
-      </li>
-    </ul>
-  </div>
-</div>
+              <li>
+                <span className="font-bold">Métriques d'affichage :</span>{" "}
+                Nombre de vues, clics et fermetures des annonces et bannières publiées sur le site.
+              </li>
+            </ul>
+          </div>
+        </div>
       ),
     },
     {
