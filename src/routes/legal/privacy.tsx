@@ -255,12 +255,10 @@ function getSections(): LegalSection[] {
                     <td className="whitespace-nowrap px-4 py-3 text-muted-foreground">Persistant</td>
                   </tr>
 
-                  <tr className="border-t">
-                    <td className="px-4 py-3">Historique de recherche</td>
-                    <td className="px-4 py-3">
-                      Conservation des 8 dernières recherches
-                    </td>
-                    <td className="px-4 py-3">Persistant</td>
+                  <tr className="hover:bg-muted/30 transition-colors">
+                    <td className="px-4 py-3 font-medium">Historique de recherche</td>
+                    <td className="px-4 py-3">Conservation des 8 dernières recherches</td>
+                    <td className="whitespace-nowrap px-4 py-3 text-muted-foreground">Persistant</td>
                   </tr>
 
                   <tr className="border-t">
