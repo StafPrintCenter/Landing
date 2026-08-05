@@ -247,12 +247,8 @@ function getSections(): LegalSection[] {
                       <br />
                       <code className="text-xs font-normal text-muted-foreground">staf_visitor_id</code>
                     </td>
-                    <td className="px-4 py-3">
-                      Reconnaissance anonyme des visites récurrentes
-                    </td>
-                    <td className="px-4 py-3">
-                      Jusqu'au nettoyage du navigateur
-                    </td>
+                    <td className="px-4 py-3">Reconnaissance anonyme des visites récurrentes</td>
+                    <td className="px-4 py-3 text-muted-foreground">Jusqu'au nettoyage du navigateur</td>
                   </tr>
 
                   <tr className="border-t">
