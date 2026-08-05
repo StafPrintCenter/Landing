@@ -56,11 +56,11 @@ function getSections(): LegalSection[] {
               ou avec nos bannières et annonces d'information, nous collectons automatiquement certaines données techniques anonymisées ou pseudonymisées.
             </p>
 
-    <ul className="mt-4 list-disc space-y-2 pl-5">
-      <li>
-        <span className="font-bold">Données de géolocalisation :</span>{" "}
-        Pays et ville d'origine déduits de l'adresse IP.
-      </li>
+            <ul className="mt-4 list-disc space-y-2 pl-5">
+              <li>
+                <span className="font-bold">Données de géolocalisation :</span>{" "}
+                Pays et ville d'origine déduits de l'adresse IP.
+              </li>
 
       <li>
         <span className="font-bold">Informations sur le dispositif :</span>{" "}
