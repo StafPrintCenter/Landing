@@ -299,7 +299,7 @@ function getSections(): LegalSection[] {
           <div>
             <h3 className="font-semibold">c. Mesure d'audience et cookies tiers</h3>
 
-            <ul className="mt-4 list-disc space-y-2 pl-5">
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm">
               <li>
                 <strong>Google Analytics (gtag.js) :</strong> utilisé uniquement si
                 vous acceptez les cookies d'analyse. L'anonymisation de l'adresse IP
