@@ -180,7 +180,7 @@ function getSections(): LegalSection[] {
     },
     {
       id: "cookies",
-      number: "06",
+      number: "07",
       icon: ServerCog,
       title: "Cookies et technologies de suivi",
       content: (
