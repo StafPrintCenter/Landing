@@ -166,7 +166,7 @@ function getSections(): LegalSection[] {
 
           <div>
             <h3 className="font-semibold">
-              A. Stockage local de confort (localStorage)
+              a. Stockage local de confort (localStorage)
             </h3>
 
             <p className="mt-2">
