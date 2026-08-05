@@ -23,7 +23,7 @@ function getSections(): LegalSection[] {
       content: (
         <div>
           <div>
-            <h3 className="font-semibold">a. Données collectées automatiquement (Redirections & Interactions)</h3>
+            <h3 className="font-semibold">a. Données fournies volontairement</h3>
             <p>
               Nous collectons les informations que vous nous fournissez volontairement lors de l'utilisation de nos services (formulaire de contact, demande de devis, inscription à une formation ou création de compte client).
             </p>
