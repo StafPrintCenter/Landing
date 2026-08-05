@@ -62,10 +62,10 @@ function getSections(): LegalSection[] {
                 Pays et ville d'origine déduits de l'adresse IP.
               </li>
 
-      <li>
-        <span className="font-bold">Informations sur le dispositif :</span>{" "}
-        Type d'appareil (mobile ou ordinateur) et navigateur web utilisé.
-      </li>
+              <li>
+                <span className="font-bold">Informations sur le dispositif :</span>{" "}
+                Type d'appareil (mobile ou ordinateur) et navigateur web utilisé.
+              </li>
 
               <li>
                 <span className="font-bold">
