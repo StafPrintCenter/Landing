@@ -154,6 +154,169 @@ function getSections(): LegalSection[] {
       ),
     },
     {
+      id: "stockage-local",
+      number: "05",
+      icon: ServerCog,
+      title: "Cookies et technologies de stockage local",
+      content: (
+        <div className="space-y-6">
+          <p>
+            Afin d'améliorer l'expérience utilisateur, d'assurer le bon fonctionnement
+            technique du site et d'effectuer certaines mesures d'audience, nous
+            utilisons les fonctionnalités de stockage de votre navigateur
+            (<code className="rounded bg-muted px-1.5 py-0.5 text-[13px]">localStorage</code>,
+            <code className="ml-1 rounded bg-muted px-1.5 py-0.5 text-[13px]">sessionStorage</code>)
+            ainsi que des cookies lorsque cela est nécessaire.
+          </p>
+
+          <div>
+            <h3 className="font-semibold">
+              A. Stockage local de confort (localStorage)
+            </h3>
+
+            <p className="mt-2">
+              Ces informations sont enregistrées uniquement sur votre appareil afin
+              de mémoriser certaines préférences et faciliter votre navigation.
+              Elles ne sont jamais transmises à des tiers.
+            </p>
+
+            <div className="mt-4 overflow-x-auto rounded-lg border">
+              <table className="w-full text-sm">
+                <thead className="bg-muted/50">
+                  <tr>
+                    <th className="px-4 py-3 text-left font-semibold">Donnée / Fonction</th>
+                    <th className="px-4 py-3 text-left font-semibold">Finalité</th>
+                    <th className="px-4 py-3 text-left font-semibold">Durée</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr className="border-t">
+                    <td className="px-4 py-3">Brouillon : Demande de devis</td>
+                    <td className="px-4 py-3">
+                      Sauvegarde temporaire du formulaire
+                    </td>
+                    <td className="px-4 py-3">6 heures</td>
+                  </tr>
+
+                  <tr className="border-t">
+                    <td className="px-4 py-3">Brouillon : Offre d'emploi</td>
+                    <td className="px-4 py-3">
+                      Sauvegarde temporaire de candidature
+                    </td>
+                    <td className="px-4 py-3">24 heures</td>
+                  </tr>
+
+                  <tr className="border-t">
+                    <td className="px-4 py-3">Brouillon : Demande de stage</td>
+                    <td className="px-4 py-3">
+                      Sauvegarde temporaire du formulaire
+                    </td>
+                    <td className="px-4 py-3">2 jours</td>
+                  </tr>
+
+                  <tr className="border-t">
+                    <td className="px-4 py-3">Brouillon : Déposer un avis</td>
+                    <td className="px-4 py-3">
+                      Sauvegarde d'un avis en cours de rédaction
+                    </td>
+                    <td className="px-4 py-3">3 jours</td>
+                  </tr>
+
+                  <tr className="border-t">
+                    <td className="px-4 py-3">
+                      Identifiant visiteur
+                      <br />
+                      <code>staf_visitor_id</code>
+                    </td>
+                    <td className="px-4 py-3">
+                      Reconnaissance anonyme des visites récurrentes
+                    </td>
+                    <td className="px-4 py-3">
+                      Jusqu'au nettoyage du navigateur
+                    </td>
+                  </tr>
+
+                  <tr className="border-t">
+                    <td className="px-4 py-3">Newsletter</td>
+                    <td className="px-4 py-3">
+                      Mémorisation de votre choix (abonné, masqué ou reporté)
+                    </td>
+                    <td className="px-4 py-3">Persistant</td>
+                  </tr>
+
+                  <tr className="border-t">
+                    <td className="px-4 py-3">Historique de recherche</td>
+                    <td className="px-4 py-3">
+                      Conservation des 8 dernières recherches
+                    </td>
+                    <td className="px-4 py-3">Persistant</td>
+                  </tr>
+
+                  <tr className="border-t">
+                    <td className="px-4 py-3">Consentement cookies</td>
+                    <td className="px-4 py-3">
+                      Mémorisation de votre choix de consentement
+                    </td>
+                    <td className="px-4 py-3">Persistant</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div className="mt-4 rounded-lg border border-amber-300 bg-amber-50 p-4 text-sm dark:border-amber-900 dark:bg-amber-950/30">
+              <strong>Note importante :</strong> Les fichiers joints ainsi que les
+              cases de consentement légal ne sont jamais enregistrés dans les
+              brouillons automatiques.
+            </div>
+          </div>
+
+          <div>
+            <h3 className="font-semibold">
+              B. Stockage temporaire de session (sessionStorage)
+            </h3>
+
+            <ul className="mt-4 list-disc space-y-2 pl-5">
+              <li>
+                <strong>Annonces & notifications :</strong> mémorisation des
+                bannières et notifications fermées pendant votre session.
+              </li>
+
+              <li>
+                <strong>Navigation :</strong> restauration automatique de la
+                position de défilement lors du retour sur une page précédente.
+              </li>
+
+              <li>
+                <strong>Session de visite :</strong> prévention des affichages
+                multiples du module de newsletter durant une même session.
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="font-semibold">
+              C. Mesure d'audience et cookies tiers
+            </h3>
+
+            <ul className="mt-4 list-disc space-y-2 pl-5">
+              <li>
+                <strong>Google Analytics (gtag.js) :</strong> utilisé uniquement si
+                vous acceptez les cookies d'analyse. L'anonymisation de l'adresse IP
+                est activée.
+              </li>
+
+              <li>
+                <strong>Absence de traçage publicitaire :</strong> aucun cookie de
+                ciblage publicitaire ou de profilage commercial tiers n'est déposé
+                sur votre appareil.
+              </li>
+            </ul>
+          </div>
+        </div>
+      )
+    },
+    {
       id: "droits",
       number: "06",
       icon: UserCheck,
