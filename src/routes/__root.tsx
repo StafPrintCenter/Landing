@@ -21,7 +21,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         { title: DEFAULT_TITLE },
         { name: "description", content: "Studio de design graphique, impression numérique, web et formations créatives à Porto-Novo, Bénin." },
         { name: "author", content: `${SITE.manager}` },
-        { name: "keywords", content: "graphiste, Porto-Novo, Bénin, impression, numérique, web, formation, créatives, logo, carte, visite, flyer, affiche, site, web, développement, web, formation, graphisme, photographie, Steve, Aster, Afovo, Stafast, Staf, print, center, artistique, studio, photo, événementiel, corporate" },
+        { name: "keywords", content: "graphiste, Porto-Novo, Bénin, impression, numérique, web, formation, créatives, logo, carte, visite, flyer, affiche, site, web, développement, web, formation, graphisme, photographie, Steve, Aster, Afovo, Stafast, staf, print, center, artistique, studio, photo, événementiel, corporate" },
         { property: "og:title", content: DEFAULT_TITLE },
         { property: "og:description", content: `${SITE.slogan}, ${SITE.activity}` },
         { property: "og:type", content: "website" },
