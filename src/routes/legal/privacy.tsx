@@ -111,7 +111,7 @@ function getSections(): LegalSection[] {
               <span className="font-bold">Le support & la relation client :</span>{" "} Réponse à vos questions, assistance technique et suivi après-vente.
             </li>
             <li>
-              <span className="font-bold">L'amélioration de nos services  :</span>{" "} Analyses internes pour optimiser nos prestations et la navigation sur notre site.
+              <span className="font-bold">L'amélioration de nos services :</span>{" "} Analyses internes pour optimiser nos prestations et la navigation sur notre site.
             </li>
             <li>
               <span className="font-bold">
