@@ -212,17 +212,17 @@ function getSections(): LegalSection[] {
               nos services et de sécurité.
             </li>
 
-    <li>
-      <span className="font-bold">
-        Absence de traçage tiers :
-      </span>{" "}
-      Aucun cookie publicitaire, outil de profilage ou dispositif de suivi
-      comportemental tiers n'est utilisé à votre insu à des fins commerciales.
-      Vous pouvez à tout moment configurer votre navigateur afin de bloquer,
-      limiter ou supprimer les cookies enregistrés.
-    </li>
-  </ul>
-</div>
+            <li>
+              <span className="font-bold">
+                Absence de traçage tiers :
+              </span>{" "}
+              Aucun cookie publicitaire, outil de profilage ou dispositif de suivi
+              comportemental tiers n'est utilisé à votre insu à des fins commerciales.
+              Vous pouvez à tout moment configurer votre navigateur afin de bloquer,
+              limiter ou supprimer les cookies enregistrés.
+            </li>
+          </ul>
+        </div>
       ),
     },
   ];
