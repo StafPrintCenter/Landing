@@ -109,9 +109,9 @@ function getSections(): LegalSection[] {
               Les données collectées sont exclusivement utilisées par {SITE.name}. Elles ne sont ni vendues, ni louées, ni cédées à des tiers à des fins commerciales.
             </li>
 
-      <li>
-        <span className="font-bold">Droits des utilisateurs :</span>{" "}
-        Conformément à la législation applicable en République du Bénin relative à la protection des données personnelles, vous disposez d'un droit d'accès, de rectification, de mise à jour, d'opposition et de suppression de vos données.
+            <li>
+              <span className="font-bold">Droits des utilisateurs :</span>{" "}
+              Conformément à la législation applicable en République du Bénin relative à la protection des données personnelles, vous disposez d'un droit d'accès, de rectification, de mise à jour, d'opposition et de suppression de vos données.
 
         <br />
         <br />
