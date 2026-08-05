@@ -256,8 +256,7 @@ function getSections(): LegalSection[] {
             </div>
 
             <div className="mt-4 rounded-lg border border-amber-300 bg-amber-50 p-4 text-sm dark:border-amber-900 dark:bg-amber-950/30">
-              <strong>Note importante :</strong> Les fichiers joints ainsi que les
-              cases de consentement légal ne sont jamais enregistrés dans les
+              <strong>Note importante :</strong> Les fichiers joints ainsi que les cases de consentement légal ne sont jamais enregistrés dans les
               brouillons automatiques.
             </div>
           </div>
