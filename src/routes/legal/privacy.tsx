@@ -133,7 +133,7 @@ function getSections(): LegalSection[] {
       title: "Engagement de non-transmission et confidentialité",
       content: (
         <div>
-          <ul className="list-disc pl-5 space-y-2 mt-4">
+          <ul className="list-disc pl-5 space-y-2 mt-2">
             <li>
               <span className="font-bold">Aucune revente :</span>{" "} {SITE.name} s'engage formellement à ne jamais vendre, louer, échanger ou céder vos données personnelles ou vos fichiers de projet à des tiers à des fins commerciales ou publicitaires.
             </li>
