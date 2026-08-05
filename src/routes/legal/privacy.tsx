@@ -305,7 +305,7 @@ function getSections(): LegalSection[] {
             </ul>
           </div>
         </div>
-      )
+      ),
     },
     {
       id: "droits",
