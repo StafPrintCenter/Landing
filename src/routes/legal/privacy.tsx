@@ -161,8 +161,7 @@ function getSections(): LegalSection[] {
       content: (
         <div className="space-y-6">
           <p>
-            Afin d'améliorer l'expérience utilisateur, d'assurer le bon fonctionnement technique du site et d'effectuer certaines mesures d'audience, nous utilisons les fonctionnalités de stockage de votre navigateur
-            (<code className="rounded bg-muted px-1.5 py-0.5 text-[13px]">localStorage</code>,
+            Afin d'améliorer l'expérience utilisateur, d'assurer le bon fonctionnement technique du site et d'effectuer certaines mesures d'audience, nous utilisons les fonctionnalités de stockage de votre navigateur (<code className="rounded bg-muted px-1.5 py-0.5 text-[13px]">localStorage</code>,
             <code className="ml-1 rounded bg-muted px-1.5 py-0.5 text-[13px]">sessionStorage</code>)
             ainsi que des cookies lorsque cela est nécessaire.
           </p>
