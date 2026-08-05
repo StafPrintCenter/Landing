@@ -112,8 +112,8 @@ function getSections(): LegalSection[] {
               <span className="font-bold">Droits des utilisateurs :</span>{" "}
               Conformément à la législation applicable en République du Bénin relative à la protection des données personnelles, vous disposez d'un droit d'accès, de rectification, de mise à jour, d'opposition et de suppression de vos données.
 
-        <br />
-        <br />
+              <br />
+              <br />
 
         Pour exercer ces droits, vous pouvez nous contacter à l'adresse suivante :{" "}
         <a
