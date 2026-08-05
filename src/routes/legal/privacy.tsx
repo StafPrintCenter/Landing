@@ -262,8 +262,6 @@ function getSections(): LegalSection[] {
 
           <div>
             <h3 className="font-semibold">b. Stockage temporaire de session (sessionStorage)</h3>
-
-            <ul className="mt-4 list-disc space-y-2 pl-5">
               <li>
                 <strong>Annonces & notifications :</strong> mémorisation des
                 bannières et notifications fermées pendant votre session.
