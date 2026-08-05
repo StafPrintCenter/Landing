@@ -294,9 +294,7 @@ function getSections(): LegalSection[] {
               </li>
 
               <li>
-                <strong>Absence de traçage publicitaire :</strong> aucun cookie de
-                ciblage publicitaire ou de profilage commercial tiers n'est déposé
-                sur votre appareil.
+                <strong>Absence de traçage publicitaire :</strong> aucun cookie de ciblage publicitaire ou de profilage commercial tiers n'est déposé sur votre appareil.
               </li>
             </ul>
           </div>
