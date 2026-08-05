@@ -282,9 +282,7 @@ function getSections(): LegalSection[] {
           </div>
 
           <div>
-            <h3 className="font-semibold">
-              c. Mesure d'audience et cookies tiers
-            </h3>
+            <h3 className="font-semibold">c. Mesure d'audience et cookies tiers</h3>
 
             <ul className="mt-4 list-disc space-y-2 pl-5">
               <li>
