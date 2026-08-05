@@ -1,4 +1,4 @@
-const VISITOR_ID_KEY = "staf_visitor_id";
+const VISITOR_ID_KEY = "spc_visitor_id";
 
 /**
  * Retourne un identifiant visiteur anonyme et stable sur l'appareil (UUID généré
