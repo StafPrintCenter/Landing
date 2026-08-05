@@ -249,12 +249,10 @@ function getSections(): LegalSection[] {
                     <td className="px-4 py-3 text-muted-foreground">Jusqu'au nettoyage du navigateur</td>
                   </tr>
 
-                  <tr className="border-t">
-                    <td className="px-4 py-3">Newsletter</td>
-                    <td className="px-4 py-3">
-                      Mémorisation de votre choix (abonné, masqué ou reporté)
-                    </td>
-                    <td className="px-4 py-3">Persistant</td>
+                  <tr className="hover:bg-muted/30 transition-colors">
+                    <td className="px-4 py-3 font-medium">Newsletter</td>
+                    <td className="px-4 py-3">Mémorisation de votre choix (abonné, masqué ou reporté)</td>
+                    <td className="whitespace-nowrap px-4 py-3 text-muted-foreground">Persistant</td>
                   </tr>
 
                   <tr className="border-t">
