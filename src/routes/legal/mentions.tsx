@@ -86,7 +86,6 @@ function getSections(): LegalSection[] {
               <span className="font-bold">Données directement fournies :</span>{" "}
               Les informations recueillies via les formulaires (demande de devis, prise de contact, avis, inscription à une formation ou candidature) telles que vos nom, prénom, adresse e-mail, numéro de téléphone et informations relatives à votre projet sont utilisées exclusivement pour traiter votre demande, assurer le suivi de la relation client et gérer nos activités de recrutement.
             </li>
-
             <li>
               <span className="font-bold">Données de navigation et de redirection :</span>{" "}
               Lors de l'utilisation de notre site internet ou de notre service de réduction de liens{" "}
