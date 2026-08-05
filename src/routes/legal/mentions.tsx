@@ -135,10 +135,29 @@ function getSections(): LegalSection[] {
       icon: Cookie,
       title: "Gestion des Cookies et Mesure d'Audience",
       content: (
-        <p>
-          Ce site utilise des cookies strictement nécessaires à son bon fonctionnement technique (navigation, mémorisation de session, affichage). Aucun cookie publicitaire ou de suivi comportemental tiers n'est déposé sans votre accord préalable. Vous pouvez configurer votre navigateur pour bloquer ou être informé de la présence de ces cookies.
-        </p>
-      ),
+  <div className="space-y-4">
+    <p>
+      Afin d'assurer le bon fonctionnement du site et de mesurer l'utilisation de nos services, nous utilisons exclusivement des technologies nécessaires au fonctionnement de la plateforme et à la production de statistiques internes.
+    </p>
+
+    <ul className="list-disc space-y-4 pl-5">
+      <li>
+        <span className="font-bold">Cookies techniques :</span>{" "}
+        Ce site utilise des cookies strictement nécessaires à son bon fonctionnement technique (navigation, mémorisation de session, affichage).
+      </li>
+
+      <li>
+        <span className="font-bold">Suivi des annonces et widgets :</span>{" "}
+        Afin de mesurer l'efficacité de nos communications internes (notifications, bannières d'information, offres d'emploi et autres widgets), nous enregistrons le nombre de vues, de clics et de fermetures de ces éléments d'affichage. Ces mesures sont réalisées sans déposer de cookies publicitaires tiers ni mettre en œuvre un suivi comportemental à des fins marketing.
+      </li>
+
+      <li>
+        <span className="font-bold">Configuration :</span>{" "}
+        Vous pouvez configurer votre navigateur afin de bloquer les cookies ou d'être informé lorsqu'un cookie est enregistré sur votre appareil. Le refus de certains cookies techniques peut toutefois affecter le bon fonctionnement de certaines fonctionnalités du site.
+      </li>
+    </ul>
+  </div>
+),
     },
     {
       id: "droit",
