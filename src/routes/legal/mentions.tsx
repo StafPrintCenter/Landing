@@ -80,11 +80,11 @@ function getSections(): LegalSection[] {
       <span className="font-bold">{SITE.name}</span> s'engage à protéger la vie privée des utilisateurs de ses services et plateformes.
     </p>
 
-    <ul className="list-disc space-y-4 pl-5">
-      <li>
-        <span className="font-bold">Données directement fournies :</span>{" "}
-        Les informations recueillies via les formulaires (demande de devis, prise de contact, avis, inscription à une formation ou candidature) telles que vos nom, prénom, adresse e-mail, numéro de téléphone et informations relatives à votre projet sont utilisées exclusivement pour traiter votre demande, assurer le suivi de la relation client et gérer nos activités de recrutement.
-      </li>
+          <ul className="list-disc space-y-4 pl-5">
+            <li>
+              <span className="font-bold">Données directement fournies :</span>{" "}
+              Les informations recueillies via les formulaires (demande de devis, prise de contact, avis, inscription à une formation ou candidature) telles que vos nom, prénom, adresse e-mail, numéro de téléphone et informations relatives à votre projet sont utilisées exclusivement pour traiter votre demande, assurer le suivi de la relation client et gérer nos activités de recrutement.
+            </li>
 
       <li>
         <span className="font-bold">Données de navigation et de redirection :</span>{" "}
