@@ -26,11 +26,11 @@ function getSections(): LegalSection[] {
             Nous collectons les informations que vous nous fournissez volontairement lors de l'utilisation de nos services (formulaire de contact, demande de devis, inscription à une formation ou création de compte client).
           </p>
 
-  <ul className="mt-4 list-disc space-y-2 pl-5">
-    <li>
-      <span className="font-bold">Données d'identification & contact :</span>{" "}
-      Nom, prénom, adresse e-mail, numéro de téléphone et nom de l'entreprise.
-    </li>
+          <ul className="mt-4 list-disc space-y-2 pl-5">
+            <li>
+              <span className="font-bold">Données d'identification & contact :</span>{" "}
+              Nom, prénom, adresse e-mail, numéro de téléphone et nom de l'entreprise.
+            </li>
 
     <li>
       <span className="font-bold">Fichiers & contenus de projet :</span>{" "}
