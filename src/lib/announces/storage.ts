@@ -1,4 +1,4 @@
-const DISMISSED_KEY = "staf_dismissed_announcements";
+const DISMISSED_KEY = "spc_dismissed_announcements";
 
 /**
  * Annonces fermées par l'utilisateur pendant la session courante (sessionStorage :
