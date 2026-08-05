@@ -37,11 +37,11 @@ function getSections(): LegalSection[] {
               Fichiers sources, identités visuelles, codes sources, images, maquettes et tout document transmis dans le cadre d'une prestation.
             </li>
 
-    <li>
-      <span className="font-bold">Données de suivi de formation :</span>{" "}
-      Informations nécessaires à l'inscription, à l'accompagnement pédagogique et au suivi des apprenants.
-    </li>
-  </ul>
+            <li>
+              <span className="font-bold">Données de suivi de formation :</span>{" "}
+              Informations nécessaires à l'inscription, à l'accompagnement pédagogique et au suivi des apprenants.
+            </li>
+          </ul>
 
   <div className="mt-6 rounded-xl border bg-muted/40 p-5">
     <h4 className="font-semibold">
