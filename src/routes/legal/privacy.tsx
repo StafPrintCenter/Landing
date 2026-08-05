@@ -294,9 +294,7 @@ function getSections(): LegalSection[] {
 
             <ul className="mt-3 list-disc space-y-2 pl-5 text-sm">
               <li>
-                <strong>Google Analytics (gtag.js) :</strong> utilisé uniquement si
-                vous acceptez les cookies d'analyse. L'anonymisation de l'adresse IP
-                est activée.
+                <strong>Google Analytics (gtag.js) :</strong> utilisé uniquement si vous acceptez les cookies d'analyse. L'anonymisation de l'adresse IP est activée.
               </li>
 
               <li>
