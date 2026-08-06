@@ -90,7 +90,7 @@ function getSections(): LegalSection[] {
               <span className="font-bold">Données de navigation et de redirection :</span>{" "}
               Lors de l'utilisation de notre site internet ou de notre service de réduction de liens{" "}
               <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[0.9em]">
-                <a href="https://go.stafprint.com" target="_blank" rel="noopener noreferrer" className="text-primary no-underline hover:underline">go.stafprint.com</a>
+                <a href="https://go.stafprint.com" target="_blank" rel="noopener noreferrer" className="text-primary no-underline hover:underline">{SITE.shortUrl}</a>
               </code>
               , certaines informations techniques sont collectées automatiquement à des fins de mesure d'audience, d'analyse statistique et d'amélioration de nos services.
 
