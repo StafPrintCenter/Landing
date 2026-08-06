@@ -59,7 +59,7 @@ function getSections(): LegalSection[] {
             <h3 className="font-semibold">b. Données collectées automatiquement (Redirections & Interactions)</h3>
             <p className="mt-1">
               Lors de l'interaction avec nos liens courts{" "}
-              <code className="rounded bg-muted px-1.5 py-0.5 text-[13px]">go.stafprint.com</code>{" "}
+              <code className="rounded bg-muted px-1.5 py-0.5 text-[13px]">{SITE.shortUrl}</code>{" "}
               ou avec nos bannières et annonces d'information, nous collectons automatiquement certaines données techniques anonymisées ou pseudonymisées.
             </p>
 
