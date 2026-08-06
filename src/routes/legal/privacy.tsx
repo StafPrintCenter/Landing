@@ -19,7 +19,7 @@ function getSections(): LegalSection[] {
     { title: "Brouillon : Offre d'emploi", desc: "Sauvegarde temporaire de candidature", duration: "24 heures" },
     { title: "Brouillon : Demande de stage", desc: "Sauvegarde temporaire du formulaire", duration: "2 jours" },
     { title: "Brouillon : Déposer un avis", desc: "Sauvegarde d'un avis en cours de rédaction", duration: "3 jours" },
-    { title: "Identifiant visiteur (staf_visitor_id)", desc: "Reconnaissance anonyme des visites récurrentes", duration: "Jusqu'au nettoyage" },
+    { title: "Identifiant visiteur (spc_visitor_id)", desc: "Reconnaissance anonyme des visites récurrentes", duration: "Jusqu'au nettoyage" },
     { title: "Newsletter", desc: "Mémorisation de votre choix (abonné, masqué ou reporté)", duration: "Persistant" },
     { title: "Historique de recherche", desc: "Conservation des 8 dernières recherches", duration: "Persistant" },
     { title: "Consentement cookies", desc: "Mémorisation de votre choix de consentement", duration: "Persistant" },
@@ -233,7 +233,7 @@ function getSections(): LegalSection[] {
                     <td className="px-4 py-3 font-medium">
                       Identifiant visiteur
                       <br />
-                      <code className="text-xs font-normal text-muted-foreground">staf_visitor_id</code>
+                      <code className="text-xs font-normal text-muted-foreground">spc_visitor_id</code>
                     </td>
                     <td className="px-4 py-3">Reconnaissance anonyme des visites récurrentes</td>
                     <td className="px-4 py-3 text-muted-foreground">Jusqu'au nettoyage du navigateur</td>
