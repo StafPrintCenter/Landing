@@ -116,9 +116,7 @@ function getSections(): LegalSection[] {
                 La mesure d'audience et d'engagement :
               </span>{" "}
               Analyse des performances de nos campagnes d'information (vues, taux de clic, fermetures des annonces) ainsi que mesure du trafic acheminé via notre service de redirection{" "}
-              <code className="rounded bg-muted px-1.5 py-0.5 text-[13px]">
-                {SITE.shortUrl}
-              </code>.
+              <code className="rounded bg-muted px-1.5 py-0.5 text-[13px]"> {SITE.shortUrl}</code>.
             </li>
           </ol>
         </div>
