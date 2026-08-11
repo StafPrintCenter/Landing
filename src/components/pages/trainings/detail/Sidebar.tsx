@@ -79,7 +79,6 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
                 </span>
               </li>
             )}
-
           </div>
 
           <div className="my-5 h-px bg-border" />
