@@ -61,6 +61,11 @@ export function FormationDetailHeader({ formation: f }: FormationDetailHeaderPro
             <span className="inline-flex items-center gap-2 rounded-full bg-card px-4 py-2 border border-border">
               <BarChart3 size={14} />Niveau {f.level}
             </span>
+            {f.startDate && f.endDate && (
+              <span className="inline-flex items-center gap-2 rounded-full bg-card px-4 py-2 border border-border">
+                <Calendar size={14} />Du {formatDate(f.startDate)} au {formatDate(f.endDate)}
+              </span>
+            )}
             {f.seatsRemaining !== null && (
               <span className={`inline-flex items-center gap-2 rounded-full px-4 py-2 border ${isFull
                 ? "bg-destructive/10 border-destructive/20 text-destructive font-semibold"
