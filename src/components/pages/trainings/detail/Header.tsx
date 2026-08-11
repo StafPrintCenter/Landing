@@ -19,8 +19,18 @@ export function FormationDetailHeader({ formation: f }: FormationDetailHeaderPro
   const mainColor = f.coverColor || "var(--primary)";
 
   return (
-    <section className="relative border-b border-border bg-muted overflow-hidden py-8">
-      <div className="container-x">
+    <section
+      className="relative border-b border-border overflow-hidden py-8 transition-colors"
+      style={{
+        background: `linear-gradient(180deg, ${mainColor}14 0%, ${mainColor}02 100%)`,
+      }}
+    >
+      <div
+        className="pointer-events-none absolute -top-24 -right-24 h-96 w-96 rounded-full blur-3xl opacity-20"
+        style={{ backgroundColor: mainColor }}
+      />
+
+      <div className="container-x relative">
         <div className="flex items-center justify-between mb-8">
           <Link
             to="/trainings"
