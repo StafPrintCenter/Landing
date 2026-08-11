@@ -43,10 +43,12 @@ export function FormationDetailHeader({ formation: f }: FormationDetailHeaderPro
         </div>
 
         <Reveal>
-          <span className={[
-            "mt-6 inline-flex rounded-full border px-3 py-1 text-xs font-semibold",
-            getThemeColor(f.theme)
-          ].join(" ")}>
+          <span
+            className={[
+              "mt-6 inline-flex rounded-full border px-3 py-1 text-xs font-semibold",
+              getThemeColor(f.theme),
+            ].join(" ")}
+          >
             {f.theme}
           </span>
           <h1 className="mt-3 font-display text-4xl font-bold md:text-5xl">{f.title}</h1>
