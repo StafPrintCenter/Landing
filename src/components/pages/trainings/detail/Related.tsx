@@ -18,7 +18,7 @@ export function FormationDetailRelated({ related }: FormationRelatedProps) {
               key={r.id}
               to="/trainings/$id"
               params={{ id: r.id }}
-              className="group rounded-2xl border border-border bg-card p-6 transition hover:border-primary"
+              className="group relative overflow-hidden rounded-2xl border border-border bg-card p-6 transition hover:border-primary shadow-sm"
             >
               <div
                 className="absolute top-0 left-0 right-0 h-1"
