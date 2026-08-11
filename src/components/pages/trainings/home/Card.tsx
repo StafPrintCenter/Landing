@@ -44,8 +44,8 @@ export function FormationHomeCard({ formation: f, onRegister }: FormationCardPro
           </div>
         </div>
 
-      <h3 className="mt-4 font-display text-xl font-semibold tracking-tight text-foreground">{f.title}</h3>
-      <p className="mt-2 text-sm text-muted-foreground leading-relaxed flex-1">{f.short}</p>
+        <h3 className="mt-4 font-display text-xl font-semibold tracking-tight text-foreground">{f.title}</h3>
+        <p className="mt-2 text-sm text-muted-foreground leading-relaxed flex-1">{f.short}</p>
 
       <div className="mt-4 flex flex-wrap gap-2 text-xs font-medium text-muted-foreground">
         <span className="inline-flex items-center gap-1 bg-muted px-2.5 py-1 rounded-md">
