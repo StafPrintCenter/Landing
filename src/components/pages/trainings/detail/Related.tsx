@@ -20,6 +20,10 @@ export function FormationDetailRelated({ related }: FormationRelatedProps) {
               params={{ id: r.id }}
               className="group rounded-2xl border border-border bg-card p-6 transition hover:border-primary"
             >
+              <div
+                className="absolute top-0 left-0 right-0 h-1"
+                style={{ backgroundColor: r.coverColor || "var(--primary)" }}
+              />
               <span className="text-xs font-semibold text-secondary">{r.theme}</span>
               <h3 className="mt-2 font-display text-lg font-semibold group-hover:text-primary">{r.title}</h3>
               <p className="mt-1 text-sm text-muted-foreground">{r.short}</p>
