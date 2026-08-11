@@ -39,6 +39,21 @@ export type APIFormation = {
 };
 
 /**
+ * Helper de formatage de date natif (remplace la dépendance à @/lib/api)
+ */
+export function formatDate(dateString: string | null | undefined): string {
+  if (!dateString) return "";
+  const date = new Date(dateString);
+  if (isNaN(date.getTime())) return dateString;
+
+  return date.toLocaleDateString("fr-FR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
+
+/**
  * Retourne les classes Tailwind associées à la couleur d'un thème de formation,
  * avec un fallback neutre si le thème n'est pas répertorié.
  */
