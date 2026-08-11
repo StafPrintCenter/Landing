@@ -29,7 +29,7 @@ export function FormationDetailHeader({ formation: f }: FormationDetailHeaderPro
           <Link
             to="/trainings"
             search={{ theme: "Tout", sortBy: "default", sortDir: "asc", query: "", availableOnly: false, page: 1, perPage: 9 }}
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
           >
             <ArrowLeft size={14} /> Toutes les formations
           </Link>
