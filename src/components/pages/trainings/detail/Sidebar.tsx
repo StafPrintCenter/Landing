@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { ArrowRight, Mail } from "lucide-react";
-import { type APIFormation } from "@/data/trainings";
+import { ArrowRight, Mail, Calendar, MapPin, Users, Ticket, AlertCircle } from "lucide-react";
+import { formatDate, type APIFormation } from "@/data/trainings";
 import { SITE } from "@/data/site";
 import { WhatsAppIcon } from "@/components/site/icons/WhatsAppIcon";
 import { withWhatsAppMessage } from "@/lib/message/whatsapp";
