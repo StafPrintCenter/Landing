@@ -84,7 +84,7 @@ export function FormationDetailHeader({ formation: f }: FormationDetailHeaderPro
                   </span>
                 )}
                 <span
-                  className="inline-flex items-center gap-2 rounded-full px-4 py-2 font-semibold text-white shadow-sm"
+                  className="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 sm:px-4 sm:py-2 font-semibold text-white shadow-sm"
                   style={{ backgroundColor: mainColor }}
                 >
                   {f.price.toLocaleString("fr-FR")} FCFA
