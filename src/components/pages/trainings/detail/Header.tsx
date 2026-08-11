@@ -74,7 +74,9 @@ export function FormationDetailHeader({ formation: f }: FormationDetailHeaderPro
                   }`}
               >
                 <Users size={14} />
-                {isFull ? "Session complète" : `${f.seatsRemaining} place${f.seatsRemaining > 1 ? "s" : ""} disponible${f.seatsRemaining > 1 ? "s" : ""}`}
+                {isFull
+                  ? "Session complète"
+                  : `${f.seatsRemaining} place${f.seatsRemaining > 1 ? "s" : ""} disponible${f.seatsRemaining > 1 ? "s" : ""}`}
               </span>
             )}
             <span className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 font-semibold text-primary-foreground">
