@@ -49,9 +49,16 @@ export function FormationDetailHeader({ formation: f }: FormationDetailHeaderPro
               {f.theme}
             </span>
 
-              <h1 className="mt-3 font-display text-3xl sm:text-4xl font-bold md:text-5xl">
+            {/* Titre avec la barre verticale de couleur juste à sa gauche */}
+            <div className="mt-3 flex items-stretch gap-3 sm:gap-4">
+              <div
+                className="w-1.5 rounded-full shrink-0 my-1"
+                style={{ backgroundColor: mainColor }}
+              />
+              <h1 className="font-display text-3xl sm:text-4xl font-bold md:text-5xl leading-tight">
                 {f.title}
               </h1>
+            </div>
 
             <p className="mt-4 max-w-2xl text-base sm:text-lg text-muted-foreground">
               {f.short}
