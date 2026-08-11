@@ -25,7 +25,9 @@ export function FormationDetailRelated({ related }: FormationRelatedProps) {
                 style={{ backgroundColor: r.coverColor || "var(--primary)" }}
               />
               <span className="text-xs font-semibold text-secondary">{r.theme}</span>
-              <h3 className="mt-2 font-display text-lg font-semibold group-hover:text-primary">{r.title}</h3>
+              <h3 className="mt-2 font-display text-lg font-semibold group-hover:text-primary">
+                {r.title}
+              </h3>
               <p className="mt-1 text-sm text-muted-foreground">{r.short}</p>
             </Link>
           ))}
