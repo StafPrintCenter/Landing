@@ -9,7 +9,7 @@ export function FormationDetailRelated({ related }: FormationRelatedProps) {
   if (related.length === 0) return null;
 
   return (
-    <section className="bg-muted">
+    <section className="bg-muted border-t border-border">
       <div className="container-x py-16">
         <h2 className="font-display text-2xl font-bold">Formations similaires</h2>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
