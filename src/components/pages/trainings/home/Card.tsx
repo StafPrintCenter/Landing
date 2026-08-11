@@ -105,17 +105,17 @@ export function FormationHomeCard({ formation: f, onRegister }: FormationCardPro
           Voir détails <ArrowRight size={14} />
         </Link>
 
-        {/* Bouton S'inscrire */}
-        <button
-          onClick={onRegister}
-          disabled={isFull}
-          className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition shadow-sm ${isFull
-            ? "bg-muted text-muted-foreground cursor-not-allowed"
-            : "bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer"
-            }`}
-        >
-          {isFull ? "Complet" : "S'inscrire"}
-        </button>
+          <button
+            onClick={onRegister}
+            disabled={isFull || !isOpen}
+            className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition shadow-sm ${isFull || !isOpen
+              ? "bg-muted text-muted-foreground cursor-not-allowed"
+              : "bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer"
+              }`}
+          >
+            {isFull ? "Complet" : !isOpen ? "Clôturé" : "S'inscrire"}
+          </button>
+        </div>
       </div>
     </motion.div>
   );
