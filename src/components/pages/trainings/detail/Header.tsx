@@ -67,10 +67,12 @@ export function FormationDetailHeader({ formation: f }: FormationDetailHeaderPro
               </span>
             )}
             {f.seatsRemaining !== null && (
-              <span className={`inline-flex items-center gap-2 rounded-full px-4 py-2 border ${isFull
-                ? "bg-destructive/10 border-destructive/20 text-destructive font-semibold"
-                : "bg-card border-border text-muted-foreground"
-                }`}>
+              <span
+                className={`inline-flex items-center gap-2 rounded-full px-4 py-2 border ${isFull
+                  ? "bg-destructive/10 border-destructive/20 text-destructive font-semibold"
+                  : "bg-card border-border text-muted-foreground"
+                  }`}
+              >
                 <Users size={14} />
                 {isFull ? "Session complète" : `${f.seatsRemaining} place${f.seatsRemaining > 1 ? "s" : ""} disponible${f.seatsRemaining > 1 ? "s" : ""}`}
               </span>
