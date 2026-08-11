@@ -71,17 +71,18 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
               </p>
             </div>
 
-
-            {f.registrationFee !== undefined && f.registrationFee > 0 && (
-              <div className="flex items-center text-xs">
-                <span className="text-muted-foreground flex items-center gap-1">
-                  <Ticket size={13} /> Frais d'inscription
-                </span>
-                <span className="font-semibold text-foreground">
-                  {f.registrationFee.toLocaleString("fr-FR")} FCFA
-                </span>
-              </div>
-            )}
+            <div>
+              {f.registrationFee !== undefined && f.registrationFee > 0 && (
+                <div className="flex items-center text-xs">
+                  <span className="text-muted-foreground flex items-center gap-1">
+                    <Ticket size={13} /> Frais d'inscription
+                  </span>
+                  <span className="font-semibold text-foreground">
+                    {f.registrationFee.toLocaleString("fr-FR")} FCFA
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="my-5 h-px bg-border" />
