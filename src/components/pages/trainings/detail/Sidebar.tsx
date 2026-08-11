@@ -63,6 +63,24 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
     <>
       <aside className="space-y-6">
         <div className="sticky top-24 rounded-2xl border border-border bg-card p-6 shadow-sm">
+          <div>
+            <p className="text-sm text-muted-foreground">Tarif de la formation</p>
+            <p className="mt-1 font-display text-3xl font-bold text-primary">
+              {f.price.toLocaleString("fr-FR")} FCFA
+            </p>
+
+            {f.registrationFee !== undefined && f.registrationFee > 0 && (
+              <li className="flex justify-between items-center text-xs bg-muted/60 p-2 rounded-lg">
+                <span className="text-muted-foreground flex items-center gap-1">
+                  <Ticket size={13} /> Frais d'inscription
+                </span>
+                <span className="font-semibold text-foreground">
+                  {f.registrationFee.toLocaleString("fr-FR")} FCFA
+                </span>
+              </li>
+            )}
+
+          </div>
           <p className="text-sm text-muted-foreground">Tarif de la formation</p>
           <p className="mt-1 font-display text-3xl font-bold text-primary">
             {f.price.toLocaleString("fr-FR")} FCFA
