@@ -21,9 +21,7 @@ export function FormationDetailHeader({ formation: f }: FormationDetailHeaderPro
   return (
     <section
       className="relative border-b border-border overflow-hidden py-8 transition-colors"
-      style={{
-        background: `linear-gradient(180deg, ${mainColor}14 0%, ${mainColor}02 100%)`,
-      }}
+      style={{ background: `linear-gradient(180deg, ${mainColor}14 0%, ${mainColor}02 100%)` }}
     >
       <div
         className="pointer-events-none absolute -top-24 -right-24 h-96 w-96 rounded-full blur-3xl opacity-20"
