@@ -82,13 +82,6 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
 
           </div>
 
-
-
-          <p className="text-sm text-muted-foreground">Tarif de la formation</p>
-          <p className="mt-1 font-display text-3xl font-bold text-primary">
-            {f.price.toLocaleString("fr-FR")} FCFA
-          </p>
-
           <div className="my-5 h-px bg-border" />
 
           <ul className="space-y-2 text-sm mb-6">
