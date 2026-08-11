@@ -71,8 +71,16 @@ export function FormationsPreview() {
                       </span>
                     </div>
 
-                    <h3 className="mt-4 font-display text-xl font-semibold">{f.title}</h3>
-                    <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{f.short}</p>
+                    <div className="mt-4 flex gap-3 items-start">
+                      <div
+                        className="w-1 h-8 rounded-full shrink-0 mt-1"
+                        style={{ backgroundColor: color }}
+                      />
+                      <div>
+                        <h3 className="font-display text-xl font-semibold leading-snug">{f.title}</h3>
+                        <p className="mt-1 text-sm text-muted-foreground">{f.short}</p>
+                      </div>
+                    </div>
 
                     <div className="flex-1 min-h-4" />
 
