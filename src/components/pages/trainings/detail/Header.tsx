@@ -83,6 +83,13 @@ export function FormationDetailHeader({ formation: f }: FormationDetailHeaderPro
               {f.price.toLocaleString("fr-FR")} FCFA
             </span>
           </div>
+
+          {f.registrationDeadline && (
+            <p className="mt-4 flex items-center gap-1.5 text-xs text-muted-foreground font-medium">
+              <AlertCircle size={14} className="text-amber-500" />
+              Date limite de préinscription : <strong className="text-foreground">{formatDate(f.registrationDeadline)}</strong>
+            </p>
+          )}
         </Reveal>
       </div>
 
