@@ -53,7 +53,7 @@ export function FormationsPreview() {
                   {/* Bordure supérieure de couleur */}
                   <div
                     className="h-1.5 w-full shrink-0"
-                    style={{ backgroundColor: f.coverColor || "var(--primary)" }}
+                    style={{ backgroundColor: color }}
                   />
 
                   <div className="flex flex-1 flex-col p-6">
