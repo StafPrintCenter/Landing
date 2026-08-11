@@ -16,6 +16,8 @@ export function FormationDetailHeader({ formation: f }: FormationDetailHeaderPro
   const shareUrl = buildShareUrl(`/trainings/${f.id}`);
   const isFull = f.seatsRemaining !== null && f.seatsRemaining <= 0;
 
+  const mainColor = f.coverColor || "var(--primary)";
+
   return (
     <section className="relative border-b border-border bg-muted overflow-hidden py-8">
       <div className="container-x">
