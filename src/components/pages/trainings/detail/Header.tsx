@@ -39,7 +39,7 @@ export function FormationDetailHeader({ formation: f }: FormationDetailHeaderPro
         </div>
 
         <Reveal>
-          <div className="flex gap-4 sm:gap-6 items-stretch">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 sm:items-stretch">
             {/* Pilier de couleur à gauche */}
             <div
               className="h-1.5 w-12 sm:h-auto sm:w-2 rounded-full shrink-0"
