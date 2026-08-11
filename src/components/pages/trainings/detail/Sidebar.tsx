@@ -64,10 +64,13 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
       <aside className="space-y-6">
         <div className="sticky top-24 rounded-2xl border border-border bg-card p-6 shadow-sm">
           <div>
-            <p className="text-sm text-muted-foreground">Tarif de la formation</p>
-            <p className="mt-1 font-display text-3xl font-bold text-primary">
-              {f.price.toLocaleString("fr-FR")} FCFA
-            </p>
+            <div>
+              <p className="text-sm text-muted-foreground">Tarif de la formation</p>
+              <p className="mt-1 font-display text-3xl font-bold text-primary">
+                {f.price.toLocaleString("fr-FR")} FCFA
+              </p>
+            </div>
+
 
             {f.registrationFee !== undefined && f.registrationFee > 0 && (
               <div className="flex items-center text-xs">
