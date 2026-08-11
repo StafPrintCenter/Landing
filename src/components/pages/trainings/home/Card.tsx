@@ -21,15 +21,28 @@ export function FormationHomeCard({ formation: f, onRegister }: FormationCardPro
       transition={{ duration: 0.25 }}
       className="flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm hover:shadow-md transition-shadow"
     >
-      <div className="flex items-start justify-between gap-3">
-        <span className={[
-          "rounded-full border px-3 py-0.5 text-xs font-semibold uppercase tracking-wider",
-          getThemeColor(f.theme)
-        ].join(" ")}>
-          {f.theme}
-        </span>
-        <span className="font-display text-xl font-bold text-primary">{f.price.toLocaleString("fr-FR")} FCFA</span>
-      </div>
+      {/* Bordure supérieure aux couleurs de la formation */}
+      <div
+        className="h-2 w-full shrink-0"
+        style={{ backgroundColor: f.coverColor || "var(--primary)" }}
+      />
+
+      <div className="flex flex-1 flex-col p-6">
+        <div className="flex items-start justify-between gap-3">
+          <span
+            className={[
+              "rounded-full border px-3 py-0.5 text-xs font-semibold uppercase tracking-wider",
+              getThemeColor(f.theme),
+            ].join(" ")}
+          >
+            {f.theme}
+          </span>
+          <div className="text-right">
+            <span className="font-display text-xl font-bold text-primary">
+              {f.price.toLocaleString("fr-FR")} FCFA
+            </span>
+          </div>
+        </div>
 
       <h3 className="mt-4 font-display text-xl font-semibold tracking-tight text-foreground">{f.title}</h3>
       <p className="mt-2 text-sm text-muted-foreground leading-relaxed flex-1">{f.short}</p>
