@@ -39,22 +39,15 @@ export function FormationDetailHeader({ formation: f }: FormationDetailHeaderPro
         </div>
 
         <Reveal>
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 sm:items-stretch">
-            {/* Pilier de couleur à gauche */}
-            <div
-              className="h-1.5 w-12 sm:h-auto sm:w-2 rounded-full shrink-0"
-              style={{ backgroundColor: mainColor }}
-            />
-
-            <div className="flex-1">
-              <span
-                className={[
-                  "inline-flex rounded-full border px-3 py-1 text-xs font-semibold",
-                  getThemeColor(f.theme),
-                ].join(" ")}
-              >
-                {f.theme}
-              </span>
+          <div>
+            <span
+              className={[
+                "inline-flex rounded-full border px-3 py-1 text-xs font-semibold",
+                getThemeColor(f.theme),
+              ].join(" ")}
+            >
+              {f.theme}
+            </span>
 
               <h1 className="mt-3 font-display text-3xl sm:text-4xl font-bold md:text-5xl">
                 {f.title}
