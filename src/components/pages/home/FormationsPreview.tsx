@@ -45,6 +45,7 @@ export function FormationsPreview() {
           {formations.map((f, i) => {
             const isFull = f.seatsRemaining !== null && f.seatsRemaining <= 0;
             const isOpen = f.enrollmentStatus === "open";
+            const color = f.coverColor || "var(--primary)";
 
             return (
               <Reveal key={f.id} delay={i * 0.08}>
