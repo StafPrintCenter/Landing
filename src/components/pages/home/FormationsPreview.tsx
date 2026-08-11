@@ -134,7 +134,8 @@ export function FormationsPreview() {
         </div>
 
         <div className="mt-10 text-center">
-          <Link to="/trainings"
+          <Link
+            to="/trainings"
             search={{ theme: "Tout", sortBy: "default", sortDir: "asc", query: "", availableOnly: false, page: 1, perPage: 9 }}
             className="inline-flex items-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-secondary-foreground transition hover:bg-secondary/90"
           >
