@@ -9,6 +9,8 @@ export type FormationProgramStep = {
 
 export type FormationLevel = "Débutant" | "Intermédiaire" | "Avancé";
 
+export type EnrollmentStatus = "open" | "closed" | "coming_soon";
+
 export type APIFormation = {
   id: string;
   title: string;
