@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowLeft, Clock, BarChart3, Share2, Users } from "lucide-react";
+import { ArrowLeft, Clock, BarChart3, Share2, Users, Calendar, AlertCircle } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { getThemeColor, type APIFormation } from "@/data/trainings";
 import { ShareModal } from "@/components/modal";
