@@ -19,7 +19,7 @@ export function FormationHomeCard({ formation: f, onRegister }: FormationCardPro
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.97 }}
       transition={{ duration: 0.25 }}
-      className="flex h-full flex-col rounded-2xl border border-border bg-card p-6 shadow-sm hover:shadow-md transition-shadow"
+      className="flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm hover:shadow-md transition-shadow"
     >
       <div className="flex items-start justify-between gap-3">
         <span className={[
