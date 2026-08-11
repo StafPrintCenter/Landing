@@ -17,7 +17,13 @@ export function FormationDetailHeader({ formation: f }: FormationDetailHeaderPro
   const isFull = f.seatsRemaining !== null && f.seatsRemaining <= 0;
 
   return (
-    <section className="border-b border-border bg-muted">
+    <section className="relative border-b border-border bg-muted overflow-hidden">
+      {/* Accent de couleur sur la partie supérieure */}
+      <div
+        className="h-2 w-full"
+        style={{ backgroundColor: f.coverColor || "var(--primary)" }}
+      />
+
       <div className="container-x py-12 md:py-16">
         <div className="flex items-center justify-between">
           <Link
