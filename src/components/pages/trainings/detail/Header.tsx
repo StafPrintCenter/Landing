@@ -49,7 +49,7 @@ export function FormationDetailHeader({ formation: f }: FormationDetailHeaderPro
               {f.theme}
             </span>
 
-            {/* Titre avec la barre verticale de couleur juste à sa gauche */}
+            {/* Titre avec la barre verticale de couleur */}
             <div className="mt-3 flex items-stretch gap-3 sm:gap-4">
               <div
                 className="w-1.5 rounded-full shrink-0 my-1"
