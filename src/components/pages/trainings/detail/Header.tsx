@@ -72,7 +72,7 @@ export function FormationDetailHeader({ formation: f }: FormationDetailHeaderPro
                 )}
                 {f.seatsRemaining !== null && (
                   <span
-                    className={`inline-flex items-center gap-2 rounded-full px-4 py-2 border ${isFull
+                    className={`inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 sm:px-4 sm:py-2 border ${isFull
                       ? "bg-destructive/10 border-destructive/20 text-destructive font-semibold"
                       : "bg-card border-border text-muted-foreground"
                       }`}
