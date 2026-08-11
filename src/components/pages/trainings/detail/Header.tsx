@@ -62,7 +62,7 @@ export function FormationDetailHeader({ formation: f }: FormationDetailHeaderPro
                 <span className="inline-flex items-center gap-2 rounded-full bg-card px-3.5 py-1.5 sm:px-4 sm:py-2 border border-border">
                   <Clock size={14} />{f.duration}
                 </span>
-                <span className="inline-flex items-center gap-2 rounded-full bg-card px-4 py-2 border border-border">
+                <span className="inline-flex items-center gap-2 rounded-full bg-card px-3.5 py-1.5 sm:px-4 sm:py-2 border border-border">
                   <BarChart3 size={14} />Niveau {f.level}
                 </span>
                 {f.startDate && f.endDate && (
