@@ -113,9 +113,12 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
               </li>
             )}
             {seatsFormatted && (
-              <li className="flex justify-between items-center">
-                <span className="text-muted-foreground">Places restantes</span>
-                <span className={`font-medium ${isFull ? "text-destructive" : "text-foreground"}`}>
+              <li className="flex justify-between">
+                <span className="text-muted-foreground">Places disponibles</span>
+                <span
+                  className={`font-medium ${isFull ? "text-destructive" : "text-foreground"
+                    }`}
+                >
                   {seatsFormatted}
                 </span>
               </li>
