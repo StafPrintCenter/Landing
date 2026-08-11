@@ -14,8 +14,8 @@ interface FormationDetailSidebarProps {
 export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isFull = f.seatsRemaining !== null && f.seatsRemaining <= 0;
+  const isOpen = f.enrollmentStatus === "open";
 
-  // Calcul du libellé pour les places (ex: "5 / 20 places" ou "5 places")
   const seatsFormatted = (() => {
     if (f.seatsRemaining === null) return null;
     if (isFull) return "Session complète";
