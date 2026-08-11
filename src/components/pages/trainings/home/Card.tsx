@@ -12,15 +12,6 @@ export function FormationHomeCard({ formation: f, onRegister }: FormationCardPro
   const isFull = f.seatsRemaining !== null && f.seatsRemaining <= 0;
   const isOpen = f.enrollmentStatus === "open";
 
-  const formatDate = (dateStr?: string | null) => {
-    if (!dateStr) return "";
-    return new Date(dateStr).toLocaleDateString("fr-FR", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-    });
-  };
-
   return (
     <motion.div
       layout
