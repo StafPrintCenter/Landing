@@ -106,7 +106,7 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
             )}
             {f.registrationDeadline && (
               <li className="flex justify-between">
-                <span className="text-muted-foreground">Limite inscription</span>
+                <span className="text-muted-foreground">Délais d'inscription</span>
                 <span className="font-medium text-right text-xs">
                   {formatDate(f.registrationDeadline)}
                 </span>
