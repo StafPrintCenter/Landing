@@ -16,7 +16,6 @@ export function FormationDetailHeader({ formation: f }: FormationDetailHeaderPro
   const shareUrl = buildShareUrl(`/trainings/${f.id}`);
   const isFull = f.seatsRemaining !== null && f.seatsRemaining <= 0;
 
-
   return (
     <section className="relative border-b border-border bg-muted overflow-hidden">
       {/* Accent de couleur sur la partie supérieure */}
