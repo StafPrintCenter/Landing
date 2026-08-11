@@ -73,7 +73,7 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
 
             <div>
               {f.registrationFee !== undefined && f.registrationFee > 0 && (
-                <div className="flex items-center text-xs">
+                <div className="flex items-center justify-between gap-3 text-xs">
                   <span className="text-muted-foreground flex items-center gap-1">
                     <Ticket size={13} /> Frais d'inscription
                   </span>
