@@ -96,6 +96,22 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
               <span className="text-muted-foreground">Niveau</span>
               <span className="font-medium">{f.level}</span>
             </li>
+            {f.startDate && f.endDate && (
+              <li className="flex justify-between">
+                <span className="text-muted-foreground">Périodes</span>
+                <span className="font-medium text-right text-xs">
+                  {formatDate(f.startDate)} - {formatDate(f.endDate)}
+                </span>
+              </li>
+            )}
+            {f.registrationDeadline && (
+              <li className="flex justify-between">
+                <span className="text-muted-foreground">Limite inscription</span>
+                <span className="font-medium text-right text-xs">
+                  {formatDate(f.registrationDeadline)}
+                </span>
+              </li>
+            )}
             {seatsFormatted && (
               <li className="flex justify-between items-center">
                 <span className="text-muted-foreground">Places restantes</span>
