@@ -39,16 +39,24 @@ export function FormationDetailHeader({ formation: f }: FormationDetailHeaderPro
         </div>
 
         <Reveal>
-          <span
-            className={[
-              "mt-6 inline-flex rounded-full border px-3 py-1 text-xs font-semibold",
-              getThemeColor(f.theme),
-            ].join(" ")}
-          >
-            {f.theme}
-          </span>
-          <h1 className="mt-3 font-display text-4xl font-bold md:text-5xl">{f.title}</h1>
-          <p className="mt-4 max-w-2xl text-lg text-muted-foreground">{f.short}</p>
+          <div className="flex gap-6 items-stretch">
+            {/* Pilier de couleur à gauche */}
+            <div
+              className="w-2 rounded-full shrink-0 hidden sm:block"
+              style={{ backgroundColor: mainColor }}
+            />
+
+            <div className="flex-1">
+              <span
+                className={[
+                  "inline-flex rounded-full border px-3 py-1 text-xs font-semibold",
+                  getThemeColor(f.theme),
+                ].join(" ")}
+              >
+                {f.theme}
+              </span>
+              <h1 className="mt-3 font-display text-4xl font-bold md:text-5xl">{f.title}</h1>
+              <p className="mt-4 max-w-2xl text-lg text-muted-foreground">{f.short}</p>
 
           <div className="mt-6 flex flex-wrap gap-3 text-sm">
             <span className="inline-flex items-center gap-2 rounded-full bg-card px-4 py-2 border border-border">
