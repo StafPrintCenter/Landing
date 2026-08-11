@@ -129,7 +129,7 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
             </li>
             <li className="flex justify-between">
               <span className="text-muted-foreground">Lieu</span>
-              <span className="font-medium">Porto-Novo</span>
+              <span className="font-medium">{f.location || "Porto-Novo"}</span>
             </li>
           </ul>
 
