@@ -61,7 +61,6 @@ export function getThemeColor(theme: string): string {
   return DISCIPLINE_COLORS[theme as FormationTheme] || "border-border bg-muted text-muted-foreground";
 }
 
-
 /**
  * Inscription.
  */
