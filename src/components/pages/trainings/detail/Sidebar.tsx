@@ -137,8 +137,8 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
             {/* Action 1: S'inscrire (Ouvre la modal) */}
             <button
               onClick={() => setIsModalOpen(true)}
-              disabled={isFull}
-              className={`inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition ${isFull
+              disabled={isFull || !isOpen}
+              className={`inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition ${isFull || !isOpen
                 ? "bg-muted text-muted-foreground cursor-not-allowed"
                 : "bg-primary text-primary-foreground hover:opacity-90 cursor-pointer"
                 }`}
