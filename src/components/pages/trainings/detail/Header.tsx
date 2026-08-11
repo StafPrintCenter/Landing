@@ -16,14 +16,6 @@ export function FormationDetailHeader({ formation: f }: FormationDetailHeaderPro
   const shareUrl = buildShareUrl(`/trainings/${f.id}`);
   const isFull = f.seatsRemaining !== null && f.seatsRemaining <= 0;
 
-  const formatDsate = (dateStr?: string | null) => {
-    if (!dateStr) return "";
-    return new Date(dateStr).toLocaleDateString("fr-FR", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-    });
-  };
 
   return (
     <section className="relative border-b border-border bg-muted overflow-hidden">
