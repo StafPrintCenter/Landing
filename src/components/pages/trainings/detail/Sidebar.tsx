@@ -162,7 +162,7 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
               href={richEmailLink}
               className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-border bg-card px-5 py-3 text-sm font-semibold hover:bg-muted transition-colors"
             >
-              <Mail size={14} />Nous écrire par Email
+              <Mail size={14} /> Nous écrire par Email
             </a>
           </div>
         </div>
