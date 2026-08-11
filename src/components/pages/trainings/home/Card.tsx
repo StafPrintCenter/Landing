@@ -47,23 +47,33 @@ export function FormationHomeCard({ formation: f, onRegister }: FormationCardPro
         <h3 className="mt-4 font-display text-xl font-semibold tracking-tight text-foreground">{f.title}</h3>
         <p className="mt-2 text-sm text-muted-foreground leading-relaxed flex-1">{f.short}</p>
 
-      <div className="mt-4 flex flex-wrap gap-2 text-xs font-medium text-muted-foreground">
-        <span className="inline-flex items-center gap-1 bg-muted px-2.5 py-1 rounded-md">
-          <Clock size={13} /> {f.duration}
-        </span>
-        <span className="inline-flex items-center gap-1 bg-muted px-2.5 py-1 rounded-md">
-          <BarChart3 size={13} /> {f.level}
-        </span>
-        {f.seatsRemaining !== null && (
-          <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md ${isFull
-            ? "bg-destructive/10 text-destructive font-semibold"
-            : "bg-muted"
-            }`}>
-            <Users size={13} />
-            {isFull ? "Complet" : `${f.seatsRemaining} place${f.seatsRemaining > 1 ? "s" : ""} restante${f.seatsRemaining > 1 ? "s" : ""}`}
+        {/* Badges de métadonnées */}
+        <div className="mt-4 flex flex-wrap gap-2 text-xs font-medium text-muted-foreground">
+          <span className="inline-flex items-center gap-1 bg-muted px-2.5 py-1 rounded-md">
+            <Clock size={13} /> {f.duration}
           </span>
-        )}
-      </div>
+          <span className="inline-flex items-center gap-1 bg-muted px-2.5 py-1 rounded-md">
+            <BarChart3 size={13} /> {f.level}
+          </span>
+          {f.location && (
+            <span className="inline-flex items-center gap-1 bg-muted px-2.5 py-1 rounded-md">
+              <MapPin size={13} /> {f.location}
+            </span>
+          )}
+          {f.seatsRemaining !== null && (
+            <span
+              className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md ${isFull
+                ? "bg-destructive/10 text-destructive font-semibold"
+                : "bg-muted"
+                }`}
+            >
+              <Users size={13} />
+              {isFull
+                ? "Complet"
+                : `${f.seatsRemaining} place${f.seatsRemaining > 1 ? "s" : ""} restante${f.seatsRemaining > 1 ? "s" : ""}`}
+            </span>
+          )}
+        </div>
 
       <ul className="mt-5 space-y-2 text-sm text-foreground/80">
         {f.objectives.slice(0, 4).map((o) => (
