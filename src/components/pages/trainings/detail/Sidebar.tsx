@@ -77,7 +77,7 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
                 <span className="font-semibold text-foreground">
                   {f.registrationFee.toLocaleString("fr-FR")} FCFA
                 </span>
-              </li>
+              </div>
             )}
           </div>
 
