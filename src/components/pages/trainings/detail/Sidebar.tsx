@@ -124,8 +124,8 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
               </li>
             )}
             <li className="flex justify-between">
-              <span className="text-muted-foreground">Format</span>
-              <span className="font-medium">Présentiel</span>
+              <span className="text-muted-foreground">Inscrits actuels</span>
+              <span className="font-medium">{f.currentStudents ?? 0}</span>
             </li>
             <li className="flex justify-between">
               <span className="text-muted-foreground">Lieu</span>
