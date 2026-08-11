@@ -64,38 +64,38 @@ export function FormationDetailHeader({ formation: f }: FormationDetailHeaderPro
                 {f.short}
               </p>
 
-              <div className="mt-6 flex flex-wrap gap-2.5 sm:gap-3 text-sm">
+            <div className="mt-6 flex flex-wrap gap-2.5 sm:gap-3 text-sm">
+              <span className="inline-flex items-center gap-2 rounded-full bg-card px-3.5 py-1.5 sm:px-4 sm:py-2 border border-border">
+                <Clock size={14} />{f.duration}
+              </span>
+              <span className="inline-flex items-center gap-2 rounded-full bg-card px-3.5 py-1.5 sm:px-4 sm:py-2 border border-border">
+                <BarChart3 size={14} />Niveau {f.level}
+              </span>
+              {f.startDate && f.endDate && (
                 <span className="inline-flex items-center gap-2 rounded-full bg-card px-3.5 py-1.5 sm:px-4 sm:py-2 border border-border">
-                  <Clock size={14} />{f.duration}
+                  <Calendar size={14} />Du {formatDate(f.startDate)} au {formatDate(f.endDate)}
                 </span>
-                <span className="inline-flex items-center gap-2 rounded-full bg-card px-3.5 py-1.5 sm:px-4 sm:py-2 border border-border">
-                  <BarChart3 size={14} />Niveau {f.level}
-                </span>
-                {f.startDate && f.endDate && (
-                  <span className="inline-flex items-center gap-2 rounded-full bg-card px-3.5 py-1.5 sm:px-4 sm:py-2 border border-border">
-                    <Calendar size={14} />Du {formatDate(f.startDate)} au {formatDate(f.endDate)}
-                  </span>
-                )}
-                {f.seatsRemaining !== null && (
-                  <span
-                    className={`inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 sm:px-4 sm:py-2 border ${isFull
-                      ? "bg-destructive/10 border-destructive/20 text-destructive font-semibold"
-                      : "bg-card border-border text-muted-foreground"
-                      }`}
-                  >
-                    <Users size={14} />
-                    {isFull
-                      ? "Session complète"
-                      : `${f.seatsRemaining} place${f.seatsRemaining > 1 ? "s" : ""} disponible${f.seatsRemaining > 1 ? "s" : ""}`}
-                  </span>
-                )}
+              )}
+              {f.seatsRemaining !== null && (
                 <span
-                  className="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 sm:px-4 sm:py-2 font-semibold text-white shadow-sm"
-                  style={{ backgroundColor: mainColor }}
+                  className={`inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 sm:px-4 sm:py-2 border ${isFull
+                    ? "bg-destructive/10 border-destructive/20 text-destructive font-semibold"
+                    : "bg-card border-border text-muted-foreground"
+                    }`}
                 >
-                  {f.price.toLocaleString("fr-FR")} FCFA
+                  <Users size={14} />
+                  {isFull
+                    ? "Session complète"
+                    : `${f.seatsRemaining} place${f.seatsRemaining > 1 ? "s" : ""} disponible${f.seatsRemaining > 1 ? "s" : ""}`}
                 </span>
-              </div>
+              )}
+              <span
+                className="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 sm:px-4 sm:py-2 font-semibold text-white shadow-sm"
+                style={{ backgroundColor: mainColor }}
+              >
+                {f.price.toLocaleString("fr-FR")} FCFA
+              </span>
+            </div>
 
             {f.registrationDeadline && (
               <p className="mt-4 flex items-center gap-1.5 text-xs text-muted-foreground font-medium">
