@@ -75,14 +75,25 @@ export function FormationHomeCard({ formation: f, onRegister }: FormationCardPro
           )}
         </div>
 
-      <ul className="mt-5 space-y-2 text-sm text-foreground/80">
-        {f.objectives.slice(0, 4).map((o) => (
-          <li key={o} className="flex gap-2 items-start">
-            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/70" />
-            <span className="leading-snug">{o}</span>
-          </li>
-        ))}
-      </ul>
+        {/* Dates de début et fin de formation */}
+        {f.startDate && f.endDate && (
+          <div className="mt-3 flex items-center gap-1.5 text-xs text-muted-foreground font-medium">
+            <Calendar size={13} className="text-primary shrink-0" />
+            <span>
+              Du {formatDate(f.startDate)} au {formatDate(f.endDate)}
+            </span>
+          </div>
+        )}
+
+        {/* Objectifs clés */}
+        <ul className="mt-5 space-y-2 text-sm text-foreground/80">
+          {f.objectives.slice(0, 4).map((o) => (
+            <li key={o} className="flex gap-2 items-start">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/70" />
+              <span className="leading-snug">{o}</span>
+            </li>
+          ))}
+        </ul>
 
       <div className="mt-6 flex flex-wrap gap-2 pt-4 border-t border-border/40">
         {/* Bouton Voir détails */}
