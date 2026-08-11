@@ -13,12 +13,16 @@ export function FormationsPreview() {
   // États pour gérer l'ouverture de la modal
   const [selectedFormation, setSelectedFormation] = useState<APIFormation | null>(null);
 
-  // 1. Gestion de l'état de chargement
-  if (isLoading) {
-    return <FormationsSkeleton />;
-  }
+  const formatDate = (dateStr?: string | null) => {
+    if (!dateStr) return "";
+    return new Date(dateStr).toLocaleDateString("fr-FR", {
+      day: "numeric",
+      month: "short",
+    });
+  };
 
-  // 2. Gestion de l'état d'erreur
+  if (isLoading) return <FormationsSkeleton />;
+
   if (isError) {
     return (
       <section className="bg-muted/50 border-y border-border/50">
