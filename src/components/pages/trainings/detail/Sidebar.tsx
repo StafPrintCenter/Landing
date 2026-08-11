@@ -143,7 +143,8 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
                 : "bg-primary text-primary-foreground hover:opacity-90 cursor-pointer"
                 }`}
             >
-              {isFull ? "Session complète" : "S'inscrire maintenant"} <ArrowRight size={14} />
+              {isFull ? "Session complète" : !isOpen ? "Inscriptions closes" : "S'inscrire maintenant"}{" "}
+              <ArrowRight size={14} />
             </button>
 
             {/* Action 2: Plus d'infos WhatsApp */}
