@@ -51,7 +51,7 @@ export const Route = createFileRoute("/services/")({
 function ServicesPage() {
   const { category, sortBy, sortDir, query, page, perPage } = useSearch({ from: "/services/" });
   const navigate = useNavigate({ from: "/services/" });
-  const { services: processedList, meta, isLoading: storeLoading } = useServicesStore({ category, sortBy, sortDir, query, page, perPage, });
+  const { services: processedList, meta, isLoading: storeLoading } = useServicesStore({ category, sortBy, sortDir, query, page, perPage });
   const { services: allServices } = useServicesStore({ perPage: 100 });
 
   const [isLoading, setIsLoading] = useState(false);
