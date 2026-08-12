@@ -63,8 +63,13 @@ export function ServiceHomeFAQ() {
                     onClick={() => setOpen(open === i ? null : i)}
                     className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-medium text-foreground/90 hover:text-primary transition-colors cursor-pointer"
                   >
-                    <span className="text-sm sm:text-base">
-                      <span className="mr-2 text-xs font-semibold px-2 py-0.5 rounded bg-muted text-muted-foreground border border-border/50">
+                    <span className="flex flex-col gap-1.5">
+                      <span
+                        className={[
+                          "w-fit rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider",
+                          getDisciplineColorClass(item.category),
+                        ].join(" ")}
+                      >
                         {item.category}
                       </span>
                       {item.question}
