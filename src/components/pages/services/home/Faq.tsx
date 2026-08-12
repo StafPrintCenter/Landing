@@ -113,7 +113,7 @@ export function ServiceHomeFAQ() {
             )}
           </div>
 
-          {/* CTA sur-mesure */}
+          {/* CTA */}
           <div className="lg:col-span-5 lg:sticky lg:top-24">
             <ServiceHomeCta />
           </div>
