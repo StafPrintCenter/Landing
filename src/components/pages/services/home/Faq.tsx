@@ -54,8 +54,11 @@ export function ServiceHomeFAQ() {
             ) : randomizedFaqs.length === 0 ? (
               <p className="text-sm text-muted-foreground">Aucune question disponible pour le moment.</p>
             ) : (
-              randomizedFaqs.map((item, i) => (
-                <div key={item.id} className="overflow-hidden rounded-xl border border-border bg-card transition-colors duration-200">
+              uniqueCategoryFaqs.map((item, i) => (
+                <div
+                  key={item.id}
+                  className="overflow-hidden rounded-xl border border-border bg-card transition-colors duration-200"
+                >
                   <button
                     onClick={() => setOpen(open === i ? null : i)}
                     className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-medium text-foreground/90 hover:text-primary transition-colors cursor-pointer"
