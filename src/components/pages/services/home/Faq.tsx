@@ -74,7 +74,11 @@ export function ServiceHomeFAQ() {
                       </span>
                       {item.question}
                     </span>
-                    {open === i ? <Minus size={18} className="text-primary shrink-0" /> : <Plus size={18} className="text-primary shrink-0" />}
+                    {open === i ? (
+                      <Minus size={18} className="text-primary shrink-0 mt-1" />
+                    ) : (
+                      <Plus size={18} className="text-primary shrink-0 mt-1" />
+                    )}
                   </button>
                   <AnimatePresence initial={false}>
                     {open === i && (
