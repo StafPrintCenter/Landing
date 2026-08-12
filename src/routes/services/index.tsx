@@ -134,7 +134,8 @@ function ServicesPage() {
         )}
       </section>
 
-      <ServiceHomeCta />
+      {/* Section FAQ & CTA latéral */}
+      <ServiceHomeFAQ />
 
       {/* Tiroir mobile */}
       <ServiceHomeMobileSheet
