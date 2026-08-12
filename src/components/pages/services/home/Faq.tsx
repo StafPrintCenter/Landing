@@ -10,7 +10,7 @@ import type { APIFaq } from "@/data/faqs";
 export function ServiceHomeFAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
-  // Récupération de l'ensemble des FAQs (toutes catégories confondues)
+  // Récupération de l'ensemble des FAQs
   const { faqs, isLoading } = useFaqsStore({ perPage: 50 });
 
   // Mélange aléatoire des données une fois qu'elles sont chargées
