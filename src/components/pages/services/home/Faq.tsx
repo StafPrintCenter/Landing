@@ -11,10 +11,8 @@ export function ServiceHomeFAQ() {
   const [open, setOpen] = useState<number | null>(0);
   const [randomFaqs, setRandomFaqs] = useState<APIFaq[]>([]);
 
-  // Récupération de l'ensemble des FAQs
   const { faqs, isLoading } = useFaqsStore({ perPage: 50 });
 
-  // Exécuté uniquement sur le navigateur du client après le chargement des faqs
   useEffect(() => {
     if (!faqs || faqs.length === 0) return;
 
@@ -32,13 +30,13 @@ export function ServiceHomeFAQ() {
       return acc;
     }, {});
 
-    // 2. Sélection d'une FAQ aléatoire par catégorie
+    // 3. Extraction d'une FAQ aléatoire par catégorie
     const selected = Object.values(grouped).map((items) => {
       const randomIndex = Math.floor(Math.random() * items.length);
       return items[randomIndex];
     });
 
-    // 3. Mélange facultatif de l'ordre d'affichage des catégories
+    // 4. Mélange de l'ordre d'affichage
     for (let i = selected.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [selected[i], selected[j]] = [selected[j], selected[i]];
