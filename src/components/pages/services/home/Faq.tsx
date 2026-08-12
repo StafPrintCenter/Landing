@@ -5,6 +5,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { useFaqsStore } from "@/stores/useFaqsStore";
 import { getDisciplineColorClass } from "@/data/categories";
 import { ServiceHomeCta } from "./Cta";
+import type { APIFaq } from "@/data/faqs";
 
 export function ServiceHomeFAQ() {
   const [open, setOpen] = useState<number | null>(0);
