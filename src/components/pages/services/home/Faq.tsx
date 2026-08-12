@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { useFaqsStore } from "@/stores/useFaqsStore";
+import { getDisciplineColorClass } from "@/data/categories";
 import { ServiceHomeCta } from "./Cta";
 
 export function ServiceHomeFAQ() {
