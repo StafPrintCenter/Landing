@@ -58,7 +58,7 @@ export function ServiceHomeFAQ() {
           {/* Liste des FAQ : 1 par catégorie */}
           <div className="space-y-3 lg:col-span-7">
             {isDataLoading ? (
-              Array.from({ length: 5 }).map((_, idx) => (
+              Array.from({ length: 4 }).map((_, idx) => (
                 <div
                   key={`faq-skeleton-${idx}`}
                   className="h-16 animate-pulse rounded-xl border border-border bg-card"
