@@ -9,7 +9,7 @@ import { SERVICE_CATEGORIES } from "@/data/services";
 import { Pagination } from "@/components/site/Pagination";
 import {
   ServiceHomeHeader,
-  ServiceHomeCta,
+  ServiceHomeFAQ,
   ServiceHomeSearchBar,
   ServiceHomeFilters,
   ServiceHomeMobileTrigger,
