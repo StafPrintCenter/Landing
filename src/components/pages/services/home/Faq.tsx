@@ -18,8 +18,13 @@ export function ServiceHomeFAQ() {
   useEffect(() => {
     if (!faqs || faqs.length === 0) return;
 
-    // 1. Groupement par catégorie
-    const grouped = faqs.reduce<Record<string, APIFaq[]>>((acc, faq) => {
+    // 1. Exclusion stricte de la catégorie "Formation" / "Formations"
+    const serviceFaqs = faqs.filter(
+      (faq) => faq.category.toLowerCase() !== "formation" && faq.category.toLowerCase() !== "formations"
+    );
+
+    // 2. Regroupement par catégorie
+    const grouped = serviceFaqs.reduce<Record<string, APIFaq[]>>((acc, faq) => {
       if (!acc[faq.category]) {
         acc[faq.category] = [];
       }
