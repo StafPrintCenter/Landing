@@ -9,14 +9,16 @@ import type { APIFaq } from "@/data/faqs";
 
 export function ServiceHomeFAQ() {
   const [open, setOpen] = useState<number | null>(0);
+  const [randomFaqs, setRandomFaqs] = useState<APIFaq[]>([]);
 
   // Récupération de l'ensemble des FAQs
   const { faqs, isLoading } = useFaqsStore({ perPage: 50 });
 
-  // Extrait exactement 1 FAQ aléatoire par catégorie
-  const uniqueCategoryFaqs = useMemo(() => {
-    if (!faqs || faqs.length === 0) return [];
+  // Exécuté uniquement sur le navigateur du client après le chargement des faqs
+  useEffect(() => {
+    if (!faqs || faqs.length === 0) return;
 
+    // 1. Groupement par catégorie
     const grouped = faqs.reduce<Record<string, APIFaq[]>>((acc, faq) => {
       if (!acc[faq.category]) {
         acc[faq.category] = [];
@@ -25,11 +27,22 @@ export function ServiceHomeFAQ() {
       return acc;
     }, {});
 
-    return Object.values(grouped).map((items) => {
+    // 2. Sélection d'une FAQ aléatoire par catégorie
+    const selected = Object.values(grouped).map((items) => {
       const randomIndex = Math.floor(Math.random() * items.length);
       return items[randomIndex];
     });
+
+    // 3. Mélange facultatif de l'ordre d'affichage des catégories
+    for (let i = selected.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [selected[i], selected[j]] = [selected[j], selected[i]];
+    }
+
+    setRandomFaqs(selected);
   }, [faqs]);
+
+  const isDataLoading = isLoading || (faqs.length > 0 && randomFaqs.length === 0);
 
   return (
     <section className="bg-muted/40 border-t border-border/40">
@@ -44,17 +57,17 @@ export function ServiceHomeFAQ() {
         <div className="mt-8 grid gap-8 lg:grid-cols-12 items-start">
           {/* Liste des FAQ : 1 par catégorie */}
           <div className="space-y-3 lg:col-span-7">
-            {isLoading ? (
+            {isDataLoading ? (
               Array.from({ length: 5 }).map((_, idx) => (
                 <div
                   key={`faq-skeleton-${idx}`}
                   className="h-16 animate-pulse rounded-xl border border-border bg-card"
                 />
               ))
-            ) : uniqueCategoryFaqs.length === 0 ? (
+            ) : randomFaqs.length === 0 ? (
               <p className="text-sm text-muted-foreground">Aucune question disponible pour le moment.</p>
             ) : (
-              uniqueCategoryFaqs.map((item, i) => (
+              randomFaqs.map((item, i) => (
                 <div
                   key={item.id}
                   className="overflow-hidden rounded-xl border border-border bg-card transition-colors duration-200"
