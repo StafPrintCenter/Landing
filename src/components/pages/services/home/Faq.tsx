@@ -13,8 +13,8 @@ export function ServiceHomeFAQ() {
   // Récupération de l'ensemble des FAQs
   const { faqs, isLoading } = useFaqsStore({ perPage: 50 });
 
-  // Mélange aléatoire des données une fois qu'elles sont chargées
-  const randomizedFaqs = useMemo(() => {
+  // Extrait exactement 1 FAQ aléatoire par catégorie
+  const uniqueCategoryFaqs = useMemo(() => {
     if (!faqs || faqs.length === 0) return [];
 
     const grouped = faqs.reduce<Record<string, APIFaq[]>>((acc, faq) => {
@@ -42,16 +42,16 @@ export function ServiceHomeFAQ() {
         </Reveal>
 
         <div className="mt-8 grid gap-8 lg:grid-cols-12 items-start">
-          {/* Liste des FAQ */}
+          {/* Liste des FAQ : 1 par catégorie */}
           <div className="space-y-3 lg:col-span-7">
             {isLoading ? (
               Array.from({ length: 5 }).map((_, idx) => (
                 <div
                   key={`faq-skeleton-${idx}`}
-                  className="h-13 animate-pulse rounded-xl border border-border bg-card"
+                  className="h-16 animate-pulse rounded-xl border border-border bg-card"
                 />
               ))
-            ) : randomizedFaqs.length === 0 ? (
+            ) : uniqueCategoryFaqs.length === 0 ? (
               <p className="text-sm text-muted-foreground">Aucune question disponible pour le moment.</p>
             ) : (
               uniqueCategoryFaqs.map((item, i) => (
@@ -61,7 +61,7 @@ export function ServiceHomeFAQ() {
                 >
                   <button
                     onClick={() => setOpen(open === i ? null : i)}
-                    className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-medium text-foreground/90 hover:text-primary transition-colors cursor-pointer"
+                    className="flex w-full items-start justify-between gap-4 px-5 py-4 text-left font-medium text-foreground/90 hover:text-primary transition-colors cursor-pointer"
                   >
                     <span className="flex flex-col gap-1.5">
                       <span
@@ -72,7 +72,7 @@ export function ServiceHomeFAQ() {
                       >
                         {item.category}
                       </span>
-                      {item.question}
+                      <span className="text-sm sm:text-base">{item.question}</span>
                     </span>
                     {open === i ? (
                       <Minus size={18} className="text-primary shrink-0 mt-1" />
