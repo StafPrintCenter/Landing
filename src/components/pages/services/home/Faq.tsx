@@ -17,13 +17,18 @@ export function ServiceHomeFAQ() {
   const randomizedFaqs = useMemo(() => {
     if (!faqs || faqs.length === 0) return [];
 
-    // Algorithme de mélange (Fisher-Yates) sur une copie du tableau
-    const shuffled = [...faqs];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
+    const grouped = faqs.reduce<Record<string, APIFaq[]>>((acc, faq) => {
+      if (!acc[faq.category]) {
+        acc[faq.category] = [];
+      }
+      acc[faq.category].push(faq);
+      return acc;
+    }, {});
+
+    return Object.values(grouped).map((items) => {
+      const randomIndex = Math.floor(Math.random() * items.length);
+      return items[randomIndex];
+    });
   }, [faqs]);
 
   return (
