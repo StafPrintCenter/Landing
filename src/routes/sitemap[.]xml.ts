@@ -33,7 +33,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/legal/privacy", changefreq: "yearly", priority: "0.2" },
         ];
 
-        // Récupération dynamique depuis l'API - perPage élevé pour tout couvrir
+        // Récupération dynamique depuis l'API
         const [servicesRes, formationsRes, articlesRes, jobsRes] = await Promise.all([
           fetchPublicServices({ perPage: 500 }),
           fetchPublicFormations({ perPage: 500 }),
