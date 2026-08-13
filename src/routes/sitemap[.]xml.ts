@@ -5,9 +5,11 @@ import { fetchPublicFormations } from "@/stores/useTrainingsStore";
 import { fetchPublicArticles } from "@/stores/useArticlesStore";
 import { fetchPublicJobOffers } from "@/stores/useJobsStore";
 
+// 1. Sécurisation de l'URL de base
 const RAW_URL = import.meta.env.VITE_FRONTEND_URL || "https://stafprint.com";
 const BASE_URL = RAW_URL.replace(/\/$/, "");
 
+// Date du jour pour les entités dépourvues de date ISO
 const TODAY = new Date().toISOString().split("T")[0];
 
 interface SitemapEntry {
@@ -17,10 +19,12 @@ interface SitemapEntry {
   priority?: string;
 }
 
-const formatDate = (dateStr?: string) => {
+// Fonction utilitaire pour formater une date ISO au format YYYY-MM-DD
+const formatDate = (dateStr?: string | null): string => {
   if (!dateStr) return TODAY;
   try {
-    return new Date(dateStr).toISOString().split("T")[0];
+    const parsed = new Date(dateStr);
+    return isNaN(parsed.getTime()) ? TODAY : parsed.toISOString().split("T")[0];
   } catch {
     return TODAY;
   }
@@ -30,7 +34,7 @@ export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
-        // 2. Pages statiques avec <lastmod>
+        // 2. Pages statiques de base
         const entries: SitemapEntry[] = [
           { path: "/", lastmod: TODAY, changefreq: "weekly", priority: "1.0" },
           { path: "/services", lastmod: TODAY, changefreq: "weekly", priority: "0.8" },
@@ -46,7 +50,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/legal/privacy", lastmod: TODAY, changefreq: "yearly", priority: "0.2" },
         ];
 
-        // Récupération dynamique depuis l'API
+        // 3. Appel aux APIs publiques
         const [servicesRes, formationsRes, articlesRes, jobsRes] = await Promise.all([
           fetchPublicServices({ perPage: 500 }),
           fetchPublicFormations({ perPage: 500 }),
@@ -54,48 +58,48 @@ export const Route = createFileRoute("/sitemap.xml")({
           fetchPublicJobOffers({ perPage: 500 }),
         ]);
 
-        // 3. Traitement des entités dynamiques + dates réelles de modification
+        // Services (APIService : slug disponible)
         for (const s of servicesRes.data) {
           entries.push({
             path: `/services/${s.slug}`,
-            lastmod: formatDate(s.updatedAt || s.createdAt),
+            lastmod: TODAY,
             changefreq: "monthly",
             priority: "0.7",
           });
         }
 
+        // Formations (APIFormation : utilise id)
         for (const f of formationsRes.data) {
-          // Utilise le slug SEO si disponible, sinon fallback sur l'id
-          const formationIdentifier = f.slug || f.id;
           entries.push({
-            path: `/trainings/${formationIdentifier}`,
-            lastmod: formatDate(f.updatedAt || f.createdAt),
+            path: `/trainings/${f.id}`,
+            lastmod: formatDate(f.startDate),
             changefreq: "monthly",
             priority: "0.7",
           });
         }
 
+        // Articles (APIArticle : utilise slug et champ date)
         for (const a of articlesRes.data) {
           entries.push({
             path: `/articles/${a.slug}`,
-            lastmod: formatDate(a.updatedAt || a.publishedAt || a.createdAt),
+            lastmod: formatDate(a.date),
             changefreq: "monthly",
             priority: "0.6",
           });
         }
 
+        // Offres d'emploi (APIJobOffer : utilise slug et createdAt)
         for (const j of jobsRes.data) {
-          // Correction du slash manquant avant le slug
           const jobPath = j.slug.startsWith("/") ? j.slug : `/${j.slug}`;
           entries.push({
             path: `/careers/offers${jobPath}`,
-            lastmod: formatDate(j.updatedAt || j.createdAt),
+            lastmod: formatDate(j.createdAt),
             changefreq: "monthly",
             priority: "0.6",
           });
         }
 
-        // 4. Génération du balisage XML propre
+        // 4. Génération XML
         const urls = entries.map((e) => {
           const cleanPath = e.path.startsWith("/") ? e.path : `/${e.path}`;
           const fullUrl = `${BASE_URL}${cleanPath}`;
