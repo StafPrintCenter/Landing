@@ -5,7 +5,8 @@ import { fetchPublicFormations } from "@/stores/useTrainingsStore";
 import { fetchPublicArticles } from "@/stores/useArticlesStore";
 import { fetchPublicJobOffers } from "@/stores/useJobsStore";
 
-const BASE_URL = import.meta.env.VITE_FRONTEND_URL;
+const RAW_URL = import.meta.env.VITE_FRONTEND_URL || "https://stafprint.com";
+const BASE_URL = RAW_URL.replace(/\/$/, "");
 
 interface SitemapEntry {
   path: string;
@@ -50,18 +51,21 @@ export const Route = createFileRoute("/sitemap.xml")({
           entries.push({ path: `/articles/${a.slug}`, changefreq: "monthly", priority: "0.6" });
         }
         for (const a of jobsRes.data) {
-          entries.push({ path: `/careers/offers${a.slug}`, changefreq: "monthly", priority: "0.6" });
+          entries.push({ path: `/careers/offers/${a.slug}`, changefreq: "monthly", priority: "0.6" });
         }
 
-        const urls = entries.map((e) =>
-          [
+        const urls = entries.map((e) => {
+          const cleanPath = e.path.startsWith("/") ? e.path : `/${e.path}`;
+          const fullUrl = `${BASE_URL}${cleanPath}`;
+
+          return [
             `  <url>`,
-            `    <loc>${BASE_URL}${e.path}</loc>`,
+            `    <loc>${fullUrl}</loc>`,
             e.changefreq ? `    <changefreq>${e.changefreq}</changefreq>` : null,
             e.priority ? `    <priority>${e.priority}</priority>` : null,
             `  </url>`,
-          ].filter(Boolean).join("\n"),
-        );
+          ].filter(Boolean).join("\n");
+        });
 
         const xml = [
           `<?xml version="1.0" encoding="UTF-8"?>`,
