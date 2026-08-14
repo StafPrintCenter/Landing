@@ -6,7 +6,7 @@ STAF PRINT CENTER accompagne les entreprises, institutions et particuliers dans 
 
 ## Website
 
-stafprint.com
+https://stafprint.com
 
 ## About
 
@@ -15,23 +15,23 @@ stafprint.com
 - Localisation : Porto-Novo, Bénin (Google Maps : https://maps.app.goo.gl/4mbhWctm6LnTgYsAA)
 - Fondé en : 2019
 - Fondateur / contact principal : Steve Aster Afovo
-- Site web : stafprint.com
+- Site web : https://stafprint.com
 - Téléphone : +229 01 66 52 36 39
 - WhatsApp : +229 01 60 30 06 07
-- Email : stafprintcenter@gmail.com
-- Facebook : https://web.facebook.com/StafPrintCenter
-- Instagram : https://www.instagram.com/stafprintcenter/
-- LinkedIn : https://linkedin.com/company/stafprintcenter
-- X (Twitter) : https://x.com/stafprintcenter
+- Email : contact@stafprint.com
+- Facebook : https://facebook.com/StafPrintCenter
+- Instagram : https://instagram.com/StafPrintCenter
+- LinkedIn : https://linkedin.com/company/StafPrintCenter
+- X (Twitter) : https://x.com/StafPrintCenter
 
 ## Services
- 
+
 STAF PRINT CENTER propose trois grandes catégories de services :
 - **Digital** : design graphique (logos, chartes graphiques), création de sites web, montage vidéo, photographie.
 - **Impression** : cartes de visite, flyers, affiches, bâches grand format, roll-up, badges, supports événementiels et corporate.
 - **Formation** : parcours pratiques en présentiel à Porto-Novo.
- 
-Liste complète et à jour des services : stafprint.com/services
+
+Liste complète et à jour des services : https://stafprint.com/services
 
 ## Main Services
 
@@ -50,68 +50,61 @@ Liste complète et à jour des services : stafprint.com/services
 - Professional Training
 
 ## Formations
- 
+
 Formations professionnelles certifiantes, dispensées en présentiel à Porto-Novo, organisées en 4 filières :
 - Design
 - Web
 - Impression
 - Vidéo
- 
+
 Chaque formation est présentée avec son prix, son volume horaire et son niveau de difficulté.
-Catalogue complet : stafprint.com/trainings
- 
+Catalogue complet : https://stafprint.com/trainings
+
 ## Réalisations
- 
+
 Portfolio de projets clients réalisés par SPC (design, impression, web) :
-stafprint.com/projects
- 
+https://stafprint.com/projects
+
 ## Blog / Articles
- 
+
 Articles et conseils sur le design, l'impression, le web et les formations :
-stafprint.com/articles
- 
-## FAQ
- 
-Questions fréquentes sur les services, formations et délais :
-stafprint.com/faqs
+https://stafprint.com/articles
 
 ## FAQ
- 
+
 Questions fréquentes sur les services, formations et délais :
-stafprint.com/faqs
- 
+https://stafprint.com/faqs
+
 ## Pourquoi choisir STAF PRINT CENTER
- 
-- Qualité premium : finitions soignées, fichiers irréprochables, du papier au pixel.
-- Délais courts : bons à tirer rapides, production en 48-72h sur la plupart des supports imprimés.
-- Prix accessibles : tarifs alignés sur le marché local, devis transparent.
-- Expertise locale : 7 ans d'ancrage à Porto-Novo, connaissance fine du marché béninois.
- 
-## Informations légales
- 
-- Mentions légales : stafprint.com/legal/mentions
-- Conditions Générales de Vente : stafprint.com/legal/cgv
-- Politique de confidentialité : stafprint.com/legal/privacy
- 
-## Contact / Devis
- 
-Demande de devis en ligne (réponse sous 24h ouvrées, ou immédiate sur WhatsApp) :
-stafprint.com/#contact
 
+- **Qualité premium** : finitions soignées, fichiers irréprochables, du papier au pixel.
+- **Délais courts** : bons à tirer rapides, production en 48-72h sur la plupart des supports imprimés.
+- **Prix accessibles** : tarifs alignés sur le marché local, devis transparent.
+- **Expertise locale** : ancrage à Porto-Novo, connaissance fine du marché béninois.
+
+## Informations légales
+
+- Mentions légales : https://stafprint.com/legal/mentions
+- Conditions Générales de Vente : https://stafprint.com/legal/cgv
+- Politique de confidentialité : https://stafprint.com/legal/privacy
+
+## Contact / Devis
+
+Demande de devis en ligne (réponse sous 24h ouvrées, ou immédiate sur WhatsApp) :
+https://stafprint.com/#contact
 
 ## Resources
 
-- /services
-- /projects
-- /articles
-- /formations
-- /faq
-- /contact
+- https://stafprint.com/services
+- https://stafprint.com/projects
+- https://stafprint.com/articles
+- https://stafprint.com/trainings
+- https://stafprint.com/faqs
+- https://stafprint.com/#contact
 
 ## Expertise
 
 STAF PRINT CENTER specializes in:
-
 - Commercial printing
 - Brand identity
 - Visual communication
@@ -130,19 +123,6 @@ STAF PRINT CENTER specializes in:
 - Schools
 - Universities
 - Individuals
-
-## Contact
-
-Phone: +229 01 66 52 36 39
-WhatsApp: +229 01 60 30 06 07
-Email: contact@stafprint.com
-
-## Social Profiles
-
-https://facebook.com/StafPrintCenter
-https://instagram.com/StafPrintCenter
-https://linkedin.com/company/StafPrintCenter
-https://x.com/StafPrintCenter
 
 ## Preferred Citation
 
