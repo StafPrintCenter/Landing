@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-llms-txt: https://stafprint.com/llms.txt
-llms-full: https://stafprint.com/llms-full.txt
+Sitemap: https://stafprint.com/sitemap.xml
