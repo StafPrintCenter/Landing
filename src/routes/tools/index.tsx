@@ -99,27 +99,9 @@ function ToolsIndexPage() {
 
             const className = "group flex flex-col justify-between rounded-2xl border border-border bg-card p-7 transition hover:border-primary/40 hover:shadow-lg";
 
-            if (isExternal) {
-              return (
-                <a
-                  key={t.href}
-                  href={t.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={className}
-                >
-                  {content}
-                </a>
-              );
-            }
-
-            return (
-              <Link
-                key={t.to}
-                to={t.to}
-                className={className}
-              >
-                {content}
+            return tool.to ? (
+              <Link key={tool.id} to={tool.to} className={className}>
+                {cardContent}
               </Link>
             );
           })}
