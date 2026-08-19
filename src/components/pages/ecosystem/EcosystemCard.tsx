@@ -10,11 +10,11 @@ export function EcosystemCard({ site }: EcosystemCardProps) {
   const Icon = site.icon;
 
   return (
-
-    href = { site.url }
-      target = { site.isCurrent ? undefined : "_blank" }
-  rel = { site.isCurrent ? undefined : "noreferrer" }
-  className = "group flex flex-col rounded-2xl border border-border bg-card p-6 transition hover:border-primary/40 hover:shadow-md"
+    <a
+      href={site.url}
+      target={site.isCurrent ? undefined : "_blank"}
+      rel={site.isCurrent ? undefined : "noreferrer"}
+      className="group flex flex-col rounded-2xl border border-border bg-card p-6 transition hover:border-primary/40 hover:shadow-md"
     >
       <div className="flex items-start justify-between gap-3">
         <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
