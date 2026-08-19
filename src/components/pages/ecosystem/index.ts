@@ -1,3 +1,3 @@
 export { EcosystemHeader } from "./Header";
-export { EcosystemGrid } from "./EcosystemGrid";
+export { EcosystemGrid } from "./Grid";
 export { EcosystemCard } from "./Card";
