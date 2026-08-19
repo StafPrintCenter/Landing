@@ -20,14 +20,6 @@ export const ECOSYSTEM_CATEGORY_LABELS: Record<EcosystemSiteCategory, string> = 
   communication: "Communication",
 };
 
-/**
- * ⚠️ Plusieurs URLs ci-dessous sont des placeholders temporaires (SITE.url)
- * en attendant les vraies variables d'environnement dédiées :
- * - VITE_DOC_URL (Documentation officielle)
- * - VITE_TEACHER_URL (Espace Formateur)
- * - VITE_MEET_URL (SPC Meet)
- * À remplacer dès que ces sous-domaines seront prêts.
- */
 export const ECOSYSTEM_SITES: EcosystemSite[] = [
   {
     id: "website",
