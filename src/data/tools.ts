@@ -53,7 +53,7 @@ export const AVAILABLE_TOOLS: AvailableTool[] = [
   },
   {
     id: "ecosystem",
-    to: "/ecosystem",
+    to: "/tools/ecosystem",
     icon: Network,
     title: "Notre écosystème",
     desc: "Découvrez tous nos sites et plateformes : espaces formateur, apprenant, documentation et outils internes.",
