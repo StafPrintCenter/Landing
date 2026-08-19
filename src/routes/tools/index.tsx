@@ -20,24 +20,28 @@ const AVAILABLE_TOOLS = [
     icon: CalendarDays,
     title: "Prendre rendez-vous",
     desc: "Choisissez un créneau disponible et réservez votre passage en atelier ou en ligne en quelques clics.",
+    actionLabel: "Réserver un créneau",
   },
   {
     to: "/tools/lookup",
     icon: PackageSearch,
     title: "Suivre une demande",
     desc: "Entrez votre email et votre numéro de ticket pour connaître l'état de traitement de votre message.",
+    actionLabel: "Suivre mon ticket",
   },
   {
     to: "/tools/newsletter",
     icon: Newspaper,
     title: "Newsletter",
     desc: "Recevez nos actualités, conseils et offres selon vos centres d'intérêt.",
+    actionLabel: "Gérer mon abonnement",
   },
   {
     href: SITE.shortUrl,
     icon: Link2,
     title: "Raccourcir un lien",
     desc: "Générez des liens courts et faciles à partager pour simplifier votre communication.",
+    actionLabel: "Reduire un lien",
   },
 ] as const;
 
@@ -67,7 +71,7 @@ function ToolsIndexPage() {
           </div>
         </div>
 
-        {/* Outils disponibles : mis en avant, format plus large qu'une simple card de grille */}
+        {/* Outils disponibles */}
         <div className="mt-10 grid gap-5 md:grid-cols-4">
           {AVAILABLE_TOOLS.map((t) => {
             const Icon = t.icon;
