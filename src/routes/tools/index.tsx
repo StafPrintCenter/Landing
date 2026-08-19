@@ -102,6 +102,10 @@ function ToolsIndexPage() {
               <Link key={tool.id} to={tool.to} className={className}>
                 {cardContent}
               </Link>
+            ) : (
+              <a key={tool.id} href={tool.href} target="_blank" rel="noreferrer" className={className}>
+                {cardContent}
+              </a>
             );
           })}
         </div>
