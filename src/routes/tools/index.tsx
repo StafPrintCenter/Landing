@@ -12,7 +12,7 @@ export const Route = createFileRoute("/tools/")({
       { name: "description", content: `Retrouvez tous les outils pratiques mis à disposition par ${SITE.name} : rendez-vous, suivi de demande, newsletter et plus.` },
     ],
   }),
-  component: ToolsIndexPage,
+  component: ToolsPage,
 });
 
 const AVAILABLE_TOOLS = [
