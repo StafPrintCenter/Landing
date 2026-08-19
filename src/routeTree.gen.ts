@@ -38,9 +38,9 @@ import { Route as CareersOffersIndexRouteImport } from './routes/careers/offers/
 import { Route as CareersInternshipIndexRouteImport } from './routes/careers/internship/index'
 import { Route as ToolsNewsletterUnsubscribeRouteImport } from './routes/tools/newsletter/unsubscribe'
 import { Route as ToolsNewsletterPreferencesRouteImport } from './routes/tools/newsletter/preferences'
-import { Route as CareersOffersSlugRouteImport } from './routes/careers/offers/$slug'
 import { Route as CareersInternshipCheckRouteImport } from './routes/careers/internship/check'
-import { Route as CareersOffersApplySlugRouteImport } from './routes/careers/offers/apply.$slug'
+import { Route as CareersOffersSlugIndexRouteImport } from './routes/careers/offers/$slug/index'
+import { Route as CareersOffersSlugApplyRouteImport } from './routes/careers/offers/$slug/apply'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -189,19 +189,19 @@ const ToolsNewsletterPreferencesRoute =
     path: '/tools/newsletter/preferences',
     getParentRoute: () => rootRouteImport,
   } as any)
-const CareersOffersSlugRoute = CareersOffersSlugRouteImport.update({
-  id: '/careers/offers/$slug',
-  path: '/careers/offers/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const CareersInternshipCheckRoute = CareersInternshipCheckRouteImport.update({
   id: '/careers/internship/check',
   path: '/careers/internship/check',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CareersOffersApplySlugRoute = CareersOffersApplySlugRouteImport.update({
-  id: '/careers/offers/apply/$slug',
-  path: '/careers/offers/apply/$slug',
+const CareersOffersSlugIndexRoute = CareersOffersSlugIndexRouteImport.update({
+  id: '/careers/offers/$slug/',
+  path: '/careers/offers/$slug/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareersOffersSlugApplyRoute = CareersOffersSlugApplyRouteImport.update({
+  id: '/careers/offers/$slug/apply',
+  path: '/careers/offers/$slug/apply',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -231,13 +231,13 @@ export interface FileRoutesByFullPath {
   '/tools/': typeof ToolsIndexRoute
   '/trainings/': typeof TrainingsIndexRoute
   '/careers/internship/check': typeof CareersInternshipCheckRoute
-  '/careers/offers/$slug': typeof CareersOffersSlugRoute
   '/tools/newsletter/preferences': typeof ToolsNewsletterPreferencesRoute
   '/tools/newsletter/unsubscribe': typeof ToolsNewsletterUnsubscribeRoute
   '/careers/internship/': typeof CareersInternshipIndexRoute
   '/careers/offers/': typeof CareersOffersIndexRoute
   '/tools/newsletter/': typeof ToolsNewsletterIndexRoute
-  '/careers/offers/apply/$slug': typeof CareersOffersApplySlugRoute
+  '/careers/offers/$slug/apply': typeof CareersOffersSlugApplyRoute
+  '/careers/offers/$slug/': typeof CareersOffersSlugIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -265,13 +265,13 @@ export interface FileRoutesByTo {
   '/tools': typeof ToolsIndexRoute
   '/trainings': typeof TrainingsIndexRoute
   '/careers/internship/check': typeof CareersInternshipCheckRoute
-  '/careers/offers/$slug': typeof CareersOffersSlugRoute
   '/tools/newsletter/preferences': typeof ToolsNewsletterPreferencesRoute
   '/tools/newsletter/unsubscribe': typeof ToolsNewsletterUnsubscribeRoute
   '/careers/internship': typeof CareersInternshipIndexRoute
   '/careers/offers': typeof CareersOffersIndexRoute
   '/tools/newsletter': typeof ToolsNewsletterIndexRoute
-  '/careers/offers/apply/$slug': typeof CareersOffersApplySlugRoute
+  '/careers/offers/$slug/apply': typeof CareersOffersSlugApplyRoute
+  '/careers/offers/$slug': typeof CareersOffersSlugIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -300,13 +300,13 @@ export interface FileRoutesById {
   '/tools/': typeof ToolsIndexRoute
   '/trainings/': typeof TrainingsIndexRoute
   '/careers/internship/check': typeof CareersInternshipCheckRoute
-  '/careers/offers/$slug': typeof CareersOffersSlugRoute
   '/tools/newsletter/preferences': typeof ToolsNewsletterPreferencesRoute
   '/tools/newsletter/unsubscribe': typeof ToolsNewsletterUnsubscribeRoute
   '/careers/internship/': typeof CareersInternshipIndexRoute
   '/careers/offers/': typeof CareersOffersIndexRoute
   '/tools/newsletter/': typeof ToolsNewsletterIndexRoute
-  '/careers/offers/apply/$slug': typeof CareersOffersApplySlugRoute
+  '/careers/offers/$slug/apply': typeof CareersOffersSlugApplyRoute
+  '/careers/offers/$slug/': typeof CareersOffersSlugIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -336,13 +336,13 @@ export interface FileRouteTypes {
     | '/tools/'
     | '/trainings/'
     | '/careers/internship/check'
-    | '/careers/offers/$slug'
     | '/tools/newsletter/preferences'
     | '/tools/newsletter/unsubscribe'
     | '/careers/internship/'
     | '/careers/offers/'
     | '/tools/newsletter/'
-    | '/careers/offers/apply/$slug'
+    | '/careers/offers/$slug/apply'
+    | '/careers/offers/$slug/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -370,13 +370,13 @@ export interface FileRouteTypes {
     | '/tools'
     | '/trainings'
     | '/careers/internship/check'
-    | '/careers/offers/$slug'
     | '/tools/newsletter/preferences'
     | '/tools/newsletter/unsubscribe'
     | '/careers/internship'
     | '/careers/offers'
     | '/tools/newsletter'
-    | '/careers/offers/apply/$slug'
+    | '/careers/offers/$slug/apply'
+    | '/careers/offers/$slug'
   id:
     | '__root__'
     | '/'
@@ -404,13 +404,13 @@ export interface FileRouteTypes {
     | '/tools/'
     | '/trainings/'
     | '/careers/internship/check'
-    | '/careers/offers/$slug'
     | '/tools/newsletter/preferences'
     | '/tools/newsletter/unsubscribe'
     | '/careers/internship/'
     | '/careers/offers/'
     | '/tools/newsletter/'
-    | '/careers/offers/apply/$slug'
+    | '/careers/offers/$slug/apply'
+    | '/careers/offers/$slug/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -439,13 +439,13 @@ export interface RootRouteChildren {
   ToolsIndexRoute: typeof ToolsIndexRoute
   TrainingsIndexRoute: typeof TrainingsIndexRoute
   CareersInternshipCheckRoute: typeof CareersInternshipCheckRoute
-  CareersOffersSlugRoute: typeof CareersOffersSlugRoute
   ToolsNewsletterPreferencesRoute: typeof ToolsNewsletterPreferencesRoute
   ToolsNewsletterUnsubscribeRoute: typeof ToolsNewsletterUnsubscribeRoute
   CareersInternshipIndexRoute: typeof CareersInternshipIndexRoute
   CareersOffersIndexRoute: typeof CareersOffersIndexRoute
   ToolsNewsletterIndexRoute: typeof ToolsNewsletterIndexRoute
-  CareersOffersApplySlugRoute: typeof CareersOffersApplySlugRoute
+  CareersOffersSlugApplyRoute: typeof CareersOffersSlugApplyRoute
+  CareersOffersSlugIndexRoute: typeof CareersOffersSlugIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -653,13 +653,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsNewsletterPreferencesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/careers/offers/$slug': {
-      id: '/careers/offers/$slug'
-      path: '/careers/offers/$slug'
-      fullPath: '/careers/offers/$slug'
-      preLoaderRoute: typeof CareersOffersSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/careers/internship/check': {
       id: '/careers/internship/check'
       path: '/careers/internship/check'
@@ -667,11 +660,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CareersInternshipCheckRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/careers/offers/apply/$slug': {
-      id: '/careers/offers/apply/$slug'
-      path: '/careers/offers/apply/$slug'
-      fullPath: '/careers/offers/apply/$slug'
-      preLoaderRoute: typeof CareersOffersApplySlugRouteImport
+    '/careers/offers/$slug/': {
+      id: '/careers/offers/$slug/'
+      path: '/careers/offers/$slug'
+      fullPath: '/careers/offers/$slug/'
+      preLoaderRoute: typeof CareersOffersSlugIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/careers/offers/$slug/apply': {
+      id: '/careers/offers/$slug/apply'
+      path: '/careers/offers/$slug/apply'
+      fullPath: '/careers/offers/$slug/apply'
+      preLoaderRoute: typeof CareersOffersSlugApplyRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -703,13 +703,13 @@ const rootRouteChildren: RootRouteChildren = {
   ToolsIndexRoute: ToolsIndexRoute,
   TrainingsIndexRoute: TrainingsIndexRoute,
   CareersInternshipCheckRoute: CareersInternshipCheckRoute,
-  CareersOffersSlugRoute: CareersOffersSlugRoute,
   ToolsNewsletterPreferencesRoute: ToolsNewsletterPreferencesRoute,
   ToolsNewsletterUnsubscribeRoute: ToolsNewsletterUnsubscribeRoute,
   CareersInternshipIndexRoute: CareersInternshipIndexRoute,
   CareersOffersIndexRoute: CareersOffersIndexRoute,
   ToolsNewsletterIndexRoute: ToolsNewsletterIndexRoute,
-  CareersOffersApplySlugRoute: CareersOffersApplySlugRoute,
+  CareersOffersSlugApplyRoute: CareersOffersSlugApplyRoute,
+  CareersOffersSlugIndexRoute: CareersOffersSlugIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
