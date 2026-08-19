@@ -55,16 +55,20 @@ const UPCOMING_TOOLS = [
 function ToolsIndexPage() {
   return (
     <SiteShell>
-      <section className="container-x max-w-6xl py-14 md:py-20">
-        {/* En-tête */}
-        <div className="flex flex-col gap-6 border-b border-border pb-10 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-xl">
-            <h1 className="font-display text-3xl font-bold md:text-4xl">Outils en ligne</h1>
-            <p className="mt-3 text-foreground/70">
-              Services accessibles dès maintenant, sans appel ni déplacement. D'autres outils
-              sont en cours de préparation.
-            </p>
-          </div>
+      <section className="container-x py-16">
+        <Reveal>
+          <div className="flex flex-col gap-6 border-b border-border pb-10 md:flex-row md:items-end md:justify-between">
+            <div className="max-w-xl">
+              <div className="mb-2">
+                <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                  <Sparkles size={14} /> Outils
+                </span>
+              </div>
+              <h1 className="text-3xl font-bold md:text-4xl">Outils pratiques</h1>
+              <p className="mt-3 text-foreground/70">
+                Des fonctionnalités pensées pour vous simplifier la vie, en attendant votre prochaine visite en atelier.
+              </p>
+            </div>
 
           <div className="flex shrink-0 items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-medium text-foreground/70">
             <span className="h-2 w-2 rounded-full bg-primary" />
