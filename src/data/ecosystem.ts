@@ -24,7 +24,7 @@ export const ECOSYSTEM_SITES: EcosystemSite[] = [
   {
     id: "website",
     name: "Site web",
-    description: "Le site principal de STAF PRINT CENTER : services, réalisations, formations, blog et contact.",
+    description: `Le site principal de ${SITE.name} : services, réalisations, formations, blog et contact.`,
     url: SITE.url,
     icon: Globe,
     category: "principal",
@@ -33,7 +33,7 @@ export const ECOSYSTEM_SITES: EcosystemSite[] = [
   {
     id: "shortener",
     name: "SPC Shortener",
-    description: "Raccourcisseur de liens officiel, réservé exclusivement aux contenus de STAF PRINT CENTER.",
+    description: `Raccourcisseur de liens officiel, réservé exclusivement aux contenus de ${SITE.name}.`,
     url: SITE.shortUrl,
     icon: Link2,
     category: "outil",
@@ -41,7 +41,7 @@ export const ECOSYSTEM_SITES: EcosystemSite[] = [
   {
     id: "documentation",
     name: "Documentation officielle",
-    description: "Guides, procédures et ressources techniques de STAF PRINT CENTER.",
+    description: `Guides, procédures et ressources techniques de ${SITE.name}.`,
     url: SITE.url,
     icon: BookOpen,
     category: "outil",
@@ -57,15 +57,15 @@ export const ECOSYSTEM_SITES: EcosystemSite[] = [
   {
     id: "student-space",
     name: "Espace Apprenant",
-    description: "Portail dédié aux étudiants inscrits aux formations STAF PRINT CENTER.",
-    url: import.meta.env.VITE_STUDENT_URL ?? SITE.url,
+    description: `Portail dédié aux étudiants inscrits aux formations ${SITE.name}.`,
+    url: SITE.url,
     icon: Users,
     category: "formation",
   },
   {
     id: "meet",
     name: "SPC Meet",
-    description: "Plateforme de visioconférence pour les réunions et sessions à distance de STAF PRINT CENTER.",
+    description: `Plateforme de visioconférence pour les réunions et sessions à distance de ${SITE.name}.`,
     url: SITE.url,
     icon: Video,
     category: "communication",
