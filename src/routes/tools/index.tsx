@@ -125,34 +125,35 @@ function ToolsIndexPage() {
           })}
         </div>
 
-        {/* Outils à venir */}
-        <div className="mt-14">
-          <div className="mb-5 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-foreground/50">
-            <Clock size={14} />
-            Bientôt disponibles
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {UPCOMING_TOOLS.map((t) => {
-              const Icon = t.icon;
-              return (
-                <div
-                  key={t.title}
-                  className="flex flex-col rounded-2xl border border-dashed border-border bg-muted/30 p-5 opacity-70"
-                >
-                  <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg bg-foreground/5 text-foreground/50">
-                    <Icon size={18} />
+        {UPCOMING_TOOLS.length > 0 && (
+          <div className="mt-16">
+            <h2 className="font-display text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+              À venir
+            </h2>
+            <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {UPCOMING_TOOLS.map((tool) => {
+                const Icon = tool.icon;
+                return (
+                  <div
+                    key={tool.id}
+                    className="flex flex-col rounded-2xl border border-dashed border-border bg-muted/20 p-6 opacity-70"
+                  >
+                    <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-muted text-muted-foreground">
+                      <Icon size={20} />
+                    </span>
+                    <h3 className="mt-4 font-display text-lg font-semibold text-foreground/80">{tool.title}</h3>
+                    <p className="mt-1.5 flex-1 text-sm text-muted-foreground leading-relaxed">{tool.desc}</p>
+                    {tool.statusLabel && (
+                      <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
+                        <Clock size={12} /> {tool.statusLabel}
+                      </span>
+                    )}
                   </div>
-                  <h3 className="text-sm font-semibold text-foreground/80">{t.title}</h3>
-                  <p className="mt-1.5 flex-1 text-xs text-foreground/60">{t.desc}</p>
-                  <span className="mt-3 inline-flex w-fit items-center rounded-full bg-foreground/5 px-2.5 py-1 text-[11px] font-medium text-foreground/50">
-                    En préparation
-                  </span>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
       </section>
     </SiteShell>
   );
