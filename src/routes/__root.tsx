@@ -25,7 +25,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         { name: "author", content: `${SITE.manager}` },
         {
           name: "keywords",
-          content: "imprimerie Porto-Novo, impression bâche Bénin, badge professionnel, formation InDesign, création site web Porto-Novo, graphiste Bénin, STAF PRINT CENTER, studio graphique, Géré par Steve Aster Afovo Devis gratuit sous 24H"
+          content: `imprimerie Porto-Novo, impression bâche Bénin, badge professionnel, formation InDesign, création site web Porto-Novo, graphiste Bénin, ${SITE.name}, studio graphique, Géré par Steve Aster Afovo Devis gratuit sous 24H`
         },
 
         /* Open Graph / Facebook / WhatsApp */
