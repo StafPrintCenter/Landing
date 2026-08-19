@@ -1,4 +1,4 @@
-import { CalendarDays, PackageSearch, Newspaper, Link2, Network, QrCode, FileSignature, Calculator, type LucideIcon } from "lucide-react";
+import { CalendarDays, PackageSearch, Newspaper, Link2, Network, QrCode, FileSignature, Calculator, Download, Users, type LucideIcon } from "lucide-react";
 import { SITE } from "@/data/site";
 
 interface ToolBase {
