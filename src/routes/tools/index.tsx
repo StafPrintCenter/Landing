@@ -8,9 +8,8 @@ import { AVAILABLE_TOOLS, UPCOMING_TOOLS } from "@/data/tools";
 export const Route = createFileRoute("/tools/")({
   head: () => ({
     meta: [
-      { title: `Outils en ligne | ${SITE.name}` },
-      { name: "description", content: "Prenez rendez-vous ou suivez l'état de votre demande en ligne, sans appel ni file d'attente." },
-      { name: "robots", content: "noindex" },
+      { title: `Outils | ${SITE.name}` },
+      { name: "description", content: `Retrouvez tous les outils pratiques mis à disposition par ${SITE.name} : rendez-vous, suivi de demande, newsletter et plus.` },
     ],
   }),
   component: ToolsIndexPage,
