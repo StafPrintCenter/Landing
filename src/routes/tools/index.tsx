@@ -84,16 +84,16 @@ function ToolsIndexPage() {
             const isExternal = "href" in t;
             const content = (
               <>
-                <div>
-                  <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                    <Icon size={22} />
-                  </div>
-                  <h3 className="font-display text-xl font-semibold leading-snug">{t.title}</h3>
-                  <p className="mt-2 text-sm text-foreground/70">{t.desc}</p>
-                </div>
-                <div className="mt-6 flex items-center gap-1.5 text-sm font-semibold text-primary">
-                  {t.actionLabel} <ArrowRight size={14} className="transition group-hover:translate-x-0.5" />
-                </div>
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <Icon size={20} />
+                </span>
+                <h3 className="mt-4 font-display text-lg font-semibold group-hover:text-primary transition-colors">
+                  {tool.title}
+                </h3>
+                <p className="mt-1.5 flex-1 text-sm text-muted-foreground leading-relaxed">{tool.desc}</p>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary">
+                  {tool.actionLabel} <ArrowRight size={14} />
+                </span>
               </>
             );
 
