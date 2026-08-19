@@ -15,44 +15,7 @@ export const Route = createFileRoute("/tools/")({
   component: ToolsPage,
 });
 
-const AVAILABLE_TOOLS = [
-  {
-    to: "/tools/appointment",
-    icon: CalendarDays,
-    title: "Prendre rendez-vous",
-    desc: "Choisissez un créneau disponible et réservez votre passage en atelier ou en ligne en quelques clics.",
-    actionLabel: "Réserver un créneau",
-  },
-  {
-    to: "/tools/lookup",
-    icon: PackageSearch,
-    title: "Suivre une demande",
-    desc: "Entrez votre email et votre numéro de ticket pour connaître l'état de traitement de votre message.",
-    actionLabel: "Suivre mon ticket",
-  },
-  {
-    to: "/tools/newsletter",
-    icon: Newspaper,
-    title: "Newsletter",
-    desc: "Recevez nos actualités, conseils et offres selon vos centres d'intérêt.",
-    actionLabel: "Gérer mon abonnement",
-  },
-  {
-    href: SITE.shortUrl,
-    icon: Link2,
-    title: "Raccourcir un lien",
-    desc: "Générez des liens courts et faciles à partager pour simplifier votre communication.",
-    actionLabel: "Reduire un lien",
-  },
-] as const;
-
-const UPCOMING_TOOLS = [
-  { icon: Calculator, title: "Devis intelligent", desc: "Configurateur de prix selon produit, quantité et finition." },
-  { icon: Download, title: "Ressources gratuites", desc: "Templates et guides à télécharger." },
-  { icon: Users, title: "Programme de parrainage", desc: "Codes de parrainage et paliers de récompenses." },
-] as const;
-
-function ToolsIndexPage() {
+function ToolsPage() {
   return (
     <SiteShell>
       <section className="container-x py-16">
