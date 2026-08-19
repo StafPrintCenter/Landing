@@ -39,14 +39,6 @@ export const ECOSYSTEM_SITES: EcosystemSite[] = [
     category: "outil",
   },
   {
-    id: "documentation",
-    name: "Documentation officielle",
-    description: `Guides, procédures et ressources techniques de ${SITE.name}.`,
-    url: SITE.url,
-    icon: BookOpen,
-    category: "outil",
-  },
-  {
     id: "teacher-space",
     name: "Espace Formateur",
     description: "Portail dédié aux formateurs pour la gestion de leurs sessions et de leurs apprenants.",
@@ -69,5 +61,13 @@ export const ECOSYSTEM_SITES: EcosystemSite[] = [
     url: SITE.url,
     icon: Video,
     category: "communication",
+  },
+  {
+    id: "documentation",
+    name: "Documentation officielle",
+    description: `Guides, procédures et ressources techniques de ${SITE.name}.`,
+    url: SITE.docsUrl,
+    icon: BookOpen,
+    category: "outil",
   },
 ];
