@@ -87,4 +87,18 @@ export const UPCOMING_TOOLS: UpcomingTool[] = [
     desc: "Signez vos devis et contrats directement en ligne, sans impression papier.",
     statusLabel: "Bientôt disponible",
   },
+  {
+    id: "free-ressources",
+    icon: Download,
+    title: "Ressources gratuites",
+    desc: "Templates et guides à télécharger.",
+    statusLabel: "Bientôt disponible",
+  },
+  {
+    id: "affiliation",
+    icon: Users,
+    title: "Programme de parrainage",
+    desc: "Codes de parrainage et paliers de récompenses.",
+    statusLabel: "Bientôt disponible",
+  },
 ];
