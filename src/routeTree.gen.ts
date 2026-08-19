@@ -11,7 +11,6 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SearchRouteImport } from './routes/search'
-import { Route as EcosystemRouteImport } from './routes/ecosystem'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TrainingsIndexRouteImport } from './routes/trainings/index'
 import { Route as ToolsIndexRouteImport } from './routes/tools/index'
@@ -22,6 +21,7 @@ import { Route as FaqsIndexRouteImport } from './routes/faqs/index'
 import { Route as ArticlesIndexRouteImport } from './routes/articles/index'
 import { Route as TrainingsIdRouteImport } from './routes/trainings/$id'
 import { Route as ToolsLookupRouteImport } from './routes/tools/lookup'
+import { Route as ToolsEcosystemRouteImport } from './routes/tools/ecosystem'
 import { Route as ToolsAppointmentRouteImport } from './routes/tools/appointment'
 import { Route as TestsRessourcesRouteImport } from './routes/tests/ressources'
 import { Route as TestsDevisRouteImport } from './routes/tests/devis'
@@ -51,11 +51,6 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const SearchRoute = SearchRouteImport.update({
   id: '/search',
   path: '/search',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EcosystemRoute = EcosystemRouteImport.update({
-  id: '/ecosystem',
-  path: '/ecosystem',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -106,6 +101,11 @@ const TrainingsIdRoute = TrainingsIdRouteImport.update({
 const ToolsLookupRoute = ToolsLookupRouteImport.update({
   id: '/tools/lookup',
   path: '/tools/lookup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsEcosystemRoute = ToolsEcosystemRouteImport.update({
+  id: '/tools/ecosystem',
+  path: '/tools/ecosystem',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ToolsAppointmentRoute = ToolsAppointmentRouteImport.update({
@@ -213,7 +213,6 @@ const CareersOffersSlugApplyRoute = CareersOffersSlugApplyRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/ecosystem': typeof EcosystemRoute
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/articles/$slug': typeof ArticlesSlugRoute
@@ -228,6 +227,7 @@ export interface FileRoutesByFullPath {
   '/tests/devis': typeof TestsDevisRoute
   '/tests/ressources': typeof TestsRessourcesRoute
   '/tools/appointment': typeof ToolsAppointmentRoute
+  '/tools/ecosystem': typeof ToolsEcosystemRoute
   '/tools/lookup': typeof ToolsLookupRoute
   '/trainings/$id': typeof TrainingsIdRoute
   '/articles/': typeof ArticlesIndexRoute
@@ -248,7 +248,6 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/ecosystem': typeof EcosystemRoute
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/articles/$slug': typeof ArticlesSlugRoute
@@ -263,6 +262,7 @@ export interface FileRoutesByTo {
   '/tests/devis': typeof TestsDevisRoute
   '/tests/ressources': typeof TestsRessourcesRoute
   '/tools/appointment': typeof ToolsAppointmentRoute
+  '/tools/ecosystem': typeof ToolsEcosystemRoute
   '/tools/lookup': typeof ToolsLookupRoute
   '/trainings/$id': typeof TrainingsIdRoute
   '/articles': typeof ArticlesIndexRoute
@@ -284,7 +284,6 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/ecosystem': typeof EcosystemRoute
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/articles/$slug': typeof ArticlesSlugRoute
@@ -299,6 +298,7 @@ export interface FileRoutesById {
   '/tests/devis': typeof TestsDevisRoute
   '/tests/ressources': typeof TestsRessourcesRoute
   '/tools/appointment': typeof ToolsAppointmentRoute
+  '/tools/ecosystem': typeof ToolsEcosystemRoute
   '/tools/lookup': typeof ToolsLookupRoute
   '/trainings/$id': typeof TrainingsIdRoute
   '/articles/': typeof ArticlesIndexRoute
@@ -321,7 +321,6 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/ecosystem'
     | '/search'
     | '/sitemap.xml'
     | '/articles/$slug'
@@ -336,6 +335,7 @@ export interface FileRouteTypes {
     | '/tests/devis'
     | '/tests/ressources'
     | '/tools/appointment'
+    | '/tools/ecosystem'
     | '/tools/lookup'
     | '/trainings/$id'
     | '/articles/'
@@ -356,7 +356,6 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/ecosystem'
     | '/search'
     | '/sitemap.xml'
     | '/articles/$slug'
@@ -371,6 +370,7 @@ export interface FileRouteTypes {
     | '/tests/devis'
     | '/tests/ressources'
     | '/tools/appointment'
+    | '/tools/ecosystem'
     | '/tools/lookup'
     | '/trainings/$id'
     | '/articles'
@@ -391,7 +391,6 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/ecosystem'
     | '/search'
     | '/sitemap.xml'
     | '/articles/$slug'
@@ -406,6 +405,7 @@ export interface FileRouteTypes {
     | '/tests/devis'
     | '/tests/ressources'
     | '/tools/appointment'
+    | '/tools/ecosystem'
     | '/tools/lookup'
     | '/trainings/$id'
     | '/articles/'
@@ -427,7 +427,6 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  EcosystemRoute: typeof EcosystemRoute
   SearchRoute: typeof SearchRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ArticlesSlugRoute: typeof ArticlesSlugRoute
@@ -442,6 +441,7 @@ export interface RootRouteChildren {
   TestsDevisRoute: typeof TestsDevisRoute
   TestsRessourcesRoute: typeof TestsRessourcesRoute
   ToolsAppointmentRoute: typeof ToolsAppointmentRoute
+  ToolsEcosystemRoute: typeof ToolsEcosystemRoute
   ToolsLookupRoute: typeof ToolsLookupRoute
   TrainingsIdRoute: typeof TrainingsIdRoute
   ArticlesIndexRoute: typeof ArticlesIndexRoute
@@ -475,13 +475,6 @@ declare module '@tanstack/react-router' {
       path: '/search'
       fullPath: '/search'
       preLoaderRoute: typeof SearchRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/ecosystem': {
-      id: '/ecosystem'
-      path: '/ecosystem'
-      fullPath: '/ecosystem'
-      preLoaderRoute: typeof EcosystemRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -552,6 +545,13 @@ declare module '@tanstack/react-router' {
       path: '/tools/lookup'
       fullPath: '/tools/lookup'
       preLoaderRoute: typeof ToolsLookupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/ecosystem': {
+      id: '/tools/ecosystem'
+      path: '/tools/ecosystem'
+      fullPath: '/tools/ecosystem'
+      preLoaderRoute: typeof ToolsEcosystemRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tools/appointment': {
@@ -699,7 +699,6 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  EcosystemRoute: EcosystemRoute,
   SearchRoute: SearchRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ArticlesSlugRoute: ArticlesSlugRoute,
@@ -714,6 +713,7 @@ const rootRouteChildren: RootRouteChildren = {
   TestsDevisRoute: TestsDevisRoute,
   TestsRessourcesRoute: TestsRessourcesRoute,
   ToolsAppointmentRoute: ToolsAppointmentRoute,
+  ToolsEcosystemRoute: ToolsEcosystemRoute,
   ToolsLookupRoute: ToolsLookupRoute,
   TrainingsIdRoute: TrainingsIdRoute,
   ArticlesIndexRoute: ArticlesIndexRoute,
