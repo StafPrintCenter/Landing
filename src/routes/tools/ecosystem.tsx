@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { SiteShell } from "@/components/site/SiteShell";
 import { SITE } from "@/data/site";
 import { ECOSYSTEM_SITES, type EcosystemSiteCategory } from "@/data/ecosystem";
-import { EcosystemHeader, EcosystemFilters, EcosystemGrid, type EcosystemSortDirection } from "@/components/pages/ecosystem";
+import { EcosystemHeader, EcosystemFilters, EcosystemGrid, type EcosystemSortDirection } from "@/components/pages/tools/ecosystem";
 
 export const Route = createFileRoute("/tools/ecosystem")({
   head: () => ({
