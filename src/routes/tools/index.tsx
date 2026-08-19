@@ -78,11 +78,10 @@ function ToolsIndexPage() {
         </Reveal>
 
         {/* Outils disponibles */}
-        <div className="mt-10 grid gap-5 md:grid-cols-4">
-          {AVAILABLE_TOOLS.map((t) => {
-            const Icon = t.icon;
-            const isExternal = "href" in t;
-            const content = (
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {AVAILABLE_TOOLS.map((tool) => {
+            const Icon = tool.icon;
+            const cardContent = (
               <>
                 <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
                   <Icon size={20} />
