@@ -115,7 +115,7 @@ function ToolsIndexPage() {
           })}
         </div>
 
-        {/* Outils à venir : visuellement distincts, non cliquables */}
+        {/* Outils à venir */}
         <div className="mt-14">
           <div className="mb-5 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-foreground/50">
             <Clock size={14} />
