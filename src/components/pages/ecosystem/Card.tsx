@@ -1,6 +1,6 @@
 import { ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { stripProtocol } from "@/lib/domain";
-import type { EcosystemSite } from "@/data/ecosystem";
+import { ECOSYSTEM_CATEGORY_LABELS, type EcosystemSite } from "@/data/ecosystem";
 
 interface EcosystemCardProps {
   site: EcosystemSite;
@@ -29,7 +29,11 @@ export function EcosystemCard({ site }: EcosystemCardProps) {
         )}
       </div>
 
-      <h3 className="mt-4 font-display text-lg font-semibold group-hover:text-primary transition-colors">
+      <span className="mt-3 inline-flex w-fit rounded-full border border-border bg-muted px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+        {ECOSYSTEM_CATEGORY_LABELS[site.category]}
+      </span>
+
+      <h3 className="mt-2 font-display text-lg font-semibold group-hover:text-primary transition-colors">
         {site.name}
       </h3>
       <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">{site.description}</p>
