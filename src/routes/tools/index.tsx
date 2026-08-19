@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Sparkles, Clock } from "lucide-react";
 import { SiteShell } from "@/components/site/SiteShell";
-import { CalendarDays, PackageSearch, Calculator, Download, Users, Newspaper, ArrowRight, Clock, Link2 } from "lucide-react";
+import { Reveal } from "@/components/site/Reveal";
 import { SITE } from "@/data/site";
+import { AVAILABLE_TOOLS, UPCOMING_TOOLS } from "@/data/tools";
 
 export const Route = createFileRoute("/tools/")({
   head: () => ({
