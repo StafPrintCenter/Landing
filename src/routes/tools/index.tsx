@@ -51,7 +51,7 @@ function ToolsIndexPage() {
   return (
     <SiteShell>
       <section className="container-x max-w-6xl py-14 md:py-20">
-        {/* En-tête : aligné à gauche, pas de bloc centré isolé */}
+        {/* En-tête */}
         <div className="flex flex-col gap-6 border-b border-border pb-10 md:flex-row md:items-end md:justify-between">
           <div className="max-w-xl">
             <h1 className="font-display text-3xl font-bold md:text-4xl">Outils en ligne</h1>
@@ -82,7 +82,7 @@ function ToolsIndexPage() {
                   <p className="mt-2 text-sm text-foreground/70">{t.desc}</p>
                 </div>
                 <div className="mt-6 flex items-center gap-1.5 text-sm font-semibold text-primary">
-                  Ouvrir l'outil <ArrowRight size={14} className="transition group-hover:translate-x-0.5" />
+                  {t.actionLabel} <ArrowRight size={14} className="transition group-hover:translate-x-0.5" />
                 </div>
               </>
             );
