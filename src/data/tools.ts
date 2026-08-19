@@ -62,8 +62,7 @@ export const AVAILABLE_TOOLS: AvailableTool[] = [
 ];
 
 /**
- * ⚠️ Fonctionnalités non encore développées — placeholders à ajuster
- * (titres/descriptions/icônes) au fur et à mesure de leur mise en œuvre réelle.
+ * Fonctionnalités non encore développées — placeholders à ajuster
  */
 export const UPCOMING_TOOLS: UpcomingTool[] = [
   {
