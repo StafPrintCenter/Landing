@@ -20,6 +20,7 @@ export function EcosystemCard({ site }: EcosystemCardProps) {
       rel={site.isCurrent ? undefined : "noreferrer"}
       className="group flex flex-col justify-between rounded-2xl border border-border bg-card p-6 transition-all duration-200 hover:border-primary/40 hover:shadow-md"
     >
+      {/* Contenu principal (Haut) */}
       <div>
         <div className="flex items-center justify-between gap-3">
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-border/50 bg-muted/40 p-2 transition-colors group-hover:border-primary/30">
@@ -43,13 +44,7 @@ export function EcosystemCard({ site }: EcosystemCardProps) {
           )}
         </div>
 
-        {/* Catégorie */}
-        <span className="mt-4 inline-flex w-fit rounded-full border border-border bg-muted px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-          {ECOSYSTEM_CATEGORY_LABELS[site.category]}
-        </span>
-
-        {/* Titre & Description */}
-        <h3 className="mt-2 font-display text-lg font-semibold text-foreground transition-colors group-hover:text-primary">
+        <h3 className="mt-4 font-display text-lg font-semibold text-foreground transition-colors group-hover:text-primary">
           {site.name}
         </h3>
         <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">
@@ -57,10 +52,16 @@ export function EcosystemCard({ site }: EcosystemCardProps) {
         </p>
       </div>
 
-      {/* URL nettoyée en bas de carte */}
-      <p className="mt-6 truncate text-xs font-mono text-muted-foreground/70">
-        {stripProtocol(site.url)}
-      </p>
+      {/* Pied de carte : Badge + URL en flex */}
+      <div className="mt-6 flex items-center justify-between gap-2 border-t border-border/40 pt-4">
+        <span className="inline-flex shrink-0 rounded-md border border-border bg-muted/60 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+          {ECOSYSTEM_CATEGORY_LABELS[site.category]}
+        </span>
+
+        <p className="truncate text-xs font-mono text-muted-foreground/70">
+          {stripProtocol(site.url)}
+        </p>
+      </div>
     </a>
   );
 }
