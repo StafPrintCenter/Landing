@@ -64,9 +64,9 @@ export const ECOSYSTEM_SITES: EcosystemSite[] = [
     category: "communication",
   },
   {
-    id: "arcarde",
-    name: "SPC Arcarde",
-    description: `Plateforme de visioconférence pour les réunions et sessions à distance de ${SITE.name}.`,
+    id: "arcade",
+    name: "SPC Arcade",
+    description: `Hub de jeux interactifs pour se divertir tout en développant ses compétences techniques.`,
     url: SITE.url,
     logoKey: "arcarde",
     category: "communication",
