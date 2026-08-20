@@ -1,7 +1,7 @@
 import logos from "@/assets/logos.json";
 import { SITE } from "@/data/site";
 
-export type EcosystemSiteCategory = "principal" | "outil" | "formation" | "communication";
+export type EcosystemSiteCategory = "principal" | "outil" | "formation" | "communication" | "divertissement";
 
 export interface EcosystemSite {
   id: string;
@@ -60,6 +60,14 @@ export const ECOSYSTEM_SITES: EcosystemSite[] = [
     description: `Plateforme de visioconférence pour les réunions et sessions à distance de ${SITE.name}.`,
     url: SITE.url,
     logoKey: "meet",
+    category: "communication",
+  },
+  {
+    id: "arcarde",
+    name: "SPC Arcarde",
+    description: `Plateforme de visioconférence pour les réunions et sessions à distance de ${SITE.name}.`,
+    url: SITE.url,
+    logoKey: "arcarde",
     category: "communication",
   },
   {
