@@ -148,7 +148,7 @@ export function JobOfferDetailSidebar({ offer }: JobOfferDetailSidebarProps) {
             </div>
           ) : (
             <Link
-              to="/careers/offers/apply/$slug"
+              to="/careers/offers/$slug/apply"
               params={{ slug: offer.slug }}
               className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-all hover:opacity-90 cursor-pointer shadow-xs"
             >
