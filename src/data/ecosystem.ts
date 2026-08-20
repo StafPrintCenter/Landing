@@ -1,4 +1,4 @@
-import { Globe, Link2, BookOpen, GraduationCap, Users, Video, type LucideIcon } from "lucide-react";
+import logos from "@/assets/logos.json";
 import { SITE } from "@/data/site";
 
 export type EcosystemSiteCategory = "principal" | "outil" | "formation" | "communication";
@@ -8,7 +8,7 @@ export interface EcosystemSite {
   name: string;
   description: string;
   url: string;
-  icon: LucideIcon;
+  logoKey: keyof typeof logos;
   category: EcosystemSiteCategory;
   isCurrent?: boolean;
 }
@@ -26,7 +26,7 @@ export const ECOSYSTEM_SITES: EcosystemSite[] = [
     name: "Site web",
     description: `Le site principal de ${SITE.name} : services, réalisations, formations, blog et contact.`,
     url: SITE.url,
-    icon: Globe,
+    logoKey: "mc",
     category: "principal",
     isCurrent: true,
   },
@@ -35,7 +35,7 @@ export const ECOSYSTEM_SITES: EcosystemSite[] = [
     name: "SPC Shortener",
     description: `Raccourcisseur de liens officiel, réservé exclusivement aux contenus de ${SITE.name}.`,
     url: SITE.shortUrl,
-    icon: Link2,
+    logoKey: "shortener",
     category: "outil",
   },
   {
@@ -43,7 +43,7 @@ export const ECOSYSTEM_SITES: EcosystemSite[] = [
     name: "Espace Formateur",
     description: "Portail dédié aux formateurs pour la gestion de leurs sessions et de leurs apprenants.",
     url: SITE.url,
-    icon: GraduationCap,
+    logoKey: "instructor",
     category: "formation",
   },
   {
@@ -51,7 +51,7 @@ export const ECOSYSTEM_SITES: EcosystemSite[] = [
     name: "Espace Apprenant",
     description: `Portail dédié aux étudiants inscrits aux formations ${SITE.name}.`,
     url: SITE.url,
-    icon: Users,
+    logoKey: "student",
     category: "formation",
   },
   {
@@ -59,7 +59,7 @@ export const ECOSYSTEM_SITES: EcosystemSite[] = [
     name: "SPC Meet",
     description: `Plateforme de visioconférence pour les réunions et sessions à distance de ${SITE.name}.`,
     url: SITE.url,
-    icon: Video,
+    logoKey: "meet",
     category: "communication",
   },
   {
@@ -67,7 +67,7 @@ export const ECOSYSTEM_SITES: EcosystemSite[] = [
     name: "Documentation officielle",
     description: `Guides, procédures et ressources techniques de ${SITE.name}.`,
     url: SITE.docsUrl,
-    icon: BookOpen,
+    logoKey: "docs",
     category: "outil",
   },
 ];
