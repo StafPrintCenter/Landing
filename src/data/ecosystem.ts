@@ -68,8 +68,8 @@ export const ECOSYSTEM_SITES: EcosystemSite[] = [
     name: "SPC Arcade",
     description: `Hub de jeux interactifs pour se divertir tout en développant ses compétences techniques.`,
     url: SITE.url,
-    logoKey: "arcarde",
-    category: "communication",
+    logoKey: "arcade",
+    category: "divertissement",
   },
   {
     id: "documentation",
