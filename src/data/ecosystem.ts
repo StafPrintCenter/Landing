@@ -18,6 +18,7 @@ export const ECOSYSTEM_CATEGORY_LABELS: Record<EcosystemSiteCategory, string> = 
   outil: "Outils",
   formation: "Formation",
   communication: "Communication",
+  divertissement: "Divertissement",
 };
 
 export const ECOSYSTEM_SITES: EcosystemSite[] = [
