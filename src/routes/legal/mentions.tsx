@@ -38,8 +38,10 @@ function getSections(): LegalSection[] {
           <Field label="Activité" value={SITE.activity} icon={SquareActivity} />
           <Field label="Adresse web" value={SITE.url} icon={Globe} />
           <Field label="Email" value={SITE.email} icon={Mail} />
-          <Field label="Gérant" value={SITE.manager} icon={User} />
+          <Field label="Gérant & Directeur de la publication" value={SITE.manager} icon={User} />
           <Field label="Adresse" value={SITE.city} icon={MapPin} />
+          <Field label="Registre du Commerce" value="RB/PNO/21 A 28335" icon={User} />
+          <Field label="N° IFU" value="0202011465964" icon={MapPin} />
           <Field label="Téléphone" value={SITE.phone} icon={Phone} />
           <Field label="WhatsApp" value={SITE.whatsapp} icon={Mail} />
         </dl>
@@ -51,9 +53,17 @@ function getSections(): LegalSection[] {
       icon: Server,
       title: "Hébergement",
       content: (
-        <p>
-          Le site est hébergé sur une infrastructure cloud sécurisée assurant la disponibilité, l'intégrité et la confidentialité des données échangées via un protocole chiffré (SSL/HTTPS).
-        </p>
+        <div className="space-y-4">
+          <p>
+            Le site internet et l'ensemble de ses services associés sont hébergés par la société LWS (Ligne Web Services) sur une infrastructure cloud sécurisée assurant la disponibilité, l'intégrité et la confidentialité des données échangées via un protocole chiffré (SSL/HTTPS).
+          </p>
+
+          <ul className="list-disc space-y-4 pl-5">
+            <li><span className="font-bold">Hébergeur :</span>{" "} LWS (Ligne Web Services)</li>
+            <li><span className="font-bold">Site web :</span>{" "} www.lws.fr</li>
+            <li><span className="font-bold">Adresse du siège social :</span>{" "} 10, rue Penthièvre, 75008 Paris, France</li>
+          </ul>
+        </div>
       ),
     },
     {
@@ -63,10 +73,15 @@ function getSections(): LegalSection[] {
       title: "Propriété intellectuelle",
       content: (
         <p>
-          L'ensemble des éléments figurant sur ce site (marques, logos, textes, visuels, photographies, éléments graphiques, maquettes, vidéos et code source) est la propriété exclusive de <span className="font-bold">{SITE.name}</span>, sauf mention contraire. <br />
+          Les éléments créés spécifiquement pour <span className="font-bold">{SITE.name}</span>, notamment les textes, photographies, visuels, éléments graphiques, maquettes, vidéos, interfaces et développements spécifiques, sont protégés par les dispositions applicables en matière de propriété intellectuelle, sauf mention contraire. <br />
 
-          Toute reproduction, représentation, modification, publication, adaptation ou exploitation totale ou partielle de ces éléments, quel que soit le moyen ou le procédé utilisé, est strictement interdite sans l'autorisation écrite préalable de {SITE.name}. <br />
-          Toute exploitation non autorisée sera considérée comme constitutive d'une contrefaçon et poursuivie conformément aux lois en vigueur au Bénin.
+          Les marques, logos, noms commerciaux, contenus et autres éléments appartenant à des tiers demeurent la propriété de leurs titulaires respectifs et sont utilisés conformément aux autorisations, licences ou conditions d'utilisation applicables. <br />
+
+          Toute reproduction, représentation, modification, publication, adaptation ou exploitation, totale ou partielle, des éléments appartenant à <span className="font-bold">{SITE.name}</span> est interdite sans son autorisation écrite préalable, sous réserve des exceptions prévues par la réglementation applicable. <br />
+
+          Certains éléments utilisés sur le site, notamment des photographies, icônes, typographies, illustrations, bibliothèques logicielles ou composants techniques, peuvent provenir de ressources ou services tiers. Ces éléments sont utilisés conformément aux licences ou conditions d'utilisation applicables et restent soumis aux droits de leurs auteurs, éditeurs ou titulaires respectifs. <br /><br />
+
+          <span className="italic">L'utilisation d'une ressource tierce sur ce site ne constitue aucun transfert de propriété au profit de {SITE.name}.</span>
         </p>
       ),
     },
@@ -78,7 +93,7 @@ function getSections(): LegalSection[] {
       content: (
         <div className="space-y-4">
           <p>
-            <span className="font-bold">{SITE.name}</span> s'engage à protéger la vie privée des utilisateurs de ses services et plateformes.
+            <span className="font-bold">{SITE.name}</span> s'engage à protéger la vie privée des utilisateurs conformément à la législation sur la protection des données personnelles en vigueur en République du Bénin (Loi n° 2017-20 portant code du numérique).
           </p>
 
           <ul className="list-disc space-y-4 pl-5">
