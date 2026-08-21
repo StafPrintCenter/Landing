@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Building2, Server, Copyright, ShieldCheck, Cookie, Scale, Mail, Phone, MapPin, FileText, SquareActivity, Globe, User, type LucideIcon, } from "lucide-react";
+import { Building2, Server, Copyright, ShieldCheck, Cookie, Scale, Mail, Phone, MapPin, FileText, SquareActivity, Globe, User, type LucideIcon, Briefcase, Landmark, } from "lucide-react";
 import { LegalLayout, type LegalSection } from "@/components/pages/legal";
 import { SITE } from "@/data/site";
 
