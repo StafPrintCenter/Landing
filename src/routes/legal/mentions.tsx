@@ -40,8 +40,8 @@ function getSections(): LegalSection[] {
           <Field label="Email" value={SITE.email} icon={Mail} />
           <Field label="Gérant & Directeur de la publication" value={SITE.manager} icon={User} />
           <Field label="Adresse" value={SITE.city} icon={MapPin} />
-          <Field label="Registre du Commerce" value="RB/PNO/21 A 28335" icon={User} />
-          <Field label="N° IFU" value="0202011465964" icon={MapPin} />
+          <Field label="Registre du Commerce" value="RB/PNO/21 A 28335" icon={Briefcase} />
+          <Field label="N° IFU" value="0202011465964" icon={Landmark} />
           <Field label="Téléphone" value={SITE.phone} icon={Phone} />
           <Field label="WhatsApp" value={SITE.whatsapp} icon={Mail} />
         </dl>
