@@ -191,7 +191,7 @@ function MentionsPage() {
       badge="Document officiel"
       title="Mentions légales"
       description={`Les informations légales relatives à l'édition, l'hébergement et l'utilisation du site ${SITE.name}.`}
-      lastUpdated="30 juin 2026"
+      lastUpdated="21 août 2026"
       sections={getSections()}
       contactQuestion="Une question sur ces mentions légales ?"
     />
