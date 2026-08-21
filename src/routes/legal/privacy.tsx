@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ShieldCheck, Database, Target, Lock, UserCheck, ServerCog } from "lucide-react";
+import { ShieldCheck, Database, Target, Lock, UserCheck, ServerCog, Clock } from "lucide-react";
 import { LegalLayout, type LegalSection } from "@/components/pages/legal";
 import { SITE } from "@/data/site";
 
@@ -98,43 +98,70 @@ function getSections(): LegalSection[] {
         <div>
           <p>Vos données sont strictement utilisées pour :</p>
 
-          <ol className="list-decimal pl-5 space-y-2 mt-4">
+          <ol className="mt-4 list-decimal space-y-2 pl-5">
             <li>
-              <span className="font-bold">La gestion de vos commandes :</span>{" "} Établissement des devis, facturation, suivi de production et livraison des travaux d'impression ou digitaux.
+              <span className="font-bold">La gestion de vos commandes :</span>{" "} Établissement des devis, facturation, suivi de production et livraison des travaux d'impression ou digitaux (exécution contractuelle).
             </li>
             <li>
-              <span className="font-bold">Le suivi pédagogique :</span>{" "} Inscription, communication et accompagnement des apprenants aux formations.
+              <span className="font-bold">Le suivi pédagogique :</span>{" "} Inscription, communication et accompagnement des apprenants aux formations (exécution contractuelle).
             </li>
             <li>
-              <span className="font-bold">Le support & la relation client :</span>{" "} Réponse à vos questions, assistance technique et suivi après-vente.
+              <span className="font-bold">Le support & la relation client :</span>{" "} Réponse à vos questions, assistance technique et suivi après-vente (intérêt légitime).
             </li>
             <li>
-              <span className="font-bold">L'amélioration de nos services :</span>{" "} Analyses internes pour optimiser nos prestations et la navigation sur notre site.
+              <span className="font-bold">Le recrutement :</span>{" "} Évaluation des candidatures pour des offres d'emploi ou de stage (mesures précontractuelles).
             </li>
             <li>
-              <span className="font-bold">
-                La mesure d'audience et d'engagement :
-              </span>{" "}
-              Analyse des performances de nos campagnes d'information (vues, taux de clic, fermetures des annonces) ainsi que mesure du trafic acheminé via notre service de redirection{" "}
-              <code className="rounded bg-muted px-1.5 py-0.5 text-[13px]"> {SITE.shortUrl}</code>.
+              <span className="font-bold">La mesure d'audience et d'engagement :</span>{" "} Analyse des performances de nos bannières ainsi que mesure du trafic via notre service de redirection{" "}
+              <code className="rounded bg-muted px-1.5 py-0.5 text-[13px]">{SITE.shortUrl}</code>{" "} et Google Analytics (consentement).
             </li>
           </ol>
         </div>
       ),
     },
     {
-      id: "non-transmission",
+      id: "conservation",
       number: "03",
-      icon: ShieldCheck,
-      title: "Engagement de non-transmission et confidentialité",
+      icon: Clock,
+      title: "Durée de conservation des données",
       content: (
         <div>
-          <ul className="list-disc pl-5 space-y-2 mt-2">
+          <p>Afin de respecter le principe de minimisation, vos données sont conservées pour des durées limitées :</p>
+
+          <ul className="mt-4 list-disc space-y-2 pl-5">
             <li>
-              <span className="font-bold">Aucune revente :</span>{" "} {SITE.name} s'engage formellement à ne jamais vendre, louer, échanger ou céder vos données personnelles ou vos fichiers de projet à des tiers à des fins commerciales ou publicitaires.
+              <span className="font-bold">Données prospects / formulaires :</span>{" "}
+              Conservées pendant une durée maximale de 3 ans à compter du dernier contact.
+            </li>
+            <li>
+              <span className="font-bold">Données clients & facturation :</span>{" "} Conservées pendant 10 ans conformément aux obligations légales et comptables.
+            </li>
+            <li>
+              <span className="font-bold">Fichiers créatifs de projet :</span>{" "} Conservés pendant la durée de réalisation du projet, puis archivés de manière sécurisée pendant 2 ans avant suppression complète.
+            </li>
+            <li>
+              <span className="font-bold">Données de candidatures :</span>{" "} Conservées pendant 2 ans maximum après le dernier échange.
+            </li>
+          </ul>
+        </div>
+      ),
+    },
+    {
+      id: "non-transmission",
+      number: "04",
+      icon: ShieldCheck,
+      title: "Engagement de confidentialité et sous-traitants",
+      content: (
+        <div>
+          <ul className="mt-2 list-disc space-y-2 pl-5">
+            <li>
+              <span className="font-bold">Aucune revente :</span>{" "} {SITE.name} s'engage formellement à ne jamais vendre, louer, échanger ou céder vos données personnelles ou vos fichiers de projet à des tiers à des fins commerciales.
             </li>
             <li>
               <span className="font-bold">Accès restreint :</span>{" "} Seuls les membres habilités de notre équipe (graphistes, imprimeurs, développeurs, formateurs) ont accès aux données strictement nécessaires à la réalisation de leur mission.
+            </li>
+            <li>
+              <span className="font-bold">Sous-traitants techniques :</span>{" "} Vos données peuvent être hébergées ou traitées par nos prestataires de confiance : LWS (infrastructure cloud sécurisée) et Google Ireland Ltd. (Google Analytics pour la mesure d'audience anonymisée).
             </li>
           </ul>
         </div>
@@ -142,14 +169,14 @@ function getSections(): LegalSection[] {
     },
     {
       id: "securite-donnees",
-      number: "04",
+      number: "05",
       icon: Lock,
       title: "Sécurité de vos données et fichiers créatifs",
       content: (
         <div>
           <p>Nous mettons en œuvre des mesures de sécurité techniques et organisationnelles renforcées :</p>
 
-          <ul className="list-disc pl-5 space-y-2 mt-4">
+          <ul className="mt-4 list-disc space-y-2 pl-5">
             <li>
               <span className="font-bold">Hébergement sécurisé :</span>{" "} Vos données et fichiers sources sont stockés sur des serveurs cloud sécurisés, avec accès restreint et connexions chiffrées (SSL/HTTPS).
             </li>
@@ -162,9 +189,9 @@ function getSections(): LegalSection[] {
     },
     {
       id: "stockage-local",
-      number: "05",
+      number: "06",
       icon: ServerCog,
-      title: "Cookies et technologies de stockage local",
+      title: "Cookies, stockage local et technologies de suivi",
       content: (
         <div className="space-y-6">
           <p>
@@ -178,12 +205,12 @@ function getSections(): LegalSection[] {
               Ces informations sont enregistrées uniquement sur votre appareil afin de mémoriser certaines préférences et faciliter votre navigation. Elles ne sont jamais transmises à des tiers.
             </p>
 
-            {/* 1. VUE MOBILE : Cartes empilées sans aucun risque de débordement */}
+            {/* VUE MOBILE */}
             <div className="mt-4 space-y-2.5 sm:hidden">
               {localStorageItems.map((item, idx) => (
-                <div key={idx} className="rounded-xl border border-border bg-card p-3.5 shadow-xs space-y-1">
+                <div key={idx} className="space-y-1 rounded-xl border border-border bg-card p-3.5 shadow-xs">
                   <div className="flex items-start justify-between gap-2">
-                    <span className="font-medium text-xs text-foreground">{item.title}</span>
+                    <span className="text-xs font-medium text-foreground">{item.title}</span>
                     <span className="shrink-0 rounded-md bg-muted px-2 py-0.5 text-[11px] font-medium text-muted-foreground">
                       {item.duration}
                     </span>
@@ -193,7 +220,7 @@ function getSections(): LegalSection[] {
               ))}
             </div>
 
-            {/* 2. VUE DESKTOP : Tableau classique propre */}
+            {/* VUE DESKTOP */}
             <div className="mt-4 hidden w-full overflow-hidden rounded-xl border border-border bg-card shadow-xs sm:block">
               <table className="w-full text-left text-sm">
                 <thead className="border-b border-border bg-muted/60 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
@@ -205,57 +232,13 @@ function getSections(): LegalSection[] {
                 </thead>
 
                 <tbody className="divide-y divide-border text-foreground">
-                  <tr className="hover:bg-muted/30 transition-colors">
-                    <td className="px-4 py-3 font-medium">Brouillon : Demande de devis</td>
-                    <td className="px-4 py-3">Sauvegarde temporaire du formulaire</td>
-                    <td className="whitespace-nowrap px-4 py-3 text-muted-foreground">6 heures</td>
-                  </tr>
-
-                  <tr className="hover:bg-muted/30 transition-colors">
-                    <td className="px-4 py-3 font-medium">Brouillon : Offre d'emploi</td>
-                    <td className="px-4 py-3">Sauvegarde temporaire de candidature</td>
-                    <td className="whitespace-nowrap px-4 py-3 text-muted-foreground">24 heures</td>
-                  </tr>
-
-                  <tr className="hover:bg-muted/30 transition-colors">
-                    <td className="px-4 py-3 font-medium">Brouillon : Demande de stage</td>
-                    <td className="px-4 py-3">Sauvegarde temporaire du formulaire</td>
-                    <td className="whitespace-nowrap px-4 py-3 text-muted-foreground">2 jours</td>
-                  </tr>
-
-                  <tr className="hover:bg-muted/30 transition-colors">
-                    <td className="px-4 py-3 font-medium">Brouillon : Déposer un avis</td>
-                    <td className="px-4 py-3">Sauvegarde d'un avis en cours de rédaction</td>
-                    <td className="whitespace-nowrap px-4 py-3 text-muted-foreground">3 jours</td>
-                  </tr>
-
-                  <tr className="hover:bg-muted/30 transition-colors">
-                    <td className="px-4 py-3 font-medium">
-                      Identifiant visiteur
-                      <br />
-                      <code className="text-xs font-normal text-muted-foreground">spc_visitor_id</code>
-                    </td>
-                    <td className="px-4 py-3">Reconnaissance anonyme des visites récurrentes</td>
-                    <td className="px-4 py-3 text-muted-foreground">Jusqu'au nettoyage du navigateur</td>
-                  </tr>
-
-                  <tr className="hover:bg-muted/30 transition-colors">
-                    <td className="px-4 py-3 font-medium">Newsletter</td>
-                    <td className="px-4 py-3">Mémorisation de votre choix (abonné, masqué ou reporté)</td>
-                    <td className="whitespace-nowrap px-4 py-3 text-muted-foreground">Persistant</td>
-                  </tr>
-
-                  <tr className="hover:bg-muted/30 transition-colors">
-                    <td className="px-4 py-3 font-medium">Historique de recherche</td>
-                    <td className="px-4 py-3">Conservation des 8 dernières recherches</td>
-                    <td className="whitespace-nowrap px-4 py-3 text-muted-foreground">Persistant</td>
-                  </tr>
-
-                  <tr className="hover:bg-muted/30 transition-colors">
-                    <td className="px-4 py-3 font-medium">Consentement cookies</td>
-                    <td className="px-4 py-3">Mémorisation de votre choix de consentement</td>
-                    <td className="whitespace-nowrap px-4 py-3 text-muted-foreground">Persistant</td>
-                  </tr>
+                  {localStorageItems.map((item, idx) => (
+                    <tr key={idx} className="transition-colors hover:bg-muted/30">
+                      <td className="px-4 py-3 font-medium">{item.title}</td>
+                      <td className="px-4 py-3">{item.desc}</td>
+                      <td className="whitespace-nowrap px-4 py-3 text-muted-foreground">{item.duration}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -270,26 +253,29 @@ function getSections(): LegalSection[] {
 
             <ul className="mt-3 list-disc space-y-2 pl-5 text-sm">
               <li>
-                <strong>Annonces & notifications :</strong> mémorisation des bannières et notifications fermées pendant votre session.
+                <strong>Annonces & notifications :</strong> Mémorisation des bannières et notifications fermées pendant votre session.
               </li>
               <li>
-                <strong>Navigation :</strong> restauration automatique de la position de défilement lors du retour sur une page précédente.
+                <strong>Navigation :</strong> Restauration automatique de la position de défilement lors du retour sur une page précédente.
               </li>
               <li>
-                <strong>Session de visite :</strong> prévention des affichages multiples du module de newsletter durant une même session.
+                <strong>Session de visite :</strong> Prévention des affichages multiples du module de newsletter durant une même session.
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="font-semibold">c. Mesure d'audience et cookies tiers</h3>
+            <h3 className="font-semibold">c. Cookies tiers et mesure d'audience</h3>
 
             <ul className="mt-3 list-disc space-y-2 pl-5 text-sm">
               <li>
-                <strong>Google Analytics (gtag.js) :</strong> utilisé uniquement si vous acceptez les cookies d'analyse. L'anonymisation de l'adresse IP est activée.
+                <strong>Google Analytics (gtag.js) :</strong> Utilisé uniquement si vous acceptez les cookies d'analyse via le bandeau. L'anonymisation de l'adresse IP est activée par défaut.
               </li>
               <li>
-                <strong>Absence de traçage publicitaire :</strong> aucun cookie de ciblage publicitaire ou de profilage commercial tiers n'est déposé sur votre appareil.
+                <strong>Mesure d'audience interne :</strong> Les statistiques d'interaction sur <code className="rounded bg-muted px-1.5 py-0.5 text-[13px]">{SITE.shortUrl}</code> sont traitées en interne à des fins statistiques et de sécurité.
+              </li>
+              <li>
+                <strong>Absence de traçage publicitaire :</strong> Aucun cookie de ciblage publicitaire ou de profilage commercial tiers n'est déposé sur votre appareil.
               </li>
             </ul>
           </div>
@@ -298,61 +284,34 @@ function getSections(): LegalSection[] {
     },
     {
       id: "droits",
-      number: "06",
+      number: "07",
       icon: UserCheck,
       title: "Vos droits sur vos données",
       content: (
         <div>
-          <p>Conformément à la réglementation sur la protection des données personnelles, vous disposez des droits suivants :</p>
+          <p>
+            Conformément au Code du numérique en République du Bénin (Loi n° 2017-20), vous disposez des droits d'accès, de rectification, de suppression ("droit à l'oubli") et d'opposition sur vos données personnelles.
+          </p>
 
-          <ul className="list-disc pl-5 space-y-2 mt-4">
+          <ul className="mt-4 list-disc space-y-2 pl-5">
             <li>
-              <span className="font-bold">Droit d’accès et de rectification :</span>{" "} Consulter ou corriger vos informations personnelles.
+              <span className="font-bold">Droit d’accès et de rectification :</span> Consulter ou corriger vos informations personnelles.
             </li>
             <li>
-              <span className="font-bold">Droit à l’effacement ("Droit à l'oubli") :</span>{" "} Demander la suppression de vos données personnelles et fichiers de nos serveurs, sous réserve des obligations légales de conservation (ex. facturation).
+              <span className="font-bold">Droit à l’effacement :</span> Demander la suppression de vos données personnelles et fichiers de nos serveurs (hors obligations légales de conservation).
             </li>
             <li>
-              <span className="font-bold">Droit d’opposition et de limitation :</span>{" "} Refuser ou restreindre certains traitements de vos données.
+              <span className="font-bold">Droit d’opposition :</span> Refuser ou restreindre certains traitements de vos données.
             </li>
           </ul>
-          <br />
-          Pour exercer l'un de ces droits, contactez-nous directement par e-mail à <a href={`mailto:${SITE.email}`} className="text-primary underline">{SITE.email}</a>. Nous traiterons votre demande dans un délai maximal de 72 heures.
-        </div>
-      ),
-    },
-    {
-      id: "cookies",
-      number: "07",
-      icon: ServerCog,
-      title: "Cookies et technologies de suivi",
-      content: (
-        <div>
-          <ul className="list-disc pl-5 space-y-2 mt-2">
-            <li>
-              <span className="font-bold">
-                Cookies strictement nécessaires :
-              </span>{" "}
-              Utilisés uniquement afin d'assurer le bon fonctionnement technique du site, notamment la navigation, la mémorisation de session et l'affichage des préférences utilisateur.
-            </li>
 
-            <li>
-              <span className="font-bold">
-                Mesure d'audience interne :
-              </span>{" "}
-              Les statistiques relatives aux redirections effectuées via{" "}
-              <code className="rounded bg-muted px-1.5 py-0.5 text-[13px]"> {SITE.shortUrl}</code>{" "}
-              ainsi que le comptage des vues, clics et fermetures de nos annonces sont réalisés exclusivement à des fins statistiques internes, d'amélioration de nos services et de sécurité.
-            </li>
-
-            <li>
-              <span className="font-bold">
-                Absence de traçage tiers :
-              </span>{" "}
-              Aucun cookie publicitaire, outil de profilage ou dispositif de suivi comportemental tiers n'est utilisé à votre insu à des fins commerciales.
-              Vous pouvez à tout moment configurer votre navigateur afin de bloquer, limiter ou supprimer les cookies enregistrés.
-            </li>
-          </ul>
+          <p className="mt-4">
+            Pour exercer l'un de ces droits, contactez-nous directement par e-mail à{" "}
+            <a href={`mailto:${SITE.email}`} className="text-primary underline font-medium">
+              {SITE.email}
+            </a>
+            . Nous traiterons votre demande dans un délai maximal de 72 heures. Vous pouvez également adresser une réclamation auprès de l'Autorité de Protection des Données Personnelles (APDP) du Bénin.
+          </p>
         </div>
       ),
     },
@@ -366,7 +325,7 @@ function ConfidentialitePage() {
       badge="Protection des données"
       title="Politique de confidentialité"
       description={`Chez ${SITE.name}, nous attachons une importance capitale à la protection de vos données personnelles et à la confidentialité de vos projets créatifs. Cette politique détaille comment nous collectons, utilisons, stockons et protégeons vos informations.`}
-      lastUpdated="30 juin 2026"
+      lastUpdated="21 août 2026"
       sections={getSections()}
       contactQuestion="Une question sur la gestion de vos données personnelles ?"
     />
