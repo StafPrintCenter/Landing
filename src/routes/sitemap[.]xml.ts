@@ -6,7 +6,7 @@ import { fetchPublicArticles } from "@/stores/useArticlesStore";
 import { fetchPublicJobOffers } from "@/stores/useJobsStore";
 
 // 1. Sécurisation de l'URL de base
-const RAW_URL = import.meta.env.VITE_SITE_URL || "https://stafprint.com";
+const RAW_URL = import.meta.env.VITE_SITE_URL;
 const BASE_URL = RAW_URL.replace(/\/$/, "");
 
 // Date du jour pour les entités dépourvues de date ISO
