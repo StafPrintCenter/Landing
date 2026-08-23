@@ -4,3 +4,5 @@ export { EcosystemCard } from "./Card";
 export { EcosystemFilters, type EcosystemSortDirection } from "./Filters";
 export { EcosystemMobileTrigger } from "./MobileTrigger";
 export { EcosystemMobileSheet } from "./MobileSheet";
+export { EcosystemSearchBar } from "./SearchBar";
+export { EcosystemResultsCount } from "./ResultsCount";
