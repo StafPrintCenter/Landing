@@ -74,8 +74,7 @@ function EcosystemPage() {
       list = list.filter(
         (s) =>
           s.name.toLowerCase().includes(q) ||
-          s.description.toLowerCase().includes(q) ||
-          s.tags?.some((t) => t.toLowerCase().includes(q))
+          s.description.toLowerCase().includes(q)
       );
     }
 
