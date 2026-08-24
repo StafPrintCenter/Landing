@@ -1,18 +1,35 @@
-import { ArrowDownUp, ArrowUpDown } from "lucide-react";
+import { ArrowDownUp, ArrowUpDown, Layers } from "lucide-react";
 import { ECOSYSTEM_CATEGORY_LABELS, type EcosystemSiteCategory } from "@/data/ecosystem";
 
 const CATEGORIES: EcosystemSiteCategory[] = ["principal", "outil", "formation", "communication"];
 
-export type EcosystemSortDirection = "asc" | "desc";
+export type EcosystemSortOption = "default" | "asc" | "desc";
 
 interface EcosystemFiltersProps {
   category: EcosystemSiteCategory | "Tout";
   onCategoryChange: (c: EcosystemSiteCategory | "Tout") => void;
-  sortDir: EcosystemSortDirection;
-  onSortDirChange: (d: EcosystemSortDirection) => void;
+  sortBy: EcosystemSortOption;
+  onSortChange: (s: EcosystemSortOption) => void;
 }
 
-export function EcosystemFilters({ category, onCategoryChange, sortDir, onSortDirChange }: EcosystemFiltersProps) {
+export function EcosystemFilters({ category, onCategoryChange, sortBy, onSortChange }: EcosystemFiltersProps) {
+  const toggleSort = () => {
+    if (sortBy === "default") onSortChange("asc");
+    else if (sortBy === "asc") onSortChange("desc");
+    else onSortChange("default");
+  };
+
+  const getSortLabel = () => {
+    switch (sortBy) {
+      case "asc":
+        return "Nom : A → Z";
+      case "desc":
+        return "Nom : Z → A";
+      default:
+        return "Ordre par défaut";
+    }
+  };
+
   return (
     <div className="border-b border-border/60 pb-6">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
@@ -43,15 +60,20 @@ export function EcosystemFilters({ category, onCategoryChange, sortDir, onSortDi
           ))}
         </div>
 
-        {/* Tri */}
+        {/* Tri à 3 états (default -> asc -> desc) */}
         <button
           type="button"
-          onClick={() => onSortDirChange(sortDir === "asc" ? "desc" : "asc")}
-          className="inline-flex items-center gap-2 self-start rounded-lg border border-border bg-card px-3 py-2 text-sm font-medium hover:border-primary hover:text-primary cursor-pointer lg:self-auto"
-          title={sortDir === "asc" ? "Trier Z → A" : "Trier A → Z"}
+          onClick={toggleSort}
+          className={`inline-flex items-center gap-2 self-start rounded-lg border px-3 py-2 text-sm font-medium transition cursor-pointer lg:self-auto ${sortBy !== "default"
+            ? "border-primary bg-primary/5 text-primary"
+            : "border-border bg-card hover:border-primary hover:text-primary"
+            }`}
+          title="Changer le tri (Par défaut / A → Z / Z → A)"
         >
-          {sortDir === "asc" ? <ArrowDownUp size={16} /> : <ArrowUpDown size={16} />}
-          <span>{sortDir === "asc" ? "A → Z" : "Z → A"}</span>
+          {sortBy === "default" && <Layers size={16} />}
+          {sortBy === "asc" && <ArrowDownUp size={16} />}
+          {sortBy === "desc" && <ArrowUpDown size={16} />}
+          <span>{getSortLabel()}</span>
         </button>
       </div>
     </div>
