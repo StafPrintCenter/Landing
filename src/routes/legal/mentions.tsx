@@ -36,7 +36,7 @@ function getSections(): LegalSection[] {
         <dl className="grid gap-x-8 gap-y-3 sm:grid-cols-2">
           <Field label="Raison sociale" value={SITE.name} icon={Building2} />
           <Field label="Activité" value={SITE.activity} icon={SquareActivity} />
-          <Field label="Adresse web" value={SITE.url} icon={Globe} />
+          <Field label="Adresse web" value={SITE.landingUrl} icon={Globe} />
           <Field label="Email" value={SITE.email} icon={Mail} />
           <Field label="Gérant & Directeur de la publication" value={SITE.manager} icon={User} />
           <Field label="Adresse" value={SITE.city} icon={MapPin} />
