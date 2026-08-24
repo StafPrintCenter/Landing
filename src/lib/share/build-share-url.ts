@@ -11,11 +11,11 @@ export function buildShareUrl(path: string) {
 
   const base =
     (SITE as { url?: string }).url ||
-    process.env.URL ||
+    process.env.LANDING ||
     process.env.DEPLOY_PRIME_URL;
 
   if (!base) {
-    throw new Error("Base URL is not defined (SITE.url or env URL missing)");
+    throw new Error("Base URL is not defined (SITE_LINK.landingUrl or env URL missing)");
   }
 
   const cleanBase = base.replace(/\/$/, "");
