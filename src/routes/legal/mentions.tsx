@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Building2, Server, Copyright, ShieldCheck, Cookie, Scale, Mail, Phone, MapPin, FileText, SquareActivity, Globe, User, type LucideIcon, Briefcase, Landmark, } from "lucide-react";
 import { LegalLayout, type LegalSection } from "@/components/pages/legal";
-import { SITE } from "@/data/site";
+import { SITE, SITE_LINK } from "@/data/site";
 
 export const Route = createFileRoute("/legal/mentions")({
   head: () => ({
@@ -36,7 +36,7 @@ function getSections(): LegalSection[] {
         <dl className="grid gap-x-8 gap-y-3 sm:grid-cols-2">
           <Field label="Raison sociale" value={SITE.name} icon={Building2} />
           <Field label="Activité" value={SITE.activity} icon={SquareActivity} />
-          <Field label="Adresse web" value={SITE.landingUrl} icon={Globe} />
+          <Field label="Adresse web" value={SITE_LINK.landingUrl} icon={Globe} />
           <Field label="Email" value={SITE.email} icon={Mail} />
           <Field label="Gérant & Directeur de la publication" value={SITE.manager} icon={User} />
           <Field label="Adresse" value={SITE.city} icon={MapPin} />
@@ -105,7 +105,7 @@ function getSections(): LegalSection[] {
               <span className="font-bold">Données de navigation et de redirection :</span>{" "}
               Lors de l'utilisation de notre site internet ou de notre service de réduction de liens{" "}
               <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[0.9em]">
-                <a href={SITE.shortUrl} target="_blank" rel="noopener noreferrer" className="text-primary no-underline hover:underline">{SITE.shortUrl}</a>
+                <a href={SITE_LINK.shortUrl} target="_blank" rel="noopener noreferrer" className="text-primary no-underline hover:underline">{SITE_LINK.shortUrl}</a>
               </code>
               , certaines informations techniques sont collectées automatiquement à des fins de mesure d'audience, d'analyse statistique et d'amélioration de nos services.
 
