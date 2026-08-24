@@ -3,7 +3,7 @@ import { Outlet, createRootRouteWithContext, HeadContent, Scripts } from "@tanst
 import { type ReactNode } from "react";
 import { Toaster } from "sonner";
 import appCss from "../styles.css?url";
-import { SITE } from "@/data/site";
+import { SITE, SITE_LINK } from "@/data/site";
 import logo from "@/assets/logos.json";
 import { buildShareUrl } from "@/lib/share/build-share-url";
 import { NotFoundComponent, ErrorComponent } from "@/components/errors";
@@ -66,12 +66,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           children: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "PrintShop",
-            "@id": `${SITE.url}/#organization`,
+            "@id": `${SITE_LINK.landingUrl}/#organization`,
             name: SITE.name,
             alternateName: ["SPC", "STAF PRINT"],
             image: logo.meta,
             logo: logo.meta,
-            url: SITE.url,
+            url: SITE_LINK.landingUrl,
             description: OPTIMIZED_DESC,
             founder: { "@type": "Person", name: SITE.manager },
             telephone: SITE.phone.replace(/\s/g, ""),
@@ -121,10 +121,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           children: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebSite",
-            "@id": `${SITE.url}/#website`,
-            url: SITE.url,
+            "@id": `${SITE_LINK.landingUrl}/#website`,
+            url: SITE_LINK.landingUrl,
             name: SITE.name,
-            publisher: { "@id": `${SITE.url}/#organization` },
+            publisher: { "@id": `${SITE_LINK.landingUrl}/#organization` },
             inLanguage: "fr-BJ"
           }),
         }
