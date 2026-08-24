@@ -25,7 +25,7 @@ export const Route = createFileRoute("/tools/appointment")({
     meta: [
       { title: `Prendre rendez-vous | ${SITE.name}` },
       {
-        name: "description", content: `Réservez un rendez-vous en ligne ou en présentiel avec {SITE.name} à Porto-Novo. Choisissez votre créneau et confirmez en quelques étapes.`
+        name: "description", content: `Réservez un rendez-vous en ligne ou en présentiel avec ${SITE.name} à Porto-Novo. Choisissez votre créneau et confirmez en quelques étapes.`
       },
       { property: "og:title", content: `Prendre rendez-vous | ${SITE.name}` },
       { property: "og:description", content: "Réservez facilement un créneau en ligne ou en présentiel." },
