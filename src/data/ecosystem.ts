@@ -1,5 +1,5 @@
 import logos from "@/assets/logos.json";
-import { SITE } from "@/data/site";
+import { SITE, SITE_LINK } from "@/data/site";
 
 export type EcosystemSiteCategory = "principal" | "outil" | "formation" | "communication" | "divertissement";
 
@@ -23,10 +23,10 @@ export const ECOSYSTEM_CATEGORY_LABELS: Record<EcosystemSiteCategory, string> = 
 
 export const ECOSYSTEM_SITES: EcosystemSite[] = [
   {
-    id: "website",
-    name: "Site web",
+    id: "landing",
+    name: "Site vitrine",
     description: `Le site principal de ${SITE.name} : services, réalisations, formations, blog et contact.`,
-    url: SITE.url,
+    url: SITE_LINK.landingUrl,
     logoKey: "mc",
     category: "principal",
     isCurrent: true,
@@ -35,23 +35,23 @@ export const ECOSYSTEM_SITES: EcosystemSite[] = [
     id: "shortener",
     name: "SPC Shortener",
     description: `Raccourcisseur de liens officiel, réservé exclusivement aux contenus de ${SITE.name}.`,
-    url: SITE.shortUrl,
+    url: SITE_LINK.shortUrl,
     logoKey: "shortener",
     category: "outil",
   },
   {
-    id: "teacher-space",
+    id: "instructor",
     name: "Espace Formateur",
     description: "Portail dédié aux formateurs pour la gestion de leurs sessions et de leurs apprenants.",
-    url: SITE.url,
+    url: SITE_LINK.landingUrl,
     logoKey: "instructor",
     category: "formation",
   },
   {
-    id: "student-space",
+    id: "student",
     name: "Espace Apprenant",
     description: `Portail dédié aux étudiants inscrits aux formations ${SITE.name}.`,
-    url: SITE.url,
+    url: SITE_LINK.landingUrl,
     logoKey: "student",
     category: "formation",
   },
@@ -59,7 +59,7 @@ export const ECOSYSTEM_SITES: EcosystemSite[] = [
     id: "meet",
     name: "SPC Meet",
     description: `Plateforme de visioconférence pour les réunions et sessions à distance de ${SITE.name}.`,
-    url: SITE.url,
+    url: SITE_LINK.landingUrl,
     logoKey: "meet",
     category: "communication",
   },
@@ -67,7 +67,7 @@ export const ECOSYSTEM_SITES: EcosystemSite[] = [
     id: "arcade",
     name: "SPC Arcade",
     description: `Hub de jeux interactifs pour se divertir tout en développant ses compétences techniques.`,
-    url: SITE.arcadeUrl,
+    url: SITE_LINK.arcadeUrl,
     logoKey: "arcade",
     category: "divertissement",
   },
@@ -75,7 +75,7 @@ export const ECOSYSTEM_SITES: EcosystemSite[] = [
     id: "documentation",
     name: "Documentation officielle",
     description: `Guides, procédures et ressources techniques de ${SITE.name}.`,
-    url: SITE.docsUrl,
+    url: SITE_LINK.docsUrl,
     logoKey: "docs",
     category: "outil",
   },
