@@ -2,20 +2,19 @@
  * Construit une URL absolue partageable.
  */
 
-import { SITE } from "@/data/site";
+import { SITE_LINK } from "@/data/site";
 
-export function buildShareUrl(path: string) {
+export function buildShareUrl(path: string): string {
+  // Côté navigateur : utilise l'origine actuelle
   if (typeof window !== "undefined") {
-    return `${window.location.origin}${path}`;
+    return `${window.location.origin}${path.startsWith("/") ? path : `/${path}`}`;
   }
 
-  const base =
-    (SITE as { url?: string }).url ||
-    process.env.LANDING ||
-    process.env.DEPLOY_PRIME_URL;
+  // Côté serveur (SSR / Build) : utilise l'URL configurée dans SITE_LINK
+  const base = SITE_LINK.landingUrl;
 
   if (!base) {
-    throw new Error("Base URL is not defined (SITE_LINK.landingUrl or env URL missing)");
+    throw new Error("Base URL is not defined (VITE_LANDING_URL inside SITE_LINK is missing)");
   }
 
   const cleanBase = base.replace(/\/$/, "");
