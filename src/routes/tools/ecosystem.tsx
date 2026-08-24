@@ -13,12 +13,12 @@ import {
   EcosystemGrid,
   EcosystemMobileTrigger,
   EcosystemMobileSheet,
-  type EcosystemSortDirection,
+  type EcosystemSortOption,
 } from "@/components/pages/tools/ecosystem";
 
 const ecosystemSearchSchema = z.object({
   category: z.string().catch("Tout").default("Tout"),
-  sortDir: z.enum(["asc", "desc"]).catch("asc").default("asc"),
+  sortBy: z.enum(["default", "asc", "desc"]).catch("default").default("default"),
   query: z.string().catch("").default(""),
 });
 
@@ -40,7 +40,7 @@ export const Route = createFileRoute("/tools/ecosystem")({
 });
 
 function EcosystemPage() {
-  const { category, sortDir, query } = useSearch({ from: "/tools/ecosystem" });
+  const { category, sortBy, query } = useSearch({ from: "/tools/ecosystem" });
   const navigate = useNavigate({ from: "/tools/ecosystem" });
 
   const [filtersOpen, setFiltersOpen] = useState(false);
@@ -78,19 +78,26 @@ function EcosystemPage() {
       );
     }
 
-    return [...list].sort((a, b) =>
-      sortDir === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)
-    );
-  }, [category, sortDir, query]);
+    if (sortBy === "default") {
+      return list;
+    }
 
-  const activeFilterCount = (category !== "Tout" ? 1 : 0) + (query.trim() !== "" ? 1 : 0);
+    return [...list].sort((a, b) =>
+      sortBy === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)
+    );
+  }, [category, sortBy, query]);
+
+  const activeFilterCount =
+    (category !== "Tout" ? 1 : 0) +
+    (sortBy !== "default" ? 1 : 0) +
+    (query.trim() !== "" ? 1 : 0);
 
   const filtersPanel = (
     <EcosystemFilters
       category={category as EcosystemSiteCategory | "Tout"}
       onCategoryChange={(c) => updateSearch({ category: c })}
-      sortDir={sortDir as EcosystemSortDirection}
-      onSortDirChange={(d) => updateSearch({ sortDir: d })}
+      sortBy={sortBy as EcosystemSortOption}
+      onSortChange={(s) => updateSearch({ sortBy: s })}
     />
   );
 
