@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ShieldCheck, Database, Target, Lock, UserCheck, ServerCog, Clock } from "lucide-react";
 import { LegalLayout, type LegalSection } from "@/components/pages/legal";
-import { SITE } from "@/data/site";
+import { SITE, SITE_LINK } from "@/data/site";
 
 export const Route = createFileRoute("/legal/privacy")({
   head: () => ({
@@ -59,7 +59,7 @@ function getSections(): LegalSection[] {
             <h3 className="font-semibold">b. Données collectées automatiquement (Redirections & Interactions)</h3>
             <p className="mt-1">
               Lors de l'interaction avec nos liens courts{" "}
-              <code className="rounded bg-muted px-1.5 py-0.5 text-[13px]">{SITE.shortUrl}</code>{" "} ou avec nos bannières et annonces d'information, nous collectons automatiquement certaines données techniques anonymisées ou pseudonymisées.
+              <code className="rounded bg-muted px-1.5 py-0.5 text-[13px]">{SITE_LINK.shortUrl}</code>{" "} ou avec nos bannières et annonces d'information, nous collectons automatiquement certaines données techniques anonymisées ou pseudonymisées.
             </p>
 
             <ul className="mt-4 list-disc space-y-2 pl-5">
@@ -113,7 +113,7 @@ function getSections(): LegalSection[] {
             </li>
             <li>
               <span className="font-bold">La mesure d'audience et d'engagement :</span>{" "} Analyse des performances de nos bannières ainsi que mesure du trafic via notre service de redirection{" "}
-              <code className="rounded bg-muted px-1.5 py-0.5 text-[13px]">{SITE.shortUrl}</code>{" "} et Google Analytics (consentement).
+              <code className="rounded bg-muted px-1.5 py-0.5 text-[13px]">{SITE_LINK.shortUrl}</code>{" "} et Google Analytics (consentement).
             </li>
           </ol>
         </div>
@@ -272,7 +272,7 @@ function getSections(): LegalSection[] {
                 <strong>Google Analytics (gtag.js) :</strong> Utilisé uniquement si vous acceptez les cookies d'analyse via le bandeau. L'anonymisation de l'adresse IP est activée par défaut.
               </li>
               <li>
-                <strong>Mesure d'audience interne :</strong> Les statistiques d'interaction sur <code className="rounded bg-muted px-1.5 py-0.5 text-[13px]">{SITE.shortUrl}</code> sont traitées en interne à des fins statistiques et de sécurité.
+                <strong>Mesure d'audience interne :</strong> Les statistiques d'interaction sur <code className="rounded bg-muted px-1.5 py-0.5 text-[13px]">{SITE_LINK.shortUrl}</code> sont traitées en interne à des fins statistiques et de sécurité.
               </li>
               <li>
                 <strong>Absence de traçage publicitaire :</strong> Aucun cookie de ciblage publicitaire ou de profilage commercial tiers n'est déposé sur votre appareil.
