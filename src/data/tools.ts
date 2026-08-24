@@ -1,5 +1,5 @@
 import { CalendarDays, PackageSearch, Newspaper, Link2, Network, QrCode, FileSignature, Calculator, Download, Users, type LucideIcon } from "lucide-react";
-import { SITE } from "@/data/site";
+import { SITE_LINK } from "@/data/site";
 
 interface ToolBase {
   id: string;
@@ -45,7 +45,7 @@ export const AVAILABLE_TOOLS: AvailableTool[] = [
   },
   {
     id: "shortener",
-    href: SITE.shortUrl,
+    href: SITE_LINK.shortUrl,
     icon: Link2,
     title: "Raccourcir un lien",
     desc: "Générez des liens courts et faciles à partager pour simplifier votre communication.",
