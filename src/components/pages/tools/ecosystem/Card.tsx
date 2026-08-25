@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowUpRight, CheckCircle2 } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, Construction } from "lucide-react";
 import logos from "@/assets/logos.json";
 import { stripProtocol } from "@/lib/domain";
 import { ECOSYSTEM_CATEGORY_LABELS, type EcosystemSite } from "@/data/ecosystem";
@@ -32,16 +32,22 @@ export function EcosystemCard({ site }: EcosystemCardProps) {
             />
           </div>
 
-          {site.isCurrent ? (
-            <span className="inline-flex items-center gap-1 rounded-full bg-success/10 px-2.5 py-1 text-[11px] font-semibold text-success">
-              <CheckCircle2 size={12} /> Vous êtes ici
-            </span>
-          ) : (
-            <ArrowUpRight
-              size={18}
-              className="text-muted-foreground transition-colors group-hover:text-primary"
-            />
-          )}
+          <div className="flex items-center gap-2">
+            {site.isCurrent ? (
+              <span className="inline-flex items-center gap-1 rounded-full bg-success/10 px-2.5 py-1 text-[11px] font-semibold text-success">
+                <CheckCircle2 size={12} /> Vous êtes ici
+              </span>
+            ) : site.status === "building" ? (
+              <span className="inline-flex items-center gap-1 rounded-full border border-amber-500/20 bg-amber-500/10 px-2.5 py-1 text-[11px] font-semibold text-amber-600 dark:text-amber-400">
+                <Construction size={12} /> En construction
+              </span>
+            ) : (
+              <ArrowUpRight
+                size={18}
+                className="text-muted-foreground transition-colors group-hover:text-primary"
+              />
+            )}
+          </div>
         </div>
 
         <h3 className="mt-4 font-display text-lg font-semibold text-foreground transition-colors group-hover:text-primary">
@@ -52,7 +58,7 @@ export function EcosystemCard({ site }: EcosystemCardProps) {
         </p>
       </div>
 
-      {/* Pied de carte : Badge + URL en flex */}
+      {/* Pied de carte : Badge + URL */}
       <div className="mt-6 flex items-center justify-between gap-2 border-t border-border/40 pt-4">
         <span className="inline-flex shrink-0 rounded-md border border-border bg-muted/60 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
           {ECOSYSTEM_CATEGORY_LABELS[site.category]}
