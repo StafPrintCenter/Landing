@@ -4,7 +4,7 @@ import { z } from "zod";
 import { zodValidator } from "@tanstack/zod-adapter";
 import { SiteShell } from "@/components/site/SiteShell";
 import { SITE } from "@/data/site";
-import { ECOSYSTEM_SITES, type EcosystemSiteCategory } from "@/data/ecosystem";
+import { ECOSYSTEM_SITES, type EcosystemSiteCategory, type EcosystemSiteStatus } from "@/data/ecosystem";
 import {
   EcosystemHeader,
   EcosystemSearchBar,
@@ -18,6 +18,7 @@ import {
 
 const ecosystemSearchSchema = z.object({
   category: z.string().catch("Tout").default("Tout"),
+  status: z.enum(["Tout", "available", "building"]).catch("Tout").default("Tout"),
   sortBy: z.enum(["default", "asc", "desc"]).catch("default").default("default"),
   query: z.string().catch("").default(""),
 });
@@ -40,12 +41,11 @@ export const Route = createFileRoute("/tools/ecosystem")({
 });
 
 function EcosystemPage() {
-  const { category, sortBy, query } = useSearch({ from: "/tools/ecosystem" });
+  const { category, status, sortBy, query } = useSearch({ from: "/tools/ecosystem" });
   const navigate = useNavigate({ from: "/tools/ecosystem" });
 
   const [filtersOpen, setFiltersOpen] = useState(false);
 
-  // Lock scroll en arrière-plan lorsque la sheet mobile est ouverte
   useEffect(() => {
     if (filtersOpen) {
       document.body.style.overflow = "hidden";
@@ -69,6 +69,10 @@ function EcosystemPage() {
       list = list.filter((s) => s.category === category);
     }
 
+    if (status !== "Tout") {
+      list = list.filter((s) => s.status === status);
+    }
+
     if (query.trim() !== "") {
       const q = query.toLowerCase().trim();
       list = list.filter(
@@ -85,10 +89,11 @@ function EcosystemPage() {
     return [...list].sort((a, b) =>
       sortBy === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)
     );
-  }, [category, sortBy, query]);
+  }, [category, status, sortBy, query]);
 
   const activeFilterCount =
     (category !== "Tout" ? 1 : 0) +
+    (status !== "Tout" ? 1 : 0) +
     (sortBy !== "default" ? 1 : 0) +
     (query.trim() !== "" ? 1 : 0);
 
@@ -96,6 +101,8 @@ function EcosystemPage() {
     <EcosystemFilters
       category={category as EcosystemSiteCategory | "Tout"}
       onCategoryChange={(c) => updateSearch({ category: c })}
+      status={status as EcosystemSiteStatus | "Tout"}
+      onStatusChange={(s) => updateSearch({ status: s })}
       sortBy={sortBy as EcosystemSortOption}
       onSortChange={(s) => updateSearch({ sortBy: s })}
     />
