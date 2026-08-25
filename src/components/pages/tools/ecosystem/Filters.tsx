@@ -1,4 +1,4 @@
-import { ArrowDownUp, ArrowUpDown, Layers, SlidersHorizontal } from "lucide-react";
+import { ArrowDownUp, ArrowUpDown, Layers, SlidersHorizontal, Construction } from "lucide-react";
 import {
   ECOSYSTEM_CATEGORY_LABELS,
   ECOSYSTEM_STATUS_LABELS,
@@ -46,9 +46,9 @@ export function EcosystemFilters({
   };
 
   return (
-    <div className="border-b border-border/60 pb-6">
+    <div className="mt-10 border-b border-border/60 pb-6">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-        {/* Filtres par Catégorie (Pills) */}
+        {/* Catégories (Pills) */}
         <div className="flex flex-wrap gap-2">
           <button
             type="button"
@@ -75,37 +75,38 @@ export function EcosystemFilters({
           ))}
         </div>
 
-        {/* Contrôles d'action à droite : Statut (Select) + Tri (Bouton) sur la même ligne */}
+        {/* Contrôles à droite : Statut + Tri alignés sur la même ligne */}
         <div className="flex flex-wrap items-center gap-2 self-start lg:self-auto">
-          {/* Liste déroulante Statut */}
-          <div className="relative inline-flex items-center">
-            <SlidersHorizontal size={14} className="absolute left-3 pointer-events-none text-muted-foreground" />
+          {/* Menu déroulant Statut */}
+          <div className="flex items-center gap-2">
+            <Construction size={16} className="shrink-0 text-muted-foreground" />
             <select
               value={status}
               onChange={(e) => onStatusChange(e.target.value as EcosystemSiteStatus | "Tout")}
-              className={`appearance-none rounded-lg border py-2 pl-8 pr-8 text-sm font-medium transition cursor-pointer bg-card focus:outline-none focus:ring-1 focus:ring-primary ${status !== "Tout"
-                ? "border-primary bg-primary/5 text-primary"
-                : "border-border text-foreground hover:border-primary"
+              className={`rounded-lg border px-3 py-2 text-sm font-medium focus:border-primary focus:outline-none cursor-pointer transition ${status !== "Tout"
+                ? "border-primary bg-primary/10 text-primary font-semibold"
+                : "border-border bg-card text-foreground"
                 }`}
             >
               {STATUSES.map((s) => (
                 <option key={s} value={s} className="bg-card text-foreground">
-                  {s === "Tout" ? "Tous les statuts" : ECOSYSTEM_STATUS_LABELS[s]}
+                  {ECOSYSTEM_STATUS_LABELS[s]}
                 </option>
               ))}
             </select>
-            <span className="absolute right-2.5 pointer-events-none text-xs text-muted-foreground">▼</span>
           </div>
 
-          {/* Tri à 3 états */}
+          <div className="h-6 w-px bg-border/60 hidden sm:block" />
+
+          {/* Tri (Ordre par défaut / A → Z / Z → A) */}
           <button
             type="button"
             onClick={toggleSort}
             className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium transition cursor-pointer ${sortBy !== "default"
-              ? "border-primary bg-primary/5 text-primary"
-              : "border-border bg-card hover:border-primary hover:text-primary"
+              ? "border-primary bg-primary/10 text-primary font-semibold"
+              : "border-border bg-card text-foreground hover:border-primary hover:text-primary"
               }`}
-            title="Changer le tri (Par défaut / A → Z / Z → A)"
+            title="Changer l'ordre de tri"
           >
             {sortBy === "default" && <Layers size={16} />}
             {sortBy === "asc" && <ArrowDownUp size={16} />}
