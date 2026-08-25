@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Info, Star, X, MessageSquareText } from "lucide-react";
-import { useSearch, useNavigate, Link } from "@tanstack/react-router";
+import { useNavigate, Link } from "@tanstack/react-router";
 import { Reveal } from "@/components/site/Reveal";
 import { SERVICE_CATEGORIES, getServiceIcon } from "@/data/services";
 import { useServicesStore } from "@/stores/useServicesStore";
@@ -9,52 +9,17 @@ import { ServicesSkeleton } from "@/components/skeleton/HomeServices";
 
 export function ServicesPreview() {
   const [expandedSlug, setExpandedSlug] = useState<string | null>(null);
-  const search = useSearch({ from: "/" });
   const navigate = useNavigate();
 
   const { services, isLoading, isError } = useServicesStore({ perPage: 100 });
-
-  useEffect(() => {
-    if (!search.service || services.length === 0) return;
-
-    const target = services.find((s) => s.slug === search.service);
-    if (!target) return;
-
-    setExpandedSlug(target.slug);
-
-    const scrollToCard = () => {
-      const el = document.getElementById(`service-${target.slug}`);
-      if (!el) return;
-
-      const headerOffset = 96;
-      const top = el.getBoundingClientRect().top + window.scrollY - headerOffset;
-      window.scrollTo({ top, behavior: "smooth" });
-    };
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(scrollToCard);
-    });
-
-    navigate({ to: "/", search: {}, hash: "services", replace: true });
-  }, [search.service, services]);
 
   const displayed = useMemo(() => {
     if (services.length === 0) return [];
 
     const featured = services.filter((s) => s.featured);
     const rest = services.filter((s) => !s.featured);
-    const ordered = [...featured, ...rest];
-
-    if (search.service) {
-      const idx = ordered.findIndex((s) => s.slug === search.service);
-      if (idx > 3) {
-        const [target] = ordered.splice(idx, 1);
-        ordered.unshift(target);
-      }
-    }
-
-    return ordered.slice(0, 4);
-  }, [search.service, services]);
+    return [...featured, ...rest].slice(0, 4);
+  }, [services]);
 
   const requestQuote = (slug: string) => {
     navigate({
@@ -64,7 +29,6 @@ export function ServicesPreview() {
     });
   };
 
-  // Gestion des états de chargement et d'erreur
   if (isLoading) {
     return <ServicesSkeleton />;
   }
