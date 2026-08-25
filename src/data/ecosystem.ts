@@ -2,6 +2,7 @@ import logos from "@/assets/logos.json";
 import { SITE, SITE_LINK } from "@/data/site";
 
 export type EcosystemSiteCategory = "principal" | "outil" | "formation" | "communication" | "divertissement";
+export type EcosystemSiteStatus = "available" | "building";
 
 export interface EcosystemSite {
   id: string;
@@ -10,6 +11,7 @@ export interface EcosystemSite {
   url: string;
   logoKey: keyof typeof logos;
   category: EcosystemSiteCategory;
+  status: EcosystemSiteStatus;
   isCurrent?: boolean;
 }
 
@@ -21,6 +23,12 @@ export const ECOSYSTEM_CATEGORY_LABELS: Record<EcosystemSiteCategory, string> = 
   divertissement: "Divertissement",
 };
 
+export const ECOSYSTEM_STATUS_LABELS: Record<EcosystemSiteStatus | "Tout", string> = {
+  Tout: "Tous les statuts",
+  available: "Disponible",
+  building: "Bientôt",
+};
+
 export const ECOSYSTEM_SITES: EcosystemSite[] = [
   {
     id: "landing",
@@ -29,6 +37,7 @@ export const ECOSYSTEM_SITES: EcosystemSite[] = [
     url: SITE_LINK.landingUrl,
     logoKey: "mc",
     category: "principal",
+    status: "available",
     isCurrent: true,
   },
   {
@@ -38,6 +47,7 @@ export const ECOSYSTEM_SITES: EcosystemSite[] = [
     url: SITE_LINK.shortUrl,
     logoKey: "shortener",
     category: "outil",
+    status: "available",
   },
   {
     id: "instructor",
@@ -46,6 +56,7 @@ export const ECOSYSTEM_SITES: EcosystemSite[] = [
     url: SITE_LINK.instructorUrl,
     logoKey: "instructor",
     category: "formation",
+    status: "building",
   },
   {
     id: "student",
@@ -54,6 +65,7 @@ export const ECOSYSTEM_SITES: EcosystemSite[] = [
     url: SITE_LINK.studentUrl,
     logoKey: "student",
     category: "formation",
+    status: "building",
   },
   {
     id: "meet",
@@ -62,6 +74,7 @@ export const ECOSYSTEM_SITES: EcosystemSite[] = [
     url: SITE_LINK.meetUrl,
     logoKey: "meet",
     category: "communication",
+    status: "building",
   },
   {
     id: "arcade",
@@ -70,6 +83,7 @@ export const ECOSYSTEM_SITES: EcosystemSite[] = [
     url: SITE_LINK.arcadeUrl,
     logoKey: "arcade",
     category: "divertissement",
+    status: "available",
   },
   {
     id: "documentation",
@@ -78,5 +92,6 @@ export const ECOSYSTEM_SITES: EcosystemSite[] = [
     url: SITE_LINK.docsUrl,
     logoKey: "docs",
     category: "outil",
+    status: "available",
   },
 ];
