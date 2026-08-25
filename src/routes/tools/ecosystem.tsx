@@ -30,7 +30,7 @@ export const Route = createFileRoute("/tools/ecosystem")({
       { title: `Notre écosystème | ${SITE.name}` },
       {
         name: "description",
-        content: `Retrouvez l'ensemble des plateformes officielles de ${SITE.name} : site web, outils, espaces de formation et communication.`,
+        content: `Retrouvez l'ensemble des plateformes officielles de ${SITE.name} : site vitrine, outils, espaces de formation et communication.`,
       },
       { property: "og:title", content: `Notre écosystème | ${SITE.name}` },
       { property: "og:url", content: "/tools/ecosystem" },
