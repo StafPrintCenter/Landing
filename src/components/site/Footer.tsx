@@ -64,7 +64,7 @@ export function Footer() {
             <li>
               <Link
                 to="/services"
-                search={{ category: "Tout", sortBy: "default", sortDir: "asc", query: "", page: 1, perPage: 9 }}
+                search={{ category: "all", sortBy: "default", sortDir: "asc", query: "", page: 1, perPage: 9 }}
                 className="hover:text-accent"
               >
                 Plus ...
