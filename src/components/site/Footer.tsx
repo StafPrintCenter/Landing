@@ -53,9 +53,8 @@ export function Footer() {
             {footerServices.map((s) => (
               <li key={s.slug} className="min-w-0">
                 <Link
-                  to="/"
-                  hash="services"
-                  search={{ service: s.slug }}
+                  to="/services/$slug"
+                  params={{ slug: s.slug }}
                   className="block truncate hover:text-accent transition-colors" title={s.title}
                 >
                   {s.title}
