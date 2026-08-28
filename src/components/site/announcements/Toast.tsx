@@ -30,12 +30,12 @@ export function AnnouncementToast({ announcement, onClose, onAction }: Announcem
         <Icon size={18} className={["mt-0.5 shrink-0", styleConfig.icon].join(" ")} />
 
         <div className="flex-1 min-w-0">
-          <p className="text-xs font-bold text-foreground leading-snug break-words">
+          <p className="text-xs font-bold text-foreground leading-snug wrap-break-word">
             {announcement.title}
           </p>
 
           {announcement.message && (
-            <p className="mt-1 text-xs text-muted-foreground leading-relaxed break-words">
+            <p className="mt-1 text-xs text-muted-foreground leading-relaxed wrap-break-word">
               {announcement.message}
             </p>
           )}
@@ -46,7 +46,7 @@ export function AnnouncementToast({ announcement, onClose, onAction }: Announcem
               target={announcement.action.target}
               rel={announcement.action.target === "_blank" ? "noreferrer" : undefined}
               onClick={onAction}
-              className="mt-2 inline-block text-[11px] font-semibold text-primary underline underline-offset-2 hover:opacity-80 break-words"
+              className="mt-2 inline-block text-[11px] font-semibold text-primary underline underline-offset-2 hover:opacity-80 wrap-break-word"
             >
               {announcement.action.label}
             </a>
