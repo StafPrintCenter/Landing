@@ -26,11 +26,6 @@ export function AnnouncementBanner({ announcement, onClose, onAction }: Announce
   const initialY = isCenter ? 0 : isBottom ? 40 : -40;
   const initialScale = isCenter ? 0.95 : 1;
 
-  // Texte complet assemblé pour le tooltip de survol (title)
-  const fullText = announcement.message
-    ? `${announcement.title} | ${announcement.message}`
-    : announcement.title;
-
   return (
     <motion.div
       initial={{ y: initialY, scale: initialScale, opacity: 0 }}
@@ -44,12 +39,9 @@ export function AnnouncementBanner({ announcement, onClose, onAction }: Announce
       ].join(" ")}
     >
       <div className="container mx-auto flex flex-wrap items-center justify-between gap-3 px-3 py-1.5 text-sm">
-        <div
-          className="flex flex-1 items-center justify-center gap-2 text-center md:justify-start min-w-0"
-          title={fullText}
-        >
+        <div className="flex flex-1 items-center justify-center gap-2 text-center md:justify-start min-w-0">
           <Icon size={18} className="shrink-0 opacity-90" />
-          <p className="line-clamp-2 cursor-help">
+          <p className="wrap-break-words">
             <strong className="font-semibold">{announcement.title}</strong>
             {announcement.message && (
               <span className="ml-2 opacity-90">{announcement.message}</span>
@@ -65,7 +57,6 @@ export function AnnouncementBanner({ announcement, onClose, onAction }: Announce
               rel={announcement.action.target === "_blank" ? "noreferrer" : undefined}
               onClick={onAction}
               className="font-semibold underline underline-offset-4 hover:opacity-80 transition-opacity"
-              title={announcement.action.label}
             >
               {announcement.action.label}
             </a>
