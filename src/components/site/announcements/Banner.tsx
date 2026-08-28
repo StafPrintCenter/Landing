@@ -15,22 +15,30 @@ interface AnnouncementBannerProps {
 
 export function AnnouncementBanner({ announcement, onClose, onAction }: AnnouncementBannerProps) {
   const Icon = getAnnouncementIcon(announcement.icon);
-  const isBottom = announcement.position === "bottom";
   const styleConfig = STYLES_CONFIG[announcement.style] ?? STYLES_CONFIG.info;
+
+  const posKey = announcement.position ?? "top";
+  const positionClass = BANNER_POSITIONS[posKey] ?? BANNER_POSITIONS.top;
+
+  // Animation dynamique selon la position
+  const isBottom = posKey.includes("bottom");
+  const isCenter = posKey === "center";
+  const initialY = isCenter ? 0 : isBottom ? 40 : -40;
+  const initialScale = isCenter ? 0.95 : 1;
 
   return (
     <motion.div
-      initial={{ y: isBottom ? 50 : -50, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      exit={{ y: isBottom ? 50 : -50, opacity: 0 }}
-      transition={{ duration: 0.25, ease: "easeInOut" }}
+      initial={{ y: initialY, scale: initialScale, opacity: 0 }}
+      animate={{ y: 0, scale: 1, opacity: 1 }}
+      exit={{ y: initialY, scale: initialScale, opacity: 0 }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
       className={[
-        "fixed inset-x-0 z-40 border-b shadow-sm",
-        isBottom ? "bottom-0" : "top-20",
+        "fixed z-40 p-1.5 transition-all",
+        positionClass,
         styleConfig.banner,
       ].join(" ")}
     >
-      <div className="container mx-auto flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 text-sm">
+      <div className="container mx-auto flex flex-wrap items-center justify-between gap-3 px-3 py-1.5 text-sm">
         <div className="flex flex-1 items-center justify-center gap-2 text-center md:justify-start">
           <Icon size={18} className="shrink-0 opacity-90" />
           <p className="line-clamp-2">
