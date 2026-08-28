@@ -41,7 +41,7 @@ export function AnnouncementBanner({ announcement, onClose, onAction }: Announce
       <div className="container mx-auto flex flex-wrap items-center justify-between gap-3 px-3 py-1.5 text-sm">
         <div className="flex flex-1 items-center justify-center gap-2 text-center md:justify-start min-w-0">
           <Icon size={18} className="shrink-0 opacity-90" />
-          <p className="wrap-break-words">
+          <p className="wrap-break-word">
             <strong className="font-semibold">{announcement.title}</strong>
             {announcement.message && (
               <span className="ml-2 opacity-90">{announcement.message}</span>
