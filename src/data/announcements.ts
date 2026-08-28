@@ -52,7 +52,7 @@ export const STYLES_CONFIG: Record<
     button: "bg-emerald-600 text-white hover:bg-emerald-700",
   },
   warning: {
-    banner: "bg-amber-500 text-amber-950 border-amber-600",
+    banner: "bg-amber-500 text-amber-950 border-amber-600 shadow-amber-950/10",
     surfaceCard: "border-amber-500/30 bg-card text-card-foreground shadow-amber-500/5",
     accent: "bg-amber-500",
     icon: "text-amber-500",
