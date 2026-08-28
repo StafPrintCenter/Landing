@@ -26,6 +26,11 @@ export function AnnouncementBanner({ announcement, onClose, onAction }: Announce
   const initialY = isCenter ? 0 : isBottom ? 40 : -40;
   const initialScale = isCenter ? 0.95 : 1;
 
+  // Texte complet assemblé pour le tooltip de survol (title)
+  const fullText = announcement.message
+    ? `${announcement.title} | ${announcement.message}`
+    : announcement.title;
+
   return (
     <motion.div
       initial={{ y: initialY, scale: initialScale, opacity: 0 }}
