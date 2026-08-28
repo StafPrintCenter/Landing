@@ -1,9 +1,21 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, MapPin, Phone } from "lucide-react";
-import { SITE, NAV_LINKS, FOOTER_LINKS } from "@/data/site";
+import { Mail, MapPin, Phone, Calendar } from "lucide-react"; // Import de Calendar ajouté
+import { SITE, NAV_LINKS, FOOTER_LINKS, FOOTER_ACTION_LINKS } from "@/data/site"; // Import ajouté
 import { useServicesStore } from "@/stores/useServicesStore";
 import logo from "@/assets/logos.json";
 import { WhatsAppIcon, FacebookIcon, InstagramIcon, LinkedinIcon, XIcon } from "./icons";
+
+// Fonction utilitaire pour résoudre l'icône dynamiquement si besoin
+function getActionIcon(iconName: string) {
+  switch (iconName) {
+    case "Mail":
+      return <Mail size={14} />;
+    case "Calendar":
+      return <Calendar size={14} />;
+    default:
+      return null;
+  }
+}
 
 export function Footer() {
   const { services } = useServicesStore({ perPage: 100 });
@@ -23,13 +35,20 @@ export function Footer() {
           <p className="mt-4 max-w-sm text-sm text-secondary-foreground/70 leading-relaxed">
             Depuis 2019, nous accompagnons votre vision jusqu'à ce qu'elle devienne visible.
           </p>
-          <Link
-            to="/tools/newsletter"
-            className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium text-accent hover:underline"
-          >
-            <Mail size={14} />
-            S'inscrire à la newsletter
-          </Link>
+          
+          {/* BOUCLE DYNAMIQUE POUR LES LIENS D'ACTION */}
+          <div className="flex flex-col gap-3 mt-4">
+            {FOOTER_ACTION_LINKS.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="inline-flex items-center gap-1.5 text-xs font-medium text-accent hover:underline w-fit"
+              >
+                {getActionIcon(link.icon)}
+                {link.label}
+              </Link>
+            ))}
+          </div>
         </div>
 
         {/* Colonne Navigation */}
