@@ -1,6 +1,11 @@
 import { X } from "lucide-react";
 import { motion } from "framer-motion";
-import { type APIAnnouncement, STYLES_CONFIG, getAnnouncementIcon } from "@/data/announcements";
+import {
+  type APIAnnouncement,
+  STYLES_CONFIG,
+  BANNER_POSITIONS,
+  getAnnouncementIcon,
+} from "@/data/announcements";
 
 interface AnnouncementBannerProps {
   announcement: APIAnnouncement;
