@@ -8,7 +8,8 @@ import { type APIAnnouncement } from "@/data/announcements";
 import {
   AnnouncementBanner,
   AnnouncementToast,
-  AnnouncementOverlay
+  AnnouncementPopup,
+  AnnouncementModal,
 } from "./";
 
 export function AnnouncementsHost() {
@@ -22,7 +23,6 @@ export function AnnouncementsHost() {
     [announcements, dismissedIds]
   );
 
-  // Enregistre un événement "view" une seule fois par annonce affichée
   useEffect(() => {
     const visitorId = getVisitorId();
     visible.forEach((a) => trackAnnouncementEvent(a.id, "view", pathname, visitorId));
@@ -41,17 +41,20 @@ export function AnnouncementsHost() {
 
   const banners = visible.filter((a) => a.type === "banner");
   const toasts = visible.filter((a) => a.type === "toast");
-  const overlays = visible.filter((a) => a.type === "popup" || a.type === "modal");
+  const popups = visible.filter((a) => a.type === "popup");
+  const modals = visible.filter((a) => a.type === "modal");
 
   return (
     <>
+      {/* Bannières */}
       <AnimatePresence>
         {banners.map((a) => (
           <AnnouncementBanner key={a.id} announcement={a} onClose={() => handleClose(a)} onAction={() => handleAction(a)} />
         ))}
       </AnimatePresence>
 
-      <div className="pointer-events-none fixed inset-0 z-50">
+      {/* Toasts */}
+      <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden">
         <AnimatePresence>
           {toasts.map((a) => (
             <AnnouncementToast key={a.id} announcement={a} onClose={() => handleClose(a)} onAction={() => handleAction(a)} />
@@ -59,9 +62,17 @@ export function AnnouncementsHost() {
         </AnimatePresence>
       </div>
 
+      {/* Popups */}
       <AnimatePresence>
-        {overlays.map((a) => (
-          <AnnouncementOverlay key={a.id} announcement={a} onClose={() => handleClose(a)} onAction={() => handleAction(a)} />
+        {popups.map((a) => (
+          <AnnouncementPopup key={a.id} announcement={a} onClose={() => handleClose(a)} onAction={() => handleAction(a)} />
+        ))}
+      </AnimatePresence>
+
+      {/* Modales */}
+      <AnimatePresence>
+        {modals.map((a) => (
+          <AnnouncementModal key={a.id} announcement={a} onClose={() => handleClose(a)} onAction={() => handleAction(a)} />
         ))}
       </AnimatePresence>
     </>
