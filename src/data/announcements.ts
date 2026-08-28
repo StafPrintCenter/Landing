@@ -134,3 +134,16 @@ export function getAnnouncementIcon(icon: string | null): LucideIcon {
   const found = (Icons as unknown as Record<string, LucideIcon>)[pascalCase];
   return found ?? Megaphone;
 }
+
+/**
+ * Positions Modales (Alignement de l'overlay flexbox)
+ */
+export const MODAL_POSITIONS: Record<AnnouncementPosition, string> = {
+  top: "items-start justify-center pt-10 md:pt-16",
+  bottom: "items-end justify-center pb-10 md:pb-16",
+  "top-left": "items-start justify-start p-4 md:p-6",
+  "top-right": "items-start justify-end p-4 md:p-6",
+  "bottom-left": "items-end justify-start p-4 md:p-6",
+  "bottom-right": "items-end justify-end p-4 md:p-6",
+  center: "items-center justify-center p-4",
+};
