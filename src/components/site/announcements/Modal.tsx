@@ -43,9 +43,9 @@ export function AnnouncementModal({ announcement, onClose, onAction }: Announcem
             <Icon size={32} />
           </div>
 
-          <h3 className="text-xl font-bold text-foreground break-words">{announcement.title}</h3>
+          <h3 className="text-xl font-bold text-foreground wrap-break-word">{announcement.title}</h3>
           {announcement.message && (
-            <p className="mt-2 text-sm text-muted-foreground leading-relaxed break-words">
+            <p className="mt-2 text-sm text-muted-foreground leading-relaxed wrap-break-word">
               {announcement.message}
             </p>
           )}
