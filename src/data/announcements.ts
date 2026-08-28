@@ -33,16 +33,16 @@ export type APIAnnouncement = {
 export function getAnnouncementBarClasses(style: AnnouncementStyle): string {
   switch (style) {
     case "success":
-      return "border-emerald-500/30 bg-emerald-500/10 text-emerald-700";
+      return "bg-emerald-600 text-cream";
     case "warning":
-      return "border-amber-500/30 bg-amber-500/10 text-amber-700";
+      return "bg-amber-600 text-cream";
     case "danger":
-      return "border-destructive/30 bg-destructive/10 text-destructive";
+      return "bg-destructive text-cream";
     case "neutral":
-      return "border-border bg-muted text-foreground";
+      return "bg-muted text-foreground";
     case "info":
     default:
-      return "border-primary/30 bg-primary/10 text-primary";
+      return "bg-primary text-cream";
   }
 }
 
