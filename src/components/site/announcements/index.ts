@@ -1,4 +1,4 @@
-export { AnnouncementBanner } from "./AnnouncementBanner";
+export { AnnouncementBanner } from "./Banner";
 export { AnnouncementOverlay } from "./AnnouncementOverlay";
 export { AnnouncementsHost } from "./AnnouncementsHost";
-export { AnnouncementToast } from "./AnnouncementToast";
+export { AnnouncementToast } from "./Toast";
