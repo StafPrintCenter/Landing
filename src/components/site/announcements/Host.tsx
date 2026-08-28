@@ -7,9 +7,9 @@ import { getDismissedAnnouncementIds, dismissAnnouncement } from "@/lib/announce
 import { type APIAnnouncement } from "@/data/announcements";
 import {
   AnnouncementBanner,
-  AnnouncementToast
-} from ".";
-import { AnnouncementOverlay } from "./AnnouncementOverlay";
+  AnnouncementToast,
+  AnnouncementOverlay
+} from "./";
 
 export function AnnouncementsHost() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
