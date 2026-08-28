@@ -59,21 +59,21 @@ export const STYLES_CONFIG: Record<
     button: "bg-amber-500 text-amber-950 hover:bg-amber-600",
   },
   danger: {
-    banner: "bg-destructive text-destructive-foreground border-destructive/80",
+    banner: "bg-destructive text-destructive-foreground border-destructive/80 shadow-destructive/10",
     surfaceCard: "border-destructive/30 bg-card text-card-foreground shadow-destructive/5",
     accent: "bg-destructive",
     icon: "text-destructive",
     button: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
   },
   neutral: {
-    banner: "bg-muted text-foreground border-border",
+    banner: "bg-muted text-foreground border-border shadow-black/5",
     surfaceCard: "border-border bg-card text-card-foreground shadow-black/5",
     accent: "bg-muted-foreground",
     icon: "text-muted-foreground",
     button: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
   },
   info: {
-    banner: "bg-primary text-primary-foreground border-primary/80",
+    banner: "bg-primary text-primary-foreground border-primary/80 shadow-primary/10",
     surfaceCard: "border-primary/30 bg-card text-card-foreground shadow-primary/5",
     accent: "bg-primary",
     icon: "text-primary",
@@ -82,7 +82,20 @@ export const STYLES_CONFIG: Record<
 };
 
 /**
- * Mappages précis des positions
+ * Positions des Bannières (Pleine largeur sur top/bottom, encadrée/flottante sur les coins/centre)
+ */
+export const BANNER_POSITIONS: Record<AnnouncementPosition, string> = {
+  top: "top-20 inset-x-0 border-b",
+  bottom: "bottom-0 inset-x-0 border-t",
+  "top-left": "top-20 left-4 max-w-xl rounded-2xl border shadow-lg",
+  "top-right": "top-20 right-4 max-w-xl rounded-2xl border shadow-lg",
+  "bottom-left": "bottom-4 left-4 max-w-xl rounded-2xl border shadow-lg",
+  "bottom-right": "bottom-4 right-4 max-w-xl rounded-2xl border shadow-lg",
+  center: "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-xl rounded-2xl border shadow-xl",
+};
+
+/**
+ * Positions Toasts
  */
 export const TOAST_POSITIONS: Record<AnnouncementPosition, string> = {
   "top-left": "top-4 left-4",
@@ -94,6 +107,9 @@ export const TOAST_POSITIONS: Record<AnnouncementPosition, string> = {
   center: "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
 };
 
+/**
+ * Positions Popups
+ */
 export const POPUP_POSITIONS: Record<AnnouncementPosition, string> = {
   "bottom-right": "bottom-6 right-6",
   "bottom-left": "bottom-6 left-6",
