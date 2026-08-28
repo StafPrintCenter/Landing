@@ -20,18 +20,31 @@ export function AnnouncementToast({ announcement, onClose, onAction }: Announcem
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 15, scale: 0.95 }}
       className={[
-        "pointer-events-auto fixed z-50 w-[min(22rem,calc(100vw-2rem))] overflow-hidden rounded-xl border shadow-lg",
+        "pointer-events-auto fixed z-50 w-[min(20rem,calc(100vw-2rem))] overflow-hidden rounded-lg border border-l-4 shadow-md backdrop-blur-md transition-all",
         positionClass,
         styleConfig.surfaceCard,
       ].join(" ")}
+      style={{ borderLeftColor: "currentColor" }} // S'appuie sur la couleur principale
     >
-      <div className={["h-1 w-full", styleConfig.accent].join(" ")} />
+      <div className="flex items-start gap-2.5 p-3">
+        <Icon size={18} className={["mt-0.5 shrink-0", styleConfig.icon].join(" ")} />
 
-      <div className="flex items-start gap-3 p-3.5">
-        <Icon size={20} className={["mt-0.5 shrink-0", styleConfig.icon].join(" ")} />
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-semibold text-foreground truncate">{announcement.title}</p>
-          {announcement.message && <p className="mt-0.5 text-xs text-muted-foreground line-clamp-2">{announcement.message}</p>}
+          <p
+            className="text-xs font-bold text-foreground truncate cursor-help"
+            title={announcement.title}
+          >
+            {announcement.title}
+          </p>
+
+          {announcement.message && (
+            <p
+              className="mt-0.5 text-xs text-muted-foreground line-clamp-2 leading-tight cursor-help"
+              title={announcement.message}
+            >
+              {announcement.message}
+            </p>
+          )}
 
           {announcement.action && (
             <a
@@ -39,7 +52,8 @@ export function AnnouncementToast({ announcement, onClose, onAction }: Announcem
               target={announcement.action.target}
               rel={announcement.action.target === "_blank" ? "noreferrer" : undefined}
               onClick={onAction}
-              className="mt-2 inline-block text-xs font-semibold text-primary underline underline-offset-2 hover:opacity-80"
+              title={announcement.action.label}
+              className="mt-1.5 inline-block text-[11px] font-semibold text-primary underline underline-offset-2 hover:opacity-80 truncate max-w-full"
             >
               {announcement.action.label}
             </a>
@@ -51,7 +65,7 @@ export function AnnouncementToast({ announcement, onClose, onAction }: Announcem
             type="button"
             onClick={onClose}
             aria-label="Fermer la notification"
-            className="shrink-0 rounded-md p-1 text-muted-foreground hover:bg-muted transition-colors cursor-pointer"
+            className="shrink-0 rounded-md p-0.5 text-muted-foreground hover:bg-muted/80 transition-colors cursor-pointer"
           >
             <X size={14} />
           </button>
