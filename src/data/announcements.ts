@@ -32,7 +32,7 @@ export type APIAnnouncement = {
 };
 
 /**
- * Thèmes visuels complets pour chaque style (bg, text, border, ring, accents)
+ * Palette visuelle complète par style
  */
 export const STYLES_CONFIG: Record<
   AnnouncementStyle,
