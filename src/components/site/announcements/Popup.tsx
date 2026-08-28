@@ -25,14 +25,11 @@ export function AnnouncementPopup({ announcement, onClose, onAction }: Announcem
       ].join(" ")}
     >
       <div className="flex items-start justify-between gap-3">
-        <div className="flex items-center gap-3 min-w-0">
-          <div className={["rounded-2xl p-3 shadow-inner bg-muted/80 shrink-0", styleConfig.icon].join(" ")}>
+        <div className="flex items-start gap-3 min-w-0 flex-1">
+          <div className={["rounded-2xl p-3 shadow-inner bg-muted/80 shrink-0 mt-0.5", styleConfig.icon].join(" ")}>
             <Icon size={24} />
           </div>
-          <h4
-            className="font-bold text-base text-foreground truncate cursor-help min-w-0"
-            title={announcement.title}
-          >
+          <h4 className="font-bold text-base text-foreground leading-snug wrap-break-word flex-1">
             {announcement.title}
           </h4>
         </div>
@@ -50,10 +47,7 @@ export function AnnouncementPopup({ announcement, onClose, onAction }: Announcem
       </div>
 
       {announcement.message && (
-        <p
-          className="mt-3 text-xs md:text-sm text-muted-foreground leading-relaxed line-clamp-3 cursor-help"
-          title={announcement.message}
-        >
+        <p className="mt-3 text-xs md:text-sm text-muted-foreground leading-relaxed wrap-break-word">
           {announcement.message}
         </p>
       )}
@@ -65,7 +59,6 @@ export function AnnouncementPopup({ announcement, onClose, onAction }: Announcem
             target={announcement.action.target}
             rel={announcement.action.target === "_blank" ? "noreferrer" : undefined}
             onClick={onAction}
-            title={announcement.action.label}
             className={[
               "w-full sm:w-auto inline-flex items-center justify-center rounded-xl px-4 py-2 text-xs font-semibold shadow-sm transition-all",
               styleConfig.button,
