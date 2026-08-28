@@ -44,11 +44,16 @@ export function AnnouncementBanner({ announcement, onClose, onAction }: Announce
       ].join(" ")}
     >
       <div className="container mx-auto flex flex-wrap items-center justify-between gap-3 px-3 py-1.5 text-sm">
-        <div className="flex flex-1 items-center justify-center gap-2 text-center md:justify-start">
+        <div
+          className="flex flex-1 items-center justify-center gap-2 text-center md:justify-start min-w-0"
+          title={fullText}
+        >
           <Icon size={18} className="shrink-0 opacity-90" />
-          <p className="line-clamp-2">
+          <p className="line-clamp-2 cursor-help">
             <strong className="font-semibold">{announcement.title}</strong>
-            {announcement.message && <span className="ml-2 opacity-90">{announcement.message}</span>}
+            {announcement.message && (
+              <span className="ml-2 opacity-90">{announcement.message}</span>
+            )}
           </p>
         </div>
 
