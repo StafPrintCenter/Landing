@@ -55,6 +55,7 @@ export function AnnouncementBanner({ announcement, onClose, onAction }: Announce
               rel={announcement.action.target === "_blank" ? "noreferrer" : undefined}
               onClick={onAction}
               className="font-semibold underline underline-offset-4 hover:opacity-80 transition-opacity"
+              title={announcement.action.label}
             >
               {announcement.action.label}
             </a>
