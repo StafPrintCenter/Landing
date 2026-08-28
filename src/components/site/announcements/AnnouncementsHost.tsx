@@ -5,8 +5,10 @@ import { useAnnouncementsStore, trackAnnouncementEvent } from "@/stores/useAnnou
 import { getVisitorId } from "@/lib/announces/visitor";
 import { getDismissedAnnouncementIds, dismissAnnouncement } from "@/lib/announces/storage";
 import { type APIAnnouncement } from "@/data/announcements";
-import { AnnouncementBanner } from "./AnnouncementBanner";
-import { AnnouncementToast } from "./AnnouncementToast";
+import {
+  AnnouncementBanner,
+  AnnouncementToast
+} from "./";
 import { AnnouncementOverlay } from "./AnnouncementOverlay";
 
 export function AnnouncementsHost() {
