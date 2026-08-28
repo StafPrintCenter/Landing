@@ -41,6 +41,11 @@ export const NAV_LINKS = [
   { label: "FAQs", to: "/faqs" },
 ] as const;
 
+export const FOOTER_ACTION_LINKS = [
+  { label: "S'inscrire à la newsletter", to: "/tools/newsletter", icon: "Mail" },
+  { label: "Prendre un rendez-vous", to: "/tools/appointment", icon: "Calendar" },
+] as const;
+
 export const FOOTER_LINKS = [
   { label: "Mentions légales", to: "/legal/mentions" },
   { label: "Confidentialité", to: "/legal/privacy" },
