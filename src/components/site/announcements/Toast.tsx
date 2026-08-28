@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
 import { motion } from "framer-motion";
-import { type APIAnnouncement, getAnnouncementSurfaceClasses, getAnnouncementIcon } from "@/data/announcements";
+import { type APIAnnouncement, STYLES_CONFIG, TOAST_POSITIONS, getAnnouncementIcon } from "@/data/announcements";
 
 interface AnnouncementToastProps {
   announcement: APIAnnouncement;
@@ -8,39 +8,30 @@ interface AnnouncementToastProps {
   onAction: () => void;
 }
 
-const POSITION_CLASSES: Record<string, string> = {
-  "top-left": "top-4 left-4",
-  "top-right": "top-4 right-4",
-  "bottom-left": "bottom-4 left-4",
-  "bottom-right": "bottom-4 right-4",
-  top: "top-4 left-1/2 -translate-x-1/2",
-  bottom: "bottom-4 left-1/2 -translate-x-1/2",
-  center: "top-4 left-1/2 -translate-x-1/2",
-};
-
 export function AnnouncementToast({ announcement, onClose, onAction }: AnnouncementToastProps) {
   const Icon = getAnnouncementIcon(announcement.icon);
-  const { card, accent, icon } = getAnnouncementSurfaceClasses(announcement.style);
+  const styleConfig = STYLES_CONFIG[announcement.style] ?? STYLES_CONFIG.info;
+  const positionClass = TOAST_POSITIONS[announcement.position] ?? TOAST_POSITIONS["bottom-right"];
 
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, y: 12, scale: 0.96 }}
+      initial={{ opacity: 0, y: 15, scale: 0.95 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: 12, scale: 0.96 }}
+      exit={{ opacity: 0, y: 15, scale: 0.95 }}
       className={[
-        "pointer-events-auto fixed z-50 w-[min(22rem,calc(100vw-2rem))] overflow-hidden rounded-2xl border shadow-lg",
-        POSITION_CLASSES[announcement.position] ?? POSITION_CLASSES["bottom-right"],
-        card,
+        "pointer-events-auto fixed z-50 w-[min(22rem,calc(100vw-2rem))] overflow-hidden rounded-xl border shadow-lg",
+        positionClass,
+        styleConfig.surfaceCard,
       ].join(" ")}
     >
-      <div className={["h-1 w-full", accent].join(" ")} />
+      <div className={["h-1 w-full", styleConfig.accent].join(" ")} />
 
-      <div className="flex items-start gap-3 p-4">
-        <Icon size={18} className={["mt-0.5 shrink-0", icon].join(" ")} />
-        <div className="flex-1">
-          <p className="font-display text-sm font-semibold text-foreground">{announcement.title}</p>
-          {announcement.message && <p className="mt-1 text-xs text-muted-foreground">{announcement.message}</p>}
+      <div className="flex items-start gap-3 p-3.5">
+        <Icon size={20} className={["mt-0.5 shrink-0", styleConfig.icon].join(" ")} />
+        <div className="flex-1 min-w-0">
+          <p className="text-sm font-semibold text-foreground truncate">{announcement.title}</p>
+          {announcement.message && <p className="mt-0.5 text-xs text-muted-foreground line-clamp-2">{announcement.message}</p>}
 
           {announcement.action && (
             <a
@@ -60,12 +51,12 @@ export function AnnouncementToast({ announcement, onClose, onAction }: Announcem
             type="button"
             onClick={onClose}
             aria-label="Fermer la notification"
-            className="shrink-0 rounded-full p-1 text-muted-foreground hover:bg-muted cursor-pointer"
+            className="shrink-0 rounded-md p-1 text-muted-foreground hover:bg-muted transition-colors cursor-pointer"
           >
             <X size={14} />
           </button>
         )}
       </div>
-    </motion.div >
+    </motion.div>
   );
 }
