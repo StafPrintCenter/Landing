@@ -1,6 +1,11 @@
 import { X } from "lucide-react";
 import { motion } from "framer-motion";
-import { type APIAnnouncement, STYLES_CONFIG, getAnnouncementIcon } from "@/data/announcements";
+import {
+  type APIAnnouncement,
+  STYLES_CONFIG,
+  MODAL_POSITIONS,
+  getAnnouncementIcon,
+} from "@/data/announcements";
 
 interface AnnouncementModalProps {
   announcement: APIAnnouncement;
@@ -12,20 +17,36 @@ export function AnnouncementModal({ announcement, onClose, onAction }: Announcem
   const Icon = getAnnouncementIcon(announcement.icon);
   const styleConfig = STYLES_CONFIG[announcement.style] ?? STYLES_CONFIG.info;
 
+  const posKey = announcement.position ?? "center";
+  const positionClass = MODAL_POSITIONS[posKey] ?? MODAL_POSITIONS.center;
+
+  // Calcul dynamique de la direction de transition selon la position
+  const isTop = posKey.includes("top");
+  const isBottom = posKey.includes("bottom");
+  const initialY = isTop ? -40 : isBottom ? 40 : 0;
+  const initialScale = posKey === "center" ? 0.9 : 0.95;
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 grid place-items-center bg-black/60 p-4 backdrop-blur-sm"
+      className={[
+        "fixed inset-0 z-50 flex bg-black/60 backdrop-blur-sm transition-all",
+        positionClass,
+      ].join(" ")}
       onClick={announcement.isClosable ? onClose : undefined}
     >
       <motion.div
-        initial={{ opacity: 0, scale: 0.95, y: 15 }}
+        initial={{ opacity: 0, scale: initialScale, y: initialY }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.95, y: 15 }}
+        exit={{ opacity: 0, scale: initialScale, y: initialY }}
+        transition={{ type: "spring", damping: 25, stiffness: 300 }}
         onClick={(e) => e.stopPropagation()}
-        className={["relative w-full max-w-lg rounded-3xl border p-6 shadow-2xl", styleConfig.surfaceCard].join(" ")}
+        className={[
+          "relative w-full max-w-lg rounded-3xl border p-6 shadow-2xl",
+          styleConfig.surfaceCard,
+        ].join(" ")}
       >
         {announcement.isClosable && (
           <button
@@ -44,6 +65,7 @@ export function AnnouncementModal({ announcement, onClose, onAction }: Announcem
           </div>
 
           <h3 className="text-xl font-bold text-foreground wrap-break-word">{announcement.title}</h3>
+
           {announcement.message && (
             <p className="mt-2 text-sm text-muted-foreground leading-relaxed wrap-break-word">
               {announcement.message}
@@ -56,7 +78,10 @@ export function AnnouncementModal({ announcement, onClose, onAction }: Announcem
               target={announcement.action.target}
               rel={announcement.action.target === "_blank" ? "noreferrer" : undefined}
               onClick={onAction}
-              className={["mt-6 w-full inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold shadow-sm transition-all", styleConfig.button].join(" ")}
+              className={[
+                "mt-6 w-full inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold shadow-sm transition-all",
+                styleConfig.button,
+              ].join(" ")}
             >
               {announcement.action.label}
             </a>
