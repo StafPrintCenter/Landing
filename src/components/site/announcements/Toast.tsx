@@ -24,24 +24,18 @@ export function AnnouncementToast({ announcement, onClose, onAction }: Announcem
         positionClass,
         styleConfig.surfaceCard,
       ].join(" ")}
-      style={{ borderLeftColor: "currentColor" }} // S'appuie sur la couleur principale
+      style={{ borderLeftColor: "currentColor" }}
     >
       <div className="flex items-start gap-2.5 p-3">
         <Icon size={18} className={["mt-0.5 shrink-0", styleConfig.icon].join(" ")} />
 
         <div className="flex-1 min-w-0">
-          <p
-            className="text-xs font-bold text-foreground truncate cursor-help"
-            title={announcement.title}
-          >
+          <p className="text-xs font-bold text-foreground leading-snug break-words">
             {announcement.title}
           </p>
 
           {announcement.message && (
-            <p
-              className="mt-0.5 text-xs text-muted-foreground line-clamp-2 leading-tight cursor-help"
-              title={announcement.message}
-            >
+            <p className="mt-1 text-xs text-muted-foreground leading-relaxed break-words">
               {announcement.message}
             </p>
           )}
@@ -52,8 +46,7 @@ export function AnnouncementToast({ announcement, onClose, onAction }: Announcem
               target={announcement.action.target}
               rel={announcement.action.target === "_blank" ? "noreferrer" : undefined}
               onClick={onAction}
-              title={announcement.action.label}
-              className="mt-1.5 inline-block text-[11px] font-semibold text-primary underline underline-offset-2 hover:opacity-80 truncate max-w-full"
+              className="mt-2 inline-block text-[11px] font-semibold text-primary underline underline-offset-2 hover:opacity-80 break-words"
             >
               {announcement.action.label}
             </a>
