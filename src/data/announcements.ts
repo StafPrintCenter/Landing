@@ -45,7 +45,7 @@ export const STYLES_CONFIG: Record<
   }
 > = {
   success: {
-    banner: "bg-emerald-600 text-white border-emerald-700",
+    banner: "bg-emerald-600 text-white border-emerald-700 shadow-emerald-950/10",
     surfaceCard: "border-emerald-500/30 bg-card text-card-foreground shadow-emerald-500/5",
     accent: "bg-emerald-500",
     icon: "text-emerald-500",
