@@ -1,10 +1,12 @@
 import { createFileRoute, useNavigate, useSearch } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 import { zodValidator } from "@tanstack/zod-adapter";
 import { SiteShell } from "@/components/site/SiteShell";
 import { SITE } from "@/data/site";
-import { ECOSYSTEM_SITES, type EcosystemSiteCategory, type EcosystemSiteStatus } from "@/data/ecosystem";
+import { ECOSYSTEM_CATEGORIES, type EcosystemSiteCategory, type EcosystemSiteStatus } from "@/data/ecosystem";
+import { useEcosystemSitesStore } from "@/stores/useEcosystemSitesStore";
+import { Pagination } from "@/components/site/Pagination";
 import {
   EcosystemHeader,
   EcosystemSearchBar,
@@ -17,10 +19,12 @@ import {
 } from "@/components/pages/tools/ecosystem";
 
 const ecosystemSearchSchema = z.object({
-  category: z.string().catch("Tout").default("Tout"),
+  category: z.enum(["Tout", ...ECOSYSTEM_CATEGORIES] as [string, ...string[]]).catch("Tout").default("Tout"),
   status: z.enum(["Tout", "available", "building"]).catch("Tout").default("Tout"),
   sortBy: z.enum(["default", "asc", "desc"]).catch("default").default("default"),
   query: z.string().catch("").default(""),
+  page: z.number().catch(1).default(1),
+  perPage: z.number().catch(20).default(20),
 });
 
 export const Route = createFileRoute("/tools/ecosystem")({
@@ -28,10 +32,7 @@ export const Route = createFileRoute("/tools/ecosystem")({
   head: () => ({
     meta: [
       { title: `Notre écosystème | ${SITE.name}` },
-      {
-        name: "description",
-        content: `Retrouvez l'ensemble des plateformes officielles de ${SITE.name} : site vitrine, outils, espaces de formation et communication.`,
-      },
+      { name: "description", content: `Retrouvez l'ensemble des plateformes officielles de ${SITE.name} : site vitrine, outils, espaces de formation et communication.` },
       { property: "og:title", content: `Notre écosystème | ${SITE.name}` },
       { property: "og:url", content: "/tools/ecosystem" },
     ],
@@ -41,10 +42,19 @@ export const Route = createFileRoute("/tools/ecosystem")({
 });
 
 function EcosystemPage() {
-  const { category, status, sortBy, query } = useSearch({ from: "/tools/ecosystem" });
+  const { category, status, sortBy, query, page, perPage } = useSearch({ from: "/tools/ecosystem" });
   const navigate = useNavigate({ from: "/tools/ecosystem" });
 
+  const { sites, meta, isLoading: storeLoading } = useEcosystemSitesStore({ category, status, sortBy, query, page, perPage });
+
+  const [isLoading, setIsLoading] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => setIsLoading(false), 400);
+    return () => clearTimeout(timer);
+  }, [category, status, sortBy, query, page, perPage]);
 
   useEffect(() => {
     if (filtersOpen) {
@@ -57,39 +67,13 @@ function EcosystemPage() {
 
   const updateSearch = (params: Partial<z.infer<typeof ecosystemSearchSchema>>) => {
     navigate({
-      search: (prev) => ({ ...prev, ...params }),
+      search: (prev) => {
+        const nextPage = params.page !== undefined ? params.page : 1;
+        return { ...prev, ...params, page: nextPage };
+      },
       replace: true,
     });
   };
-
-  const filteredSites = useMemo(() => {
-    let list = ECOSYSTEM_SITES;
-
-    if (category !== "Tout") {
-      list = list.filter((s) => s.category === category);
-    }
-
-    if (status !== "Tout") {
-      list = list.filter((s) => s.status === status);
-    }
-
-    if (query.trim() !== "") {
-      const q = query.toLowerCase().trim();
-      list = list.filter(
-        (s) =>
-          s.name.toLowerCase().includes(q) ||
-          s.description.toLowerCase().includes(q)
-      );
-    }
-
-    if (sortBy === "default") {
-      return list;
-    }
-
-    return [...list].sort((a, b) =>
-      sortBy === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)
-    );
-  }, [category, status, sortBy, query]);
 
   const activeFilterCount =
     (category !== "Tout" ? 1 : 0) +
@@ -127,17 +111,27 @@ function EcosystemPage() {
         <EcosystemResultsCount
           category={category}
           query={query}
-          filteredCount={filteredSites.length}
-          totalCount={ECOSYSTEM_SITES.length}
+          filteredCount={meta?.total ?? sites.length}
+          totalCount={meta?.total ?? sites.length}
+          isLoading={isLoading || storeLoading}
         />
 
-        <EcosystemGrid sites={filteredSites} />
+        <EcosystemGrid isLoading={isLoading || storeLoading} sites={sites} />
+
+        {!isLoading && !storeLoading && meta && meta.last_page > 1 && (
+          <Pagination
+            currentPage={meta.current_page}
+            lastPage={meta.last_page}
+            onPageChange={(p) => updateSearch({ page: p })}
+            meta={meta}
+          />
+        )}
       </section>
 
       <EcosystemMobileSheet
         isOpen={filtersOpen}
         onClose={() => setFiltersOpen(false)}
-        resultCount={filteredSites.length}
+        resultCount={meta?.total ?? sites.length}
       >
         {filtersPanel}
       </EcosystemMobileSheet>
