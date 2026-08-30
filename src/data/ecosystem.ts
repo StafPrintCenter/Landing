@@ -1,19 +1,33 @@
-import logos from "@/assets/logos.json";
-import { SITE, SITE_LINK } from "@/data/site";
-
 export type EcosystemSiteCategory = "principal" | "outil" | "formation" | "communication" | "divertissement";
 export type EcosystemSiteStatus = "available" | "building";
 
-export interface EcosystemSite {
+export interface APIEcosystemSite {
   id: string;
   name: string;
   description: string;
   url: string;
-  logoKey: keyof typeof logos;
+  logoKey: string;
+  logoBaseUrl: string;
+  logoUrl: string;
+  logoVariants: {
+    mc: string;
+    mw: string;
+    dc: string;
+    dw: string;
+  };
   category: EcosystemSiteCategory;
   status: EcosystemSiteStatus;
-  isCurrent?: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
+
+export const ECOSYSTEM_CATEGORIES: EcosystemSiteCategory[] = [
+  "principal",
+  "outil",
+  "formation",
+  "communication",
+  "divertissement",
+];
 
 export const ECOSYSTEM_CATEGORY_LABELS: Record<EcosystemSiteCategory, string> = {
   principal: "Site principal",
@@ -28,70 +42,3 @@ export const ECOSYSTEM_STATUS_LABELS: Record<EcosystemSiteStatus | "Tout", strin
   available: "Disponible",
   building: "Bientôt",
 };
-
-export const ECOSYSTEM_SITES: EcosystemSite[] = [
-  {
-    id: "landing",
-    name: "Site vitrine",
-    description: `Le site principal de ${SITE.name} : services, réalisations, formations, blog et contact.`,
-    url: SITE_LINK.landingUrl,
-    logoKey: "mc",
-    category: "principal",
-    status: "available",
-    isCurrent: true,
-  },
-  {
-    id: "shortener",
-    name: "SPC Shortener",
-    description: `Raccourcisseur de liens officiel, réservé exclusivement aux contenus de ${SITE.name}.`,
-    url: SITE_LINK.shortUrl,
-    logoKey: "shortener",
-    category: "outil",
-    status: "available",
-  },
-  {
-    id: "instructor",
-    name: "Espace Formateur",
-    description: `Préparer, animer et évaluer les sessions de formation : parcours, supports, présence, notation et suivi des apprenants pour ${SITE.name}.`,
-    url: SITE_LINK.instructorUrl,
-    logoKey: "instructor",
-    category: "formation",
-    status: "building",
-  },
-  {
-    id: "student",
-    name: "Espace Apprenant",
-    description: `S'inscrire à une formation, suivre ses cours, rendre ses devoirs et récupérer ses attestations depuis le Student Hub de ${SITE.name}.`,
-    url: SITE_LINK.studentUrl,
-    logoKey: "student",
-    category: "formation",
-    status: "building",
-  },
-  {
-    id: "meet",
-    name: "SPC Meet",
-    description: `Plateforme de visioconférence pour les réunions et sessions à distance de ${SITE.name}.`,
-    url: SITE_LINK.meetUrl,
-    logoKey: "meet",
-    category: "communication",
-    status: "building",
-  },
-  {
-    id: "arcade",
-    name: "SPC Arcade",
-    description: `Hub de jeux interactifs pour se divertir tout en développant ses compétences techniques.`,
-    url: SITE_LINK.arcadeUrl,
-    logoKey: "arcade",
-    category: "divertissement",
-    status: "available",
-  },
-  {
-    id: "documentation",
-    name: "Documentation officielle",
-    description: `Guides, procédures et ressources techniques de ${SITE.name}.`,
-    url: SITE_LINK.docsUrl,
-    logoKey: "docs",
-    category: "outil",
-    status: "available",
-  },
-];
