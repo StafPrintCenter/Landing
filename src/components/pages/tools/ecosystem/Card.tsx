@@ -2,22 +2,26 @@ import { useState } from "react";
 import { ArrowUpRight, CheckCircle2, Construction } from "lucide-react";
 import logos from "@/assets/logos.json";
 import { stripProtocol } from "@/lib/domain";
-import { ECOSYSTEM_CATEGORY_LABELS, type EcosystemSite } from "@/data/ecosystem";
+import { ECOSYSTEM_CATEGORY_LABELS, type APIEcosystemSite } from "@/data/ecosystem";
+
+type LogosType = typeof logos;
 
 interface EcosystemCardProps {
-  site: EcosystemSite;
+  site: APIEcosystemSite;
 }
 
 export function EcosystemCard({ site }: EcosystemCardProps) {
   const defaultImage = logos.mc;
-  const initialImage = logos[site.logoKey] || defaultImage;
-  const [imgSrc, setImgSrc] = useState(initialImage);
+  const logoKey = site.logoKey as keyof LogosType;
+  const initialImage = site.logoUrl || (logoKey in logos ? logos[logoKey] : defaultImage);
+  const [imgSrc, setImgSrc] = useState<string>(initialImage);
+  const isCurrent = site.name.toLowerCase() === "site vitrine";
 
   return (
     <a
       href={site.url}
-      target={site.isCurrent ? undefined : "_blank"}
-      rel={site.isCurrent ? undefined : "noreferrer"}
+      target={isCurrent ? undefined : "_blank"}
+      rel={isCurrent ? undefined : "noreferrer"}
       className="group flex flex-col justify-between rounded-2xl border border-border bg-card p-6 transition-all duration-200 hover:border-primary/40 hover:shadow-md"
     >
       {/* Contenu principal (Haut) */}
@@ -33,7 +37,7 @@ export function EcosystemCard({ site }: EcosystemCardProps) {
           </div>
 
           <div className="flex items-center gap-2">
-            {site.isCurrent ? (
+            {isCurrent ? (
               <span className="inline-flex items-center gap-1 rounded-full bg-success/10 px-2.5 py-1 text-[11px] font-semibold text-success">
                 <CheckCircle2 size={12} /> Vous êtes ici
               </span>
@@ -53,7 +57,7 @@ export function EcosystemCard({ site }: EcosystemCardProps) {
         <h3 className="mt-4 font-display text-lg font-semibold text-foreground transition-colors group-hover:text-primary">
           {site.name}
         </h3>
-        <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">
+        <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
           {site.description}
         </p>
       </div>
@@ -61,10 +65,10 @@ export function EcosystemCard({ site }: EcosystemCardProps) {
       {/* Pied de carte : Badge + URL */}
       <div className="mt-6 flex items-center justify-between gap-2 border-t border-border/40 pt-4">
         <span className="inline-flex shrink-0 rounded-md border border-border bg-muted/60 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-          {ECOSYSTEM_CATEGORY_LABELS[site.category]}
+          {ECOSYSTEM_CATEGORY_LABELS[site.category] ?? site.category}
         </span>
 
-        <p className="truncate text-xs font-mono text-muted-foreground/70">
+        <p className="truncate font-mono text-xs text-muted-foreground/70">
           {stripProtocol(site.url)}
         </p>
       </div>
