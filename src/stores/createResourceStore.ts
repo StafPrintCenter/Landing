@@ -4,6 +4,7 @@ import { resolveApiUrl } from "@/lib/api-url";
 export interface BaseFetchParams {
   category?: string;
   contractType?: string;
+  status?: string;
   query?: string;
   sortBy?: string;
   sortDir?: string;
@@ -47,6 +48,10 @@ export function createResourceStore<T>({
 
     if (params.contractType && params.contractType !== "Tout") {
       queryParams.append("contractType", params.contractType);
+    }
+
+    if (params.status && params.status !== "Tout") {
+      queryParams.append("status", params.status);
     }
 
     if (params.query) queryParams.append("query", params.query);
