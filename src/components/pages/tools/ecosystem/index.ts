@@ -5,4 +5,5 @@ export { EcosystemFilters, type EcosystemSortOption } from "./Filters";
 export { EcosystemMobileTrigger } from "./MobileTrigger";
 export { EcosystemMobileSheet } from "./MobileSheet";
 export { EcosystemSearchBar } from "./SearchBar";
+export { EcosystemSkeleton } from "./Skeleton";
 export { EcosystemResultsCount } from "./ResultsCount";
