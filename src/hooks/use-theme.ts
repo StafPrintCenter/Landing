@@ -26,16 +26,6 @@ export function useTheme() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    let initial: Theme = "light";
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY) as Theme | null;
-      if (stored === "light" || stored === "dark") initial = stored;
-      else if (window.matchMedia("(prefers-color-scheme: dark)").matches) initial = "dark";
-    } catch {
-      /* ignore */
-    }
-    setThemeState(initial);
-    applyTheme(initial);
     setMounted(true);
   }, []);
 
