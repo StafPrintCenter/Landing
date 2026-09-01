@@ -29,6 +29,11 @@ export function EcosystemCard({ site }: EcosystemCardProps) {
   const [imgSrc, setImgSrc] = useState<string>(getLogoSrc());
   const isCurrent = site.name.toLowerCase() === "site vitrine";
 
+  // Mise à jour synchrone de l'image lorsque le thème change
+  useEffect(() => {
+    setImgSrc(getLogoSrc());
+  }, [theme, site]);
+
   return (
     <a
       href={site.url}
