@@ -1,6 +1,5 @@
 export * from "./HelpMenuHeader";
 export * from "./IntelligenceSection";
-export * from "./IntelligenceSection2";
 export * from "./WhatsAppSection";
 export * from "./LinkCheckerSection";
 export * from "./ReportSection";
