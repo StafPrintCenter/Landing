@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, MapPin, Phone, Calendar } from "lucide-react"; // Import de Calendar ajouté
-import { SITE, NAV_LINKS, FOOTER_LINKS, FOOTER_ACTION_LINKS } from "@/data/site"; // Import ajouté
+import { Mail, MapPin, Phone, Calendar } from "lucide-react";
+import { SITE, NAV_LINKS, FOOTER_LINKS, FOOTER_ACTION_LINKS } from "@/data/site";
 import { useServicesStore } from "@/stores/useServicesStore";
 import logo from "@/assets/logos.json";
 import { WhatsAppIcon, FacebookIcon, InstagramIcon, LinkedinIcon, XIcon } from "./icons";
