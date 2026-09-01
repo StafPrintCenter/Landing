@@ -25,7 +25,7 @@ export function Footer() {
           </p>
 
           {/* LES LIENS D'ACTION */}
-          <div className="flex flex-col gap-3 mt-4">
+          <div className="flex flex-col gap-2 mt-4">
             {FOOTER_ACTION_LINKS.map((link) => {
               const Icon = link.icon;
               return (
