@@ -69,8 +69,8 @@ export function Footer() {
         <div className="w-full min-w-0">
           <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-accent">Services</h4>
           <ul className="mt-4 space-y-2 text-sm text-secondary-foreground/80">
-            {footerServices.map((s) => (
-              <li key={s.slug} className="min-w-0">
+            {footerServices.map((s, index) => (
+              <li key={`${s.slug}-${index}`} className="min-w-0">
                 <Link
                   to="/services/$slug"
                   params={{ slug: s.slug }}
