@@ -10,6 +10,17 @@ function applyTheme(theme: Theme) {
   root.style.colorScheme = theme;
 }
 
+function getInitialTheme(): Theme {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY) as Theme | null;
+    if (stored === "light" || stored === "dark") return stored;
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) return "dark";
+  } catch {
+    /* ignore */
+  }
+  return "light";
+}
+
 export function useTheme() {
   const [theme, setThemeState] = useState<Theme>("light");
   const [mounted, setMounted] = useState(false);
