@@ -3,6 +3,7 @@ import { ArrowUpRight, CheckCircle2, Construction } from "lucide-react";
 import logos from "@/assets/logos.json";
 import { stripProtocol } from "@/lib/domain";
 import { ECOSYSTEM_CATEGORY_LABELS, type APIEcosystemSite } from "@/data/ecosystem";
+import { useTheme } from "@/hooks/use-theme";
 
 type LogosType = typeof logos;
 
