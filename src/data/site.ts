@@ -50,4 +50,5 @@ export const FOOTER_LINKS = [
   { label: "Mentions légales", to: "/legal/mentions" },
   { label: "Confidentialité", to: "/legal/privacy" },
   { label: "Conditions Générales de Vente", to: "/legal/cgv" },
+  { label: "Documentation", href: `SITE_LINK.docsUrl/docs/landing/s-inscrire-a-la-newsletter` },
 ] as const;
