@@ -48,7 +48,9 @@ export function useTheme() {
     }
 
     window.dispatchEvent(
-      new CustomEvent<Theme>(THEME_CHANGE_EVENT, { detail: nextTheme })
+      new CustomEvent<Theme>(THEME_CHANGE_EVENT, {
+        detail: nextTheme,
+      })
     );
   }, []);
 
