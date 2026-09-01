@@ -19,11 +19,12 @@ export function IntelligenceSection() {
         </div>
 
         <div className="flex-1 overflow-hidden">
-          <div className="flex items-center gap-1">
-            <p className="text-xs font-semibold text-foreground">Assistant IA</p>
-            <ExternalLink size={10} className="text-muted-foreground" />
-          </div>
-          <p className="truncate text-[11px] text-muted-foreground"> Posez vos questions à l'IA</p>
+          <p className="text-xs font-semibold text-foreground">
+            Assistant IA
+          </p>
+          <p className="truncate text-[11px] text-muted-foreground">
+            Discuter avec notre intelligence artificielle
+          </p>
         </div>
 
         <ExternalLink
