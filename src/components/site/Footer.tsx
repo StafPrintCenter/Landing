@@ -5,18 +5,6 @@ import { useServicesStore } from "@/stores/useServicesStore";
 import logo from "@/assets/logos.json";
 import { WhatsAppIcon, FacebookIcon, InstagramIcon, LinkedinIcon, XIcon } from "./icons";
 
-// Fonction utilitaire pour résoudre l'icône dynamiquement si besoin
-function getActionIcon(iconName: string) {
-  switch (iconName) {
-    case "Mail":
-      return <Mail size={14} />;
-    case "Calendar":
-      return <Calendar size={14} />;
-    default:
-      return null;
-  }
-}
-
 export function Footer() {
   const { services } = useServicesStore({ perPage: 100 });
 
