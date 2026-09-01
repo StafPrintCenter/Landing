@@ -56,7 +56,7 @@ export const AVAILABLE_TOOLS: AvailableTool[] = [
     href: SITE_LINK.aiUrl,
     icon: Sparkles,
     title: "SPC Intelligence",
-    desc: "Posez vos questions à notre assistant IA pour vous guider, rédiger ou concevoir vos projets d'impression et design.",
+    desc: "Discutez avec notre assistant IA pour obtenir des informations, explorer nos services et trouver rapidement les réponses à vos besoins.",
     actionLabel: "Discuter avec l'IA",
   },
   {
