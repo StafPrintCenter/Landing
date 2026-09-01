@@ -44,5 +44,5 @@ export function useTheme() {
     updateTheme(nextTheme);
   }, [theme, updateTheme]);
 
-  return { theme, setTheme, toggleTheme, mounted };
+  return { theme, setTheme: updateTheme, toggleTheme, mounted };
 }
