@@ -12,10 +12,21 @@ interface EcosystemCardProps {
 }
 
 export function EcosystemCard({ site }: EcosystemCardProps) {
-  const defaultImage = logos.mc;
-  const logoKey = site.logoKey as keyof LogosType;
-  const initialImage = site.logoUrl || (logoKey in logos ? logos[logoKey] : defaultImage);
-  const [imgSrc, setImgSrc] = useState<string>(initialImage);
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
+  // Sélection de l'image selon la variante du thème (mw pour dark, mc pour light)
+  const getLogoSrc = (): string => {
+    const variantUrl = isDark ? site.logoVariants?.mw : site.logoVariants?.mc;
+    if (variantUrl) return variantUrl;
+
+    // Repli sur site.logoUrl ou sur le fichier local JSON si présent
+    if (site.logoUrl) return site.logoUrl;
+    const logoKey = site.logoKey as keyof LogosType;
+    return logoKey in logos ? logos[logoKey] : logos.mc;
+  };
+
+  const [imgSrc, setImgSrc] = useState<string>(getLogoSrc());
   const isCurrent = site.name.toLowerCase() === "site vitrine";
 
   return (
