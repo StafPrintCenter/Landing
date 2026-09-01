@@ -32,7 +32,7 @@ export function Footer() {
                 <Link
                   key={link.to}
                   to={link.to}
-                  className="inline-flex items-center gap-1.5 text-xs font-medium text-accent hover:underline w-fit"
+                  className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs font-medium text-secondary-foreground hover:border-accent/40 hover:bg-accent/10 hover:text-accent transition-all duration-200 w-fit shadow-xs"
                 >
                   <Icon size={14} />
                   {link.label}
