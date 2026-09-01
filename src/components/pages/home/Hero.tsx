@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowRight, Star } from "lucide-react";
+import { useTheme } from "@/hooks/use-theme";
 import { Typewriter } from "@/components/site/Typewriter";
 import { SITE } from "@/data/site";
 import logo from "@/assets/logos.json";
