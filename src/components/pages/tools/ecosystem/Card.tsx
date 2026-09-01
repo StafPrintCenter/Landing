@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowUpRight, CheckCircle2, Construction } from "lucide-react";
 import logos from "@/assets/logos.json";
 import { stripProtocol } from "@/lib/domain";
