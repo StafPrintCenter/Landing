@@ -15,7 +15,7 @@ export function WhatsAppSection() {
   );
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 border-t border-border pt-3">
       <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
         Assistance directe
       </span>
