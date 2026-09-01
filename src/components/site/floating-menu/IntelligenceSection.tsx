@@ -25,6 +25,11 @@ export function IntelligenceSection() {
           </div>
           <p className="truncate text-[11px] text-muted-foreground"> Posez vos questions à l'IA</p>
         </div>
+
+        <ExternalLink
+          size={14}
+          className="shrink-0 text-muted-foreground"
+        />
       </a>
     </div>
   );
