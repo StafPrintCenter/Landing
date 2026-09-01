@@ -12,7 +12,7 @@ export function IntelligenceSection() {
         href={SITE_LINK.aiUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-3 rounded-xl border border-primary/20 bg-primary/5 px-3 py-2.5 text-sm font-medium text-foreground transition hover:bg-primary/10 cursor-pointer"
+        className="flex items-center gap-3 rounded-xl border border-primary/20 bg-primary/5 px-3 py-2.5 text-sm font-medium text-foreground transition hover:bg-primary/10"
       >
         <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-sm">
           <Bot size={20} />
