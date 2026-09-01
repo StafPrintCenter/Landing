@@ -48,9 +48,17 @@ function ToolsPage() {
 
             const cardContent = (
               <>
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                  <Icon size={20} />
-                </span>
+                <div className="flex items-start justify-between">
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <Icon size={20} />
+                  </span>
+                  {isExternal && (
+                    <span className="text-muted-foreground/60 group-hover:text-primary transition-colors">
+                      <ExternalLink size={18} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </span>
+                  )}
+                </div>
+
                 <h3 className="mt-4 font-display text-lg font-semibold group-hover:text-primary transition-colors">
                   {tool.title}
                 </h3>
