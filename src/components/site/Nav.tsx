@@ -37,7 +37,7 @@ export function Nav() {
     >
       <div className="container-x flex h-16 items-center justify-between md:h-20">
         <Link to="/" className="flex items-center" onClick={() => setMobileOpen(false)}>
-          <img src={logo.dc} alt="Logo SPC" className="h-10 md:h-12 w-auto" />
+          <img src={currentLogo} alt="Logo SPC" className="h-10 md:h-12 w-auto transition-all duration-300" />
         </Link>
 
         <nav className="hidden items-center gap-7 md:flex">
