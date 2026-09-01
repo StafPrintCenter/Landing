@@ -15,7 +15,6 @@ export function Nav() {
   const { mobileOpen, toggleMobile, setMobileOpen } = useUI();
   const { pathname, hash } = useRouterState({ select: (s) => s.location });
   const { theme } = useTheme();
-
   const currentLogo = theme === "dark" ? logo.dw : logo.dc;
 
   const isLinkActive = (to: string) => {
