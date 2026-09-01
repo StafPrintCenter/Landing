@@ -35,7 +35,8 @@ export function FloatingHelpMenu() {
           <HelpMenuHeader onClose={() => setOpen(false)} />
 
           <div className="mt-4 space-y-4">
-            <InteligenceSection />
+            <IntelligenceSection />
+            <IntelligenceSection2 />
             <WhatsAppSection />
             <LinkCheckerSection />
             <ReportSection onOpenReport={handleOpenReport} />
