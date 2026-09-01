@@ -46,7 +46,7 @@ export function useTheme() {
     } catch {
       /* ignore */
     }
-    // Émettre un événement global pour synchroniser tous les hooks useTheme actifs
+
     window.dispatchEvent(
       new CustomEvent<Theme>(THEME_CHANGE_EVENT, { detail: nextTheme })
     );
