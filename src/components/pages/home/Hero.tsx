@@ -26,7 +26,7 @@ export function Hero() {
           src={currentLogo}
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute left-1/2 top-1/2 w-[min(80vw,720px)] -translate-x-1/2 -translate-y-1/2 opacity-[0.06] select-none"
+          className="pointer-events-none absolute left-1/2 top-1/2 w-[min(80vw,720px)] -translate-x-1/2 -translate-y-1/2 opacity-[0.06] select-none transition-opacity duration-300"
         />
       </div>
 
