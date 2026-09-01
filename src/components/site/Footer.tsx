@@ -132,16 +132,27 @@ export function Footer() {
         <div className="container-x flex flex-col items-center justify-center gap-3 py-5 text-xs text-secondary-foreground/60 md:flex-row md:justify-between">
           <p>© {new Date().getFullYear()} {SITE.name} - Tous droits réservés.</p>
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
-            {FOOTER_LINKS.map((l, i) => (
-              <span key={l.to} className="flex items-center gap-4">
-                <Link to={l.to} className="hover:text-accent transition-colors">
-                  {l.label}
-                </Link>
-                {i < FOOTER_LINKS.length - 1 && (
-                  <span className="hidden h-3 w-px bg-secondary-foreground/20 md:inline-block" aria-hidden />
-                )}
-              </span>
-            ))}
+            {FOOTER_LINKS.map((l, i) => {
+              const linkKey = "to" in l ? l.to : l.href;
+              const isExternal = "href" in l;
+
+              return (
+                <span key={linkKey || i} className="flex items-center gap-4">
+                  {isExternal ? (
+                    <a href={l.href} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+                      {l.label}
+                    </a>
+                  ) : (
+                    <Link to={l.to} className="hover:text-accent transition-colors">
+                      {l.label}
+                    </Link>
+                  )}
+                  {i < FOOTER_LINKS.length - 1 && (
+                    <span className="hidden h-3 w-px bg-secondary-foreground/20 md:inline-block" aria-hidden />
+                  )}
+                </span>
+              );
+            })}
           </div>
           <p>{SITE.slogan}</p>
         </div>
