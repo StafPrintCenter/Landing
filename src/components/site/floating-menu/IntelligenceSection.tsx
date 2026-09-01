@@ -17,6 +17,7 @@ export function IntelligenceSection() {
         <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-sm">
           <Sparkles size={20} />
         </div>
+
         <div className="flex-1 overflow-hidden">
           <div className="flex items-center gap-1">
             <p className="text-xs font-semibold text-foreground">Assistant IA</p>
