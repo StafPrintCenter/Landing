@@ -1,6 +1,5 @@
 import { ExternalLink, Sparkles } from "lucide-react";
 import { SITE_LINK } from "@/data/site";
-import { Bot, Sparkles, ExternalLink } from "lucide-react";
 
 export function IntelligenceSection() {
   return (
