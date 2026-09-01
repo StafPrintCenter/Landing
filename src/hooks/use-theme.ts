@@ -12,9 +12,10 @@ function applyTheme(theme: Theme) {
 
 function getInitialTheme(): Theme {
   try {
-    const stored = localStorage.getItem(STORAGE_KEY) as Theme | null;
-    if (stored === "light" || stored === "dark") return stored;
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) return "dark";
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored === "light" || stored === "dark") {
+      return stored;
+    }
   } catch {
     /* ignore */
   }
@@ -26,17 +27,24 @@ export function useTheme() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    applyTheme(theme);
     setMounted(true);
 
-    const handleThemeChange = (e: CustomEvent<Theme>) => {
-      setThemeState(e.detail);
+    const handleThemeChange = (e: Event) => {
+      const customEvent = e as CustomEvent<Theme>;
+      const nextTheme = customEvent.detail;
+
+      if (nextTheme === "light" || nextTheme === "dark") {
+        setThemeState(nextTheme);
+        applyTheme(nextTheme);
+      }
     };
 
-    window.addEventListener(THEME_CHANGE_EVENT as any, handleThemeChange);
+    window.addEventListener(THEME_CHANGE_EVENT, handleThemeChange);
     return () => {
-      window.removeEventListener(THEME_CHANGE_EVENT as any, handleThemeChange);
+      window.removeEventListener(THEME_CHANGE_EVENT, handleThemeChange);
     };
-  }, []);
+  }, [theme]);
 
   const updateTheme = useCallback((nextTheme: Theme) => {
     setThemeState(nextTheme);
@@ -55,8 +63,7 @@ export function useTheme() {
   }, []);
 
   const toggleTheme = useCallback(() => {
-    const nextTheme: Theme = theme === "dark" ? "light" : "dark";
-    updateTheme(nextTheme);
+    updateTheme(theme === "dark" ? "light" : "dark");
   }, [theme, updateTheme]);
 
   return {
