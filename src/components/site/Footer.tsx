@@ -34,8 +34,10 @@ export function Footer() {
                   to={link.to}
                   className="group inline-flex items-center gap-2.5 text-xs font-medium text-secondary-foreground/90 hover:text-accent transition-colors w-fit"
                 >
-                  <Icon size={14} className="text-accent shrink-0" />
-                  <span>{link.label}</span>
+                  <span className="flex h-6 w-6 items-center justify-center rounded-md bg-white/10 text-accent transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
+                    <Icon size={13} />
+                  </span>
+                  <span className="group-hover:underline underline-offset-4">{link.label}</span>
                 </Link>
               );
             })}
