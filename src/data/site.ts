@@ -45,6 +45,7 @@ export const NAV_LINKS = [
 export const FOOTER_ACTION_LINKS = [
   { label: "S'inscrire à la newsletter", to: "/tools/newsletter", icon: "Mail" },
   { label: "Prendre un rendez-vous", to: "/tools/appointment", icon: "Calendar" },
+  { label: "L'écosystème", to: "/tools/ecosystem", icon: "Calendar" },
 ] as const;
 
 export const FOOTER_LINKS = [
