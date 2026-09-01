@@ -13,6 +13,9 @@ const whatsappLink = withWhatsAppMessage(
 );
 
 export function Hero() {
+  const { theme } = useTheme();
+  const currentLogo = theme === "dark" ? logo.mw : logo.mc;
+
   return (
     <section className="relative overflow-hidden">
       <div className="absolute inset-0 -z-10 pointer-events-none">
