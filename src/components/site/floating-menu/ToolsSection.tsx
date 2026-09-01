@@ -19,7 +19,7 @@ export function ToolsSection() {
           {/* L'indice s'affiche uniquement si non replié (!open) */}
           <span
             className={`text-[9px] text-muted-foreground/60 transition-all duration-300 ${open
-              ? "opacity-0 translate-x-[-4px] pointer-events-none"
+              ? "opacity-0 translate-x-1 pointer-events-none"
               : "opacity-100 translate-x-0"
               }`}
           >
