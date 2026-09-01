@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 
 type Theme = "light" | "dark";
 const STORAGE_KEY = "spc-theme";
+const THEME_CHANGE_EVENT = "spc-theme-change";
 
 function applyTheme(theme: Theme) {
   const root = document.documentElement;
