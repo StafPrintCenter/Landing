@@ -36,7 +36,6 @@ export function FloatingHelpMenu() {
 
           <div className="mt-4 space-y-4">
             <IntelligenceSection />
-            <IntelligenceSection2 />
             <WhatsAppSection />
             <LinkCheckerSection />
             <ReportSection onOpenReport={handleOpenReport} />
