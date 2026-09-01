@@ -118,7 +118,7 @@ export function Footer() {
             </li>
           </ul>
 
-          {/* ── Liens sociaux ── */}
+          {/* Liens sociaux */}
           <div className="mt-4 flex gap-3">
             <a href={SITE.socials.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-accent hover:text-accent-foreground"><FacebookIcon size={16} /></a>
             <a href={SITE.socials.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-accent hover:text-accent-foreground"><InstagramIcon size={16} /></a>
