@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X, Search } from "lucide-react";
 import { NAV_LINKS } from "@/data/site";
 import { useUI } from "@/store/ui";
+import { useTheme } from "@/hooks/use-theme";
 import logo from "@/assets/logos.json";
 import { SearchDialog } from "@/components/modal";
 import { ThemeToggle } from "./ThemeToggle";
