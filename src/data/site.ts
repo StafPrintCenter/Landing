@@ -1,3 +1,5 @@
+import { Mail, Calendar, Network } from "lucide-react";
+
 export const SITE = {
   name: "STAF PRINT CENTER",
   slogan: "L'empreinte de votre succès",
