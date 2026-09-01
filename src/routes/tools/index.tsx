@@ -56,7 +56,12 @@ function ToolsPage() {
                 </h3>
                 <p className="mt-1.5 flex-1 text-sm text-muted-foreground leading-relaxed">{tool.desc}</p>
                 <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary">
-                  {tool.actionLabel} <ArrowRight size={14} />
+                  {tool.actionLabel}
+                  {isExternal ? (
+                    <ExternalLink size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  ) : (
+                    <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                  )}
                 </span>
               </>
             );
