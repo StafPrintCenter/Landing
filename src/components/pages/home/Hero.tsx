@@ -23,7 +23,7 @@ export function Hero() {
         <div className="absolute top-40 right-0 h-96 w-96 rounded-full bg-accent/30 blur-3xl" />
         <div className="absolute inset-0 bg-grain opacity-60" />
         <img
-          src={logo.mc}
+          src={currentLogo}
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute left-1/2 top-1/2 w-[min(80vw,720px)] -translate-x-1/2 -translate-y-1/2 opacity-[0.06] select-none"
