@@ -26,16 +26,19 @@ export function Footer() {
 
           {/* LES LIENS D'ACTION */}
           <div className="flex flex-col gap-3 mt-4">
-            {FOOTER_ACTION_LINKS.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className="inline-flex items-center gap-1.5 text-xs font-medium text-accent hover:underline w-fit"
-              >
-                {getActionIcon(link.icon)}
-                {link.label}
-              </Link>
-            ))}
+            {FOOTER_ACTION_LINKS.map((link) => {
+              const Icon = link.icon;
+              return (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-accent hover:underline w-fit"
+                >
+                  <Icon size={14} />
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
         </div>
 
