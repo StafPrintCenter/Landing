@@ -6,6 +6,7 @@ import { NAV_LINKS } from "@/data/site";
 import { useUI } from "@/store/ui";
 import logo from "@/assets/logos.json";
 import { SearchDialog } from "@/components/modal";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -48,10 +49,13 @@ export function Nav() {
           <button
             onClick={() => setSearchOpen(true)}
             aria-label="Rechercher"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full text-foreground/80 transition hover:bg-muted hover:text-primary"
+            className="cursor-pointer inline-flex h-9 w-9 items-center justify-center rounded-full text-foreground/80 transition hover:bg-muted hover:text-primary"
           >
             <Search size={18} />
           </button>
+
+          <ThemeToggle className="h-9 w-9" />
+
           <a href="/#contact" className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground shadow-md transition hover:opacity-90">
             Demander un devis
           </a>
@@ -61,11 +65,14 @@ export function Nav() {
           <button
             onClick={() => setSearchOpen(true)}
             aria-label="Rechercher"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border bg-background text-foreground/80"
+            className="cursor-pointer inline-flex h-10 w-10 items-center justify-center rounded-md border border-border bg-background text-foreground/80"
           >
             <Search size={18} />
           </button>
-          <button aria-label="Menu" className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border bg-background" onClick={toggleMobile}>
+
+          <ThemeToggle className="h-10 w-10 rounded-md border border-border bg-background" />
+
+          <button aria-label="Menu" className="cursor-pointer inline-flex h-10 w-10 items-center justify-center rounded-md border border-border bg-background" onClick={toggleMobile}>
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
