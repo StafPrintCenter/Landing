@@ -3,7 +3,7 @@ import { SITE_LINK } from "@/data/site";
 
 export function IntelligenceSection() {
   return (
-    <div className="space-y-2 border-t border-border pt-3">
+    <div className="space-y-2">
       <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
         SPC Intelligence
       </span>
