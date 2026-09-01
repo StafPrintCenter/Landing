@@ -36,7 +36,7 @@ export function Hero() {
               key={i}
               whileHover={{ scale: 1.3, rotate: 10, zIndex: 20, boxShadow: "0px 10px 20px rgba(0,0,0,0.15)" }}
               transition={{ type: "spring", stiffness: 300, damping: 15 }}
-              className={`h-24 w-24 rounded-md ${i % 3 === 0 ? "bg-primary" : i % 3 === 1 ? "bg-secondary" : "bg-accent"} opacity-90 cursor-pointer`}
+              className={`h-24 w-24 rounded-md ${i % 3 === 0 ? "bg-primary" : i % 3 === 1 ? "bg-muted-foreground" : "bg-accent"} opacity-90 cursor-pointer`}
             />
           ))}
         </motion.div>
