@@ -29,9 +29,9 @@ export function useTheme() {
     setMounted(true);
   }, []);
 
-  const setTheme = useCallback((next: Theme) => {
-    setThemeState(next);
-    applyTheme(next);
+  const updateTheme = useCallback((nextTheme: Theme) => {
+    setThemeState(nextTheme);
+    applyTheme(nextTheme);
     try {
       localStorage.setItem(STORAGE_KEY, next);
     } catch {
