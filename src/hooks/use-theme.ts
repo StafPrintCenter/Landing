@@ -27,16 +27,29 @@ export function useTheme() {
 
   useEffect(() => {
     setMounted(true);
+
+    const handleThemeChange = (e: CustomEvent<Theme>) => {
+      setThemeState(e.detail);
+    };
+
+    window.addEventListener(THEME_CHANGE_EVENT as any, handleThemeChange);
+    return () => {
+      window.removeEventListener(THEME_CHANGE_EVENT as any, handleThemeChange);
+    };
   }, []);
 
   const updateTheme = useCallback((nextTheme: Theme) => {
     setThemeState(nextTheme);
     applyTheme(nextTheme);
     try {
-      localStorage.setItem(STORAGE_KEY, next);
+      localStorage.setItem(STORAGE_KEY, nextTheme);
     } catch {
       /* ignore */
     }
+    // Émettre un événement global pour synchroniser tous les hooks useTheme actifs
+    window.dispatchEvent(
+      new CustomEvent<Theme>(THEME_CHANGE_EVENT, { detail: nextTheme })
+    );
   }, []);
 
   const toggleTheme = useCallback(() => {
