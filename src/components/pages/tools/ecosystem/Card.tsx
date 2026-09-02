@@ -49,7 +49,7 @@ export function EcosystemCard({ site }: EcosystemCardProps) {
               src={imgSrc}
               alt={`Logo ${site.name}`}
               className="h-full w-full object-contain"
-              onError={() => setImgSrc(logos.mc)}
+              onError={() => setImgSrc(localFallbackLogo)}
             />
           </div>
 
