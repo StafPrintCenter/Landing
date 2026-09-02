@@ -24,7 +24,7 @@ export function EcosystemCard({ site }: EcosystemCardProps) {
     // Repli sur site.logoUrl ou sur le fichier local JSON si présent
     if (site.logoUrl) return site.logoUrl;
     const logoKey = site.logoKey as keyof LogosType;
-    return logoKey in logos ? logos[logoKey] : logos.mc;
+    return logoKey in logos ? logos[logoKey] : localFallbackLogo;
   };
 
   const [imgSrc, setImgSrc] = useState<string>(getLogoSrc());
