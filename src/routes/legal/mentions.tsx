@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import type { ReactNode } from "react";
 import { Building2, Server, Copyright, ShieldCheck, Cookie, Scale, Mail, Phone, MapPin, FileText, SquareActivity, Globe, User, type LucideIcon, Briefcase, Landmark, } from "lucide-react";
 import { LegalLayout, type LegalSection } from "@/components/pages/legal";
 import { SITE, SITE_LINK } from "@/data/site";
@@ -13,7 +14,7 @@ export const Route = createFileRoute("/legal/mentions")({
   component: MentionsPage,
 });
 
-function Field({ label, value, icon: Icon }: { label: string; value: string; icon?: LucideIcon }) {
+function Field({ label, value, icon: Icon }: { label: string; value: ReactNode; icon?: LucideIcon }) {
   return (
     <div>
       <dt className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{label}</dt>
@@ -38,7 +39,20 @@ function getSections(): LegalSection[] {
           <Field label="Activité" value={SITE.activity} icon={SquareActivity} />
           <Field label="Adresse web" value={SITE_LINK.landingUrl} icon={Globe} />
           <Field label="Email" value={SITE.email} icon={Mail} />
-          <Field label="Gérant & Directeur de la publication" value={SITE.manager} icon={User} />
+          <Field
+            label="Gérant & Directeur de la publication"
+            value={
+              <a
+                href="https://steve.stafprint.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-4 hover:opacity-80"
+              >
+                {SITE.manager}
+              </a>
+            }
+            icon={User}
+          />
           <Field label="Adresse" value={SITE.city} icon={MapPin} />
           <Field label="Registre du Commerce" value="RB/PNO/21 A 28335" icon={Briefcase} />
           <Field label="N° IFU" value="0202011465964" icon={Landmark} />
