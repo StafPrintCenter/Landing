@@ -1,7 +1,20 @@
 import { type Discipline } from "@/data/categories";
 
 export type ShortlinkStatus = "active" | "disabled" | string;
-export type ShortlinkCategory = "design" | "web" | "print" | "video" | "formation" | "tips" | "news" | "blog" | "newsletter" | "other";
+
+export type ShortlinkCategory =
+  | "design"
+  | "web"
+  | "print"
+  | "video"
+  | "formation"
+  | "tips"
+  | "news"
+  | "blog"
+  | "newsletter"
+  | "other"
+  | "documentation"
+  | "chat";
 
 /**
  * Type aligné sur la réponse de l'API publique /shortlinks
