@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Share2, Link2, Check, Loader2 } from "lucide-react";
+import { Share2, Link2, Check, Loader2, QrCode } from "lucide-react";
 import { WhatsAppIcon, FacebookIcon, LinkedinIcon, XIcon } from "@/components/site/icons";
 import { useShortUrl } from "@/hooks/use-short-url";
 import { QrCodeAutoPanel } from "./QrCodeAutoPanel";
