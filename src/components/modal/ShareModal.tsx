@@ -22,8 +22,17 @@ interface ShareModalProps extends ShareContent {
   shortlinkCategory?: ShortlinkCategory;
 }
 
+// Helper pour tronquer élégamment une URL très longue au milieu pour l'affichage
+function formatTruncatedUrl(url: string, maxLength = 38): string {
+  if (!url || url.length <= maxLength) return url;
+  const start = url.substring(0, 22);
+  const end = url.substring(url.length - 12);
+  return `${start}...${end}`;
+}
+
 export function ShareModal({ url, title, text, isOpen, onClose, shortlinkCategory }: ShareModalProps) {
   const [copied, setCopied] = useState(false);
+  const [showQr, setShowQr] = useState(false);
   const { displayUrl, alias, isLoading } = useShortUrl(url, shortlinkCategory);
 
   const content: ShareContent = { url: displayUrl, title, text };
@@ -77,27 +86,54 @@ export function ShareModal({ url, title, text, isOpen, onClose, shortlinkCategor
 
           <div className="my-5 h-px bg-border" />
 
-          <div className="flex items-center gap-2 rounded-xl border border-border bg-muted px-3 py-2.5">
+          {/* Champ d'affichage du lien + Actions (Copier / QR Code) */}
+          <div className="flex items-center gap-2 rounded-xl border border-border bg-muted p-1.5 pl-3">
             <Link2 size={16} className="shrink-0 text-muted-foreground" />
-            {isLoading ? (
-              <span className="h-4 flex-1 animate-pulse rounded bg-muted-foreground/20" />
-            ) : (
-              <span className="min-w-0 flex-1 truncate text-sm text-muted-foreground">{displayUrl}</span>
-            )}
-            <button
-              onClick={handleCopy}
-              disabled={isLoading}
-              className="inline-flex shrink-0 cursor-pointer items-center gap-1.5 rounded-full bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
-            >
+
+            <div className="min-w-0 flex-1">
               {isLoading ? (
-                <Loader2 size={13} className="animate-spin" />
-              ) : copied ? (
-                <Check size={13} />
+                <span className="block h-4 w-full animate-pulse rounded bg-muted-foreground/20" />
               ) : (
-                <Link2 size={13} />
+                <span
+                  className="block min-w-0 truncate font-mono text-xs text-muted-foreground select-all"
+                  title={displayUrl}
+                >
+                  {formatTruncatedUrl(displayUrl)}
+                </span>
               )}
-              {isLoading ? "Traitement…" : copied ? "Copié" : "Copier"}
-            </button>
+            </div>
+
+            <div className="flex shrink-0 items-center gap-1.5">
+              {/* Bouton Copier */}
+              <button
+                onClick={handleCopy}
+                disabled={isLoading}
+                title="Copier le lien complet"
+                className="inline-flex shrink-0 cursor-pointer items-center gap-1.5 rounded-lg bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {isLoading ? (
+                  <Loader2 size={13} className="animate-spin" />
+                ) : copied ? (
+                  <Check size={13} />
+                ) : (
+                  <Link2 size={13} />
+                )}
+                <span>{isLoading ? "Traitement…" : copied ? "Copié" : "Copier"}</span>
+              </button>
+
+              {/* Bouton Afficher le Code QR */}
+              {!isLoading && alias && (
+                <button
+                  type="button"
+                  onClick={() => setShowQr(true)}
+                  title="Afficher le Code QR"
+                  aria-label="Afficher le code QR"
+                  className="inline-flex h-7 w-7 items-center justify-center rounded-lg border border-border bg-card text-foreground transition-colors hover:bg-muted shrink-0 cursor-pointer"
+                >
+                  <QrCode size={14} />
+                </button>
+              )}
+            </div>
           </div>
 
           <button
@@ -108,9 +144,9 @@ export function ShareModal({ url, title, text, isOpen, onClose, shortlinkCategor
             <Share2 size={14} /> Autres applications…
           </button>
         </div>
-      </BaseModal >
+      </BaseModal>
 
-      {isOpen && <QrCodeAutoPanel alias={alias} />}
+      {(isOpen || showQr) && <QrCodeAutoPanel alias={alias} />}
     </>
   );
 }
