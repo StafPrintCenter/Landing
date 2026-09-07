@@ -74,6 +74,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             telephone: SITE.phone.replace(/\s/g, ""),
             email: SITE.email,
             priceRange: "$$",
+            sameAs: [
+              "https://www.linkedin.com/company/StafPrintCenter",
+              "https://www.facebook.com/StafPrintCenter",
+              "https://www.instagram.com/StafPrintCenter",
+              "https://twitter.com/StafPrintCenter",
+            ],
             address: {
               "@type": "PostalAddress",
               addressLocality: "Porto-Novo",
