@@ -82,7 +82,7 @@ export function ClientInfoFields({
             <span>
               J'accepte la{" "}
               <Link
-                to="/legal/mentions"
+                to="/legal/privacy"
                 onClick={(e) => e.stopPropagation()}
                 className="text-primary hover:underline"
               >
