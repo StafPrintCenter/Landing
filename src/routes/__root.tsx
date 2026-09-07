@@ -65,7 +65,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             "@type": "PrintShop",
             "@id": `${SITE_LINK.landingUrl}/#organization`,
             name: SITE.name,
-            alternateName: ["SPC", "STAF PRINT"],
+            alternateName: ["SPC", "STAF PRINT", "Staf Print Center"],
             image: logo.meta,
             logo: logo.meta,
             url: SITE_LINK.landingUrl,
