@@ -20,7 +20,7 @@ interface QuestionRendererProps {
 
 export function QuestionRenderer({ question, value, onChange, error }: QuestionRendererProps) {
   return (
-    <QuestionField question={question} error={error}>
+    <QuestionField question={question} value={value} error={error}>
       {(() => {
         switch (question.type) {
           case "short_text":
