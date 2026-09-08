@@ -7,7 +7,6 @@ import { submitReviewResponse, editReviewResponse } from "@/stores/useReviewsSto
 import { useFormDraft } from "@/hooks/use-form-draft";
 import { DraftBanner } from "@/components/shared/DraftBanner";
 import type { APIReviewClientInfo, APIReviewFormPublic, ReviewAnswers, ReviewAnswerValue, ReviewExistingAnswers, } from "@/data/reviews";
-import { SITE } from "@/data/site";
 
 interface ReviewFormProps {
   token: string;
