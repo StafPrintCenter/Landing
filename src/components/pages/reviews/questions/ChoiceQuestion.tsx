@@ -16,9 +16,9 @@ export function ChoiceQuestion({ question, value, onChange }: ChoiceQuestionProp
       <select
         value={(value as string) ?? ""}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full cursor-pointer rounded-lg border border-border bg-background px-4 py-3 text-sm transition focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+        className="w-full cursor-pointer rounded-lg border border-border bg-background px-4 py-3 text-sm"
       >
-        <option value="">- Choisir une option -</option>
+        <option value="">- Choisir -</option>
         {options.map((o) => (
           <option key={o.value} value={o.value}>
             {o.label}
@@ -28,10 +28,10 @@ export function ChoiceQuestion({ question, value, onChange }: ChoiceQuestionProp
     );
   }
 
-  // 2. Choix unique (Single Choice) - Puces / Radio Pills
+  // 2. Choix unique (Single Choice) - Design original
   if (question.type === "single_choice") {
     return (
-      <div className="flex flex-wrap gap-2.5">
+      <div className="flex flex-wrap gap-2">
         {options.map((o) => {
           const active = value === o.value;
           return (
@@ -39,18 +39,12 @@ export function ChoiceQuestion({ question, value, onChange }: ChoiceQuestionProp
               type="button"
               key={o.value}
               onClick={() => onChange(o.value)}
-              className={`inline-flex cursor-pointer items-center gap-2.5 rounded-full border px-4 py-2 text-sm font-medium transition ${active
-                ? "border-primary bg-primary/10 text-primary shadow-xs"
-                : "border-border bg-background text-foreground hover:bg-muted"
+              className={`cursor-pointer rounded-full border px-4 py-2 text-sm font-medium transition ${active
+                ? "border-primary bg-primary/10 text-primary"
+                : "border-border hover:bg-muted"
                 }`}
             >
-              <span
-                className={`flex size-4 shrink-0 items-center justify-center rounded-full border transition ${active ? "border-primary bg-primary" : "border-muted-foreground/40"
-                  }`}
-              >
-                {active && <span className="size-1.5 rounded-full bg-primary-foreground" />}
-              </span>
-              <span>{o.label}</span>
+              {o.label}
             </button>
           );
         })}
@@ -58,7 +52,7 @@ export function ChoiceQuestion({ question, value, onChange }: ChoiceQuestionProp
     );
   }
 
-  // 3. Choix multiples (Multiple Choice) - Cartes Checkbox
+  // 3. Choix multiples (Multiple Choice) - Cartes avec case à cocher
   const selectedValues = Array.isArray(value) ? value : [];
   const toggle = (v: string) => {
     onChange(
