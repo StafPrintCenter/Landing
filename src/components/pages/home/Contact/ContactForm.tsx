@@ -216,7 +216,7 @@ export function ContactForm({ onSuccess, initialValues }: ContactFormProps) {
           <textarea
             {...register("message")}
             rows={5}
-            maxLength={3000}
+            maxLength={2000}
             className="input w-full pr-16 pb-8"
             placeholder="Décrivez votre besoin..."
           />
