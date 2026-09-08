@@ -15,7 +15,7 @@ export const contactSchema = z.object({
   email: z.string().trim().email("Email invalide").max(160),
   service: z.string().min(1, "Choisissez un service"),
   customService: z.string().trim().max(100, "Le service ne peut pas dépasser 100 caractères").optional(),
-  message: z.string().trim().min(100, "Message trop court").max(3000, "Le message ne peut pas dépasser 3000 caractères"),
+  message: z.string().trim().min(100, "Message trop court").max(2000, "Le message ne peut pas dépasser 2000 caractères"),
 }).superRefine((data, ctx) => {
   // customService reste requis uniquement lorsque le service choisi est "Autre"
   if (data.service === "Autre") {
