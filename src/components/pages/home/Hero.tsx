@@ -81,7 +81,7 @@ export function Hero() {
               href={whatsappLink}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border-2 border-secondary px-6 py-3 text-sm font-semibold text-secondary transition hover:bg-secondary hover:text-secondary-foreground"
+              className="inline-flex items-center gap-2 rounded-full border-2 border-foreground px-6 py-3 text-sm font-semibold text-foreground transition hover:bg-secondary hover:text-secondary-foreground"
             >
               Discuter sur WhatsApp
             </a>
