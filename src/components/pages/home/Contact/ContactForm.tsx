@@ -210,7 +210,7 @@ export function ContactForm({ onSuccess, initialValues }: ContactFormProps) {
           label="Message"
           error={errors.message?.message}
           className="md:col-span-2"
-          counter={<CharacterCounter current={watchMessage.length} min={100} max={3000} />}
+          counter={<CharacterCounter current={watchMessage.length} min={100} max={2000} />}
           counterPosition="bottom-right"
         >
           <textarea
