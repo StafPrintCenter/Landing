@@ -28,7 +28,7 @@ const ecosystemSearchSchema = z.object({
   sortDir: z.enum(ECOSYSTEM_SORT_DIRECTIONS).catch("asc").default("asc"),
   query: z.string().catch("").default(""),
   page: z.number().catch(1).default(1),
-  perPage: z.number().catch(20).default(20),
+  perPage: z.number().catch(12).default(12),
 });
 
 export const Route = createFileRoute("/tools/ecosystem")({
