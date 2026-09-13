@@ -15,13 +15,17 @@ import {
   EcosystemGrid,
   EcosystemMobileTrigger,
   EcosystemMobileSheet,
+  ECOSYSTEM_SORT_OPTIONS,
+  ECOSYSTEM_SORT_DIRECTIONS,
   type EcosystemSortOption,
+  type EcosystemSortDirection,
 } from "@/components/pages/tools/ecosystem";
 
 const ecosystemSearchSchema = z.object({
   category: z.enum(["Tout", ...ECOSYSTEM_CATEGORIES] as [string, ...string[]]).catch("Tout").default("Tout"),
   status: z.enum(["Tout", "available", "building"]).catch("Tout").default("Tout"),
-  sortBy: z.enum(["default", "asc", "desc"]).catch("default").default("default"),
+  sortBy: z.enum(ECOSYSTEM_SORT_OPTIONS).catch("default").default("default"),
+  sortDir: z.enum(ECOSYSTEM_SORT_DIRECTIONS).catch("asc").default("asc"),
   query: z.string().catch("").default(""),
   page: z.number().catch(1).default(1),
   perPage: z.number().catch(20).default(20),
@@ -42,10 +46,10 @@ export const Route = createFileRoute("/tools/ecosystem")({
 });
 
 function EcosystemPage() {
-  const { category, status, sortBy, query, page, perPage } = useSearch({ from: "/tools/ecosystem" });
+  const { category, status, sortBy, sortDir, query, page, perPage } = useSearch({ from: "/tools/ecosystem" });
   const navigate = useNavigate({ from: "/tools/ecosystem" });
 
-  const { sites, meta, isLoading: storeLoading } = useEcosystemSitesStore({ category, status, sortBy, query, page, perPage });
+  const { sites, meta, isLoading: storeLoading } = useEcosystemSitesStore({ category, status, sortBy, sortDir, query, page, perPage });
 
   const [isLoading, setIsLoading] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
@@ -54,7 +58,7 @@ function EcosystemPage() {
     setIsLoading(true);
     const timer = setTimeout(() => setIsLoading(false), 400);
     return () => clearTimeout(timer);
-  }, [category, status, sortBy, query, page, perPage]);
+  }, [category, status, sortBy, sortDir, query, page, perPage]);
 
   useEffect(() => {
     if (filtersOpen) {
@@ -75,20 +79,25 @@ function EcosystemPage() {
     });
   };
 
+  const handleSortChange = (s: EcosystemSortOption) => {
+    updateSearch({ sortBy: s, sortDir: "asc" });
+  };
+
   const activeFilterCount =
     (category !== "Tout" ? 1 : 0) +
     (status !== "Tout" ? 1 : 0) +
-    (sortBy !== "default" ? 1 : 0) +
-    (query.trim() !== "" ? 1 : 0);
+    (sortBy !== "default" ? 1 : 0);
 
   const filtersPanel = (
     <EcosystemFilters
       category={category as EcosystemSiteCategory | "Tout"}
-      onCategoryChange={(c) => updateSearch({ category: c })}
       status={status as EcosystemSiteStatus | "Tout"}
-      onStatusChange={(s) => updateSearch({ status: s })}
       sortBy={sortBy as EcosystemSortOption}
-      onSortChange={(s) => updateSearch({ sortBy: s })}
+      sortDir={sortDir as EcosystemSortDirection}
+      onCategoryChange={(c) => updateSearch({ category: c })}
+      onStatusChange={(s) => updateSearch({ status: s })}
+      onSortChange={handleSortChange}
+      onSortDirChange={(d) => updateSearch({ sortDir: d })}
     />
   );
 
