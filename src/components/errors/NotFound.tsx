@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowLeft, ArrowUpRight, Home, Printer, RotateCcw } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Home, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/data/site";
+import { SpcMobLogo } from "@/components/site";
 
 export function NotFoundComponent() {
   return (
@@ -35,7 +36,7 @@ export function NotFoundComponent() {
           <section>
             <div className="flex items-center gap-3">
               <div className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card">
-                <Printer className="h-4 w-4 text-primary" />
+                <SpcMobLogo className="mx-auto h-6 w-auto" />
               </div>
 
               <div>
