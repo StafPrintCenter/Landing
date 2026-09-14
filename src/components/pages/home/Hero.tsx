@@ -5,6 +5,7 @@ import { useTheme } from "@/hooks/use-theme";
 import { Typewriter } from "@/components/site/Typewriter";
 import { SITE } from "@/data/site";
 import logo from "@/assets/logos.json";
+import { SpcMobLogo } from "@/components/site";
 import { createWhatsAppContactMessage, withWhatsAppMessage } from "@/lib/message/whatsapp";
 
 const whatsappLink = withWhatsAppMessage(
@@ -22,12 +23,7 @@ export function Hero() {
         <div className="absolute -top-32 -left-24 h-112 w-md rounded-full bg-primary/25 blur-3xl" />
         <div className="absolute top-40 right-0 h-96 w-96 rounded-full bg-accent/30 blur-3xl" />
         <div className="absolute inset-0 bg-grain opacity-60" />
-        <img
-          src={currentLogo}
-          alt=""
-          aria-hidden="true"
-          className="pointer-events-none absolute left-1/2 top-1/2 w-[min(80vw,720px)] -translate-x-1/2 -translate-y-1/2 opacity-[0.06] select-none transition-opacity duration-300"
-        />
+        <SpcMobLogo className="pointer-events-none absolute left-1/2 top-1/2 w-[min(80vw,720px)] -translate-x-1/2 -translate-y-1/2 opacity-[0.06] select-none transition-opacity duration-300" />
       </div>
 
       <div className="absolute right-24 top-24 hidden md:block z-10">
