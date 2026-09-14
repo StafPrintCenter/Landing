@@ -39,7 +39,7 @@ export function NotFoundComponent() {
 
               <div>
                 <p className="text-sm font-bold tracking-tight">
-                  STAF PRINT CENTER
+                  {SITE.name}
                 </p>
                 <p className="text-[10px] text-muted-foreground">
                   L’empreinte de votre succès
