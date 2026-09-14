@@ -102,7 +102,7 @@ export function NotFoundComponent() {
             <div className="absolute -bottom-3 -right-3 h-8 w-8 border-b border-r border-muted-foreground/40" />
 
             {/* Paper */}
-            <div className="relative aspect-[0.78] w-full max-w-105 rotate-3 border border-border bg-card p-6 shadow-2xl sm:p-8">
+            <div className="relative aspect-[0.78] w-full max-w-105 -rotate-3 border border-border bg-card p-6 shadow-2xl sm:p-8">
               {/* Bleed area */}
               <div className="absolute inset-5 border border-dashed border-primary/20" />
 
