@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Nav, Footer, CookieConsent, FloatingHelpMenu } from "./";
+import { Header, Footer, CookieConsent, FloatingHelpMenu } from "./";
 import { NewsletterPromptModal } from "@/components/modal/NewsletterPromptModal";
 import { useNewsletterPrompt } from "@/hooks/use-newsletter-prompt";
 import { AnnouncementsHost } from "@/components/site/announcements/Host";
@@ -9,7 +9,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Nav />
+      <Header />
       <main className="flex-1 pt-16 md:pt-20">{children}</main>
       <Footer />
 
