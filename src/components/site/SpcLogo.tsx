@@ -7,7 +7,8 @@ export function SpcMobLogo({ className }: { className?: string }) {
   return (
     <img
       src={dark ? logos.mw : logos.mc}
-      alt="Logo STAF PRINT CENTER"
+      alt=""
+      aria-hidden="true"
       className={cn("object-contain", className)}
       loading="eager"
       decoding="async"
