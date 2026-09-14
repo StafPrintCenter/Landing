@@ -138,7 +138,7 @@ export function NotFoundComponent() {
                   </span>
                 </div>
 
-                <p className="mt-3 max-w-62.5 text-sm font-semibold leading-tight">
+                <p className="mt-3 max-w-62.5 text-sm leading-tight">
                   Votre page semble avoir été coupée au mauvais endroit.
                 </p>
               </div>
