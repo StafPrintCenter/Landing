@@ -42,7 +42,7 @@ export function NotFoundComponent() {
                   {SITE.name}
                 </p>
                 <p className="text-[10px] text-muted-foreground">
-                  L’empreinte de votre succès
+                  {SITE.slogan}
                 </p>
               </div>
             </div>
