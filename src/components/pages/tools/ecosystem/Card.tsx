@@ -12,8 +12,7 @@ interface EcosystemCardProps {
 }
 
 export function EcosystemCard({ site }: EcosystemCardProps) {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
+  const isDark = useDarkMode();
   const localFallbackLogo = isDark ? logos.mw : logos.mc;
 
   // Sélection de l'image selon la variante du thème (mw pour dark, mc pour light)
