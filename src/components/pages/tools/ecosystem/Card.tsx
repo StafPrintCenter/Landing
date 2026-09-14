@@ -32,7 +32,7 @@ export function EcosystemCard({ site }: EcosystemCardProps) {
   // Mise à jour de l'image dès que isDark ou site changent
   useEffect(() => {
     setImgSrc(getLogoSrc());
-  }, [theme, site]);
+  }, [isDark, site]);
 
   return (
     <a
