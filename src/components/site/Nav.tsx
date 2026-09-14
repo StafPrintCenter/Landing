@@ -55,7 +55,7 @@ export function Nav() {
             <Search size={18} />
           </button>
 
-          <ThemeToggle className="h-9 w-9" />
+          <ThemeToggle />
 
           <a href="/#contact" className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground shadow-md transition hover:opacity-90">
             Demander un devis
@@ -71,7 +71,8 @@ export function Nav() {
             <Search size={18} />
           </button>
 
-          <ThemeToggle className="h-10 w-10 rounded-md border border-border bg-background" />
+          <div className="h-10 w-10 rounded-md border border-border bg-background" />
+          <ThemeToggle />
 
           <button aria-label="Menu" className="cursor-pointer inline-flex h-10 w-10 items-center justify-center rounded-md border border-border bg-background" onClick={toggleMobile}>
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}
