@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft, ArrowUpRight, Home, Printer, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SITE } from "@/data/site";
 
 export function NotFoundComponent() {
   return (
