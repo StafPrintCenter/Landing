@@ -1,11 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import {
-  ArrowLeft,
-  ArrowUpRight,
-  Home,
-  Printer,
-  RotateCcw,
-} from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Home, Printer, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function NotFoundComponent() {
