@@ -4,7 +4,6 @@ import { ArrowRight, Star } from "lucide-react";
 import { useTheme } from "@/hooks/use-theme";
 import { Typewriter } from "@/components/site/Typewriter";
 import { SITE } from "@/data/site";
-import logo from "@/assets/logos.json";
 import { SpcMobLogo } from "@/components/site";
 import { createWhatsAppContactMessage, withWhatsAppMessage } from "@/lib/message/whatsapp";
 
@@ -14,9 +13,6 @@ const whatsappLink = withWhatsAppMessage(
 );
 
 export function Hero() {
-  const { theme } = useTheme();
-  const currentLogo = theme === "dark" ? logo.mw : logo.mc;
-
   return (
     <section className="relative overflow-hidden">
       <div className="absolute inset-0 -z-10 pointer-events-none">
