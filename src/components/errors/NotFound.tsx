@@ -65,7 +65,7 @@ export function NotFoundComponent() {
             {/* Code-barres simulé en CSS/Texte */}
             <div className="py-4 text-center">
               <div className="font-mono text-2xl tracking-[0.3em] font-black opacity-80 select-all">
-                |||| | ||||| ||| || |||||| | |||
+                |||| | |||||
               </div>
               <span className="text-[10px] text-muted-foreground tracking-widest block mt-1">
                 *ERR-404-STAF-PRINT*
@@ -94,7 +94,7 @@ export function NotFoundComponent() {
         </div>
 
         {/* Bordure inférieure style papier déchiré */}
-        <div className="h-3 w-full bg-[radial-gradient(circle,transparent_8px,#ffffff_8px)] dark:bg-[radial-gradient(circle,transparent_8px,#1e293b_8px)] bg-[length:20px_20px] bg-[position:0_3px]" />
+        <div className="h-3 w-full bg-[radial-gradient(circle,transparent_8px,#ffffff_8px)] dark:bg-[radial-gradient(circle,transparent_8px,#1e293b_8px)] bg-size-[20px_20px] bg-position-[0_3px]" />
       </main>
 
       {/* Footer minimaliste */}
