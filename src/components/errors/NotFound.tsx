@@ -58,7 +58,7 @@ export function NotFoundComponent() {
                 PAGE HORS FORMAT · 404
               </p>
 
-              <h1 className="mt-5 max-w-2xl font-display text-5xl font-black leading-[0.9] tracking-[-0.05em] sm:text-6xl lg:text-7xl">
+              <h1 className="mt-5 max-w-2xl font-display text-5xl font-black leading-[0.9] tracking-tighter sm:text-6xl lg:text-7xl">
                 Cette page
                 <br />
                 <span className="text-muted-foreground">
@@ -107,7 +107,7 @@ export function NotFoundComponent() {
             <div className="absolute -bottom-3 -right-3 h-8 w-8 border-b border-r border-muted-foreground/40" />
 
             {/* Paper */}
-            <div className="relative aspect-[0.78] w-full max-w-[420px] rotate-[-3deg] border border-border bg-card p-6 shadow-2xl sm:p-8">
+            <div className="relative aspect-[0.78] w-full max-w-105 rotate-3 border border-border bg-card p-6 shadow-2xl sm:p-8">
               {/* Bleed area */}
               <div className="absolute inset-5 border border-dashed border-primary/20" />
 
