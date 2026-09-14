@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export function NotFoundComponent() {
   return (
-    <div className="flex min-h-[100dvh] w-full flex-col justify-between bg-muted/40 text-foreground select-none p-4 sm:p-6 font-mono">
+    <div className="flex min-h-dvh w-full flex-col justify-between bg-muted/40 text-foreground select-none p-4 sm:p-6 font-mono">
       {/* Background avec grille technique */}
       <div className="pointer-events-none absolute inset-0 grid-field opacity-40" />
 
@@ -22,7 +22,7 @@ export function NotFoundComponent() {
       <main className="relative z-10 my-auto mx-auto w-full max-w-md">
 
         {/* Bordure supérieure style ticket de caisse / papier imprimé */}
-        <div className="h-3 w-full bg-[radial-gradient(circle,transparent_8px,#ffffff_8px)] dark:bg-[radial-gradient(circle,transparent_8px,#1e293b_8px)] bg-[length:20px_20px] bg-[position:0_-10px]" />
+        <div className="h-3 w-full bg-[radial-gradient(circle,transparent_8px,#ffffff_8px)] dark:bg-[radial-gradient(circle,transparent_8px,#1e293b_8px)] bg-size-[20px_20px] bg-position-[0_-10px]" />
 
         {/* Corps du Ticket */}
         <div className="bg-card text-card-foreground p-6 sm:p-8 shadow-2xl border-x border-border/40">
