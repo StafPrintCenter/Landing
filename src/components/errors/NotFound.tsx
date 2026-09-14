@@ -64,9 +64,7 @@ export function NotFoundComponent() {
               </h1>
 
               <p className="mt-7 max-w-lg text-sm leading-7 text-muted-foreground sm:text-base">
-                L’adresse que vous recherchez ne correspond à aucune page
-                de notre site. Elle a probablement été déplacée, renommée
-                ou simplement décidé de prendre quelques vacances.
+                L’adresse que vous recherchez ne correspond à aucune page de notre site. Elle a probablement été déplacée, renommée ou simplement décidé de prendre quelques vacances.
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
