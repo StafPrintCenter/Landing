@@ -8,7 +8,7 @@ import { SearchDialog } from "@/components/modal";
 import { ThemeToggle } from "./ThemeToggle";
 import { SpcDeskLogo } from "@/components/site";
 
-export function Nav() {
+export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const { mobileOpen, toggleMobile, setMobileOpen } = useUI();
