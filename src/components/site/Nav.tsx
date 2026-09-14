@@ -8,6 +8,7 @@ import { useTheme } from "@/hooks/use-theme";
 import logo from "@/assets/logos.json";
 import { SearchDialog } from "@/components/modal";
 import { ThemeToggle } from "./ThemeToggle";
+import { SpcDeskLogo } from "@/components/site";
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
