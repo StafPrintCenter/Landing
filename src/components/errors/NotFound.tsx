@@ -138,12 +138,12 @@ export function NotFoundComponent() {
                 <div className="relative mt-2">
                   <span className="absolute -left-2 top-1/2 h-px w-[115%] -rotate-6 bg-primary/30" />
 
-                  <span className="relative font-display text-[clamp(7rem,18vw,10rem)] font-black leading-none tracking-[-0.1em]">
+                  <span className="relative font-display text-[clamp(7rem,18vw,10rem)] font-black leading-none -tracking-widest">
                     404
                   </span>
                 </div>
 
-                <p className="mt-3 max-w-[250px] text-sm font-semibold leading-tight">
+                <p className="mt-3 max-w-62.5 text-sm font-semibold leading-tight">
                   Votre page semble avoir été coupée au mauvais endroit.
                 </p>
               </div>
