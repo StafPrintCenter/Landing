@@ -133,7 +133,7 @@ export function Footer() {
                 </a>
               </li>
             ))}
-            {availableSites.length > 6 && (
+            {filteredSites.length > 6 && (
               <li>
                 <Link
                   to="/tools/ecosystem"
