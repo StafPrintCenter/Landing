@@ -87,7 +87,7 @@ export function Footer() {
               <Link
                 to="/services"
                 search={{ category: "all", sortBy: "default", sortDir: "asc", query: "", page: 1, perPage: 9 }}
-                className="hover:text-accent"
+                className="text-accent hover:underline"
               >
                 Plus ...
               </Link>
