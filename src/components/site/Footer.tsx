@@ -10,6 +10,7 @@ export function Footer() {
   const { services } = useServicesStore({ perPage: 100 });
   const { sites: ecosystemSites } = useEcosystemSitesStore({ perPage: 100 });
 
+  // Récupération des 6 premiers services (featured en priorité)
   const footerServices = [
     ...(services || []).filter((s) => s.featured),
     ...(services || []).filter((s) => !s.featured),
