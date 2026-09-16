@@ -6,6 +6,9 @@ import { useEcosystemSitesStore } from "@/stores/useEcosystemSitesStore";
 import logo from "@/assets/logos.json";
 import { WhatsAppIcon, FacebookIcon, InstagramIcon, LinkedinIcon, XIcon } from "./icons";
 
+// Liste des noms prioritaires dans l'ordre souhaité
+const PRIORITY_NAMES = ["SPC Intelligence", "SPC Arcade", "SPC Interactive Brief", "SPC Creative Toolkit", "SPC 3D Studio"];
+
 export function Footer() {
   const { services } = useServicesStore({ perPage: 100 });
   const { sites: ecosystemSites } = useEcosystemSitesStore({ perPage: 100 });
