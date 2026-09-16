@@ -16,6 +16,11 @@ export function Footer() {
     ...(services || []).filter((s) => !s.featured),
   ].slice(0, 6);
 
+  // Récupération des 6 premiers écosystèmes triés par nom
+  const footerEcosystems = [...(ecosystemSites || [])]
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .slice(0, 6);
+
   return (
     <footer className="mt-24 border-t border-border bg-secondary text-secondary-foreground">
       <div className="container-x grid gap-10 py-14 md:grid-cols-5">
