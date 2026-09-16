@@ -95,6 +95,37 @@ export function Footer() {
           </ul>
         </div>
 
+        {/* Colonne Écosystème */}
+        <div className="w-full min-w-0">
+          <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-accent">Écosystème</h4>
+          <ul className="mt-4 space-y-2 text-sm text-secondary-foreground/80">
+            {footerEcosystems.map((site, index) => (
+              <li key={`${site.id || site.url}-${index}`} className="min-w-0">
+                <a
+                  href={site.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 max-w-full truncate hover:text-accent transition-colors"
+                  title={site.name}
+                >
+                  <span className="truncate">{site.name}</span>
+                  <ExternalLink size={12} className="shrink-0 text-secondary-foreground/50" />
+                </a>
+              </li>
+            ))}
+            {ecosystemSites && ecosystemSites.length > 6 && (
+              <li>
+                <Link
+                  to="/tools/ecosystem"
+                  className="hover:text-accent font-medium text-xs text-accent"
+                >
+                  Voir tout ...
+                </Link>
+              </li>
+            )}
+          </ul>
+        </div>
+
         {/* Colonne Contact */}
         <div>
           <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-accent">Contact</h4>
