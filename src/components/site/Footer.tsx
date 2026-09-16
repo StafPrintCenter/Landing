@@ -143,7 +143,7 @@ export function Footer() {
               </a>
             </li>
             <li className="flex items-start gap-2">
-              <WhatsAppIcon size={16} className="mt-0.5 text-accent" />
+              <WhatsAppIcon size={16} className="mt-0.5 text-accent shrink-0" />
               <a href={SITE.whatsappLink} target="_blank" rel="noopener noreferrer" className="hover:text-accent">{SITE.whatsapp}</a>
             </li>
             <li className="flex items-start gap-2">
