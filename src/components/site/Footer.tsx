@@ -22,9 +22,21 @@ export function Footer() {
     ...(services || []).filter((s) => !s.featured),
   ].slice(0, 6);
 
-  // Récupération des 6 premiers écosystèmes triés par nom
-  const footerEcosystems = [...(ecosystemSites || [])]
-    .sort((a, b) => a.name.localeCompare(b.name))
+  // Filtrage (disponibles + non exclus)
+  const filteredSites = (ecosystemSites || []).filter(
+    (site) => site.status === "available" && !EXCLUDED_NAMES.includes(site.name)
+  );
+
+  // Extraction des sites prioritaires dans l'ordre exact
+  const prioritySites = PRIORITY_NAMES.map((name) =>
+    filteredSites.find((site) => site.name === name)
+  ).filter((site): site is NonNullable<typeof site> => Boolean(site));
+
+  // Tri alphabétique pour le reste des sites disponibles
+  const otherSites = filteredSites
+    .filter((site) => !PRIORITY_NAMES.includes(site.name))
+    .sort((a, b) => a.name.localeCompare(b.name));
+
   const footerEcosystems = [...prioritySites, ...otherSites].slice(0, 6);
 
   return (
