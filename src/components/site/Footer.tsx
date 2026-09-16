@@ -83,15 +83,17 @@ export function Footer() {
                 </Link>
               </li>
             ))}
-            <li>
-              <Link
-                to="/services"
-                search={{ category: "all", sortBy: "default", sortDir: "asc", query: "", page: 1, perPage: 9 }}
-                className="text-accent hover:underline"
-              >
-                Plus ...
-              </Link>
-            </li>
+            {services && services.length > 6 && (
+              <li>
+                <Link
+                  to="/services"
+                  search={{ category: "all", sortBy: "default", sortDir: "asc", query: "", page: 1, perPage: 9 }}
+                  className="text-accent hover:underline"
+                >
+                  Plus ...
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
 
