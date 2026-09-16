@@ -118,7 +118,7 @@ export function Footer() {
                 </a>
               </li>
             ))}
-            {ecosystemSites && ecosystemSites.length > 6 && (
+            {availableSites.length > 6 && (
               <li>
                 <Link
                   to="/tools/ecosystem"
