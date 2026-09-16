@@ -164,6 +164,7 @@ export function Footer() {
         </div>
       </div>
 
+      {/* Baseline / Copyright */}
       <div className="border-t border-white/10">
         <div className="container-x flex flex-col items-center justify-center gap-3 py-5 text-xs text-secondary-foreground/60 md:flex-row md:justify-between">
           <p>© {new Date().getFullYear()} {SITE.name} - Tous droits réservés.</p>
