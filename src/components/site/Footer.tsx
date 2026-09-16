@@ -100,7 +100,7 @@ export function Footer() {
           <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-accent">Contact</h4>
           <ul className="mt-4 space-y-3 text-sm">
             <li className="flex items-start gap-2">
-              <MapPin size={16} className="mt-0.5 text-accent" />
+              <MapPin size={16} className="mt-0.5 text-accent shrink-0" />
               <a href={SITE.maps} target="_blank" rel="noopener noreferrer" className="hover:text-accent">{SITE.city}</a>
             </li>
             <li className="flex items-start gap-2">
