@@ -8,6 +8,7 @@ import { WhatsAppIcon, FacebookIcon, InstagramIcon, LinkedinIcon, XIcon } from "
 
 export function Footer() {
   const { services } = useServicesStore({ perPage: 100 });
+  const { sites: ecosystemSites } = useEcosystemSitesStore({ perPage: 100 });
 
   const footerServices = [
     ...(services || []).filter((s) => s.featured),
