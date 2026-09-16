@@ -9,6 +9,9 @@ import { WhatsAppIcon, FacebookIcon, InstagramIcon, LinkedinIcon, XIcon } from "
 // Liste des noms prioritaires dans l'ordre souhaité
 const PRIORITY_NAMES = ["SPC Intelligence", "SPC Arcade", "SPC Interactive Brief", "SPC Creative Toolkit", "SPC 3D Studio"];
 
+// Éléments à exclure de l'écosystème
+const EXCLUDED_NAMES = ["Site vitrine", "Documentation officielle"];
+
 export function Footer() {
   const { services } = useServicesStore({ perPage: 100 });
   const { sites: ecosystemSites } = useEcosystemSitesStore({ perPage: 100 });
@@ -22,7 +25,7 @@ export function Footer() {
   // Récupération des 6 premiers écosystèmes triés par nom
   const footerEcosystems = [...(ecosystemSites || [])]
     .sort((a, b) => a.name.localeCompare(b.name))
-    .slice(0, 6);
+  const footerEcosystems = [...prioritySites, ...otherSites].slice(0, 6);
 
   return (
     <footer className="mt-24 border-t border-border bg-secondary text-secondary-foreground">
