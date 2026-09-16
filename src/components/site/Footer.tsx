@@ -117,7 +117,7 @@ export function Footer() {
               <li>
                 <Link
                   to="/tools/ecosystem"
-                  className="hover:text-accent font-medium text-xs text-accent"
+                  className="text-accent hover:underline"
                 >
                   Voir tout ...
                 </Link>
