@@ -76,7 +76,8 @@ export function Footer() {
                 <Link
                   to="/services/$slug"
                   params={{ slug: s.slug }}
-                  className="block truncate hover:text-accent transition-colors" title={s.title}
+                  className="block truncate hover:text-accent transition-colors"
+                  title={s.title}
                 >
                   {s.title}
                 </Link>
