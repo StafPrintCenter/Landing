@@ -69,7 +69,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           });
         }
 
-        // Formations (APIFormation : utilise id)
+        // Formations
         for (const f of formationsRes.data) {
           entries.push({
             path: `/trainings/${f.id}`,
