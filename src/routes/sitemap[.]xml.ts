@@ -89,7 +89,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           });
         }
 
-        // Offres d'emploi (APIJobOffer : utilise slug et createdAt)
+        // Offres d'emploi
         for (const j of jobsRes.data) {
           const jobPath = j.slug.startsWith("/") ? j.slug : `/${j.slug}`;
           entries.push({
