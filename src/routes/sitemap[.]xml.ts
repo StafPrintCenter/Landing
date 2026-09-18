@@ -74,7 +74,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           entries.push({
             path: `/trainings/${f.id}`,
             lastmod: formatDate(f.startDate),
-            changefreq: "monthly",
+            changefreq: "weekly",
             priority: "0.7",
           });
         }
