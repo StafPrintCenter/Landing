@@ -79,7 +79,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           });
         }
 
-        // Articles (APIArticle : utilise slug et champ date)
+        // Articles
         for (const a of articlesRes.data) {
           entries.push({
             path: `/articles/${a.slug}`,
