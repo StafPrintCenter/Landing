@@ -11,7 +11,7 @@ const TODAY = new Date().toISOString().split("T")[0];
 interface SitemapEntry {
   path: string;
   lastmod?: string;
-  changefreq?: "weekly" | "monthly" | "yearly";
+  changefreq?: "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never";
   priority?: string;
 }
 
