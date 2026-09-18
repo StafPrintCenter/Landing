@@ -50,57 +50,53 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/legal/privacy", lastmod: TODAY, changefreq: "weekly", priority: "0.2" },
         ];
 
-        // 3. Appel aux APIs publiques avec tolérance de panne
-        try {
-          const [servicesRes, formationsRes, articlesRes, jobsRes] = await Promise.all([
-            fetchPublicServices({ perPage: 500 }).catch(() => ({ data: [] })),
-            fetchPublicFormations({ perPage: 500 }).catch(() => ({ data: [] })),
-            fetchPublicArticles({ perPage: 500 }).catch(() => ({ data: [] })),
-            fetchPublicJobOffers({ perPage: 500 }).catch(() => ({ data: [] })),
-          ]);
+        // 3. Appel aux APIs publiques
+        const [servicesRes, formationsRes, articlesRes, jobsRes] = await Promise.all([
+          fetchPublicServices({ perPage: 500 }),
+          fetchPublicFormations({ perPage: 500 }),
+          fetchPublicArticles({ perPage: 500 }),
+          fetchPublicJobOffers({ perPage: 500 }),
+        ]);
 
-          // Services
-          for (const s of servicesRes.data) {
-            entries.push({
-              path: `/services/${s.slug}`,
-              lastmod: TODAY,
-              changefreq: "monthly",
-              priority: "0.7",
-            });
-          }
+        // Services
+        for (const s of servicesRes.data) {
+          entries.push({
+            path: `/services/${s.slug}`,
+            lastmod: TODAY,
+            changefreq: "monthly",
+            priority: "0.7",
+          });
+        }
 
-          // Formations
-          for (const f of formationsRes.data) {
-            entries.push({
-              path: `/trainings/${f.id}`,
-              lastmod: formatDate(f.startDate),
-              changefreq: "weekly",
-              priority: "0.7",
-            });
-          }
+        // Formations
+        for (const f of formationsRes.data) {
+          entries.push({
+            path: `/trainings/${f.id}`,
+            lastmod: formatDate(f.startDate),
+            changefreq: "weekly",
+            priority: "0.7",
+          });
+        }
 
-          // Articles
-          for (const a of articlesRes.data) {
-            entries.push({
-              path: `/articles/${a.slug}`,
-              lastmod: formatDate(a.date),
-              changefreq: "weekly",
-              priority: "0.6",
-            });
-          }
+        // Articles
+        for (const a of articlesRes.data) {
+          entries.push({
+            path: `/articles/${a.slug}`,
+            lastmod: formatDate(a.date),
+            changefreq: "weekly",
+            priority: "0.6",
+          });
+        }
 
-          // Offres d'emploi
-          for (const j of jobsRes.data) {
-            const jobPath = j.slug.startsWith("/") ? j.slug : `/${j.slug}`;
-            entries.push({
-              path: `/careers/offers${jobPath}`,
-              lastmod: formatDate(j.createdAt),
-              changefreq: "monthly",
-              priority: "0.6",
-            });
-          }
-        } catch {
-          // Ignorer les erreurs d'API pour continuer de servir le sitemap des pages statiques
+        // Offres d'emploi
+        for (const j of jobsRes.data) {
+          const jobPath = j.slug.startsWith("/") ? j.slug : `/${j.slug}`;
+          entries.push({
+            path: `/careers/offers${jobPath}`,
+            lastmod: formatDate(j.createdAt),
+            changefreq: "monthly",
+            priority: "0.6",
+          });
         }
 
         // 4. Génération XML
