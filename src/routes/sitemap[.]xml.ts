@@ -5,10 +5,6 @@ import { fetchPublicFormations } from "@/stores/useTrainingsStore";
 import { fetchPublicArticles } from "@/stores/useArticlesStore";
 import { fetchPublicJobOffers } from "@/stores/useJobsStore";
 
-// 1. Sécurisation de l'URL de base
-const RAW_URL = import.meta.env.VITE_LANDING_URL;
-const BASE_URL = RAW_URL.replace(/\/$/, "");
-
 // Date du jour pour les entités dépourvues de date ISO
 const TODAY = new Date().toISOString().split("T")[0];
 
@@ -33,7 +29,10 @@ const formatDate = (dateStr?: string | null): string => {
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
-      GET: async () => {
+      GET: async ({ request }) => {
+        // 1. Récupération dynamique de l'origine depuis la requête du serveur
+        const origin = new URL(request.url).origin;
+
         // 2. Pages statiques de base
         const entries: SitemapEntry[] = [
           { path: "/", lastmod: TODAY, changefreq: "weekly", priority: "1.0" },
@@ -103,7 +102,7 @@ export const Route = createFileRoute("/sitemap.xml")({
         // 4. Génération XML
         const urls = entries.map((e) => {
           const cleanPath = e.path.startsWith("/") ? e.path : `/${e.path}`;
-          const fullUrl = `${BASE_URL}${cleanPath}`;
+          const fullUrl = `${origin}${cleanPath}`;
 
           return [
             `  <url>`,
