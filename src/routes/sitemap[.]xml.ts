@@ -59,7 +59,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           fetchPublicJobOffers({ perPage: 500 }),
         ]);
 
-        // Services (APIService : slug disponible)
+        // Services
         for (const s of servicesRes.data) {
           entries.push({
             path: `/services/${s.slug}`,
