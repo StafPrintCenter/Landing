@@ -16,6 +16,7 @@ const DIRECTION_LABELS: Record<FormationSortOption, { asc: string; desc: string 
   price: { asc: "Prix croissant", desc: "Prix décroissant" },
   duration: { asc: "Moins d'heures", desc: "Plus d'heures" },
   level: { asc: "Niveau faible", desc: "Niveau élevé" },
+  enrollment: { asc: "Ouvertes d'abord", desc: "Clôturées d'abord" },
 };
 
 interface FormationFiltersProps {
