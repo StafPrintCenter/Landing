@@ -98,6 +98,7 @@ export function FormationHomeFilters({
               <option value="price">Prix</option>
               <option value="duration">Volume horaire</option>
               <option value="level">Niveau de difficulté</option>
+              <option value="enrollment">Statut des inscriptions</option>
             </select>
 
             <button
