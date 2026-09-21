@@ -93,6 +93,7 @@ export function FormationHomeFilters({
               className="rounded-lg border border-border bg-card px-3 py-2 text-sm font-medium focus:border-primary focus:outline-none cursor-pointer"
             >
               <option value="default">Trier par défaut</option>
+              <option value="enrollment">Statut des inscriptions</option>
               <option value="alpha">Ordre alphabétique</option>
               <option value="price">Prix</option>
               <option value="duration">Volume horaire</option>
