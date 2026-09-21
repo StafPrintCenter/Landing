@@ -3,7 +3,7 @@ import { FORMATION_THEMES, type FormationTheme } from "@/data/trainings";
 
 const THEMES: Array<"Tout" | FormationTheme> = ["Tout", ...FORMATION_THEMES];
 
-export const FORMATION_SORT_OPTIONS = ["default", "enrollment", "alpha", "price", "duration", "level"] as const;
+export const FORMATION_SORT_OPTIONS = ["default", "alpha", "price", "duration", "level", "enrollment"] as const;
 export type FormationSortOption = (typeof FORMATION_SORT_OPTIONS)[number];
 
 export const FORMATION_SORT_DIRECTIONS = ["asc", "desc"] as const;
