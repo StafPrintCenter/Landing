@@ -71,7 +71,6 @@ export function Header() {
             <Search size={18} />
           </button>
 
-          <div className="h-10 w-10 rounded-md border border-border bg-background" />
           <ThemeToggle />
 
           <button aria-label="Menu" className="cursor-pointer inline-flex h-10 w-10 items-center justify-center rounded-md border border-border bg-background" onClick={toggleMobile}>
