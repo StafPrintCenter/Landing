@@ -11,7 +11,6 @@ export type FormationSortDirection = (typeof FORMATION_SORT_DIRECTIONS)[number];
 
 const DIRECTION_LABELS: Record<FormationSortOption, { asc: string; desc: string }> = {
   default: { asc: "Par défaut", desc: "Par défaut" },
-  enrollment: { asc: "Ouvertes d'abord", desc: "Clôturées d'abord" },
   alpha: { asc: "A → Z", desc: "Z → A" },
   price: { asc: "Prix croissant", desc: "Prix décroissant" },
   duration: { asc: "Moins d'heures", desc: "Plus d'heures" },
