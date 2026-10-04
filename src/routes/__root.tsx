@@ -46,7 +46,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
         /* Google */
         { name: "google-site-verification", content: "OdKxHpVkBSxk0mj4vD4OTmZPdVi5pWzyCu4QPIMHy9A" },
-        { name: "google-adsense-account", content: "ca-pub-968229330854081" },
+        { name: "google-adsense-account", content: "ca-pub-9682293308540812" },
       ],
       links: [
         { rel: "canonical", href: canonicalUrl },
