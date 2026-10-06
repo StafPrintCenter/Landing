@@ -70,7 +70,7 @@ export const AVAILABLE_TOOLS: AvailableTool[] = [
 ];
 
 /**
- * Fonctionnalités non encore développées — placeholders à ajuster
+ * Fonctionnalités non encore développées - placeholders à ajuster
  */
 export const UPCOMING_TOOLS: UpcomingTool[] = [
   {
