@@ -1,4 +1,4 @@
-export function StatSkeleton() {
+export function StatsSkeleton() {
   return (
     <div className="grid gap-8 rounded-3xl border border-border bg-card p-8 sm:grid-cols-2 md:p-10 lg:grid-cols-4">
       {Array.from({ length: 4 }).map((_, idx) => (
