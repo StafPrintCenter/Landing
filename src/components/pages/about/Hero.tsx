@@ -77,18 +77,29 @@ export function AboutHero() {
 
       {/* Chiffres */}
       <section className="container-x pt-14">
-        <Reveal>
-          <div className="grid gap-8 rounded-3xl border border-border bg-card p-8 sm:grid-cols-2 md:p-10 lg:grid-cols-4">
-            {STATS.map((s) => (
-              <div key={s.label} className="text-center lg:text-left">
-                <p className="font-display text-4xl font-bold text-gradient-brand">
-                  <Counter to={s.to} suffix={s.suffix} />
-                </p>
-                <p className="mt-1 text-sm text-muted-foreground">{s.label}</p>
-              </div>
-            ))}
+        {isLoading ? (
+          <StatsSkeleton />
+        ) : isError ? (
+          <div className="rounded-3xl border border-destructive/20 bg-destructive/5 p-8 text-center text-destructive">
+            <p className="text-lg font-semibold">Oups, une erreur est survenue</p>
+            <p className="mt-1 text-sm text-destructive/80">
+              Impossible de charger les statistiques de l'atelier.
+            </p>
           </div>
-        </Reveal>
+        ) : (
+          <Reveal>
+            <div className="grid gap-8 rounded-3xl border border-border bg-card p-8 sm:grid-cols-2 md:p-10 lg:grid-cols-4">
+              {stats.map((s) => (
+                <div key={s.id} className="text-center lg:text-left">
+                  <p className="font-display text-4xl font-bold text-gradient-brand">
+                    <Counter to={s.value} suffix={s.suffix} />
+                  </p>
+                  <p className="mt-1 text-sm text-muted-foreground">{s.label}</p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        )}
       </section>
     </>
   );
