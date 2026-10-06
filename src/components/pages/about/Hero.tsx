@@ -4,7 +4,6 @@ import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { Counter } from "@/components/site/Counter";
 import { SITE } from "@/data/site";
-import { STATS } from "@/data/atelier";
 import images from "@/assets/images.json";
 
 export function AboutHero() {
