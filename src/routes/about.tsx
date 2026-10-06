@@ -240,7 +240,7 @@ function AtelierPage() {
           <Reveal className="lg:sticky lg:top-28">
             <div className="overflow-hidden rounded-3xl border border-border shadow-xl">
               <img
-                src={atelierFinitions}
+                src={images.atFt}
                 alt="Poste de finitions : découpe, pelliculage et cartes de visite"
                 width={1200}
                 height={912}
