@@ -1,5 +1,6 @@
 {
-  "mc": "https://cdn.jsdelivr.net/gh/stafprintcenter/Files/Images/Atelier/Hero.png",
-  "mw": "https://cdn.jsdelivr.net/gh/stafprintcenter/Files/Images/Atelier/GrandFormat.png",
-  "dc": "https://cdn.jsdelivr.net/gh/stafprintcenter/Files/Images/Atelier/Finition.png"
+  "atHr": "https://cdn.jsdelivr.net/gh/stafprintcenter/Files/Images/Atelier/Hero.png",
+  "atGf": "https://cdn.jsdelivr.net/gh/stafprintcenter/Files/Images/Atelier/GrandFormat.png",
+  "atFt": "https://cdn.jsdelivr.net/gh/stafprintcenter/Files/Images/Atelier/Finition.png",
+  "steve": "https://cdn.jsdelivr.net/gh/steveasterafovo/Files/Images/Illustrations/0.%20Chemise.png"
 }
