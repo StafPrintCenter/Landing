@@ -10,6 +10,7 @@ import images from "@/assets/images.json";
 export function AboutHero() {
   return (
     <>
+      {/* ============ HERO ============ */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 -z-10 bg-grain" />
         <div className="absolute inset-0 -z-10">
@@ -71,6 +72,7 @@ export function AboutHero() {
         </div>
       </section>
 
+      {/* ============ CHIFFRES ============ */}
       <section className="container-x pt-14">
         <Reveal>
           <div className="grid gap-8 rounded-3xl border border-border bg-card p-8 sm:grid-cols-2 md:p-10 lg:grid-cols-4">
