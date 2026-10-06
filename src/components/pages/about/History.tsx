@@ -15,9 +15,7 @@ export function AboutHistory() {
             Une imprimerie née sur place, <span className="text-gradient-brand">pas importée.</span>
           </h2>
           <p className="mt-5 text-muted-foreground">
-            Nous avons grandi avec nos clients : chaque machine est arrivée
-            parce qu'un projet l'exigeait, et chaque compétence s'est ajoutée
-            pour répondre à une demande réelle du quartier, puis de la ville.
+            Nous avons grandi avec nos clients : chaque machine est arrivée parce qu'un projet l'exigeait, et chaque compétence s'est ajoutée pour répondre à une demande réelle du quartier, puis de la ville.
           </p>
           <a
             href={SITE.maps}
@@ -25,7 +23,7 @@ export function AboutHistory() {
             rel="noreferrer"
             className="mt-7 inline-flex cursor-pointer items-center gap-2 text-sm font-semibold text-primary hover:underline"
           >
-            <MapPin size={16} /> Voir l'atelier sur la carte
+            <MapPin size={16} /> Voir sur la carte
           </a>
         </Reveal>
 
