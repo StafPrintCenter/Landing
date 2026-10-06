@@ -1,9 +1,6 @@
-export * from "./Hero";
-export * from "./Stats";
-export * from "./History";
-export * from "./Machines";
-export * from "./Expertise";
-export * from "./Process";
-export * from "./Engagements";
-export * from "./Founder";
-export * from "./Cta";
+export { AboutHero } from "./AboutHero";
+export { AboutHistory } from "./AboutHistory";
+export { AboutMachines } from "./AboutMachines";
+export { AboutExpertise } from "./AboutExpertise";
+export { AboutProcess } from "./AboutProcess";
+export { AboutCta } from "./AboutCta";
