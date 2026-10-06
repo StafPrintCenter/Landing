@@ -163,7 +163,7 @@ function AtelierPage() {
           </Reveal>
 
           <div className="relative pl-8">
-            <div className="absolute bottom-2 left-[7px] top-2 w-px bg-border" />
+            <div className="absolute bottom-2 left-1.75 top-2 w-px bg-border" />
             {TIMELINE.map((t, i) => (
               <Reveal key={t.year} delay={i * 0.06}>
                 <div className="relative pb-10 last:pb-0">
@@ -247,7 +247,7 @@ function AtelierPage() {
                 width={1200}
                 height={912}
                 loading="lazy"
-                className="h-80 w-full object-cover md:h-[28rem]"
+                className="h-80 w-full object-cover md:h-112"
               />
             </div>
             <p className="mt-4 text-sm text-muted-foreground">
