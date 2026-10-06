@@ -71,6 +71,8 @@ export function AboutHero() {
                   className="h-full w-full object-cover"
                 />
               </div>
+
+              {/* Badge d'overlay dynamique */}
               <div className="absolute -bottom-6 left-6 rounded-2xl border border-border bg-card px-5 py-4 shadow-xl">
                 {isLoading ? (
                   <div className="space-y-1">
