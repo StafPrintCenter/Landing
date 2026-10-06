@@ -1,16 +1,4 @@
-import {
-  Clock,
-  Factory,
-  Layers,
-  MonitorCheck,
-  Printer,
-  Ruler,
-  Scissors,
-  ShieldCheck,
-  Stamp,
-  Users,
-  type LucideIcon,
-} from "lucide-react";
+import { Clock, Factory, Layers, MonitorCheck, Printer, Ruler, Scissors, ShieldCheck, Stamp, Users, type LucideIcon } from "lucide-react";
 
 export type Machine = {
   name: string;
