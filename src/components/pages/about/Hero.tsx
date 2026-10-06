@@ -38,10 +38,7 @@ export function AboutHero() {
               Nous produisons <span className="text-gradient-brand">à Porto-Novo</span>, du premier croquis à la livraison.
             </h1>
             <p className="mt-5 max-w-xl text-lg text-muted-foreground">
-              {SITE.name} est un studio béninois : une équipe, des machines
-              et un savoir-faire réunis sous le même toit pour donner une forme
-              physique à vos idées - une carte, une bâche, un stand, une marque
-              entière.
+              {SITE.name} est un studio béninois de design, d’impression et de production visuelle. Nous réunissons créativité, technologie et savoir-faire pour transformer vos idées en supports concrets : identité visuelle, cartes, affiches, bâches, stands, packaging et bien plus.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
