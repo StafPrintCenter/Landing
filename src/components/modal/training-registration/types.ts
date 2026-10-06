@@ -10,7 +10,7 @@ export const registerSchema = z.object({
   }),
   notes: z.string().trim().max(300, "Maximum 300 caractères").optional(),
   programRead: z.boolean().optional(),
-  consent: z.literal(true, {
+  consent: z.boolean().refine((val) => val === true, {
     message: "Vous devez accepter pour valider l'inscription",
   }),
 });
