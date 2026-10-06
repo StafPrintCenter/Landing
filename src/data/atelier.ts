@@ -125,15 +125,6 @@ export const ENGAGEMENTS: Engagement[] = [
   },
 ];
 
-export type Stat = { to: number; suffix?: string; label: string };
-
-export const STATS: Stat[] = [
-  { to: 7, suffix: " ans", label: "au service des marques béninoises" },
-  { to: 480, suffix: "+", label: "projets imprimés et livrés" },
-  { to: 120, suffix: "", label: "personnes formées à Porto-Novo" },
-  { to: 8, suffix: "", label: "expertises sous un même toit" },
-];
-
 export type Milestone = { year: string; title: string; text: string };
 
 export const TIMELINE: Milestone[] = [
