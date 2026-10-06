@@ -22,31 +22,6 @@ export const Route = createFileRoute("/about")({
       { title: "Notre atelier - STAF PRINT CENTER" },
       { name: "description", content: "Visitez l'atelier STAF PRINT CENTER à Porto-Novo : parc machines, savoir-faire local, finitions et engagements de production." },
     ],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "AboutPage",
-          name: "Notre atelier — STAF PRINT CENTER",
-          description: "Présentation de l'atelier STAF PRINT CENTER à Porto-Novo : machines, savoir-faire et engagements.",
-          about: {
-            "@type": "LocalBusiness",
-            name: "STAF PRINT CENTER",
-            founder: { "@type": "Person", name: "Steve Aster Afovo" },
-            address: { "@type": "PostalAddress", addressLocality: "Porto-Novo", addressCountry: "BJ" },
-            email: "stafprintcenter@gmail.com",
-            areaServed: "Bénin",
-          },
-          breadcrumb: {
-            "@type": "BreadcrumbList",
-            itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Accueil", item: "/a-propos#" },
-            ],
-          },
-        }),
-      },
-    ],
   }),
   component: AtelierPage,
 });
