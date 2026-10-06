@@ -75,7 +75,7 @@ export function AboutHero() {
         </div>
       </section>
 
-      {/* Chiffres */}
+      {/* Chiffres (depuis l'API) */}
       <section className="container-x pt-14">
         <Reveal>
           <div className="grid gap-8 rounded-3xl border border-border bg-card p-8 sm:grid-cols-2 md:p-10 lg:grid-cols-4">
