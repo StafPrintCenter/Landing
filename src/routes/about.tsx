@@ -350,7 +350,7 @@ function AtelierPage() {
       {/* ============ FONDATEUR ============ */}
       <section className="container-x pb-20 md:pb-28">
         <Reveal>
-          <div className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-primary/10 via-card to-accent/10 p-8 md:p-12">
+          <div className="relative overflow-hidden rounded-3xl border border-border bg-linear-to-br from-primary/10 via-card to-accent/10 p-8 md:p-12">
             <Quote
               size={90}
               className="absolute -right-4 -top-4 text-primary/10"
@@ -380,7 +380,7 @@ function AtelierPage() {
 
       {/* ============ CTA ============ */}
       <section className="container-x pb-24">
-        <div className="rounded-3xl border border-border bg-gradient-to-br from-primary/10 via-card to-accent/10 p-8 text-center md:p-12">
+        <div className="rounded-3xl border border-border bg-linear-to-br from-primary/10 via-card to-accent/10 p-8 text-center md:p-12">
           <h2 className="font-display text-2xl font-bold md:text-3xl">
             Passez voir l'atelier avant de commander.
           </h2>
