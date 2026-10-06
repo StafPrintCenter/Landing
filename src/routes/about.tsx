@@ -19,8 +19,8 @@ import { useDarkMode } from "@/hooks/use-dark-mode";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "Notre atelier - STAF PRINT CENTER" },
-      { name: "description", content: "Visitez l'atelier STAF PRINT CENTER à Porto-Novo : parc machines, savoir-faire local, finitions et engagements de production." },
+      { title: `Notre atelier - ${SITE.name}` },
+      { name: "description", content: "Visitez l'atelier ${SITE.name} à Porto-Novo : parc machines, savoir-faire local, finitions et engagements de production." },
     ],
   }),
   component: AtelierPage,
