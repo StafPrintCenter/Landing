@@ -52,7 +52,7 @@ function AtelierPage() {
             <p className="mt-5 max-w-xl text-lg text-muted-foreground">
               {SITE.name} est un studio béninois : une équipe, des machines
               et un savoir-faire réunis sous le même toit pour donner une forme
-              physique à vos idées — une carte, une bâche, un stand, une marque
+              physique à vos idées - une carte, une bâche, un stand, une marque
               entière.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
