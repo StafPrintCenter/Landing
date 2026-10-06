@@ -5,6 +5,8 @@ import { Reveal } from "@/components/site/Reveal";
 import { Counter } from "@/components/site/Counter";
 import { SITE } from "@/data/site";
 import images from "@/assets/images.json";
+import { useStatsStore } from "@/stores/useStatsStore";
+import { StatsSkeleton } from "@/components/skeleton/HomeStats";
 
 export function AboutHero() {
   return (
