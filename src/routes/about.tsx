@@ -3,7 +3,6 @@ import { SiteShell } from "@/components/site/SiteShell";
 import { SITE } from "@/data/site";
 import {
   AboutHero,
-  AboutStats,
   AboutHistory,
   AboutMachines,
   AboutExpertise,
