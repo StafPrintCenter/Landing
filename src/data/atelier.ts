@@ -63,7 +63,7 @@ export const EXPERTISE: Expertise[] = [
   },
   {
     title: "Finitions & assemblage",
-    text: "Pelliculage, dorure, œillets, pliage, reliure — nos finitions tiennent en salle de conférence comme sous un auvent de marché.",
+    text: "Pelliculage, dorure, œillets, pliage, reliure - nos finitions tiennent en salle de conférence comme sous un auvent de marché.",
   },
   {
     title: "Grand format & pose",
