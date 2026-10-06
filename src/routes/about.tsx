@@ -355,7 +355,7 @@ function AtelierPage() {
               aria-hidden="true"
             />
             <div className="relative flex flex-col gap-8 md:flex-row md:items-center">
-              <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-full border border-border bg-card p-1">
+              <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-full border border-border bg-white p-1">
                 <img
                   src={images.steve}
                   alt="Steve Aster"
