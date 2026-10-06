@@ -31,8 +31,6 @@ function AtelierPage() {
       <AboutMachines />
       <AboutExpertise />
       <AboutProcess />
-      <AboutEngagements />
-      <AboutFounder />
       <AboutCta />
     </SiteShell>
   );
