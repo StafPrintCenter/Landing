@@ -32,7 +32,7 @@ export function AboutExpertise() {
               La machine compte moins <span className="text-gradient-brand">que la main qui la règle.</span>
             </h2>
             <p className="mt-5 text-muted-foreground">
-              Un fichier mal préparé s'imprime aussi bien qu'un bon - jusqu'au premier contrôle. Voici ce que nos opérateurs vérifient avant que la presse ne démarre.
+              Un fichier bien préparé, c’est l’assurance d’un résultat conforme. Avant chaque production, nous vérifions les éléments essentiels pour éviter les mauvaises surprises à l’impression.
             </p>
           </Reveal>
 
