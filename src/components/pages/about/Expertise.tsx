@@ -19,8 +19,7 @@ export function AboutExpertise() {
             />
           </div>
           <p className="mt-4 text-sm text-muted-foreground">
-            Le poste de finitions : c'est là qu'une impression correcte devient
-            un support professionnel.
+            Le poste de finitions : c'est là qu'une impression correcte devient un support professionnel.
           </p>
         </Reveal>
 
@@ -33,9 +32,7 @@ export function AboutExpertise() {
               La machine compte moins <span className="text-gradient-brand">que la main qui la règle.</span>
             </h2>
             <p className="mt-5 text-muted-foreground">
-              Un fichier mal préparé s'imprime aussi bien qu'un bon - jusqu'au
-              premier contrôle. Voici ce que nos opérateurs vérifient avant
-              que la presse ne démarre.
+              Un fichier mal préparé s'imprime aussi bien qu'un bon - jusqu'au premier contrôle. Voici ce que nos opérateurs vérifient avant que la presse ne démarre.
             </p>
           </Reveal>
 
