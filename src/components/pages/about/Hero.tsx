@@ -11,6 +11,13 @@ import { StatsSkeleton } from "./StatsSkeleton";
 export function AboutHero() {
   const { stats, isLoading, isError } = useStatsStore();
 
+  // Sélection aléatoire d'une statistique pour le badge d'image
+  const randomStat = useMemo(() => {
+    if (!stats || stats.length === 0) return null;
+    const randomIndex = Math.floor(Math.random() * stats.length);
+    return stats[randomIndex];
+  }, [stats]);
+
   return (
     <>
       {/* Hero */}
