@@ -81,7 +81,7 @@ function AtelierPage() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                to="/rendez-vous"
+                to="/tools/appointment"
                 className="cursor-pointer inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-md transition hover:opacity-90"
               >
                 Prendre rendez-vous à l'atelier <ArrowRight size={16} />
