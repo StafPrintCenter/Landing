@@ -92,7 +92,7 @@ export const PROCESS: Step[] = [
   },
   {
     title: "Production",
-    text: "Impression, découpe et finitions enchaînées dans notre atelier, sans sous-traitance lointaine.",
+    text: "Impression, découpe et finitions coordonnées pour une production suivie de bout en bout.",
   },
   {
     title: "Contrôle & remise",
@@ -114,13 +114,13 @@ export const ENGAGEMENTS: Engagement[] = [
     icon: Clock,
   },
   {
-    title: "Production sur place",
-    text: "Tout est imprimé, découpé et fini dans notre atelier de Porto-Novo.",
+    title: "Production locale",
+    text: "Une production suivie à Porto-Novo, de l’impression aux finitions.",
     icon: Factory,
   },
   {
     title: "Équipe formée ici",
-    text: "Nos opérateurs sont béninois, formés en interne, et connaissent vos fichiers d'une commande à l'autre.",
+    text: "Nos opérateurs sont béninois, formés en interne et connaissent vos fichiers d'une commande à l'autre.",
     icon: Users,
   },
 ];
