@@ -355,9 +355,14 @@ function AtelierPage() {
               aria-hidden="true"
             />
             <div className="relative flex flex-col gap-8 md:flex-row md:items-center">
-              <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-2xl bg-primary font-display text-3xl font-bold text-primary-foreground">
-                SA
-              </div>
+              <img
+                src={images.atGf}
+                alt="Steve Aster"
+                width={96}
+                height={96}
+                loading="lazy"
+                className="h-24 w-24 shrink-0 rounded-2xl object-cover object-center"
+              />
               <div className="max-w-2xl">
                 <p className="font-display text-xl font-semibold md:text-2xl">
                   {SITE.manager}
@@ -388,7 +393,7 @@ function AtelierPage() {
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Link
-              to="/rendez-vous"
+              to="/tools/appointment"
               className="cursor-pointer inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-md transition hover:opacity-90"
             >
               Prendre rendez-vous <ArrowRight size={16} />
