@@ -14,9 +14,7 @@ export function AboutMachines() {
             Ce dont nous disposons, <span className="text-gradient-brand">ici, pas en transit.</span>
           </h2>
           <p className="mt-5 max-w-2xl text-muted-foreground">
-            Rien n'est sous-traité à l'autre bout du monde : vos supports sont
-            imprimés, découpés et finis dans le même atelier, ce qui nous
-            permet de tenir un délai et une couleur.
+            Rien n'est sous-traité à l'autre bout du monde : vos supports sont imprimés, découpés et finis dans le même atelier, ce qui nous permet de tenir un délai et une couleur.
           </p>
         </Reveal>
 
@@ -51,8 +49,7 @@ export function AboutMachines() {
               className="h-64 w-full object-cover object-[center_70%] md:h-96"
             />
             <figcaption className="bg-card px-6 py-4 text-sm text-muted-foreground">
-              Le traceur grand format en production : 1,60 m de laize pour vos
-              bâches, roll-up et habillages de vitrine.
+              Le traceur grand format en production : 1,60 m de laize pour vos bâches, roll-up et habillages de vitrine.
             </figcaption>
           </figure>
         </Reveal>
