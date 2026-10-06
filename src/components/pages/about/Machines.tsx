@@ -11,10 +11,10 @@ export function AboutMachines() {
             Le parc machines
           </p>
           <h2 className="mt-2 max-w-3xl font-display text-4xl font-bold leading-tight md:text-5xl">
-            Ce dont nous disposons, <span className="text-gradient-brand">ici, pas en transit.</span>
+            Ce dont nous disposons, <span className="text-gradient-brand">pour mieux vous servir.</span>
           </h2>
           <p className="mt-5 max-w-2xl text-muted-foreground">
-            Rien n'est sous-traité à l'autre bout du monde : vos supports sont imprimés, découpés et finis dans le même atelier, ce qui nous permet de tenir un délai et une couleur.
+            Des équipements, des compétences et un savoir-faire réunis pour assurer la majorité de votre production avec un suivi attentif, de la préparation à la finition.
           </p>
         </Reveal>
 
@@ -49,7 +49,7 @@ export function AboutMachines() {
               className="h-64 w-full object-cover object-[center_70%] md:h-96"
             />
             <figcaption className="bg-card px-6 py-4 text-sm text-muted-foreground">
-              Le traceur grand format en production : 1,60 m de laize pour vos bâches, roll-up et habillages de vitrine.
+              Production grand format pour bâches, roll-up et habillages de vitrine.
             </figcaption>
           </figure>
         </Reveal>
