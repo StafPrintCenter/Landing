@@ -27,7 +27,6 @@ function AtelierPage() {
   return (
     <SiteShell>
       <AboutHero />
-      <AboutStats />
       <AboutHistory />
       <AboutMachines />
       <AboutExpertise />
