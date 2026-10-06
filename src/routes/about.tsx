@@ -101,7 +101,7 @@ function AtelierPage() {
             <motion.div whileHover={{ y: -6 }} className="relative">
               <div className="overflow-hidden rounded-3xl border border-border shadow-2xl">
                 <img
-                  src={atelierHero}
+                  src={images.atHr}
                   alt="L'atelier de production STAF PRINT CENTER"
                   width={1600}
                   height={912}
