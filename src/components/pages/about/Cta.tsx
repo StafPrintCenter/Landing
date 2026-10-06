@@ -38,9 +38,7 @@ export function AboutCta() {
                   Fondateur &amp; responsable de production
                 </p>
                 <p className="mt-5 text-lg italic text-muted-foreground">
-                  « Mon métier, ce n'est pas de vendre des feuilles imprimées.
-                  C'est de faire en sorte qu'une idée qui tient dans une tête
-                  tienne aussi sur un mur, une table ou une façade. »
+                  « Mon métier, ce n'est pas de vendre des feuilles imprimées. C'est de faire en sorte qu'une idée qui tient dans une tête tienne aussi sur un mur, une table ou une façade. »
                 </p>
               </div>
             </div>
@@ -55,8 +53,7 @@ export function AboutCta() {
             Passez voir l'atelier avant de commander.
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-            On vous montre les machines, les finitions et les épreuves. Vous
-            repartez avec un devis clair et une date de retrait.
+            On vous montre les machines, les finitions et les épreuves. Vous repartez avec un devis clair et une date de retrait.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Link
