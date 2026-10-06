@@ -13,9 +13,7 @@ import {
   STATS,
   TIMELINE,
 } from "@/data/atelier";
-import atelierHero from "@/assets/atelier-hero.jpg";
-import atelierGrandFormat from "@/assets/atelier-grand-format.jpg";
-import atelierFinitions from "@/assets/atelier-finitions.jpg";
+import images from "@/assets/images.json";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
