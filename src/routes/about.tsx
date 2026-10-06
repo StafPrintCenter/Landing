@@ -55,6 +55,8 @@ export const Route = createFileRoute("/about")({
 });
 
 function AtelierPage() {
+  const dark = useDarkMode();
+
   return (
     <SiteShell>
       {/* ============ HERO ============ */}
