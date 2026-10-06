@@ -49,7 +49,7 @@ export function StepAvailability({ register, errors, watch }: StepProps) {
             J'accepte que {SITE.name} me contacte par WhatsApp, email ou téléphone pour finaliser mon inscription.
           </span>
         </label>
-        {errors.consent && <span className="mt-0.5 block text-xs text-destructive">{errors.consent.message}</span>}
+        {errors.consent && (<span className="mt-0.5 block text-xs text-destructive">{errors.consent.message}</span>)}
       </div>
     </motion.div>
   );
