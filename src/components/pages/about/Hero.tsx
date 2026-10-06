@@ -9,6 +9,8 @@ import { useStatsStore } from "@/stores/useStatsStore";
 import { StatsSkeleton } from "@/components/skeleton/HomeStats";
 
 export function AboutHero() {
+  const { stats, isLoading, isError } = useStatsStore();
+
   return (
     <>
       {/* Hero */}
