@@ -6,7 +6,7 @@ import { Counter } from "@/components/site/Counter";
 import { SITE } from "@/data/site";
 import images from "@/assets/images.json";
 import { useStatsStore } from "@/stores/useStatsStore";
-import { StatsSkeleton } from "@/components/skeleton/HomeStats";
+import { StatsSkeleton } from "./StatsSkeleton";
 
 export function AboutHero() {
   const { stats, isLoading, isError } = useStatsStore();
