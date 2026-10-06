@@ -72,10 +72,26 @@ export function AboutHero() {
                 />
               </div>
               <div className="absolute -bottom-6 left-6 rounded-2xl border border-border bg-card px-5 py-4 shadow-xl">
-                <p className="font-display text-2xl font-bold text-primary">
-                  <Counter to={480} suffix="+" />
-                </p>
-                <p className="text-xs text-muted-foreground">projets livrés</p>
+                {isLoading ? (
+                  <div className="space-y-1">
+                    <div className="h-7 w-16 animate-pulse rounded bg-muted" />
+                    <div className="h-3 w-20 animate-pulse rounded bg-muted/70" />
+                  </div>
+                ) : randomStat ? (
+                  <>
+                    <p className="font-display text-2xl font-bold text-primary">
+                      <Counter to={randomStat.value} suffix={randomStat.suffix} />
+                    </p>
+                    <p className="text-xs text-muted-foreground">{randomStat.label}</p>
+                  </>
+                ) : (
+                  <>
+                    <p className="font-display text-2xl font-bold text-primary">
+                      <Counter to={480} suffix="+" />
+                    </p>
+                    <p className="text-xs text-muted-foreground">projets livrés</p>
+                  </>
+                )}
               </div>
             </motion.div>
           </Reveal>
