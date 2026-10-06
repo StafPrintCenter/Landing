@@ -14,6 +14,7 @@ import {
   TIMELINE,
 } from "@/data/atelier";
 import images from "@/assets/images.json";
+import { useDarkMode } from "@/hooks/use-dark-mode";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
