@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
