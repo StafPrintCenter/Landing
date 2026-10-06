@@ -11,7 +11,7 @@ import {
   AboutEngagements,
   AboutFounder,
   AboutCta,
-} from "@/components/pages/services/about";
+} from "@/components/pages/about";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
