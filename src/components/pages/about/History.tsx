@@ -12,10 +12,10 @@ export function AboutHistory() {
             Notre histoire
           </p>
           <h2 className="mt-2 font-display text-4xl font-bold leading-tight md:text-5xl">
-            Une imprimerie née sur place, <span className="text-gradient-brand">pas importée.</span>
+            Née à Porto-Novo, <span className="text-gradient-brand">construite avec nos clients.</span>
           </h2>
           <p className="mt-5 text-muted-foreground">
-            Nous avons grandi avec nos clients : chaque machine est arrivée parce qu'un projet l'exigeait, et chaque compétence s'est ajoutée pour répondre à une demande réelle du quartier, puis de la ville.
+            Depuis ses débuts, {SITE.name} évolue avec les besoins de ses clients pour proposer des solutions en design, impression et production visuelle.
           </p>
           <a
             href={SITE.maps}
