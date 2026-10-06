@@ -78,7 +78,7 @@ function AtelierPage() {
               <div className="overflow-hidden rounded-3xl border border-border shadow-2xl">
                 <img
                   src={images.atHr}
-                  alt="L'atelier de production STAF PRINT CENTER"
+                  alt={`L'atelier de production ${SITE.name}`}
                   width={1600}
                   height={912}
                   className="h-full w-full object-cover"
