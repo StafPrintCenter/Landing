@@ -12,43 +12,37 @@ export const MACHINES: Machine[] = [
     name: "Presse numérique couleur",
     icon: Printer,
     spec: "A3+ · 1 200 × 4 800 dpi",
-    usage:
-      "Cartes de visite, flyers, brochures et petits tirages avec une régularité de couleur parfaite d'un lot à l'autre.",
+    usage: "Cartes de visite, flyers, brochures et petits tirages avec une régularité de couleur parfaite d'un lot à l'autre.",
   },
   {
     name: "Traceur grand format",
     icon: Ruler,
     spec: "Laize 1,60 m · encres tenaces",
-    usage:
-      "Bâches, roll-up, panneaux, stickers muraux et habillage de vitrine, de la devanture au stand d'exposition.",
+    usage: "Bâches, roll-up, panneaux, stickers muraux et habillage de vitrine, de la devanture au stand d'exposition.",
   },
   {
     name: "Plotter & table de découpe",
     icon: Scissors,
     spec: "Vinyle, gabarits, pochoirs",
-    usage:
-      "Lettrage adhésif, numérotation, logos découpés et formes personnalisées au tracé près.",
+    usage: "Lettrage adhésif, numérotation, logos découpés et formes personnalisées au tracé près.",
   },
   {
     name: "Poste de finitions",
     icon: Layers,
     spec: "Plastifieuse · massicot · relieuse",
-    usage:
-      "Pelliculage, vernis, pliage, reliure et mise sous film pour des supports qui tiennent dans le temps.",
+    usage: "Pelliculage, vernis, pliage, reliure et mise sous film pour des supports qui tiennent dans le temps.",
   },
   {
     name: "Presse à badges & tampons",
     icon: Stamp,
     spec: "PVC · métal · nominatif",
-    usage:
-      "Accréditations d'événements, cartons d'identification d'équipe et cachets d'entreprise en quelques heures.",
+    usage: "Accréditations d'événements, cartons d'identification d'équipe et cachets d'entreprise en quelques heures.",
   },
   {
     name: "Stations de création",
     icon: MonitorCheck,
     spec: "Écrans étalonnés · profils ICC",
-    usage:
-      "Nos maquettes sont calibrées pour que la couleur vue à l'écran soit exactement celle du tirage.",
+    usage: "Nos maquettes sont calibrées pour que la couleur vue à l'écran soit exactement celle du tirage.",
   },
 ];
 
