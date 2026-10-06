@@ -4,4 +4,4 @@ export { AboutMachines } from "./Machines";
 export { AboutExpertise } from "./Expertise";
 export { AboutProcess } from "./Process";
 export { AboutCta } from "./Cta";
-export { StatSkeleton } from "./StatSkeleton";
+export { StatsSkeleton } from "./StatsSkeleton";
