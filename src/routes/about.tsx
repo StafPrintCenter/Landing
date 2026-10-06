@@ -8,8 +8,6 @@ import {
   AboutMachines,
   AboutExpertise,
   AboutProcess,
-  AboutEngagements,
-  AboutFounder,
   AboutCta,
 } from "@/components/pages/about";
 
