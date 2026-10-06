@@ -22,7 +22,6 @@ export const Route = createFileRoute("/about")({
       { title: "Notre atelier - STAF PRINT CENTER" },
       { name: "description", content: "Visitez l'atelier STAF PRINT CENTER à Porto-Novo : parc machines, savoir-faire local, finitions et engagements de production." },
     ],
-    links: [{ rel: "canonical", href: "/a-propos" }],
     scripts: [
       {
         type: "application/ld+json",
