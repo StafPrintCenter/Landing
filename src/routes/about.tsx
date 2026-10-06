@@ -218,7 +218,7 @@ function AtelierPage() {
           <Reveal delay={0.1}>
             <figure className="mt-12 overflow-hidden rounded-3xl border border-border">
               <img
-                src={atelierGrandFormat}
+                src={images.atGf}
                 alt="Impression grand format sur vinyle à l'atelier"
                 width={1200}
                 height={912}
