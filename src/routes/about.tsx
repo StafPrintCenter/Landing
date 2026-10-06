@@ -19,7 +19,7 @@ import { useDarkMode } from "@/hooks/use-dark-mode";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "Notre atelier — STAF PRINT CENTER" },
+      { title: "Notre atelier - STAF PRINT CENTER" },
       { name: "description", content: "Visitez l'atelier STAF PRINT CENTER à Porto-Novo : parc machines, savoir-faire local, finitions et engagements de production." },
       { property: "og:title", content: "Notre atelier — STAF PRINT CENTER" },
       { property: "og:description", content: "Presse numérique, traceur grand format, finitions et savoir-faire béninois : comment nous produisons à Porto-Novo." },
