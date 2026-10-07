@@ -80,7 +80,7 @@ export function Footer() {
                 <a href={l.to} className="hover:text-accent">{l.label}</a>
               </li>
             ))}
-            <li><Link to="/" hash="contact" className="hover:text-accent">Contact</Link></li>
+            <li><Link to="/about" className="hover:text-accent">A propos</Link></li>
             <li><Link to="/careers/offers" className="hover:text-accent">Offre d'emploi</Link></li>
             <li><Link to="/about" className="hover:text-accent">A propos</Link></li>
           </ul>
