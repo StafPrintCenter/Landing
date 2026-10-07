@@ -82,7 +82,6 @@ export function Footer() {
             ))}
             <li><Link to="/about" className="hover:text-accent">A propos</Link></li>
             <li><Link to="/careers/offers" className="hover:text-accent">Offre d'emploi</Link></li>
-            <li><Link to="/about" className="hover:text-accent">A propos</Link></li>
           </ul>
         </div>
 
