@@ -7,7 +7,7 @@ import logo from "@/assets/logos.json";
 import { WhatsAppIcon, FacebookIcon, InstagramIcon, LinkedinIcon, XIcon } from "./icons";
 
 // Liste des noms prioritaires dans l'ordre souhaité
-const PRIORITY_NAMES = ["SPC Intelligence", "SPC Arcade", "SPC Interactive Brief", "SPC Creative Toolkit", "SPC 3D Studio"];
+const PRIORITY_NAMES = ["SPC Intelligence", "SPC Interactive Brief", "SPC Creative Toolkit", "SPC 3D Studio", , "SPC Site Builder", "SPC Arcade"];
 
 // Éléments à exclure de l'écosystème
 const EXCLUDED_NAMES = ["Site vitrine", "Documentation officielle"];
