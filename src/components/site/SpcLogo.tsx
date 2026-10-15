@@ -29,3 +29,18 @@ export function SpcDeskLogo({ className }: { className?: string }) {
     />
   );
 }
+
+
+export function Spc3DLogo({ className }: { className?: string }) {
+  const dark = useDarkMode();
+  return (
+    <img
+      src={dark ? logos.w3d : logos.c3d}
+      alt=""
+      aria-hidden="true"
+      className={cn("object-contain", className)}
+      loading="eager"
+      decoding="async"
+    />
+  );
+}
