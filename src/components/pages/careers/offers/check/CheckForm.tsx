@@ -1,4 +1,3 @@
-// src/components/pages/careers/check/CheckForm.tsx
 import { Search, Loader2, Mail, KeyRound } from "lucide-react";
 
 interface CheckFormProps {
