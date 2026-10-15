@@ -2,6 +2,7 @@ export { useAppointmentSlots, createAppointment } from "./useAppointmentsStore";
 export { createResourceStore } from "./createResourceStore";
 export { useArticlesStore } from "./useArticlesStore";
 export { fetchCategories, useCategoriesStore } from "./useCategoriesStore";
+export * from "./useCertificatesStore";
 export { sendContactRequest, trackContactRequest } from "./useContactStore";
 export { useFaqsStore } from "./useFaqsStore";
 export * from "./useInternshipsStore";
