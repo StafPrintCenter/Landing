@@ -1,3 +1,3 @@
-export { CertificateHeader } from "./CertificateHeader";
-export { CertificateResultCard } from "./CertificateResultCard";
+export { CertificateHeader } from "./Header";
+export { CertificateResultCard } from "./ResultCard";
 export { CertificateNotFoundState } from "./states/NotFoundState";
