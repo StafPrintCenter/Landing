@@ -8,7 +8,7 @@ export class CertificateApiError extends Error { }
 export async function fetchCertificateVerification(
   number: string
 ): Promise<APICertificateVerification | null> {
-  const url = resolveApiUrl(`/api/public/certificates/verify/${encodeURIComponent(number)}`);
+  const url = resolveApiUrl(`/api/public/trainings/certificates/verify/${encodeURIComponent(number)}`);
   const response = await fetch(url, { headers: { Accept: "application/json" } });
   if (response.status === 404) return null;
   if (!response.ok) {
