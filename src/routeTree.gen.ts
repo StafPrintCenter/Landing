@@ -20,6 +20,7 @@ import { Route as ServicesIndexRouteImport } from './routes/services/index'
 import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
 import { Route as FaqsIndexRouteImport } from './routes/faqs/index'
 import { Route as ArticlesIndexRouteImport } from './routes/articles/index'
+import { Route as VerifyCertificateNumberRouteImport } from './routes/verify-certificate/$number'
 import { Route as TrainingsIdRouteImport } from './routes/trainings/$id'
 import { Route as ToolsLookupRouteImport } from './routes/tools/lookup'
 import { Route as ToolsEcosystemRouteImport } from './routes/tools/ecosystem'
@@ -97,6 +98,11 @@ const FaqsIndexRoute = FaqsIndexRouteImport.update({
 const ArticlesIndexRoute = ArticlesIndexRouteImport.update({
   id: '/articles/',
   path: '/articles/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerifyCertificateNumberRoute = VerifyCertificateNumberRouteImport.update({
+  id: '/verify-certificate/$number',
+  path: '/verify-certificate/$number',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TrainingsIdRoute = TrainingsIdRouteImport.update({
@@ -237,6 +243,7 @@ export interface FileRoutesByFullPath {
   '/tools/ecosystem': typeof ToolsEcosystemRoute
   '/tools/lookup': typeof ToolsLookupRoute
   '/trainings/$id': typeof TrainingsIdRoute
+  '/verify-certificate/$number': typeof VerifyCertificateNumberRoute
   '/articles/': typeof ArticlesIndexRoute
   '/faqs/': typeof FaqsIndexRoute
   '/projects/': typeof ProjectsIndexRoute
@@ -273,6 +280,7 @@ export interface FileRoutesByTo {
   '/tools/ecosystem': typeof ToolsEcosystemRoute
   '/tools/lookup': typeof ToolsLookupRoute
   '/trainings/$id': typeof TrainingsIdRoute
+  '/verify-certificate/$number': typeof VerifyCertificateNumberRoute
   '/articles': typeof ArticlesIndexRoute
   '/faqs': typeof FaqsIndexRoute
   '/projects': typeof ProjectsIndexRoute
@@ -310,6 +318,7 @@ export interface FileRoutesById {
   '/tools/ecosystem': typeof ToolsEcosystemRoute
   '/tools/lookup': typeof ToolsLookupRoute
   '/trainings/$id': typeof TrainingsIdRoute
+  '/verify-certificate/$number': typeof VerifyCertificateNumberRoute
   '/articles/': typeof ArticlesIndexRoute
   '/faqs/': typeof FaqsIndexRoute
   '/projects/': typeof ProjectsIndexRoute
@@ -348,6 +357,7 @@ export interface FileRouteTypes {
     | '/tools/ecosystem'
     | '/tools/lookup'
     | '/trainings/$id'
+    | '/verify-certificate/$number'
     | '/articles/'
     | '/faqs/'
     | '/projects/'
@@ -384,6 +394,7 @@ export interface FileRouteTypes {
     | '/tools/ecosystem'
     | '/tools/lookup'
     | '/trainings/$id'
+    | '/verify-certificate/$number'
     | '/articles'
     | '/faqs'
     | '/projects'
@@ -420,6 +431,7 @@ export interface FileRouteTypes {
     | '/tools/ecosystem'
     | '/tools/lookup'
     | '/trainings/$id'
+    | '/verify-certificate/$number'
     | '/articles/'
     | '/faqs/'
     | '/projects/'
@@ -457,6 +469,7 @@ export interface RootRouteChildren {
   ToolsEcosystemRoute: typeof ToolsEcosystemRoute
   ToolsLookupRoute: typeof ToolsLookupRoute
   TrainingsIdRoute: typeof TrainingsIdRoute
+  VerifyCertificateNumberRoute: typeof VerifyCertificateNumberRoute
   ArticlesIndexRoute: typeof ArticlesIndexRoute
   FaqsIndexRoute: typeof FaqsIndexRoute
   ProjectsIndexRoute: typeof ProjectsIndexRoute
@@ -551,6 +564,13 @@ declare module '@tanstack/react-router' {
       path: '/articles'
       fullPath: '/articles/'
       preLoaderRoute: typeof ArticlesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verify-certificate/$number': {
+      id: '/verify-certificate/$number'
+      path: '/verify-certificate/$number'
+      fullPath: '/verify-certificate/$number'
+      preLoaderRoute: typeof VerifyCertificateNumberRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/trainings/$id': {
@@ -737,6 +757,7 @@ const rootRouteChildren: RootRouteChildren = {
   ToolsEcosystemRoute: ToolsEcosystemRoute,
   ToolsLookupRoute: ToolsLookupRoute,
   TrainingsIdRoute: TrainingsIdRoute,
+  VerifyCertificateNumberRoute: VerifyCertificateNumberRoute,
   ArticlesIndexRoute: ArticlesIndexRoute,
   FaqsIndexRoute: FaqsIndexRoute,
   ProjectsIndexRoute: ProjectsIndexRoute,
