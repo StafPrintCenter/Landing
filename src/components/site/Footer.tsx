@@ -4,7 +4,7 @@ import { SITE, NAV_LINKS, FOOTER_LINKS, FOOTER_ACTION_LINKS } from "@/data/site"
 import { useServicesStore } from "@/stores/useServicesStore";
 import { useEcosystemSitesStore } from "@/stores/useEcosystemSitesStore";
 import logo from "@/assets/logos.json";
-import { WhatsAppIcon, FacebookIcon, InstagramIcon, LinkedinIcon, XIcon } from "./icons";
+import { WhatsAppIcon, FacebookIcon, InstagramIcon, LinkedinIcon, XIcon, TiktokIcon } from "./icons";
 
 // Liste des noms prioritaires dans l'ordre souhaité
 const PRIORITY_NAMES = ["SPC Intelligence", "SPC Interactive Brief", "SPC Creative Toolkit", "SPC 3D Studio", , "SPC Site Builder", "SPC Arcade"];
@@ -178,6 +178,7 @@ export function Footer() {
             <a href={SITE.socials.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-accent hover:text-accent-foreground"><FacebookIcon size={16} /></a>
             <a href={SITE.socials.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-accent hover:text-accent-foreground"><InstagramIcon size={16} /></a>
             <a href={SITE.socials.x} target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-accent hover:text-accent-foreground"><XIcon size={16} /></a>
+            <a href={SITE.socials.tiktok} target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-accent hover:text-accent-foreground"><TiktokIcon size={16} /></a>
           </div>
         </div>
       </div>
