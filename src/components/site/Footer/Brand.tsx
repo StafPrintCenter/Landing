@@ -1,13 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { SITE, FOOTER_LINKS } from "@/data/site";
 import logo from "@/assets/logos.json";
-import {
-  FacebookIcon,
-  InstagramIcon,
-  LinkedinIcon,
-  TiktokIcon,
-  XIcon,
-} from "../icons";
+import { FacebookIcon, InstagramIcon, LinkedinIcon, TiktokIcon, XIcon } from "../icons";
 
 const SOCIAL_LINKS = [
   { href: SITE.socials.linkedin, label: "LinkedIn", Icon: LinkedinIcon },
