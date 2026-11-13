@@ -274,7 +274,19 @@ export function InternshipRequestForm() {
               type="date"
               min={minStartDate}
               value={desiredStartDate}
-              onChange={(e) => setDesiredStartDate(e.target.value)}
+              onChange={(e) => {
+                const val = e.target.value;
+                if (val && val < minStartDate) {
+                  setDesiredStartDate(minStartDate);
+                  return;
+                }
+                setDesiredStartDate(val);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "ArrowDown" && desiredStartDate && desiredStartDate <= minStartDate) {
+                  e.preventDefault();
+                }
+              }}
               className="w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-sm outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
             />
           </label>
@@ -339,11 +351,10 @@ export function InternshipRequestForm() {
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
-              className={`flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed p-6 text-center transition-all ${
-                isCvDragging
-                  ? "border-primary bg-primary/10"
-                  : "border-border bg-background hover:border-primary/50 hover:bg-muted/30"
-              }`}
+              className={`flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed p-6 text-center transition-all ${isCvDragging
+                ? "border-primary bg-primary/10"
+                : "border-border bg-background hover:border-primary/50 hover:bg-muted/30"
+                }`}
             >
               <div className="rounded-full bg-primary/10 p-3 text-primary">
                 <Upload size={20} />
