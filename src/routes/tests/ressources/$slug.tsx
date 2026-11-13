@@ -15,7 +15,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { SiteShell } from "@/components/site/SiteShell";
-import { RESOURCES, formatResourcePrice, getResource } from "@/data/resources";
+import { RESOURCES, formatResourcePrice, getDiscountPercent, getResource, getResourceIcon, getResourceStatus } from "@/data/resources";
 import { SITE } from "@/data/site";
 
 export const Route = createFileRoute("/tests/ressources/$slug")({
@@ -66,14 +66,16 @@ function ResourceDetailPage() {
   const { slug } = Route.useLoaderData();
   const resource = getResource(slug);
   if (!resource) throw notFound();
-  const Icon = resource.icon;
+  const Icon = getResourceIcon(resource);
   const isFree = resource.price === 0;
   const price = formatResourcePrice(resource.price);
+  const discount = getDiscountPercent(resource);
+  const originalPrice = discount !== null && resource.originalPrice ? formatResourcePrice(resource.originalPrice) : null;
   const related = RESOURCES.filter((item) => item.slug !== resource.slug && item.category === resource.category).slice(0, 2);
   const whatsappUrl = `${SITE.whatsappLink}?text=${encodeURIComponent(
     isFree
       ? `Bonjour STAF PRINT CENTER, je souhaite recevoir gratuitement la ressource « ${resource.title} » (${resource.format}).`
-      : `Bonjour STAF PRINT CENTER, je souhaite commander la ressource « ${resource.title} » au prix de ${price}. Pouvez-vous m'indiquer la marche à suivre ?`,
+      : `Bonjour STAF PRINT CENTER, je souhaite commander la ressource « ${resource.title} » au prix ${originalPrice ? `promotionnel de ${price} au lieu de ${originalPrice} (-${discount}%)` : `de ${price}`}. Pouvez-vous m'indiquer la marche à suivre ?`,
   )}`;
 
   return (
@@ -111,13 +113,21 @@ function ResourceDetailPage() {
               <div className="mt-7 flex flex-wrap gap-x-6 gap-y-3 text-sm text-secondary-foreground/65">
                 <span className="inline-flex items-center gap-2"><FileCheck2 size={16} className="text-accent" />{resource.format}</span>
                 <span className="inline-flex items-center gap-2"><Layers3 size={16} className="text-accent" />{resource.meta}</span>
-                <span className="inline-flex items-center gap-2"><BadgeCheck size={16} className="text-accent" />Prêt à utiliser</span>
+                <span className="inline-flex items-center gap-2"><BadgeCheck size={16} className="text-accent" />{getResourceStatus(resource)}</span>
               </div>
             </div>
 
             <aside className="rounded-3xl border border-secondary-foreground/15 bg-background/5 p-6 shadow-2xl backdrop-blur-sm md:p-8">
-              <p className="text-sm text-secondary-foreground/60">{isFree ? "Accès libre" : "Prix de la ressource"}</p>
-              <p className="mt-2 font-display text-4xl font-bold">{price}</p>
+              <p className="text-sm text-secondary-foreground/60">{isFree ? "Accès libre" : originalPrice ? "Prix promotionnel" : "Prix de la ressource"}</p>
+              <div className="mt-2 flex flex-wrap items-baseline gap-3">
+                <p className="font-display text-4xl font-bold">{price}</p>
+                {originalPrice && (
+                  <>
+                    <s className="text-lg text-secondary-foreground/50">{originalPrice}</s>
+                    <span className="rounded-full bg-primary px-2.5 py-0.5 text-xs font-bold text-primary-foreground">-{discount}%</span>
+                  </>
+                )}
+              </div>
               <p className="mt-3 text-sm leading-relaxed text-secondary-foreground/60">
                 {isFree ? "Demandez le fichier et recevez-le directement sur WhatsApp." : "Commande et remise du fichier confirmées directement sur WhatsApp."}
               </p>
@@ -210,7 +220,7 @@ function ResourceDetailPage() {
             </div>
             <div className="mt-8 grid gap-5 md:grid-cols-2">
               {related.map((item) => {
-                const RelatedIcon = item.icon;
+                const RelatedIcon = getResourceIcon(item);
                 return (
                   <Link key={item.slug} to="/tests/ressources/$slug" params={{ slug: item.slug }} className="group flex cursor-pointer items-start gap-4 rounded-2xl border border-border bg-card p-6 transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg">
                     <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary"><RelatedIcon size={22} /></span>

@@ -1,4 +1,4 @@
-import { BookOpen, FileText, Layers, Palette, Sparkles, type LucideIcon } from "lucide-react";
+import { BookOpen, LayoutTemplate, Wrench, type LucideIcon } from "lucide-react";
 
 export type ResourceCategory = "Gabarit" | "Guide" | "Outil";
 
@@ -6,8 +6,14 @@ export type Resource = {
   slug: string;
   title: string;
   category: ResourceCategory;
-  icon: LucideIcon;
+  /** Icône personnalisée ; sinon l'icône de la catégorie s'applique. */
+  icon?: LucideIcon;
+  /** Prix payé (promo incluse). 0 = gratuit. */
   price: number;
+  /** Prix normal avant promotion (doit être supérieur à price). */
+  originalPrice?: number;
+  /** Statut affiché (ex. « Prêt à imprimer »). */
+  status?: string;
   short: string;
   description: string;
   format: string;
@@ -22,9 +28,9 @@ export type Resource = {
 export const RESOURCES: Resource[] = [
   {
     slug: "gabarit-carte-visite-85x55",
+    status: "Prêt à imprimer",
     title: "Gabarit carte de visite 85 × 55 mm",
     category: "Gabarit",
-    icon: FileText,
     price: 0,
     short: "Un fichier propre aux bonnes dimensions, avec fond perdu et marges de sécurité.",
     description:
@@ -39,9 +45,9 @@ export const RESOURCES: Resource[] = [
   },
   {
     slug: "choisir-couleurs-de-marque",
+    status: "Lecture 15 min",
     title: "Choisir ses couleurs de marque",
     category: "Guide",
-    icon: Palette,
     price: 2500,
     short: "Une méthode simple pour construire une palette cohérente et mémorable.",
     description:
@@ -56,10 +62,11 @@ export const RESOURCES: Resource[] = [
   },
   {
     slug: "kit-kakemono-85x200",
+    status: "Prêt à personnaliser",
     title: "Kit kakémono 85 × 200 cm",
     category: "Gabarit",
-    icon: Layers,
-    price: 5000,
+    price: 3000,
+    originalPrice: 5000,
     short: "Un modèle professionnel à personnaliser pour vos stands et événements.",
     description:
       "Concevez un kakémono lisible de loin et techniquement prêt pour la production. Le kit organise les zones importantes et vous évite de placer un logo ou un texte dans une zone masquée par la structure.",
@@ -73,9 +80,9 @@ export const RESOURCES: Resource[] = [
   },
   {
     slug: "reussir-son-brief-design",
+    status: "Checklist à remplir",
     title: "Réussir son brief design",
     category: "Guide",
-    icon: BookOpen,
     price: 0,
     short: "Les bonnes questions pour obtenir une proposition créative vraiment utile.",
     description:
@@ -90,9 +97,9 @@ export const RESOURCES: Resource[] = [
   },
   {
     slug: "checklist-site-web-performant",
+    status: "Nouveauté 2026",
     title: "Checklist site web performant",
     category: "Outil",
-    icon: Sparkles,
     price: 0,
     short: "20 points à contrôler avant de mettre votre site en ligne.",
     description:
@@ -107,9 +114,9 @@ export const RESOURCES: Resource[] = [
   },
   {
     slug: "gabarit-flyer-a5",
+    status: "Prêt à personnaliser",
     title: "Gabarit flyer A5 recto-verso",
     category: "Gabarit",
-    icon: FileText,
     price: 3500,
     short: "Deux compositions professionnelles avec marges et fond perdu inclus.",
     description:
@@ -123,6 +130,29 @@ export const RESOURCES: Resource[] = [
     license: "Utilisation commerciale autorisée sur un nombre illimité de projets. Redistribution des sources interdite.",
   },
 ];
+
+export const CATEGORY_ICONS: Record<ResourceCategory, LucideIcon> = {
+  Gabarit: LayoutTemplate,
+  Guide: BookOpen,
+  Outil: Wrench,
+};
+
+export const DEFAULT_RESOURCE_STATUS = "Prêt à l'emploi";
+
+export function getResourceIcon(resource: Pick<Resource, "icon" | "category">) {
+  return resource.icon ?? CATEGORY_ICONS[resource.category];
+}
+
+export function getResourceStatus(resource: Pick<Resource, "status">) {
+  return resource.status ?? DEFAULT_RESOURCE_STATUS;
+}
+
+/** Pourcentage de réduction arrondi, ou null si pas de promotion valide. */
+export function getDiscountPercent(resource: Pick<Resource, "price" | "originalPrice">) {
+  const { price, originalPrice } = resource;
+  if (!originalPrice || price <= 0 || originalPrice <= price) return null;
+  return Math.round(((originalPrice - price) / originalPrice) * 100);
+}
 
 export function formatResourcePrice(price: number) {
   return price === 0 ? "Gratuit" : `${new Intl.NumberFormat("fr-FR").format(price)} FCFA`;

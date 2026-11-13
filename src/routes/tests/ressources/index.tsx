@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Download, LibraryBig, Sparkles } from "lucide-react";
 import { SiteShell } from "@/components/site/SiteShell";
-import { RESOURCES, formatResourcePrice } from "@/data/resources";
+import { RESOURCES, formatResourcePrice, getDiscountPercent, getResourceIcon, getResourceStatus } from "@/data/resources";
 
 export const Route = createFileRoute("/tests/ressources/")({
   head: () => ({
@@ -97,8 +97,9 @@ function RessourcesPage() {
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {visibleResources.map((resource) => {
-            const Icon = resource.icon;
+            const Icon = getResourceIcon(resource);
             const isFree = resource.price === 0;
+            const discount = getDiscountPercent(resource);
             return (
               <article key={resource.slug} className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl">
                 <div className="relative flex h-36 items-center justify-center overflow-hidden bg-secondary text-secondary-foreground">
@@ -109,6 +110,10 @@ function RessourcesPage() {
                     {isFree ? <Download size={12} /> : <Sparkles size={12} />}
                     {formatResourcePrice(resource.price)}
                   </span>
+                  {discount !== null && (
+                    <span className="absolute left-4 top-4 rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">-{discount}%</span>
+                  )}
+                  <span className="absolute bottom-3 left-4 rounded-full bg-background/10 px-3 py-1 text-[11px] font-medium text-secondary-foreground/80 backdrop-blur-sm">{getResourceStatus(resource)}</span>
                 </div>
                 <div className="flex flex-1 flex-col p-6">
                   <div className="flex items-center justify-between gap-3 text-xs">
@@ -118,7 +123,12 @@ function RessourcesPage() {
                   <h3 className="mt-3 font-display text-xl font-semibold leading-snug">{resource.title}</h3>
                   <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{resource.short}</p>
                   <div className="mt-5 flex items-center justify-between gap-3 border-t border-border pt-4">
-                    <span className="text-xs text-muted-foreground">{resource.format}</span>
+                    <span className="flex flex-col text-xs text-muted-foreground">
+                      {resource.format}
+                      {discount !== null && resource.originalPrice && (
+                        <span className="mt-1"><s>{formatResourcePrice(resource.originalPrice)}</s> <strong className="text-primary">{formatResourcePrice(resource.price)}</strong></span>
+                      )}
+                    </span>
                     <Link
                       to="/tests/ressources/$slug"
                       params={{ slug: resource.slug }}
