@@ -60,20 +60,20 @@ export const AVAILABLE_TOOLS: AvailableTool[] = [
     actionLabel: "Discuter avec l'IA",
   },
   {
+    id: "ressources",
+    to: "/tools/ressources",
+    icon: Download,
+    title: "Ressources & templates",
+    desc: "Bibliothèque de ressources gratuites et premium avec fiches détaillées.",
+    actionLabel: "Parcourir les ressources",
+  },
+  {
     id: "ecosystem",
     to: "/tools/ecosystem",
     icon: Network,
     title: "Notre écosystème",
     desc: "Découvrez tous nos sites et plateformes : espaces formateur, apprenant, documentation et outils internes.",
     actionLabel: "Explorer l'écosystème",
-  },
-  {
-    id: "ressources",
-    to: "/tools/ecosystem",
-    icon: Network,
-    title: "Notre écosystème",
-    desc: "Bibliothèque de ressources gratuites et premium avec fiches détaillées.",
-    actionLabel: "Parcourir les ressources",
   },
 ];
 
