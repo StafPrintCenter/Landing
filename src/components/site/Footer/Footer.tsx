@@ -48,6 +48,7 @@ export function Footer() {
     <footer className="mt-24 border-t border-border bg-secondary text-secondary-foreground">
       <div className="container-x grid gap-12 py-14 md:grid-cols-6">
         <FooterBrand />
+
         <div className="md:col-span-4 flex flex-col gap-10">
           <FooterResourceColumns
             services={footerServices}
@@ -59,6 +60,7 @@ export function Footer() {
           <FooterToolsContact />
         </div>
       </div>
+
       <FooterCopyright />
     </footer>
   );
