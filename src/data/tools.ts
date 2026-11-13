@@ -97,8 +97,8 @@ export const UPCOMING_TOOLS: UpcomingTool[] = [
   {
     id: "free-ressources",
     icon: Download,
-    title: "Ressources gratuites",
-    desc: "Templates et guides à télécharger.",
+    title: "Ressources & templates",
+    desc: "Bibliothèque de ressources gratuites et premium avec fiches détaillées.",
     statusLabel: "Bientôt disponible",
   },
   {
