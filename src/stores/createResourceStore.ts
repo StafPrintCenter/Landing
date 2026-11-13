@@ -1,5 +1,6 @@
 import { useQuery, type UseQueryResult } from "@tanstack/react-query";
 import { resolveApiUrl } from "@/lib/api/resolve-url";
+import { parseApiError } from "@/lib/api/error";
 
 export interface BaseFetchParams {
   category?: string;
@@ -64,7 +65,7 @@ export function createResourceStore<T>({
     const response = await fetch(url);
 
     if (!response.ok) {
-      throw new Error(`Erreur lors de la récupération de la ressource "${resourceKey}"`);
+      throw await parseApiError(response, `Erreur lors de la récupération de la ressource "${resourceKey}"`);
     }
 
     return response.json();
@@ -78,7 +79,7 @@ export function createResourceStore<T>({
     const response = await fetch(url);
     if (response.status === 404) return null;
     if (!response.ok) {
-      throw new Error(`Erreur lors de la récupération d'un élément de "${resourceKey}"`);
+      throw await parseApiError(response, `Erreur lors de la récupération d'un élément de "${resourceKey}"`);
     }
     const json: DetailResponse<T> = await response.json();
     return json.data;

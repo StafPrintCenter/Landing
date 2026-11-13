@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { resolveApiUrl } from "@/lib/api/resolve-url";
+import { parseApiError } from "@/lib/api/error";
 import { type APIAnnouncement } from "@/data/announcements";
 
 interface AnnouncementsListResponse {
@@ -11,7 +12,7 @@ async function fetchAnnouncements(page: string): Promise<AnnouncementsListRespon
   const url = resolveApiUrl(`/api/public/announcements/list?${queryParams.toString()}`);
   const response = await fetch(url);
   if (!response.ok) {
-    throw new Error("Erreur lors de la récupération des annonces");
+    throw await parseApiError(response, "Erreur lors de la récupération des annonces");
   }
   return response.json();
 }

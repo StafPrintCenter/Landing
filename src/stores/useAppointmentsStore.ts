@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { resolveApiUrl } from "@/lib/api/resolve-url";
+import { parseApiError } from "@/lib/api/error";
 import type { APIAppointment, AppointmentMode, AppointmentSlotsResponse } from "@/data/appointments";
 
 type AppointmentResponse = { data: APIAppointment };
@@ -8,7 +9,7 @@ export async function fetchAppointmentSlots(date: string): Promise<AppointmentSl
   const url = resolveApiUrl(`/api/public/appointments/slots?date=${date}`);
   const response = await fetch(url);
   if (!response.ok) {
-    throw new Error("Erreur lors de la récupération des créneaux disponibles");
+    throw await parseApiError(response, "Erreur lors de la récupération des créneaux disponibles");
   }
   return response.json();
 }
@@ -62,7 +63,7 @@ export async function createAppointment(params: CreateAppointmentParams): Promis
   const url = resolveApiUrl(`/api/public/appointments/create`);
   const response = await fetch(url, { method: "POST", body: formData });
   if (!response.ok) {
-    throw new Error("Erreur lors de la création du rendez-vous");
+    throw await parseApiError(response, "Erreur lors de la création du rendez-vous");
   }
   const json: AppointmentResponse = await response.json();
   return json.data;
