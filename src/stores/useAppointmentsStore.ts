@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { resolveApiUrl } from "@/lib/api/api-url";
+import { resolveApiUrl } from "@/lib/api/resolve-url";
 import type { APIAppointment, AppointmentMode, AppointmentSlotsResponse } from "@/data/appointments";
 
 type AppointmentResponse = { data: APIAppointment };

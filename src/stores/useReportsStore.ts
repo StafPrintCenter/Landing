@@ -1,4 +1,4 @@
-import { resolveApiUrl } from "@/lib/api/api-url";
+import { resolveApiUrl } from "@/lib/api/resolve-url";
 import type { APIReport, ReportableType, ReportReason } from "@/data/reports";
 
 type ReportResponse = { data: APIReport };

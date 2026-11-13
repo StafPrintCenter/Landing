@@ -1,5 +1,5 @@
 import { createResourceStore } from "./createResourceStore";
-import { resolveApiUrl } from "@/lib/api/api-url";
+import { resolveApiUrl } from "@/lib/api/resolve-url";
 import { type APIFormation } from "@/data/trainings";
 import type { APITrainingRegistration, CreateTrainingRegistrationParams, TrainingRegistrationSchedule, TrainingRegistrationErrorReason, TrainingRegistrationErrorPayload, } from "@/data/trainings";
 

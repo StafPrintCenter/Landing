@@ -1,5 +1,5 @@
 import { useQuery, type UseQueryResult } from "@tanstack/react-query";
-import { resolveApiUrl } from "@/lib/api/api-url";
+import { resolveApiUrl } from "@/lib/api/resolve-url";
 
 export interface BaseFetchParams {
   category?: string;

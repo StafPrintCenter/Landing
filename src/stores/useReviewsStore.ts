@@ -1,4 +1,4 @@
-import { resolveApiUrl } from "@/lib/api/api-url";
+import { resolveApiUrl } from "@/lib/api/resolve-url";
 import type { APIReviewInvitationDetails, ReviewAnswers } from "@/data/reviews";
 
 type ReviewInvitationResponse = { data: APIReviewInvitationDetails };

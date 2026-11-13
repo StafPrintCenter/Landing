@@ -1,5 +1,5 @@
 import { createResourceStore, type BaseFetchParams } from "./createResourceStore";
-import { resolveApiUrl } from "@/lib/api/api-url";
+import { resolveApiUrl } from "@/lib/api/resolve-url";
 import type { APIJobOffer, APIJobApplication } from "@/data/jobs";
 
 // ==========================================
