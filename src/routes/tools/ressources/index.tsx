@@ -130,7 +130,7 @@ function RessourcesPage() {
                       )}
                     </span>
                     <Link
-                      to="/tests/ressources/$slug"
+                      to="/tools/ressources/$slug"
                       params={{ slug: resource.slug }}
                       className="inline-flex cursor-pointer items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground transition hover:gap-2.5 hover:opacity-90"
                       aria-label={`Découvrir ${resource.title}`}
