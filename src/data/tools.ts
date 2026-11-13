@@ -67,19 +67,20 @@ export const AVAILABLE_TOOLS: AvailableTool[] = [
     desc: "Découvrez tous nos sites et plateformes : espaces formateur, apprenant, documentation et outils internes.",
     actionLabel: "Explorer l'écosystème",
   },
+  {
+    id: "ecosystem",
+    to: "/tools/ecosystem",
+    icon: Network,
+    title: "Notre écosystème",
+    desc: "Découvrez tous nos sites et plateformes : espaces formateur, apprenant, documentation et outils internes.",
+    actionLabel: "Explorer l'écosystème",
+  },
 ];
 
 /**
  * Fonctionnalités non encore développées - placeholders à ajuster
  */
 export const UPCOMING_TOOLS: UpcomingTool[] = [
-  {
-    id: "qr-generator",
-    icon: QrCode,
-    title: "Générateur de QR Code",
-    desc: "Créez un QR code personnalisé pour vos supports imprimés en quelques secondes.",
-    statusLabel: "Bientôt disponible",
-  },
   {
     id: "quote-simulator",
     icon: Calculator,
