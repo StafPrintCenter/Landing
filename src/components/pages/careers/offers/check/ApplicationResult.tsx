@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Mail, Phone, Calendar, FileText, User, GraduationCap, Clock, ArrowLeft, Eye, Home } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { STATUS_CONFIG, getEducationLevelLabel, type APIJobApplication, } from "@/data/jobs";
-import { resolveStorageUrl } from "@/lib/api/file-url";
+import { resolveStorageUrl } from "@/lib/api/file";
 import { FilePreviewModal } from "@/components/modal";
 
 interface ApplicationResultProps {
