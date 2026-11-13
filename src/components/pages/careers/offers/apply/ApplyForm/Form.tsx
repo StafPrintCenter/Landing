@@ -6,8 +6,7 @@ import { useFormDraft } from "@/hooks/use-form-draft";
 import { SITE } from "@/data/site";
 import type { APIJobOffer } from "@/data/jobs";
 import { applyToJobOffer, JobsApiError } from "@/stores/useJobsStore";
-import { ApplySuccessScreen } from "../SuccessScreen";
-import { ApplicantFields, MotivationField, ApplyErrorBanner, FieldErrorsBanner } from "./";
+import { ApplicantFields, MotivationField, ApplyErrorBanner, FieldErrorsBanner, ApplySuccessScreen } from "./";
 
 interface ApplyFormProps {
   offer: APIJobOffer;
