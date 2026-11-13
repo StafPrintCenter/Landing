@@ -9,8 +9,7 @@ import { applyToJobOffer, JobsApiError } from "@/stores/useJobsStore";
 import { ApplyErrorBanner } from "../ErrorBanner";
 import { FieldErrorsBanner } from "../FieldErrorsBanner";
 import { ApplySuccessScreen } from "../SuccessScreen";
-import { ApplicantFields } from "./ApplicantFields";
-import { MotivationField } from "./MotivationField";
+import { ApplicantFields, MotivationField } from "./";
 
 interface ApplyFormProps {
   offer: APIJobOffer;
