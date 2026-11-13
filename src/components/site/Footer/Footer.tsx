@@ -4,7 +4,7 @@ import { useServicesStore } from "@/stores/useServicesStore";
 import { useEcosystemSitesStore } from "@/stores/useEcosystemSitesStore";
 import { FooterBrand, FooterCopyright, FooterResourceColumns } from "./";
 import { } from "./ResourceColumns";
-import { FooterToolsContact } from "./FooterToolsContact";
+import { FooterToolsContact } from "./ToolsContact";
 
 const PRIORITY_NAMES = [
   "SPC Intelligence",
