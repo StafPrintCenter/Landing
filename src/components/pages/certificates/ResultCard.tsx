@@ -59,7 +59,7 @@ export function CertificateResultCard({ number, certificate }: CertificateResult
       </dl>
       <div className="p-6">
         <Link
-          to="/verify-certificate/"
+          to="/verify-certificate"
           className="inline-flex w-full items-center justify-center rounded-full border border-border px-5 py-2.5 text-sm font-semibold hover:bg-muted"
         >
           Vérifier un autre certificat

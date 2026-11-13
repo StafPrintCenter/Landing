@@ -32,7 +32,7 @@ export function CertificateNotFoundState({ number, isError, onRetry }: Certifica
           </button>
         )}
         <Link
-          to="/verify-certificate/"
+          to="/verify-certificate"
           className="rounded-full border border-border px-5 py-2.5 text-sm font-semibold hover:bg-muted"
         >
           Rechercher un autre certificat
