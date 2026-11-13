@@ -54,7 +54,7 @@ function ResourceNotFound() {
       <section className="container-x py-24 text-center">
         <h1 className="font-display text-4xl font-bold">Ressource introuvable</h1>
         <p className="mt-3 text-muted-foreground">Cette ressource n'existe pas ou a été déplacée.</p>
-        <Link to="/tests/ressources" className="mt-6 inline-flex cursor-pointer items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground">
+        <Link to="/tools/ressources" className="mt-6 inline-flex cursor-pointer items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground">
           <ArrowLeft size={16} /> Retour aux ressources
         </Link>
       </section>
