@@ -5,9 +5,9 @@ import { useFormDraft } from "@/hooks/use-form-draft";
 import { FileUploadField } from "@/components/pages/careers/FileUploadField";
 import { createInternshipRequest, InternshipApiError } from "@/stores/useInternshipsStore";
 import { SuccessScreen } from "../SuccessScreen";
-import { InternshipDetailsFields } from "./";
+import { InternshipDetailsFields } from ".";
 import { PersonalFields } from "./PersonalFields";
-import { RequestFormFeedback } from "./RequestFormFeedback";
+import { RequestFormFeedback } from "./FormFeedback";
 
 const INTERNSHIP_DRAFT_VERSION = 1;
 const INTERNSHIP_DRAFT_TTL_MS = 1000 * 60 * 60 * 24 * 2;
