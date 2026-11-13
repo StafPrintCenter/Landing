@@ -5,7 +5,7 @@ import { useFormDraft } from "@/hooks/use-form-draft";
 import { FileUploadField } from "@/components/pages/careers/FileUploadField";
 import { createInternshipRequest, InternshipApiError } from "@/stores/useInternshipsStore";
 import { SuccessScreen } from "../SuccessScreen";
-import { InternshipDetailsFields } from "./InternshipDetailsFields";
+import { InternshipDetailsFields } from "./";
 import { PersonalFields } from "./PersonalFields";
 import { RequestFormFeedback } from "./RequestFormFeedback";
 
