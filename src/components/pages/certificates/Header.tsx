@@ -9,10 +9,10 @@ export function CertificateHeader() {
           <BadgeCheck size={14} /> Vérification
         </span>
         <h1 className="mt-4 text-2xl md:text-4xl font-bold tracking-tight">
-          Authenticité d'un certificat
+          Vérifier un certificat
         </h1>
         <p className="mt-3 text-muted-foreground">
-          Résultat de la vérification du certificat délivré par notre centre de formation.
+          Saisissez le numéro inscrit sur le certificat pour vérifier son authenticité.
         </p>
       </div>
     </Reveal>

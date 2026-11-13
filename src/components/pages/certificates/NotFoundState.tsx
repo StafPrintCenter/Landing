@@ -31,6 +31,12 @@ export function CertificateNotFoundState({ number, isError, onRetry }: Certifica
             Réessayer
           </button>
         )}
+        <Link
+          to="/verify-certificate/"
+          className="rounded-full border border-border px-5 py-2.5 text-sm font-semibold hover:bg-muted"
+        >
+          Rechercher un autre certificat
+        </Link>
         <Link to="/" className="rounded-full border border-border px-5 py-2.5 text-sm font-semibold hover:bg-muted">
           Retour à l'accueil
         </Link>
