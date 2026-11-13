@@ -36,11 +36,18 @@ export function InternshipRequestForm() {
   const [cv, setCv] = useState<File | null>(null);
   const [consent, setConsent] = useState(false);
 
-  // Calcul dynamique de la date minimale (Aujourd'hui + 14 jours / 2 semaines)
-  const minStartDate = useMemo(() => {
-    const date = new Date();
-    date.setDate(date.getDate() + 14);
-    return date.toISOString().split("T")[0];
+  // Calcul dynamique des dates min (J+14) et max (J+6 mois)
+  const { minStartDate, maxStartDate } = useMemo(() => {
+    const minDate = new Date();
+    minDate.setDate(minDate.getDate() + 14);
+
+    const maxDate = new Date();
+    maxDate.setMonth(maxDate.getMonth() + 6);
+
+    return {
+      minStartDate: minDate.toISOString().split("T")[0],
+      maxStartDate: maxDate.toISOString().split("T")[0],
+    };
   }, []);
 
   // État Drag & Drop pour le CV
@@ -53,7 +60,6 @@ export function InternshipRequestForm() {
   const [submitted, setSubmitted] = useState(false);
   const [bannerDismissed, setBannerDismissed] = useState(false);
 
-  // Le CV (fichier) n'est jamais inclus dans le brouillon - non sérialisable, devra être resélectionné manuellement à la restauration.
   const draftValues = { firstName, lastName, email, phone, institution, fieldOfStudy, desiredStartDate, duration, message };
   const { draftAvailable, restoreDraft, discardDraft, getSavedAgeLabel } = useFormDraft({
     formId: "internship-request",
@@ -84,7 +90,6 @@ export function InternshipRequestForm() {
     setBannerDismissed(true);
   };
 
-  // Handlers pour Drag & Drop
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
     setIsCvDragging(true);
@@ -109,9 +114,15 @@ export function InternshipRequestForm() {
     if (!consent) return;
 
     // Sécurité front-end additionnelle avant l'envoi réseau
-    if (desiredStartDate && desiredStartDate < minStartDate) {
-      setErrorMessage("La date de début souhaitée doit être au moins deux semaines dans le futur.");
-      return;
+    if (desiredStartDate) {
+      if (desiredStartDate < minStartDate) {
+        setErrorMessage("La date de début souhaitée doit être au moins deux semaines dans le futur.");
+        return;
+      }
+      if (desiredStartDate > maxStartDate) {
+        setErrorMessage("La date de début souhaitée ne peut pas dépasser 6 mois dans le futur.");
+        return;
+      }
     }
 
     setErrorMessage(null);
@@ -132,7 +143,7 @@ export function InternshipRequestForm() {
         consentAccepted: consent,
       });
       setSubmitted(true);
-      discardDraft(); // formulaire abouti - plus besoin du brouillon
+      discardDraft();
     } catch (err) {
       if (err instanceof InternshipApiError) {
         setErrorMessage(err.message);
@@ -273,6 +284,7 @@ export function InternshipRequestForm() {
             <input
               type="date"
               min={minStartDate}
+              max={maxStartDate}
               value={desiredStartDate}
               onChange={(e) => {
                 const val = e.target.value;
@@ -280,10 +292,17 @@ export function InternshipRequestForm() {
                   setDesiredStartDate(minStartDate);
                   return;
                 }
+                if (val && val > maxStartDate) {
+                  setDesiredStartDate(maxStartDate);
+                  return;
+                }
                 setDesiredStartDate(val);
               }}
               onKeyDown={(e) => {
                 if (e.key === "ArrowDown" && desiredStartDate && desiredStartDate <= minStartDate) {
+                  e.preventDefault();
+                }
+                if (e.key === "ArrowUp" && desiredStartDate && desiredStartDate >= maxStartDate) {
                   e.preventDefault();
                 }
               }}
