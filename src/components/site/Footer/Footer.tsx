@@ -2,8 +2,7 @@ import type { APIService } from "@/data/services";
 import type { APIEcosystemSite } from "@/data/ecosystem";
 import { useServicesStore } from "@/stores/useServicesStore";
 import { useEcosystemSitesStore } from "@/stores/useEcosystemSitesStore";
-import { FooterBrand } from "./";
-import { FooterCopyright } from "./FooterCopyright";
+import { FooterBrand, FooterCopyright } from "./";
 import { FooterResourceColumns } from "./FooterResourceColumns";
 import { FooterToolsContact } from "./FooterToolsContact";
 
