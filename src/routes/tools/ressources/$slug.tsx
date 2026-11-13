@@ -89,7 +89,7 @@ function ResourceDetailPage() {
             <span>/</span>
             <Link to="/tests" className="transition hover:text-accent">Tests</Link>
             <span>/</span>
-            <Link to="/tests/ressources" className="transition hover:text-accent">Ressources</Link>
+            <Link to="/tools/ressources" className="transition hover:text-accent">Ressources</Link>
             <span>/</span>
             <span className="text-secondary-foreground">{resource.title}</span>
           </nav>
@@ -214,7 +214,7 @@ function ResourceDetailPage() {
                 <p className="text-sm font-semibold uppercase tracking-widest text-primary">Dans la même catégorie</p>
                 <h2 className="mt-2 font-display text-3xl font-bold">À explorer aussi.</h2>
               </div>
-              <Link to="/tests/ressources" className="inline-flex cursor-pointer items-center gap-2 text-sm font-semibold text-primary hover:underline">
+              <Link to="/tools/ressources" className="inline-flex cursor-pointer items-center gap-2 text-sm font-semibold text-primary hover:underline">
                 Toute la bibliothèque <ArrowRight size={15} />
               </Link>
             </div>
@@ -222,7 +222,7 @@ function ResourceDetailPage() {
               {related.map((item) => {
                 const RelatedIcon = getResourceIcon(item);
                 return (
-                  <Link key={item.slug} to="/tests/ressources/$slug" params={{ slug: item.slug }} className="group flex cursor-pointer items-start gap-4 rounded-2xl border border-border bg-card p-6 transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg">
+                  <Link key={item.slug} to="/tools/ressources/$slug" params={{ slug: item.slug }} className="group flex cursor-pointer items-start gap-4 rounded-2xl border border-border bg-card p-6 transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg">
                     <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary"><RelatedIcon size={22} /></span>
                     <span className="min-w-0 flex-1">
                       <span className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">{item.format}<span>·</span>{formatResourcePrice(item.price)}</span>
