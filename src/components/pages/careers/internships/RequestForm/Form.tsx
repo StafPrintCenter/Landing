@@ -4,8 +4,7 @@ import { DraftBanner } from "@/components/shared/DraftBanner";
 import { useFormDraft } from "@/hooks/use-form-draft";
 import { FileUploadField } from "@/components/pages/careers/FileUploadField";
 import { createInternshipRequest, InternshipApiError } from "@/stores/useInternshipsStore";
-import { SuccessScreen } from "../SuccessScreen";
-import { InternshipDetailsFields, PersonalFields, RequestFormFeedback } from "./";
+import { InternshipDetailsFields, PersonalFields, RequestFormFeedback, SuccessScreen } from "./";
 
 const INTERNSHIP_DRAFT_VERSION = 1;
 const INTERNSHIP_DRAFT_TTL_MS = 1000 * 60 * 60 * 24 * 2;
