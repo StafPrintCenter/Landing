@@ -6,13 +6,9 @@ export type Resource = {
   slug: string;
   title: string;
   category: ResourceCategory;
-  /** Icône personnalisée ; sinon l'icône de la catégorie s'applique. */
   icon?: LucideIcon;
-  /** Prix payé (promo incluse). 0 = gratuit. */
   price: number;
-  /** Prix normal avant promotion (doit être supérieur à price). */
   originalPrice?: number;
-  /** Statut affiché (ex. « Prêt à imprimer »). */
   status?: string;
   short: string;
   description: string;
