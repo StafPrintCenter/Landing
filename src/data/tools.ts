@@ -68,12 +68,12 @@ export const AVAILABLE_TOOLS: AvailableTool[] = [
     actionLabel: "Explorer l'écosystème",
   },
   {
-    id: "ecosystem",
+    id: "ressources",
     to: "/tools/ecosystem",
     icon: Network,
     title: "Notre écosystème",
-    desc: "Découvrez tous nos sites et plateformes : espaces formateur, apprenant, documentation et outils internes.",
-    actionLabel: "Explorer l'écosystème",
+    desc: "Bibliothèque de ressources gratuites et premium avec fiches détaillées.",
+    actionLabel: "Parcourir les ressources",
   },
 ];
 
@@ -93,13 +93,6 @@ export const UPCOMING_TOOLS: UpcomingTool[] = [
     icon: FileSignature,
     title: "Signature électronique",
     desc: "Signez vos devis et contrats directement en ligne, sans impression papier.",
-    statusLabel: "Bientôt disponible",
-  },
-  {
-    id: "free-ressources",
-    icon: Download,
-    title: "Ressources & templates",
-    desc: "Bibliothèque de ressources gratuites et premium avec fiches détaillées.",
     statusLabel: "Bientôt disponible",
   },
   {
