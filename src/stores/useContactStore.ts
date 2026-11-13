@@ -1,4 +1,5 @@
 import { resolveApiUrl } from "@/lib/api/resolve-url";
+import { parseApiError } from "@/lib/api/error";
 import type { APIContactRequest } from "@/data/contact";
 
 type ContactResponse = { data: APIContactRequest };
@@ -28,7 +29,7 @@ export async function sendContactRequest(params: SendContactParams): Promise<API
   const url = resolveApiUrl(`/api/public/contact/create`);
   const response = await fetch(url, { method: "POST", body: formData });
   if (!response.ok) {
-    throw new Error("Erreur lors de l'envoi de votre demande de contact");
+    throw await parseApiError(response, "Erreur lors de l'envoi de votre demande de contact");
   }
   const json: ContactResponse = await response.json();
   return json.data;
@@ -47,7 +48,7 @@ export async function trackContactRequest({ email, ticketNumber }: TrackContactP
   const response = await fetch(url, { method: "POST", body: formData });
   if (response.status === 404) return null;
   if (!response.ok) {
-    throw new Error("Erreur lors de la recherche de votre demande");
+    throw await parseApiError(response, "Erreur lors de la recherche de votre demande");
   }
   const json: ContactResponse = await response.json();
   return json.data;

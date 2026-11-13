@@ -1,4 +1,5 @@
 import { resolveApiUrl } from "@/lib/api/resolve-url";
+import { parseApiError } from "@/lib/api/error";
 import type { APINewsletterSubscription } from "@/data/newsletter";
 
 type SubscriptionResponse = { data: APINewsletterSubscription; message?: string };
@@ -27,7 +28,7 @@ export async function subscribeNewsletter(params: SubscribeNewsletterParams): Pr
   const url = resolveApiUrl(`/api/public/newsletter/subscribe`);
   const response = await fetch(url, { method: "POST", body: formData });
   if (!response.ok) {
-    throw new Error("Erreur lors de l'inscription à la newsletter");
+    throw await parseApiError(response, "Erreur lors de l'inscription à la newsletter");
   }
   const json: SubscriptionResponse = await response.json();
   return {
@@ -43,7 +44,7 @@ export async function fetchNewsletterPreferences(token: string): Promise<APINews
   const url = resolveApiUrl(`/api/public/newsletter/preferences?token=${encodeURIComponent(token)}`);
   const response = await fetch(url);
   if (!response.ok) {
-    throw new Error("Erreur lors de la récupération des préférences");
+    throw await parseApiError(response, "Erreur lors de la récupération des préférences");
   }
   const json: SubscriptionResponse = await response.json();
   return json.data;
@@ -62,7 +63,7 @@ export async function updateNewsletterPreferences(params: UpdateNewsletterPrefer
   const url = resolveApiUrl(`/api/public/newsletter/preferences`);
   const response = await fetch(url, { method: "PUT", body: formData });
   if (!response.ok) {
-    throw new Error("Erreur lors de la mise à jour des préférences");
+    throw await parseApiError(response, "Erreur lors de la mise à jour des préférences");
   }
   const json: SubscriptionResponse = await response.json();
   return json.data;
@@ -82,7 +83,7 @@ export async function unsubscribeNewsletter(token: string): Promise<APINewslette
     throw new NewsletterAlreadyUnsubscribedError();
   }
   if (!response.ok) {
-    throw new Error("Erreur lors de la désinscription");
+    throw await parseApiError(response, "Erreur lors de la désinscription");
   }
 
   const json: SubscriptionResponse = await response.json();

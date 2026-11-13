@@ -1,5 +1,6 @@
 import { type APIShortlink, type ShortlinkCategory } from "@/data/shortlinks";
 import { resolveApiUrl } from "@/lib/api/resolve-url";
+import { parseApiError } from "@/lib/api/error";
 
 type ShortlinkResponse = { data: APIShortlink };
 
@@ -13,7 +14,7 @@ export async function resolveShortlink(longUrl: string): Promise<APIShortlink | 
   const response = await fetch(url);
   if (response.status === 404) return null;
   if (!response.ok) {
-    throw new Error("Erreur lors de la résolution du lien court");
+    throw await parseApiError(response, "Erreur lors de la résolution du lien court");
   }
   const json: ShortlinkResponse = await response.json();
   return json.data;
@@ -35,7 +36,7 @@ export async function createShortlink(longUrl: string, category?: ShortlinkCateg
     body: formData,
   });
   if (!response.ok) {
-    throw new Error("Erreur lors de la création du lien court");
+    throw await parseApiError(response, "Erreur lors de la création du lien court");
   }
   const json: ShortlinkResponse = await response.json();
   return json.data;

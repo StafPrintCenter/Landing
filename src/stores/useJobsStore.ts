@@ -1,5 +1,6 @@
 import { createResourceStore, type BaseFetchParams } from "./createResourceStore";
 import { resolveApiUrl } from "@/lib/api/resolve-url";
+import { parseApiError } from "@/lib/api/error";
 import type { APIJobOffer, APIJobApplication } from "@/data/jobs";
 
 // ==========================================
@@ -68,16 +69,11 @@ export async function applyToJobOffer(
   const response = await fetch(url, { method: "POST", body: formData });
 
   if (!response.ok) {
-    let payload: { message?: string; errors?: Record<string, string[]> } = {};
-    try {
-      payload = await response.json();
-    } catch {
-      // corps non-JSON - repli sur message générique
-    }
+    const error = await parseApiError(response, "Erreur lors de l'envoi de votre candidature.");
     throw new JobsApiError(
-      payload.message ?? "Erreur lors de l'envoi de votre candidature.",
+      error.message,
       response.status,
-      payload.errors
+      error.fieldErrors
     );
   }
 
@@ -96,7 +92,7 @@ export async function checkJobApplication(
   const url = resolveApiUrl(`/api/public/jobs/applications/check`);
   const response = await fetch(url, { method: "POST", body: formData });
   if (response.status === 404) return null;
-  if (!response.ok) throw new Error("Erreur lors de la vérification de votre candidature.");
+  if (!response.ok) throw await parseApiError(response, "Erreur lors de la vérification de votre candidature.");
 
   const json: JobApplicationResponse = await response.json();
   return json.data;

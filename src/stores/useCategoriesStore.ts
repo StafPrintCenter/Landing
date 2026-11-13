@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { resolveApiUrl } from "@/lib/api/resolve-url";
+import { parseApiError } from "@/lib/api/error";
 import type { APICategory } from "@/data/api-categories";
 
 type CategoriesResponse = {
@@ -26,7 +27,7 @@ export async function fetchCategories(params: FetchCategoriesParams = {}): Promi
   const url = resolveApiUrl(`/api/public/categories/list?${queryParams.toString()}`);
   const response = await fetch(url);
   if (!response.ok) {
-    throw new Error("Erreur lors de la récupération des catégories");
+    throw await parseApiError(response, "Erreur lors de la récupération des catégories");
   }
   return response.json();
 }

@@ -1,7 +1,8 @@
 import { createResourceStore } from "./createResourceStore";
 import { resolveApiUrl } from "@/lib/api/resolve-url";
+import { parseApiError } from "@/lib/api/error";
 import { type APIFormation } from "@/data/trainings";
-import type { APITrainingRegistration, CreateTrainingRegistrationParams, TrainingRegistrationSchedule, TrainingRegistrationErrorReason, TrainingRegistrationErrorPayload, } from "@/data/trainings";
+import type { APITrainingRegistration, CreateTrainingRegistrationParams, TrainingRegistrationSchedule, TrainingRegistrationErrorReason, } from "@/data/trainings";
 
 type RegistrationResponse = { data: APITrainingRegistration };
 
@@ -48,15 +49,21 @@ export async function createTrainingRegistration(params: CreateTrainingRegistrat
   const url = resolveApiUrl(`/api/public/trainings/registrations/create`);
   const response = await fetch(url, { method: "POST", body: formData });
   if (!response.ok) {
-    let payload: TrainingRegistrationErrorPayload = {};
-    try { payload = await response.json(); }
-    catch { }
+    const error = await parseApiError(response, "Une erreur est survenue lors de l'envoi de votre inscription.");
+    const reasons: TrainingRegistrationErrorReason[] = [
+      "blocked",
+      "has_account",
+      "in_progress",
+      "pending_account",
+      "full",
+    ];
+    const reason = reasons.find((candidate) => candidate === error.reason);
 
     throw new TrainingRegistrationApiError(
-      payload.message ?? "Une erreur est survenue lors de l'envoi de votre inscription.",
+      error.message,
       response.status,
-      payload.reason,
-      payload.errors
+      reason,
+      error.fieldErrors
     );
   }
 

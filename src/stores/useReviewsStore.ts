@@ -1,16 +1,23 @@
 import { resolveApiUrl } from "@/lib/api/resolve-url";
+import { parseApiError } from "@/lib/api/error";
 import type { APIReviewInvitationDetails, ReviewAnswers } from "@/data/reviews";
 
 type ReviewInvitationResponse = { data: APIReviewInvitationDetails };
 
-export class ReviewApiError extends Error { }
+export class ReviewApiError extends Error {
+  constructor(message: string, public readonly status?: number) {
+    super(message);
+    this.name = "ReviewApiError";
+  }
+}
 
 export async function fetchReviewByToken(token: string): Promise<APIReviewInvitationDetails | null> {
   const url = resolveApiUrl(`/api/public/reviews/${token}`);
   const response = await fetch(url);
   if (response.status === 404 || response.status === 410) return null;
   if (!response.ok) {
-    throw new ReviewApiError("Erreur lors de la récupération du formulaire d'avis");
+    const error = await parseApiError(response, "Erreur lors de la récupération du formulaire d'avis");
+    throw new ReviewApiError(error.message, error.status);
   }
   const json: ReviewInvitationResponse = await response.json();
   return json.data;
@@ -60,7 +67,8 @@ export async function submitReviewResponse(token: string, params: SubmitReviewPa
   const url = resolveApiUrl(`/api/public/reviews/${token}`);
   const response = await fetch(url, { method: "POST", body: formData });
   if (!response.ok) {
-    throw new ReviewApiError("Erreur lors de l'envoi de votre avis");
+    const error = await parseApiError(response, "Erreur lors de l'envoi de votre avis");
+    throw new ReviewApiError(error.message, error.status);
   }
 }
 
@@ -86,6 +94,7 @@ export async function editReviewResponse(token: string, params: EditReviewParams
   const url = resolveApiUrl(`/api/public/reviews/${token}/response`);
   const response = await fetch(url, { method: "PUT", body: formData });
   if (!response.ok) {
-    throw new ReviewApiError("Erreur lors de la mise à jour de votre avis");
+    const error = await parseApiError(response, "Erreur lors de la mise à jour de votre avis");
+    throw new ReviewApiError(error.message, error.status);
   }
 }

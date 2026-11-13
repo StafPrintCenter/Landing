@@ -1,8 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { resolveApiUrl } from "@/lib/api/resolve-url";
+import { parseApiError } from "@/lib/api/error";
 import type { APICertificateVerification } from "@/data/certificates";
 
-export class CertificateApiError extends Error { }
+export class CertificateApiError extends Error {
+  constructor(message: string, public readonly status?: number) {
+    super(message);
+    this.name = "CertificateApiError";
+  }
+}
 
 /** Retourne null si le numéro n'existe pas (404) */
 export async function fetchCertificateVerification(
@@ -12,7 +18,8 @@ export async function fetchCertificateVerification(
   const response = await fetch(url, { headers: { Accept: "application/json" } });
   if (response.status === 404) return null;
   if (!response.ok) {
-    throw new CertificateApiError("Erreur lors de la vérification du certificat");
+    const error = await parseApiError(response, "Erreur lors de la vérification du certificat");
+    throw new CertificateApiError(error.message, error.status);
   }
   return response.json();
 }

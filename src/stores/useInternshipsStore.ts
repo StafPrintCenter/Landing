@@ -1,4 +1,5 @@
 import { resolveApiUrl } from "@/lib/api/resolve-url";
+import { parseApiError } from "@/lib/api/error";
 import type { APIInternshipRequest } from "@/data/internships";
 
 type InternshipResponse = { data: APIInternshipRequest };
@@ -45,16 +46,11 @@ export async function createInternshipRequest(params: CreateInternshipRequestPar
   const response = await fetch(url, { method: "POST", body: formData });
 
   if (!response.ok) {
-    let payload: { message?: string; errors?: Record<string, string[]> } = {};
-    try {
-      payload = await response.json();
-    } catch {
-      // corps non-JSON - repli générique
-    }
+    const error = await parseApiError(response, "Erreur lors de l'envoi de votre demande de stage.");
     throw new InternshipApiError(
-      payload.message ?? "Erreur lors de l'envoi de votre demande de stage.",
+      error.message,
       response.status,
-      payload.errors
+      error.fieldErrors
     );
   }
 
@@ -70,7 +66,7 @@ export async function checkInternshipRequest(email: string, token: string): Prom
   const url = resolveApiUrl(`/api/public/internships/requests/check`);
   const response = await fetch(url, { method: "POST", body: formData });
   if (response.status === 404) return null;
-  if (!response.ok) throw new Error("Erreur lors de la vérification de votre demande.");
+  if (!response.ok) throw await parseApiError(response, "Erreur lors de la vérification de votre demande.");
   const json: InternshipResponse = await response.json();
   return json.data;
 }

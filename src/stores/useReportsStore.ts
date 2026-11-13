@@ -1,4 +1,5 @@
 import { resolveApiUrl } from "@/lib/api/resolve-url";
+import { parseApiError } from "@/lib/api/error";
 import type { APIReport, ReportableType, ReportReason } from "@/data/reports";
 
 type ReportResponse = { data: APIReport };
@@ -10,11 +11,6 @@ export interface CreateReportParams {
   message?: string;
   reporterEmail?: string;
 }
-
-type ReportErrorPayload = {
-  errors?: Record<string, string[]>;
-  message?: string;
-};
 
 export class ReportApiError extends Error {
   fieldErrors?: Record<string, string[]>;
@@ -38,18 +34,10 @@ export async function createReport(params: CreateReportParams): Promise<APIRepor
   const response = await fetch(url, { method: "POST", body: formData });
 
   if (!response.ok) {
-    let payload: ReportErrorPayload | null = null;
-    try {
-      payload = await response.json();
-    } catch { }
-
-    const firstFieldError = payload?.errors
-      ? Object.values(payload.errors)[0]?.[0]
-      : undefined;
-
+    const error = await parseApiError(response, "Erreur lors de l'envoi du signalement");
     throw new ReportApiError(
-      firstFieldError ?? payload?.message ?? "Erreur lors de l'envoi du signalement",
-      payload?.errors
+      error.message,
+      error.fieldErrors
     );
   }
 
