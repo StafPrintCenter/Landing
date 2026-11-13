@@ -13,6 +13,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as VerifyCertificateIndexRouteImport } from './routes/verify-certificate/index'
 import { Route as TrainingsIndexRouteImport } from './routes/trainings/index'
 import { Route as ToolsIndexRouteImport } from './routes/tools/index'
 import { Route as TestsIndexRouteImport } from './routes/tests/index'
@@ -64,6 +65,11 @@ const AboutRoute = AboutRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerifyCertificateIndexRoute = VerifyCertificateIndexRouteImport.update({
+  id: '/verify-certificate/',
+  path: '/verify-certificate/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TrainingsIndexRoute = TrainingsIndexRouteImport.update({
@@ -256,6 +262,7 @@ export interface FileRoutesByFullPath {
   '/tests/': typeof TestsIndexRoute
   '/tools/': typeof ToolsIndexRoute
   '/trainings/': typeof TrainingsIndexRoute
+  '/verify-certificate/': typeof VerifyCertificateIndexRoute
   '/careers/internship/check': typeof CareersInternshipCheckRoute
   '/tools/newsletter/preferences': typeof ToolsNewsletterPreferencesRoute
   '/tools/newsletter/unsubscribe': typeof ToolsNewsletterUnsubscribeRoute
@@ -294,6 +301,7 @@ export interface FileRoutesByTo {
   '/tests': typeof TestsIndexRoute
   '/tools': typeof ToolsIndexRoute
   '/trainings': typeof TrainingsIndexRoute
+  '/verify-certificate': typeof VerifyCertificateIndexRoute
   '/careers/internship/check': typeof CareersInternshipCheckRoute
   '/tools/newsletter/preferences': typeof ToolsNewsletterPreferencesRoute
   '/tools/newsletter/unsubscribe': typeof ToolsNewsletterUnsubscribeRoute
@@ -333,6 +341,7 @@ export interface FileRoutesById {
   '/tests/': typeof TestsIndexRoute
   '/tools/': typeof ToolsIndexRoute
   '/trainings/': typeof TrainingsIndexRoute
+  '/verify-certificate/': typeof VerifyCertificateIndexRoute
   '/careers/internship/check': typeof CareersInternshipCheckRoute
   '/tools/newsletter/preferences': typeof ToolsNewsletterPreferencesRoute
   '/tools/newsletter/unsubscribe': typeof ToolsNewsletterUnsubscribeRoute
@@ -373,6 +382,7 @@ export interface FileRouteTypes {
     | '/tests/'
     | '/tools/'
     | '/trainings/'
+    | '/verify-certificate/'
     | '/careers/internship/check'
     | '/tools/newsletter/preferences'
     | '/tools/newsletter/unsubscribe'
@@ -411,6 +421,7 @@ export interface FileRouteTypes {
     | '/tests'
     | '/tools'
     | '/trainings'
+    | '/verify-certificate'
     | '/careers/internship/check'
     | '/tools/newsletter/preferences'
     | '/tools/newsletter/unsubscribe'
@@ -449,6 +460,7 @@ export interface FileRouteTypes {
     | '/tests/'
     | '/tools/'
     | '/trainings/'
+    | '/verify-certificate/'
     | '/careers/internship/check'
     | '/tools/newsletter/preferences'
     | '/tools/newsletter/unsubscribe'
@@ -488,6 +500,7 @@ export interface RootRouteChildren {
   TestsIndexRoute: typeof TestsIndexRoute
   ToolsIndexRoute: typeof ToolsIndexRoute
   TrainingsIndexRoute: typeof TrainingsIndexRoute
+  VerifyCertificateIndexRoute: typeof VerifyCertificateIndexRoute
   CareersInternshipCheckRoute: typeof CareersInternshipCheckRoute
   ToolsNewsletterPreferencesRoute: typeof ToolsNewsletterPreferencesRoute
   ToolsNewsletterUnsubscribeRoute: typeof ToolsNewsletterUnsubscribeRoute
@@ -528,6 +541,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verify-certificate/': {
+      id: '/verify-certificate/'
+      path: '/verify-certificate'
+      fullPath: '/verify-certificate/'
+      preLoaderRoute: typeof VerifyCertificateIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/trainings/': {
@@ -784,6 +804,7 @@ const rootRouteChildren: RootRouteChildren = {
   TestsIndexRoute: TestsIndexRoute,
   ToolsIndexRoute: ToolsIndexRoute,
   TrainingsIndexRoute: TrainingsIndexRoute,
+  VerifyCertificateIndexRoute: VerifyCertificateIndexRoute,
   CareersInternshipCheckRoute: CareersInternshipCheckRoute,
   ToolsNewsletterPreferencesRoute: ToolsNewsletterPreferencesRoute,
   ToolsNewsletterUnsubscribeRoute: ToolsNewsletterUnsubscribeRoute,
