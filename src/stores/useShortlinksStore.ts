@@ -1,5 +1,5 @@
 import { type APIShortlink, type ShortlinkCategory } from "@/data/shortlinks";
-import { resolveApiUrl } from "@/lib/api-url";
+import { resolveApiUrl } from "@/lib/api/api-url";
 
 type ShortlinkResponse = { data: APIShortlink };
 

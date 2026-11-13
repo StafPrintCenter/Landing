@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { resolveApiUrl } from "@/lib/api-url";
+import { resolveApiUrl } from "@/lib/api/api-url";
 import type { APICertificateVerification } from "@/data/certificates";
 
 export class CertificateApiError extends Error { }

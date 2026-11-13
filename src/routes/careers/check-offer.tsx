@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { CheckForm, ApplicationResult, CheckErrorState } from "@/components/pages/careers/offers/check";
-import { resolveApiUrl } from "@/lib/api-url";
+import { resolveApiUrl } from "@/lib/api/api-url";
 import type { APIJobApplication } from "@/data/jobs";
 import { Loader2 } from "lucide-react";
 

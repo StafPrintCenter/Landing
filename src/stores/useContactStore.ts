@@ -1,4 +1,4 @@
-import { resolveApiUrl } from "@/lib/api-url";
+import { resolveApiUrl } from "@/lib/api/api-url";
 import type { APIContactRequest } from "@/data/contact";
 
 type ContactResponse = { data: APIContactRequest };

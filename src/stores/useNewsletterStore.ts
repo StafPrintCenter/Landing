@@ -1,4 +1,4 @@
-import { resolveApiUrl } from "@/lib/api-url";
+import { resolveApiUrl } from "@/lib/api/api-url";
 import type { APINewsletterSubscription } from "@/data/newsletter";
 
 type SubscriptionResponse = { data: APINewsletterSubscription; message?: string };
