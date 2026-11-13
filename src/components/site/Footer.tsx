@@ -112,8 +112,8 @@ export function Footer() {
         {/* COLONNE DROITE (Deux piles superposées) */}
         <div className="md:col-span-4 flex flex-col gap-10">
 
-          {/* PILE 1 (Haut) : Navigation + Services */}
-          <div className="grid gap-8 sm:grid-cols-2">
+          {/* PILE 1 (Haut) : Navigation + Services + Écosystème (3 colonnes) */}
+          <div className="grid gap-8 sm:grid-cols-3">
             {/* Navigation */}
             <div>
               <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-accent">
@@ -178,13 +178,8 @@ export function Footer() {
                 )}
               </ul>
             </div>
-          </div>
 
-          <div className="border-t border-white/10" />
-
-          {/* PILE 2 (Bas) : Écosystème + Outils + Contact */}
-          <div className="grid gap-8 sm:grid-cols-3">
-            {/* Écosystème */}
+            {/* Écosystème (remonté en haut) */}
             <div className="w-full min-w-0">
               <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-accent">
                 Écosystème
@@ -213,7 +208,12 @@ export function Footer() {
                 )}
               </ul>
             </div>
+          </div>
 
+          <div className="border-t border-white/10" />
+
+          {/* PILE 2 (Bas) : Outils + Contact (2 colonnes) */}
+          <div className="grid gap-8 sm:grid-cols-2">
             {/* Outils (FOOTER_ACTION_LINKS) */}
             <div>
               <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-accent">
