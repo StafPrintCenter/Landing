@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Loader2, User, Mail, Phone, School, BookOpen, Calendar, Timer, MessageSquare, Upload, X, Check, ShieldCheck } from "lucide-react";
 import { createInternshipRequest, InternshipApiError } from "@/stores/useInternshipsStore";
 import { SuccessScreen } from "./SuccessScreen";
@@ -35,6 +35,13 @@ export function InternshipRequestForm() {
   const [message, setMessage] = useState("");
   const [cv, setCv] = useState<File | null>(null);
   const [consent, setConsent] = useState(false);
+
+  // Calcul dynamique de la date minimale (Aujourd'hui + 14 jours / 2 semaines)
+  const minStartDate = useMemo(() => {
+    const date = new Date();
+    date.setDate(date.getDate() + 14);
+    return date.toISOString().split("T")[0];
+  }, []);
 
   // État Drag & Drop pour le CV
   const [isCvDragging, setIsCvDragging] = useState(false);
@@ -100,6 +107,12 @@ export function InternshipRequestForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!consent) return;
+
+    // Sécurité front-end additionnelle avant l'envoi réseau
+    if (desiredStartDate && desiredStartDate < minStartDate) {
+      setErrorMessage("La date de début souhaitée doit être au moins deux semaines dans le futur.");
+      return;
+    }
 
     setErrorMessage(null);
     setFieldErrors(undefined);
@@ -259,6 +272,7 @@ export function InternshipRequestForm() {
             </span>
             <input
               type="date"
+              min={minStartDate}
               value={desiredStartDate}
               onChange={(e) => setDesiredStartDate(e.target.value)}
               className="w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-sm outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
@@ -325,10 +339,11 @@ export function InternshipRequestForm() {
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
-              className={`flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed p-6 text-center transition-all ${isCvDragging
-                ? "border-primary bg-primary/10"
-                : "border-border bg-background hover:border-primary/50 hover:bg-muted/30"
-                }`}
+              className={`flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed p-6 text-center transition-all ${
+                isCvDragging
+                  ? "border-primary bg-primary/10"
+                  : "border-border bg-background hover:border-primary/50 hover:bg-muted/30"
+              }`}
             >
               <div className="rounded-full bg-primary/10 p-3 text-primary">
                 <Upload size={20} />
