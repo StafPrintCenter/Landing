@@ -4,7 +4,7 @@ import { ArrowRight, Download, LibraryBig, Sparkles } from "lucide-react";
 import { SiteShell } from "@/components/site/SiteShell";
 import { RESOURCES, formatResourcePrice, getDiscountPercent, getResourceIcon, getResourceStatus } from "@/data/resources";
 
-export const Route = createFileRoute("/tests/ressources/")({
+export const Route = createFileRoute("/tools/ressources/")({
   head: () => ({
     meta: [
       { title: "Ressources & templates (test) — STAF PRINT CENTER" },

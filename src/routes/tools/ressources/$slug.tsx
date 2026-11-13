@@ -18,7 +18,7 @@ import { SiteShell } from "@/components/site/SiteShell";
 import { RESOURCES, formatResourcePrice, getDiscountPercent, getResource, getResourceIcon, getResourceStatus } from "@/data/resources";
 import { SITE } from "@/data/site";
 
-export const Route = createFileRoute("/tests/ressources/$slug")({
+export const Route = createFileRoute("/tools/ressources/$slug")({
   loader: ({ params }) => {
     const resource = getResource(params.slug);
     if (!resource) throw notFound();
