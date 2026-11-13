@@ -50,63 +50,98 @@ export function Footer() {
     <footer className="mt-24 border-t border-border bg-secondary text-secondary-foreground">
       <div className="container-x grid gap-12 py-14 md:grid-cols-6">
 
-        {/* COLONNE GAUCHE (Branding + Réseaux Sociaux sur toute la hauteur) */}
-        <div className="md:col-span-2">
-          <Link to="/" className="flex items-center">
-            <img src={logo.dw} alt={`LOGO ${SITE.name}`} className="h-14 w-auto" />
-          </Link>
-          <p className="mt-4 max-w-sm text-sm text-secondary-foreground/70 leading-relaxed">
-            Depuis 2019, nous accompagnons votre vision jusqu'à ce qu'elle devienne visible.
-          </p>
+        {/* COLONNE GAUCHE (Branding + Réseaux Sociaux + Liens légaux) */}
+        <div className="md:col-span-2 flex flex-col justify-between">
+          <div>
+            <Link to="/" className="flex items-center">
+              <img src={logo.dw} alt={`LOGO ${SITE.name}`} className="h-14 w-auto" />
+            </Link>
+            <p className="mt-4 max-w-sm text-sm text-secondary-foreground/70 leading-relaxed">
+              Depuis 2019, nous accompagnons votre vision jusqu'à ce qu'elle devienne visible.
+            </p>
 
-          {/* Liens sociaux déplacés sous la baseline */}
-          <div className="mt-6 flex gap-3">
-            <a
-              href={SITE.socials.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-accent hover:text-accent-foreground transition-colors"
-            >
-              <LinkedinIcon size={16} />
-            </a>
-            <a
-              href={SITE.socials.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-accent hover:text-accent-foreground transition-colors"
-            >
-              <FacebookIcon size={16} />
-            </a>
-            <a
-              href={SITE.socials.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-accent hover:text-accent-foreground transition-colors"
-            >
-              <InstagramIcon size={16} />
-            </a>
-            <a
-              href={SITE.socials.x}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="X (Twitter)"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-accent hover:text-accent-foreground transition-colors"
-            >
-              <XIcon size={16} />
-            </a>
-            <a
-              href={SITE.socials.tiktok}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="TikTok"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-accent hover:text-accent-foreground transition-colors"
-            >
-              <TiktokIcon size={16} />
-            </a>
+            {/* Liens sociaux */}
+            <div className="mt-6 flex gap-3">
+              <a
+                href={SITE.socials.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-accent hover:text-accent-foreground transition-colors"
+              >
+                <LinkedinIcon size={16} />
+              </a>
+              <a
+                href={SITE.socials.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-accent hover:text-accent-foreground transition-colors"
+              >
+                <FacebookIcon size={16} />
+              </a>
+              <a
+                href={SITE.socials.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-accent hover:text-accent-foreground transition-colors"
+              >
+                <InstagramIcon size={16} />
+              </a>
+              <a
+                href={SITE.socials.x}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="X (Twitter)"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-accent hover:text-accent-foreground transition-colors"
+              >
+                <XIcon size={16} />
+              </a>
+              <a
+                href={SITE.socials.tiktok}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="TikTok"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-accent hover:text-accent-foreground transition-colors"
+              >
+                <TiktokIcon size={16} />
+              </a>
+            </div>
           </div>
+
+          {/* Liens légaux déplacés sous le bloc branding / réseaux sociaux */}
+          <span className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-secondary-foreground/60">
+            {FOOTER_LINKS.map((l, i) => {
+              const linkKey = "to" in l ? l.to : l.href;
+              const isExternal = "href" in l;
+
+              return (
+                <span key={linkKey || i} className="inline-flex items-center gap-3">
+                  {isExternal ? (
+                    <a
+                      href={l.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-accent transition-colors"
+                    >
+                      {l.label}
+                    </a>
+                  ) : (
+                    <Link to={l.to} className="hover:text-accent transition-colors">
+                      {l.label}
+                    </Link>
+                  )}
+                  {i < FOOTER_LINKS.length - 1 && (
+                    <span
+                      className="h-3 w-px bg-secondary-foreground/20 inline-block"
+                      aria-hidden
+                    />
+                  )}
+                </span>
+              );
+            })}
+          </span>
         </div>
 
         {/* COLONNE DROITE (Deux piles superposées) */}
@@ -179,7 +214,7 @@ export function Footer() {
               </ul>
             </div>
 
-            {/* Écosystème (remonté en haut) */}
+            {/* Écosystème */}
             <div className="w-full min-w-0">
               <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-accent">
                 Écosystème
@@ -295,37 +330,6 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="container-x flex flex-col items-center justify-center gap-3 py-5 text-xs text-secondary-foreground/60 md:flex-row md:justify-between">
           <p>© {new Date().getFullYear()} {SITE.name} - Tous droits réservés.</p>
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
-            {FOOTER_LINKS.map((l, i) => {
-              const linkKey = "to" in l ? l.to : l.href;
-              const isExternal = "href" in l;
-
-              return (
-                <span key={linkKey || i} className="flex items-center gap-4">
-                  {isExternal ? (
-                    <a
-                      href={l.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-accent transition-colors"
-                    >
-                      {l.label}
-                    </a>
-                  ) : (
-                    <Link to={l.to} className="hover:text-accent transition-colors">
-                      {l.label}
-                    </Link>
-                  )}
-                  {i < FOOTER_LINKS.length - 1 && (
-                    <span
-                      className="hidden h-3 w-px bg-secondary-foreground/20 md:inline-block"
-                      aria-hidden
-                    />
-                  )}
-                </span>
-              );
-            })}
-          </div>
           <p>{SITE.slogan}</p>
         </div>
       </div>
