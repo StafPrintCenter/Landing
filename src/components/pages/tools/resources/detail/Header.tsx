@@ -108,8 +108,8 @@ export function ResourceDetailHeader({ resource, whatsappUrl }: ResourceDetailHe
                 rel="noreferrer"
                 className="mt-6 inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-accent px-5 py-3.5 text-sm font-bold text-accent-foreground transition hover:-translate-y-0.5 hover:opacity-90"
               >
-                {isFree ? <Download size={18} /> : <ShoppingBag size={18} />}
-                {isFree ? "Recevoir gratuitement sur WhatsApp" : "Commander sur WhatsApp"}
+                <ShoppingBag size={18} />
+                Commander sur WhatsApp
               </a>
             )}
             <div className="mt-5 space-y-3 border-t border-secondary-foreground/15 pt-5 text-xs text-secondary-foreground/65">
