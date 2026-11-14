@@ -1,5 +1,11 @@
-import { BadgeCheck, Download, Eye, FileCheck2, Layers3, MessageCircle, MonitorCheck, ShieldCheck, ShoppingBag, Sparkles } from "lucide-react";
+import { useState } from "react";
+import { Link } from "@tanstack/react-router";
+import { toast } from "sonner";
+import { ArrowLeft, BadgeCheck, Download, Eye, FileCheck2, Layers3, LoaderCircle, MessageCircle, MonitorCheck, Share2, ShieldCheck, ShoppingBag, Sparkles } from "lucide-react";
 import { formatResourcePrice, getResourceIcon, type APIResource } from "@/data/resources";
+import { ShareModal } from "@/components/modal";
+import { buildShareUrl } from "@/lib/share/build-share-url";
+import { fetchResourceDownload } from "@/stores/useResourcesStore";
 
 interface ResourceDetailHeaderProps {
   resource: APIResource;
@@ -7,16 +13,46 @@ interface ResourceDetailHeaderProps {
 }
 
 export function ResourceDetailHeader({ resource, whatsappUrl }: ResourceDetailHeaderProps) {
+  const [isShareOpen, setIsShareOpen] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
   const Icon = getResourceIcon(resource);
   const isFree = resource.price === 0;
   const discount = resource.discountPercentage > 0 ? resource.discountPercentage : null;
   const originalPrice = discount !== null && resource.originalPrice !== null ? formatResourcePrice(resource.originalPrice) : null;
+  const shareUrl = buildShareUrl(`/tools/ressources/${resource.slug}`);
+
+  const handleDownload = async () => {
+    setIsDownloading(true);
+    try {
+      const download = await fetchResourceDownload(resource.slug);
+      window.location.assign(download.url);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Impossible de télécharger cette ressource.");
+    } finally {
+      setIsDownloading(false);
+    }
+  };
 
   return (
     <section className="relative overflow-hidden border-b border-border bg-secondary text-secondary-foreground">
       <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-primary/20 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-32 left-1/3 h-72 w-72 rounded-full bg-accent/10 blur-3xl" />
       <div className="container-x relative py-10">
+        <div className="mb-8 flex items-center justify-between gap-4">
+          <Link
+            to="/tools/ressources"
+            className="inline-flex items-center gap-2 text-sm font-medium text-secondary-foreground/70 transition hover:text-accent"
+          >
+            <ArrowLeft size={14} /> Toutes les ressources
+          </Link>
+          <button
+            type="button"
+            onClick={() => setIsShareOpen(true)}
+            className="inline-flex shrink-0 cursor-pointer items-center gap-1.5 rounded-full border border-white/20 bg-white/5 px-3.5 py-1.5 text-sm font-medium text-secondary-foreground/80 transition-colors hover:border-accent/50 hover:text-accent"
+          >
+            <Share2 size={14} /> Partager
+          </button>
+        </div>
         <div className="grid items-center gap-10 lg:grid-cols-[1fr_360px] lg:gap-16">
           <div>
             <div className="flex flex-wrap items-center gap-3">
@@ -55,14 +91,16 @@ export function ResourceDetailHeader({ resource, whatsappUrl }: ResourceDetailHe
             <p className="mt-3 text-sm leading-relaxed text-secondary-foreground/60">
               {isFree ? "Téléchargez directement le fichier ou demandez-le sur WhatsApp." : "Commande et remise du fichier confirmées directement sur WhatsApp."}
             </p>
-            {isFree && resource.downloadUrl ? (
-              <a
-                href={resource.downloadUrl}
-                download={resource.downloadFileName ?? undefined}
-                className="mt-6 inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-accent px-5 py-3.5 text-sm font-bold text-accent-foreground transition hover:-translate-y-0.5 hover:opacity-90"
+            {isFree ? (
+              <button
+                type="button"
+                onClick={() => void handleDownload()}
+                disabled={isDownloading}
+                className="mt-6 inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-accent px-5 py-3.5 text-sm font-bold text-accent-foreground transition hover:-translate-y-0.5 hover:opacity-90 disabled:cursor-wait disabled:opacity-70"
               >
-                <Download size={18} /> Télécharger la ressource
-              </a>
+                {isDownloading ? <LoaderCircle size={18} className="animate-spin" /> : <Download size={18} />}
+                {isDownloading ? "Préparation du téléchargement…" : "Télécharger la ressource"}
+              </button>
             ) : (
               <a
                 href={whatsappUrl}
@@ -83,6 +121,14 @@ export function ResourceDetailHeader({ resource, whatsappUrl }: ResourceDetailHe
           </aside>
         </div>
       </div>
+      <ShareModal
+        isOpen={isShareOpen}
+        onClose={() => setIsShareOpen(false)}
+        url={shareUrl}
+        title={resource.title}
+        text={resource.short}
+        shortlinkCategory="other"
+      />
     </section>
   );
 }
