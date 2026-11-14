@@ -11,7 +11,7 @@ import {
 import { fetchResourceBySlug } from "@/stores/useResourcesStore";
 import { SITE } from "@/data/site";
 
-export const Route = createFileRoute("/tools/ressources/$slug")({
+export const Route = createFileRoute("/tools/ressources/$slug/")({
   pendingMs: 0,
   loader: async ({ params }) => {
     const resource = await fetchResourceBySlug(params.slug);
