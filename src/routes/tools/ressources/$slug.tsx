@@ -20,23 +20,23 @@ export const Route = createFileRoute("/tools/ressources/$slug")({
   },
   head: ({ loaderData, params }) => {
     const resource = loaderData?.resource;
-    const title = resource ? `${resource.title} — Ressources ${SITE.name}` : `Ressource ${SITE.name}`;
+    const title = resource ? `${resource.title} - Ressources ${SITE.name}` : `Ressource ${SITE.name}`;
     const description = resource?.short ?? "";
     const url = `/tools/ressources/${params.slug}`;
 
     return {
       meta: resource
         ? [
-            { title },
-            { name: "description", content: description },
-            { name: "robots", content: "noindex" },
-            { property: "og:type", content: "website" },
-            { property: "og:title", content: title },
-            { property: "og:description", content: description },
-            { name: "twitter:card", content: "summary" },
-            { name: "twitter:title", content: title },
-            { name: "twitter:description", content: description },
-          ]
+          { title },
+          { name: "description", content: description },
+          { name: "robots", content: "noindex" },
+          { property: "og:type", content: "website" },
+          { property: "og:title", content: title },
+          { property: "og:description", content: description },
+          { name: "twitter:card", content: "summary" },
+          { name: "twitter:title", content: title },
+          { name: "twitter:description", content: description },
+        ]
         : [{ title }, { name: "robots", content: "noindex" }],
       links: [{ rel: "canonical", href: url }],
     };
@@ -58,11 +58,10 @@ function ResourceDetailPage() {
   const whatsappUrl = `${SITE.whatsappLink}?text=${encodeURIComponent(
     isFree
       ? `Bonjour STAF PRINT CENTER, je souhaite recevoir gratuitement la ressource « ${resource.title} » (${resource.format}).`
-      : `Bonjour STAF PRINT CENTER, je souhaite commander la ressource « ${resource.title} » au prix ${
-          originalPrice
-            ? `promotionnel de ${price} FCFA au lieu de ${originalPrice} FCFA (-${discount}%)`
-            : `de ${price} FCFA`
-        }. Pouvez-vous m'indiquer la marche à suivre ?`,
+      : `Bonjour STAF PRINT CENTER, je souhaite commander la ressource « ${resource.title} » au prix ${originalPrice
+        ? `promotionnel de ${price} FCFA au lieu de ${originalPrice} FCFA (-${discount}%)`
+        : `de ${price} FCFA`
+      }. Pouvez-vous m'indiquer la marche à suivre ?`,
   )}`;
 
   return (
