@@ -7,6 +7,7 @@ import { SITE, SITE_LINK } from "@/data/site";
 import logo from "@/assets/logos.json";
 import { buildShareUrl } from "@/lib/share/build-share-url";
 import { NotFoundComponent, ErrorComponent } from "@/components/errors";
+import { useSpcPageContext } from "@/lib/spc-intelligence";
 
 // Titre & Description
 const OPTIMIZED_TITLE = `${SITE.name} | Studio Créatif, Imprimerie & Web à Porto-Novo ⚡`;
@@ -131,7 +132,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             publisher: { "@id": `${SITE_LINK.landingUrl}/#organization` },
             inLanguage: "fr-BJ"
           }),
-        }
+        },
+        {
+          src: "https://ai.stafprint.com/widget.js",
+          "data-app": "spc-landing",
+          "data-position": "left",
+          async: true
+        } as { src: string; async: boolean },
       ],
     };
   },
@@ -157,6 +164,7 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  useSpcPageContext();
 
   return (
     <QueryClientProvider client={queryClient}>
