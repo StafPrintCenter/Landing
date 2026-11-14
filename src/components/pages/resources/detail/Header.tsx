@@ -1,5 +1,5 @@
 import { BadgeCheck, Download, Eye, FileCheck2, Layers3, MessageCircle, MonitorCheck, ShieldCheck, ShoppingBag, Sparkles } from "lucide-react";
-import { formatResourcePrice, getDiscountPercent, getResourceIcon, getResourceStatus, type APIResource } from "@/data/resources";
+import { formatResourcePrice, getResourceIcon, type APIResource } from "@/data/resources";
 
 interface ResourceDetailHeaderProps {
   resource: APIResource;
@@ -9,12 +9,12 @@ interface ResourceDetailHeaderProps {
 export function ResourceDetailHeader({ resource, whatsappUrl }: ResourceDetailHeaderProps) {
   const Icon = getResourceIcon(resource);
   const isFree = resource.price === 0;
-  const discount = getDiscountPercent(resource);
-  const originalPrice = discount !== null && resource.originalPrice ? formatResourcePrice(resource.originalPrice) : null;
+  const discount = resource.discountPercentage > 0 ? resource.discountPercentage : null;
+  const originalPrice = discount !== null && resource.originalPrice !== null ? formatResourcePrice(resource.originalPrice) : null;
 
   return (
     <section className="relative overflow-hidden border-b border-border bg-secondary text-secondary-foreground">
-      <div className="pointer-events-none absolute -right-24 -top-324 h-80 w-80 rounded-full bg-primary/20 blur-3xl" />
+      <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-primary/20 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-32 left-1/3 h-72 w-72 rounded-full bg-accent/10 blur-3xl" />
       <div className="container-x relative py-10">
         <div className="grid items-center gap-10 lg:grid-cols-[1fr_360px] lg:gap-16">
@@ -36,7 +36,7 @@ export function ResourceDetailHeader({ resource, whatsappUrl }: ResourceDetailHe
             <div className="mt-7 flex flex-wrap gap-x-6 gap-y-3 text-sm text-secondary-foreground/65">
               <span className="inline-flex items-center gap-2"><FileCheck2 size={16} className="text-accent" />{resource.format}</span>
               <span className="inline-flex items-center gap-2"><Layers3 size={16} className="text-accent" />{resource.meta}</span>
-              <span className="inline-flex items-center gap-2"><BadgeCheck size={16} className="text-accent" />{getResourceStatus(resource)}</span>
+              <span className="inline-flex items-center gap-2"><BadgeCheck size={16} className="text-accent" />{resource.status}</span>
               <span className="inline-flex items-center gap-2"><Eye size={16} className="text-accent" />{resource.viewsCount} vues</span>
             </div>
           </div>
