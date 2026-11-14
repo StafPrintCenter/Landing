@@ -1,5 +1,4 @@
 import { Reveal } from "@/components/site/Reveal";
-import { LibraryBig } from "lucide-react";
 
 interface ResourceHomeHeaderProps {
   totalCount: number;

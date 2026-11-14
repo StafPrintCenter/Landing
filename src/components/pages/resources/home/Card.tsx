@@ -1,11 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Download, Eye, Sparkles } from "lucide-react";
-import { getDiscountPercent, getResourceIcon, getResourceStatus, formatResourcePrice, type APIResource } from "@/data/resources";
+import { getResourceIcon, formatResourcePrice, type APIResource } from "@/data/resources";
 
 export function ResourceHomeCard({ resource }: { resource: APIResource }) {
   const Icon = getResourceIcon(resource);
   const isFree = resource.price === 0;
-  const discount = getDiscountPercent(resource);
+  const discount = resource.discountPercentage > 0 ? resource.discountPercentage : null;
 
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl">
@@ -23,7 +23,7 @@ export function ResourceHomeCard({ resource }: { resource: APIResource }) {
           </span>
         )}
         <span className="absolute bottom-3 left-4 rounded-full bg-background/10 px-3 py-1 text-[11px] font-medium text-secondary-foreground/80 backdrop-blur-sm">
-          {getResourceStatus(resource)}
+          {resource.status}
         </span>
       </div>
       <div className="flex flex-1 flex-col p-6">
@@ -40,7 +40,7 @@ export function ResourceHomeCard({ resource }: { resource: APIResource }) {
               <span className="inline-flex items-center gap-1"><Eye size={12} />{resource.viewsCount}</span>
               <span className="inline-flex items-center gap-1"><Download size={12} />{resource.downloadsCount}</span>
             </span>
-            {discount !== null && resource.originalPrice && (
+            {discount !== null && resource.originalPrice !== null && (
               <span><s>{formatResourcePrice(resource.originalPrice)}</s> <strong className="text-primary">{formatResourcePrice(resource.price)}</strong></span>
             )}
           </div>

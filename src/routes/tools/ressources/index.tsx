@@ -44,7 +44,7 @@ export const Route = createFileRoute("/tools/ressources/")({
       { property: "og:description", content: "Des ressources pratiques pour préparer vos projets d'impression et de design." },
       { property: "og:url", content: "/tools/ressources" },
     ],
-    links: [{ rel: "canonical", href: "/appointment" }],
+    links: [{ rel: "canonical", href: "/tools/ressources" }],
   }),
   component: ResourcesPage,
 });
@@ -59,12 +59,13 @@ function ResourcesPage() {
     sortDir,
     query,
   });
+  const { resources: allResources } = useResourcesStore();
   const [isLoading, setIsLoading] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
-    const timer = setTimeout(() => setIsLoading(false), 350);
+    const timer = setTimeout(() => setIsLoading(false), 400);
     return () => clearTimeout(timer);
   }, [category, price, sortBy, sortDir, query, page, perPage]);
 
@@ -118,8 +119,8 @@ function ResourcesPage() {
     <SiteShell>
       <section className="container-x py-12 md:py-16">
         <ResourceHomeHeader
-          totalCount={resources.length}
-          freeCount={resources.filter((resource) => resource.price === 0).length}
+          totalCount={allResources.length}
+          freeCount={allResources.filter((resource) => resource.price === 0).length}
         />
 
         <div className="mt-10 pb-6">
@@ -132,7 +133,7 @@ function ResourcesPage() {
           category={category}
           query={query}
           filteredCount={meta.total}
-          totalCount={resources.length}
+          totalCount={allResources.length}
           isLoading={isLoading || storeLoading}
         />
         <ResourceHomeGrid

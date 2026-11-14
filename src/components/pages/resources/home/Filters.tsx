@@ -1,7 +1,7 @@
 import { ArrowDownUp, ArrowUpDown, SlidersHorizontal } from "lucide-react";
-import type { ResourceCategory } from "@/data/resources";
+import { RESOURCE_CATEGORIES as RESOURCE_CATEGORY_VALUES, type ResourceCategory } from "@/data/resources";
 
-export const RESOURCE_CATEGORIES = ["Tout", "Gabarit", "Guide", "Outil"] as const;
+export const RESOURCE_CATEGORIES = ["Tout", ...RESOURCE_CATEGORY_VALUES] as const;
 export type ResourceCategoryFilter = (typeof RESOURCE_CATEGORIES)[number];
 export const RESOURCE_PRICE_FILTERS = ["all", "free", "paid"] as const;
 export type ResourcePriceFilter = (typeof RESOURCE_PRICE_FILTERS)[number];
