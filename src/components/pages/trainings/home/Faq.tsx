@@ -1,13 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { useFaqsStore } from "@/stores/useFaqsStore";
 import { FormationHomeCta } from "./Cta";
+import { shuffleFaqs, type APIFaq } from "@/data/faqs";
 
 export function FormationHomeFAQ() {
   const [open, setOpen] = useState<number | null>(0);
-  const { faqs, isLoading } = useFaqsStore({ category: "Formation", perPage: 4 });
+  const [randomFaqs, setRandomFaqs] = useState<APIFaq[]>([]);
+  const { faqs, isLoading } = useFaqsStore({ category: "Formation", perPage: 50 });
+
+  useEffect(() => {
+    setRandomFaqs(shuffleFaqs(faqs).slice(0, 4));
+  }, [faqs]);
+
+  const isDataLoading = isLoading || (faqs.length > 0 && randomFaqs.length === 0);
 
   return (
     <section className="bg-muted/40 border-t border-border/40">
@@ -20,17 +28,17 @@ export function FormationHomeFAQ() {
         <div className="mt-8 grid gap-8 lg:grid-cols-12 items-start">
           {/* FAQ */}
           <div className="space-y-3 lg:col-span-7">
-            {isLoading ? (
+            {isDataLoading ? (
               Array.from({ length: 5 }).map((_, idx) => (
                 <div
                   key={`faq-skeleton-${idx}`}
                   className="h-13 animate-pulse rounded-xl border border-border bg-card"
                 />
               ))
-            ) : faqs.length === 0 ? (
+            ) : randomFaqs.length === 0 ? (
               <p className="text-sm text-muted-foreground">Aucune question disponible pour le moment.</p>
             ) : (
-              faqs.map((item, i) => (
+              randomFaqs.map((item, i) => (
                 <div key={item.id} className="overflow-hidden rounded-xl border border-border bg-card transition-colors duration-200">
                   <button
                     onClick={() => setOpen(open === i ? null : i)}

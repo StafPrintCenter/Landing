@@ -7,6 +7,7 @@ import { SiteShell } from "@/components/site/SiteShell";
 import { useResourcesStore } from "@/stores/useResourcesStore";
 import {
   ResourceHomeFilters,
+  ResourceHomeFAQ,
   ResourceHomeGrid,
   ResourceHomeHeader,
   ResourceHomeMobileSheet,
@@ -154,17 +155,7 @@ function ResourcesPage() {
         )}
       </section>
 
-      <section className="container-x pb-14">
-        <div className="flex flex-col items-center justify-between gap-4 rounded-2xl border border-primary/20 bg-primary/5 p-6 text-center sm:flex-row sm:text-left">
-          <div>
-            <h2 className="font-display text-lg font-semibold">Une ressource vous manque ?</h2>
-            <p className="mt-1 text-sm text-muted-foreground">Dites-nous quel modèle ou quel guide vous ferait gagner du temps.</p>
-          </div>
-          <a href="/#contact" className="inline-flex shrink-0 cursor-pointer items-center gap-2 rounded-full border border-primary/30 px-5 py-2.5 text-sm font-semibold text-primary transition hover:bg-primary hover:text-primary-foreground">
-            Suggérer une ressource
-          </a>
-        </div>
-      </section>
+      <ResourceHomeFAQ />
 
       <ResourceHomeMobileSheet
         isOpen={filtersOpen}
