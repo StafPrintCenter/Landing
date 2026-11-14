@@ -27,7 +27,7 @@ export function ArticleDetailSkeleton() {
       </div>
 
       {/* Cover image placeholder */}
-      <div className="mt-10 aspect-[16/9] w-full rounded-2xl bg-muted" />
+      <div className="mt-10 aspect-video w-full rounded-2xl bg-muted" />
 
       {/* Article Body content placeholder */}
       <div className="mx-auto mt-12 max-w-3xl space-y-4">
