@@ -53,8 +53,12 @@ function ResourcesPage() {
   const { category, price, sortBy, sortDir, query, page, perPage } = useSearch({ from: "/tools/ressources/" });
   const navigate = useNavigate({ from: "/tools/ressources/" });
 
-  const { resources, isLoading: storeLoading, isError, error, refetch,
-  } = useResourcesStore({ category, sortBy, sortDir, query });
+  const { resources, isLoading: storeLoading, isError, error, refetch } = useResourcesStore({
+    category,
+    sortBy,
+    sortDir,
+    query,
+  });
   const [isLoading, setIsLoading] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
 
@@ -113,14 +117,6 @@ function ResourcesPage() {
   return (
     <SiteShell>
       <section className="container-x py-12 md:py-16">
-        <nav aria-label="Fil d'Ariane" className="mb-8 flex flex-wrap items-center gap-3 text-sm text-foreground/60">
-          <Link to="/" className="hover:text-primary">Accueil</Link>
-          <span>/</span>
-          <Link to="/tests" className="hover:text-primary">Tests</Link>
-          <span>/</span>
-          <span className="text-foreground">Ressources</span>
-        </nav>
-
         <ResourceHomeHeader
           totalCount={resources.length}
           freeCount={resources.filter((resource) => resource.price === 0).length}
