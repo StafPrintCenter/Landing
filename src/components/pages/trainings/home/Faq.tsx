@@ -7,7 +7,7 @@ import { FormationHomeCta } from "./Cta";
 
 export function FormationHomeFAQ() {
   const [open, setOpen] = useState<number | null>(0);
-  const { faqs, isLoading } = useFaqsStore({ category: "Formation", perPage: 50 });
+  const { faqs, isLoading } = useFaqsStore({ category: "Formation", perPage: 4 });
 
   return (
     <section className="bg-muted/40 border-t border-border/40">
