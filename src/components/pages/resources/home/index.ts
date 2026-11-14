@@ -5,3 +5,5 @@ export { ResourceHomeMobileTrigger } from "./MobileTrigger";
 export { ResourceHomeMobileSheet } from "./MobileSheet";
 export { ResourceHomeResultsCount } from "./ResultsCount";
 export { ResourceHomeGrid } from "./Grid";
+export { ResourceHomeFAQ } from "./Faq";
+export { ResourceHomeCta } from "./Cta";

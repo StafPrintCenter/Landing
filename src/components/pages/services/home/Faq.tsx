@@ -5,7 +5,9 @@ import { Reveal } from "@/components/site/Reveal";
 import { useFaqsStore } from "@/stores/useFaqsStore";
 import { getDisciplineColorClass } from "@/data/categories";
 import { ServiceHomeCta } from "./Cta";
-import type { APIFaq } from "@/data/faqs";
+import { shuffleFaqs, type APIFaq } from "@/data/faqs";
+
+const SERVICE_FAQ_EXCLUDED_CATEGORIES = new Set(["formation", "formations", "conseils", "actus"]);
 
 export function ServiceHomeFAQ() {
   const [open, setOpen] = useState<number | null>(0);
@@ -14,14 +16,15 @@ export function ServiceHomeFAQ() {
   const { faqs, isLoading } = useFaqsStore({ perPage: 50 });
 
   useEffect(() => {
-    if (!faqs || faqs.length === 0) return;
+    if (faqs.length === 0) {
+      setRandomFaqs([]);
+      return;
+    }
 
-    // 1. Exclusion stricte de la catégorie "Formation" / "Formations"
     const serviceFaqs = faqs.filter(
-      (faq) => faq.category.toLowerCase() !== "formation" && faq.category.toLowerCase() !== "formations"
+      (faq) => !SERVICE_FAQ_EXCLUDED_CATEGORIES.has(faq.category.toLowerCase()),
     );
 
-    // 2. Regroupement par catégorie
     const grouped = serviceFaqs.reduce<Record<string, APIFaq[]>>((acc, faq) => {
       if (!acc[faq.category]) {
         acc[faq.category] = [];
@@ -30,22 +33,14 @@ export function ServiceHomeFAQ() {
       return acc;
     }, {});
 
-    // 3. Extraction d'une FAQ aléatoire par catégorie
-    const selected = Object.values(grouped).map((items) => {
-      const randomIndex = Math.floor(Math.random() * items.length);
-      return items[randomIndex];
-    });
-
-    // 4. Mélange de l'ordre d'affichage
-    for (let i = selected.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [selected[i], selected[j]] = [selected[j], selected[i]];
-    }
-
-    setRandomFaqs(selected);
+    const selected = Object.values(grouped).map((items) => shuffleFaqs(items)[0]);
+    setRandomFaqs(shuffleFaqs(selected));
   }, [faqs]);
 
-  const isDataLoading = isLoading || (faqs.length > 0 && randomFaqs.length === 0);
+  const hasEligibleFaqs = faqs.some(
+    (faq) => !SERVICE_FAQ_EXCLUDED_CATEGORIES.has(faq.category.toLowerCase()),
+  );
+  const isDataLoading = isLoading || (hasEligibleFaqs && randomFaqs.length === 0);
 
   return (
     <section className="bg-muted/40 border-t border-border/40">
