@@ -1,51 +1,67 @@
 import { useEffect } from "react";
 import { useLocation } from "@tanstack/react-router";
 
-const LABELS: [RegExp, string, string][] = [
-  [/^\/dashboard(?:\/|$)/, "Tableau de bord formateur", "Vue d'ensemble des formations, de la progression des apprenants, des travaux à corriger et des prochaines sessions."],
-  [/^\/trainings\/[^/]+\/sessions\/[^/]+(?:\/|$)/, "Détail d'une session de formation", "Consultez les informations et le suivi d'une session liée à une formation."],
-  [/^\/trainings\/[^/]+\/students\/[^/]+(?:\/|$)/, "Suivi d'un apprenant en formation", "Consultez la progression et l'activité d'un apprenant dans une formation."],
-  [/^\/trainings\/[^/]+\/submissions(?:\/|$)/, "Travaux rendus d'une formation", "Consultez, évaluez et validez les travaux remis dans cette formation."],
-  [/^\/trainings\/[^/]+\/manage(?:\/|$)/, "Contenu de la formation", "Organisez les modules, les leçons, les quiz et les exercices d'une formation."],
-  [/^\/trainings\/[^/]+(?:\/|$)/, "Détail d'une formation", "Consultez les objectifs, les sessions, les apprenants inscrits et l'avancement de la formation."],
-  [/^\/trainings(?:\/|$)/, "Mes formations", "Consultez vos formations assignées et l'avancement de leurs apprenants."],
-  [/^\/students\/[^/]+(?:\/|$)/, "Profil d'un apprenant", "Consultez la progression et l'activité récente d'un apprenant dans vos formations."],
-  [/^\/students(?:\/|$)/, "Mes apprenants", "Retrouvez les apprenants inscrits à vos formations et suivez leur progression."],
-  [/^\/corrections\/[^/]+(?:\/|$)/, "Détail d'une correction", "Consultez le travail remis, les consignes pédagogiques et l'historique des corrections."],
-  [/^\/corrections(?:\/|$)/, "Corrections", "Filtrez les travaux remis dans vos formations et corrigez-les."],
-  [/^\/submissions(?:\/|$)/, "Travaux rendus", "Consultez, évaluez ou validez les travaux déposés par vos apprenants."],
-  [/^\/sessions\/[^/]+(?:\/|$)/, "Détail d'une session", "Consultez les informations et la date d'une session de formation."],
-  [/^\/sessions(?:\/|$)/, "Sessions de formation", "Planifiez vos sessions en présentiel ou en ligne et suivez les réponses des apprenants."],
-  [/^\/community\/posts\/[^/]+(?:\/|$)/, "Publication de la communauté", "Consultez une publication et ses commentaires."],
-  [/^\/community\/posts(?:\/|$)/, "Communauté", "Consultez et publiez des discussions, questions, ressources et annonces."],
-  [/^\/community\/reports\/[^/]+(?:\/|$)/, "Détail d'un signalement", "Examinez un contenu signalé dans la communauté."],
-  [/^\/community\/reports(?:\/|$)/, "Modération de la communauté", "Traitez les contenus signalés par les apprenants."],
-  [/^\/notifications\/preferences(?:\/|$)/, "Préférences de notifications", "Choisissez les notifications à recevoir au sujet de vos formations et de vos apprenants."],
-  [/^\/notifications\/[^/]+(?:\/|$)/, "Détail d'une notification", "Consultez une notification liée à votre espace formateur."],
-  [/^\/notifications(?:\/|$)/, "Notifications", "Consultez les notifications liées à vos formations, vos apprenants et vos prochaines sessions."],
-  [/^\/security\/mfa(?:\/|$)/, "Sécurité du compte", "Gérez la double authentification, les méthodes de connexion et les codes de secours."],
-  [/^\/security\/sessions(?:\/|$)/, "Sessions actives", "Consultez et fermez les sessions ouvertes sur votre compte formateur."],
-  [/^\/health(?:\/|$)/, "Santé du compte", "Consultez le score de sécurité et de profil ainsi que les recommandations pour l'améliorer."],
-  [/^\/profile(?:\/|$)/, "Mon profil formateur", "Consultez les informations de votre compte et gérez vos catégories préférées."],
-  [/^\/cgu(?:\/|$)/, "Charte d'engagement et CGU formateur", "Consultez les règles applicables aux formateurs : gouvernance, confidentialité, corrections, usage de l'assistant IA et déontologie."],
-  [/^\/login(?:\/|$)/, "Connexion formateur", "Connectez-vous à votre espace formateur."],
-  [/^\/register(?:\/|$)/, "Demande d'accès formateur", "Demandez la création d'un compte formateur."],
-  [/^\/invite(?:\/|$)/, "Activation du compte formateur", "Finalisez l'activation de votre compte à partir de votre invitation."],
-  [/^\/forgot-password(?:\/|$)/, "Mot de passe oublié", "Demandez un lien pour réinitialiser votre mot de passe."],
-  [/^\/reset-password(?:\/|$)/, "Nouveau mot de passe", "Choisissez un nouveau mot de passe pour votre compte formateur."],
+type PageContext = readonly [pattern: RegExp, title: string, text: string];
+
+const PAGE_CONTEXTS: PageContext[] = [
+  [/^\/services\/[^/]+(?:\/|$)/, "Détail d'un service", "Découvrez les prestations, les options et les modalités de réalisation de ce service."],
+  [/^\/services(?:\/|$)/, "Services", "Découvrez nos services de design, d'impression et de création numérique."],
+  [/^\/trainings\/[^/]+(?:\/|$)/, "Détail d'une formation", "Consultez le programme, les objectifs et les modalités de cette formation."],
+  [/^\/trainings(?:\/|$)/, "Formations", "Découvrez nos formations en design, web, impression et vidéo."],
+  [/^\/articles\/[^/]+(?:\/|$)/, "Article", "Consultez nos conseils et actualités autour du design, de l'impression et du numérique."],
+  [/^\/articles(?:\/|$)/, "Blog", "Parcourez les conseils, tutoriels et actualités de STAF PRINT CENTER."],
+  [/^\/faqs(?:\/|$)/, "Questions fréquentes", "Trouvez des réponses à vos questions sur nos services et nos formations."],
+  [/^\/projects(?:\/|$)/, "Réalisations", "Découvrez nos projets de design, d'impression et de création numérique."],
+  [/^\/tools\/ressources\/[^/]+(?:\/|$)/, "Détail d'une ressource", "Consultez les informations, le contenu et les modalités d'accès à cette ressource."],
+  [/^\/tools\/ressources(?:\/|$)/, "Ressources", "Explorez nos gabarits, guides et outils pour préparer vos projets."],
+  [/^\/tools\/ecosystem(?:\/|$)/, "Écosystème", "Découvrez les outils et plateformes de l'écosystème STAF PRINT CENTER."],
+  [/^\/tools\/appointment(?:\/|$)/, "Prendre rendez-vous", "Choisissez un créneau pour échanger avec STAF PRINT CENTER."],
+  [/^\/tools\/newsletter\/preferences(?:\/|$)/, "Préférences de la newsletter", "Gérez les sujets et la fréquence des communications que vous recevez."],
+  [/^\/tools\/newsletter\/unsubscribe(?:\/|$)/, "Désinscription à la newsletter", "Gérez votre désinscription de la newsletter STAF PRINT CENTER."],
+  [/^\/tools\/newsletter(?:\/|$)/, "Newsletter", "Inscrivez-vous pour recevoir nos conseils, actualités et nouveautés."],
+  [/^\/tools\/lookup(?:\/|$)/, "Recherche de lien court", "Retrouvez la destination d'un lien court STAF PRINT CENTER."],
+  [/^\/tools(?:\/|$)/, "Outils", "Accédez aux outils et ressources proposés par STAF PRINT CENTER."],
+  [/^\/tests\/devis(?:\/|$)/, "Demande de devis", "Préparez une demande de devis pour votre projet."],
+  [/^\/tests\/calendar(?:\/|$)/, "Calendrier", "Consultez les dates et disponibilités de nos activités."],
+  [/^\/tests\/affiliation(?:\/|$)/, "Affiliation", "Découvrez le programme d'affiliation STAF PRINT CENTER."],
+  [/^\/tests(?:\/|$)/, "Espace de tests", "Découvrez les fonctionnalités en cours de test sur notre site."],
+  [/^\/careers\/offers\/[^/]+\/apply(?:\/|$)/, "Candidature", "Envoyez votre candidature à une offre de STAF PRINT CENTER."],
+  [/^\/careers\/offers\/[^/]+(?:\/|$)/, "Détail d'une offre", "Consultez les missions et les conditions de cette offre."],
+  [/^\/careers\/offers(?:\/|$)/, "Offres d'emploi", "Consultez les offres d'emploi et opportunités chez STAF PRINT CENTER."],
+  [/^\/careers\/internship\/check(?:\/|$)/, "Suivi de candidature de stage", "Vérifiez le statut de votre candidature de stage."],
+  [/^\/careers\/internship(?:\/|$)/, "Stage", "Découvrez les possibilités de stage chez STAF PRINT CENTER."],
+  [/^\/careers\/check-offer(?:\/|$)/, "Vérification d'une offre", "Vérifiez les informations relatives à une offre d'emploi."],
+  [/^\/legal\/cgv(?:\/|$)/, "Conditions générales de vente", "Consultez les conditions générales de vente de STAF PRINT CENTER."],
+  [/^\/legal\/privacy(?:\/|$)/, "Confidentialité", "Consultez notre politique de confidentialité et la gestion de vos données."],
+  [/^\/legal\/mentions(?:\/|$)/, "Mentions légales", "Consultez les informations légales de STAF PRINT CENTER."],
+  [/^\/legal(?:\/|$)/, "Informations légales", "Consultez les informations légales de STAF PRINT CENTER."],
+  [/^\/verify-certificate\/[^/]+(?:\/|$)/, "Vérification de certificat", "Vérifiez l'authenticité d'un certificat de formation."],
+  [/^\/verify-certificate(?:\/|$)/, "Vérification de certificat", "Vérifiez l'authenticité d'un certificat de formation."],
+  [/^\/reviews\/[^/]+(?:\/|$)/, "Avis client", "Consultez ou partagez un avis sur votre expérience avec STAF PRINT CENTER."],
+  [/^\/search(?:\/|$)/, "Recherche", "Recherchez des services, projets, formations, articles et réponses."],
+  [/^\/about(?:\/|$)/, "À propos", "Découvrez STAF PRINT CENTER, notre équipe et notre approche."],
+  [/^\/$/, "Accueil", "Découvrez les services, réalisations, formations et actualités de STAF PRINT CENTER."],
 ];
 
-/** Pushes the current screen (no personal data) to SPC Intelligence. */
+function getPageContext(pathname: string) {
+  const context = PAGE_CONTEXTS.find(([pattern]) => pattern.test(pathname));
+  return context
+    ? { title: context[1], text: context[2] }
+    : {
+        title: "STAF PRINT CENTER",
+        text: "Explorez nos services, réalisations, formations et ressources.",
+      };
+}
+
 export function useSpcPageContext() {
-  const pathname = useLocation({ select: (l) => l.pathname });
+  const pathname = useLocation({ select: (location) => location.pathname });
+
   useEffect(() => {
-    const m = LABELS.find(([re]) => re.test(pathname));
-    const title = m?.[1] ?? "Espace Formateur STAF PRINT CENTER";
-    const text = m?.[2] ?? "Consultez et gérez votre espace formateur STAF PRINT CENTER.";
-    const apply = () => window.SPCIntelligence?.setContext(() => ({ title, text }));
+    const context = getPageContext(pathname);
+    const apply = () => window.SPCIntelligence?.setContext(() => context);
     apply();
-    const t = window.setTimeout(apply, 1500); // widget loads async
-    return () => window.clearTimeout(t);
+    const timeout = window.setTimeout(apply, 1500);
+    return () => window.clearTimeout(timeout);
   }, [pathname]);
 }
 
