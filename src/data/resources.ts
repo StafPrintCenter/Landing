@@ -1,6 +1,7 @@
 import { BookOpen, LayoutTemplate, Wrench, type LucideIcon } from "lucide-react";
 
-export type ResourceCategory = "Gabarit" | "Guide" | "Outil";
+export const RESOURCE_CATEGORIES = ["Gabarit", "Guide", "Outil"] as const;
+export type ResourceCategory = (typeof RESOURCE_CATEGORIES)[number];
 
 export type APIResource = {
   slug: string;
@@ -33,14 +34,8 @@ export const CATEGORY_ICONS: Record<ResourceCategory, LucideIcon> = {
   Outil: Wrench,
 };
 
-export const DEFAULT_RESOURCE_STATUS = "Prêt à l'emploi";
-
-export function getResourceIcon(resource: Pick<APIResource, "icon" | "category">) {
-  return resource.icon ?? CATEGORY_ICONS[resource.category];
-}
-
-export function getResourceStatus(resource: Pick<APIResource, "status">) {
-  return resource.status ?? DEFAULT_RESOURCE_STATUS;
+export function getResourceIcon(resource: Pick<APIResource, "category">): LucideIcon {
+  return CATEGORY_ICONS[resource.category];
 }
 
 export function formatResourcePrice(price: number) {
