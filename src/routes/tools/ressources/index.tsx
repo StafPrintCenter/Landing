@@ -22,6 +22,7 @@ import {
   type ResourceSortDirection,
   type ResourceSortOption,
 } from "@/components/pages/resources/home";
+import { SITE } from "@/data/site";
 
 const resourceSearchSchema = z.object({
   category: z.enum(RESOURCE_CATEGORIES).catch("Tout").default("Tout"),
@@ -37,14 +38,13 @@ export const Route = createFileRoute("/tools/ressources/")({
   validateSearch: zodValidator(resourceSearchSchema),
   head: () => ({
     meta: [
-      { title: "Ressources & templates — STAF PRINT CENTER" },
+      { title: `Ressources & templates | ${SITE.name}` },
       { name: "description", content: "Gabarits, guides et outils gratuits ou premium pour vos projets d'impression, de design et de communication." },
-      { name: "robots", content: "noindex" },
-      { property: "og:type", content: "website" },
-      { property: "og:title", content: "Ressources & templates — STAF PRINT CENTER" },
+      { property: "og:title", content: `Ressources & templates | ${SITE.name}` },
       { property: "og:description", content: "Des ressources pratiques pour préparer vos projets d'impression et de design." },
-      { name: "twitter:card", content: "summary" },
+      { property: "og:url", content: "/tools/ressources" },
     ],
+    links: [{ rel: "canonical", href: "/appointment" }],
   }),
   component: ResourcesPage,
 });
@@ -52,12 +52,8 @@ export const Route = createFileRoute("/tools/ressources/")({
 function ResourcesPage() {
   const { category, price, sortBy, sortDir, query, page, perPage } = useSearch({ from: "/tools/ressources/" });
   const navigate = useNavigate({ from: "/tools/ressources/" });
-  const {
-    resources,
-    isLoading: storeLoading,
-    isError,
-    error,
-    refetch,
+
+  const { resources, isLoading: storeLoading, isError, error, refetch,
   } = useResourcesStore({ category, sortBy, sortDir, query });
   const [isLoading, setIsLoading] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
