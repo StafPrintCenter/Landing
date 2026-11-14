@@ -15,15 +15,8 @@ export function ResourceHomeFAQ() {
   const { faqs, isLoading, isError, error } = useFaqsStore({ perPage: 50 });
 
   useEffect(() => {
-    const grouped = faqs
-      .filter((faq) => RESOURCE_FAQ_CATEGORIES.has(faq.category))
-      .reduce<Record<string, APIFaq[]>>((acc, faq) => {
-        (acc[faq.category] ??= []).push(faq);
-        return acc;
-      }, {});
-
-    const selected = Object.values(grouped).map((items) => shuffleFaqs(items)[0]);
-    setRandomFaqs(shuffleFaqs(selected));
+    const selected = faqs.filter((faq) => RESOURCE_FAQ_CATEGORIES.has(faq.category));
+    setRandomFaqs(shuffleFaqs(selected).slice(0, 4));
   }, [faqs]);
 
   const hasEligibleFaqs = faqs.some((faq) => RESOURCE_FAQ_CATEGORIES.has(faq.category));
@@ -42,7 +35,7 @@ export function ResourceHomeFAQ() {
         <div className="mt-8 grid items-start gap-8 lg:grid-cols-12">
           <div className="space-y-3 lg:col-span-7">
             {isDataLoading ? (
-              Array.from({ length: 2 }).map((_, index) => (
+              Array.from({ length: 4 }).map((_, index) => (
                 <div
                   key={`resource-faq-skeleton-${index}`}
                   className="h-16 animate-pulse rounded-xl border border-border bg-card"
