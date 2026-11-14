@@ -8,17 +8,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { SITE } from "@/data/site";
 import { createAppointment } from "@/stores/useAppointmentsStore";
 import type { APIAppointment } from "@/data/appointments";
-import {
-  Stepper,
-  StepType,
-  StepSlot,
-  StepInfos,
-  StepRecap,
-  ConfirmationScreen,
-  STEPS,
-  INITIAL_BOOKING,
-  type BookingData,
-} from "@/components/pages/tools/appointment";
+import { Stepper, StepType, StepSlot, StepInfos, StepRecap, ConfirmationScreen, STEPS, INITIAL_BOOKING, type BookingData } from "@/components/pages/tools/appointment";
 
 export const Route = createFileRoute("/tools/appointment")({
   head: () => ({
