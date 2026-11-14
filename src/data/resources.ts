@@ -21,6 +21,31 @@ export type Resource = {
   license: string;
 };
 
+export type APIResource = {
+  slug: string;
+  title: string;
+  category: ResourceCategory;
+  price: number;
+  originalPrice: number | null;
+  discountPercentage: number;
+  status: string;
+  short: string;
+  format: string;
+  meta: string;
+  viewsCount: number;
+  downloadsCount: number;
+  description?: string;
+  includes?: string[];
+  outcomes?: string[];
+  audience?: string;
+  requirements?: string[];
+  license?: string;
+  downloadUrl?: string | null;
+  downloadFileName?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export const RESOURCES: Resource[] = [
   {
     slug: "gabarit-carte-visite-85x55",
@@ -144,7 +169,7 @@ export function getResourceStatus(resource: Pick<Resource, "status">) {
 }
 
 /** Pourcentage de réduction arrondi, ou null si pas de promotion valide. */
-export function getDiscountPercent(resource: Pick<Resource, "price" | "originalPrice">) {
+export function getDiscountPercent(resource: { price: number; originalPrice?: number | null }) {
   const { price, originalPrice } = resource;
   if (!originalPrice || price <= 0 || originalPrice <= price) return null;
   return Math.round(((originalPrice - price) / originalPrice) * 100);
