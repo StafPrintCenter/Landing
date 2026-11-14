@@ -36,8 +36,8 @@ function getFooterEcosystems(sites: APIEcosystemSite[]): APIEcosystemSite[] {
 }
 
 export function Footer() {
-  const { services } = useServicesStore({ perPage: 100 });
-  const { sites } = useEcosystemSitesStore({ perPage: 100 });
+  const { services, isLoading: isLoadingServices } = useServicesStore({ perPage: 100 });
+  const { sites, isLoading: isLoadingEcosystems } = useEcosystemSitesStore({ perPage: 100 });
   const footerServices = getFooterServices(services);
   const footerEcosystems = getFooterEcosystems(sites);
   const availableEcosystemCount = sites.filter(
@@ -53,6 +53,8 @@ export function Footer() {
           <FooterResourceColumns
             services={footerServices}
             ecosystems={footerEcosystems}
+            isLoadingServices={isLoadingServices}
+            isLoadingEcosystems={isLoadingEcosystems}
             hasMoreServices={services.length > 6}
             hasMoreEcosystems={availableEcosystemCount > 6}
           />
