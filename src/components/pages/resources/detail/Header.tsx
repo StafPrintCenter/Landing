@@ -1,17 +1,4 @@
-import { Link } from "@tanstack/react-router";
-import {
-  ArrowLeft,
-  BadgeCheck,
-  Download,
-  Eye,
-  FileCheck2,
-  Layers3,
-  MessageCircle,
-  MonitorCheck,
-  ShieldCheck,
-  ShoppingBag,
-  Sparkles,
-} from "lucide-react";
+import { BadgeCheck, Download, Eye, FileCheck2, Layers3, MessageCircle, MonitorCheck, ShieldCheck, ShoppingBag, Sparkles } from "lucide-react";
 import { formatResourcePrice, getDiscountPercent, getResourceIcon, getResourceStatus, type APIResource } from "@/data/resources";
 
 interface ResourceDetailHeaderProps {
@@ -30,16 +17,6 @@ export function ResourceDetailHeader({ resource, whatsappUrl }: ResourceDetailHe
       <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-primary/20 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-32 left-1/3 h-72 w-72 rounded-full bg-accent/10 blur-3xl" />
       <div className="container-x relative py-10 md:py-16">
-        <nav aria-label="Fil d'Ariane" className="flex flex-wrap items-center gap-2 text-sm text-secondary-foreground/60">
-          <Link to="/" className="transition hover:text-accent">Accueil</Link>
-          <span>/</span>
-          <Link to="/tests" className="transition hover:text-accent">Tests</Link>
-          <span>/</span>
-          <Link to="/tools/ressources" className="transition hover:text-accent">Ressources</Link>
-          <span>/</span>
-          <span className="text-secondary-foreground">{resource.title}</span>
-        </nav>
-
         <div className="mt-10 grid items-center gap-10 lg:grid-cols-[1fr_360px] lg:gap-16">
           <div>
             <div className="flex flex-wrap items-center gap-3">
