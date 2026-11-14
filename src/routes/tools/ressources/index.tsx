@@ -22,7 +22,7 @@ import {
   type ResourcePriceFilter,
   type ResourceSortDirection,
   type ResourceSortOption,
-} from "@/components/pages/resources/home";
+} from "@/components/pages/tools/resources/home";
 import { SITE } from "@/data/site";
 
 const resourceSearchSchema = z.object({

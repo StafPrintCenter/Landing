@@ -7,7 +7,7 @@ import {
   ResourceDetailRelated,
   ResourceDetailSections,
   ResourceDetailSkeleton,
-} from "@/components/pages/resources/detail";
+} from "@/components/pages/tools/resources/detail";
 import { fetchResourceBySlug } from "@/stores/useResourcesStore";
 import { SITE } from "@/data/site";
 
