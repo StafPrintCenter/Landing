@@ -2,6 +2,7 @@ import { AlertCircle, BadgeCheck, Download } from "lucide-react";
 import type { APIResource } from "@/data/resources";
 import { formatResourcePrice } from "@/data/resources";
 import type { ResourcePayment } from "@/stores/useResourcesStore";
+import { InvoiceDownloadButton } from "@/components/pages/invoice/InvoiceDownloadButton";
 import { ResourceDownloadAction } from "../detail/DownloadAction";
 
 interface PaymentDetailsProps {
@@ -54,7 +55,13 @@ export function PaymentDetails({ resource, payment, isApproved, message }: Payme
         )}
       </dl>
       {isApproved ? (
-        <ResourceDownloadAction key={payment.id} slug={resource.slug} transactionId={payment.id} />
+        <>
+          <ResourceDownloadAction key={payment.id} slug={resource.slug} transactionId={payment.id} />
+          <div className="mt-4 border-t border-border pt-4">
+            <InvoiceDownloadButton transactionId={payment.id} />
+            <p className="mt-2 text-xs text-muted-foreground">Facture disponible en ligne pendant 7 jours après le paiement.</p>
+          </div>
+        </>
       ) : (
         <p className="mt-4 text-sm text-muted-foreground">
           Le téléchargement sera disponible dès que le paiement sera approuvé.
