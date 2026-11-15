@@ -48,7 +48,7 @@ export function ResourceDetailHeader({ resource }: ResourceDetailHeaderProps) {
             <Share2 size={14} /> Partager
           </button>
         </div>
-        <div className={`grid items-start gap-8 lg:gap-10 ${contentColumns}`}>
+        <div className={`grid items-start gap-y-8 gap-x-4 lg:gap-x-5 ${contentColumns}`}>
           <div>
             <div className="flex flex-wrap items-center gap-3">
               <span className="rounded-full border border-secondary-foreground/15 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-accent">
