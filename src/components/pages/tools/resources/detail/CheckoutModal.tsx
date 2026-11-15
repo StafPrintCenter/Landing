@@ -116,10 +116,10 @@ export function ResourceCheckoutModal({ resource, isOpen, onClose }: ResourceChe
         )}
 
         <div className="mt-6 flex justify-end gap-3 border-t border-border pt-4">
-          <button type="button" onClick={handleClose} disabled={isSubmitting} className="rounded-full border border-border px-5 py-2.5 text-sm font-semibold hover:bg-muted disabled:opacity-50">
+          <button type="button" onClick={handleClose} disabled={isSubmitting} className="rounded-full border border-border px-5 py-2.5 text-sm font-semibold hover:bg-muted disabled:opacity-50 cursor-pointer">
             Annuler
           </button>
-          <button type="submit" disabled={isSubmitting} className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground disabled:cursor-wait disabled:opacity-60">
+          <button type="submit" disabled={isSubmitting} className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground disabled:cursor-wait disabled:opacity-60 cursor-pointer">
             {isSubmitting ? <LoaderCircle size={16} className="animate-spin" /> : <ArrowRight size={16} />}
             {isSubmitting ? "Préparation…" : "Continuer vers le paiement"}
           </button>
