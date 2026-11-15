@@ -1,37 +1,28 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { toast } from "sonner";
-import { ArrowLeft, BadgeCheck, Download, Eye, FileCheck2, Layers3, LoaderCircle, MessageCircle, MonitorCheck, Share2, ShieldCheck, ShoppingBag, Sparkles } from "lucide-react";
+import { ArrowLeft, BadgeCheck, CreditCard, Download, Eye, FileCheck2, Layers3, MessageCircle, MonitorCheck, Share2, ShieldCheck, Sparkles } from "lucide-react";
 import { formatResourcePrice, getResourceIcon, type APIResource } from "@/data/resources";
 import { ShareModal } from "@/components/modal";
 import { buildShareUrl } from "@/lib/share/build-share-url";
-import { fetchResourceDownload } from "@/stores/useResourcesStore";
+import { getResourceCheckoutStorageKey } from "@/stores/useResourcesStore";
+import { ResourceCheckoutModal } from "./CheckoutModal";
+import { ResourceDownloadAction } from "./DownloadAction";
+import { VerifyPaymentModal } from "./VerifyPaymentModal";
 
 interface ResourceDetailHeaderProps {
   resource: APIResource;
-  whatsappUrl: string;
 }
 
-export function ResourceDetailHeader({ resource, whatsappUrl }: ResourceDetailHeaderProps) {
+export function ResourceDetailHeader({ resource }: ResourceDetailHeaderProps) {
   const [isShareOpen, setIsShareOpen] = useState(false);
-  const [isDownloading, setIsDownloading] = useState(false);
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [isVerifyOpen, setIsVerifyOpen] = useState(false);
+  const [verifiedTransactionId, setVerifiedTransactionId] = useState<string | undefined>();
   const Icon = getResourceIcon(resource);
   const isFree = resource.price === 0;
   const discount = resource.discountPercentage > 0 ? resource.discountPercentage : null;
   const originalPrice = discount !== null && resource.originalPrice !== null ? formatResourcePrice(resource.originalPrice) : null;
   const shareUrl = buildShareUrl(`/tools/ressources/${resource.slug}`);
-
-  const handleDownload = async () => {
-    setIsDownloading(true);
-    try {
-      const download = await fetchResourceDownload(resource.slug);
-      window.location.assign(download.url);
-    } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Impossible de télécharger cette ressource.");
-    } finally {
-      setIsDownloading(false);
-    }
-  };
 
   return (
     <section className="relative overflow-hidden border-b border-border bg-secondary text-secondary-foreground">
@@ -89,28 +80,31 @@ export function ResourceDetailHeader({ resource, whatsappUrl }: ResourceDetailHe
               )}
             </div>
             <p className="mt-3 text-sm leading-relaxed text-secondary-foreground/60">
-              {isFree ? "Téléchargez directement le fichier ou demandez-le sur WhatsApp." : "Commande et remise du fichier confirmées directement sur WhatsApp."}
+              {isFree
+                ? "Préparez un lien sécurisé pour télécharger le fichier."
+                : "Le paiement est sécurisé par FedaPay. Le lien de téléchargement sera disponible après vérification."}
             </p>
             {isFree ? (
-              <button
-                type="button"
-                onClick={() => void handleDownload()}
-                disabled={isDownloading}
-                className="mt-6 inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-accent px-5 py-3.5 text-sm font-bold text-accent-foreground transition hover:-translate-y-0.5 hover:opacity-90 disabled:cursor-wait disabled:opacity-70"
-              >
-                {isDownloading ? <LoaderCircle size={18} className="animate-spin" /> : <Download size={18} />}
-                {isDownloading ? "Préparation du téléchargement…" : "Télécharger la ressource"}
-              </button>
+              <ResourceDownloadAction slug={resource.slug} />
+            ) : verifiedTransactionId ? (
+              <ResourceDownloadAction key={verifiedTransactionId} slug={resource.slug} transactionId={verifiedTransactionId} />
             ) : (
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-6 inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-accent px-5 py-3.5 text-sm font-bold text-accent-foreground transition hover:-translate-y-0.5 hover:opacity-90"
-              >
-                <ShoppingBag size={18} />
-                Commander sur WhatsApp
-              </a>
+              <div className="mt-6">
+                <button
+                  type="button"
+                  onClick={() => setIsCheckoutOpen(true)}
+                  className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-accent px-5 py-3.5 text-sm font-bold text-accent-foreground transition hover:-translate-y-0.5 hover:opacity-90"
+                >
+                  <CreditCard size={18} /> Payer avec FedaPay
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsVerifyOpen(true)}
+                  className="mt-3 w-full cursor-pointer text-center text-xs text-secondary-foreground/60 underline-offset-4 transition hover:text-accent hover:underline"
+                >
+                  J'ai déjà payé
+                </button>
+              </div>
             )}
             <div className="mt-5 space-y-3 border-t border-secondary-foreground/15 pt-5 text-xs text-secondary-foreground/65">
               <p className="flex items-center gap-2"><MessageCircle size={14} className="text-accent" />Réponse de l'équipe STAF PRINT CENTER</p>
@@ -129,6 +123,23 @@ export function ResourceDetailHeader({ resource, whatsappUrl }: ResourceDetailHe
         text={resource.short}
         shortlinkCategory="other"
       />
+      {!isFree && (
+        <>
+          <ResourceCheckoutModal
+            resource={resource}
+            isOpen={isCheckoutOpen}
+            onClose={() => setIsCheckoutOpen(false)}
+          />
+          <VerifyPaymentModal
+            isOpen={isVerifyOpen}
+            onClose={() => setIsVerifyOpen(false)}
+            onApproved={(transactionId) => {
+              window.localStorage.setItem(getResourceCheckoutStorageKey(resource.slug), transactionId);
+              setVerifiedTransactionId(transactionId);
+            }}
+          />
+        </>
+      )}
     </section>
   );
 }
