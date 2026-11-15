@@ -130,17 +130,15 @@ export function PaymentLook({ resource, callbackId, callbackStatus, transactionP
                   src={resource.cover}
                   alt=""
                   aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover opacity-80"
+                  className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover"
                 />
                 <div className="pointer-events-none absolute inset-0 -z-10 bg-secondary/75" />
               </>
             )}
             <div className="flex items-start gap-4">
-              {!resource.cover && (
-                <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-foreground">
-                  <Icon size={24} />
-                </span>
-              )}
+              <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-foreground">
+                <Icon size={24} />
+              </span>
               <div>
                 <p className="text-sm font-semibold uppercase tracking-wider text-accent">Votre ressource</p>
                 <h1 className="mt-1 font-display text-2xl font-bold md:text-3xl">{resource.title}</h1>

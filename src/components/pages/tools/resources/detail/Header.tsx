@@ -32,7 +32,7 @@ export function ResourceDetailHeader({ resource }: ResourceDetailHeaderProps) {
           src={resource.cover}
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-60"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
         />
       )}
       <div className="pointer-events-none absolute inset-0 bg-secondary/75" />
@@ -65,11 +65,9 @@ export function ResourceDetailHeader({ resource }: ResourceDetailHeaderProps) {
                 {isFree ? "Ressource gratuite" : "Ressource premium"}
               </span>
             </div>
-            {!resource.cover && (
-              <div className="mt-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-accent text-accent-foreground shadow-xl">
-                <Icon size={30} />
-              </div>
-            )}
+            <div className="mt-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-accent text-accent-foreground shadow-xl">
+              <Icon size={30} />
+            </div>
             <h1 className="mt-6 max-w-3xl font-display text-4xl font-bold leading-tight md:text-5xl">{resource.title}</h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-secondary-foreground/75">{resource.description ?? resource.short}</p>
             <div className="mt-7 flex flex-wrap gap-x-6 gap-y-3 text-sm text-secondary-foreground/65">
