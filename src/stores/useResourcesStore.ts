@@ -32,10 +32,72 @@ export interface ResourceDownload {
   url: string;
   expires_in: number;
   file_name: string;
+  remaining_downloads?: number;
 }
 
-export async function fetchResourceDownload(slug: string): Promise<ResourceDownload> {
-  const url = resolveApiUrl(`/api/public/resources/${encodeURIComponent(slug)}/download`);
+export interface ResourceCheckout {
+  id: string;
+  status: string;
+  amount: number;
+  currency: string;
+  description: string;
+  payableType: string;
+  payableId: string;
+  paymentUrl: string;
+  paidAt: string | null;
+  createdAt: string;
+}
+
+export type ResourcePayment = Omit<ResourceCheckout, "paymentUrl">;
+
+export interface ResourceCheckoutDetails {
+  email: string;
+  firstName?: string;
+  lastName?: string;
+}
+
+export function getResourceCheckoutStorageKey(slug: string) {
+  return `spc:resource-checkout:${slug}`;
+}
+
+export async function createResourceCheckout(
+  slug: string,
+  details: ResourceCheckoutDetails,
+): Promise<ResourceCheckout> {
+  const formData = new FormData();
+  formData.append("email", details.email);
+  if (details.firstName?.trim()) formData.append("firstName", details.firstName.trim());
+  if (details.lastName?.trim()) formData.append("lastName", details.lastName.trim());
+
+  const url = resolveApiUrl(`/api/public/resources/${encodeURIComponent(slug)}/checkout`);
+  const response = await fetch(url, { method: "POST", body: formData });
+
+  if (!response.ok) {
+    throw await parseApiError(response, "Impossible de démarrer le paiement.");
+  }
+
+  const result: { data: ResourceCheckout } = await response.json();
+  return result.data;
+}
+
+export async function fetchResourcePayment(transactionId: string): Promise<ResourcePayment> {
+  const url = resolveApiUrl(`/api/public/payments/${encodeURIComponent(transactionId)}`);
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw await parseApiError(response, "Impossible de vérifier cette transaction.");
+  }
+
+  const result: { data: ResourcePayment } = await response.json();
+  return result.data;
+}
+
+export async function fetchResourceDownload(
+  slug: string,
+  transactionId?: string,
+): Promise<ResourceDownload> {
+  const query = transactionId ? `?transaction=${encodeURIComponent(transactionId)}` : "";
+  const url = resolveApiUrl(`/api/public/resources/${encodeURIComponent(slug)}/download${query}`);
   const response = await fetch(url);
 
   if (!response.ok) {
