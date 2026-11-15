@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
-import { AlertCircle, BadgeCheck, FileText, LoaderCircle, Search } from "lucide-react";
+import { AlertCircle, FileText } from "lucide-react";
 import { SiteShell } from "@/components/site/SiteShell";
-import { getResourceIcon, type APIResource } from "@/data/resources";
+import type { APIResource } from "@/data/resources";
 import { fetchResourcePayment, fetchResourceForPayment, type ResourcePayment } from "@/stores/useResourcesStore";
-import { InvoiceDownloadButton } from "./InvoiceDownloadButton";
+import { InvoiceLookupForm } from "./InvoiceLookupForm";
+import { InvoicePaymentDetails } from "./InvoicePaymentDetails";
 
 export function InvoiceLookup({ initialId = "" }: { initialId?: string }) {
   const [transactionId, setTransactionId] = useState(initialId);
@@ -63,8 +64,15 @@ export function InvoiceLookup({ initialId = "" }: { initialId?: string }) {
     void verifyPayment(transactionId);
   };
 
-  const isApproved = payment?.status.toLowerCase() === "approved";
-  const ResourceIcon = resource ? getResourceIcon(resource) : null;
+  const handleNewSearch = () => {
+    verificationRequestRef.current += 1;
+    setTransactionId("");
+    setPayment(null);
+    setResource(null);
+    setIsVerifying(false);
+    setVerificationError(null);
+    setResourceError(null);
+  };
 
   return (
     <SiteShell>
@@ -81,39 +89,18 @@ export function InvoiceLookup({ initialId = "" }: { initialId?: string }) {
             </p>
           </div>
 
-          <form
-            onSubmit={handleSubmit}
-            className="mt-8 space-y-4 rounded-2xl border border-border bg-card p-6 shadow-sm md:p-8"
-          >
-            <label htmlFor="invoice-transaction-id" className="block text-sm font-medium">
-              Identifiant de transaction SPC
-            </label>
-            <input
-              id="invoice-transaction-id"
-              type="text"
-              required
-              autoComplete="off"
-              disabled={isVerifying}
-              value={transactionId}
-              onChange={(event) => {
-                setTransactionId(event.target.value);
-                setPayment(null);
-                setResource(null);
+          {!payment && (
+            <InvoiceLookupForm
+              transactionId={transactionId}
+              isVerifying={isVerifying}
+              onTransactionIdChange={(value) => {
+                setTransactionId(value);
                 setVerificationError(null);
                 setResourceError(null);
               }}
-              placeholder="Ex. xxxxxxxx-xxxx-4xxx-xxxx-xxxxxxxxxxxx"
-              className="input w-full font-mono"
+              onSubmit={handleSubmit}
             />
-            <button
-              type="submit"
-              disabled={!transactionId.trim() || isVerifying}
-              className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground disabled:cursor-wait disabled:opacity-60"
-            >
-              {isVerifying ? <LoaderCircle size={16} className="animate-spin" /> : <Search size={16} />}
-              {isVerifying ? "Vérification…" : "Vérifier la transaction"}
-            </button>
-          </form>
+          )}
 
           {verificationError && (
             <div role="alert" className="mt-5 flex items-start gap-2 rounded-xl border border-destructive/20 bg-destructive/5 p-4 text-sm text-destructive">
@@ -123,79 +110,13 @@ export function InvoiceLookup({ initialId = "" }: { initialId?: string }) {
           )}
 
           {payment && (
-            <div className="mt-6 rounded-2xl border border-border bg-card p-6 shadow-sm md:p-8">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <h2 className="font-display text-xl font-bold">Détails du paiement</h2>
-                <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${isApproved ? "bg-leaf/15 text-leaf" : "bg-amber-500/10 text-amber-600"}`}>
-                  <BadgeCheck size={14} /> {payment.status}
-                </span>
-              </div>
-              <dl className="mt-5 grid gap-4 text-sm sm:grid-cols-2">
-                <div>
-                  <dt className="text-muted-foreground">Montant</dt>
-                  <dd className="mt-1 font-semibold">{payment.amount.toLocaleString("fr-FR")} {payment.currency}</dd>
-                </div>
-                <div>
-                  <dt className="text-muted-foreground">Type</dt>
-                  <dd className="mt-1 font-semibold">{payment.payableType}</dd>
-                </div>
-                <div className="sm:col-span-2">
-                  <dt className="text-muted-foreground">Description</dt>
-                  <dd className="mt-1">{payment.description}</dd>
-                </div>
-                <div className="sm:col-span-2">
-                  <dt className="text-muted-foreground">Identifiant de transaction SPC</dt>
-                  <dd className="mt-1 break-all font-mono text-xs">{payment.id}</dd>
-                </div>
-                {payment.paidAt && (
-                  <div className="sm:col-span-2">
-                    <dt className="text-muted-foreground">Payé le</dt>
-                    <dd className="mt-1">{new Date(payment.paidAt).toLocaleString("fr-FR")}</dd>
-                  </div>
-                )}
-              </dl>
-
-              {payment.payableType.toLowerCase() === "resource" && (
-                <div className="mt-6 border-t border-border pt-5">
-                  <h3 className="font-display text-lg font-semibold">Ressource achetée</h3>
-                  {resource ? (
-                    <div className="mt-3 flex items-start gap-4">
-                      {resource.cover ? (
-                        <img src={resource.cover} alt="" className="h-20 w-28 shrink-0 rounded-lg object-cover" />
-                      ) : (
-                        <div className="flex h-20 w-28 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground">
-                          {ResourceIcon && <ResourceIcon size={28} />}
-                        </div>
-                      )}
-                      <div>
-                        <p className="font-semibold">{resource.title}</p>
-                        <p className="mt-1 text-sm text-muted-foreground">{resource.category} · {resource.format}</p>
-                        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{resource.short}</p>
-                      </div>
-                    </div>
-                  ) : resourceError ? (
-                    <p role="status" className="mt-2 text-sm text-muted-foreground">{resourceError}</p>
-                  ) : (
-                    <p className="mt-2 inline-flex items-center gap-2 text-sm text-muted-foreground">
-                      <LoaderCircle size={15} className="animate-spin" /> Chargement de la ressource…
-                    </p>
-                  )}
-                </div>
-              )}
-
-              {isApproved ? (
-                <div className="mt-6 border-t border-border pt-5">
-                  <p className="mb-3 text-sm text-muted-foreground">
-                    Facture disponible en ligne pendant 7 jours après le paiement.
-                  </p>
-                  <InvoiceDownloadButton transactionId={payment.id} />
-                </div>
-              ) : (
-                <p className="mt-6 border-t border-border pt-5 text-sm text-muted-foreground">
-                  La facture sera disponible une fois le paiement approuvé.
-                </p>
-              )}
-            </div>
+            <InvoicePaymentDetails
+              payment={payment}
+              resource={resource}
+              resourceError={resourceError}
+              isLoadingResource={isVerifying && payment.payableType.toLowerCase() === "resource" && !resourceError}
+              onNewSearch={handleNewSearch}
+            />
           )}
         </div>
       </section>
