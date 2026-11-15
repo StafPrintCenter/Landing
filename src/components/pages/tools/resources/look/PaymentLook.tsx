@@ -130,7 +130,7 @@ export function PaymentLook({ resource, callbackId, callbackStatus, transactionP
                   src={resource.cover}
                   alt=""
                   aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover opacity-25"
+                  className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover opacity-80"
                 />
                 <div className="pointer-events-none absolute inset-0 -z-10 bg-secondary/75" />
               </>
