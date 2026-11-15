@@ -19,6 +19,7 @@ import { Route as ToolsIndexRouteImport } from './routes/tools/index'
 import { Route as TestsIndexRouteImport } from './routes/tests/index'
 import { Route as ServicesIndexRouteImport } from './routes/services/index'
 import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
+import { Route as InvoiceIndexRouteImport } from './routes/invoice/index'
 import { Route as FaqsIndexRouteImport } from './routes/faqs/index'
 import { Route as ArticlesIndexRouteImport } from './routes/articles/index'
 import { Route as VerifyCertificateNumberRouteImport } from './routes/verify-certificate/$number'
@@ -34,6 +35,7 @@ import { Route as ReviewsTokenRouteImport } from './routes/reviews/$token'
 import { Route as LegalPrivacyRouteImport } from './routes/legal/privacy'
 import { Route as LegalMentionsRouteImport } from './routes/legal/mentions'
 import { Route as LegalCgvRouteImport } from './routes/legal/cgv'
+import { Route as InvoiceIdRouteImport } from './routes/invoice/$id'
 import { Route as CareersCheckOfferRouteImport } from './routes/careers/check-offer'
 import { Route as ArticlesSlugRouteImport } from './routes/articles/$slug'
 import { Route as ToolsRessourcesIndexRouteImport } from './routes/tools/ressources/index'
@@ -96,6 +98,11 @@ const ServicesIndexRoute = ServicesIndexRouteImport.update({
 const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
   id: '/projects/',
   path: '/projects/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InvoiceIndexRoute = InvoiceIndexRouteImport.update({
+  id: '/invoice/',
+  path: '/invoice/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqsIndexRoute = FaqsIndexRouteImport.update({
@@ -171,6 +178,11 @@ const LegalMentionsRoute = LegalMentionsRouteImport.update({
 const LegalCgvRoute = LegalCgvRouteImport.update({
   id: '/legal/cgv',
   path: '/legal/cgv',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InvoiceIdRoute = InvoiceIdRouteImport.update({
+  id: '/invoice/$id',
+  path: '/invoice/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CareersCheckOfferRoute = CareersCheckOfferRouteImport.update({
@@ -249,6 +261,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/articles/$slug': typeof ArticlesSlugRoute
   '/careers/check-offer': typeof CareersCheckOfferRoute
+  '/invoice/$id': typeof InvoiceIdRoute
   '/legal/cgv': typeof LegalCgvRoute
   '/legal/mentions': typeof LegalMentionsRoute
   '/legal/privacy': typeof LegalPrivacyRoute
@@ -264,6 +277,7 @@ export interface FileRoutesByFullPath {
   '/verify-certificate/$number': typeof VerifyCertificateNumberRoute
   '/articles/': typeof ArticlesIndexRoute
   '/faqs/': typeof FaqsIndexRoute
+  '/invoice/': typeof InvoiceIndexRoute
   '/projects/': typeof ProjectsIndexRoute
   '/services/': typeof ServicesIndexRoute
   '/tests/': typeof TestsIndexRoute
@@ -289,6 +303,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/articles/$slug': typeof ArticlesSlugRoute
   '/careers/check-offer': typeof CareersCheckOfferRoute
+  '/invoice/$id': typeof InvoiceIdRoute
   '/legal/cgv': typeof LegalCgvRoute
   '/legal/mentions': typeof LegalMentionsRoute
   '/legal/privacy': typeof LegalPrivacyRoute
@@ -304,6 +319,7 @@ export interface FileRoutesByTo {
   '/verify-certificate/$number': typeof VerifyCertificateNumberRoute
   '/articles': typeof ArticlesIndexRoute
   '/faqs': typeof FaqsIndexRoute
+  '/invoice': typeof InvoiceIndexRoute
   '/projects': typeof ProjectsIndexRoute
   '/services': typeof ServicesIndexRoute
   '/tests': typeof TestsIndexRoute
@@ -330,6 +346,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/articles/$slug': typeof ArticlesSlugRoute
   '/careers/check-offer': typeof CareersCheckOfferRoute
+  '/invoice/$id': typeof InvoiceIdRoute
   '/legal/cgv': typeof LegalCgvRoute
   '/legal/mentions': typeof LegalMentionsRoute
   '/legal/privacy': typeof LegalPrivacyRoute
@@ -345,6 +362,7 @@ export interface FileRoutesById {
   '/verify-certificate/$number': typeof VerifyCertificateNumberRoute
   '/articles/': typeof ArticlesIndexRoute
   '/faqs/': typeof FaqsIndexRoute
+  '/invoice/': typeof InvoiceIndexRoute
   '/projects/': typeof ProjectsIndexRoute
   '/services/': typeof ServicesIndexRoute
   '/tests/': typeof TestsIndexRoute
@@ -372,6 +390,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/articles/$slug'
     | '/careers/check-offer'
+    | '/invoice/$id'
     | '/legal/cgv'
     | '/legal/mentions'
     | '/legal/privacy'
@@ -387,6 +406,7 @@ export interface FileRouteTypes {
     | '/verify-certificate/$number'
     | '/articles/'
     | '/faqs/'
+    | '/invoice/'
     | '/projects/'
     | '/services/'
     | '/tests/'
@@ -412,6 +432,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/articles/$slug'
     | '/careers/check-offer'
+    | '/invoice/$id'
     | '/legal/cgv'
     | '/legal/mentions'
     | '/legal/privacy'
@@ -427,6 +448,7 @@ export interface FileRouteTypes {
     | '/verify-certificate/$number'
     | '/articles'
     | '/faqs'
+    | '/invoice'
     | '/projects'
     | '/services'
     | '/tests'
@@ -452,6 +474,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/articles/$slug'
     | '/careers/check-offer'
+    | '/invoice/$id'
     | '/legal/cgv'
     | '/legal/mentions'
     | '/legal/privacy'
@@ -467,6 +490,7 @@ export interface FileRouteTypes {
     | '/verify-certificate/$number'
     | '/articles/'
     | '/faqs/'
+    | '/invoice/'
     | '/projects/'
     | '/services/'
     | '/tests/'
@@ -493,6 +517,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ArticlesSlugRoute: typeof ArticlesSlugRoute
   CareersCheckOfferRoute: typeof CareersCheckOfferRoute
+  InvoiceIdRoute: typeof InvoiceIdRoute
   LegalCgvRoute: typeof LegalCgvRoute
   LegalMentionsRoute: typeof LegalMentionsRoute
   LegalPrivacyRoute: typeof LegalPrivacyRoute
@@ -508,6 +533,7 @@ export interface RootRouteChildren {
   VerifyCertificateNumberRoute: typeof VerifyCertificateNumberRoute
   ArticlesIndexRoute: typeof ArticlesIndexRoute
   FaqsIndexRoute: typeof FaqsIndexRoute
+  InvoiceIndexRoute: typeof InvoiceIndexRoute
   ProjectsIndexRoute: typeof ProjectsIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
   TestsIndexRoute: typeof TestsIndexRoute
@@ -597,6 +623,13 @@ declare module '@tanstack/react-router' {
       path: '/projects'
       fullPath: '/projects/'
       preLoaderRoute: typeof ProjectsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/invoice/': {
+      id: '/invoice/'
+      path: '/invoice'
+      fullPath: '/invoice/'
+      preLoaderRoute: typeof InvoiceIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faqs/': {
@@ -704,6 +737,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LegalCgvRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/invoice/$id': {
+      id: '/invoice/$id'
+      path: '/invoice/$id'
+      fullPath: '/invoice/$id'
+      preLoaderRoute: typeof InvoiceIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/careers/check-offer': {
       id: '/careers/check-offer'
       path: '/careers/check-offer'
@@ -805,6 +845,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ArticlesSlugRoute: ArticlesSlugRoute,
   CareersCheckOfferRoute: CareersCheckOfferRoute,
+  InvoiceIdRoute: InvoiceIdRoute,
   LegalCgvRoute: LegalCgvRoute,
   LegalMentionsRoute: LegalMentionsRoute,
   LegalPrivacyRoute: LegalPrivacyRoute,
@@ -820,6 +861,7 @@ const rootRouteChildren: RootRouteChildren = {
   VerifyCertificateNumberRoute: VerifyCertificateNumberRoute,
   ArticlesIndexRoute: ArticlesIndexRoute,
   FaqsIndexRoute: FaqsIndexRoute,
+  InvoiceIndexRoute: InvoiceIndexRoute,
   ProjectsIndexRoute: ProjectsIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,
   TestsIndexRoute: TestsIndexRoute,
