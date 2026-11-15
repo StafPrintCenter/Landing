@@ -10,6 +10,7 @@ export type APIResource = {
   price: number;
   originalPrice: number | null;
   discountPercentage: number;
+  cover?: string | null;
   status: string;
   short: string;
   format: string;

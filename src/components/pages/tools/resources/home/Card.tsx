@@ -10,9 +10,19 @@ export function ResourceHomeCard({ resource }: { resource: APIResource }) {
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl">
       <div className="relative flex h-36 items-center justify-center overflow-hidden bg-secondary text-secondary-foreground">
-        <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-accent/20 blur-2xl" />
-        <div className="absolute bottom-0 left-0 h-32 w-32 rounded-full bg-primary/20 blur-2xl" />
-        <Icon size={52} strokeWidth={1.25} className="relative text-accent transition duration-300 group-hover:scale-110" />
+        {resource.cover ? (
+          <img
+            src={resource.cover}
+            alt={`Couverture de ${resource.title}`}
+            className="absolute inset-0 h-full w-full object-cover transition duration-300 group-hover:scale-105"
+          />
+        ) : (
+          <>
+            <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-accent/20 blur-2xl" />
+            <div className="absolute bottom-0 left-0 h-32 w-32 rounded-full bg-primary/20 blur-2xl" />
+            <Icon size={52} strokeWidth={1.25} className="relative text-accent transition duration-300 group-hover:scale-110" />
+          </>
+        )}
         <span className={`absolute right-4 top-4 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold ${isFree ? "bg-leaf text-cream" : "bg-accent text-accent-foreground"}`}>
           {isFree ? <Download size={12} /> : <Sparkles size={12} />}
           {formatResourcePrice(resource.price)}
