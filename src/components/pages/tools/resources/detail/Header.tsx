@@ -27,6 +27,15 @@ export function ResourceDetailHeader({ resource }: ResourceDetailHeaderProps) {
 
   return (
     <section className="relative overflow-hidden border-b border-border bg-secondary text-secondary-foreground">
+      {resource.cover && (
+        <img
+          src={resource.cover}
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-80"
+        />
+      )}
+      <div className="pointer-events-none absolute inset-0 bg-secondary/75" />
       <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-primary/20 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-32 left-1/3 h-72 w-72 rounded-full bg-accent/10 blur-3xl" />
       <div className="container-x relative py-10">
@@ -47,13 +56,6 @@ export function ResourceDetailHeader({ resource }: ResourceDetailHeaderProps) {
         </div>
         <div className="grid items-center gap-10 lg:grid-cols-[1fr_360px] lg:gap-16">
           <div>
-            {resource.cover && (
-              <img
-                src={resource.cover}
-                alt={`Couverture de ${resource.title}`}
-                className="mb-7 aspect-video w-full max-w-2xl rounded-2xl border border-secondary-foreground/10 object-cover shadow-xl"
-              />
-            )}
             <div className="flex flex-wrap items-center gap-3">
               <span className="rounded-full border border-secondary-foreground/15 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-accent">
                 {resource.category}
