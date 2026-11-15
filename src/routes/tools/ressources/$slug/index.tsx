@@ -49,24 +49,10 @@ export const Route = createFileRoute("/tools/ressources/$slug/")({
 
 function ResourceDetailPage() {
   const { resource } = Route.useLoaderData();
-  const isFree = resource.price === 0;
-  const discount = resource.discountPercentage || 0;
-  const price = new Intl.NumberFormat("fr-FR").format(resource.price);
-  const originalPrice = resource.originalPrice
-    ? new Intl.NumberFormat("fr-FR").format(resource.originalPrice)
-    : null;
-  const whatsappUrl = `${SITE.whatsappLink}?text=${encodeURIComponent(
-    isFree
-      ? `Bonjour STAF PRINT CENTER, je souhaite recevoir gratuitement la ressource « ${resource.title} » (${resource.format}).`
-      : `Bonjour STAF PRINT CENTER, je souhaite commander la ressource « ${resource.title} » au prix ${originalPrice
-        ? `promotionnel de ${price} FCFA au lieu de ${originalPrice} FCFA (-${discount}%)`
-        : `de ${price} FCFA`
-      }. Pouvez-vous m'indiquer la marche à suivre ?`,
-  )}`;
 
   return (
     <SiteShell>
-      <ResourceDetailHeader resource={resource} whatsappUrl={whatsappUrl} />
+      <ResourceDetailHeader resource={resource} />
       <ResourceDetailSections resource={resource} />
       <ResourceDetailRelated resource={resource} />
     </SiteShell>
