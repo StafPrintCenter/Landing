@@ -98,9 +98,9 @@ export function ResourceDownloadAction({ slug, transactionId }: ResourceDownload
               <Download size={16} /> Télécharger maintenant
             </a>
           ) : (
-            <span className="inline-flex cursor-not-allowed items-center gap-2 text-sm font-semibold text-muted-foreground" aria-disabled="true">
+            <button type="button" disabled className="inline-flex cursor-not-allowed items-center gap-2 text-sm font-semibold text-muted-foreground">
               <Download size={16} /> Téléchargement lancé
-            </span>
+            </button>
           )}
           <span className="mt-1 text-xs text-muted-foreground">
             Lien valable encore {Math.floor(secondsLeft / 60)}:{String(secondsLeft % 60).padStart(2, "0")}

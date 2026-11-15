@@ -5,7 +5,7 @@ export const RESOURCE_CATEGORIES = ["Tout", ...RESOURCE_CATEGORY_VALUES] as cons
 export type ResourceCategoryFilter = (typeof RESOURCE_CATEGORIES)[number];
 export const RESOURCE_PRICE_FILTERS = ["all", "free", "paid"] as const;
 export type ResourcePriceFilter = (typeof RESOURCE_PRICE_FILTERS)[number];
-export const RESOURCE_SORT_OPTIONS = ["default", "alpha", "downloads", "views"] as const;
+export const RESOURCE_SORT_OPTIONS = ["default", "alpha", "price", "downloads", "views"] as const;
 export type ResourceSortOption = (typeof RESOURCE_SORT_OPTIONS)[number];
 export const RESOURCE_SORT_DIRECTIONS = ["asc", "desc"] as const;
 export type ResourceSortDirection = (typeof RESOURCE_SORT_DIRECTIONS)[number];
@@ -19,6 +19,7 @@ const PRICE_FILTER_LABELS: Record<ResourcePriceFilter, string> = {
 const SORT_LABELS: Record<ResourceSortOption, string> = {
   default: "Par défaut",
   alpha: "Ordre alphabétique",
+  price: "Prix",
   downloads: "Téléchargements",
   views: "Nombre de vues",
 };
@@ -56,11 +57,10 @@ export function ResourceHomeFilters({
               type="button"
               aria-pressed={category === item}
               onClick={() => onCategoryChange(item)}
-              className={`cursor-pointer rounded-full border px-4 py-2 text-sm font-medium transition ${
-                category === item
-                  ? "border-primary bg-primary text-primary-foreground shadow-sm"
-                  : "border-border bg-card hover:border-primary"
-              }`}
+              className={`cursor-pointer rounded-full border px-4 py-2 text-sm font-medium transition ${category === item
+                ? "border-primary bg-primary text-primary-foreground shadow-sm"
+                : "border-border bg-card hover:border-primary"
+                }`}
             >
               {item}
             </button>
@@ -74,9 +74,8 @@ export function ResourceHomeFilters({
                 type="button"
                 aria-pressed={priceFilter === item}
                 onClick={() => onPriceFilterChange(item)}
-                className={`cursor-pointer rounded-full px-3 py-1.5 text-xs font-semibold transition ${
-                  priceFilter === item ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
-                }`}
+                className={`cursor-pointer rounded-full px-3 py-1.5 text-xs font-semibold transition ${priceFilter === item ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
+                  }`}
               >
                 {PRICE_FILTER_LABELS[item]}
               </button>
@@ -101,11 +100,10 @@ export function ResourceHomeFilters({
             disabled={!isSortable}
             title={isSortable ? `Inverser : ${SORT_LABELS[sortBy]}` : "Choisissez un critère de tri"}
             aria-label="Inverser l'ordre de tri"
-            className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border transition ${
-              isSortable
-                ? "cursor-pointer border-border bg-card text-foreground hover:border-primary hover:text-primary"
-                : "cursor-not-allowed border-border/50 bg-muted text-muted-foreground/40"
-            }`}
+            className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border transition ${isSortable
+              ? "cursor-pointer border-border bg-card text-foreground hover:border-primary hover:text-primary"
+              : "cursor-not-allowed border-border/50 bg-muted text-muted-foreground/40"
+              }`}
           >
             {sortDir === "asc" ? <ArrowDownUp size={16} /> : <ArrowUpDown size={16} />}
           </button>
