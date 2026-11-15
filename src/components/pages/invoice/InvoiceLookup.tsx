@@ -42,7 +42,7 @@ export function InvoiceLookup({ initialId = "" }: { initialId?: string }) {
               placeholder="Ex. xxxxxxxx-xxxx-4xxx-xxxx-xxxxxxxxxxxx"
               className="input w-full font-mono"
             />
-            <InvoiceDownloadButton transactionId={transactionId} />
+            <InvoiceDownloadButton transactionId={transactionId} type="submit" />
           </form>
         </div>
       </section>
