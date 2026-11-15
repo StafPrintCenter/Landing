@@ -2,7 +2,12 @@ import { useState } from "react";
 import { Download, LoaderCircle } from "lucide-react";
 import { fetchPaymentInvoice } from "@/stores/usePaymentsStore";
 
-export function InvoiceDownloadButton({ transactionId }: { transactionId: string }) {
+interface InvoiceDownloadButtonProps {
+  transactionId: string;
+  type?: "button" | "submit";
+}
+
+export function InvoiceDownloadButton({ transactionId, type = "button" }: InvoiceDownloadButtonProps) {
   const [isDownloading, setIsDownloading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -32,7 +37,7 @@ export function InvoiceDownloadButton({ transactionId }: { transactionId: string
   return (
     <div>
       <button
-        type="button"
+        type={type}
         onClick={() => void handleDownload()}
         disabled={!transactionId.trim() || isDownloading}
         className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm font-semibold transition hover:bg-muted disabled:cursor-wait disabled:opacity-60"
