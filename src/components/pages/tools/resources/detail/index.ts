@@ -4,3 +4,6 @@ export { ResourceDetailRelated } from "./Related";
 export { ResourceDetailSkeleton } from "./Skeleton";
 export { ResourceDetailNotFound } from "./NotFound";
 export { ResourceDetailError } from "./Error";
+export { ResourceCheckoutModal } from "./CheckoutModal";
+export { VerifyPaymentModal } from "./VerifyPaymentModal";
+export { ResourceDownloadAction } from "./DownloadAction";
