@@ -123,19 +123,24 @@ export function PaymentLook({ resource, callbackId, callbackStatus, transactionP
         </Link>
 
         <div className="mx-auto mt-8 max-w-2xl overflow-hidden rounded-3xl border border-border bg-card shadow-sm">
-          <div className="bg-secondary px-6 py-8 text-secondary-foreground md:px-8">
+          <div className="relative isolate overflow-hidden bg-secondary px-6 py-8 text-secondary-foreground md:px-8">
+            {resource.cover && (
+              <>
+                <img
+                  src={resource.cover}
+                  alt=""
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover opacity-25"
+                />
+                <div className="pointer-events-none absolute inset-0 -z-10 bg-secondary/75" />
+              </>
+            )}
             <div className="flex items-start gap-4">
-              <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-foreground">
-                {resource.cover ? (
-                  <img
-                    src={resource.cover}
-                    alt={`Couverture de ${resource.title}`}
-                    className="h-full w-full rounded-xl object-cover"
-                  />
-                ) : (
+              {!resource.cover && (
+                <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-foreground">
                   <Icon size={24} />
-                )}
-              </span>
+                </span>
+              )}
               <div>
                 <p className="text-sm font-semibold uppercase tracking-wider text-accent">Votre ressource</p>
                 <h1 className="mt-1 font-display text-2xl font-bold md:text-3xl">{resource.title}</h1>
