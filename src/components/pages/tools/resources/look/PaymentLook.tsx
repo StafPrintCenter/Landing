@@ -110,7 +110,7 @@ export function PaymentLook({ resource, callbackId, callbackStatus, transactionP
           <div className="grid md:grid-cols-2">
             <div className="bg-secondary text-secondary-foreground">
               {resource.cover ? (
-                <div className="aspect-video overflow-hidden md:aspect-[4/3]">
+                <div className="aspect-video overflow-hidden">
                   <img
                     src={resource.cover}
                     alt={resource.title}
