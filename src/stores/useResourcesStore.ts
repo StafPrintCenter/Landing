@@ -56,8 +56,79 @@ export interface ResourceCheckoutDetails {
   lastName?: string;
 }
 
-export function getResourceCheckoutStorageKey(slug: string) {
-  return `spc:resource-checkout:${slug}`;
+const RESOURCE_CHECKOUT_STORAGE_PREFIX = "spc:resource-checkout:";
+const RESOURCE_CHECKOUT_TTL_MS = 5 * 60 * 1000;
+
+function getResourceCheckoutStorageKey(slug: string) {
+  return `${RESOURCE_CHECKOUT_STORAGE_PREFIX}${slug}`;
+}
+
+function removeLegacyResourceCheckoutIds() {
+  try {
+    const legacyKeys: string[] = [];
+    for (let index = 0; index < window.localStorage.length; index += 1) {
+      const key = window.localStorage.key(index);
+      if (key?.startsWith(RESOURCE_CHECKOUT_STORAGE_PREFIX)) legacyKeys.push(key);
+    }
+    legacyKeys.forEach((key) => window.localStorage.removeItem(key));
+  } catch {
+    // Legacy storage is optional and may be unavailable.
+  }
+}
+
+export function storeResourceCheckoutId(slug: string, transactionId: string) {
+  removeLegacyResourceCheckoutIds();
+  const key = getResourceCheckoutStorageKey(slug);
+  const value = JSON.stringify({
+    transactionId,
+    expiresAt: Date.now() + RESOURCE_CHECKOUT_TTL_MS,
+  });
+  try {
+    window.sessionStorage.setItem(key, value);
+    window.setTimeout(() => {
+      try {
+        if (window.sessionStorage.getItem(key) === value) {
+          window.sessionStorage.removeItem(key);
+        }
+      } catch {
+        // Expired entries are also removed when read.
+      }
+    }, RESOURCE_CHECKOUT_TTL_MS);
+  } catch {
+    // The payment flow can continue and the transaction can still be entered manually.
+  }
+}
+
+export function getResourceCheckoutId(slug: string): string | null {
+  removeLegacyResourceCheckoutIds();
+  const key = getResourceCheckoutStorageKey(slug);
+  try {
+    const value = window.sessionStorage.getItem(key);
+    if (!value) return null;
+
+    const parsed: unknown = JSON.parse(value);
+    if (
+      typeof parsed !== "object"
+      || parsed === null
+      || !("transactionId" in parsed)
+      || typeof parsed.transactionId !== "string"
+      || !("expiresAt" in parsed)
+      || typeof parsed.expiresAt !== "number"
+      || parsed.expiresAt <= Date.now()
+    ) {
+      window.sessionStorage.removeItem(key);
+      return null;
+    }
+
+    return parsed.transactionId;
+  } catch {
+    try {
+      window.sessionStorage.removeItem(key);
+    } catch {
+      // Session storage may be unavailable.
+    }
+    return null;
+  }
 }
 
 export async function createResourceCheckout(
