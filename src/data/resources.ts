@@ -4,6 +4,7 @@ export const RESOURCE_CATEGORIES = ["Gabarit", "Guide", "Outil"] as const;
 export type ResourceCategory = (typeof RESOURCE_CATEGORIES)[number];
 
 export type APIResource = {
+  id?: string;
   slug: string;
   title: string;
   category: ResourceCategory;

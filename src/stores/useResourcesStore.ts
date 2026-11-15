@@ -28,6 +28,14 @@ export async function fetchPublicResources(params: Parameters<typeof fetchList>[
 
 export const fetchResourceBySlug = fetchById;
 
+export async function fetchResourceForPayment(resourceId: string): Promise<APIResource | null> {
+  const resource = await fetchById(resourceId);
+  if (resource) return resource;
+
+  const resources = await fetchPublicResources();
+  return resources.data.find((item) => item.id === resourceId) ?? null;
+}
+
 export interface ResourceDownload {
   url: string;
   expires_in: number;
