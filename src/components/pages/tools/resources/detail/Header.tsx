@@ -47,7 +47,7 @@ export function ResourceDetailHeader({ resource }: ResourceDetailHeaderProps) {
         </div>
         <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-10">
           {/* Regroupe le descriptif et la couverture pour maîtriser leur espacement. */}
-          <div className={`grid items-start gap-6 ${resource.cover ? "lg:grid-cols-[minmax(0,1fr)_minmax(240px,0.8fr)]" : ""}`}>
+          <div className={`grid items-start gap-4 ${resource.cover ? "lg:grid-cols-[minmax(0,1fr)_minmax(240px,0.8fr)]" : ""}`}>
             <div>
               <div className="flex flex-wrap items-center gap-3">
                 <span className="rounded-full border border-secondary-foreground/15 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-accent">
