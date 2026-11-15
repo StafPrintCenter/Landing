@@ -47,6 +47,13 @@ export function ResourceDetailHeader({ resource }: ResourceDetailHeaderProps) {
         </div>
         <div className="grid items-center gap-10 lg:grid-cols-[1fr_360px] lg:gap-16">
           <div>
+            {resource.cover && (
+              <img
+                src={resource.cover}
+                alt={`Couverture de ${resource.title}`}
+                className="mb-7 aspect-video w-full max-w-2xl rounded-2xl border border-secondary-foreground/10 object-cover shadow-xl"
+              />
+            )}
             <div className="flex flex-wrap items-center gap-3">
               <span className="rounded-full border border-secondary-foreground/15 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-accent">
                 {resource.category}
@@ -56,9 +63,11 @@ export function ResourceDetailHeader({ resource }: ResourceDetailHeaderProps) {
                 {isFree ? "Ressource gratuite" : "Ressource premium"}
               </span>
             </div>
-            <div className="mt-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-accent text-accent-foreground shadow-xl">
-              <Icon size={30} />
-            </div>
+            {!resource.cover && (
+              <div className="mt-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-accent text-accent-foreground shadow-xl">
+                <Icon size={30} />
+              </div>
+            )}
             <h1 className="mt-6 max-w-3xl font-display text-4xl font-bold leading-tight md:text-5xl">{resource.title}</h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-secondary-foreground/75">{resource.description ?? resource.short}</p>
             <div className="mt-7 flex flex-wrap gap-x-6 gap-y-3 text-sm text-secondary-foreground/65">

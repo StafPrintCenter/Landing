@@ -126,7 +126,15 @@ export function PaymentLook({ resource, callbackId, callbackStatus, transactionP
           <div className="bg-secondary px-6 py-8 text-secondary-foreground md:px-8">
             <div className="flex items-start gap-4">
               <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-foreground">
-                <Icon size={24} />
+                {resource.cover ? (
+                  <img
+                    src={resource.cover}
+                    alt={`Couverture de ${resource.title}`}
+                    className="h-full w-full rounded-xl object-cover"
+                  />
+                ) : (
+                  <Icon size={24} />
+                )}
               </span>
               <div>
                 <p className="text-sm font-semibold uppercase tracking-wider text-accent">Votre ressource</p>
