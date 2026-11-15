@@ -33,7 +33,14 @@ export const Route = createFileRoute("/tools/ressources/$slug/")({
           { property: "og:type", content: "website" },
           { property: "og:title", content: title },
           { property: "og:description", content: description },
-          { name: "twitter:card", content: "summary" },
+          ...(resource.cover
+            ? [
+              { property: "og:image", content: resource.cover },
+              { property: "og:image:alt", content: resource.title },
+              { name: "twitter:card", content: "summary_large_image" },
+              { name: "twitter:image", content: resource.cover },
+            ]
+            : [{ name: "twitter:card", content: "summary" }]),
           { name: "twitter:title", content: title },
           { name: "twitter:description", content: description },
         ]
