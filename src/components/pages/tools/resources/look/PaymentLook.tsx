@@ -141,7 +141,7 @@ export function PaymentLook({ resource, callbackId, callbackStatus, transactionP
             <h2 className="font-display text-xl font-bold">Vérification du paiement</h2>
             {isVerifying && !payment ? (
               <p className="mt-4 inline-flex items-center gap-2 text-sm text-muted-foreground">
-                <LoaderCircle size={16} className="animate-spin" /> Vérification auprès du serveur…
+                <LoaderCircle size={16} className="animate-spin" /> Ceci ne devrait que durer qu'un petit moment
               </p>
             ) : (
               <PaymentDetails
