@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { ArrowRight, LoaderCircle, Mail } from "lucide-react";
 import { BaseModal } from "@/components/modal/BaseModal";
-import { createResourceCheckout, getResourceCheckoutStorageKey } from "@/stores/useResourcesStore";
+import { createResourceCheckout, storeResourceCheckoutId } from "@/stores/useResourcesStore";
 import type { APIResource } from "@/data/resources";
 
 interface ResourceCheckoutModalProps {
@@ -28,11 +28,7 @@ export function ResourceCheckoutModal({ resource, isOpen, onClose }: ResourceChe
         throw new Error("Le lien de paiement n'a pas été fourni.");
       }
 
-      try {
-        window.localStorage.setItem(getResourceCheckoutStorageKey(resource.slug), checkout.id);
-      } catch {
-        // Continue to payment even if this browser blocks local storage.
-      }
+      storeResourceCheckoutId(resource.slug, checkout.id);
       window.location.assign(checkout.paymentUrl);
     } catch (submitError) {
       setError(submitError instanceof Error ? submitError.message : "Impossible de démarrer le paiement.");

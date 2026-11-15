@@ -4,7 +4,7 @@ import { ArrowLeft, BadgeCheck, CreditCard, Download, Eye, FileCheck2, Layers3, 
 import { formatResourcePrice, getResourceIcon, type APIResource } from "@/data/resources";
 import { ShareModal } from "@/components/modal";
 import { buildShareUrl } from "@/lib/share/build-share-url";
-import { getResourceCheckoutStorageKey } from "@/stores/useResourcesStore";
+import { storeResourceCheckoutId } from "@/stores/useResourcesStore";
 import type { ResourcePayment } from "@/stores/useResourcesStore";
 import { ResourceCheckoutModal } from "./CheckoutModal";
 import { ResourceDownloadAction } from "./DownloadAction";
@@ -152,11 +152,7 @@ export function ResourceDetailHeader({ resource }: ResourceDetailHeaderProps) {
             onClose={() => setIsVerifyOpen(false)}
             initialPayment={verifiedPayment}
             onApproved={(payment) => {
-              try {
-                window.localStorage.setItem(getResourceCheckoutStorageKey(resource.slug), payment.id);
-              } catch {
-                // Payment verification and download remain available without local storage.
-              }
+              storeResourceCheckoutId(resource.slug, payment.id);
               setVerifiedPayment(payment);
             }}
           />

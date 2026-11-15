@@ -4,7 +4,7 @@ import { ArrowLeft, LoaderCircle } from "lucide-react";
 import { SiteShell } from "@/components/site/SiteShell";
 import type { APIResource } from "@/data/resources";
 import { getResourceIcon } from "@/data/resources";
-import { fetchResourcePayment, getResourceCheckoutStorageKey, type ResourcePayment } from "@/stores/useResourcesStore";
+import { fetchResourcePayment, getResourceCheckoutId, storeResourceCheckoutId, type ResourcePayment } from "@/stores/useResourcesStore";
 import { PaymentDetails } from "./PaymentDetails";
 import { TransactionLookupForm } from "./TransactionLookupForm";
 
@@ -19,22 +19,6 @@ function isInternalTransactionId(value: string | undefined): value is string {
   return Boolean(value && /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value));
 }
 
-function getStoredTransactionId(slug: string): string | null {
-  try {
-    return window.localStorage.getItem(getResourceCheckoutStorageKey(slug));
-  } catch {
-    return null;
-  }
-}
-
-function storeTransactionId(slug: string, transactionId: string) {
-  try {
-    window.localStorage.setItem(getResourceCheckoutStorageKey(slug), transactionId);
-  } catch {
-    // The verified transaction remains usable for the current page without local storage.
-  }
-}
-
 export function PaymentLook({ resource, callbackId, callbackStatus, transactionParam }: PaymentLookProps) {
   const [payment, setPayment] = useState<ResourcePayment | null>(null);
   const [transactionId, setTransactionId] = useState("");
@@ -44,7 +28,7 @@ export function PaymentLook({ resource, callbackId, callbackStatus, transactionP
 
   useEffect(() => {
     let cancelled = false;
-    const candidate = getStoredTransactionId(resource.slug)
+    const candidate = getResourceCheckoutId(resource.slug)
       || transactionParam
       || (isInternalTransactionId(callbackId) ? callbackId : "");
 
@@ -99,7 +83,7 @@ export function PaymentLook({ resource, callbackId, callbackStatus, transactionP
       }
       setPayment(result);
       setTransactionId(result.id);
-      storeTransactionId(resource.slug, result.id);
+      storeResourceCheckoutId(resource.slug, result.id);
     } catch (error) {
       setPayment(null);
       setManualError(error instanceof Error ? error.message : "La vérification du paiement a échoué.");
