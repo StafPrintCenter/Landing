@@ -32,7 +32,7 @@ export function ResourceDetailHeader({ resource }: ResourceDetailHeaderProps) {
           src={resource.cover}
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-80"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-60"
         />
       )}
       <div className="pointer-events-none absolute inset-0 bg-secondary/75" />
