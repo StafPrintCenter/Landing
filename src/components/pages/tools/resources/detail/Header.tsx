@@ -5,6 +5,7 @@ import { formatResourcePrice, getResourceIcon, type APIResource } from "@/data/r
 import { ShareModal } from "@/components/modal";
 import { buildShareUrl } from "@/lib/share/build-share-url";
 import { getResourceCheckoutStorageKey } from "@/stores/useResourcesStore";
+import type { ResourcePayment } from "@/stores/useResourcesStore";
 import { ResourceCheckoutModal } from "./CheckoutModal";
 import { ResourceDownloadAction } from "./DownloadAction";
 import { VerifyPaymentModal } from "./VerifyPaymentModal";
@@ -17,7 +18,7 @@ export function ResourceDetailHeader({ resource }: ResourceDetailHeaderProps) {
   const [isShareOpen, setIsShareOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [isVerifyOpen, setIsVerifyOpen] = useState(false);
-  const [verifiedTransactionId, setVerifiedTransactionId] = useState<string | undefined>();
+  const [verifiedPayment, setVerifiedPayment] = useState<ResourcePayment | null>(null);
   const Icon = getResourceIcon(resource);
   const isFree = resource.price === 0;
   const discount = resource.discountPercentage > 0 ? resource.discountPercentage : null;
@@ -86,8 +87,14 @@ export function ResourceDetailHeader({ resource }: ResourceDetailHeaderProps) {
             </p>
             {isFree ? (
               <ResourceDownloadAction slug={resource.slug} />
-            ) : verifiedTransactionId ? (
-              <ResourceDownloadAction key={verifiedTransactionId} slug={resource.slug} transactionId={verifiedTransactionId} />
+            ) : verifiedPayment ? (
+              <button
+                type="button"
+                onClick={() => setIsVerifyOpen(true)}
+                className="mt-6 inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-accent px-5 py-3.5 text-sm font-bold text-accent-foreground transition hover:-translate-y-0.5 hover:opacity-90"
+              >
+                <Download size={18} /> Voir le téléchargement
+              </button>
             ) : (
               <div className="mt-6">
                 <button
@@ -131,11 +138,17 @@ export function ResourceDetailHeader({ resource }: ResourceDetailHeaderProps) {
             onClose={() => setIsCheckoutOpen(false)}
           />
           <VerifyPaymentModal
+            resource={resource}
             isOpen={isVerifyOpen}
             onClose={() => setIsVerifyOpen(false)}
-            onApproved={(transactionId) => {
-              window.localStorage.setItem(getResourceCheckoutStorageKey(resource.slug), transactionId);
-              setVerifiedTransactionId(transactionId);
+            initialPayment={verifiedPayment}
+            onApproved={(payment) => {
+              try {
+                window.localStorage.setItem(getResourceCheckoutStorageKey(resource.slug), payment.id);
+              } catch {
+                // Payment verification and download remain available without local storage.
+              }
+              setVerifiedPayment(payment);
             }}
           />
         </>
