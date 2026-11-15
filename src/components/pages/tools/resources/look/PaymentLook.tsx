@@ -106,55 +106,61 @@ export function PaymentLook({ resource, callbackId, callbackStatus, transactionP
           <ArrowLeft size={15} /> Retour à la ressource
         </Link>
 
-        <div className="mx-auto mt-8 max-w-2xl overflow-hidden rounded-3xl border border-border bg-card shadow-sm">
-          <div className="relative isolate overflow-hidden bg-secondary px-6 py-8 text-secondary-foreground md:px-8">
-            {resource.cover && (
-              <>
-                <img
-                  src={resource.cover}
-                  alt=""
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover"
-                />
-                <div className="pointer-events-none absolute inset-0 -z-10 bg-secondary/75" />
-              </>
-            )}
-            <div className="flex items-start gap-4">
-              <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-foreground">
-                <Icon size={24} />
-              </span>
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-wider text-accent">Votre ressource</p>
-                <h1 className="mt-1 font-display text-2xl font-bold md:text-3xl">{resource.title}</h1>
-                <p className="mt-2 text-sm text-secondary-foreground/70">{resource.category} · {resource.format}</p>
+        <div className="mx-auto mt-8 max-w-6xl overflow-hidden rounded-3xl border border-border bg-card shadow-sm">
+          <div className="grid md:grid-cols-2">
+            <div className="bg-secondary text-secondary-foreground">
+              {resource.cover ? (
+                <div className="aspect-video overflow-hidden md:aspect-[4/3]">
+                  <img
+                    src={resource.cover}
+                    alt={resource.title}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+              ) : (
+                <div className="flex aspect-video items-center justify-center bg-background/5 md:aspect-[4/3]">
+                  <Icon size={64} strokeWidth={1.1} className="text-accent" />
+                </div>
+              )}
+              <div className="px-6 py-8 md:px-8">
+                <div className="flex items-start gap-4">
+                  <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-foreground">
+                    <Icon size={24} />
+                  </span>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent">Votre ressource</p>
+                    <h1 className="mt-2 font-display text-2xl font-bold leading-tight md:text-3xl">{resource.title}</h1>
+                    <p className="mt-2 text-sm text-secondary-foreground/70">{resource.category} <span aria-hidden="true">·</span> {resource.format} <span aria-hidden="true">·</span> {resource.meta}</p>
+                  </div>
+                </div>
+                <p className="mt-5 max-w-prose text-sm leading-relaxed text-secondary-foreground/75">{resource.description ?? resource.short}</p>
               </div>
             </div>
-            <p className="mt-5 text-sm leading-relaxed text-secondary-foreground/75">{resource.short}</p>
-          </div>
 
-          <div className="p-6 md:p-8">
-            <h2 className="font-display text-xl font-bold">Vérification du paiement</h2>
-            {isVerifying && !payment ? (
-              <p className="mt-4 inline-flex items-center gap-2 text-sm text-muted-foreground">
-                <LoaderCircle size={16} className="animate-spin" /> Ceci ne devrait que durer qu'un petit moment
-              </p>
-            ) : (
-              <PaymentDetails
-                resource={resource}
-                payment={payment}
-                isApproved={isApproved}
-                message={verificationError ?? (callbackStatus ? `Retour du prestataire : ${callbackStatus}.` : undefined)}
+            <div className="p-6 md:p-8">
+              <h2 className="font-display text-xl font-bold">Vérification du paiement</h2>
+              {isVerifying && !payment ? (
+                <p className="mt-4 inline-flex items-center gap-2 text-sm text-muted-foreground">
+                  <LoaderCircle size={16} className="animate-spin" /> Ceci ne devrait que durer qu'un petit moment
+                </p>
+              ) : (
+                <PaymentDetails
+                  resource={resource}
+                  payment={payment}
+                  isApproved={isApproved}
+                  message={verificationError ?? (callbackStatus ? `Retour du prestataire : ${callbackStatus}.` : undefined)}
+                />
+              )}
+
+              <TransactionLookupForm
+                transactionId={transactionId}
+                onTransactionIdChange={setTransactionId}
+                onSubmit={handleManualVerification}
+                isLoading={isVerifying}
+                error={manualError}
+                hidden={isApproved}
               />
-            )}
-
-            <TransactionLookupForm
-              transactionId={transactionId}
-              onTransactionIdChange={setTransactionId}
-              onSubmit={handleManualVerification}
-              isLoading={isVerifying}
-              error={manualError}
-              hidden={isApproved}
-            />
+            </div>
           </div>
         </div>
       </section>
