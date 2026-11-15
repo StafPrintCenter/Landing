@@ -61,16 +61,16 @@ export function VerifyPaymentModal({ isOpen, onClose, onApproved }: VerifyPaymen
             required
             value={transactionId}
             onChange={(event) => setTransactionId(event.target.value)}
-            placeholder="Ex. 74ba4bf1-f3a6-4d7a-83d2-24932ab2af78"
+            placeholder="Ex. xxxxxxxx-xxxx-4xxx-xxxx-xxxxxxxxxxxx"
             className="h-10 w-full rounded-md border border-input bg-background px-3 font-mono text-sm outline-none focus-visible:ring-1 focus-visible:ring-ring"
           />
         </label>
         {error && <p role="alert" className="mt-4 rounded-lg bg-destructive/10 px-4 py-3 text-sm text-destructive">{error}</p>}
         <div className="mt-6 flex justify-end gap-3 border-t border-border pt-4">
-          <button type="button" onClick={handleClose} disabled={isSubmitting} className="rounded-full border border-border px-5 py-2.5 text-sm font-semibold hover:bg-muted disabled:opacity-50">
+          <button type="button" onClick={handleClose} disabled={isSubmitting} className="rounded-full border border-border px-5 py-2.5 text-sm font-semibold hover:bg-muted disabled:opacity-50 cursor-pointer">
             Annuler
           </button>
-          <button type="submit" disabled={isSubmitting} className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground disabled:cursor-wait disabled:opacity-60">
+          <button type="submit" disabled={isSubmitting} className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground disabled:cursor-wait disabled:opacity-60 cursor-pointer">
             {isSubmitting ? <LoaderCircle size={16} className="animate-spin" /> : <Search size={16} />}
             Vérifier
           </button>
