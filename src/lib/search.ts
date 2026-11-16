@@ -66,7 +66,7 @@ function buildSearchIndex(
       type: "service",
       title: s.title,
       description: s.short,
-      category: "Service",
+      category: s.category,
       url: `/services/${s.slug}`,
       params: { slug: s.slug },
       routePattern: "/services/$slug",
