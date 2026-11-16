@@ -11,6 +11,7 @@ import {
   FormationsPreview,
   Testimonials,
   BlogPreview,
+  ResourcesPreview,
   Contact,
 } from "@/components/pages/home";
 
@@ -46,6 +47,7 @@ function HomePage() {
       <FormationsPreview />
       <Testimonials />
       <BlogPreview />
+      <ResourcesPreview />
       <Contact />
     </SiteShell>
   );

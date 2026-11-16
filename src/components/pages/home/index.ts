@@ -6,4 +6,5 @@ export { ProjectsPreview } from "./ProjectsPreview";
 export { FormationsPreview } from "./FormationsPreview";
 export { Testimonials } from "./Testimonials";
 export { BlogPreview } from "./BlogPreview";
+export { ResourcesPreview } from "./ResourcesPreview";
 export { Contact } from "./Contact";
