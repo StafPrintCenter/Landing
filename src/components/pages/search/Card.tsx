@@ -16,7 +16,9 @@ export function SearchResultCard({ item, onNavigate }: SearchResultCardProps) {
     ? ({ open: item.projectId } as never)
     : isFaq
       ? ({ open: item.faqId } as never)
-      : undefined;
+      : item.type === "site"
+        ? ({ query: item.title } as never)
+        : undefined;
 
   return (
     <Link
