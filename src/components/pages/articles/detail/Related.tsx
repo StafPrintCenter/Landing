@@ -21,7 +21,7 @@ export function ArticleDetailRelated({ related }: ArticleRelatedProps) {
               params={{ slug: a.slug }}
               className="group block overflow-hidden rounded-2xl border border-border bg-card transition hover:border-primary hover:shadow-md"
             >
-              <div className="aspect-[16/10] overflow-hidden">
+              <div className="aspect-16/10 overflow-hidden">
                 <img
                   src={a.cover}
                   alt={a.title}
