@@ -4,6 +4,7 @@ import { fetchPublicServices } from "@/stores/useServicesStore";
 import { fetchPublicFormations } from "@/stores/useTrainingsStore";
 import { fetchPublicArticles } from "@/stores/useArticlesStore";
 import { fetchPublicJobOffers } from "@/stores/useJobsStore";
+import { fetchPublicResources } from "@/stores/useResourcesStore";
 
 // Date du jour pour les entités dépourvues de date ISO
 const TODAY = new Date().toISOString().split("T")[0];
@@ -43,6 +44,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/articles", lastmod: TODAY, changefreq: "weekly", priority: "0.8" },
           { path: "/faqs", lastmod: TODAY, changefreq: "weekly", priority: "0.7" },
           { path: "/careers/offers", lastmod: TODAY, changefreq: "weekly", priority: "0.7" },
+          { path: "/tools/ressources", lastmod: TODAY, changefreq: "weekly", priority: "0.8" },
           { path: "/tools/appointment", lastmod: TODAY, changefreq: "yearly", priority: "0.2" },
           { path: "/tools/newsletter", lastmod: TODAY, changefreq: "yearly", priority: "0.2" },
           { path: "/tools/ecosystem", lastmod: TODAY, changefreq: "weekly", priority: "0.6" },
@@ -53,11 +55,12 @@ export const Route = createFileRoute("/sitemap.xml")({
 
         // 3. Appel aux APIs publiques avec tolérance de panne
         try {
-          const [servicesRes, formationsRes, articlesRes, jobsRes] = await Promise.all([
+          const [servicesRes, formationsRes, articlesRes, jobsRes, ressourcesRes] = await Promise.all([
             fetchPublicServices({ perPage: 500 }).catch(() => ({ data: [] })),
             fetchPublicFormations({ perPage: 500 }).catch(() => ({ data: [] })),
             fetchPublicArticles({ perPage: 500 }).catch(() => ({ data: [] })),
             fetchPublicJobOffers({ perPage: 500 }).catch(() => ({ data: [] })),
+            fetchPublicResources({ perPage: 500 }).catch(() => ({ data: [] })),
           ]);
 
           // Services
@@ -98,6 +101,16 @@ export const Route = createFileRoute("/sitemap.xml")({
               lastmod: formatDate(j.createdAt),
               changefreq: "monthly",
               priority: "0.6",
+            });
+          }
+
+          // Ressources
+          for (const r of ressourcesRes.data) {
+            entries.push({
+              path: `/tools/ressources/${r.slug}`,
+              lastmod: TODAY,
+              changefreq: "weekly",
+              priority: "0.7",
             });
           }
         } catch {
