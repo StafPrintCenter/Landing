@@ -25,7 +25,7 @@ import {
 // 1. Schéma de validation dérivé des sources uniques
 const searchSchema = z.object({
   q: fallback(z.string(), "").default(""),
-  type: fallback(z.enum(["all", "service", "project", "formation", "article", "faq", "job", "resource"]), "all").default("all"),
+  type: fallback(z.enum(["all", "service", "project", "formation", "article", "faq", "job", "resource", "site"]), "all").default("all"),
   category: fallback(z.string(), "Toutes").default("Toutes"),
   sortBy: fallback(z.enum(SEARCH_SORT_OPTIONS), "relevance").default("relevance"),
   sortDir: fallback(z.enum(SEARCH_SORT_DIRECTIONS), "asc").default("asc"),
@@ -53,7 +53,7 @@ function SearchPage() {
   const [input, setInput] = useState(q);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const { pushQuery, pushPage } = useSearchHistory();
-  const { services, projects, formations, articles, faqs, jobs, resources } = useGlobalSearchData();
+  const { services, projects, formations, articles, faqs, jobs, resources, ecosystemSites } = useGlobalSearchData();
 
   useEffect(() => setInput(q), [q]);
 
@@ -68,13 +68,13 @@ function SearchPage() {
   }, [filtersOpen]);
 
   const categories = useMemo(
-    () => categoriesForType(type, services, projects, formations, articles, faqs, jobs, resources),
-    [type, services, projects, formations, articles, faqs, jobs, resources]
+    () => categoriesForType(type, services, projects, formations, articles, faqs, jobs, resources, ecosystemSites),
+    [type, services, projects, formations, articles, faqs, jobs, resources, ecosystemSites]
   );
 
   const matched = useMemo(
-    () => searchItems(q, services, projects, formations, articles, faqs, jobs, resources, { type, category }),
-    [q, services, projects, formations, articles, faqs, jobs, resources, type, category]
+    () => searchItems(q, services, projects, formations, articles, faqs, jobs, resources, ecosystemSites, { type, category }),
+    [q, services, projects, formations, articles, faqs, jobs, resources, ecosystemSites, type, category]
   );
 
   // 3. Tri appliqué après le filtrage

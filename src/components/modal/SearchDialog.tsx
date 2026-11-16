@@ -14,7 +14,7 @@ export function SearchDialog({ open, onOpenChange }: Props) {
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
   const { queries, pages, pushPage, pushQuery, clearAll } = useSearchHistory();
-  const { services, projects, formations, articles, faqs, jobs, resources } = useGlobalSearchData();
+  const { services, projects, formations, articles, faqs, jobs, resources, ecosystemSites, } = useGlobalSearchData();
 
   useEffect(() => {
     if (open) setTimeout(() => inputRef.current?.focus(), 50);
@@ -22,8 +22,8 @@ export function SearchDialog({ open, onOpenChange }: Props) {
   }, [open]);
 
   const results = useMemo(
-    () => searchItems(q, services, projects, formations, articles, faqs, jobs, resources, { limit: 8 }),
-    [q, services, projects, formations, articles, faqs, jobs, resources]
+    () => searchItems(q, services, projects, formations, articles, faqs, jobs, resources, ecosystemSites, { limit: 8 }),
+    [q, services, projects, formations, articles, faqs, jobs, resources, ecosystemSites]
   );
 
   const goToItem = (item: SearchItem) => {

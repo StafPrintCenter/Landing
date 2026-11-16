@@ -85,7 +85,7 @@ export const SERVICE_CATEGORIES: { value: ServiceCategory | "Tout"; label: strin
 
 // ── Recherche ──
 // Source unique pour les types de contenu recherchables.
-export type SearchType = "service" | "project" | "formation" | "article" | "faq" | "job" | "resource";
+export type SearchType = "service" | "project" | "formation" | "article" | "faq" | "job" | "resource" | "site";
 
 export const SEARCH_TYPE_LABELS: Record<SearchType, string> = {
   service: "Service",
@@ -95,6 +95,7 @@ export const SEARCH_TYPE_LABELS: Record<SearchType, string> = {
   faq: "Faq",
   job: "Emploi",
   resource: "Ressource",
+  site: "Site de l'écosystème",
 };
 
 export const SEARCH_TYPES: Array<{ value: SearchType | "all"; label: string }> = [
@@ -114,6 +115,7 @@ export const SEARCH_TYPE_COLORS: Record<SearchType, string> = {
   faq: "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 dark:bg-yellow-500/20 border-yellow-500/20",
   job: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 dark:bg-emerald-500/20 border-emerald-500/20",
   resource: "bg-teal-500/10 text-teal-600 dark:text-teal-400 dark:bg-teal-500/20 border-teal-500/20",
+  site: "bg-olive-500/10 text-olive-600 dark:text-olive-400 dark:bg-olive-500/20 border-olive-500/20",
 };
 
 export function getSearchTypeColorClass(type: SearchType): string {

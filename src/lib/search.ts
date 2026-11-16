@@ -5,6 +5,7 @@ import { type APIArticle } from "@/data/articles";
 import { type APIFaq } from "@/data/faqs";
 import { type APIJobOffer } from "@/data/jobs";
 import { type APIResource } from "@/data/resources";
+import { type APIEcosystemSite } from "@/data/ecosystem";
 import { type SearchType, SEARCH_TYPE_LABELS } from "@/data/categories";
 
 export type { SearchType };
@@ -27,7 +28,8 @@ export type SearchItem = {
   | "/services/$slug"
   | "/faqs"
   | "/careers/offers/$slug"
-  | "/tools/ressources/$slug";
+  | "/tools/ressources/$slug"
+  | "/tools/ecosystem";
   keywords: string;
   projectId?: string;
   faqId?: string;
@@ -51,6 +53,7 @@ function buildSearchIndex(
   apiFaqs: APIFaq[],
   apiJobs: APIJobOffer[],
   apiResources: APIResource[],
+  apiEcosystemSite: APIEcosystemSite[],
 ): SearchItem[] {
   const services = Array.isArray(apiServices) ? apiServices : [];
   const projects = Array.isArray(apiProjects) ? apiProjects : [];
@@ -59,6 +62,7 @@ function buildSearchIndex(
   const faqs = Array.isArray(apiFaqs) ? apiFaqs : [];
   const jobs = Array.isArray(apiJobs) ? apiJobs : [];
   const resources = Array.isArray(apiResources) ? apiResources : [];
+  const ecosystemSite = Array.isArray(apiEcosystemSite) ? apiEcosystemSite : [];
 
   return [
     ...services.map<SearchItem>((s) => ({
@@ -141,6 +145,18 @@ function buildSearchIndex(
       routePattern: "/tools/ressources/$slug",
       keywords: norm(`${r.title} ${r.short} ${r.category}`),
     })),
+    ...ecosystemSite.map<SearchItem>((e) => ({
+      id: `ecosystem-${e.id}`,
+      type: "site",
+      title: e.name,
+      description: e.description,
+      category: e.category,
+      image: e.logoUrl,
+      url: `/tools/ecosystem`,
+      params: { id: e.id },
+      routePattern: "/tools/ecosystem",
+      keywords: norm(`${e.name} ${e.description} ${e.category}`),
+    })),
   ];
 }
 
@@ -153,6 +169,7 @@ export function searchItems(
   apiFaqs: APIFaq[],
   apiJobs: APIJobOffer[],
   apiResources: APIResource[],
+  apiEcosystemSite: APIEcosystemSite[],
   opts?: { type?: SearchType | "all"; category?: string; limit?: number }
 ): SearchItem[] {
   const q = norm(query.trim());
@@ -160,7 +177,7 @@ export function searchItems(
   const category = opts?.category;
   const limit = opts?.limit;
 
-  let items = buildSearchIndex(apiServices, apiProjects, apiFormations, apiArticles, apiFaqs, apiJobs, apiResources);
+  let items = buildSearchIndex(apiServices, apiProjects, apiFormations, apiArticles, apiFaqs, apiJobs, apiResources, apiEcosystemSite);
 
   if (type !== "all") items = items.filter((i) => i.type === type);
   if (category && category !== "Toutes")
@@ -197,9 +214,10 @@ export function categoriesForType(
   apiFaqs: APIFaq[],
   apiJobs: APIJobOffer[],
   apiResources: APIResource[],
+  apiEcosystemSite: APIEcosystemSite[],
 ): string[] {
   const set = new Set<string>();
-  const items = buildSearchIndex(apiServices, apiProjects, apiFormations, apiArticles, apiFaqs, apiJobs, apiResources);
+  const items = buildSearchIndex(apiServices, apiProjects, apiFormations, apiArticles, apiFaqs, apiJobs, apiResources, apiEcosystemSite);
 
   for (const i of items) {
     if (type !== "all" && i.type !== type) continue;

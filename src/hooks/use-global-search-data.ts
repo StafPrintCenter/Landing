@@ -6,6 +6,7 @@ import {
   useFaqsStore,
   useJobOffersStore,
   useResourcesStore,
+  useEcosystemSitesStore,
 } from "@/stores";
 
 export function useGlobalSearchData() {
@@ -16,6 +17,7 @@ export function useGlobalSearchData() {
   const { faqs, isLoading: l5 } = useFaqsStore({ perPage: 100 });
   const { offers: jobs, isLoading: l6 } = useJobOffersStore({ perPage: 100 });
   const { resources, isLoading: l7 } = useResourcesStore({ perPage: 100 });
+  const { sites: ecosystemSites, isLoading: l8 } = useEcosystemSitesStore({ perPage: 100 });
 
   return {
     services,
@@ -25,7 +27,8 @@ export function useGlobalSearchData() {
     faqs,
     jobs,
     resources,
+    ecosystemSites,
 
-    isLoading: l1 || l2 || l3 || l4 || l5 || l6 || l7,
+    isLoading: l1 || l2 || l3 || l4 || l5 || l6 || l7 || l8,
   };
 }
