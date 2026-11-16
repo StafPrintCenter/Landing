@@ -10,6 +10,7 @@ export * from "./useJobsStore";
 export * from "./useNewsletterStore";
 export { useProjectsStore } from "./useProjectsStore";
 export { createReport } from "./useReportsStore";
+export * from "./useResourcesStore";
 export { fetchReviewByToken, submitReviewResponse, editReviewResponse } from "./useReviewsStore";
 export { useServicesStore } from "./useServicesStore";
 export { resolveShortlink, createShortlink } from "./useShortlinksStore";
