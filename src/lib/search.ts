@@ -195,10 +195,11 @@ export function categoriesForType(
   apiFormations: APIFormation[],
   apiArticles: APIArticle[],
   apiFaqs: APIFaq[],
-  apiJobs: APIJobOffer[]
+  apiJobs: APIJobOffer[],
+  apiResources: APIResource[],
 ): string[] {
   const set = new Set<string>();
-  const items = buildSearchIndex(apiServices, apiProjects, apiFormations, apiArticles, apiFaqs, apiJobs);
+  const items = buildSearchIndex(apiServices, apiProjects, apiFormations, apiArticles, apiFaqs, apiJobs, apiResources);
 
   for (const i of items) {
     if (type !== "all" && i.type !== type) continue;
