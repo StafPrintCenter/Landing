@@ -35,6 +35,8 @@ export function SearchDialog({ open, onOpenChange }: Props) {
       navigate({ to: "/projects", search: { open: item.projectId } as never });
     } else if (item.type === "faq" && item.faqId) {
       navigate({ to: "/faqs", search: { open: item.faqId } as never });
+    } else if (item.type === "site") {
+      navigate({ to: "/tools/ecosystem", search: { query: item.title } as never });
     } else {
       navigate({ to: item.routePattern as never, params: item.params as never });
     }
@@ -67,7 +69,7 @@ export function SearchDialog({ open, onOpenChange }: Props) {
             value={q}
             onChange={(e) => setQ(e.target.value)}
             onKeyDown={onKeyDown}
-            placeholder="Rechercher services, réalisations, formations, articles, FAQ, Ressources, Emploi…"
+            placeholder="Que recherchez-vous ?"
             className="h-14 w-full bg-transparent text-base outline-none placeholder:text-muted-foreground"
           />
 
@@ -96,7 +98,7 @@ export function SearchDialog({ open, onOpenChange }: Props) {
             <div className="p-4">
               {queries.length === 0 && pages.length === 0 ? (
                 <p className="p-6 text-center text-sm text-muted-foreground">
-                  Cherchez un service, un projet, une formation, un article, une question fréquente, une ressources ou un emploi.
+                  Cherchez un élement sur l'ensemble du site.
                 </p>
               ) : (
                 <>
