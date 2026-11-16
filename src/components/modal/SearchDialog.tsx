@@ -14,7 +14,7 @@ export function SearchDialog({ open, onOpenChange }: Props) {
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
   const { queries, pages, pushPage, pushQuery, clearAll } = useSearchHistory();
-  const { services, projects, formations, articles, faqs, jobs } = useGlobalSearchData();
+  const { services, projects, formations, articles, faqs, jobs, resources } = useGlobalSearchData();
 
   useEffect(() => {
     if (open) setTimeout(() => inputRef.current?.focus(), 50);
@@ -22,8 +22,8 @@ export function SearchDialog({ open, onOpenChange }: Props) {
   }, [open]);
 
   const results = useMemo(
-    () => searchItems(q, services, projects, formations, articles, faqs, jobs, { limit: 8 }),
-    [q, services, projects, formations, articles, faqs, jobs]
+    () => searchItems(q, services, projects, formations, articles, faqs, jobs, resources, { limit: 8 }),
+    [q, services, projects, formations, articles, faqs, jobs, resources]
   );
 
   const goToItem = (item: SearchItem) => {
@@ -67,7 +67,7 @@ export function SearchDialog({ open, onOpenChange }: Props) {
             value={q}
             onChange={(e) => setQ(e.target.value)}
             onKeyDown={onKeyDown}
-            placeholder="Rechercher services, réalisations, formations, articles, FAQ, Emploi…"
+            placeholder="Rechercher services, réalisations, formations, articles, FAQ, Ressources, Emploi…"
             className="h-14 w-full bg-transparent text-base outline-none placeholder:text-muted-foreground"
           />
 
@@ -96,7 +96,7 @@ export function SearchDialog({ open, onOpenChange }: Props) {
             <div className="p-4">
               {queries.length === 0 && pages.length === 0 ? (
                 <p className="p-6 text-center text-sm text-muted-foreground">
-                  Cherchez un service, un projet, une formation, un article, une question fréquente ou un emploi.
+                  Cherchez un service, un projet, une formation, un article, une question fréquente, une ressources ou un emploi.
                 </p>
               ) : (
                 <>
