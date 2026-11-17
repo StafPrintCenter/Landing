@@ -11,8 +11,8 @@ import {
   ETHIQUE_PROCESS, ETHIQUE_FAQ, ETHIQUE_POSTAL, generateTrackingCode,
 } from "@/data/ethique";
 
-const TITLE = "Signalement éthique & droit d'alerte - STAF PRINT CENTER";
-const DESC = "Signalez de façon anonyme et confidentielle tout fait de corruption, fraude ou conflit d'intérêts. Dispositif conforme à la loi béninoise n° 2011-20.";
+const TITLE = `Signalement éthique & droit d'alerte | ${SITE.name}`;
+const DESC = `Signalez de façon anonyme et confidentielle tout fait de corruption, fraude ou conflit d'intérêts. Dispositif conforme à la loi béninoise n° 2011-20.`;
 
 export const Route = createFileRoute("/signalement-ethique")({
   head: () => ({
@@ -26,12 +26,6 @@ export const Route = createFileRoute("/signalement-ethique")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/signalement-ethique" }],
-    scripts: [{
-      type: "application/ld+json", children: JSON.stringify({
-        "@context": "https://schema.org", "@type": "WebPage", name: TITLE, description: DESC,
-        publisher: { "@type": "LocalBusiness", name: "STAF PRINT CENTER" },
-      })
-    }],
   }),
   component: EthiquePage,
 });
