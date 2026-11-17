@@ -59,7 +59,7 @@ export function FooterBrand() {
                   {link.label}
                 </Link>
               )}
-              {index < FOOTER_LINKS.length - 1 && (
+              {index < FOOTER_LEGAL_LINKS.length - 1 && (
                 <span className="h-3 w-px bg-secondary-foreground/20 inline-block" aria-hidden />
               )}
             </span>
