@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SignalementEthiqueRouteImport } from './routes/signalement-ethique'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
@@ -53,6 +54,11 @@ import { Route as CareersOffersSlugApplyRouteImport } from './routes/careers/off
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignalementEthiqueRoute = SignalementEthiqueRouteImport.update({
+  id: '/signalement-ethique',
+  path: '/signalement-ethique',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SearchRoute = SearchRouteImport.update({
@@ -258,6 +264,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/search': typeof SearchRoute
+  '/signalement-ethique': typeof SignalementEthiqueRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/articles/$slug': typeof ArticlesSlugRoute
   '/careers/check-offer': typeof CareersCheckOfferRoute
@@ -300,6 +307,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/search': typeof SearchRoute
+  '/signalement-ethique': typeof SignalementEthiqueRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/articles/$slug': typeof ArticlesSlugRoute
   '/careers/check-offer': typeof CareersCheckOfferRoute
@@ -343,6 +351,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/search': typeof SearchRoute
+  '/signalement-ethique': typeof SignalementEthiqueRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/articles/$slug': typeof ArticlesSlugRoute
   '/careers/check-offer': typeof CareersCheckOfferRoute
@@ -387,6 +396,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/search'
+    | '/signalement-ethique'
     | '/sitemap.xml'
     | '/articles/$slug'
     | '/careers/check-offer'
@@ -429,6 +439,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/search'
+    | '/signalement-ethique'
     | '/sitemap.xml'
     | '/articles/$slug'
     | '/careers/check-offer'
@@ -471,6 +482,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/search'
+    | '/signalement-ethique'
     | '/sitemap.xml'
     | '/articles/$slug'
     | '/careers/check-offer'
@@ -514,6 +526,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   SearchRoute: typeof SearchRoute
+  SignalementEthiqueRoute: typeof SignalementEthiqueRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ArticlesSlugRoute: typeof ArticlesSlugRoute
   CareersCheckOfferRoute: typeof CareersCheckOfferRoute
@@ -560,6 +573,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signalement-ethique': {
+      id: '/signalement-ethique'
+      path: '/signalement-ethique'
+      fullPath: '/signalement-ethique'
+      preLoaderRoute: typeof SignalementEthiqueRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/search': {
@@ -842,6 +862,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   SearchRoute: SearchRoute,
+  SignalementEthiqueRoute: SignalementEthiqueRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ArticlesSlugRoute: ArticlesSlugRoute,
   CareersCheckOfferRoute: CareersCheckOfferRoute,
