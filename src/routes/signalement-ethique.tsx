@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+
 import { useState } from "react";
 import { z } from "zod";
 import { ShieldCheck, EyeOff, Lock, Scale, Copy, MessageCircle, Mail, CheckCircle2 } from "lucide-react";
@@ -76,16 +77,26 @@ function EthiquePage() {
 
   return (
     <SiteShell>
-      <section className="border-b border-border bg-secondary/40">
+      <section className="border-b border-border bg-muted/40">
         <div className="container-x py-16 md:py-24">
-          <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary">
-            <ShieldCheck className="h-4 w-4" /> Canal confidentiel — Tolérance zéro corruption
+          <span 
+          className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary"
+          >
+            <ShieldCheck className="h-4 w-4" />
+             Canal confidentiel — Tolérance zéro corruption
           </span>
-          <h1 className="mt-6 max-w-3xl font-display text-4xl font-bold md:text-6xl">Dispositif de signalement éthique & droit d'alerte</h1>
-          <p className="mt-6 max-w-2xl text-lg text-muted-foreground">STAF PRINT CENTER refuse toute forme de corruption, de fraude ou d'arrangement occulte. Si vous êtes témoin d'un manquement, vous pouvez nous le signaler en toute sécurité, de manière anonyme si vous le souhaitez.</p>
+
+          <h1 className="mt-6 max-w-3xl font-display text-4xl font-bold md:text-6xl">
+            Dispositif de signalement éthique & droit d'alerte
+            </h1>
+
+          <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
+            STAF PRINT CENTER refuse toute forme de corruption, de fraude ou d'arrangement occulte. Si vous êtes témoin d'un manquement, vous pouvez nous le signaler en toute sécurité, de manière anonyme si vous le souhaitez.
+            </p>
+
           <div className="mt-8 flex flex-wrap gap-3">
             <a href="#formulaire" className="cursor-pointer rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90">Faire un signalement</a>
-            <a href="#cadre" className="cursor-pointer rounded-full border border-border px-6 py-3 text-sm font-semibold hover:bg-secondary">Notre cadre de référence</a>
+            <a href="#cadre" className="inline-flex items-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-secondary-foreground transition hover:bg-secondary/90">Notre cadre de référence</a>
           </div>
           <blockquote className="mt-12 max-w-2xl border-l-4 border-primary pl-5 text-foreground/80 italic">
             « L'intégrité est la base de la confiance que nos clients nous accordent. Aucun contrat ne vaut une compromission. »
