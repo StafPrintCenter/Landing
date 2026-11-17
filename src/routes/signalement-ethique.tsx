@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { z } from "zod";
 import { ShieldCheck, EyeOff, Lock, Scale, Copy, MessageCircle, Mail, CheckCircle2 } from "lucide-react";
@@ -95,9 +96,19 @@ function EthiquePage() {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href="#formulaire" className="cursor-pointer rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90">Faire un signalement</a>
-            <a href="#cadre" className="inline-flex items-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-secondary-foreground transition hover:bg-secondary/90">Notre cadre de référence</a>
+            <Link href="#formulaire"
+              className="inline-flex items-center cursor-pointer rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90"
+            >
+              Faire un signalement <ArrowRight size={16} />
+            </Link>
+
+            <a href="#cadre"
+              className="inline-flex items-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-secondary-foreground transition hover:bg-secondary/90"
+            >
+              Notre cadre de référence
+            </a>
           </div>
+
           <blockquote className="mt-12 max-w-2xl border-l-4 border-primary pl-5 text-foreground/80 italic">
             « L'intégrité est la base de la confiance que nos clients nous accordent. Aucun contrat ne vaut une compromission. »
             <footer className="mt-2 text-sm not-italic font-semibold text-foreground">- {SITE.manager}, gérant</footer>
