@@ -39,7 +39,7 @@ export function FooterBrand() {
       </div>
 
       <span className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-secondary-foreground/60">
-        {FOOTER_LINKS.map((link, index) => {
+        {FOOTER_LEGAL_LINKS.map((link, index) => {
           const linkKey = "to" in link ? link.to : link.href;
           const isExternal = "href" in link;
 
