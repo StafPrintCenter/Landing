@@ -105,7 +105,9 @@ function EthiquePage() {
 
           <blockquote className="mt-12 max-w-2xl border-l-4 border-primary pl-5 text-foreground/80 italic">
             « L'intégrité est la base de la confiance que nos clients nous accordent. Aucun contrat ne vaut une compromission. »
-            <footer className="mt-2 text-sm not-italic font-semibold text-foreground">- {SITE.manager}, gérant</footer>
+            <footer className="mt-2 text-sm not-italic font-semibold text-foreground">
+              - {SITE.manager}, Fondateur &amp; responsable de production
+            </footer>
           </blockquote>
         </div>
       </section>
