@@ -86,7 +86,7 @@ function EthiquePage() {
           </h1>
 
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-            STAF PRINT CENTER refuse toute forme de corruption, de fraude ou d'arrangement occulte. Si vous êtes témoin d'un manquement, vous pouvez nous le signaler en toute sécurité, de manière anonyme si vous le souhaitez.
+            {SITE.name} refuse toute forme de corruption, de fraude ou d'arrangement occulte. Si vous êtes témoin d'un manquement, vous pouvez nous le signaler en toute sécurité, de manière anonyme si vous le souhaitez.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
