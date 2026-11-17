@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { SITE, FOOTER_LINKS } from "@/data/site";
+import { SITE, FOOTER_LEGAL_LINKS } from "@/data/site";
 import logo from "@/assets/logos.json";
 import { FacebookIcon, InstagramIcon, LinkedinIcon, TiktokIcon, XIcon } from "../icons";
 
