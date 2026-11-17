@@ -10,7 +10,7 @@ import {
   ETHIQUE_PROCESS, ETHIQUE_FAQ, ETHIQUE_POSTAL, generateTrackingCode,
 } from "@/data/ethique";
 
-const TITLE = "Signalement éthique & droit d'alerte — STAF PRINT CENTER";
+const TITLE = "Signalement éthique & droit d'alerte - STAF PRINT CENTER";
 const DESC = "Signalez de façon anonyme et confidentielle tout fait de corruption, fraude ou conflit d'intérêts. Dispositif conforme à la loi béninoise n° 2011-20.";
 
 export const Route = createFileRoute("/signalement-ethique")({
@@ -67,7 +67,7 @@ function EthiquePage() {
   };
 
   const report = code ? [
-    `SIGNALEMENT ÉTHIQUE — ${code}`, `Catégorie : ${form.category}`,
+    `SIGNALEMENT ÉTHIQUE - ${code}`, `Catégorie : ${form.category}`,
     form.concerned && `Personnes/services : ${form.concerned}`, form.when && `Période : ${form.when}`,
     `Faits : ${form.description}`, form.evidence && `Éléments probants : ${form.evidence}`,
     form.anonymous || !form.contact ? "Déclarant : anonyme" : `Contact : ${form.contact}`,
@@ -83,7 +83,7 @@ function EthiquePage() {
             className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary"
           >
             <ShieldCheck className="h-4 w-4" />
-            Canal confidentiel — Tolérance zéro corruption
+            Canal confidentiel - Tolérance zéro corruption
           </span>
 
           <h1 className="mt-6 max-w-3xl font-display text-4xl font-bold md:text-6xl">
@@ -100,7 +100,7 @@ function EthiquePage() {
           </div>
           <blockquote className="mt-12 max-w-2xl border-l-4 border-primary pl-5 text-foreground/80 italic">
             « L'intégrité est la base de la confiance que nos clients nous accordent. Aucun contrat ne vaut une compromission. »
-            <footer className="mt-2 text-sm not-italic font-semibold text-foreground">— {SITE.manager}, gérant</footer>
+            <footer className="mt-2 text-sm not-italic font-semibold text-foreground">- {SITE.manager}, gérant</footer>
           </blockquote>
         </div>
       </section>
