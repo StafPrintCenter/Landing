@@ -87,61 +87,67 @@ export function EthiqueReportForm() {
     <section id="formulaire" className="container-x max-w-3xl scroll-mt-24 py-16">
       <h2 className="font-display text-3xl font-bold">Formulaire de signalement</h2>
       {code ? (
-        <div className="mt-8 rounded-2xl border border-primary/40 bg-primary/5 p-6">
-          <CheckCircle2 className="h-8 w-8 text-primary" />
-          <h3 className="mt-3 font-display text-xl font-semibold">Votre signalement est prêt</h3>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Conservez votre code de suivi, puis transmettez le signalement au référent éthique par
-            le canal de votre choix.
-          </p>
-          <p className="mt-4 font-mono text-2xl font-bold text-primary">{code}</p>
-          <pre className="mt-4 max-h-64 overflow-auto whitespace-pre-wrap rounded-xl bg-background p-4 text-xs">
-            {report}
-          </pre>
-          <div className="mt-4 flex flex-wrap gap-3">
+        <div className="relative mt-8 overflow-hidden rounded-3xl border border-border bg-linear-to-br from-primary/10 via-card to-accent/10 p-1 shadow-lg">
+          <div className="rounded-[1.35rem] border border-border/70 bg-card/90 p-6 backdrop-blur md:p-8">
+            <CheckCircle2 className="h-8 w-8 text-primary" />
+            <h3 className="mt-3 font-display text-xl font-semibold">Votre signalement est prêt</h3>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Conservez votre code de suivi, puis transmettez le signalement au référent éthique par
+              le canal de votre choix.
+            </p>
+            <p className="mt-4 font-mono text-2xl font-bold text-primary">{code}</p>
+            <pre className="mt-4 max-h-64 overflow-auto whitespace-pre-wrap rounded-xl border border-border bg-background/80 p-4 text-xs">
+              {report}
+            </pre>
+            <div className="mt-4 flex flex-wrap gap-3">
+              <button
+                type="button"
+                onClick={() => navigator.clipboard.writeText(report)}
+                className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold transition hover:bg-secondary"
+              >
+                <Copy className="h-4 w-4" /> Copier
+              </button>
+              <a
+                href={`${SITE.whatsappLink}?text=${encodeURIComponent(report)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition hover:opacity-90"
+              >
+                <MessageCircle className="h-4 w-4" /> Envoyer par WhatsApp
+              </a>
+              <a
+                href={`mailto:${SITE.email}?subject=${encodeURIComponent("Signalement éthique " + code)}&body=${encodeURIComponent(report)}`}
+                className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold transition hover:bg-secondary"
+              >
+                <Mail className="h-4 w-4" /> Envoyer par e-mail
+              </a>
+            </div>
+            <p className="mt-4 text-xs text-muted-foreground">
+              Pour rester totalement anonyme, utilisez une adresse e-mail ou un numéro qui ne vous
+              identifie pas, ou le courrier postal ci-dessous.
+            </p>
             <button
               type="button"
-              onClick={() => navigator.clipboard.writeText(report)}
-              className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-semibold hover:bg-secondary"
+              onClick={() => setCode(null)}
+              className="mt-4 cursor-pointer text-sm font-semibold text-primary underline"
             >
-              <Copy className="h-4 w-4" /> Copier
+              Modifier le signalement
             </button>
-            <a
-              href={`${SITE.whatsappLink}?text=${encodeURIComponent(report)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground"
-            >
-              <MessageCircle className="h-4 w-4" /> Envoyer par WhatsApp
-            </a>
-            <a
-              href={`mailto:${SITE.email}?subject=${encodeURIComponent("Signalement éthique " + code)}&body=${encodeURIComponent(report)}`}
-              className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-semibold hover:bg-secondary"
-            >
-              <Mail className="h-4 w-4" /> Envoyer par e-mail
-            </a>
           </div>
-          <p className="mt-4 text-xs text-muted-foreground">
-            Pour rester totalement anonyme, utilisez une adresse e-mail ou un numéro qui ne vous
-            identifie pas, ou le courrier postal ci-dessous.
-          </p>
-          <button
-            type="button"
-            onClick={() => setCode(null)}
-            className="mt-4 cursor-pointer text-sm font-semibold text-primary underline"
-          >
-            Modifier le signalement
-          </button>
         </div>
       ) : (
-        <form onSubmit={submit} className="mt-8 space-y-5" noValidate>
+        <form
+          onSubmit={submit}
+          className="mt-8 space-y-5 rounded-3xl border border-border bg-linear-to-br from-primary/10 via-card to-accent/10 p-6 shadow-lg md:p-8"
+          noValidate
+        >
           <div>
             <label className="text-sm font-semibold" htmlFor="cat">
               Nature des faits *
             </label>
             <select
               id="cat"
-              className={`${FIELD_CLASS_NAME} mt-2 cursor-pointer`}
+              className={`${FIELD_CLASS_NAME} mt-2 cursor-pointer border-border/80 bg-card/80 transition focus:ring-2 focus:ring-primary/20`}
               value={form.category}
               onChange={(event) => setField("category", event.target.value)}
             >
@@ -161,7 +167,7 @@ export function EthiqueReportForm() {
               <input
                 id="who"
                 maxLength={200}
-                className={`${FIELD_CLASS_NAME} mt-2`}
+                className={`${FIELD_CLASS_NAME} mt-2 border-border/80 bg-card/80 transition focus:ring-2 focus:ring-primary/20`}
                 value={form.concerned}
                 onChange={(event) => setField("concerned", event.target.value)}
               />
@@ -174,7 +180,7 @@ export function EthiqueReportForm() {
                 id="when"
                 maxLength={100}
                 placeholder="ex : mars 2026, répété"
-                className={`${FIELD_CLASS_NAME} mt-2`}
+                className={`${FIELD_CLASS_NAME} mt-2 border-border/80 bg-card/80 transition focus:ring-2 focus:ring-primary/20`}
                 value={form.when}
                 onChange={(event) => setField("when", event.target.value)}
               />
@@ -190,7 +196,7 @@ export function EthiqueReportForm() {
               id="desc"
               rows={6}
               maxLength={3000}
-              className={`${FIELD_CLASS_NAME} mt-2`}
+              className={`${FIELD_CLASS_NAME} mt-2 border-border/80 bg-card/80 transition focus:ring-2 focus:ring-primary/20`}
               value={form.description}
               onChange={(event) => setField("description", event.target.value)}
             />
@@ -207,13 +213,13 @@ export function EthiqueReportForm() {
               id="ev"
               maxLength={500}
               placeholder="documents, messages, témoins…"
-              className={`${FIELD_CLASS_NAME} mt-2`}
+              className={`${FIELD_CLASS_NAME} mt-2 border-border/80 bg-card/80 transition focus:ring-2 focus:ring-primary/20`}
               value={form.evidence}
               onChange={(event) => setField("evidence", event.target.value)}
             />
           </div>
 
-          <fieldset className="rounded-2xl border border-border p-5">
+          <fieldset className="rounded-2xl border border-border/80 bg-card/60 p-5">
             <legend className="px-2 text-sm font-semibold">Mode de transmission</legend>
             <label className="flex cursor-pointer items-center gap-3 text-sm">
               <input
@@ -235,7 +241,7 @@ export function EthiqueReportForm() {
               <input
                 maxLength={150}
                 placeholder="Nom, e-mail ou téléphone"
-                className={`${FIELD_CLASS_NAME} mt-4`}
+                className={`${FIELD_CLASS_NAME} mt-4 border-border/80 bg-card/80 transition focus:ring-2 focus:ring-primary/20`}
                 value={form.contact}
                 onChange={(event) => setField("contact", event.target.value)}
               />
