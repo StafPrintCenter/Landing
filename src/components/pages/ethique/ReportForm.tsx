@@ -1,8 +1,11 @@
 import { useState, type FormEvent } from "react";
 import { z } from "zod";
-import { CheckCircle2, Copy, Mail, MessageCircle } from "lucide-react";
-import { ETHIQUE_CATEGORIES, generateTrackingCode } from "@/data/ethique";
-import { SITE } from "@/data/site";
+import { CheckCircle2, Copy } from "lucide-react";
+import { ETHIQUE_CATEGORIES } from "@/data/ethique";
+import { DraftBanner } from "@/components/shared/DraftBanner";
+import { useFormDraft } from "@/hooks/use-form-draft";
+import { ApiError } from "@/lib/api/error";
+import { createEthicalReport, type EthicalReportReceipt } from "@/stores/useEthicalReportsStore";
 
 const reportSchema = z.object({
   category: z.string().min(1, "Choisissez une catégorie"),
@@ -37,20 +40,48 @@ const INITIAL_FORM: ReportFormData = {
   goodFaith: false,
 };
 
+const ETHICAL_REPORT_DRAFT_VERSION = 1;
+const ETHICAL_REPORT_DRAFT_TTL_MS = 1000 * 60 * 60 * 24;
+
 const FIELD_CLASS_NAME =
   "w-full rounded-xl border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none";
 
 export function EthiqueReportForm() {
   const [form, setForm] = useState(INITIAL_FORM);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [code, setCode] = useState<string | null>(null);
+  const [receipt, setReceipt] = useState<EthicalReportReceipt | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [bannerDismissed, setBannerDismissed] = useState(false);
+
+  const { draftAvailable, restoreDraft, discardDraft, getSavedAgeLabel } =
+    useFormDraft<ReportFormData>({
+      formId: "ethical-report",
+      version: ETHICAL_REPORT_DRAFT_VERSION,
+      ttlMs: ETHICAL_REPORT_DRAFT_TTL_MS,
+      values: form,
+      excludeFields: ["goodFaith"],
+      enabled: !receipt,
+    });
 
   function setField<Key extends keyof ReportFormData>(key: Key, value: ReportFormData[Key]) {
     setForm((current) => ({ ...current, [key]: value }));
   }
 
-  function submit(event: FormEvent<HTMLFormElement>) {
+  function handleRestoreDraft() {
+    const draft = restoreDraft();
+    if (draft) setForm((current) => ({ ...current, ...draft, goodFaith: false }));
+    setBannerDismissed(true);
+  }
+
+  function handleDiscardDraft() {
+    discardDraft();
+    setBannerDismissed(true);
+  }
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setSubmitError(null);
     const result = reportSchema.safeParse(form);
     if (!result.success) {
       const nextErrors: Record<string, string> = {};
@@ -62,76 +93,71 @@ export function EthiqueReportForm() {
     }
 
     setErrors({});
-    setCode(generateTrackingCode());
+    setIsSubmitting(true);
+    try {
+      const submittedReport = await createEthicalReport(result.data);
+      setReceipt(submittedReport);
+      discardDraft();
+    } catch (error) {
+      if (error instanceof ApiError) {
+        setSubmitError(error.message);
+        if (error.fieldErrors) {
+          const fieldErrors: Record<string, string> = {};
+          for (const [field, messages] of Object.entries(error.fieldErrors)) {
+            if (messages[0]) fieldErrors[field] = messages[0];
+          }
+          setErrors(fieldErrors);
+        }
+      } else {
+        setSubmitError("Une erreur est survenue lors de l'envoi. Merci de réessayer.");
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
     window.scrollTo({
       top: document.getElementById("formulaire")?.offsetTop ?? 0,
       behavior: "smooth",
     });
   }
 
-  const report = code
-    ? [
-        `SIGNALEMENT ÉTHIQUE - ${code}`,
-        `Catégorie : ${form.category}`,
-        form.concerned && `Personnes/services : ${form.concerned}`,
-        form.when && `Période : ${form.when}`,
-        `Faits : ${form.description}`,
-        form.evidence && `Éléments probants : ${form.evidence}`,
-        form.anonymous || !form.contact ? "Déclarant : anonyme" : `Contact : ${form.contact}`,
-      ]
-        .filter(Boolean)
-        .join("\n")
-    : "";
-
   return (
     <section id="formulaire" className="container-x max-w-3xl scroll-mt-24 py-16">
       <h2 className="font-display text-3xl font-bold">Formulaire de signalement</h2>
-      {code ? (
+      {receipt ? (
         <div className="relative mt-8 overflow-hidden rounded-3xl border border-border bg-linear-to-br from-primary/10 via-card to-accent/10 p-1 shadow-lg">
           <div className="rounded-[1.35rem] border border-border/70 bg-card/90 p-6 backdrop-blur md:p-8">
             <CheckCircle2 className="h-8 w-8 text-primary" />
-            <h3 className="mt-3 font-display text-xl font-semibold">Votre signalement est prêt</h3>
+            <h3 className="mt-3 font-display text-xl font-semibold">
+              Votre signalement a été enregistré
+            </h3>
             <p className="mt-2 text-sm text-muted-foreground">
-              Conservez votre code de suivi, puis transmettez le signalement au référent éthique par
-              le canal de votre choix.
+              Conservez votre code de suivi. Votre signalement a été transmis de manière
+              confidentielle au référent éthique.
             </p>
-            <p className="mt-4 font-mono text-2xl font-bold text-primary">{code}</p>
-            <pre className="mt-4 max-h-64 overflow-auto whitespace-pre-wrap rounded-xl border border-border bg-background/80 p-4 text-xs">
-              {report}
-            </pre>
+            <p className="mt-4 font-mono text-2xl font-bold text-primary">{receipt.trackingCode}</p>
             <div className="mt-4 flex flex-wrap gap-3">
               <button
                 type="button"
-                onClick={() => navigator.clipboard.writeText(report)}
+                onClick={() => navigator.clipboard.writeText(receipt.trackingCode)}
                 className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold transition hover:bg-secondary"
               >
-                <Copy className="h-4 w-4" /> Copier
+                <Copy className="h-4 w-4" /> Copier le code
               </button>
-              <a
-                href={`${SITE.whatsappLink}?text=${encodeURIComponent(report)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition hover:opacity-90"
-              >
-                <MessageCircle className="h-4 w-4" /> Envoyer par WhatsApp
-              </a>
-              <a
-                href={`mailto:${SITE.email}?subject=${encodeURIComponent("Signalement éthique " + code)}&body=${encodeURIComponent(report)}`}
-                className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold transition hover:bg-secondary"
-              >
-                <Mail className="h-4 w-4" /> Envoyer par e-mail
-              </a>
             </div>
             <p className="mt-4 text-xs text-muted-foreground">
-              Pour rester totalement anonyme, utilisez une adresse e-mail ou un numéro qui ne vous
-              identifie pas, ou le courrier postal ci-dessous.
+              Statut : {receipt.status === "pending" ? "en attente" : receipt.status}.
             </p>
             <button
               type="button"
-              onClick={() => setCode(null)}
+              onClick={() => {
+                setReceipt(null);
+                setForm(INITIAL_FORM);
+                setErrors({});
+                setSubmitError(null);
+              }}
               className="mt-4 cursor-pointer text-sm font-semibold text-primary underline"
             >
-              Modifier le signalement
+              Déposer un autre signalement
             </button>
           </div>
         </div>
@@ -141,6 +167,17 @@ export function EthiqueReportForm() {
           className="mt-8 space-y-5 rounded-3xl border border-border bg-linear-to-br from-primary/10 via-card to-accent/10 p-6 shadow-lg md:p-8"
           noValidate
         >
+          {draftAvailable && !bannerDismissed && (
+            <DraftBanner
+              savedAgeLabel={getSavedAgeLabel()}
+              onRestore={handleRestoreDraft}
+              onDiscard={handleDiscardDraft}
+            />
+          )}
+          <p className="text-xs text-muted-foreground">
+            Les réponses non envoyées sont sauvegardées dans ce navigateur pendant 24 heures. Sur un
+            appareil partagé, pensez à supprimer votre brouillon après utilisation.
+          </p>
           <div>
             <label className="text-sm font-semibold" htmlFor="cat">
               Nature des faits *
@@ -225,7 +262,10 @@ export function EthiqueReportForm() {
               <input
                 type="radio"
                 checked={form.anonymous}
-                onChange={() => setField("anonymous", true)}
+                onChange={() => {
+                  setField("anonymous", true);
+                  setField("contact", "");
+                }}
               />
               100 % anonyme
             </label>
@@ -262,10 +302,16 @@ export function EthiqueReportForm() {
 
           <button
             type="submit"
-            className="cursor-pointer rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90"
+            disabled={isSubmitting}
+            className="cursor-pointer rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            Préparer mon signalement
+            {isSubmitting ? "Envoi en cours…" : "Envoyer mon signalement"}
           </button>
+          {submitError && (
+            <p role="alert" className="text-sm text-destructive">
+              {submitError}
+            </p>
+          )}
         </form>
       )}
     </section>
