@@ -26,7 +26,12 @@ export async function fetchPublicResources(params: Parameters<typeof fetchList>[
   };
 }
 
-export const fetchResourceBySlug = fetchById;
+export function fetchResourceBySlug(
+  slug: string,
+  options?: { trackView?: boolean },
+): Promise<APIResource | null> {
+  return fetchById(slug, options);
+}
 
 export async function fetchResourceForPayment(resourceId: string): Promise<APIResource | null> {
   const resource = await fetchById(resourceId);
