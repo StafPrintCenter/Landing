@@ -18,6 +18,7 @@ function getSections(): LegalSection[] {
     { title: "Brouillon : Demande de devis", desc: "Sauvegarde temporaire du formulaire", duration: "6 heures" },
     { title: "Brouillon : Offre d'emploi", desc: "Sauvegarde temporaire de candidature", duration: "24 heures" },
     { title: "Brouillon : Demande de stage", desc: "Sauvegarde temporaire du formulaire", duration: "2 jours" },
+    { title: "Brouillon : Signalement éthique", desc: "Réponses du formulaire enregistrées sur l'appareil utilisé", duration: "24 heures" },
     { title: "Brouillon : Déposer un avis", desc: "Sauvegarde d'un avis en cours de rédaction", duration: "3 jours" },
     { title: "Identifiant visiteur (spc_visitor_id)", desc: "Reconnaissance anonyme des visites récurrentes", duration: "Jusqu'au nettoyage" },
     { title: "Newsletter", desc: "Mémorisation de votre choix (abonné, masqué ou reporté)", duration: "Persistant" },
@@ -51,6 +52,10 @@ function getSections(): LegalSection[] {
               <li>
                 <span className="font-bold">Données de suivi de formation :</span>{" "}
                 Informations nécessaires à l'inscription, à l'accompagnement pédagogique et au suivi des apprenants.
+              </li>
+              <li>
+                <span className="font-bold">Signalements éthiques :</span>{" "}
+                Catégorie, personnes ou services concernés, période et description des faits, éléments probants, choix de l'anonymat et, le cas échéant, coordonnées de contact.
               </li>
             </ul>
           </div>
@@ -112,6 +117,9 @@ function getSections(): LegalSection[] {
               <span className="font-bold">Le recrutement :</span>{" "} Évaluation des candidatures pour des offres d'emploi ou de stage (mesures précontractuelles).
             </li>
             <li>
+              <span className="font-bold">Le traitement des signalements éthiques :</span>{" "} Réception, examen confidentiel et suivi des faits signalés, avec ou sans coordonnées de contact.
+            </li>
+            <li>
               <span className="font-bold">La mesure d'audience et d'engagement :</span>{" "} Analyse des performances de nos bannières ainsi que mesure du trafic via notre service de redirection{" "}
               <code className="rounded bg-muted px-1.5 py-0.5 text-[13px]">{SITE_LINK.shortUrl}</code>{" "} et Google Analytics (consentement).
             </li>
@@ -142,6 +150,9 @@ function getSections(): LegalSection[] {
             <li>
               <span className="font-bold">Données de candidatures :</span>{" "} Conservées pendant 2 ans maximum après le dernier échange.
             </li>
+            <li>
+              <span className="font-bold">Signalements éthiques :</span>{" "} Conservés de manière confidentielle pendant leur examen et leur suivi, puis selon les obligations légales applicables.
+            </li>
           </ul>
         </div>
       ),
@@ -158,7 +169,7 @@ function getSections(): LegalSection[] {
               <span className="font-bold">Aucune revente :</span>{" "} {SITE.name} s'engage formellement à ne jamais vendre, louer, échanger ou céder vos données personnelles ou vos fichiers de projet à des tiers à des fins commerciales.
             </li>
             <li>
-              <span className="font-bold">Accès restreint :</span>{" "} Seuls les membres habilités de notre équipe (graphistes, imprimeurs, développeurs, formateurs) ont accès aux données strictement nécessaires à la réalisation de leur mission.
+              <span className="font-bold">Accès restreint :</span>{" "} Seules les personnes habilitées ont accès aux données nécessaires à leur mission. Les signalements éthiques sont réservés au référent et aux personnes autorisées à les traiter.
             </li>
             <li>
               <span className="font-bold">Sous-traitants techniques :</span>{" "} Vos données peuvent être hébergées ou traitées par nos prestataires de confiance : LWS (infrastructure cloud sécurisée) et Google Ireland Ltd. (Google Analytics pour la mesure d'audience anonymisée).
@@ -325,7 +336,7 @@ function ConfidentialitePage() {
       badge="Protection des données"
       title="Politique de confidentialité"
       description={`Chez ${SITE.name}, nous attachons une importance capitale à la protection de vos données personnelles et à la confidentialité de vos projets créatifs. Cette politique détaille comment nous collectons, utilisons, stockons et protégeons vos informations.`}
-      lastUpdated="21 août 2026"
+      lastUpdated="18 novembre 2026"
       sections={getSections()}
       contactQuestion="Une question sur la gestion de vos données personnelles ?"
     />
