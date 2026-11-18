@@ -18,7 +18,7 @@ const reportSchema = z.object({
   goodFaith: z.literal(true, { message: "Vous devez attester de votre bonne foi" }),
 });
 
-interface ReportFormData {
+interface ReportFormData extends Record<string, unknown> {
   category: string;
   concerned: string;
   when: string;
@@ -139,7 +139,7 @@ export function EthiqueReportForm() {
               <button
                 type="button"
                 onClick={() => navigator.clipboard.writeText(receipt.trackingCode)}
-                className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold transition hover:bg-secondary"
+                className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold transition hover:bg-secondary hover:text-card"
               >
                 <Copy className="h-4 w-4" /> Copier le code
               </button>
