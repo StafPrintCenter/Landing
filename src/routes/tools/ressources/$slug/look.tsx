@@ -15,7 +15,7 @@ export const Route = createFileRoute("/tools/ressources/$slug/look")({
   validateSearch: searchSchema,
   pendingMs: 0,
   loader: async ({ params }) => {
-    const resource = await fetchResourceBySlug(params.slug);
+    const resource = await fetchResourceBySlug(params.slug, { trackView: false });
     if (!resource) throw notFound();
     return { resource };
   },
