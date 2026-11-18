@@ -56,5 +56,6 @@ export const FOOTER_LEGAL_LINKS = [
   { label: "Mentions légales", to: "/legal/mentions" },
   { label: "Confidentialité", to: "/legal/privacy" },
   { label: "Conditions Générales de Vente", to: "/legal/cgv" },
+  { label: "Signalement éthique", to: "/signalement-ethique" },
   { label: "Documentation", href: `${SITE_LINK.docsUrl}/docs/landing/index` },
 ] as const;
