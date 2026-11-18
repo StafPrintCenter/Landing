@@ -71,11 +71,12 @@ export function createResourceStore<T>({
     return response.json();
   }
 
-  async function fetchById(id: string): Promise<T | null> {
+  async function fetchById(id: string, options: { trackView?: boolean } = {}): Promise<T | null> {
     if (!detailEndpoint) {
       throw new Error(`Aucun endpoint de détail configuré pour "${resourceKey}"`);
     }
-    const url = resolveApiUrl(`/api/public/${detailEndpoint}/${id}`);
+    const query = options.trackView === false ? "?trackView=false" : "";
+    const url = resolveApiUrl(`/api/public/${detailEndpoint}/${id}${query}`);
     const response = await fetch(url);
     if (response.status === 404) return null;
     if (!response.ok) {
