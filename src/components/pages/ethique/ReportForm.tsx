@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { z } from "zod";
 import { CheckCircle2, Copy } from "lucide-react";
+import { toast } from "sonner";
 import { ETHIQUE_CATEGORIES } from "@/data/ethique";
 import { DraftBanner } from "@/components/shared/DraftBanner";
 import { useFormDraft } from "@/hooks/use-form-draft";
@@ -62,6 +63,14 @@ export function EthiqueReportForm() {
       values: form,
       excludeFields: ["goodFaith"],
       enabled: !receipt,
+      isEmpty: (values) =>
+        !values.category.trim() &&
+        !values.concerned.trim() &&
+        !values.when.trim() &&
+        !values.description.trim() &&
+        !values.evidence.trim() &&
+        !values.contact.trim() &&
+        values.anonymous,
     });
 
   function setField<Key extends keyof ReportFormData>(key: Key, value: ReportFormData[Key]) {
@@ -138,7 +147,14 @@ export function EthiqueReportForm() {
             <div className="mt-4 flex flex-wrap gap-3">
               <button
                 type="button"
-                onClick={() => navigator.clipboard.writeText(receipt.trackingCode)}
+                onClick={async () => {
+                  try {
+                    await navigator.clipboard.writeText(receipt.trackingCode);
+                    toast.success("Code de suivi copié.");
+                  } catch {
+                    toast.error("Impossible de copier le code de suivi.");
+                  }
+                }}
                 className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold transition hover:bg-secondary hover:text-card"
               >
                 <Copy className="h-4 w-4" /> Copier le code
