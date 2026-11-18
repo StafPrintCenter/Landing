@@ -14,8 +14,7 @@ export function EthiqueScope() {
           ))}
         </div>
         <p className="mt-6 text-sm text-muted-foreground">
-          Les réclamations commerciales (retard, réimpression, litige de prix) relèvent du service
-          client, pas de ce dispositif.
+          Les réclamations commerciales (retard, réimpression, litige de prix) relèvent du service client, pas de ce dispositif.
         </p>
       </div>
     </section>
