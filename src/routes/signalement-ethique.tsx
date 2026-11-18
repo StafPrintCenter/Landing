@@ -139,7 +139,7 @@ function EthiquePage() {
         </div>
       </section>
 
-      <section className="bg-secondary/40 py-16">
+      <section className="bg-muted/40 py-16">
         <div className="container-x">
           <h2 className="font-display text-3xl font-bold">Ce que vous pouvez signaler</h2>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -149,7 +149,9 @@ function EthiquePage() {
                 <p className="mt-2 text-sm text-muted-foreground">{s.text}</p>
               </div>))}
           </div>
-          <p className="mt-6 text-sm text-muted-foreground">Les réclamations commerciales (retard, réimpression, litige de prix) relèvent du service client, pas de ce dispositif.</p>
+          <p className="mt-6 text-sm text-muted-foreground">
+            Les réclamations commerciales (retard, réimpression, litige de prix) relèvent du service client, pas de ce dispositif.
+          </p>
         </div>
       </section>
 
@@ -209,7 +211,7 @@ function EthiquePage() {
         )}
       </section>
 
-      <section className="bg-secondary/40 py-16">
+      <section className="bg-muted/40 py-16">
         <div className="container-x">
           <h2 className="font-display text-3xl font-bold">Traitement & délais</h2>
           <ol className="mt-8 grid gap-4 md:grid-cols-5">
