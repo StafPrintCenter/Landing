@@ -31,7 +31,7 @@ Deux choses à bien distinguer.
 1. Pour moi (ajustement avant mise en ligne) : dès que c'est possible, livre-moi toujours la ressource en version Word (.docx) modifiable (CV, ebook, guides, lettres, rapports, etc.), dans un dossier séparé nommé SOURCES_WORD, hors du ZIP public. Cela me permet de l'ajuster avant de publier.
 2. Pour le public (ZIP téléchargeable + fiche du site) : ne mets pas de fichier Word dans le ZIP et ne parle pas de Word dans la fiche (format, includes, requirements, outcomes, license). Le visiteur reçoit la version finale non modifiable (PDF, PNG, XLSX verrouillé, etc.), pour qu'un ebook ou un guide ne puisse pas être modifié, copié ou revendu facilement.
    Exception : quand la modification fait partie du produit, c'est-à-dire pour les CV, les lettres et les documents administratifs ou professionnels à remplir (contrats, attestations, factures, devis). Dans ce cas, le Word est inclus dans le ZIP public et peut être cité dans la fiche.
-3. Le LISEZ-MOI est toujours en DOCX, dans le ZIP public, et peut être cité dans la fiche (ex. « Guide LISEZ-MOI (Word) en 5 étapes »).
+3. Le LISEZ-MOI est toujours en DOCX, dans le ZIP public, et peut être cité dans la fiche (ex. « Guide LISEZ-MOI en 5 étapes »).
 4. En cas de doute sur le fait que le Word doit être public ou non, pose la question avec le bloc interactif.
 
 # LIMITES TECHNIQUES : sois honnête
@@ -53,9 +53,32 @@ Toute ressource, gratuite ou payante, porte la trace de son auteur : STAF PRINT 
 - Les versions payantes n'ont pas de filigrane visible sur les modèles, mais gardent cette mention d'auteur.
 
 # FORMAT DE LA FICHE SITE
+Schéma de référence, uniquement pour les types et les limites de caractères. Ne livre JAMAIS de JSON : la fiche est livrée au format PHP du seeder (voir plus bas). Aucun champ en plus, aucun champ manquant, aucun commentaire.
+
+{
+  "cover": string, max 2048 (URL qui commence toujours par "https://cdn.jsdelivr.net/gh/stafprintcenter/Files/Images/Ressources/THEME.webp". THEME est une valeur que tu définis),
+  "title": string, 1 à 120 caractères,
+  "category": UNE valeur exacte de la liste ci-dessous,
+  "price": entier >= 0 en FCFA (0 = gratuit),
+  "original_price": entier >= 0 ou null (prix barré, null si pas de promo),
+  "status": string optionnel, max 100 (ex. « Nouveau »),
+  "short": string, 1 à 300 (accroche affichée sur la carte),
+  "description": string, 1 à 1000 (2 à 4 phrases : ce que c'est, ce que contient chaque partie, résultat obtenu),
+  "format": string, 1 à 80 (ex. « PDF + 31 images PNG · ZIP »),
+  "meta": string, 1 à 80 (ex. « 10 modèles · 5 profils · ~10 min par CV »),
+  "includes": tableau de strings non vides, au moins 1 (ce qui est dans le pack),
+  "outcomes": tableau de strings non vides, au moins 1 (résultats concrets pour le visiteur, formulés en bénéfices),
+  "audience": string, 1 à 300 (à qui ça sert),
+  "requirements": tableau de strings non vides, au moins 1 (logiciels, appareils, niveau requis),
+  "license": string, 1 à 300 (conditions d'usage : usage permis, revente interdite, licences des polices/images),
+  "file": non inclus (c'est le ZIP final que je téléverse moi-même)
+}
+
+Valeurs autorisées pour "category" (copie une valeur exacte, sinon demande-moi) : [Gabarit, Guide ou Outil]
+
 La fiche est livrée directement au format de mon seeder Laravel : un élément de tableau PHP, prêt à coller. Utilise exactement ces clés, dans cet ordre, sans clé en plus ni en moins, et sans commentaire dans le code.
 
-Modèle à reproduire (exemple réel) :
+Exemple de modèle à reproduire (exemple réel) :
 
 [
   'title' => 'Livre de coloriage enfants : 30 dessins à imprimer',
@@ -71,7 +94,7 @@ Modèle à reproduire (exemple réel) :
   'includes' => [
     'Livre complet en PDF : couverture + 30 pages à colorier',
     '31 images PNG A4 pour imprimer ou partager page par page',
-    'Guide LISEZ-MOI (Word) en 5 étapes'
+    'Guide LISEZ-MOI en 5 étapes'
   ],
   'outcomes' => [
     'Occupez un enfant de 3 à 5 ans avec 30 dessins prêts à imprimer',
