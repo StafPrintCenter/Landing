@@ -17,7 +17,6 @@ function getSections(): LegalSection[] {
   const localStorageItems = [
     { title: "Brouillon : Demande de devis", desc: "Sauvegarde temporaire du formulaire", duration: "6 heures" },
     { title: "Brouillon : Offre d'emploi", desc: "Sauvegarde temporaire de candidature", duration: "24 heures" },
-    { title: "Brouillon : Demande de stage", desc: "Sauvegarde temporaire du formulaire", duration: "2 jours" },
     { title: "Brouillon : Signalement éthique", desc: "Réponses du formulaire enregistrées sur l'appareil utilisé", duration: "24 heures" },
     { title: "Brouillon : Déposer un avis", desc: "Sauvegarde d'un avis en cours de rédaction", duration: "3 jours" },
     { title: "Identifiant visiteur (spc_visitor_id)", desc: "Reconnaissance anonyme des visites récurrentes", duration: "Jusqu'au nettoyage" },
