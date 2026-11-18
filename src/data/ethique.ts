@@ -104,7 +104,7 @@ export const ETHIQUE_FAQ = [
   },
 ];
 
-export const ETHIQUE_POSTAL = "Pli « STRICTEMENT PERSONNEL ET CONFIDENTIEL — RÉFÉRENT ÉTHIQUE », STAF PRINT CENTER, Porto-Novo, Bénin";
+export const ETHIQUE_POSTAL = "Pli « STRICTEMENT PERSONNEL ET CONFIDENTIEL - RÉFÉRENT ÉTHIQUE », STAF PRINT CENTER, Porto-Novo, Bénin";
 
 export function generateTrackingCode(rand: () => number = Math.random): string {
   const n = Math.floor(rand() * 9000) + 1000;
