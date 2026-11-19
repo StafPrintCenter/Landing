@@ -37,7 +37,6 @@ export const Route = createFileRoute("/sitemap.xml")({
         // 2. Pages statiques de base
         const entries: SitemapEntry[] = [
           { path: "/", lastmod: TODAY, changefreq: "weekly", priority: "1.0" },
-          { path: "/", lastmod: TODAY, changefreq: "monthly", priority: "0.8" },
           { path: "/services", lastmod: TODAY, changefreq: "weekly", priority: "0.8" },
           { path: "/projects", lastmod: TODAY, changefreq: "weekly", priority: "0.8" },
           { path: "/trainings", lastmod: TODAY, changefreq: "weekly", priority: "0.8" },
@@ -51,6 +50,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/legal/mentions", lastmod: TODAY, changefreq: "weekly", priority: "0.2" },
           { path: "/legal/cgv", lastmod: TODAY, changefreq: "weekly", priority: "0.2" },
           { path: "/legal/privacy", lastmod: TODAY, changefreq: "weekly", priority: "0.2" },
+          { path: "/ethique", lastmod: TODAY, changefreq: "weekly", priority: "0.2" },
         ];
 
         // 3. Appel aux APIs publiques avec tolérance de panne
