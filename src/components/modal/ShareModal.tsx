@@ -33,7 +33,7 @@ function formatTruncatedUrl(url: string, maxLength = 38): string {
 export function ShareModal({ url, title, text, isOpen, onClose, shortlinkCategory }: ShareModalProps) {
   const [copied, setCopied] = useState(false);
   const [showQr, setShowQr] = useState(false);
-  const { displayUrl, alias, isLoading } = useShortUrl(url, shortlinkCategory);
+  const { displayUrl, alias, isLoading } = useShortUrl(url, shortlinkCategory, isOpen);
 
   const content: ShareContent = { url: displayUrl, title, text };
 
