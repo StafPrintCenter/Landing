@@ -32,7 +32,7 @@ export async function createEthicalReport(
   formData.append("contact", params.anonymous ? "" : params.contact);
   formData.append("goodFaith", String(params.goodFaith));
 
-  const response = await fetch(resolveApiUrl("/api/public/ethical-reports"), {
+  const response = await fetch(resolveApiUrl("/api/public/reports/ethical"), {
     method: "POST",
     body: formData,
   });

@@ -30,7 +30,7 @@ export async function createReport(params: CreateReportParams): Promise<APIRepor
   if (params.message) formData.append("message", params.message);
   if (params.reporterEmail) formData.append("reporter_email", params.reporterEmail);
 
-  const url = resolveApiUrl(`/api/public/reports`);
+  const url = resolveApiUrl(`/api/public/reports/site`);
   const response = await fetch(url, { method: "POST", body: formData });
 
   if (!response.ok) {
