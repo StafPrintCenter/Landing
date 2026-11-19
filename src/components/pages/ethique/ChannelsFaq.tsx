@@ -2,8 +2,24 @@ import { ArrowUpRight, Mail, Mailbox, MessageCircle } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { ETHIQUE_FAQ, ETHIQUE_POSTAL } from "@/data/ethique";
 import { SITE } from "@/data/site";
+import { createEmailLink } from "@/lib/message/email";
+import { withWhatsAppMessage } from "@/lib/message/whatsapp";
 
 export function EthiqueChannelsFaq() {
+  const contactMessage = [
+    `Bonjour ${SITE.name},`,
+    "Je souhaite contacter le référent éthique au sujet d'un signalement.",
+    "Pourriez-vous m'indiquer les modalités pour transmettre les faits de manière confidentielle ?",
+    "",
+    "Merci.",
+  ].join("\n");
+  const whatsappLink = withWhatsAppMessage(SITE.whatsappLink, contactMessage);
+  const emailLink = createEmailLink(
+    SITE.email,
+    "Demande confidentielle au référent éthique",
+    contactMessage,
+  );
+
   return (
     <section className="container-x grid gap-10 py-20 md:grid-cols-12 md:py-24">
       <Reveal className="md:col-span-5">
@@ -14,12 +30,11 @@ export function EthiqueChannelsFaq() {
           D'autres façons de nous joindre.
         </h2>
         <p className="mt-4 text-muted-foreground">
-          Choisissez le canal qui vous convient. Vous pouvez aussi envoyer votre signalement par
-          courrier confidentiel.
+          Choisissez le canal qui vous convient. Vous pouvez aussi envoyer votre signalement par courrier confidentiel. WhatsApp et e-mail peuvent révéler vos coordonnées ; pour préserver votre anonymat, utilisez le formulaire de signalement.
         </p>
         <div className="mt-8 space-y-3">
           <a
-            href={SITE.whatsappLink}
+            href={whatsappLink}
             target="_blank"
             rel="noreferrer"
             className="group flex items-center gap-4 rounded-2xl border border-border bg-card/70 p-4 transition hover:border-primary/40 hover:bg-card"
@@ -36,7 +51,7 @@ export function EthiqueChannelsFaq() {
             <ArrowUpRight className="h-4 w-4 shrink-0 text-muted-foreground transition group-hover:text-primary" />
           </a>
           <a
-            href={`mailto:${SITE.email}`}
+            href={emailLink}
             className="group flex items-center gap-4 rounded-2xl border border-border bg-card/70 p-4 transition hover:border-primary/40 hover:bg-card"
           >
             <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent/15 text-primary">
