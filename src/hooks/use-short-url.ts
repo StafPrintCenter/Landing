@@ -13,11 +13,15 @@ interface UseShortUrlResult {
 /**
  * Fournit un lien court pour une URL longue
  */
-export function useShortUrl(longUrl: string, category?: ShortlinkCategory): UseShortUrlResult {
+export function useShortUrl(
+  longUrl: string,
+  category?: ShortlinkCategory,
+  enabled = true,
+): UseShortUrlResult {
   const query = useQuery({
     queryKey: ["shortlink", "create", longUrl, category],
     queryFn: () => createShortlink(longUrl, category),
-    enabled: !!longUrl,
+    enabled: enabled && !!longUrl,
     staleTime: 1000 * 60 * 30,
     retry: false,
   });
