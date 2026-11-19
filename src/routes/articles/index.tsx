@@ -48,11 +48,49 @@ function ArticlesPage() {
   const { category, sortBy, sortDir, query, page, perPage } = useSearch({ from: "/articles/" });
   const navigate = useNavigate({ from: "/articles/" });
 
+  const isDefaultListing = category === "Tout" && sortBy === "default" && query.trim() === "";
+  const isDefaultView = isDefaultListing && page === 1;
+
   // Article "à la une" : le plus récent, indépendamment des filtres
-  const { articles: featuredList } = useArticlesStore({ sortBy: "date", sortDir: "desc", perPage: 1 });
+  const {
+    articles: featuredList,
+    isLoading: featuredLoading,
+  } = useArticlesStore({ sortBy: "date", sortDir: "desc", perPage: 1 });
   const featured = featuredList[0] ?? null;
 
-  const { articles: displayedArticles, meta, isLoading: storeLoading } = useArticlesStore({ category, sortBy, sortDir, query, page, perPage, });
+  const {
+    articles: fetchedArticles,
+    meta,
+    isLoading: articlesLoading,
+  } = useArticlesStore({
+    category,
+    sortBy,
+    sortDir,
+    query,
+    page: isDefaultListing && featured ? 1 : page,
+    perPage: isDefaultListing && featured ? page * perPage + 1 : perPage,
+  });
+  const storeLoading = articlesLoading || (isDefaultListing && featuredLoading);
+  const displayedArticles =
+    isDefaultListing && featured
+      ? fetchedArticles
+          .filter((article) => article.id !== featured.id)
+          .slice((page - 1) * perPage, page * perPage)
+      : fetchedArticles;
+  const gridTotal = Math.max(0, (meta?.total ?? fetchedArticles.length) - (isDefaultListing && featured ? 1 : 0));
+  const gridLastPage = Math.max(1, Math.ceil(gridTotal / perPage));
+  const gridMeta =
+    meta && isDefaultListing && featured
+      ? {
+          ...meta,
+          current_page: Math.min(page, gridLastPage),
+          last_page: gridLastPage,
+          per_page: perPage,
+          total: gridTotal,
+          from: gridTotal === 0 ? 0 : (page - 1) * perPage + 1,
+          to: Math.min(page * perPage, gridTotal),
+        }
+      : meta;
 
   const [isLoading, setIsLoading] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
@@ -86,13 +124,6 @@ function ArticlesPage() {
     updateSearch({ sortBy: s, sortDir: "asc" });
   };
 
-  // Le bloc "à la une" ne s'affiche que sur la vue par défaut (page 1, sans filtre ni recherche).
-  const isDefaultView = category === "Tout" && sortBy === "default" && query.trim() === "" && page === 1;
-  const articlesForGrid =
-    isDefaultView && featured
-      ? displayedArticles.filter((article) => article.id !== featured.id)
-      : displayedArticles;
-
   const activeFilterCount = (category !== "Tout" ? 1 : 0) + (sortBy !== "default" ? 1 : 0);
 
   const filtersPanel = (
@@ -124,19 +155,19 @@ function ArticlesPage() {
         <ArticleHomeResultsCount
           category={category as "Tout" | ArticleCategory}
           query={query}
-          filteredCount={meta?.total ?? displayedArticles.length}
-          totalCount={meta?.total ?? displayedArticles.length}
+          filteredCount={meta?.total ?? fetchedArticles.length}
+          totalCount={meta?.total ?? fetchedArticles.length}
           isLoading={isLoading || storeLoading}
         />
 
-        <ArticleHomeGrid isLoading={isLoading || storeLoading} articles={articlesForGrid} />
+        <ArticleHomeGrid isLoading={isLoading || storeLoading} articles={displayedArticles} />
 
-        {!isLoading && !storeLoading && meta && meta.last_page > 1 && (
+        {!isLoading && !storeLoading && gridMeta && gridMeta.last_page > 1 && (
           <Pagination
-            currentPage={meta.current_page}
-            lastPage={meta.last_page}
+            currentPage={gridMeta.current_page}
+            lastPage={gridMeta.last_page}
             onPageChange={(p) => updateSearch({ page: p })}
-            meta={meta}
+            meta={gridMeta}
           />
         )}
       </section>
@@ -144,7 +175,7 @@ function ArticlesPage() {
       <ArticleHomeMobileSheet
         isOpen={filtersOpen}
         onClose={() => setFiltersOpen(false)}
-        resultCount={meta?.total ?? displayedArticles.length}
+        resultCount={meta?.total ?? fetchedArticles.length}
       >
         {filtersPanel}
       </ArticleHomeMobileSheet>
