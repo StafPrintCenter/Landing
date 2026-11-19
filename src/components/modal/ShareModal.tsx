@@ -30,7 +30,14 @@ function formatTruncatedUrl(url: string, maxLength = 38): string {
   return `${start}...${end}`;
 }
 
-export function ShareModal({ url, title, text, isOpen, onClose, shortlinkCategory }: ShareModalProps) {
+export function ShareModal({
+  url,
+  title,
+  text,
+  isOpen,
+  onClose,
+  shortlinkCategory,
+}: ShareModalProps) {
   const [copied, setCopied] = useState(false);
   const [showQr, setShowQr] = useState(false);
   const { displayUrl, alias, isLoading } = useShortUrl(url, shortlinkCategory, isOpen);
@@ -51,10 +58,30 @@ export function ShareModal({ url, title, text, isOpen, onClose, shortlinkCategor
   };
 
   const socials = [
-    { name: "WhatsApp", icon: <WhatsAppIcon size={20} />, href: buildWhatsAppShareLink(content), className: "bg-[#25D366] text-white" },
-    { name: "Facebook", icon: <FacebookIcon size={20} />, href: buildFacebookShareLink(content), className: "bg-[#1877F2] text-white" },
-    { name: "LinkedIn", icon: <LinkedinIcon size={20} />, href: buildLinkedInShareLink(content), className: "bg-[#0A66C2] text-white" },
-    { name: "Twitter / X", icon: <XIcon size={20} />, href: buildTwitterShareLink(content), className: "bg-black text-white" },
+    {
+      name: "WhatsApp",
+      icon: <WhatsAppIcon size={20} />,
+      href: buildWhatsAppShareLink(content),
+      className: "bg-[#25D366] text-white",
+    },
+    {
+      name: "Facebook",
+      icon: <FacebookIcon size={20} />,
+      href: buildFacebookShareLink(content),
+      className: "bg-[#1877F2] text-white",
+    },
+    {
+      name: "LinkedIn",
+      icon: <LinkedinIcon size={20} />,
+      href: buildLinkedInShareLink(content),
+      className: "bg-[#0A66C2] text-white",
+    },
+    {
+      name: "Twitter / X",
+      icon: <XIcon size={20} />,
+      href: buildTwitterShareLink(content),
+      className: "bg-black text-white",
+    },
   ];
 
   return (
