@@ -88,6 +88,10 @@ function ArticlesPage() {
 
   // Le bloc "à la une" ne s'affiche que sur la vue par défaut (page 1, sans filtre ni recherche).
   const isDefaultView = category === "Tout" && sortBy === "default" && query.trim() === "" && page === 1;
+  const articlesForGrid =
+    isDefaultView && featured
+      ? displayedArticles.filter((article) => article.id !== featured.id)
+      : displayedArticles;
 
   const activeFilterCount = (category !== "Tout" ? 1 : 0) + (sortBy !== "default" ? 1 : 0);
 
@@ -125,7 +129,7 @@ function ArticlesPage() {
           isLoading={isLoading || storeLoading}
         />
 
-        <ArticleHomeGrid isLoading={isLoading || storeLoading} articles={displayedArticles} />
+        <ArticleHomeGrid isLoading={isLoading || storeLoading} articles={articlesForGrid} />
 
         {!isLoading && !storeLoading && meta && meta.last_page > 1 && (
           <Pagination
