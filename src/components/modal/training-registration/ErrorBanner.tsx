@@ -6,7 +6,7 @@ interface ReasonContent {
   icon: typeof AlertCircle;
   title: string;
   hint?: string;
-  action?: { label: string; href: string };
+  action?: { label: string };
 }
 
 const REASON_CONTENT: Record<TrainingRegistrationErrorReason, ReasonContent> = {
@@ -19,7 +19,7 @@ const REASON_CONTENT: Record<TrainingRegistrationErrorReason, ReasonContent> = {
     icon: UserCheck,
     title: "Vous avez déjà un compte étudiant.",
     hint: "Connectez-vous à votre espace pour vous inscrire à cette formation.",
-    action: { label: "Se connecter à mon espace", href: buildStudentLoginUrl() },
+    action: { label: "Se connecter à mon espace" },
   },
   in_progress: {
     icon: Clock,
@@ -40,12 +40,14 @@ const REASON_CONTENT: Record<TrainingRegistrationErrorReason, ReasonContent> = {
 
 interface ErrorBannerProps {
   message: string;
+  trainingId: string;
   reason?: TrainingRegistrationErrorReason;
 }
 
-export function ErrorBanner({ message, reason }: ErrorBannerProps) {
+export function ErrorBanner({ message, trainingId, reason }: ErrorBannerProps) {
   const content = reason ? REASON_CONTENT[reason] : null;
   const Icon = content?.icon ?? AlertCircle;
+  const actionHref = content?.action ? buildStudentLoginUrl(trainingId) : undefined;
 
   return (
     <div className="mt-4 flex items-start gap-2.5 rounded-lg bg-destructive/10 px-3 py-2.5 text-xs text-destructive">
@@ -57,7 +59,7 @@ export function ErrorBanner({ message, reason }: ErrorBannerProps) {
 
         {content?.action && (
           <a
-            href={content.action.href}
+            href={actionHref}
             target="_blank"
             rel="noreferrer"
             className="mt-2 inline-flex items-center gap-1 rounded-full bg-destructive px-3 py-1.5 text-[11px] font-semibold text-destructive-foreground hover:opacity-90"
