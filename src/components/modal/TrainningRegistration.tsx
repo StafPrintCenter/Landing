@@ -119,7 +119,7 @@ export function TrainningRegistration({ formation: f, isOpen, onClose }: Trainni
           {submitError && submitError.fieldErrors && Object.keys(submitError.fieldErrors).length > 0 ? (
             <FieldErrorsBanner fieldErrors={submitError.fieldErrors} />
           ) : submitError ? (
-            <ErrorBanner message={submitError.message} reason={submitError.reason} />
+            <ErrorBanner message={submitError.message} trainingId={f.id} reason={submitError.reason} />
           ) : null}
 
           {/* Navigation Footer */}
