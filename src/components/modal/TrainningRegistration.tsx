@@ -146,7 +146,7 @@ export function TrainningRegistration({ formation: f, isOpen, onClose }: Trainni
                 ) : <div />}
 
                 {step < 3 ? (
-                  <button type="button" onClick={nextStep} className="inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground">
+                  <button type="button" onClick={nextStep} className="inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground cursor-pointer">
                     Continuer <ArrowRight size={16} />
                   </button>
                 ) : (
