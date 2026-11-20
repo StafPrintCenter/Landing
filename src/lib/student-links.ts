@@ -4,5 +4,5 @@
  */
 export function buildStudentLoginUrl(): string {
   const origin = import.meta.env.VITE_STUDENT_URL;
-  return `${origin}/auth/login`;
+  return `${origin}/login`;
 }
