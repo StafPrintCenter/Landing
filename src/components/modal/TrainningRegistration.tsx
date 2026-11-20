@@ -132,7 +132,7 @@ export function TrainningRegistration({ formation: f, isOpen, onClose }: Trainni
                 <button
                   type="button"
                   onClick={handleClose}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-border px-6 py-2.5 text-sm font-semibold hover:bg-muted"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-border px-6 py-2.5 text-sm font-semibold hover:bg-muted cursor-pointer"
                 >
                   Fermer
                 </button>
@@ -140,7 +140,7 @@ export function TrainningRegistration({ formation: f, isOpen, onClose }: Trainni
             ) : (
               <>
                 {step > 1 ? (
-                  <button type="button" onClick={prevStep} className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground">
+                  <button type="button" onClick={prevStep} className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground cursor-pointer">
                     <ArrowLeft size={16} /> Retour
                   </button>
                 ) : <div />}
@@ -154,7 +154,7 @@ export function TrainningRegistration({ formation: f, isOpen, onClose }: Trainni
                     type="button"
                     disabled={isSubmitting}
                     onClick={handleSubmit(onSubmitForm)}
-                    className="inline-flex items-center gap-1.5 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground cursor-pointer disabled:opacity-60"
                   >
                     {isSubmitting ? (
                       <>
