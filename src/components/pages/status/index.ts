@@ -1,4 +1,4 @@
 export { StatusDot } from "./StatusIndicator";
-export { StatusOverview } from "./StatusOverview";
-export { ServiceGrid } from "./ServiceGrid";
+export { StatusOverview, StatusOverviewSkeleton } from "./StatusOverview";
+export { ServiceGrid, ServiceGridSkeleton } from "./ServiceGrid";
 export { StatusHistory } from "./History";
