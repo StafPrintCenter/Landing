@@ -40,3 +40,22 @@ export function StatusOverview({ status, checkedAt }: { status: HealthStatusInpu
     </div>
   );
 }
+
+export function StatusOverviewSkeleton() {
+  return (
+    <div
+      role="status"
+      aria-label="Chargement de l'état des services"
+      className="animate-pulse rounded-2xl border border-border bg-card p-6 md:p-8"
+    >
+      <div className="flex items-start gap-4">
+        <div className="h-7 w-7 shrink-0 rounded-full bg-muted" />
+        <div className="w-full space-y-3">
+          <div className="h-6 w-36 rounded bg-muted" />
+          <div className="h-4 w-64 max-w-full rounded bg-muted" />
+          <div className="h-3 w-52 max-w-full rounded bg-muted/70" />
+        </div>
+      </div>
+    </div>
+  );
+}
