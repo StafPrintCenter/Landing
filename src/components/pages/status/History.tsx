@@ -186,7 +186,27 @@ export function StatusHistory({ checks, isLoading }: { checks: HealthCheck[]; is
   };
 
   if (isLoading) {
-    return <div className="h-28 animate-pulse rounded-2xl border border-border bg-card" />;
+    return (
+      <div
+        role="status"
+        aria-label="Chargement de l'historique des services"
+        className="animate-pulse rounded-2xl border border-border bg-card p-5 md:p-6"
+      >
+        <div className="flex justify-between gap-4">
+          <div className="h-4 w-28 rounded bg-muted" />
+          <div className="h-4 w-28 rounded bg-muted" />
+        </div>
+        <div className="mt-4 flex gap-1">
+          {Array.from({ length: 30 }, (_, index) => (
+            <div key={index} className="h-9 min-w-0 flex-1 rounded-sm bg-muted" />
+          ))}
+        </div>
+        <div className="mt-4 flex justify-between">
+          <div className="h-3 w-24 rounded bg-muted/70" />
+          <div className="h-3 w-24 rounded bg-muted/70" />
+        </div>
+      </div>
+    );
   }
 
   const days = getDays(checks);
