@@ -2,16 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 import type { HealthCheck } from "@/stores/useHealthStore";
 import { normalizeHealthStatus } from "@/stores/useHealthStore";
-import {
-  formatStatusDate,
-  getServiceLabel,
-  HISTORY_STATUS_KEYS,
-  STATUS_BAR_STYLES,
-  STATUS_LABELS,
-  STATUS_SHORT_LABELS,
-  STATUS_TEXT_STYLES,
-  HealthStatus
-} from "@/data/status";
+import { formatStatusDate, getServiceLabel, HISTORY_STATUS_KEYS, STATUS_BAR_STYLES, STATUS_LABELS, STATUS_SHORT_LABELS, STATUS_TEXT_STYLES, HealthStatus } from "@/data/status";
 
 type DayStatus = HealthStatus | "no_data";
 
