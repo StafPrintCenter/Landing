@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { HelpCircle, CircleX } from "lucide-react";
 import { SiteReportModal } from "@/components/modal/SiteReportModal";
-import { HelpMenuHeader, WhatsAppSection, LinkCheckerSection, ReportSection, ToolsSection, IntelligenceSection } from "./FloatingHelpMenu";
+import { HelpMenuHeader, WhatsAppSection, LinkCheckerSection, ReportSection, ToolsSection, IntelligenceSection } from "./";
 
 export function FloatingHelpMenu() {
   const [open, setOpen] = useState(false);
