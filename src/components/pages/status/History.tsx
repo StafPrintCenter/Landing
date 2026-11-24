@@ -4,7 +4,7 @@ import { StatusDot } from "./StatusIndicator";
 
 const LABELS = {
   operational: "Opérationnel",
-  partially_degraded: "Partiellement dégradé",
+  partially: "Partiellement dégradé",
   degraded: "Dégradé",
 };
 
