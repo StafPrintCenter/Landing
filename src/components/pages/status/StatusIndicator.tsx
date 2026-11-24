@@ -1,4 +1,4 @@
-import type { HealthStatus } from "@/stores/useHealthStore";
+import type { HealthStatus, HealthStatusInput } from "@/stores/useHealthStore";
 import { normalizeHealthStatus } from "@/stores/useHealthStore";
 
 const STATUS_STYLES: Record<HealthStatus, string> = {
@@ -7,7 +7,7 @@ const STATUS_STYLES: Record<HealthStatus, string> = {
   degraded: "bg-red-500",
 };
 
-export function StatusDot({ status, className = "" }: { status: HealthStatus | "Partially"; className?: string }) {
+export function StatusDot({ status, className = "" }: { status: HealthStatusInput; className?: string }) {
   return (
     <span
       aria-hidden
