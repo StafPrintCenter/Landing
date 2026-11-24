@@ -10,7 +10,7 @@ import {
   AnnouncementToast,
   AnnouncementPopup,
   AnnouncementModal,
-} from "./";
+} from ".";
 
 export function AnnouncementsHost() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
