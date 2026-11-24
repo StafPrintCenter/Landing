@@ -1,8 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SITE } from "@/data/site";
 import { SiteShell } from "@/components/site/SiteShell";
-import { StatusOverview, ServiceGrid, StatusHistory } from "@/components/pages/status";
-import { useHealthHistory, useHealthStatus } from "@/stores/useHealthStore";
+import {
+  ServiceGrid,
+  ServiceGridSkeleton,
+  StatusHistory,
+  StatusOverview,
+  StatusOverviewSkeleton,
+} from "@/components/pages/status";
+import { useHealthHistory, useHealthServices, useHealthStatus } from "@/stores/useHealthStore";
 
 export const Route = createFileRoute("/status")({
   head: () => ({
@@ -16,6 +22,7 @@ export const Route = createFileRoute("/status")({
 
 function StatusPage() {
   const current = useHealthStatus();
+  const serviceDetails = useHealthServices();
   const history = useHealthHistory(100);
 
   return (
@@ -29,15 +36,33 @@ function StatusPage() {
 
         <div className="mt-10 space-y-8">
           {current.isLoading ? (
-            <div className="h-36 animate-pulse rounded-2xl border border-border bg-card" />
+            <StatusOverviewSkeleton />
           ) : current.health ? (
-            <>
-              <StatusOverview status={current.health.status} checkedAt={current.health.checkedAt} />
-              <ServiceGrid services={current.health.services} />
-            </>
+            <StatusOverview status={current.health.status} checkedAt={current.health.checkedAt} />
           ) : (
             <StatusOverview status="degraded" />
           )}
+
+          <div className="space-y-4">
+            <div>
+              <h2 className="text-2xl font-semibold">Détail des services</h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Disponibilité et contrôles sur les {serviceDetails.periodDays ?? 30} derniers jours.
+                {serviceDetails.from && serviceDetails.to && (
+                  <> Du {new Intl.DateTimeFormat("fr-FR").format(new Date(`${serviceDetails.from}T12:00:00`))} au {new Intl.DateTimeFormat("fr-FR").format(new Date(`${serviceDetails.to}T12:00:00`))}.</>
+                )}
+              </p>
+            </div>
+            {serviceDetails.isError ? (
+              <p className="rounded-xl border border-red-500/20 bg-red-500/5 p-5 text-red-600">
+                Impossible de charger le détail des services.
+              </p>
+            ) : serviceDetails.isLoading ? (
+              <ServiceGridSkeleton />
+            ) : (
+              <ServiceGrid services={serviceDetails.services} />
+            )}
+          </div>
 
           <div className="pt-4">
             <div className="mb-5">
