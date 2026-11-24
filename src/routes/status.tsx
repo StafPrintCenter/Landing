@@ -8,7 +8,7 @@ import { StatusOverview, ServiceGrid, StatusHistory } from "@/components/pages/s
 import { useHealthHistory, useHealthStatus, normalizeHealthStatus, type HealthStatus } from "@/stores/useHealthStore";
 
 const statusSearchSchema = z.object({
-  status: z.enum(["all", "operational", "partially_degraded", "degraded"]).catch("all").default("all"),
+  status: z.enum(["all", "operational", "partially", "degraded"]).catch("all").default("all"),
   page: z.number().catch(1).default(1),
   perPage: z.number().catch(10).default(10),
 });
@@ -80,7 +80,7 @@ function StatusPage() {
               >
                 <option value="all">Tous les états</option>
                 <option value="operational">Opérationnel</option>
-                <option value="partially_degraded">Partiellement dégradé</option>
+                <option value="partially">Partiellement dégradé</option>
                 <option value="degraded">Dégradé</option>
               </select>
             </div>
