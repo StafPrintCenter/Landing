@@ -24,15 +24,15 @@ export function StatusOverview({ status, checkedAt }: { status: HealthStatusInpu
         <div>
           <h2 className="text-xl font-semibold">État actuel</h2>
 
-          <div className="mt-2 flex items-center gap-3">
-            <p className="text-base">{LABELS[normalized]}</p>
-
-            <span>-</span>
-
+          <div className="mt-2 flex min-w-0 flex-col items-start gap-1 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3">
+            <p className="min-w-0 text-base">{LABELS[normalized]}</p>
             {checkedAt && (
-              <p className="text-sm opacity-75">
-                Dernière vérification : {new Intl.DateTimeFormat("fr-FR", { dateStyle: "medium", timeStyle: "short" }).format(new Date(checkedAt))}
-              </p>
+              <div className="flex min-w-0 items-center gap-2 text-sm opacity-75">
+                <span aria-hidden className="h-1 w-1 shrink-0 rounded-full bg-current" />
+                <p>
+                  Dernière vérification : {new Intl.DateTimeFormat("fr-FR", { dateStyle: "medium", timeStyle: "short" }).format(new Date(checkedAt))}
+                </p>
+              </div>
             )}
           </div>
         </div>
