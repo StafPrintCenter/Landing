@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as StatusRouteImport } from './routes/status'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as EthiqueRouteImport } from './routes/ethique'
@@ -51,6 +52,11 @@ import { Route as CareersOffersSlugIndexRouteImport } from './routes/careers/off
 import { Route as ToolsRessourcesSlugLookRouteImport } from './routes/tools/ressources/$slug/look'
 import { Route as CareersOffersSlugApplyRouteImport } from './routes/careers/offers/$slug/apply'
 
+const StatusRoute = StatusRouteImport.update({
+  id: '/status',
+  path: '/status',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -266,6 +272,7 @@ export interface FileRoutesByFullPath {
   '/ethique': typeof EthiqueRoute
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/status': typeof StatusRoute
   '/articles/$slug': typeof ArticlesSlugRoute
   '/careers/check-offer': typeof CareersCheckOfferRoute
   '/invoice/$id': typeof InvoiceIdRoute
@@ -309,6 +316,7 @@ export interface FileRoutesByTo {
   '/ethique': typeof EthiqueRoute
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/status': typeof StatusRoute
   '/articles/$slug': typeof ArticlesSlugRoute
   '/careers/check-offer': typeof CareersCheckOfferRoute
   '/invoice/$id': typeof InvoiceIdRoute
@@ -353,6 +361,7 @@ export interface FileRoutesById {
   '/ethique': typeof EthiqueRoute
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/status': typeof StatusRoute
   '/articles/$slug': typeof ArticlesSlugRoute
   '/careers/check-offer': typeof CareersCheckOfferRoute
   '/invoice/$id': typeof InvoiceIdRoute
@@ -398,6 +407,7 @@ export interface FileRouteTypes {
     | '/ethique'
     | '/search'
     | '/sitemap.xml'
+    | '/status'
     | '/articles/$slug'
     | '/careers/check-offer'
     | '/invoice/$id'
@@ -441,6 +451,7 @@ export interface FileRouteTypes {
     | '/ethique'
     | '/search'
     | '/sitemap.xml'
+    | '/status'
     | '/articles/$slug'
     | '/careers/check-offer'
     | '/invoice/$id'
@@ -484,6 +495,7 @@ export interface FileRouteTypes {
     | '/ethique'
     | '/search'
     | '/sitemap.xml'
+    | '/status'
     | '/articles/$slug'
     | '/careers/check-offer'
     | '/invoice/$id'
@@ -528,6 +540,7 @@ export interface RootRouteChildren {
   EthiqueRoute: typeof EthiqueRoute
   SearchRoute: typeof SearchRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  StatusRoute: typeof StatusRoute
   ArticlesSlugRoute: typeof ArticlesSlugRoute
   CareersCheckOfferRoute: typeof CareersCheckOfferRoute
   InvoiceIdRoute: typeof InvoiceIdRoute
@@ -568,6 +581,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/status': {
+      id: '/status'
+      path: '/status'
+      fullPath: '/status'
+      preLoaderRoute: typeof StatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -864,6 +884,7 @@ const rootRouteChildren: RootRouteChildren = {
   EthiqueRoute: EthiqueRoute,
   SearchRoute: SearchRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  StatusRoute: StatusRoute,
   ArticlesSlugRoute: ArticlesSlugRoute,
   CareersCheckOfferRoute: CareersCheckOfferRoute,
   InvoiceIdRoute: InvoiceIdRoute,
