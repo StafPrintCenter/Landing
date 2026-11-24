@@ -1,9 +1,6 @@
 import { AlertTriangle, Check, X } from "lucide-react";
 import type { HealthService } from "@/stores/useHealthStore";
-import {
-  formatStatusDate, getServiceLabel, STATUS_BAR_STYLES,
-  STATUS_LABELS, STATUS_TEXT_STYLES
-} from "@/data/status";
+import { formatStatusDate, getServiceLabel, STATUS_BAR_STYLES, STATUS_LABELS, STATUS_TEXT_STYLES } from "@/data/status";
 
 function ServiceCard({ service }: { service: HealthService }) {
   const checksCount = service.history.reduce((total, day) => total + day.checksCount, 0);
