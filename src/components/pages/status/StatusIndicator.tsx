@@ -1,7 +1,13 @@
 import { normalizeHealthStatus } from "@/stores/useHealthStore";
 import { STATUS_DOT_STYLES, HealthStatusInput } from "@/data/status";
 
-export function StatusDot({ status, className = "" }: { status: HealthStatusInput; className?: string }) {
+export function StatusDot({
+  status,
+  className = ""
+}: {
+  status: HealthStatusInput;
+  className?: string
+}) {
   return (
     <span
       aria-hidden
