@@ -3,7 +3,7 @@ import { normalizeHealthStatus } from "@/stores/useHealthStore";
 
 const STATUS_STYLES: Record<HealthStatus, string> = {
   operational: "bg-emerald-500",
-  partially_degraded: "bg-amber-500",
+  partially: "bg-amber-500",
   degraded: "bg-red-500",
 };
 
