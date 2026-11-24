@@ -1,6 +1,6 @@
-export { HelpMenuHeader } from "./HelpMenuHeader";
-export * from "../floating-menu/IntelligenceSection";
-export * from "../floating-menu/WhatsAppSection";
-export * from "../floating-menu/LinkCheckerSection";
-export * from "../floating-menu/ReportSection";
-export * from "../floating-menu/ToolsSection";
+export { HelpMenuHeader } from "./Header";
+export { IntelligenceSection } from "./Intelligence";
+export { ReportSection } from "../floating-menu/WhatsAppSection";
+export { HelpMenuHeader } from "../floating-menu/LinkCheckerSection";
+export { ReportSection } from "./Report";
+export { HelpMenuHeader } from "../floating-menu/ToolsSection";
