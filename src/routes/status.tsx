@@ -67,8 +67,13 @@ function StatusPage() {
           <div className="pt-4">
             <div className="mb-5">
               <div>
-                <h2 className="text-2xl font-semibold">Historique - 30 derniers jours</h2>
-                <p className="mt-1 text-sm text-muted-foreground">Survolez une date ou sélectionnez-la pour consulter les détails.</p>
+                <h2 className="text-2xl font-semibold">
+                  Historique des 30 derniers jours
+                </h2>
+
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Survolez une date ou sélectionnez-la pour consulter les détails.
+                </p>
               </div>
             </div>
 
