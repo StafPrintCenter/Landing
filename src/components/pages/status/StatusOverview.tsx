@@ -1,5 +1,5 @@
 import { CheckCircle2, AlertTriangle, XCircle } from "lucide-react";
-import type { HealthStatus } from "@/stores/useHealthStore";
+import type { HealthStatus, HealthStatusInput } from "@/stores/useHealthStore";
 import { normalizeHealthStatus } from "@/stores/useHealthStore";
 
 const LABELS: Record<HealthStatus, string> = {
@@ -8,7 +8,7 @@ const LABELS: Record<HealthStatus, string> = {
   degraded: "Plusieurs services rencontrent des difficultés",
 };
 
-export function StatusOverview({ status, checkedAt }: { status: HealthStatus | "Partially"; checkedAt?: string }) {
+export function StatusOverview({ status, checkedAt }: { status: HealthStatusInput; checkedAt?: string }) {
   const normalized = normalizeHealthStatus(status);
   const Icon = normalized === "operational" ? CheckCircle2 : normalized === "partially" ? AlertTriangle : XCircle;
   const styles = {
