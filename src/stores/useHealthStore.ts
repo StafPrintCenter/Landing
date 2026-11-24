@@ -44,7 +44,7 @@ export function fetchCurrentHealth(): Promise<HealthResponse> {
 }
 
 export function fetchHealthHistory(perPage = 100): Promise<HistoryResponse> {
-  return fetchHealth(`/api/public/health/date?perPage=${perPage}`);
+  return fetchHealth(`/api/public/health/dates?perPage=${perPage}`);
 }
 
 export function useHealthStatus() {
