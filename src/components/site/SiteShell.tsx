@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { Header, Footer, CookieConsent, FloatingHelpMenu } from "./";
 import { NewsletterPromptModal } from "@/components/modal/NewsletterPromptModal";
 import { useNewsletterPrompt } from "@/hooks/use-newsletter-prompt";
-import { AnnouncementsHost } from "@/components/site/announcements/Host";
+import { AnnouncementsHost } from "@/components/site/Announces/Host";
 
 export function SiteShell({ children }: { children: ReactNode }) {
   const { isOpen, close, handleRemindLater, handleNeverAgain } = useNewsletterPrompt();
