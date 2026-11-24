@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SITE } from "@/data/site";
 import { SiteShell } from "@/components/site/SiteShell";
 import { ServiceGrid, ServiceGridSkeleton, StatusHistory, StatusOverview, StatusOverviewSkeleton } from "@/components/pages/status";
-import { formatStatusDate } from "@/data/status";
+import { formatStatusDate, STATUS_HISTORY_DAYS } from "@/data/status";
 import { useHealthHistory, useHealthServices, useHealthStatus } from "@/stores/useHealthStore";
 
 export const Route = createFileRoute("/status")({
@@ -19,6 +19,7 @@ function StatusPage() {
   const current = useHealthStatus();
   const serviceDetails = useHealthServices();
   const history = useHealthHistory(100);
+  const periodDays = serviceDetails.periodDays ?? STATUS_HISTORY_DAYS;
 
   return (
     <SiteShell>
@@ -42,7 +43,7 @@ function StatusPage() {
             <div>
               <h2 className="text-2xl font-semibold">Détail des services</h2>
               <p className="mt-1 text-sm text-muted-foreground">
-                Disponibilité et contrôles sur les {serviceDetails.periodDays ?? 30} derniers jours.
+                Disponibilité et contrôles sur les {periodDays} derniers jours.
                 {serviceDetails.from && serviceDetails.to && (
                   <> Du {formatStatusDate(serviceDetails.from)} au {formatStatusDate(serviceDetails.to)}.</>
                 )}
@@ -53,7 +54,7 @@ function StatusPage() {
                 Impossible de charger le détail des services.
               </p>
             ) : serviceDetails.isLoading ? (
-              <ServiceGridSkeleton />
+              <ServiceGridSkeleton periodDays={periodDays} />
             ) : (
               <ServiceGrid services={serviceDetails.services} />
             )}
@@ -63,7 +64,7 @@ function StatusPage() {
             <div className="mb-5">
               <div>
                 <h2 className="text-2xl font-semibold">
-                  Historique des 30 derniers jours
+                  Historique des {periodDays} derniers jours
                 </h2>
 
                 <p className="mt-1 text-sm text-muted-foreground">
@@ -77,7 +78,7 @@ function StatusPage() {
                 Impossible de charger l'historique des services.
               </p>
             ) : (
-              <StatusHistory checks={history.checks} isLoading={history.isLoading} />
+              <StatusHistory checks={history.checks} isLoading={history.isLoading} periodDays={periodDays} />
             )}
           </div>
         </div>

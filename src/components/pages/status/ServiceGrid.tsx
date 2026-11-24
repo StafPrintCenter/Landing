@@ -1,6 +1,13 @@
 import { AlertTriangle, Check, X } from "lucide-react";
 import type { HealthService } from "@/stores/useHealthStore";
-import { formatStatusDate, getServiceLabel, STATUS_BAR_STYLES, STATUS_LABELS, STATUS_TEXT_STYLES } from "@/data/status";
+import {
+  formatStatusDate,
+  getServiceLabel,
+  STATUS_BAR_STYLES,
+  STATUS_HISTORY_DAYS,
+  STATUS_LABELS,
+  STATUS_TEXT_STYLES,
+} from "@/data/status";
 
 function ServiceCard({ service }: { service: HealthService }) {
   const checksCount = service.history.reduce((total, day) => total + day.checksCount, 0);
@@ -82,7 +89,7 @@ export function ServiceGrid({ services }: { services: HealthService[] }) {
   );
 }
 
-export function ServiceGridSkeleton() {
+export function ServiceGridSkeleton({ periodDays = STATUS_HISTORY_DAYS }: { periodDays?: number }) {
   return (
     <div
       role="status"
@@ -97,7 +104,7 @@ export function ServiceGridSkeleton() {
           </div>
           <div className="mt-4 h-7 w-36 rounded bg-muted" />
           <div className="mt-4 flex gap-1">
-            {Array.from({ length: 30 }, (_, day) => <div key={day} className="h-8 min-w-0 flex-1 rounded-sm bg-muted" />)}
+            {Array.from({ length: periodDays }, (_, day) => <div key={day} className="h-8 min-w-0 flex-1 rounded-sm bg-muted" />)}
           </div>
           <div className="mt-2 flex justify-between">
             <div className="h-3 w-20 rounded bg-muted/70" />

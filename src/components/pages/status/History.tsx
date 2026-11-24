@@ -2,7 +2,17 @@ import { useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 import type { HealthCheck } from "@/stores/useHealthStore";
 import { normalizeHealthStatus } from "@/stores/useHealthStore";
-import { formatStatusDate, getServiceLabel, HISTORY_STATUS_KEYS, STATUS_BAR_STYLES, STATUS_LABELS, STATUS_SHORT_LABELS, STATUS_TEXT_STYLES, HealthStatus } from "@/data/status";
+import {
+  formatStatusDate,
+  getServiceLabel,
+  HISTORY_STATUS_KEYS,
+  STATUS_BAR_STYLES,
+  STATUS_HISTORY_DAYS,
+  STATUS_LABELS,
+  STATUS_SHORT_LABELS,
+  STATUS_TEXT_STYLES,
+  type HealthStatus,
+} from "@/data/status";
 
 type DayStatus = HealthStatus | "no_data";
 
@@ -17,7 +27,7 @@ function getDayKey(date: Date) {
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
 }
 
-function getDays(checks: HealthCheck[]): HistoryDay[] {
+function getDays(checks: HealthCheck[], periodDays: number): HistoryDay[] {
   const grouped = new Map<string, HealthCheck[]>();
   for (const check of checks) {
     const date = new Date(check.checkedAt);
@@ -30,9 +40,9 @@ function getDays(checks: HealthCheck[]): HistoryDay[] {
   const lastDate = new Date();
   lastDate.setHours(12, 0, 0, 0);
   const firstDate = new Date(lastDate);
-  firstDate.setDate(firstDate.getDate() - 29);
+  firstDate.setDate(firstDate.getDate() - (periodDays - 1));
 
-  return Array.from({ length: 30 }, (_, index) => {
+  return Array.from({ length: periodDays }, (_, index) => {
     const date = new Date(firstDate);
     date.setDate(firstDate.getDate() + index);
     const key = getDayKey(date);
@@ -105,7 +115,15 @@ function DayDetails({ day, arrowPosition, onClose }: { day: HistoryDay; arrowPos
   );
 }
 
-export function StatusHistory({ checks, isLoading }: { checks: HealthCheck[]; isLoading: boolean }) {
+export function StatusHistory({
+  checks,
+  isLoading,
+  periodDays = STATUS_HISTORY_DAYS,
+}: {
+  checks: HealthCheck[];
+  isLoading: boolean;
+  periodDays?: number;
+}) {
   const [hoveredDay, setHoveredDay] = useState<string | null>(null);
   const [selectedDay, setSelectedDay] = useState<string | null>(null);
   const [popoverPosition, setPopoverPosition] = useState({ left: 20, width: 288, arrow: 20 });
@@ -169,7 +187,7 @@ export function StatusHistory({ checks, isLoading }: { checks: HealthCheck[]; is
           <div className="h-4 w-28 rounded bg-muted" />
         </div>
         <div className="mt-4 flex gap-1">
-          {Array.from({ length: 30 }, (_, index) => (
+          {Array.from({ length: periodDays }, (_, index) => (
             <div key={index} className="h-9 min-w-0 flex-1 rounded-sm bg-muted" />
           ))}
         </div>
@@ -181,7 +199,7 @@ export function StatusHistory({ checks, isLoading }: { checks: HealthCheck[]; is
     );
   }
 
-  const days = getDays(checks);
+  const days = getDays(checks, periodDays);
   if (days.length === 0) {
     return <p className="rounded-xl border border-border bg-card p-5 text-muted-foreground">Aucun historique disponible.</p>;
   }
@@ -249,7 +267,7 @@ export function StatusHistory({ checks, isLoading }: { checks: HealthCheck[]; is
         </div>
       )}
       <div className="mt-1 flex flex-wrap items-center justify-between gap-3 text-sm text-muted-foreground">
-        <span>Il y a 30 jours</span>
+        <span>Il y a {periodDays - 1} jours</span>
         <div className="flex items-center gap-2">
           {HISTORY_STATUS_KEYS.map((status) => (
             <span key={status} className="inline-flex items-center gap-1.5">

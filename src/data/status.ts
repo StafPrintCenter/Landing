@@ -5,6 +5,8 @@ export type ServiceHistoryStatus = HealthStatus | "unknown";
 
 export type StatusDisplayKey = HealthStatus | ServiceHistoryStatus | ServiceStatus | "no_data";
 
+export const STATUS_HISTORY_DAYS = 15;
+
 export const SERVICE_LABELS: Record<string, string> = {
   database: "Base de données",
   cache: "Cache",
