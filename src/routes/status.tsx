@@ -1,13 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SITE } from "@/data/site";
 import { SiteShell } from "@/components/site/SiteShell";
-import {
-  ServiceGrid,
-  ServiceGridSkeleton,
-  StatusHistory,
-  StatusOverview,
-  StatusOverviewSkeleton,
-} from "@/components/pages/status";
+import { ServiceGrid, ServiceGridSkeleton, StatusHistory, StatusOverview, StatusOverviewSkeleton } from "@/components/pages/status";
+import { formatStatusDate } from "@/data/status";
 import { useHealthHistory, useHealthServices, useHealthStatus } from "@/stores/useHealthStore";
 
 export const Route = createFileRoute("/status")({
@@ -49,7 +44,7 @@ function StatusPage() {
               <p className="mt-1 text-sm text-muted-foreground">
                 Disponibilité et contrôles sur les {serviceDetails.periodDays ?? 30} derniers jours.
                 {serviceDetails.from && serviceDetails.to && (
-                  <> Du {new Intl.DateTimeFormat("fr-FR").format(new Date(`${serviceDetails.from}T12:00:00`))} au {new Intl.DateTimeFormat("fr-FR").format(new Date(`${serviceDetails.to}T12:00:00`))}.</>
+                  <> Du {formatStatusDate(serviceDetails.from)} au {formatStatusDate(serviceDetails.to)}.</>
                 )}
               </p>
             </div>
