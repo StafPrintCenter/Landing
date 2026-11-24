@@ -1,11 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { resolveApiUrl } from "@/lib/api/resolve-url";
 import { parseApiError } from "@/lib/api/error";
-
-export type HealthStatus = "operational" | "partially" | "degraded";
-export type HealthStatusInput = HealthStatus;
-export type ServiceStatus = "operational" | "unavailable";
-export type ServiceHistoryStatus = HealthStatus | "unknown";
+import type { HealthStatus, ServiceHistoryStatus, ServiceStatus, HealthStatusInput } from "@/data/status";
 
 export type HealthCheck = {
   status: HealthStatusInput;
