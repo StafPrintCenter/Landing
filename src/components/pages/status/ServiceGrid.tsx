@@ -1,32 +1,12 @@
 import { AlertTriangle, Check, X } from "lucide-react";
-import type { HealthService, ServiceHistoryStatus } from "@/stores/useHealthStore";
-
-const SERVICE_LABELS: Record<string, string> = {
-  database: "Base de données",
-  cache: "Cache",
-  storage: "Stockage",
-  queue: "File d'attente",
-  smtp: "Messagerie",
-  object_storage: "Stockage objet",
-};
-
-const HISTORY_STATUS_LABELS: Record<ServiceHistoryStatus, string> = {
-  operational: "Opérationnel",
-  partially: "Partiellement dégradé",
-  degraded: "Indisponible",
-  unknown: "Aucune donnée",
-};
-
-const HISTORY_STATUS_STYLES: Record<ServiceHistoryStatus, string> = {
-  operational: "bg-emerald-500",
-  partially: "bg-amber-500",
-  degraded: "bg-red-500",
-  unknown: "bg-muted-foreground/20",
-};
-
-function formatDay(date: string) {
-  return new Intl.DateTimeFormat("fr-FR", { dateStyle: "long" }).format(new Date(`${date}T12:00:00`));
-}
+import type { HealthService } from "@/stores/useHealthStore";
+import {
+  formatStatusDate,
+  getServiceLabel,
+  STATUS_BAR_STYLES,
+  STATUS_LABELS,
+  STATUS_TEXT_STYLES,
+} from "@/data/status/status";
 
 function ServiceCard({ service }: { service: HealthService }) {
   const checksCount = service.history.reduce((total, day) => total + day.checksCount, 0);
@@ -40,10 +20,10 @@ function ServiceCard({ service }: { service: HealthService }) {
   return (
     <article className="rounded-xl border border-border bg-card p-5">
       <div className="flex items-start justify-between gap-3">
-        <h3 className="font-semibold">{SERVICE_LABELS[service.name] ?? service.name}</h3>
-        <span className={`inline-flex shrink-0 items-center gap-1.5 text-sm ${isOperational ? "text-emerald-600" : "text-red-600"}`}>
+        <h3 className="font-semibold">{getServiceLabel(service.name)}</h3>
+        <span className={`inline-flex shrink-0 items-center gap-1.5 text-sm ${STATUS_TEXT_STYLES[service.currentStatus]}`}>
           <StatusIcon className="h-4 w-4" />
-          {isOperational ? "Opérationnel" : "Indisponible"}
+          {STATUS_LABELS[service.currentStatus]}
         </span>
       </div>
 
@@ -61,24 +41,24 @@ function ServiceCard({ service }: { service: HealthService }) {
       <div
         className="mt-4"
         role="group"
-        aria-label={`Historique de disponibilité de ${SERVICE_LABELS[service.name] ?? service.name}`}
+        aria-label={`Historique de disponibilité de ${getServiceLabel(service.name)}`}
       >
         <div className="flex items-center gap-1" role="list">
           {service.history.map((day) => (
             <span
               key={day.date}
               role="listitem"
-              aria-label={`${formatDay(day.date)} : ${HISTORY_STATUS_LABELS[day.status]}${day.availabilityPercentage === null ? "" : ` (${day.availabilityPercentage} %)`}`}
-              title={`${formatDay(day.date)} : ${HISTORY_STATUS_LABELS[day.status]}${day.availabilityPercentage === null ? "" : ` (${day.availabilityPercentage} %)`} · ${day.checksCount} contrôle${day.checksCount === 1 ? "" : "s"}`}
-              className={`h-8 min-w-0 flex-1 rounded-sm ${HISTORY_STATUS_STYLES[day.status]}`}
+              aria-label={`${formatStatusDate(day.date, { dateStyle: "long" })} : ${STATUS_LABELS[day.status]}${day.availabilityPercentage === null ? "" : ` (${day.availabilityPercentage} %)`}`}
+              title={`${formatStatusDate(day.date, { dateStyle: "long" })} : ${STATUS_LABELS[day.status]}${day.availabilityPercentage === null ? "" : ` (${day.availabilityPercentage} %)`} · ${day.checksCount} contrôle${day.checksCount === 1 ? "" : "s"}`}
+              className={`h-8 min-w-0 flex-1 rounded-sm ${STATUS_BAR_STYLES[day.status]}`}
             />
           ))}
         </div>
         <div className="mt-2 flex justify-between text-xs text-muted-foreground">
           {service.history.length > 0 ? (
             <>
-              <span>{formatDay(service.history[0].date)}</span>
-              <span>{formatDay(service.history[service.history.length - 1].date)}</span>
+              <span>{formatStatusDate(service.history[0].date, { dateStyle: "long" })}</span>
+              <span>{formatStatusDate(service.history[service.history.length - 1].date, { dateStyle: "long" })}</span>
             </>
           ) : (
             <span>Aucun historique disponible</span>
