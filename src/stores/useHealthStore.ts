@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { resolveApiUrl } from "@/lib/api/resolve-url";
 import { parseApiError } from "@/lib/api/error";
 
-export type HealthStatus = "operational" | "partially_degraded" | "degraded";
+export type HealthStatus = "operational" | "partially" | "degraded";
 export type ServiceStatus = "operational" | "unavailable";
 
 export type HealthCheck = {
@@ -24,7 +24,7 @@ type HistoryResponse = { data: HealthCheck[]; meta: HealthHistoryMeta };
 
 export function normalizeHealthStatus(status: HealthStatus | "Partially"): HealthStatus {
   if (status === "degraded") return "degraded";
-  if (status === "partially_degraded" || status === "Partially") return "partially_degraded";
+  if (status === "partially" || status === "Partially") return "partially";
   return "operational";
 }
 
