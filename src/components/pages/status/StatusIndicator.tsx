@@ -1,6 +1,6 @@
-import type { HealthStatus, HealthStatusInput } from "@/stores/useHealthStore";
+import type { HealthStatus, } from "@/stores/useHealthStore";
 import { normalizeHealthStatus } from "@/stores/useHealthStore";
-import { STATUS_DOT_STYLES } from "@/data/status";
+import { STATUS_DOT_STYLES, HealthStatusInput } from "@/data/status";
 
 export function StatusDot({ status, className = "" }: { status: HealthStatusInput; className?: string }) {
   return (
