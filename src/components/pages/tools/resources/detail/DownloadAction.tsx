@@ -87,13 +87,13 @@ export function ResourceDownloadAction({ slug, transactionId }: ResourceDownload
         </p>
       )}
       {preparedDownload && secondsLeft > 0 && (
-        <div className="mt-3 flex flex-col items-center rounded-xl border border-accent/30 bg-accent/10 px-4 py-3 text-center">
+        <div className="mt-3 flex flex-col items-center text-center">
           {!hasClickedDownload ? (
             <a
               href={preparedDownload.url}
               download={preparedDownload.fileName}
               onClick={() => setHasClickedDownload(true)}
-              className="inline-flex items-center gap-2 text-sm font-semibold text-accent transition hover:opacity-80"
+              className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-accent px-5 py-3.5 text-sm font-bold text-accent-foreground transition hover:-translate-y-0.5 hover:opacity-90"
             >
               <Download size={16} /> Télécharger maintenant
             </a>
