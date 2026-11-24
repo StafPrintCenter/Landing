@@ -10,7 +10,7 @@ export function FooterToolsContact() {
         <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-accent">
           Outils
         </h4>
-        <div className="mt-4 flex flex-col gap-3">
+        <div className="mt-4 flex flex-col gap-1">
           {FOOTER_ACTION_LINKS.map((link) => {
             const Icon = link.icon;
             return (
