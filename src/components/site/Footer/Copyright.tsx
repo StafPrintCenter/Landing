@@ -8,7 +8,7 @@ export function FooterCopyright() {
   const status = health ? normalizeHealthStatus(health.status) : "degraded";
   const label = isLoading ? "Vérification..." : isError ? "État indisponible" : status === "operational"
     ? "Tous les services opérationnels"
-    : status === "partially_degraded"
+    : status === "partially"
       ? "Services partiellement dégradés"
       : "Services dégradés";
 
