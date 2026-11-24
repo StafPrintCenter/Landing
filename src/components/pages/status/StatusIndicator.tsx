@@ -1,4 +1,3 @@
-import type { HealthStatus, } from "@/stores/useHealthStore";
 import { normalizeHealthStatus } from "@/stores/useHealthStore";
 import { STATUS_DOT_STYLES, HealthStatusInput } from "@/data/status";
 
