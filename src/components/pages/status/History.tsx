@@ -110,8 +110,13 @@ function DayDetails({ day, arrowPosition }: { day: HistoryDay; arrowPosition: nu
       )}
       <span
         aria-hidden
-        style={{ left: `${arrowPosition}%` }}
-        className="absolute -top-1.5 h-3 w-3 -translate-x-1/2 rotate-45 border-l border-t border-border bg-popover"
+        style={{ left: `${arrowPosition}px` }}
+        className="absolute -top-2 block h-0 w-0 -translate-x-1/2 border-x-[8px] border-b-[8px] border-x-transparent border-b-border"
+      />
+      <span
+        aria-hidden
+        style={{ left: `${arrowPosition}px` }}
+        className="absolute -top-[6px] block h-0 w-0 -translate-x-1/2 border-x-[7px] border-b-[7px] border-x-transparent border-b-popover"
       />
     </div>
   );
