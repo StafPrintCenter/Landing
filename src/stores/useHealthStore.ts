@@ -3,7 +3,7 @@ import { resolveApiUrl } from "@/lib/api/resolve-url";
 import { parseApiError } from "@/lib/api/error";
 
 export type HealthStatus = "operational" | "partially" | "degraded";
-export type HealthStatusInput = HealthStatus | "partially" | "Partially";
+export type HealthStatusInput = HealthStatus | "Partially";
 export type ServiceStatus = "operational" | "unavailable";
 
 export type HealthCheck = {
@@ -24,8 +24,9 @@ type HealthResponse = { data: { status: HealthStatusInput; checkedAt: string; se
 type HistoryResponse = { data: HealthCheck[]; meta: HealthHistoryMeta };
 
 export function normalizeHealthStatus(status: HealthStatusInput): HealthStatus {
-  if (status === "degraded") return "degraded";
-  if (status === "partially" || status === "partially" || status === "Partially") return "partially";
+  const normalized = status.toLowerCase();
+  if (normalized === "degraded") return "degraded";
+  if (normalized === "partially") return "partially";
   return "operational";
 }
 
