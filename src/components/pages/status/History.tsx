@@ -1,7 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
-import type { HealthCheck, HealthStatus } from "@/stores/useHealthStore";
+import type { HealthCheck } from "@/stores/useHealthStore";
 import { normalizeHealthStatus } from "@/stores/useHealthStore";
+import {
+  formatStatusDate,
+  getServiceLabel,
+  HISTORY_STATUS_KEYS,
+  STATUS_BAR_STYLES,
+  STATUS_LABELS,
+  STATUS_SHORT_LABELS,
+  STATUS_TEXT_STYLES,
+  HealthStatus
+} from "@/data/status";
 
 type DayStatus = HealthStatus | "no_data";
 
@@ -10,29 +20,6 @@ type HistoryDay = {
   date: Date;
   checks: HealthCheck[];
   status: DayStatus;
-};
-
-const DAY_STATUS_STYLES: Record<DayStatus, string> = {
-  operational: "bg-emerald-500 hover:bg-emerald-600",
-  partially: "bg-amber-500 hover:bg-amber-600",
-  degraded: "bg-red-500 hover:bg-red-600",
-  no_data: "bg-muted-foreground/20 hover:bg-muted-foreground/35",
-};
-
-const DAY_STATUS_LABELS: Record<DayStatus, string> = {
-  operational: "Opérationnel",
-  partially: "Partiellement dégradé",
-  degraded: "Dégradé",
-  no_data: "Aucune donnée",
-};
-
-const SERVICE_LABELS: Record<string, string> = {
-  database: "Base de données",
-  cache: "Cache",
-  storage: "Stockage",
-  queue: "File d'attente",
-  smtp: "Messagerie",
-  object_storage: "Stockage objet",
 };
 
 function getDayKey(date: Date) {
@@ -72,19 +59,15 @@ function getDays(checks: HealthCheck[]): HistoryDay[] {
   });
 }
 
-function formatDate(date: Date, options: Intl.DateTimeFormatOptions = { dateStyle: "medium" }) {
-  return new Intl.DateTimeFormat("fr-FR", options).format(date);
-}
-
 function DayDetails({ day, arrowPosition, onClose }: { day: HistoryDay; arrowPosition: number; onClose: () => void }) {
   return (
     <div
       role="dialog"
-      aria-label={`Détails du ${formatDate(day.date)}`}
+      aria-label={`Détails du ${formatStatusDate(day.date)}`}
       className="relative w-full max-w-[calc(100vw-3rem)] rounded-xl border border-border bg-popover p-4 text-popover-foreground shadow-xl"
     >
       <div className="flex items-start justify-between gap-3">
-        <p className="font-semibold">{formatDate(day.date, { day: "numeric", month: "long", year: "numeric" })}</p>
+        <p className="font-semibold">{formatStatusDate(day.date, { day: "numeric", month: "long", year: "numeric" })}</p>
         <button
           type="button"
           onClick={onClose}
@@ -94,22 +77,20 @@ function DayDetails({ day, arrowPosition, onClose }: { day: HistoryDay; arrowPos
           <X size={16} />
         </button>
       </div>
-      <p className="mt-1 text-sm text-muted-foreground">{DAY_STATUS_LABELS[day.status]}</p>
+      <p className="mt-1 text-sm text-muted-foreground">{STATUS_LABELS[day.status]}</p>
 
       {day.checks.length > 0 ? (
         <div className="mt-3 max-h-64 space-y-3 overflow-y-auto">
           {day.checks.map((check) => (
             <div key={check.checkedAt} className="rounded-lg bg-muted/60 p-3">
               <p className="mb-2 text-xs font-medium text-muted-foreground">
-                Contrôle à {formatDate(new Date(check.checkedAt), { hour: "2-digit", minute: "2-digit" })}
+                Contrôle à {formatStatusDate(new Date(check.checkedAt), { hour: "2-digit", minute: "2-digit" })}
               </p>
               <ul className="space-y-1.5">
                 {Object.entries(check.services).map(([name, status]) => (
                   <li key={name} className="flex items-center justify-between gap-2 text-sm">
-                    <span>{SERVICE_LABELS[name] ?? name}</span>
-                    <span className={status === "operational" ? "text-emerald-600" : "text-red-600"}>
-                      {status === "operational" ? "Opérationnel" : "Indisponible"}
-                    </span>
+                    <span>{getServiceLabel(name)}</span>
+                    <span className={STATUS_TEXT_STYLES[status]}>{STATUS_LABELS[status]}</span>
                   </li>
                 ))}
               </ul>
@@ -223,8 +204,8 @@ export function StatusHistory({ checks, isLoading }: { checks: HealthCheck[]; is
       onMouseLeave={() => setHoveredDay(null)}
     >
       <div className="flex items-center justify-between gap-4 text-sm text-muted-foreground">
-        <span>{formatDate(days[0].date)}</span>
-        <span>{formatDate(days[days.length - 1].date)}</span>
+        <span>{formatStatusDate(days[0].date)}</span>
+        <span>{formatStatusDate(days[days.length - 1].date)}</span>
       </div>
       <div className="mt-3 overflow-x-auto pb-2">
         <div className="flex min-w-140 items-center justify-between gap-1">
@@ -251,9 +232,9 @@ export function StatusHistory({ checks, isLoading }: { checks: HealthCheck[]; is
                 positionPopover(event.currentTarget);
                 setSelectedDay((current) => current === day.key ? null : day.key);
               }}
-              aria-label={`${formatDate(day.date, { day: "numeric", month: "long", year: "numeric" })} : ${DAY_STATUS_LABELS[day.status]}`}
+              aria-label={`${formatStatusDate(day.date, { day: "numeric", month: "long", year: "numeric" })} : ${STATUS_LABELS[day.status]}`}
               aria-expanded={(selectedDay ?? hoveredDay) === day.key}
-              className={`h-9 min-w-2 flex-1 rounded-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${DAY_STATUS_STYLES[day.status]}`}
+              className={`h-9 min-w-2 flex-1 rounded-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${STATUS_BAR_STYLES[day.status]}`}
             />
           ))}
         </div>
@@ -279,10 +260,10 @@ export function StatusHistory({ checks, isLoading }: { checks: HealthCheck[]; is
       <div className="mt-1 flex flex-wrap items-center justify-between gap-3 text-sm text-muted-foreground">
         <span>Il y a 30 jours</span>
         <div className="flex items-center gap-2">
-          {(["operational", "partially", "degraded", "no_data"] as const).map((status) => (
+          {HISTORY_STATUS_KEYS.map((status) => (
             <span key={status} className="inline-flex items-center gap-1.5">
-              <span className={`h-2.5 w-2.5 rounded-sm ${DAY_STATUS_STYLES[status].split(" ")[0]}`} />
-              <span className="sr-only sm:not-sr-only">{status === "operational" ? "OK" : status === "partially" ? "Partiel" : status === "degraded" ? "Dégradé" : "Sans données"}</span>
+              <span className={`h-2.5 w-2.5 rounded-sm ${STATUS_BAR_STYLES[status].split(" ")[0]}`} />
+              <span className="sr-only sm:not-sr-only">{STATUS_SHORT_LABELS[status]}</span>
             </span>
           ))}
         </div>
