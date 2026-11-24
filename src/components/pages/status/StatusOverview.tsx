@@ -28,6 +28,7 @@ export function StatusOverview({ status, checkedAt }: { status: HealthStatusInpu
             <p className="text-base">{LABELS[normalized]}</p>
 
             <span>-</span>
+
             {checkedAt && (
               <p className="text-sm opacity-75">
                 Dernière vérification : {new Intl.DateTimeFormat("fr-FR", { dateStyle: "medium", timeStyle: "short" }).format(new Date(checkedAt))}
