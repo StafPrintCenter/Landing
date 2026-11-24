@@ -137,7 +137,7 @@ export function StatusHistory({ checks, isLoading }: { checks: HealthCheck[]; is
         <span>{formatDate(days[days.length - 1].date)}</span>
       </div>
       <div className="mt-3 overflow-x-auto pb-2">
-        <div className="flex min-w-[560px] items-center justify-between gap-1">
+        <div className="flex min-w-140 items-center justify-between gap-1">
           {days.map((day) => (
             <button
               key={day.key}
@@ -151,7 +151,7 @@ export function StatusHistory({ checks, isLoading }: { checks: HealthCheck[]; is
               }}
               aria-label={`${formatDate(day.date, { day: "numeric", month: "long", year: "numeric" })} : ${DAY_STATUS_LABELS[day.status]}`}
               aria-expanded={(selectedDay ?? hoveredDay) === day.key}
-              className={`h-9 min-w-2 flex-1 rounded-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${DAY_STATUS_STYLES[day.status]}`}
+              className={`h-9 min-w-2 flex-1 rounded-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${DAY_STATUS_STYLES[day.status]}`}
             />
           ))}
         </div>
@@ -159,10 +159,10 @@ export function StatusHistory({ checks, isLoading }: { checks: HealthCheck[]; is
       {activeDay && (
         <div
           className={`absolute top-16 z-10 ${days.indexOf(activeDay) < 10
-              ? "left-5 sm:left-6"
-              : days.indexOf(activeDay) < 20
-                ? "left-1/2 -translate-x-1/2"
-                : "right-5 sm:right-6"
+            ? "left-5 sm:left-6"
+            : days.indexOf(activeDay) < 20
+              ? "left-1/2 -translate-x-1/2"
+              : "right-5 sm:right-6"
             }`}
         >
           <DayDetails day={activeDay} />
