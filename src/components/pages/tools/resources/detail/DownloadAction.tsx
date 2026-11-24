@@ -102,7 +102,7 @@ export function ResourceDownloadAction({ slug, transactionId }: ResourceDownload
               <Download size={16} /> Téléchargement lancé
             </button>
           )}
-          <span className="mt-1 text-xs text-muted-foreground">
+          <span className="mt-1 text-xs text-muted">
             Lien valable encore {Math.floor(secondsLeft / 60)}:{String(secondsLeft % 60).padStart(2, "0")}
           </span>
         </div>
