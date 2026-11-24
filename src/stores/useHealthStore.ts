@@ -40,11 +40,11 @@ async function fetchHealth(path: string) {
 }
 
 export function fetchCurrentHealth(): Promise<HealthResponse> {
-  return fetchHealth("/api/public/health");
+  return fetchHealth("/api/public/health/state");
 }
 
 export function fetchHealthHistory(perPage = 100): Promise<HistoryResponse> {
-  return fetchHealth(`/api/public/health/history?perPage=${perPage}`);
+  return fetchHealth(`/api/public/health/date?perPage=${perPage}`);
 }
 
 export function useHealthStatus() {
