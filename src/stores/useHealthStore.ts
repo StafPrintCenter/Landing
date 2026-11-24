@@ -3,10 +3,11 @@ import { resolveApiUrl } from "@/lib/api/resolve-url";
 import { parseApiError } from "@/lib/api/error";
 
 export type HealthStatus = "operational" | "partially" | "degraded";
+export type HealthStatusInput = HealthStatus | "partially" | "Partially";
 export type ServiceStatus = "operational" | "unavailable";
 
 export type HealthCheck = {
-  status: HealthStatus | "Partially";
+  status: HealthStatusInput;
   services: Record<string, ServiceStatus>;
   checkedAt: string;
 };
@@ -19,12 +20,12 @@ export type HealthHistoryMeta = {
   total: number;
 };
 
-type HealthResponse = { data: { status: HealthStatus | "Partially"; checkedAt: string; services: Record<string, ServiceStatus> } };
+type HealthResponse = { data: { status: HealthStatusInput; checkedAt: string; services: Record<string, ServiceStatus> } };
 type HistoryResponse = { data: HealthCheck[]; meta: HealthHistoryMeta };
 
-export function normalizeHealthStatus(status: HealthStatus | "Partially"): HealthStatus {
+export function normalizeHealthStatus(status: HealthStatusInput): HealthStatus {
   if (status === "degraded") return "degraded";
-  if (status === "partially" || status === "Partially") return "partially";
+  if (status === "partially" || status === "partially" || status === "Partially") return "partially";
   return "operational";
 }
 
