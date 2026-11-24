@@ -58,12 +58,17 @@ function ServiceCard({ service }: { service: HealthService }) {
         </p>
       </div>
 
-      <div className="mt-4" aria-label={`Historique de disponibilité de ${SERVICE_LABELS[service.name] ?? service.name}`}>
+      <div
+        className="mt-4"
+        role="group"
+        aria-label={`Historique de disponibilité de ${SERVICE_LABELS[service.name] ?? service.name}`}
+      >
         <div className="flex items-center gap-1" role="list">
           {service.history.map((day) => (
             <span
               key={day.date}
               role="listitem"
+              aria-label={`${formatDay(day.date)} : ${HISTORY_STATUS_LABELS[day.status]}${day.availabilityPercentage === null ? "" : ` (${day.availabilityPercentage} %)`}`}
               title={`${formatDay(day.date)} : ${HISTORY_STATUS_LABELS[day.status]}${day.availabilityPercentage === null ? "" : ` (${day.availabilityPercentage} %)`} · ${day.checksCount} contrôle${day.checksCount === 1 ? "" : "s"}`}
               className={`h-8 min-w-0 flex-1 rounded-sm ${HISTORY_STATUS_STYLES[day.status]}`}
             />
@@ -105,7 +110,11 @@ export function ServiceGrid({ services }: { services: HealthService[] }) {
 
 export function ServiceGridSkeleton() {
   return (
-    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" aria-label="Chargement des détails des services">
+    <div
+      role="status"
+      aria-label="Chargement des détails des services"
+      className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3"
+    >
       {Array.from({ length: 6 }, (_, index) => (
         <div key={index} className="animate-pulse rounded-xl border border-border bg-card p-5">
           <div className="flex justify-between gap-3">
