@@ -51,6 +51,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/legal/cgv", lastmod: TODAY, changefreq: "weekly", priority: "0.2" },
           { path: "/legal/privacy", lastmod: TODAY, changefreq: "weekly", priority: "0.2" },
           { path: "/ethique", lastmod: TODAY, changefreq: "weekly", priority: "0.2" },
+          { path: "/status", lastmod: TODAY, changefreq: "weekly", priority: "0.2" },
         ];
 
         // 3. Appel aux APIs publiques avec tolérance de panne
