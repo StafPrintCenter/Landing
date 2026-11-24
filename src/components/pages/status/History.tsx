@@ -89,7 +89,7 @@ function DayDetails({ day, arrowPosition, onClose }: { day: HistoryDay; arrowPos
           type="button"
           onClick={onClose}
           aria-label="Fermer les détails"
-          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground cursor-pointer"
         >
           <X size={16} />
         </button>
