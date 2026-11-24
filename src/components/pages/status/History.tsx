@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { HealthCheck, HealthStatus } from "@/stores/useHealthStore";
 import { normalizeHealthStatus } from "@/stores/useHealthStore";
 
@@ -75,12 +75,12 @@ function formatDate(date: Date, options: Intl.DateTimeFormatOptions = { dateStyl
   return new Intl.DateTimeFormat("fr-FR", options).format(date);
 }
 
-function DayDetails({ day }: { day: HistoryDay }) {
+function DayDetails({ day, arrowPosition }: { day: HistoryDay; arrowPosition: number }) {
   return (
     <div
       role="dialog"
       aria-label={`Détails du ${formatDate(day.date)}`}
-      className="w-72 max-w-[calc(100vw-3rem)] rounded-xl border border-border bg-popover p-4 text-popover-foreground shadow-xl sm:w-80"
+      className="relative w-full max-w-[calc(100vw-3rem)] rounded-xl border border-border bg-popover p-4 text-popover-foreground shadow-xl"
     >
       <p className="font-semibold">{formatDate(day.date, { day: "numeric", month: "long", year: "numeric" })}</p>
       <p className="mt-1 text-sm text-muted-foreground">{DAY_STATUS_LABELS[day.status]}</p>
@@ -108,6 +108,11 @@ function DayDetails({ day }: { day: HistoryDay }) {
       ) : (
         <p className="mt-3 text-sm text-muted-foreground">Aucun contrôle enregistré pour cette date.</p>
       )}
+      <span
+        aria-hidden
+        style={{ left: `${arrowPosition}%` }}
+        className="absolute -top-1.5 h-3 w-3 -translate-x-1/2 rotate-45 border-l border-t border-border bg-popover"
+      />
     </div>
   );
 }
@@ -115,6 +120,23 @@ function DayDetails({ day }: { day: HistoryDay }) {
 export function StatusHistory({ checks, isLoading }: { checks: HealthCheck[]; isLoading: boolean }) {
   const [hoveredDay, setHoveredDay] = useState<string | null>(null);
   const [selectedDay, setSelectedDay] = useState<string | null>(null);
+  const [popoverPosition, setPopoverPosition] = useState({ left: 20, width: 288, arrow: 20 });
+  const historyRef = useRef<HTMLDivElement>(null);
+
+  const positionPopover = (button: HTMLButtonElement) => {
+    const historyElement = historyRef.current;
+    if (!historyElement) return;
+
+    const historyRect = historyElement.getBoundingClientRect();
+    const buttonRect = button.getBoundingClientRect();
+    const width = Math.min(
+      window.matchMedia("(min-width: 640px)").matches ? 320 : 288,
+      Math.max(160, historyElement.clientWidth - 40),
+    );
+    const anchor = buttonRect.left + buttonRect.width / 2 - historyRect.left;
+    const left = Math.max(20, Math.min(anchor - width / 2, historyElement.clientWidth - width - 20));
+    setPopoverPosition({ left, width, arrow: Math.max(12, Math.min(width - 12, anchor - left)) });
+  };
 
   if (isLoading) {
     return <div className="h-28 animate-pulse rounded-2xl border border-border bg-card" />;
@@ -129,6 +151,7 @@ export function StatusHistory({ checks, isLoading }: { checks: HealthCheck[]; is
 
   return (
     <div
+      ref={historyRef}
       className="relative rounded-2xl border border-border bg-card p-5 md:p-6"
       onMouseLeave={() => setHoveredDay(null)}
     >
@@ -142,11 +165,22 @@ export function StatusHistory({ checks, isLoading }: { checks: HealthCheck[]; is
             <button
               key={day.key}
               type="button"
-              onMouseEnter={() => setHoveredDay(day.key)}
-              onFocus={() => setHoveredDay(day.key)}
+              onMouseEnter={(event) => {
+                if (!selectedDay) {
+                  setHoveredDay(day.key);
+                  positionPopover(event.currentTarget);
+                }
+              }}
+              onFocus={(event) => {
+                if (!selectedDay) {
+                  setHoveredDay(day.key);
+                  positionPopover(event.currentTarget);
+                }
+              }}
               onBlur={() => setHoveredDay(null)}
-              onClick={() => {
+              onClick={(event) => {
                 setHoveredDay(null);
+                positionPopover(event.currentTarget);
                 setSelectedDay((current) => current === day.key ? null : day.key);
               }}
               aria-label={`${formatDate(day.date, { day: "numeric", month: "long", year: "numeric" })} : ${DAY_STATUS_LABELS[day.status]}`}
@@ -158,14 +192,12 @@ export function StatusHistory({ checks, isLoading }: { checks: HealthCheck[]; is
       </div>
       {activeDay && (
         <div
-          className={`absolute top-16 z-10 ${days.indexOf(activeDay) < 10
-            ? "left-5 sm:left-6"
-            : days.indexOf(activeDay) < 20
-              ? "left-1/2 -translate-x-1/2"
-              : "right-5 sm:right-6"
-            }`}
+          className="absolute top-28 z-10"
+          style={{ left: `${popoverPosition.left}px` }}
         >
-          <DayDetails day={activeDay} />
+          <div style={{ width: `${popoverPosition.width}px` }}>
+            <DayDetails day={activeDay} arrowPosition={popoverPosition.arrow} />
+          </div>
         </div>
       )}
       <div className="mt-1 flex flex-wrap items-center justify-between gap-3 text-sm text-muted-foreground">
