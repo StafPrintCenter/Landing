@@ -1,7 +1,7 @@
 import { CheckCircle2, AlertTriangle, XCircle } from "lucide-react";
 import type { HealthStatusInput } from "@/stores/useHealthStore";
 import { normalizeHealthStatus } from "@/stores/useHealthStore";
-import { formatStatusDateTime, STATUS_OVERVIEW_LABELS, STATUS_OVERVIEW_STYLES } from "@/data/status/status";
+import { formatStatusDateTime, STATUS_OVERVIEW_LABELS, STATUS_OVERVIEW_STYLES } from "@/data/status";
 
 export function StatusOverview({ status, checkedAt }: { status: HealthStatusInput; checkedAt?: string }) {
   const normalized = normalizeHealthStatus(status);
