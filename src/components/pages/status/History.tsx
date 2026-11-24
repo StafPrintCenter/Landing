@@ -1,4 +1,5 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { X } from "lucide-react";
 import type { HealthCheck, HealthStatus } from "@/stores/useHealthStore";
 import { normalizeHealthStatus } from "@/stores/useHealthStore";
 
@@ -75,14 +76,24 @@ function formatDate(date: Date, options: Intl.DateTimeFormatOptions = { dateStyl
   return new Intl.DateTimeFormat("fr-FR", options).format(date);
 }
 
-function DayDetails({ day, arrowPosition }: { day: HistoryDay; arrowPosition: number }) {
+function DayDetails({ day, arrowPosition, onClose }: { day: HistoryDay; arrowPosition: number; onClose: () => void }) {
   return (
     <div
       role="dialog"
       aria-label={`Détails du ${formatDate(day.date)}`}
       className="relative w-full max-w-[calc(100vw-3rem)] rounded-xl border border-border bg-popover p-4 text-popover-foreground shadow-xl"
     >
-      <p className="font-semibold">{formatDate(day.date, { day: "numeric", month: "long", year: "numeric" })}</p>
+      <div className="flex items-start justify-between gap-3">
+        <p className="font-semibold">{formatDate(day.date, { day: "numeric", month: "long", year: "numeric" })}</p>
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Fermer les détails"
+          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+        >
+          <X size={16} />
+        </button>
+      </div>
       <p className="mt-1 text-sm text-muted-foreground">{DAY_STATUS_LABELS[day.status]}</p>
 
       {day.checks.length > 0 ? (
@@ -127,6 +138,37 @@ export function StatusHistory({ checks, isLoading }: { checks: HealthCheck[]; is
   const [selectedDay, setSelectedDay] = useState<string | null>(null);
   const [popoverPosition, setPopoverPosition] = useState({ left: 20, width: 288, arrow: 20 });
   const historyRef = useRef<HTMLDivElement>(null);
+  const detailsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!selectedDay) return;
+
+    const handlePointerDown = (event: PointerEvent) => {
+      const target = event.target as Node;
+      const targetElement = event.target as HTMLElement;
+      const isInsideDetails = detailsRef.current?.contains(target);
+      const isDayButton = targetElement.closest("button[data-history-day]");
+
+      if (!isInsideDetails && !isDayButton) {
+        setSelectedDay(null);
+        setHoveredDay(null);
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setSelectedDay(null);
+        setHoveredDay(null);
+      }
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedDay]);
 
   const positionPopover = (button: HTMLButtonElement) => {
     const historyElement = historyRef.current;
@@ -170,6 +212,7 @@ export function StatusHistory({ checks, isLoading }: { checks: HealthCheck[]; is
             <button
               key={day.key}
               type="button"
+              data-history-day
               onMouseEnter={(event) => {
                 if (!selectedDay) {
                   setHoveredDay(day.key);
@@ -197,11 +240,19 @@ export function StatusHistory({ checks, isLoading }: { checks: HealthCheck[]; is
       </div>
       {activeDay && (
         <div
+          ref={detailsRef}
           className="absolute top-28 z-10"
           style={{ left: `${popoverPosition.left}px` }}
         >
           <div style={{ width: `${popoverPosition.width}px` }}>
-            <DayDetails day={activeDay} arrowPosition={popoverPosition.arrow} />
+            <DayDetails
+              day={activeDay}
+              arrowPosition={popoverPosition.arrow}
+              onClose={() => {
+                setSelectedDay(null);
+                setHoveredDay(null);
+              }}
+            />
           </div>
         </div>
       )}
