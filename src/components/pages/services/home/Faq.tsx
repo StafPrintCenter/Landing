@@ -5,6 +5,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { useFaqsStore } from "@/stores/useFaqsStore";
 import { getDisciplineColorClass } from "@/data/categories";
 import { ServiceHomeCta } from "./Cta";
+import { ServiceBriefCta } from "./BriefCta";
 import { shuffleFaqs, type APIFaq } from "@/data/faqs";
 
 const SERVICE_FAQ_EXCLUDED_CATEGORIES = new Set(["formation", "formations", "conseils", "actus"]);
@@ -112,8 +113,9 @@ export function ServiceHomeFAQ() {
           </div>
 
           {/* CTA */}
-          <div className="lg:col-span-5 lg:sticky lg:top-24">
+          <div className="flex flex-col gap-5 lg:col-span-5 lg:sticky lg:top-24">
             <ServiceHomeCta />
+            <ServiceBriefCta />
           </div>
         </div>
       </div>
