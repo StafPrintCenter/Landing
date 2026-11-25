@@ -1,6 +1,7 @@
 export { ServiceHomeHeader } from "./Header";
 export { ServiceHomeSkeleton } from "./Skeleton";
-export { ServiceHomeCta, ServiceBriefCta } from "./Cta";
+export { ServiceHomeCta } from "./Cta";
+export { ServiceBriefCta } from "./BriefCta";
 export { ServiceHomeFAQ } from "./Faq";
 export { ServiceHomeSearchBar } from "./SearchBar";
 export { ServiceHomeFilters, SERVICE_SORT_OPTIONS, SERVICE_SORT_DIRECTIONS, type ServiceSortOption, type ServiceSortDirection, } from "./Filters";
