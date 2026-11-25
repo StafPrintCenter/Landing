@@ -10,7 +10,6 @@ import { Pagination } from "@/components/site/Pagination";
 import {
   ServiceHomeHeader,
   ServiceHomeFAQ,
-  ServiceBriefCta,
   ServiceHomeSearchBar,
   ServiceHomeFilters,
   ServiceHomeMobileTrigger,
@@ -137,8 +136,6 @@ function ServicesPage() {
 
       {/* Section FAQ & CTA latéral */}
       <ServiceHomeFAQ />
-
-      <ServiceBriefCta />
 
       {/* Tiroir mobile */}
       <ServiceHomeMobileSheet
