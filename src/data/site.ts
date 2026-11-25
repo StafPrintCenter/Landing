@@ -1,4 +1,4 @@
-import { Mail, Calendar, Network, Download } from "lucide-react";
+import { Mail, Calendar, Network, Download, BadgeCheck } from "lucide-react";
 
 export const SITE = {
   name: "STAF PRINT CENTER",
@@ -50,6 +50,7 @@ export const FOOTER_ACTION_LINKS = [
   { label: "Prendre un rendez-vous", to: "/tools/appointment", icon: Calendar },
   { label: "L'écosystème", to: "/tools/ecosystem", icon: Network },
   { label: "Ressources", to: "/tools/ressources", icon: Download },
+  { label: "Vérifier un certificat", to: "/verify-certificate", icon: BadgeCheck },
 ] as const;
 
 export const FOOTER_LEGAL_LINKS = [
