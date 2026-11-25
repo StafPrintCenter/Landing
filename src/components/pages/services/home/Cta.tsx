@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowUpRight, FileText, Sparkles } from "lucide-react";
+import { SITE_LINK } from "@/data/site";
 
 export function ServiceHomeCta() {
   return (
@@ -33,5 +34,46 @@ export function ServiceHomeCta() {
         </Link>
       </div>
     </div>
+  );
+}
+
+export function ServiceBriefCta() {
+  return (
+    <section className="container-x py-16 md:py-20">
+      <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-linear-to-br from-primary/10 via-card to-accent/10 p-6 md:p-10">
+        <div aria-hidden className="absolute -right-10 -top-10 h-48 w-48 rounded-full bg-primary/5" />
+        <div className="relative flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
+          <div className="max-w-2xl">
+            <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+              <FileText size={14} /> Préparation de projet
+            </span>
+            <h2 className="mt-4 font-display text-2xl font-bold md:text-3xl">
+              Une idée en tête ? Préparez votre brief.
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground md:text-base">
+              Décrivez votre besoin, vos objectifs et votre budget pour générer une fiche projet claire à nous transmettre.
+            </p>
+          </div>
+
+          {SITE_LINK.briefUrl ? (
+            <a
+              href={SITE_LINK.briefUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:scale-[1.02]"
+            >
+              Préparer mon brief <ArrowUpRight size={16} />
+            </a>
+          ) : (
+            <span
+              aria-disabled="true"
+              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-muted px-6 py-3 text-sm font-semibold text-muted-foreground"
+            >
+              Outil de brief indisponible <ArrowRight size={16} />
+            </span>
+          )}
+        </div>
+      </div>
+    </section>
   );
 }
