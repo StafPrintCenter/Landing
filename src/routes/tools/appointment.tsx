@@ -91,8 +91,12 @@ ${appointment.message || "-"}`;
         acceptedTerms: data.cgu,
       });
       setConfirmed(appointment);
-    } catch {
-      setSubmitError("Une erreur est survenue lors de l'envoi de votre demande. Merci de réessayer.");
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : "Une erreur est survenue lors de l'envoi de votre demande. Merci de réessayer.",
+      );
     } finally {
       setIsSubmitting(false);
     }
