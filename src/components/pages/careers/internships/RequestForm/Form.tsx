@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { SITE } from "@/data/site";
 import { DraftBanner } from "@/components/shared/DraftBanner";
+import { TurnstileField } from "@/components/site";
 import { useFormDraft } from "@/hooks/use-form-draft";
 import { FileUploadField } from "@/components/pages/careers/FileUploadField";
 import { createInternshipRequest, InternshipApiError } from "@/stores/useInternshipsStore";
@@ -26,6 +27,8 @@ export function InternshipRequestForm() {
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[]> | undefined>();
   const [submitted, setSubmitted] = useState(false);
   const [bannerDismissed, setBannerDismissed] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileResetSignal, setTurnstileResetSignal] = useState(0);
 
   const { minStartDate, maxStartDate } = useMemo(() => {
     const minDate = new Date();
@@ -81,6 +84,10 @@ export function InternshipRequestForm() {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!consent) return;
+    if (!turnstileToken) {
+      setErrorMessage("Veuillez valider la vérification anti-robot.");
+      return;
+    }
     if (desiredStartDate && desiredStartDate < minStartDate) {
       setErrorMessage("La date de début souhaitée doit être au moins deux semaines dans le futur.");
       return;
@@ -106,6 +113,7 @@ export function InternshipRequestForm() {
         message: message.trim() || undefined,
         cv: cv ?? undefined,
         consentAccepted: consent,
+        turnstileToken,
       });
       setSubmitted(true);
       discardDraft();
@@ -118,6 +126,8 @@ export function InternshipRequestForm() {
       }
     } finally {
       setIsSubmitting(false);
+      setTurnstileToken(null);
+      setTurnstileResetSignal((current) => current + 1);
     }
   };
 
@@ -183,6 +193,11 @@ export function InternshipRequestForm() {
             J'autorise {SITE.name} à traiter mes données personnelles dans le cadre du traitement de ma demande de stage.
           </span>
         </label>
+        <TurnstileField
+          action="internship"
+          onTokenChange={setTurnstileToken}
+          resetSignal={turnstileResetSignal}
+        />
         <RequestFormFeedback
           fieldErrors={fieldErrors}
           errorMessage={errorMessage}
