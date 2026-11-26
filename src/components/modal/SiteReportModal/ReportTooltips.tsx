@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { Info } from "lucide-react";
 
 interface BaseTooltipProps {
-  label: string; // Ce titre sera maintenant bien visible dans la bulle !
+  label: string;
   text: string;
 }
 

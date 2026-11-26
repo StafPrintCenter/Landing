@@ -32,7 +32,7 @@ interface ReportFormProps {
   turnstileResetSignal: number;
 }
 
-export function ReportForm({
+export function SiteReportForm({
   reportableType,
   reportableId,
   reason,

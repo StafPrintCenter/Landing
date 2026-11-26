@@ -3,9 +3,8 @@ import { Flag } from "lucide-react";
 import { createReport, ReportApiError } from "@/stores/useReportsStore";
 import { type ReportReason, type ReportableType } from "@/data/reports";
 import { useReportPrefill } from "@/hooks/use-report-prefill";
-import { BaseModal, ModalHeader } from "./";
-import { SuccessState } from "./SiteReportModal/SuccessState";
-import { ReportForm } from "./SiteReportModal/ReportForm";
+import { BaseModal, ModalHeader } from "..";
+import { SuccessState, SiteReportForm } from "./";
 
 interface SiteReportModalProps {
   isOpen: boolean;
@@ -84,7 +83,7 @@ export function SiteReportModal({ isOpen, onClose }: SiteReportModalProps) {
         {submitted ? (
           <SuccessState onClose={onClose} />
         ) : (
-          <ReportForm
+          <SiteReportForm
             reportableType={reportableType}
             reportableId={reportableId}
             reason={reason}
