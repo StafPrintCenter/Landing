@@ -6,6 +6,7 @@ import {
   type ReportableType,
 } from "@/data/reports";
 import { useReportPrefill } from "@/hooks/use-report-prefill";
+import { TurnstileField } from "@/components/site";
 import { IdTooltip, EmailTooltip } from "./ReportTooltips";
 
 const REASON_OPTIONS = Object.keys(REPORT_REASON_LABELS) as ReportReason[];
@@ -26,6 +27,9 @@ interface ReportFormProps {
   setMessage: (val: string) => void;
   setReporterEmail: (val: string) => void;
   onSubmit: (e: React.FormEvent) => void;
+  turnstileToken: string | null;
+  onTurnstileTokenChange: (token: string | null) => void;
+  turnstileResetSignal: number;
 }
 
 export function ReportForm({
@@ -43,6 +47,9 @@ export function ReportForm({
   setMessage,
   setReporterEmail,
   onSubmit,
+  turnstileToken,
+  onTurnstileTokenChange,
+  turnstileResetSignal,
 }: ReportFormProps) {
   return (
     <form onSubmit={onSubmit} className="space-y-4">
@@ -126,9 +133,15 @@ export function ReportForm({
 
       {error && <p className="text-xs text-destructive">{error}</p>}
 
+      <TurnstileField
+        action="report_site"
+        onTokenChange={onTurnstileTokenChange}
+        resetSignal={turnstileResetSignal}
+      />
+
       <button
         type="submit"
-        disabled={isSubmitting}
+        disabled={isSubmitting || !turnstileToken}
         className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90 disabled:opacity-60 cursor-pointer"
       >
         {isSubmitting ? <Loader2 size={16} className="animate-spin" /> : <Flag size={16} />}
