@@ -1,6 +1,7 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site/SiteShell";
 import { SITE } from "@/data/site";
+import { buildShareUrl } from "@/lib/share/build-share-url";
 import { fetchJobOfferBySlug } from "@/stores/useJobsStore";
 import { JobOfferDetailHeader, JobOfferDetailBody, JobOfferDetailSidebar, JobOfferNotFoundState, } from "@/components/pages/careers/offers/detail";
 import type { APIJobOffer } from "@/data/jobs";
@@ -29,9 +30,9 @@ export const Route = createFileRoute("/careers/offers/$slug/")({
         { property: "og:title", content: title },
         { property: "og:description", content: desc },
         { property: "og:type", content: "article" },
-        { property: "og:url", content: url },
+        { property: "og:url", content: buildShareUrl(url) },
       ],
-      links: [{ rel: "canonical", href: url }],
+      links: [{ rel: "canonical", href: buildShareUrl(url) }],
       scripts: offer
         ? [
           {

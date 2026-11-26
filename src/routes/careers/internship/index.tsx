@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site/SiteShell";
 import { SITE } from "@/data/site";
+import { buildShareUrl } from "@/lib/share/build-share-url";
 import { InternshipRequestForm, InternshipSidebar } from "@/components/pages/careers/internships";
 
 export const Route = createFileRoute("/careers/internship/")({
@@ -9,6 +10,7 @@ export const Route = createFileRoute("/careers/internship/")({
       { title: `Demande de stage | ${SITE.name}` },
       { name: "description", content: `Déposez votre demande de stage chez ${SITE.name} en quelques minutes.` },
     ],
+    links: [{ rel: "canonical", href: buildShareUrl("/careers/internship") }],
   }),
   component: InternshipsPage,
 });
