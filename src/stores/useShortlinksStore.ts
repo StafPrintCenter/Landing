@@ -23,12 +23,13 @@ export async function resolveShortlink(longUrl: string): Promise<APIShortlink | 
 /**
  * Crée un lien court pour cette URL longue. Le backend gère lui-même la déduplication
  */
-export async function createShortlink(longUrl: string, category?: ShortlinkCategory): Promise<APIShortlink> {
+export async function createShortlink(longUrl: string, turnstileToken: string, category?: ShortlinkCategory): Promise<APIShortlink> {
   const formData = new FormData();
   formData.append("long_url", longUrl);
   if (category) {
     formData.append("category", category);
   }
+  formData.append("cf-turnstile-response", turnstileToken);
 
   const url = resolveApiUrl(`/api/public/shortlinks/create`);
   const response = await fetch(url, {
