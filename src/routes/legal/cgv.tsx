@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ScrollText, FileSignature, Banknote, Printer, Truck, GraduationCap, Copyright, Scale, } from "lucide-react";
 import { LegalLayout, type LegalSection } from "@/components/pages/legal";
 import { SITE } from "@/data/site";
+import { buildShareUrl } from "@/lib/share/build-share-url";
 
 export const Route = createFileRoute("/legal/cgv")({
   head: () => ({
@@ -9,6 +10,7 @@ export const Route = createFileRoute("/legal/cgv")({
       { title: `Conditions Générales de Vente | ${SITE.name}` },
       { name: "description", content: `Conditions Générales de Vente de ${SITE.name} : devis, paiement, impression, livraison et formations.` },
     ],
+    links: [{ rel: "canonical", href: buildShareUrl("/legal/cgv") }],
   }),
   component: CgvPage,
 });
