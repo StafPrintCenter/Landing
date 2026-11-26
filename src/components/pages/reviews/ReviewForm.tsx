@@ -6,6 +6,7 @@ import { ReviewSubmittedState } from "./states/SubmittedState";
 import { submitReviewResponse, editReviewResponse } from "@/stores/useReviewsStore";
 import { useFormDraft } from "@/hooks/use-form-draft";
 import { DraftBanner } from "@/components/shared/DraftBanner";
+import { TurnstileField } from "@/components/site";
 import type { APIReviewClientInfo, APIReviewFormPublic, ReviewAnswers, ReviewAnswerValue, ReviewExistingAnswers, } from "@/data/reviews";
 
 interface ReviewFormProps {
@@ -38,6 +39,8 @@ export function ReviewForm({
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [bannerDismissed, setBannerDismissed] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileResetSignal, setTurnstileResetSignal] = useState(0);
 
   const sortedQuestions = [...(form.questions ?? [])].sort((a, b) => a.order - b.order);
 
@@ -89,13 +92,17 @@ export function ReviewForm({
       setErrors(allErrors);
       return;
     }
+    if (!isEditMode && !turnstileToken) {
+      setSubmitError("Veuillez valider la vérification anti-robot.");
+      return;
+    }
 
     setIsSubmitting(true);
     try {
       if (isEditMode) {
         await editReviewResponse(token, { answers, allowPublication });
       } else {
-        await submitReviewResponse(token, { clientName, clientEmail, answers, allowPublication, privacyAccepted });
+        await submitReviewResponse(token, { clientName, clientEmail, answers, allowPublication, privacyAccepted, turnstileToken });
       }
       setSubmitted(true);
       discardDraft(); // formulaire abouti - plus besoin du brouillon
@@ -103,6 +110,10 @@ export function ReviewForm({
       setSubmitError("Une erreur est survenue lors de l'envoi. Merci de réessayer.");
     } finally {
       setIsSubmitting(false);
+      if (!isEditMode) {
+        setTurnstileToken(null);
+        setTurnstileResetSignal((current) => current + 1);
+      }
     }
   };
 
@@ -163,9 +174,17 @@ export function ReviewForm({
             </div>
           )}
 
+          {!isEditMode && (
+            <TurnstileField
+              action="review_submit"
+              onTokenChange={setTurnstileToken}
+              resetSignal={turnstileResetSignal}
+            />
+          )}
+
           <button
             type="submit"
-            disabled={isSubmitting}
+            disabled={isSubmitting || (!isEditMode && !turnstileToken)}
             className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:opacity-90 disabled:opacity-60 cursor-pointer"
           >
             {isSubmitting ? (
