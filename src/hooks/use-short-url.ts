@@ -17,11 +17,20 @@ export function useShortUrl(
   longUrl: string,
   category?: ShortlinkCategory,
   enabled = true,
+  turnstileToken: string | null = null,
+  onTokenUsed?: () => void,
 ): UseShortUrlResult {
   const query = useQuery({
     queryKey: ["shortlink", "create", longUrl, category],
-    queryFn: () => createShortlink(longUrl, category),
-    enabled: enabled && !!longUrl,
+    queryFn: async () => {
+      if (!turnstileToken) throw new Error("Turnstile token is required.");
+      try {
+        return await createShortlink(longUrl, turnstileToken, category);
+      } finally {
+        onTokenUsed?.();
+      }
+    },
+    enabled: enabled && !!longUrl && !!turnstileToken,
     staleTime: 1000 * 60 * 30,
     retry: false,
   });
