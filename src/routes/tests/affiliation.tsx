@@ -1,10 +1,13 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { SiteShell } from "@/components/site/SiteShell";
-import { SITE } from "@/data/site";
+import { SITE, SITE_LINK } from "@/data/site";
 import { Gift, Copy, Check, Users, Sparkles, Trophy } from "lucide-react";
 
 export const Route = createFileRoute("/tests/affiliation")({
+  loader: () => {
+    if (import.meta.env.PROD) throw notFound();
+  },
   head: () => ({
     meta: [
       { title: `Programme de parrainage (test) | ${SITE.name}` },
@@ -36,7 +39,7 @@ function ParrainagePage() {
 
   const shareLink = `${SITE_LINK.landingUrl}/?ref=${code}`;
   const waMessage = encodeURIComponent(
-    `Salut ! Je te recommande STAF PRINT CENTER (impression + digital + formations). Utilise mon code ${code} pour bénéficier de -10 % : ${shareLink}`,
+    `Salut ! Je te recommande ${SITE.name} (impression + digital + formations). Utilise mon code ${code} pour bénéficier de -10 % : ${shareLink}`,
   );
 
   const copy = async () => {

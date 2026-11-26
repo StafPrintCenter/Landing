@@ -1,10 +1,13 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { SiteShell } from "@/components/site/SiteShell";
 import { SITE } from "@/data/site";
 import { CalendarDays, MapPin, Users, Clock, Filter } from "lucide-react";
 
 export const Route = createFileRoute("/tests/calendar")({
+  loader: () => {
+    if (import.meta.env.PROD) throw notFound();
+  },
   head: () => ({
     meta: [
       { title: `Calendrier des sessions (test) | ${SITE.name}` },
