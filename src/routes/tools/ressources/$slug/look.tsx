@@ -4,6 +4,7 @@ import { ResourceDetailError, ResourceDetailNotFound, ResourceDetailSkeleton } f
 import { PaymentLook } from "@/components/pages/tools/resources/look";
 import { fetchResourceBySlug } from "@/stores/useResourcesStore";
 import { SITE } from "@/data/site";
+import { buildShareUrl } from "@/lib/share/build-share-url";
 
 const searchSchema = z.object({
   status: z.string().optional(),
@@ -27,7 +28,7 @@ export const Route = createFileRoute("/tools/ressources/$slug/look")({
         { title },
         { name: "robots", content: "noindex" },
       ],
-      links: [{ rel: "canonical", href: `/tools/ressources/${params.slug}/look` }],
+      links: [{ rel: "canonical", href: buildShareUrl(`/tools/ressources/${params.slug}/look`) }],
     };
   },
   component: ResourcePaymentLookPage,

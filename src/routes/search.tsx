@@ -38,10 +38,9 @@ export const Route = createFileRoute("/search")({
       { title: `Recherche | ${SITE.name}` },
       { name: "description", content: "Recherchez parmi nos services, réalisations, formations, articles, questions fréquentes, ressources et offres d'emploi." },
       { property: "og:title", content: `Recherche | ${SITE.name}` },
-      { property: "og:url", content: "/search" },
+      { property: "og:url", content: buildShareUrl("/search") },
       { name: "robots", content: "noindex" },
     ],
-    links: [{ rel: "canonical", href: "/search" }],
   }),
   component: SearchPage,
 });
