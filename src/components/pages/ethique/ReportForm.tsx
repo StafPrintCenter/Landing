@@ -7,6 +7,7 @@ import { DraftBanner } from "@/components/shared/DraftBanner";
 import { useFormDraft } from "@/hooks/use-form-draft";
 import { ApiError } from "@/lib/api/error";
 import { createEthicalReport, type EthicalReportReceipt } from "@/stores/useEthicalReportsStore";
+import { TurnstileField } from "@/components/site";
 
 const reportSchema = z.object({
   category: z.string().min(1, "Choisissez une catégorie"),
@@ -54,6 +55,8 @@ export function EthiqueReportForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [bannerDismissed, setBannerDismissed] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileResetSignal, setTurnstileResetSignal] = useState(0);
 
   const { draftAvailable, restoreDraft, discardDraft, getSavedAgeLabel } =
     useFormDraft<ReportFormData>({
@@ -100,11 +103,15 @@ export function EthiqueReportForm() {
       setErrors(nextErrors);
       return;
     }
+    if (!turnstileToken) {
+      setSubmitError("Veuillez valider la vérification anti-robot.");
+      return;
+    }
 
     setErrors({});
     setIsSubmitting(true);
     try {
-      const submittedReport = await createEthicalReport(result.data);
+      const submittedReport = await createEthicalReport({ ...result.data, turnstileToken });
       setReceipt(submittedReport);
       discardDraft();
     } catch (error) {
@@ -122,6 +129,8 @@ export function EthiqueReportForm() {
       }
     } finally {
       setIsSubmitting(false);
+      setTurnstileToken(null);
+      setTurnstileResetSignal((current) => current + 1);
     }
     window.scrollTo({
       top: document.getElementById("formulaire")?.offsetTop ?? 0,
@@ -316,9 +325,15 @@ export function EthiqueReportForm() {
           </label>
           {errors.goodFaith && <p className="text-xs text-destructive">{errors.goodFaith}</p>}
 
+          <TurnstileField
+            action="report_ethical"
+            onTokenChange={setTurnstileToken}
+            resetSignal={turnstileResetSignal}
+          />
+
           <button
             type="submit"
-            disabled={isSubmitting}
+            disabled={isSubmitting || !turnstileToken}
             className="cursor-pointer rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isSubmitting ? "Envoi en cours…" : "Envoyer mon signalement"}
