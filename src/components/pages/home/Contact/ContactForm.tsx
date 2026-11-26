@@ -8,6 +8,7 @@ import { Send, CheckCircle2, AlertCircle, Copy, Check, ArrowRight } from "lucide
 import { useServicesStore, sendContactRequest } from "@/stores";
 import { useFormDraft } from "@/hooks/use-form-draft";
 import { DraftBanner } from "@/components/shared/DraftBanner";
+import { TurnstileField } from "@/components/site";
 import { Field, CharacterCounter } from "./FormFields";
 
 export const contactSchema = z.object({
@@ -61,6 +62,8 @@ export function ContactForm({ onSuccess, initialValues }: ContactFormProps) {
   const [ticketNumber, setTicketNumber] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [bannerDismissed, setBannerDismissed] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileResetSignal, setTurnstileResetSignal] = useState(0);
 
   const { register, handleSubmit, reset, watch, setValue, formState: { errors, isSubmitting } } = useForm<ContactInput>({
     resolver: zodResolver(contactSchema),
@@ -120,6 +123,11 @@ export function ContactForm({ onSuccess, initialValues }: ContactFormProps) {
 
   const onSubmit = async (data: ContactInput) => {
     setSubmitError(null);
+    if (!turnstileToken) {
+      setSubmitError("Veuillez valider la vérification anti-robot.");
+      return;
+    }
+
     try {
       const result = await sendContactRequest({
         name: data.name,
@@ -127,6 +135,7 @@ export function ContactForm({ onSuccess, initialValues }: ContactFormProps) {
         service: data.service === "Autre" ? (data.customService?.trim() || "Autre") : data.service,
         customService: data.service === "Autre" ? data.customService?.trim() : undefined,
         message: data.message,
+        turnstileToken,
       });
       setTicketNumber(result.ticketNumber);
       setSubmitted(true);
@@ -137,6 +146,9 @@ export function ContactForm({ onSuccess, initialValues }: ContactFormProps) {
       onSuccess?.(result.ticketNumber);
     } catch {
       setSubmitError("Une erreur est survenue lors de l'envoi. Merci de réessayer dans quelques instants.");
+    } finally {
+      setTurnstileToken(null);
+      setTurnstileResetSignal((current) => current + 1);
     }
   };
 
@@ -223,9 +235,19 @@ export function ContactForm({ onSuccess, initialValues }: ContactFormProps) {
         </Field>
       </div>
 
+      {!submitted && (
+        <div className="mt-6">
+          <TurnstileField
+            action="contact"
+            onTokenChange={setTurnstileToken}
+            resetSignal={turnstileResetSignal}
+          />
+        </div>
+      )}
+
       <button
         type="submit"
-        disabled={isSubmitting}
+        disabled={isSubmitting || !turnstileToken}
         className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60 cursor-pointer"
       >
         {isSubmitting ? "Envoi..." : <>Envoyer la demande <Send size={16} /></>}
