@@ -45,6 +45,7 @@ export async function createTrainingRegistration(params: CreateTrainingRegistrat
   if (params.notes) formData.append("notes", params.notes);
   formData.append("program_read", params.programRead ? "true" : "false");
   formData.append("consent_accepted", params.consentAccepted ? "true" : "false");
+  formData.append("cf-turnstile-response", params.turnstileToken);
 
   const url = resolveApiUrl(`/api/public/trainings/registrations/create`);
   const response = await fetch(url, { method: "POST", body: formData });
