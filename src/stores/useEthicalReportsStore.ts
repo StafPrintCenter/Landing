@@ -10,6 +10,7 @@ export interface CreateEthicalReportParams {
   anonymous: boolean;
   contact: string;
   goodFaith: boolean;
+  turnstileToken: string;
 }
 
 export interface EthicalReportReceipt {
@@ -31,6 +32,7 @@ export async function createEthicalReport(
   formData.append("anonymous", String(params.anonymous));
   formData.append("contact", params.anonymous ? "" : params.contact);
   formData.append("goodFaith", String(params.goodFaith));
+  formData.append("cf-turnstile-response", params.turnstileToken);
 
   const response = await fetch(resolveApiUrl("/api/public/reports/ethical"), {
     method: "POST",

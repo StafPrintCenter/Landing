@@ -44,6 +44,7 @@ export interface CreateAppointmentParams {
   subject: string;
   message?: string;
   acceptedTerms: boolean;
+  turnstileToken: string;
 }
 
 export async function createAppointment(params: CreateAppointmentParams): Promise<APIAppointment> {
@@ -59,6 +60,7 @@ export async function createAppointment(params: CreateAppointmentParams): Promis
   formData.append("subject", params.subject);
   formData.append("message", params.message ?? "");
   formData.append("accepted_terms", params.acceptedTerms ? "true" : "false");
+  formData.append("cf-turnstile-response", params.turnstileToken);
 
   const url = resolveApiUrl(`/api/public/appointments/create`);
   const response = await fetch(url, { method: "POST", body: formData });
