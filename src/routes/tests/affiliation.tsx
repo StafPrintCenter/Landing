@@ -34,7 +34,7 @@ function ParrainagePage() {
     return `SPC-${base.toUpperCase()}-2026`;
   }, [name]);
 
-  const shareLink = `https://stafprintcenter.com/?ref=${code}`;
+  const shareLink = `${SITE_LINK.landingUrl}/?ref=${code}`;
   const waMessage = encodeURIComponent(
     `Salut ! Je te recommande STAF PRINT CENTER (impression + digital + formations). Utilise mon code ${code} pour bénéficier de -10 % : ${shareLink}`,
   );
