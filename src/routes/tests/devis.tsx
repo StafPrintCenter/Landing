@@ -1,10 +1,13 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { SiteShell } from "@/components/site/SiteShell";
 import { SITE } from "@/data/site";
 import { Calculator, ArrowRight, CheckCircle2, Info } from "lucide-react";
 
 export const Route = createFileRoute("/tests/devis")({
+  loader: () => {
+    if (import.meta.env.PROD) throw notFound();
+  },
   head: () => ({
     meta: [
       { title: `Devis intelligent (test) | ${SITE.name}` },
