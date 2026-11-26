@@ -5,6 +5,7 @@ import { NewsletterSuccessScreen } from "./SuccessScreen";
 import { subscribeNewsletter } from "@/stores/useNewsletterStore";
 import type { APINewsletterSubscription } from "@/data/newsletter";
 import { SITE } from "@/data/site";
+import { TurnstileField } from "@/components/site";
 
 export function NewsletterSubscribeForm() {
   const [email, setEmail] = useState("");
@@ -15,6 +16,8 @@ export function NewsletterSubscribeForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<{ subscription: APINewsletterSubscription; alreadySubscribed: boolean } | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileResetSignal, setTurnstileResetSignal] = useState(0);
 
   const toggle = (categoryId: string) =>
     setSelected((prev) => (prev.includes(categoryId) ? prev.filter((x) => x !== categoryId) : [...prev, categoryId]));
@@ -26,11 +29,13 @@ export function NewsletterSubscribeForm() {
     setLastName("");
     setSelected([]);
     setConsent(false);
+    setTurnstileToken(null);
+    setTurnstileResetSignal((current) => current + 1);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !consent) return;
+    if (!email || !consent || !turnstileToken) return;
 
     setError(null);
     setIsSubmitting(true);
@@ -41,12 +46,15 @@ export function NewsletterSubscribeForm() {
         lastName: lastName.trim() || undefined,
         categoryIds: selected,
         acceptedTerms: consent,
+        turnstileToken,
       });
       setResult(res);
     } catch {
       setError("Une erreur est survenue lors de l'inscription. Merci de réessayer.");
     } finally {
       setIsSubmitting(false);
+      setTurnstileToken(null);
+      setTurnstileResetSignal((current) => current + 1);
     }
   };
 
@@ -108,6 +116,12 @@ export function NewsletterSubscribeForm() {
         <span>J'accepte de recevoir la newsletter {SITE.name} et je peux me désabonner à tout moment.</span>
       </label>
 
+      <TurnstileField
+        action="newsletter_subscribe"
+        onTokenChange={setTurnstileToken}
+        resetSignal={turnstileResetSignal}
+      />
+
       {error && (
         <div className="flex items-start gap-2 rounded-lg bg-destructive/10 px-3 py-2.5 text-xs text-destructive">
           <AlertCircle size={14} className="mt-0.5 shrink-0" />
@@ -117,7 +131,7 @@ export function NewsletterSubscribeForm() {
 
       <button
         type="submit"
-        disabled={!email || !consent || isSubmitting}
+        disabled={!email || !consent || !turnstileToken || isSubmitting}
         className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
       >
         {isSubmitting ? (
