@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { Building2, Server, Copyright, ShieldCheck, Cookie, Scale, Mail, Phone, MapPin, FileText, SquareActivity, Globe, User, type LucideIcon, Briefcase, Landmark, } from "lucide-react";
 import { LegalLayout, type LegalSection } from "@/components/pages/legal";
 import { SITE, SITE_LINK } from "@/data/site";
+import { buildShareUrl } from "@/lib/share/build-share-url";
 
 export const Route = createFileRoute("/legal/mentions")({
   head: () => ({
@@ -10,6 +11,7 @@ export const Route = createFileRoute("/legal/mentions")({
       { title: `Mentions légales | ${SITE.name}` },
       { name: "description", content: `Mentions légales et informations éditeur du site ${SITE.name}` },
     ],
+    links: [{ rel: "canonical", href: buildShareUrl("/legal/mentions") }],
   }),
   component: MentionsPage,
 });
@@ -135,7 +137,7 @@ function getSections(): LegalSection[] {
             </li>
             <li>
               <span className="font-bold">Confidentialité :</span>{" "}
-              Les données collectées sont exclusivement utilisées par {SITE.name}. Elles ne sont ni vendues, ni louées, ni cédées à des tiers à des fins commerciales.
+              {SITE.name} ne vend ni ne loue vos coordonnées ou vos fichiers de projet. Certaines données de navigation peuvent être traitées par Google pour la mesure d'audience et la publicité selon vos choix de consentement.
             </li>
             <li>
               <span className="font-bold">Droits des utilisateurs :</span>{" "}
@@ -162,7 +164,8 @@ function getSections(): LegalSection[] {
       content: (
         <div className="space-y-4">
           <p>
-            Afin d'assurer le bon fonctionnement du site et de mesurer l'utilisation de nos services, nous utilisons exclusivement des technologies nécessaires au fonctionnement de la plateforme et à la production de statistiques internes.
+            Afin d'assurer le fonctionnement du site, de mesurer son audience et de financer nos
+            contenus, nous utilisons des technologies nécessaires ainsi que des services tiers soumis à vos choix de consentement.
           </p>
 
           <ul className="list-disc space-y-4 pl-5">
@@ -173,7 +176,23 @@ function getSections(): LegalSection[] {
 
             <li>
               <span className="font-bold">Suivi des annonces et widgets :</span>{" "}
-              Afin de mesurer l'efficacité de nos communications internes (notifications, bannières d'information, offres d'emploi et autres widgets), nous enregistrons le nombre de vues, de clics et de fermetures de ces éléments d'affichage. Ces mesures sont réalisées sans déposer de cookies publicitaires tiers ni mettre en œuvre un suivi comportemental à des fins marketing.
+              Pour nos notifications et widgets internes, nous enregistrons des mesures d'affichage et d'interaction. Ce suivi interne est distinct du service publicitaire Google AdSense, qui peut utiliser des cookies ou identifiants similaires pour diffuser et mesurer des annonces.
+            </li>
+
+            <li>
+              <span className="font-bold">Publicité Google AdSense :</span>{" "}
+              Google et ses partenaires peuvent utiliser des cookies ou identifiants similaires pour diffuser, limiter et mesurer les annonces, prévenir la fraude et, lorsque votre consentement et les règles applicables le permettent, personnaliser la publicité.
+              Vous pouvez modifier votre choix dans le bandeau cookies et gérer la personnalisation
+              dans les{" "}
+              <a
+                href="https://adssettings.google.com/"
+                target="_blank"
+                rel="noreferrer"
+                className="text-primary underline underline-offset-4"
+              >
+                paramètres des annonces Google
+              </a>
+              .
             </li>
 
             <li>

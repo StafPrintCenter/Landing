@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ShieldCheck, Database, Target, Lock, UserCheck, ServerCog, Clock } from "lucide-react";
 import { LegalLayout, type LegalSection } from "@/components/pages/legal";
 import { SITE, SITE_LINK } from "@/data/site";
+import { buildShareUrl } from "@/lib/share/build-share-url";
 
 export const Route = createFileRoute("/legal/privacy")({
   head: () => ({
@@ -12,6 +13,7 @@ export const Route = createFileRoute("/legal/privacy")({
         content: `Politique de confidentialité et protection des données personnelles de ${SITE.name}.`,
       },
     ],
+    links: [{ rel: "canonical", href: buildShareUrl("/legal/privacy") }],
   }),
   component: ConfidentialitePage,
 });
@@ -181,7 +183,8 @@ function getSections(): LegalSection[] {
               <code className="rounded bg-muted px-1.5 py-0.5 text-[13px]">
                 {SITE_LINK.shortUrl}
               </code>{" "}
-              et Google Analytics (consentement).
+              Google Analytics (mesure d'audience) et Google AdSense (diffusion et mesure des
+              annonces), selon les choix de consentement applicables.
             </li>
           </ol>
         </div>
@@ -235,9 +238,8 @@ function getSections(): LegalSection[] {
         <div>
           <ul className="mt-2 list-disc space-y-2 pl-5">
             <li>
-              <span className="font-bold">Aucune revente :</span> {SITE.name} s'engage formellement
-              à ne jamais vendre, louer, échanger ou céder vos données personnelles ou vos fichiers
-              de projet à des tiers à des fins commerciales.
+              <span className="font-bold">Pas de vente de vos données :</span> {SITE.name} ne vend ni ne loue vos coordonnées ou vos fichiers de projet. Certaines données de navigation peuvent toutefois être traitées par nos prestataires, notamment Google, pour la
+              mesure d'audience et la publicité selon vos choix de consentement.
             </li>
             <li>
               <span className="font-bold">Accès restreint :</span> Seules les personnes habilitées
@@ -248,7 +250,7 @@ function getSections(): LegalSection[] {
               <span className="font-bold">Sous-traitants techniques :</span> Vos données peuvent
               être hébergées ou traitées par nos prestataires de confiance : LWS (infrastructure
               cloud sécurisée) et Google Ireland Ltd. (Google Analytics pour la mesure d'audience
-              anonymisée).
+              et Google AdSense pour la diffusion et la mesure des annonces).
             </li>
           </ul>
         </div>
@@ -384,15 +386,25 @@ function getSections(): LegalSection[] {
                 par défaut.
               </li>
               <li>
+                <strong>Google AdSense :</strong> Google et ses partenaires peuvent utiliser des cookies ou des identifiants similaires pour diffuser, limiter et mesurer les annonces, prévenir la fraude et, lorsque votre consentement et les règles
+                applicables le permettent, personnaliser la publicité. Vous pouvez refuser ou
+                modifier votre choix via le bandeau et gérer la personnalisation dans les{" "}
+                <a
+                  href="https://adssettings.google.com/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-primary underline underline-offset-4"
+                >
+                  paramètres des annonces Google
+                </a>
+                .
+              </li>
+              <li>
                 <strong>Mesure d'audience interne :</strong> Les statistiques d'interaction sur{" "}
                 <code className="rounded bg-muted px-1.5 py-0.5 text-[13px]">
                   {SITE_LINK.shortUrl}
                 </code>{" "}
                 sont traitées en interne à des fins statistiques et de sécurité.
-              </li>
-              <li>
-                <strong>Absence de traçage publicitaire :</strong> Aucun cookie de ciblage
-                publicitaire ou de profilage commercial tiers n'est déposé sur votre appareil.
               </li>
             </ul>
           </div>
