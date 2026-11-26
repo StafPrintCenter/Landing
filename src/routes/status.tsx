@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SITE } from "@/data/site";
+import { buildShareUrl } from "@/lib/share/build-share-url";
 import { SiteShell } from "@/components/site/SiteShell";
 import { ServiceGrid, ServiceGridSkeleton, StatusHistory, StatusOverview, StatusOverviewSkeleton } from "@/components/pages/status";
 import { formatStatusDate, STATUS_HISTORY_DAYS } from "@/data/status";
@@ -11,6 +12,7 @@ export const Route = createFileRoute("/status")({
       { title: `État des services | ${SITE.name}` },
       { name: "description", content: "Consultez l'état actuel et l'historique des services de l'API SPC." },
     ],
+    links: [{ rel: "canonical", href: buildShareUrl("/status") }],
   }),
   component: StatusPage,
 });
