@@ -1,4 +1,4 @@
-import { CalendarDays, PackageSearch, Newspaper, Link2, Network, QrCode, FileSignature, Calculator, Download, Users, Sparkles, type LucideIcon } from "lucide-react";
+import { CalendarDays, Download, Link2, Network, Newspaper, PackageSearch, Sparkles, type LucideIcon } from "lucide-react";
 import { SITE_LINK } from "@/data/site";
 
 interface ToolBase {
@@ -12,10 +12,6 @@ export interface AvailableTool extends ToolBase {
   actionLabel: string;
   to?: string;
   href?: string;
-}
-
-export interface UpcomingTool extends ToolBase {
-  statusLabel?: string;
 }
 
 export const AVAILABLE_TOOLS: AvailableTool[] = [
@@ -74,32 +70,5 @@ export const AVAILABLE_TOOLS: AvailableTool[] = [
     title: "Notre écosystème",
     desc: "Découvrez tous nos sites et plateformes : espaces formateur, apprenant, documentation et outils internes.",
     actionLabel: "Explorer l'écosystème",
-  },
-];
-
-/**
- * Fonctionnalités non encore développées - placeholders à ajuster
- */
-export const UPCOMING_TOOLS: UpcomingTool[] = [
-  {
-    id: "quote-simulator",
-    icon: Calculator,
-    title: "Simulateur de devis",
-    desc: "Estimez rapidement le coût de votre projet d'impression ou de design.",
-    statusLabel: "Bientôt disponible",
-  },
-  {
-    id: "e-signature",
-    icon: FileSignature,
-    title: "Signature électronique",
-    desc: "Signez vos devis et contrats directement en ligne, sans impression papier.",
-    statusLabel: "Bientôt disponible",
-  },
-  {
-    id: "affiliation",
-    icon: Users,
-    title: "Programme de parrainage",
-    desc: "Codes de parrainage et paliers de récompenses.",
-    statusLabel: "Bientôt disponible",
   },
 ];

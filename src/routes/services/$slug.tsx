@@ -3,6 +3,7 @@ import { SiteShell } from "@/components/site/SiteShell";
 import { fetchServiceBySlug } from "@/stores/useServicesStore";
 import { type APIService, getServiceProcess } from "@/data/services";
 import { SITE } from "@/data/site";
+import { buildShareUrl } from "@/lib/share/build-share-url";
 import {
   ServiceDetailHeader,
   ServiceDetailFeatures,
@@ -35,9 +36,9 @@ export const Route = createFileRoute("/services/$slug")({
         { name: "description", content: desc },
         { property: "og:title", content: title },
         { property: "og:description", content: desc },
-        { property: "og:url", content: url },
+        { property: "og:url", content: buildShareUrl(url) },
       ],
-      links: [{ rel: "canonical", href: url }],
+      links: [{ rel: "canonical", href: buildShareUrl(url) }],
     };
   },
 

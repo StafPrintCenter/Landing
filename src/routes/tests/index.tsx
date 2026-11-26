@@ -1,9 +1,12 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site/SiteShell";
 import { Calculator, Download, CalendarDays, Users, FlaskConical, ArrowRight } from "lucide-react";
 import { SITE } from "@/data/site";
 
 export const Route = createFileRoute("/tests/")({
+  loader: () => {
+    if (import.meta.env.PROD) throw notFound();
+  },
   head: () => ({
     meta: [
       { title: `Pages de test | ${SITE.name}` },

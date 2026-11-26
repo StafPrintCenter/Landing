@@ -4,6 +4,7 @@ import { SiteShell } from "@/components/site/SiteShell";
 import { fetchArticleBySlug, useArticlesStore } from "@/stores/useArticlesStore";
 import { type APIArticle } from "@/data/articles";
 import { SITE } from "@/data/site";
+import { buildShareUrl } from "@/lib/share/build-share-url";
 import {
   ArticleDetailHeader,
   ArticleDetailBody,
@@ -40,10 +41,10 @@ export const Route = createFileRoute("/articles/$slug")({
           { name: "twitter:title", content: article.title },
           { name: "twitter:description", content: article.excerpt },
           { name: "twitter:image", content: article.cover },
-          { property: "og:url", content: url },
+          { property: "og:url", content: buildShareUrl(url) },
         ]
         : [],
-      links: [{ rel: "canonical", href: url }],
+      links: [{ rel: "canonical", href: buildShareUrl(url) }],
     };
   },
   component: ArticlePage,

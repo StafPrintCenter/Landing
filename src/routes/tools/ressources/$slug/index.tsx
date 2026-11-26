@@ -10,6 +10,7 @@ import {
 } from "@/components/pages/tools/resources/detail";
 import { fetchResourceBySlug } from "@/stores/useResourcesStore";
 import { SITE } from "@/data/site";
+import { buildShareUrl } from "@/lib/share/build-share-url";
 
 export const Route = createFileRoute("/tools/ressources/$slug/")({
   pendingMs: 0,
@@ -45,7 +46,7 @@ export const Route = createFileRoute("/tools/ressources/$slug/")({
           { name: "twitter:description", content: description },
         ]
         : [{ title }, { name: "robots", content: "noindex" }],
-      links: [{ rel: "canonical", href: url }],
+      links: [{ rel: "canonical", href: buildShareUrl(url) }],
     };
   },
   component: ResourceDetailPage,

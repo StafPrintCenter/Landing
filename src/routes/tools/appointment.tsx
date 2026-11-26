@@ -7,6 +7,7 @@ import { SiteShell } from "@/components/site/SiteShell";
 import { TurnstileField } from "@/components/site";
 import { Reveal } from "@/components/site/Reveal";
 import { SITE } from "@/data/site";
+import { buildShareUrl } from "@/lib/share/build-share-url";
 import { createAppointment } from "@/stores/useAppointmentsStore";
 import type { APIAppointment } from "@/data/appointments";
 import { Stepper, StepType, StepSlot, StepInfos, StepRecap, ConfirmationScreen, STEPS, INITIAL_BOOKING, type BookingData } from "@/components/pages/tools/appointment";
@@ -20,9 +21,9 @@ export const Route = createFileRoute("/tools/appointment")({
       },
       { property: "og:title", content: `Prendre rendez-vous | ${SITE.name}` },
       { property: "og:description", content: "Réservez facilement un créneau en ligne ou en présentiel." },
-      { property: "og:url", content: "/appointment" },
+      { property: "og:url", content: buildShareUrl("/tools/appointment") },
     ],
-    links: [{ rel: "canonical", href: "/appointment" }],
+    links: [{ rel: "canonical", href: buildShareUrl("/tools/appointment") }],
   }),
   component: RendezVousPage,
 });

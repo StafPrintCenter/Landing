@@ -3,6 +3,7 @@ import { SiteShell } from "@/components/site/SiteShell";
 import { type APIFormation } from "@/data/trainings";
 import { fetchFormationById, useFormationsStore } from "@/stores/useTrainingsStore";
 import { SITE } from "@/data/site";
+import { buildShareUrl } from "@/lib/share/build-share-url";
 import {
   FormationDetailHeader,
   FormationDetailSkeleton,
@@ -34,9 +35,9 @@ export const Route = createFileRoute("/trainings/$id")({
         { property: "og:title", content: title },
         { property: "og:description", content: desc },
         { property: "og:type", content: "article" },
-        { property: "og:url", content: url },
+        { property: "og:url", content: buildShareUrl(url) },
       ],
-      links: [{ rel: "canonical", href: url }],
+      links: [{ rel: "canonical", href: buildShareUrl(url) }],
       scripts: f
         ? [
           {

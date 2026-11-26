@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Sparkles, Clock, ExternalLink } from "lucide-react";
+import { ArrowRight, Sparkles, ExternalLink } from "lucide-react";
 import { SiteShell } from "@/components/site/SiteShell";
 import { Reveal } from "@/components/site/Reveal";
 import { SITE } from "@/data/site";
-import { AVAILABLE_TOOLS, UPCOMING_TOOLS } from "@/data/tools";
+import { buildShareUrl } from "@/lib/share/build-share-url";
+import { AVAILABLE_TOOLS } from "@/data/tools";
 
 export const Route = createFileRoute("/tools/")({
   head: () => ({
@@ -11,6 +12,7 @@ export const Route = createFileRoute("/tools/")({
       { title: `Outils | ${SITE.name}` },
       { name: "description", content: `Retrouvez tous les outils pratiques mis à disposition par ${SITE.name} : rendez-vous, suivi de demande, newsletter et plus.` },
     ],
+    links: [{ rel: "canonical", href: buildShareUrl("/tools") }],
   }),
   component: ToolsPage,
 });
@@ -29,7 +31,7 @@ function ToolsPage() {
               </div>
               <h1 className="text-3xl font-bold md:text-4xl">Outils pratiques</h1>
               <p className="mt-3 text-foreground/70">
-                Des fonctionnalités pensées pour vous simplifier la vie, en attendant votre prochaine visite en atelier.
+                Découvrez les outils actuellement disponibles pour gérer vos demandes et préparer vos projets.
               </p>
             </div>
 
@@ -83,35 +85,6 @@ function ToolsPage() {
           })}
         </div>
 
-        {UPCOMING_TOOLS.length > 0 && (
-          <div className="mt-16">
-            <h2 className="font-display text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-              À venir
-            </h2>
-            <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {UPCOMING_TOOLS.map((tool) => {
-                const Icon = tool.icon;
-                return (
-                  <div
-                    key={tool.id}
-                    className="flex flex-col rounded-2xl border border-dashed border-border bg-muted/20 p-6 opacity-70"
-                  >
-                    <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-muted text-muted-foreground">
-                      <Icon size={20} />
-                    </span>
-                    <h3 className="mt-4 font-display text-lg font-semibold text-foreground/80">{tool.title}</h3>
-                    <p className="mt-1.5 flex-1 text-sm text-muted-foreground leading-relaxed">{tool.desc}</p>
-                    {tool.statusLabel && (
-                      <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
-                        <Clock size={12} /> {tool.statusLabel}
-                      </span>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
       </section>
     </SiteShell>
   );
