@@ -4,8 +4,8 @@ import { createReport, ReportApiError } from "@/stores/useReportsStore";
 import { type ReportReason, type ReportableType } from "@/data/reports";
 import { useReportPrefill } from "@/hooks/use-report-prefill";
 import { BaseModal, ModalHeader } from "./";
-import { SuccessState } from "./site-report/SuccessState";
-import { ReportForm } from "./site-report/ReportForm";
+import { SuccessState } from "./SiteReportModal/SuccessState";
+import { ReportForm } from "./SiteReportModal/ReportForm";
 
 interface SiteReportModalProps {
   isOpen: boolean;
