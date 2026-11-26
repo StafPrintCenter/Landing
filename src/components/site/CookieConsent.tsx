@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Cookie } from "lucide-react";
 
-const STORAGE_KEY = "spc_cookie_consent_v1";
+const STORAGE_KEY = "spc_cookie_consent_v2";
 const GA_ID = "G-45B9T7DTV7";
 
 type Consent = "accepted" | "declined";
@@ -30,6 +30,8 @@ function loadGA() {
   window.gtag("js", new Date());
   window.gtag("consent", "update", {
     ad_storage: "granted",
+    ad_user_data: "granted",
+    ad_personalization: "granted",
     analytics_storage: "granted",
   });
   window.gtag("config", GA_ID, { anonymize_ip: true });
@@ -46,6 +48,8 @@ function setupConsentDefaults() {
   }
   window.gtag("consent", "default", {
     ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
     analytics_storage: "denied",
     wait_for_update: 500,
   });
@@ -75,6 +79,8 @@ export function CookieConsent() {
     if (typeof window !== "undefined" && window.gtag) {
       window.gtag("consent", "update", {
         ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
         analytics_storage: "denied",
       });
     }
@@ -93,8 +99,7 @@ export function CookieConsent() {
           <div className="text-sm text-foreground/85">
             <p className="font-display font-semibold text-foreground">Nous utilisons des cookies</p>
             <p className="mt-1 text-foreground/70">
-              Nous utilisons Google Analytics pour comprendre l'usage du site et l'améliorer. Vous pouvez accepter
-              ou refuser. Voir nos {" "}
+              Google Analytics mesure l'audience et Google AdSense affiche des annonces. Ces services peuvent utiliser des cookies ou identifiants selon votre choix. Vous pouvez accepter ou refuser. Voir nos{" "}
               <Link to="/legal/mentions" hash="cookies" className="underline hover:text-primary">mentions légales</Link>.
             </p>
           </div>
