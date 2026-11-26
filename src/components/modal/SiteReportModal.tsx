@@ -23,6 +23,8 @@ export function SiteReportModal({ isOpen, onClose }: SiteReportModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileResetSignal, setTurnstileResetSignal] = useState(0);
 
   // Ré-applique le pré-remplissage détecté à chaque ouverture (logique métier
   // indépendante du portail/escape/scroll-lock désormais géré par BaseModal)
@@ -35,6 +37,8 @@ export function SiteReportModal({ isOpen, onClose }: SiteReportModalProps) {
     setReporterEmail("");
     setError(null);
     setSubmitted(false);
+    setTurnstileToken(null);
+    setTurnstileResetSignal((current) => current + 1);
   }, [isOpen, prefill.reportableType, prefill.reportableId]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -43,6 +47,7 @@ export function SiteReportModal({ isOpen, onClose }: SiteReportModalProps) {
 
     if (!reportableType) return setError("Merci de choisir le type de ressource concernée.");
     if (!reportableId.trim()) return setError("L'identifiant de la ressource est obligatoire.");
+    if (!turnstileToken) return setError("Veuillez valider la vérification anti-robot.");
 
     setIsSubmitting(true);
     try {
@@ -52,12 +57,15 @@ export function SiteReportModal({ isOpen, onClose }: SiteReportModalProps) {
         reason,
         message: message.trim() || undefined,
         reporterEmail: reporterEmail.trim() || undefined,
+        turnstileToken,
       });
       setSubmitted(true);
     } catch (err) {
       setError(err instanceof ReportApiError ? err.message : "Erreur lors de l'envoi du signalement. Réessayez.");
     } finally {
       setIsSubmitting(false);
+      setTurnstileToken(null);
+      setTurnstileResetSignal((current) => current + 1);
     }
   };
 
@@ -91,6 +99,9 @@ export function SiteReportModal({ isOpen, onClose }: SiteReportModalProps) {
             setMessage={setMessage}
             setReporterEmail={setReporterEmail}
             onSubmit={handleSubmit}
+            turnstileToken={turnstileToken}
+            onTurnstileTokenChange={setTurnstileToken}
+            turnstileResetSignal={turnstileResetSignal}
           />
         )}
       </div>
