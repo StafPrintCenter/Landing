@@ -3,6 +3,7 @@ import { Share2, Link2, Check, Loader2, QrCode } from "lucide-react";
 import { WhatsAppIcon, FacebookIcon, LinkedinIcon, XIcon } from "@/components/site/icons";
 import { useShortUrl } from "@/hooks/use-short-url";
 import { QrCodeAutoPanel } from "./QrCodeAutoPanel";
+import { TurnstileField } from "@/components/site";
 import { BaseModal, ModalHeader } from "./";
 import type { ShortlinkCategory } from "@/data/shortlinks";
 import {
@@ -40,7 +41,18 @@ export function ShareModal({
 }: ShareModalProps) {
   const [copied, setCopied] = useState(false);
   const [showQr, setShowQr] = useState(false);
-  const { displayUrl, alias, isLoading } = useShortUrl(url, shortlinkCategory, isOpen);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileResetSignal, setTurnstileResetSignal] = useState(0);
+  const { displayUrl, alias, isLoading } = useShortUrl(
+    url,
+    shortlinkCategory,
+    isOpen,
+    turnstileToken,
+    () => {
+      setTurnstileToken(null);
+      setTurnstileResetSignal((current) => current + 1);
+    },
+  );
 
   const content: ShareContent = { url: displayUrl, title, text };
 
@@ -91,6 +103,14 @@ export function ShareModal({
           <ModalHeader title="Partager" icon={Share2} onClose={onClose} />
 
           <p className="mt-1 truncate text-sm text-muted-foreground">{title}</p>
+
+          <div className="mt-4">
+            <TurnstileField
+              action="shortlink_create"
+              onTokenChange={setTurnstileToken}
+              resetSignal={turnstileResetSignal}
+            />
+          </div>
 
           <div className="mt-6 grid grid-cols-4 gap-3">
             {socials.map((s) => (
