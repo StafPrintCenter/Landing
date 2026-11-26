@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { format } from "date-fns";
 import { CalendarIcon, ChevronLeft, ChevronRight, Send, Loader2 } from "lucide-react";
 import { SiteShell } from "@/components/site/SiteShell";
+import { TurnstileField } from "@/components/site";
 import { Reveal } from "@/components/site/Reveal";
 import { SITE } from "@/data/site";
 import { createAppointment } from "@/stores/useAppointmentsStore";
@@ -32,6 +33,8 @@ function RendezVousPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [confirmed, setConfirmed] = useState<APIAppointment | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileResetSignal, setTurnstileResetSignal] = useState(0);
 
   const update = <K extends keyof BookingData>(k: K, v: BookingData[K]) =>
     setData((s) => ({ ...s, [k]: v }));
@@ -74,6 +77,10 @@ ${appointment.message || "-"}`;
 
   const submit = async () => {
     if (!data.mode || !data.date || !data.time) return;
+    if (!turnstileToken) {
+      setSubmitError("Veuillez valider la vérification anti-robot.");
+      return;
+    }
     setSubmitError(null);
     setIsSubmitting(true);
     try {
@@ -89,6 +96,7 @@ ${appointment.message || "-"}`;
         subject: data.subject,
         message: data.message || undefined,
         acceptedTerms: data.cgu,
+        turnstileToken,
       });
       setConfirmed(appointment);
     } catch (error) {
@@ -99,6 +107,8 @@ ${appointment.message || "-"}`;
       );
     } finally {
       setIsSubmitting(false);
+      setTurnstileToken(null);
+      setTurnstileResetSignal((current) => current + 1);
     }
   };
 
@@ -151,6 +161,16 @@ ${appointment.message || "-"}`;
             </motion.div>
           </AnimatePresence>
 
+          {step === STEPS.length - 1 && (
+            <div className="mt-6">
+              <TurnstileField
+                action="appointment"
+                onTokenChange={setTurnstileToken}
+                resetSignal={turnstileResetSignal}
+              />
+            </div>
+          )}
+
           <div className="mt-8 flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-3 border-t border-border pt-6">
             <button
               onClick={back}
@@ -170,7 +190,7 @@ ${appointment.message || "-"}`;
             ) : (
               <button
                 onClick={submit}
-                disabled={isSubmitting}
+                disabled={isSubmitting || !turnstileToken}
                 className="cursor-pointer inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground shadow hover:opacity-90 disabled:opacity-60"
               >
                 {isSubmitting ? (
