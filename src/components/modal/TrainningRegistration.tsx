@@ -8,7 +8,7 @@ import { BaseModal } from "./BaseModal";
 import { TurnstileField } from "@/components/site";
 import { createTrainingRegistration, TrainingRegistrationApiError } from "@/stores/useTrainingsStore";
 import type { TrainingRegistrationErrorReason } from "@/data/trainings";
-import { ProgressBar, StepContact, StepAvailability, StepSummary, SuccessScreen, ErrorBanner, FieldErrorsBanner, registerSchema, type RegisterInput, } from "./training-registration";
+import { ProgressBar, StepContact, StepAvailability, StepSummary, SuccessScreen, ErrorBanner, FieldErrorsBanner, registerSchema, type RegisterInput, } from "./TrainningRegistration";
 
 interface TrainningRegistrationProps {
   formation: APIFormation;
