@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Loader2, ShieldCheck } from "lucide-react";
 import { DraftBanner } from "@/components/shared/DraftBanner";
+import { TurnstileField } from "@/components/site";
 import { FileUploadField } from "@/components/pages/careers/FileUploadField";
 import { useFormDraft } from "@/hooks/use-form-draft";
 import { SITE } from "@/data/site";
@@ -31,6 +32,8 @@ export function ApplyForm({ offer }: ApplyFormProps) {
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[]> | undefined>();
   const [submitted, setSubmitted] = useState(false);
   const [bannerDismissed, setBannerDismissed] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileResetSignal, setTurnstileResetSignal] = useState(0);
 
   const draftValues = { firstName, lastName, email, phone, educationLevel, coverLetter };
   const { draftAvailable, restoreDraft, discardDraft, getSavedAgeLabel } = useFormDraft({
@@ -62,6 +65,10 @@ export function ApplyForm({ offer }: ApplyFormProps) {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!cv || !consent || !educationLevel) return;
+    if (!turnstileToken) {
+      setErrorMessage("Veuillez valider la vérification anti-robot.");
+      return;
+    }
 
     setErrorMessage(null);
     setFieldErrors(undefined);
@@ -77,6 +84,7 @@ export function ApplyForm({ offer }: ApplyFormProps) {
         coverLetterFile: coverLetterFile ?? undefined,
         cv,
         consentAccepted: consent,
+        turnstileToken,
       });
       setSubmitted(true);
       discardDraft();
@@ -90,6 +98,8 @@ export function ApplyForm({ offer }: ApplyFormProps) {
       }
     } finally {
       setIsSubmitting(false);
+      setTurnstileToken(null);
+      setTurnstileResetSignal((current) => current + 1);
     }
   };
 
@@ -153,6 +163,11 @@ export function ApplyForm({ offer }: ApplyFormProps) {
             J'autorise {SITE.name} à traiter mes données personnelles dans le cadre strict du recrutement pour cette offre de {offer.title}.
           </span>
         </label>
+        <TurnstileField
+          action="job_apply"
+          onTokenChange={setTurnstileToken}
+          resetSignal={turnstileResetSignal}
+        />
         {fieldErrors && Object.keys(fieldErrors).length > 0 ? (
           <FieldErrorsBanner fieldErrors={fieldErrors} />
         ) : errorMessage ? (
@@ -160,7 +175,7 @@ export function ApplyForm({ offer }: ApplyFormProps) {
         ) : null}
         <button
           type="submit"
-          disabled={isSubmitting || !cv || !consent || !educationLevel}
+          disabled={isSubmitting || !cv || !consent || !educationLevel || !turnstileToken}
           className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:opacity-90 disabled:opacity-50 cursor-pointer shadow-sm"
         >
           {isSubmitting ? (
