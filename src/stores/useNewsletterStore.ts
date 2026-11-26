@@ -10,6 +10,7 @@ export interface SubscribeNewsletterParams {
   lastName?: string;
   categoryIds: string[];
   acceptedTerms: boolean;
+  turnstileToken: string;
 }
 
 export interface SubscribeNewsletterResult {
@@ -24,6 +25,7 @@ export async function subscribeNewsletter(params: SubscribeNewsletterParams): Pr
   if (params.lastName) formData.append("last_name", params.lastName);
   formData.append("category_ids", params.categoryIds.join(","));
   formData.append("accepted_terms", params.acceptedTerms ? "true" : "false");
+  formData.append("cf-turnstile-response", params.turnstileToken);
 
   const url = resolveApiUrl(`/api/public/newsletter/subscribe`);
   const response = await fetch(url, { method: "POST", body: formData });

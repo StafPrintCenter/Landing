@@ -10,6 +10,7 @@ export interface CreateReportParams {
   reason: ReportReason;
   message?: string;
   reporterEmail?: string;
+  turnstileToken: string;
 }
 
 export class ReportApiError extends Error {
@@ -29,6 +30,7 @@ export async function createReport(params: CreateReportParams): Promise<APIRepor
   formData.append("reason", params.reason);
   if (params.message) formData.append("message", params.message);
   if (params.reporterEmail) formData.append("reporter_email", params.reporterEmail);
+  formData.append("cf-turnstile-response", params.turnstileToken);
 
   const url = resolveApiUrl(`/api/public/reports/site`);
   const response = await fetch(url, { method: "POST", body: formData });

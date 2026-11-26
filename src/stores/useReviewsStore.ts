@@ -48,6 +48,7 @@ export interface SubmitReviewParams {
   answers: ReviewAnswers;
   allowPublication: boolean;
   privacyAccepted: boolean;
+  turnstileToken: string;
 }
 
 export async function submitReviewResponse(token: string, params: SubmitReviewParams): Promise<void> {
@@ -59,6 +60,7 @@ export async function submitReviewResponse(token: string, params: SubmitReviewPa
   formData.append("answers", JSON.stringify(json));
   formData.append("allow_publication", params.allowPublication ? "true" : "false");
   formData.append("privacy_accepted", params.privacyAccepted ? "true" : "false");
+  formData.append("cf-turnstile-response", params.turnstileToken);
 
   for (const [questionId, file] of Object.entries(files)) {
     formData.append(`answers_files[${questionId}]`, file);

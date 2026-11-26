@@ -26,6 +26,7 @@ export interface CreateInternshipRequestParams {
   message?: string;
   cv?: File;
   consentAccepted: boolean;
+  turnstileToken: string;
 }
 
 export async function createInternshipRequest(params: CreateInternshipRequestParams): Promise<APIInternshipRequest> {
@@ -41,6 +42,7 @@ export async function createInternshipRequest(params: CreateInternshipRequestPar
   if (params.message) formData.append("message", params.message);
   if (params.cv) formData.append("cv", params.cv);
   formData.append("consent_accepted", params.consentAccepted ? "true" : "false");
+  formData.append("cf-turnstile-response", params.turnstileToken);
 
   const url = resolveApiUrl(`/api/public/internships/requests/create`);
   const response = await fetch(url, { method: "POST", body: formData });

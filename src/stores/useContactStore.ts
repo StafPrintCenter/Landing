@@ -10,6 +10,7 @@ export interface SendContactParams {
   service: string;
   customService?: string;
   message: string;
+  turnstileToken: string;
 }
 
 export interface TrackContactParams {
@@ -25,6 +26,7 @@ export async function sendContactRequest(params: SendContactParams): Promise<API
   formData.append("service", params.service);
   formData.append("custom_service", params.customService ?? "");
   formData.append("message", params.message);
+  formData.append("cf-turnstile-response", params.turnstileToken);
 
   const url = resolveApiUrl(`/api/public/contact/create`);
   const response = await fetch(url, { method: "POST", body: formData });
