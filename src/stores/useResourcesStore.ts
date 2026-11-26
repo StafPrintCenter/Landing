@@ -3,6 +3,7 @@ import { type APIResource } from "@/data/resources";
 import { createResourceStore } from "./createResourceStore";
 import { resolveApiUrl } from "@/lib/api/resolve-url";
 import { parseApiError } from "@/lib/api/error";
+import { usePublicResourcePrefetch } from "@/stores/public-resource-prefetch";
 
 const { fetchList, fetchById } = createResourceStore<APIResource>({
   resourceKey: "resources",
@@ -193,10 +194,12 @@ export async function fetchResourceDownload(
 }
 
 export function useResourcesStore(params: Parameters<typeof fetchList>[0] = {}) {
+  const initialData = usePublicResourcePrefetch<APIResource>("resources", params);
   const query = useQuery({
     queryKey: ["resources", "public-list", params],
     queryFn: () => fetchPublicResources(params),
     staleTime: 1000 * 60 * 5,
+    ...(initialData ? { initialData } : {}),
   });
 
   return {

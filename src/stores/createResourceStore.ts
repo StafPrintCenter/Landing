@@ -1,6 +1,7 @@
 import { useQuery, type UseQueryResult } from "@tanstack/react-query";
 import { resolveApiUrl } from "@/lib/api/resolve-url";
 import { parseApiError } from "@/lib/api/error";
+import { usePublicResourcePrefetch } from "@/stores/public-resource-prefetch";
 
 export interface BaseFetchParams {
   category?: string;
@@ -87,10 +88,12 @@ export function createResourceStore<T>({
   }
 
   function useResourceStore(params: BaseFetchParams = {}) {
+    const initialData = usePublicResourcePrefetch<T>(resourceKey, params);
     const query: UseQueryResult<ListResponse<T>> = useQuery({
       queryKey: [resourceKey, "public-list", params],
       queryFn: () => fetchList(params),
       staleTime,
+      ...(initialData ? { initialData } : {}),
     });
 
     return {
