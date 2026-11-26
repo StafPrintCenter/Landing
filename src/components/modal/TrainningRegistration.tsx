@@ -5,6 +5,7 @@ import { AnimatePresence } from "framer-motion";
 import { X, ArrowRight, ArrowLeft, Loader2 } from "lucide-react";
 import { type APIFormation } from "@/data/trainings";
 import { BaseModal } from "./BaseModal";
+import { TurnstileField } from "@/components/site";
 import { createTrainingRegistration, TrainingRegistrationApiError } from "@/stores/useTrainingsStore";
 import type { TrainingRegistrationErrorReason } from "@/data/trainings";
 import { ProgressBar, StepContact, StepAvailability, StepSummary, SuccessScreen, ErrorBanner, FieldErrorsBanner, registerSchema, type RegisterInput, } from "./training-registration";
@@ -27,6 +28,8 @@ export function TrainningRegistration({ formation: f, isOpen, onClose }: Trainni
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<SubmitErrorState | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileResetSignal, setTurnstileResetSignal] = useState(0);
 
   const { register, handleSubmit, trigger, watch, reset, formState: { errors, isSubmitting } } = useForm<RegisterInput>({
     resolver: zodResolver(registerSchema),
@@ -55,6 +58,11 @@ export function TrainningRegistration({ formation: f, isOpen, onClose }: Trainni
 
   const onSubmitForm = async (data: RegisterInput) => {
     setSubmitError(null);
+    if (!turnstileToken) {
+      setSubmitError({ message: "Veuillez valider la vérification anti-robot." });
+      return;
+    }
+
     try {
       await createTrainingRegistration({
         trainingId: f.id,
@@ -65,6 +73,7 @@ export function TrainningRegistration({ formation: f, isOpen, onClose }: Trainni
         notes: data.notes?.trim() || undefined,
         programRead: !!data.programRead,
         consentAccepted: data.consent,
+        turnstileToken,
       });
       setSubmitted(true);
     } catch (err) {
@@ -76,6 +85,9 @@ export function TrainningRegistration({ formation: f, isOpen, onClose }: Trainni
       } else {
         setSubmitError({ message: "Une erreur inattendue est survenue. Merci de réessayer." });
       }
+    } finally {
+      setTurnstileToken(null);
+      setTurnstileResetSignal((current) => current + 1);
     }
   };
 
@@ -84,6 +96,8 @@ export function TrainningRegistration({ formation: f, isOpen, onClose }: Trainni
     setStep(1);
     setSubmitted(false);
     setSubmitError(null);
+    setTurnstileToken(null);
+    setTurnstileResetSignal((current) => current + 1);
     reset();
   };
 
@@ -122,6 +136,16 @@ export function TrainningRegistration({ formation: f, isOpen, onClose }: Trainni
             <ErrorBanner message={submitError.message} trainingId={f.id} reason={submitError.reason} />
           ) : null}
 
+          {step === 3 && (
+            <div className="mt-6">
+              <TurnstileField
+                action="training_register"
+                onTokenChange={setTurnstileToken}
+                resetSignal={turnstileResetSignal}
+              />
+            </div>
+          )}
+
           {/* Navigation Footer */}
           <div className="mt-8 flex items-center justify-between border-t border-border pt-4">
             {isTerminalError ? (
@@ -152,7 +176,7 @@ export function TrainningRegistration({ formation: f, isOpen, onClose }: Trainni
                 ) : (
                   <button
                     type="button"
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || !turnstileToken}
                     onClick={handleSubmit(onSubmitForm)}
                     className="inline-flex items-center gap-1.5 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground cursor-pointer disabled:opacity-60"
                   >
