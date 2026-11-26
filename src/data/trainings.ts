@@ -76,6 +76,7 @@ export interface CreateTrainingRegistrationParams {
   notes?: string;
   programRead: boolean;
   consentAccepted: boolean;
+  turnstileToken: string;
 }
 
 export type APITrainingRegistration = {
