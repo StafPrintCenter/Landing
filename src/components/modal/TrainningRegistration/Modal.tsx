@@ -4,11 +4,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence } from "framer-motion";
 import { X, ArrowRight, ArrowLeft, Loader2 } from "lucide-react";
 import { type APIFormation } from "@/data/trainings";
-import { BaseModal } from "./BaseModal";
+import { BaseModal } from "../BaseModal";
 import { TurnstileField } from "@/components/site";
 import { createTrainingRegistration, TrainingRegistrationApiError } from "@/stores/useTrainingsStore";
 import type { TrainingRegistrationErrorReason } from "@/data/trainings";
-import { ProgressBar, StepContact, StepAvailability, StepSummary, SuccessScreen, ErrorBanner, FieldErrorsBanner, registerSchema, type RegisterInput, } from "./TrainningRegistration";
+import { ProgressBar, StepContact, StepAvailability, StepSummary, SuccessScreen, ErrorBanner, FieldErrorsBanner, registerSchema, type RegisterInput, } from "./";
 
 interface TrainningRegistrationProps {
   formation: APIFormation;

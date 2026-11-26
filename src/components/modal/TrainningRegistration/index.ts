@@ -6,4 +6,5 @@ export { StepSummary } from "./StepSummary";
 export { SuccessScreen } from "./SuccessScreen";
 export { ErrorBanner } from "./ErrorBanner";
 export { FieldErrorsBanner } from "./FieldErrorsBanner";
+export { TrainningRegistration } from "./Modal";
 export { registerSchema, type RegisterInput } from "./types";
