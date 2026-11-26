@@ -92,18 +92,28 @@ export function ReviewForm({
       setErrors(allErrors);
       return;
     }
-    if (!isEditMode && !turnstileToken) {
+    const submitResponse = isEditMode
+      ? () => editReviewResponse(token, { answers, allowPublication })
+      : turnstileToken
+        ? () =>
+            submitReviewResponse(token, {
+              clientName,
+              clientEmail,
+              answers,
+              allowPublication,
+              privacyAccepted,
+              turnstileToken,
+            })
+        : null;
+
+    if (!submitResponse) {
       setSubmitError("Veuillez valider la vérification anti-robot.");
       return;
     }
 
     setIsSubmitting(true);
     try {
-      if (isEditMode) {
-        await editReviewResponse(token, { answers, allowPublication });
-      } else {
-        await submitReviewResponse(token, { clientName, clientEmail, answers, allowPublication, privacyAccepted, turnstileToken });
-      }
+      await submitResponse();
       setSubmitted(true);
       discardDraft(); // formulaire abouti - plus besoin du brouillon
     } catch {
