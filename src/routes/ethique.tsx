@@ -10,6 +10,7 @@ import {
   EthiqueScope,
 } from "@/components/pages/ethique";
 import { SITE } from "@/data/site";
+import { buildShareUrl } from "@/lib/share/build-share-url";
 
 const TITLE = `Signalement éthique & droit d'alerte | ${SITE.name}`;
 const DESC = `Signalez de façon anonyme et confidentielle tout fait de corruption, fraude ou conflit d'intérêts. Dispositif conforme à la loi béninoise n° 2011-20.`;
@@ -22,10 +23,10 @@ export const Route = createFileRoute("/ethique")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/signalement-ethique" },
+      { property: "og:url", content: buildShareUrl("/ethique") },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "/signalement-ethique" }],
+    links: [{ rel: "canonical", href: buildShareUrl("/ethique") }],
   }),
   component: EthiquePage,
 });
