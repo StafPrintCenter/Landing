@@ -19,7 +19,8 @@ export type APIFormation = {
   durationHours: number;
   level: FormationLevel;
   price: number;
-  registrationFee?: number;
+  originalPrice?: number | null;
+  discountPercentage?: number;
   maxSeats: number | null;
   seatsRemaining: number | null;
   currentStudents?: number;
