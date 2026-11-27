@@ -16,5 +16,5 @@ export { fetchReviewByToken, submitReviewResponse, editReviewResponse } from "./
 export { fetchPublicServices, useServicesStore } from "./useServicesStore";
 export { resolveShortlink, createShortlink } from "./useShortlinksStore";
 export { fetchPublicStats, useStatsStore } from "./useStatsStore";
-export { useTestimonialsStore } from "./useTestimonialsStore";
+export { fetchPublicTestimonials, useTestimonialsStore } from "./useTestimonialsStore";
 export { fetchPublicFormations, useFormationsStore, createTrainingRegistration } from "./useTrainingsStore";
