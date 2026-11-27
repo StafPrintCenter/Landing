@@ -4,11 +4,7 @@ import { SITE } from "@/data/site";
 import { SiteShell } from "@/components/site/SiteShell";
 import { buildShareUrl } from "@/lib/share/build-share-url";
 import { prefetchPublicResources, PublicResourcePrefetchProvider } from "@/stores/public-resource-prefetch";
-import { fetchPublicArticles, fetchPublicFormations, fetchPublicProjects, fetchPublicResources, fetchPublicServices } from "@/stores";
-import { } from "@/stores/useResourcesStore";
-import { } from "@/stores/useServicesStore";
-import { fetchPublicStats } from "@/stores/useStatsStore";
-import { fetchPublicTestimonials } from "@/stores/useTestimonialsStore";
+import { fetchPublicArticles, fetchPublicFormations, fetchPublicProjects, fetchPublicResources, fetchPublicServices, fetchPublicStats, fetchPublicTestimonials } from "@/stores";
 import {
   Hero,
   Stats,
