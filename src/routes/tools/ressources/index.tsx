@@ -1,10 +1,13 @@
 import { createFileRoute, useNavigate, useSearch } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { zodValidator } from "@tanstack/zod-adapter";
 import { Pagination, paginate } from "@/components/site/Pagination";
 import { SiteShell } from "@/components/site/SiteShell";
-import { useResourcesStore } from "@/stores/useResourcesStore";
+import { fetchPublicResources, useResourcesStore } from "@/stores/useResourcesStore";
+import { fetchPublicFaqs } from "@/stores/useFaqsStore";
+import { buildShareUrl } from "@/lib/share/build-share-url";
+import { prefetchPublicResources, PublicResourcePrefetchProvider } from "@/stores/public-resource-prefetch";
 import {
   ResourceHomeFilters,
   ResourceHomeFAQ,
@@ -37,20 +40,65 @@ const resourceSearchSchema = z.object({
 
 export const Route = createFileRoute("/tools/ressources/")({
   validateSearch: zodValidator(resourceSearchSchema),
+  loaderDeps: ({ search }) => ({
+    category: search.category,
+    sortBy: search.sortBy,
+    sortDir: search.sortDir,
+    query: search.query,
+  }),
+  loader: async ({ deps }) => {
+    const listParams = {
+      category: deps.category,
+      sortBy: deps.sortBy,
+      sortDir: deps.sortDir,
+      query: deps.query,
+    };
+    const allResourcesParams = {};
+    const faqParams = { perPage: 50 };
+
+    return {
+      prefetchedResources: await prefetchPublicResources([
+        {
+          resourceKey: "resources",
+          params: listParams,
+          fetch: () => fetchPublicResources(listParams),
+        },
+        {
+          resourceKey: "resources",
+          params: allResourcesParams,
+          fetch: () => fetchPublicResources(allResourcesParams),
+        },
+        {
+          resourceKey: "faqs",
+          params: faqParams,
+          fetch: () => fetchPublicFaqs(faqParams),
+        },
+      ]),
+    };
+  },
   head: () => ({
     meta: [
       { title: `Ressources & templates | ${SITE.name}` },
       { name: "description", content: "Gabarits, guides et outils gratuits ou premium pour vos projets d'impression, de design et de communication." },
       { property: "og:title", content: `Ressources & templates | ${SITE.name}` },
       { property: "og:description", content: "Des ressources pratiques pour préparer vos projets d'impression et de design." },
-      { property: "og:url", content: "/tools/ressources" },
+      { property: "og:url", content: buildShareUrl("/tools/ressources") },
     ],
-    links: [{ rel: "canonical", href: "/tools/ressources" }],
+    links: [{ rel: "canonical", href: buildShareUrl("/tools/ressources") }],
   }),
   component: ResourcesPage,
 });
 
 function ResourcesPage() {
+  const { prefetchedResources } = Route.useLoaderData();
+  return (
+    <PublicResourcePrefetchProvider data={prefetchedResources}>
+      <ResourcesPageContent />
+    </PublicResourcePrefetchProvider>
+  );
+}
+
+function ResourcesPageContent() {
   const { category, price, sortBy, sortDir, query, page, perPage } = useSearch({ from: "/tools/ressources/" });
   const navigate = useNavigate({ from: "/tools/ressources/" });
 
@@ -63,8 +111,14 @@ function ResourcesPage() {
   const { resources: allResources } = useResourcesStore();
   const [isLoading, setIsLoading] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const hasMounted = useRef(false);
 
   useEffect(() => {
+    if (!hasMounted.current) {
+      hasMounted.current = true;
+      return;
+    }
+
     setIsLoading(true);
     const timer = setTimeout(() => setIsLoading(false), 400);
     return () => clearTimeout(timer);
