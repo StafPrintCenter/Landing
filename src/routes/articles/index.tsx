@@ -7,10 +7,7 @@ import { ARTICLE_CATEGORIES, type ArticleCategory } from "@/data/articles";
 import { fetchPublicArticles, useArticlesStore } from "@/stores/useArticlesStore";
 import { SITE } from "@/data/site";
 import { buildShareUrl } from "@/lib/share/build-share-url";
-import {
-  prefetchPublicResources,
-  PublicResourcePrefetchProvider,
-} from "@/stores/public-resource-prefetch";
+import { prefetchPublicResources, PublicResourcePrefetchProvider } from "@/stores/public-resource-prefetch";
 import { Pagination } from "@/components/site/Pagination";
 import {
   ArticleHomeHeader,
@@ -134,14 +131,14 @@ function ArticlesPageContent() {
   const gridMeta =
     meta && isDefaultListing && featured
       ? {
-          ...meta,
-          current_page: Math.min(page, gridLastPage),
-          last_page: gridLastPage,
-          per_page: perPage,
-          total: gridTotal,
-          from: gridTotal === 0 ? 0 : (page - 1) * perPage + 1,
-          to: Math.min(page * perPage, gridTotal),
-        }
+        ...meta,
+        current_page: Math.min(page, gridLastPage),
+        last_page: gridLastPage,
+        per_page: perPage,
+        total: gridTotal,
+        from: gridTotal === 0 ? 0 : (page - 1) * perPage + 1,
+        to: Math.min(page * perPage, gridTotal),
+      }
       : meta;
 
   const [isLoading, setIsLoading] = useState(false);
