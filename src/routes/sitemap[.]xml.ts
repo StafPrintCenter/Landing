@@ -109,7 +109,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           for (const r of resourcesRes.data) {
             entries.push({
               path: `/tools/ressources/${r.slug}`,
-              lastmod: TODAY,
+              lastmod: formatDate(r.updatedAt),
               changefreq: "weekly",
               priority: "0.7",
             });
