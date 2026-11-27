@@ -72,7 +72,7 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
 
             {discount > 0 && f.originalPrice != null && (
               <div className="mt-3 flex flex-wrap items-center gap-2">
-                <span className="text-sm text-muted-foreground">Prix original</span>
+                <span className="text-sm text-muted-foreground">Au lieu de</span>
                 <span className="text-sm font-medium text-muted-foreground line-through">
                   {f.originalPrice.toLocaleString("fr-FR")} FCFA
                 </span>
