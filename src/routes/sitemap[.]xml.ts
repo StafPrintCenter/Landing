@@ -45,7 +45,6 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/careers/offers", lastmod: TODAY, changefreq: "weekly", priority: "0.7" },
           { path: "/tools/ressources", lastmod: TODAY, changefreq: "weekly", priority: "0.8" },
           { path: "/tools/appointment", lastmod: TODAY, changefreq: "yearly", priority: "0.2" },
-          { path: "/tools/newsletter", lastmod: TODAY, changefreq: "yearly", priority: "0.2" },
           { path: "/tools/ecosystem", lastmod: TODAY, changefreq: "weekly", priority: "0.6" },
           { path: "/legal/mentions", lastmod: TODAY, changefreq: "weekly", priority: "0.2" },
           { path: "/legal/cgv", lastmod: TODAY, changefreq: "weekly", priority: "0.2" },
@@ -78,7 +77,6 @@ export const Route = createFileRoute("/sitemap.xml")({
           for (const f of formationsRes.data) {
             entries.push({
               path: `/trainings/${f.id}`,
-              lastmod: formatDate(f.startDate),
               changefreq: "weekly",
               priority: "0.7",
             });
