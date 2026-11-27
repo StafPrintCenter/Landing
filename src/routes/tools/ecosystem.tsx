@@ -1,11 +1,13 @@
 import { createFileRoute, useNavigate, useSearch } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { zodValidator } from "@tanstack/zod-adapter";
 import { SiteShell } from "@/components/site/SiteShell";
 import { SITE } from "@/data/site";
 import { ECOSYSTEM_CATEGORIES, type EcosystemSiteCategory, type EcosystemSiteStatus } from "@/data/ecosystem";
-import { useEcosystemSitesStore } from "@/stores/useEcosystemSitesStore";
+import { fetchPublicEcosystemSites, useEcosystemSitesStore } from "@/stores/useEcosystemSitesStore";
+import { buildShareUrl } from "@/lib/share/build-share-url";
+import { prefetchPublicResources, PublicResourcePrefetchProvider } from "@/stores/public-resource-prefetch";
 import { Pagination } from "@/components/site/Pagination";
 import {
   EcosystemHeader,
@@ -33,19 +35,58 @@ const ecosystemSearchSchema = z.object({
 
 export const Route = createFileRoute("/tools/ecosystem")({
   validateSearch: zodValidator(ecosystemSearchSchema),
+  loaderDeps: ({ search }) => ({
+    category: search.category,
+    status: search.status,
+    sortBy: search.sortBy,
+    sortDir: search.sortDir,
+    query: search.query,
+    page: search.page,
+    perPage: search.perPage,
+  }),
+  loader: async ({ deps }) => {
+    const params = {
+      category: deps.category,
+      status: deps.status,
+      sortBy: deps.sortBy,
+      sortDir: deps.sortDir,
+      query: deps.query,
+      page: deps.page,
+      perPage: deps.perPage,
+    };
+
+    return {
+      prefetchedResources: await prefetchPublicResources([
+        {
+          resourceKey: "ecosystem-sites",
+          params,
+          fetch: () => fetchPublicEcosystemSites(params),
+        },
+      ]),
+    };
+  },
   head: () => ({
     meta: [
       { title: `Notre écosystème | ${SITE.name}` },
       { name: "description", content: `Retrouvez l'ensemble des plateformes officielles de ${SITE.name} : site vitrine, outils, espaces de formation et communication.` },
       { property: "og:title", content: `Notre écosystème | ${SITE.name}` },
-      { property: "og:url", content: "/tools/ecosystem" },
+      { property: "og:url", content: buildShareUrl("/tools/ecosystem") },
     ],
-    links: [{ rel: "canonical", href: "/tools/ecosystem" }],
+    links: [{ rel: "canonical", href: buildShareUrl("/tools/ecosystem") }],
   }),
   component: EcosystemPage,
 });
 
 function EcosystemPage() {
+  const { prefetchedResources } = Route.useLoaderData();
+  return (
+    <PublicResourcePrefetchProvider data={prefetchedResources}>
+      <EcosystemPageContent />
+    </PublicResourcePrefetchProvider>
+  );
+}
+
+function EcosystemPageContent() {
   const { category, status, sortBy, sortDir, query, page, perPage } = useSearch({ from: "/tools/ecosystem" });
   const navigate = useNavigate({ from: "/tools/ecosystem" });
 
@@ -53,8 +94,14 @@ function EcosystemPage() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const hasMounted = useRef(false);
 
   useEffect(() => {
+    if (!hasMounted.current) {
+      hasMounted.current = true;
+      return;
+    }
+
     setIsLoading(true);
     const timer = setTimeout(() => setIsLoading(false), 400);
     return () => clearTimeout(timer);
