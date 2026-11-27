@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight, Mail, Calendar, MapPin, Users, Ticket, AlertCircle } from "lucide-react";
+import { ArrowRight, Mail, Percent } from "lucide-react";
 import { formatDate, type APIFormation } from "@/data/trainings";
 import { SITE } from "@/data/site";
 import { WhatsAppIcon } from "@/components/site/icons/WhatsAppIcon";
@@ -15,6 +15,7 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isFull = f.seatsRemaining !== null && f.seatsRemaining <= 0;
   const isOpen = f.enrollmentStatus === "open";
+  const discount = f.discountPercentage ?? 0;
 
   const seatsFormatted = (() => {
     if (f.seatsRemaining === null) return null;
@@ -69,15 +70,15 @@ export function FormationDetailSidebar({ formation: f }: FormationDetailSidebarP
               {f.price.toLocaleString("fr-FR")} FCFA
             </p>
 
-            {f.registrationFee !== undefined && f.registrationFee > 0 && (
-              <div className="mt-2 flex items-center justify-between gap-3 text-xs">
-                <span className="flex items-center gap-1 text-muted-foreground">
-                  <Ticket size={13} />
-                  Frais d'inscription
+            {discount > 0 && f.originalPrice != null && (
+              <div className="mt-3 flex flex-wrap items-center gap-2">
+                <span className="text-sm text-muted-foreground">Prix original</span>
+                <span className="text-sm font-medium text-muted-foreground line-through">
+                  {f.originalPrice.toLocaleString("fr-FR")} FCFA
                 </span>
-
-                <span className="whitespace-nowrap font-semibold text-foreground">
-                  {f.registrationFee.toLocaleString("fr-FR")} FCFA
+                <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-xs font-bold text-primary">
+                  <Percent size={12} />
+                  {discount}% de réduction
                 </span>
               </div>
             )}
