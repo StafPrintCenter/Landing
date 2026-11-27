@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
@@ -6,22 +6,15 @@ import { useFaqsStore } from "@/stores/useFaqsStore";
 import { getDisciplineColorClass } from "@/data/categories";
 import { ServiceHomeCta } from "./Cta";
 import { ServiceBriefCta } from "./BriefCta";
-import { shuffleFaqs, type APIFaq } from "@/data/faqs";
+import type { APIFaq } from "@/data/faqs";
 
 const SERVICE_FAQ_EXCLUDED_CATEGORIES = new Set(["formation", "formations", "conseils", "actus"]);
 
 export function ServiceHomeFAQ() {
   const [open, setOpen] = useState<number | null>(0);
-  const [randomFaqs, setRandomFaqs] = useState<APIFaq[]>([]);
-
   const { faqs, isLoading } = useFaqsStore({ perPage: 50 });
 
-  useEffect(() => {
-    if (faqs.length === 0) {
-      setRandomFaqs([]);
-      return;
-    }
-
+  const selectedFaqs = useMemo(() => {
     const serviceFaqs = faqs.filter(
       (faq) => !SERVICE_FAQ_EXCLUDED_CATEGORIES.has(faq.category.toLowerCase()),
     );
@@ -34,14 +27,10 @@ export function ServiceHomeFAQ() {
       return acc;
     }, {});
 
-    const selected = Object.values(grouped).map((items) => shuffleFaqs(items)[0]);
-    setRandomFaqs(shuffleFaqs(selected));
+    return Object.values(grouped).map((items) => items[0]);
   }, [faqs]);
 
-  const hasEligibleFaqs = faqs.some(
-    (faq) => !SERVICE_FAQ_EXCLUDED_CATEGORIES.has(faq.category.toLowerCase()),
-  );
-  const isDataLoading = isLoading || (hasEligibleFaqs && randomFaqs.length === 0);
+  const isDataLoading = isLoading;
 
   return (
     <section className="bg-muted/40 border-t border-border/40">
@@ -63,10 +52,10 @@ export function ServiceHomeFAQ() {
                   className="h-16 animate-pulse rounded-xl border border-border bg-card"
                 />
               ))
-            ) : randomFaqs.length === 0 ? (
+            ) : selectedFaqs.length === 0 ? (
               <p className="text-sm text-muted-foreground">Aucune question disponible pour le moment.</p>
             ) : (
-              randomFaqs.map((item, i) => (
+              selectedFaqs.map((item, i) => (
                 <div
                   key={item.id}
                   className="overflow-hidden rounded-xl border border-border bg-card transition-colors duration-200"

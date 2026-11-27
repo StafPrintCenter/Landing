@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Minus, Plus } from "lucide-react";
 import { getDisciplineColorClass } from "@/data/categories";
-import { shuffleFaqs, type APIFaq } from "@/data/faqs";
 import { useFaqsStore } from "@/stores/useFaqsStore";
 import { Reveal } from "@/components/site/Reveal";
 import { ResourceHomeCta } from "./Cta";
@@ -11,16 +10,13 @@ const RESOURCE_FAQ_CATEGORIES = new Set(["Conseils", "Actus"]);
 
 export function ResourceHomeFAQ() {
   const [open, setOpen] = useState<number | null>(0);
-  const [randomFaqs, setRandomFaqs] = useState<APIFaq[]>([]);
   const { faqs, isLoading, isError, error } = useFaqsStore({ perPage: 50 });
+  const selectedFaqs = useMemo(
+    () => faqs.filter((faq) => RESOURCE_FAQ_CATEGORIES.has(faq.category)).slice(0, 4),
+    [faqs],
+  );
 
-  useEffect(() => {
-    const selected = faqs.filter((faq) => RESOURCE_FAQ_CATEGORIES.has(faq.category));
-    setRandomFaqs(shuffleFaqs(selected).slice(0, 4));
-  }, [faqs]);
-
-  const hasEligibleFaqs = faqs.some((faq) => RESOURCE_FAQ_CATEGORIES.has(faq.category));
-  const isDataLoading = isLoading || (hasEligibleFaqs && randomFaqs.length === 0);
+  const isDataLoading = isLoading;
 
   return (
     <section className="border-t border-border/40 bg-muted/40">
@@ -45,10 +41,10 @@ export function ResourceHomeFAQ() {
               <p className="text-sm text-destructive">
                 Impossible de charger les conseils.{error instanceof Error && error.message ? ` ${error.message}` : ""}
               </p>
-            ) : randomFaqs.length === 0 ? (
+            ) : selectedFaqs.length === 0 ? (
               <p className="text-sm text-muted-foreground">Aucun conseil disponible pour le moment.</p>
             ) : (
-              randomFaqs.map((item, index) => (
+              selectedFaqs.map((item, index) => (
                 <div key={item.id} className="overflow-hidden rounded-xl border border-border bg-card transition-colors duration-200">
                   <button
                     type="button"

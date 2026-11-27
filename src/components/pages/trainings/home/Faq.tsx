@@ -1,21 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { useFaqsStore } from "@/stores/useFaqsStore";
 import { FormationHomeCta } from "./Cta";
-import { shuffleFaqs, type APIFaq } from "@/data/faqs";
 
 export function FormationHomeFAQ() {
   const [open, setOpen] = useState<number | null>(0);
-  const [randomFaqs, setRandomFaqs] = useState<APIFaq[]>([]);
   const { faqs, isLoading } = useFaqsStore({ category: "Formation", perPage: 50 });
-
-  useEffect(() => {
-    setRandomFaqs(shuffleFaqs(faqs).slice(0, 4));
-  }, [faqs]);
-
-  const isDataLoading = isLoading || (faqs.length > 0 && randomFaqs.length === 0);
+  const selectedFaqs = faqs.slice(0, 4);
+  const isDataLoading = isLoading;
 
   return (
     <section className="bg-muted/40 border-t border-border/40">
@@ -35,10 +29,10 @@ export function FormationHomeFAQ() {
                   className="h-13 animate-pulse rounded-xl border border-border bg-card"
                 />
               ))
-            ) : randomFaqs.length === 0 ? (
+            ) : selectedFaqs.length === 0 ? (
               <p className="text-sm text-muted-foreground">Aucune question disponible pour le moment.</p>
             ) : (
-              randomFaqs.map((item, i) => (
+              selectedFaqs.map((item, i) => (
                 <div key={item.id} className="overflow-hidden rounded-xl border border-border bg-card transition-colors duration-200">
                   <button
                     onClick={() => setOpen(open === i ? null : i)}
