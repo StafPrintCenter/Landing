@@ -1,10 +1,13 @@
 import { createFileRoute, useNavigate, useSearch } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { zodValidator } from "@tanstack/zod-adapter";
 import { SITE } from "@/data/site";
 import { SiteShell } from "@/components/site/SiteShell";
-import { useServicesStore } from "@/stores/useServicesStore";
+import { fetchPublicServices, useServicesStore } from "@/stores/useServicesStore";
+import { fetchPublicFaqs } from "@/stores/useFaqsStore";
+import { buildShareUrl } from "@/lib/share/build-share-url";
+import { prefetchPublicResources, PublicResourcePrefetchProvider } from "@/stores/public-resource-prefetch";
 import { SERVICE_CATEGORIES } from "@/data/services";
 import { Pagination } from "@/components/site/Pagination";
 import {
@@ -35,20 +38,69 @@ const servicesSearchSchema = z.object({
 
 export const Route = createFileRoute("/services/")({
   validateSearch: zodValidator(servicesSearchSchema),
+  loaderDeps: ({ search }) => ({
+    category: search.category,
+    sortBy: search.sortBy,
+    sortDir: search.sortDir,
+    query: search.query,
+    page: search.page,
+    perPage: search.perPage,
+  }),
+  loader: async ({ deps }) => {
+    const listParams = {
+      category: deps.category,
+      sortBy: deps.sortBy,
+      sortDir: deps.sortDir,
+      query: deps.query,
+      page: deps.page,
+      perPage: deps.perPage,
+    };
+    const allServicesParams = { perPage: 100 };
+    const faqParams = { perPage: 50 };
+
+    return {
+      prefetchedResources: await prefetchPublicResources([
+        {
+          resourceKey: "services",
+          params: listParams,
+          fetch: () => fetchPublicServices(listParams),
+        },
+        {
+          resourceKey: "services",
+          params: allServicesParams,
+          fetch: () => fetchPublicServices(allServicesParams),
+        },
+        {
+          resourceKey: "faqs",
+          params: faqParams,
+          fetch: () => fetchPublicFaqs(faqParams),
+        },
+      ]),
+    };
+  },
   head: () => ({
     meta: [
       { title: `Nos services | ${SITE.name}` },
       { name: "description", content: "Design graphique, impression, sites web, vidéo, badges, roll-up et formations." },
       { property: "og:title", content: `Nos services | ${SITE.name}` },
       { property: "og:description", content: "Un studio complet pour donner forme à vos idées." },
-      { property: "og:url", content: "/services" },
+      { property: "og:url", content: buildShareUrl("/services") },
     ],
-    links: [{ rel: "canonical", href: "/services" }],
+    links: [{ rel: "canonical", href: buildShareUrl("/services") }],
   }),
   component: ServicesPage,
 });
 
 function ServicesPage() {
+  const { prefetchedResources } = Route.useLoaderData();
+  return (
+    <PublicResourcePrefetchProvider data={prefetchedResources}>
+      <ServicesPageContent />
+    </PublicResourcePrefetchProvider>
+  );
+}
+
+function ServicesPageContent() {
   const { category, sortBy, sortDir, query, page, perPage } = useSearch({ from: "/services/" });
   const navigate = useNavigate({ from: "/services/" });
   const { services: processedList, meta, isLoading: storeLoading } = useServicesStore({ category, sortBy, sortDir, query, page, perPage });
@@ -56,8 +108,14 @@ function ServicesPage() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const hasMounted = useRef(false);
 
   useEffect(() => {
+    if (!hasMounted.current) {
+      hasMounted.current = true;
+      return;
+    }
+
     setIsLoading(true);
     const timer = setTimeout(() => setIsLoading(false), 400);
     return () => clearTimeout(timer);
