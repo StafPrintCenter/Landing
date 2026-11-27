@@ -11,6 +11,7 @@ interface FormationCardProps {
 export function FormationHomeCard({ formation: f, onRegister }: FormationCardProps) {
   const isFull = f.seatsRemaining !== null && f.seatsRemaining <= 0;
   const isOpen = f.enrollmentStatus === "open";
+  const discount = f.discountPercentage ?? 0;
 
   return (
     <motion.div
@@ -41,6 +42,16 @@ export function FormationHomeCard({ formation: f, onRegister }: FormationCardPro
             <span className="font-display text-xl font-bold text-primary">
               {f.price.toLocaleString("fr-FR")} FCFA
             </span>
+            {discount > 0 && f.originalPrice != null && (
+              <div className="mt-1 flex items-center justify-end gap-2">
+                <span className="text-xs text-muted-foreground line-through">
+                  {f.originalPrice.toLocaleString("fr-FR")} FCFA
+                </span>
+                <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[11px] font-bold text-primary">
+                  -{discount}%
+                </span>
+              </div>
+            )}
           </div>
         </div>
 
