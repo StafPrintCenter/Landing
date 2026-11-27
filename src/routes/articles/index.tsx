@@ -1,11 +1,16 @@
 import { createFileRoute, useNavigate, useSearch } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { zodValidator } from "@tanstack/zod-adapter";
 import { SiteShell } from "@/components/site/SiteShell";
 import { ARTICLE_CATEGORIES, type ArticleCategory } from "@/data/articles";
-import { useArticlesStore } from "@/stores/useArticlesStore";
+import { fetchPublicArticles, useArticlesStore } from "@/stores/useArticlesStore";
 import { SITE } from "@/data/site";
+import { buildShareUrl } from "@/lib/share/build-share-url";
+import {
+  prefetchPublicResources,
+  PublicResourcePrefetchProvider,
+} from "@/stores/public-resource-prefetch";
 import { Pagination } from "@/components/site/Pagination";
 import {
   ArticleHomeHeader,
@@ -33,18 +38,65 @@ const articlesSearchSchema = z.object({
 
 export const Route = createFileRoute("/articles/")({
   validateSearch: zodValidator(articlesSearchSchema),
+  loaderDeps: ({ search }) => ({
+    category: search.category,
+    sortBy: search.sortBy,
+    sortDir: search.sortDir,
+    query: search.query,
+    page: search.page,
+    perPage: search.perPage,
+  }),
+  loader: async ({ deps }) => {
+    const featuredParams = { sortBy: "date", sortDir: "desc", perPage: 1 };
+    const isDefaultListing =
+      deps.category === "Tout" && deps.sortBy === "default" && deps.query.trim() === "";
+    const listParams = {
+      category: deps.category,
+      sortBy: deps.sortBy,
+      sortDir: deps.sortDir,
+      query: deps.query,
+      page: isDefaultListing ? 1 : deps.page,
+      perPage: isDefaultListing ? deps.page * deps.perPage + 1 : deps.perPage,
+    };
+
+    return {
+      prefetchedResources: await prefetchPublicResources([
+        {
+          resourceKey: "articles",
+          params: featuredParams,
+          fetch: () => fetchPublicArticles(featuredParams),
+        },
+        {
+          resourceKey: "articles",
+          params: listParams,
+          fetch: () => fetchPublicArticles(listParams),
+        },
+      ]),
+    };
+  },
   head: () => ({
     meta: [
       { title: `Blog | ${SITE.name}` },
       { name: "description", content: `Conseils design, astuces impression, actualités web : le blog du studio ${SITE.name}.` },
       { property: "og:title", content: `Blog | ${SITE.name}` },
       { property: "og:description", content: "Tous nos articles pour mieux concevoir et imprimer au Bénin." },
+      { property: "og:url", content: buildShareUrl("/articles") },
     ],
+    links: [{ rel: "canonical", href: buildShareUrl("/articles") }],
   }),
   component: ArticlesPage,
 });
 
 function ArticlesPage() {
+  const { prefetchedResources } = Route.useLoaderData();
+  return (
+    <PublicResourcePrefetchProvider data={prefetchedResources}>
+      <ArticlesPageContent />
+    </PublicResourcePrefetchProvider>
+  );
+}
+
+function ArticlesPageContent() {
   const { category, sortBy, sortDir, query, page, perPage } = useSearch({ from: "/articles/" });
   const navigate = useNavigate({ from: "/articles/" });
 
@@ -67,16 +119,16 @@ function ArticlesPage() {
     sortBy,
     sortDir,
     query,
-    page: isDefaultListing && featured ? 1 : page,
-    perPage: isDefaultListing && featured ? page * perPage + 1 : perPage,
+    page: isDefaultListing ? 1 : page,
+    perPage: isDefaultListing ? page * perPage + 1 : perPage,
   });
   const storeLoading = articlesLoading || (isDefaultListing && featuredLoading);
-  const displayedArticles =
-    isDefaultListing && featured
-      ? fetchedArticles
-          .filter((article) => article.id !== featured.id)
-          .slice((page - 1) * perPage, page * perPage)
-      : fetchedArticles;
+  const defaultListingArticles = featured
+    ? fetchedArticles.filter((article) => article.id !== featured.id)
+    : fetchedArticles;
+  const displayedArticles = isDefaultListing
+    ? defaultListingArticles.slice((page - 1) * perPage, page * perPage)
+    : fetchedArticles;
   const gridTotal = Math.max(0, (meta?.total ?? fetchedArticles.length) - (isDefaultListing && featured ? 1 : 0));
   const gridLastPage = Math.max(1, Math.ceil(gridTotal / perPage));
   const gridMeta =
@@ -94,8 +146,14 @@ function ArticlesPage() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const hasMounted = useRef(false);
 
   useEffect(() => {
+    if (!hasMounted.current) {
+      hasMounted.current = true;
+      return;
+    }
+
     setIsLoading(true);
     const timer = setTimeout(() => setIsLoading(false), 400);
     return () => clearTimeout(timer);
