@@ -1,10 +1,13 @@
 import { createFileRoute, useNavigate, useSearch } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { SiteShell } from "@/components/site/SiteShell";
 import { SITE } from "@/data/site";
+import { buildShareUrl } from "@/lib/share/build-share-url";
 import { FORMATION_THEMES } from "@/data/trainings";
-import { useFormationsStore } from "@/stores/useTrainingsStore";
+import { fetchPublicFormations, useFormationsStore } from "@/stores/useTrainingsStore";
+import { fetchPublicFaqs } from "@/stores/useFaqsStore";
+import { prefetchPublicResources, PublicResourcePrefetchProvider } from "@/stores/public-resource-prefetch";
 import { Pagination } from "@/components/site/Pagination";
 import {
   FormationHomeHeader,
@@ -33,16 +36,62 @@ const trainingSearchSchema = z.object({
 
 export const Route = createFileRoute("/trainings/")({
   validateSearch: (search) => trainingSearchSchema.parse(search),
+  loaderDeps: ({ search }) => ({
+    theme: search.theme,
+    sortBy: search.sortBy,
+    sortDir: search.sortDir,
+    query: search.query,
+    availableOnly: search.availableOnly,
+    page: search.page,
+    perPage: search.perPage,
+  }),
+  loader: async ({ deps }) => {
+    const listParams = {
+      category: deps.theme,
+      sortBy: deps.sortBy,
+      sortDir: deps.sortDir,
+      query: deps.query,
+      availableOnly: deps.availableOnly,
+      page: deps.page,
+      perPage: deps.perPage,
+    };
+    const faqParams = { category: "Formation", perPage: 50 };
+
+    return {
+      prefetchedResources: await prefetchPublicResources([
+        {
+          resourceKey: "formations",
+          params: listParams,
+          fetch: () => fetchPublicFormations(listParams),
+        },
+        {
+          resourceKey: "faqs",
+          params: faqParams,
+          fetch: () => fetchPublicFaqs(faqParams),
+        },
+      ]),
+    };
+  },
   head: () => ({
     meta: [
       { title: `Formations | ${SITE.name}` },
       { name: "description", content: "Formations certifiantes en design, web, impression et vidéo à Porto-Novo. Apprenez des compétences métiers demandées." },
     ],
+    links: [{ rel: "canonical", href: buildShareUrl("/trainings") }],
   }),
   component: FormationsPage,
 });
 
 function FormationsPage() {
+  const { prefetchedResources } = Route.useLoaderData();
+  return (
+    <PublicResourcePrefetchProvider data={prefetchedResources}>
+      <FormationsPageContent />
+    </PublicResourcePrefetchProvider>
+  );
+}
+
+function FormationsPageContent() {
   const { theme, sortBy, sortDir, query, availableOnly, page, perPage } = useSearch({ from: "/trainings/" });
   const navigate = useNavigate({ from: "/trainings/" });
 
@@ -58,8 +107,14 @@ function FormationsPage() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const hasMounted = useRef(false);
 
   useEffect(() => {
+    if (!hasMounted.current) {
+      hasMounted.current = true;
+      return;
+    }
+
     setIsLoading(true);
     const timer = setTimeout(() => setIsLoading(false), 400);
     return () => clearTimeout(timer);
