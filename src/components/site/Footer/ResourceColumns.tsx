@@ -38,7 +38,7 @@ export function FooterResourceColumns({
         <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-accent">
           Navigation
         </h4>
-        <ul className="mt-4 space-y-2 text-sm">
+        <ul className="mt-4 space-y-2 text-sm text-secondary-foreground/80">
           {NAV_LINKS.map((link) => (
             <li key={link.to}>
               <a href={link.to} className="hover:text-accent transition-colors">
@@ -66,22 +66,22 @@ export function FooterResourceColumns({
         <ul aria-busy={isLoadingServices} className="mt-4 space-y-2 text-sm text-secondary-foreground/80">
           {isLoadingServices
             ? SKELETON_WIDTHS.map((width, index) => (
-                <li key={`service-skeleton-${index}`} className="min-w-0">
-                  <FooterLinkSkeleton width={width} />
-                </li>
-              ))
+              <li key={`service-skeleton-${index}`} className="min-w-0">
+                <FooterLinkSkeleton width={width} />
+              </li>
+            ))
             : services.map((service, index) => (
-                <li key={`${service.slug}-${index}`} className="min-w-0">
-                  <Link
-                    to="/services/$slug"
-                    params={{ slug: service.slug }}
-                    className="block truncate transition-colors hover:text-accent"
-                    title={service.title}
-                  >
-                    {service.title}
-                  </Link>
-                </li>
-              ))}
+              <li key={`${service.slug}-${index}`} className="min-w-0">
+                <Link
+                  to="/services/$slug"
+                  params={{ slug: service.slug }}
+                  className="block truncate transition-colors hover:text-accent"
+                  title={service.title}
+                >
+                  {service.title}
+                </Link>
+              </li>
+            ))}
           {!isLoadingServices && hasMoreServices && (
             <li>
               <Link
@@ -110,24 +110,24 @@ export function FooterResourceColumns({
         <ul aria-busy={isLoadingEcosystems} className="mt-4 space-y-2 text-sm text-secondary-foreground/80">
           {isLoadingEcosystems
             ? SKELETON_WIDTHS.map((width, index) => (
-                <li key={`ecosystem-skeleton-${index}`} className="min-w-0">
-                  <FooterLinkSkeleton width={width} hasExternalIcon />
-                </li>
-              ))
+              <li key={`ecosystem-skeleton-${index}`} className="min-w-0">
+                <FooterLinkSkeleton width={width} hasExternalIcon />
+              </li>
+            ))
             : ecosystems.map((site, index) => (
-                <li key={`${site.id || site.url}-${index}`} className="min-w-0">
-                  <a
-                    href={site.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex max-w-full items-center gap-1.5 truncate transition-colors hover:text-accent"
-                    title={site.name}
-                  >
-                    <span className="truncate">{site.name}</span>
-                    <ExternalLink size={12} className="shrink-0 text-secondary-foreground/50" />
-                  </a>
-                </li>
-              ))}
+              <li key={`${site.id || site.url}-${index}`} className="min-w-0">
+                <a
+                  href={site.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex max-w-full items-center gap-1.5 truncate transition-colors hover:text-accent"
+                  title={site.name}
+                >
+                  <span className="truncate">{site.name}</span>
+                  <ExternalLink size={12} className="shrink-0 text-secondary-foreground/50" />
+                </a>
+              </li>
+            ))}
           {!isLoadingEcosystems && hasMoreEcosystems && (
             <li>
               <Link to="/tools/ecosystem" className="text-accent hover:underline">
