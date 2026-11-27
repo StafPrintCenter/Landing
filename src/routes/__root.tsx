@@ -5,7 +5,6 @@ import { Toaster } from "sonner";
 import appCss from "../styles.css?url";
 import { SITE, SITE_LINK } from "@/data/site";
 import logo from "@/assets/logos.json";
-import { buildShareUrl } from "@/lib/share/build-share-url";
 import { NotFoundComponent, ErrorComponent } from "@/components/errors";
 import { useSpcPageContext } from "@/lib/spc-intelligence";
 
@@ -15,8 +14,6 @@ const OPTIMIZED_DESC = "Impression numérique (bâches, badges, cartes), design 
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => {
-    const canonicalUrl = buildShareUrl("/");
-
     return {
       meta: [
         { charSet: "utf-8" },
@@ -35,7 +32,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         { property: "og:image:width", content: "1200" },
         { property: "og:image:height", content: "630" },
         { property: "og:image:alt", content: `${SITE.name} - ${SITE.activity}` },
-        { property: "og:url", content: canonicalUrl },
         { property: "og:locale", content: "fr_BJ" },
 
         /* Twitter / X */
@@ -50,7 +46,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         { name: "google-adsense-account", content: "ca-pub-9682293308540812" },
       ],
       links: [
-        { rel: "canonical", href: canonicalUrl },
         { rel: "stylesheet", href: appCss },
         { rel: "preconnect", href: "https://fonts.googleapis.com" },
         { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
@@ -59,6 +54,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         { rel: "sitemap", type: "application/xml", href: "/sitemap.xml" },
       ],
       scripts: [
+        {
+          type: "text/javascript",
+          children:
+            "window.dataLayer = window.dataLayer || []; window.gtag = window.gtag || function(){window.dataLayer.push(arguments);}; window.gtag('consent', 'default', {ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 500});",
+        },
+        {
+          src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9682293308540812",
+          async: true,
+          crossOrigin: "anonymous",
+        },
         /* 1. Schéma LocalBusiness */
         {
           type: "application/ld+json",
