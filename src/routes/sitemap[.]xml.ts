@@ -56,7 +56,7 @@ export const Route = createFileRoute("/sitemap.xml")({
 
         // 3. Appel aux APIs publiques avec tolérance de panne
         try {
-          const [servicesRes, formationsRes, articlesRes, jobsRes, ressourcesRes] = await Promise.all([
+          const [servicesRes, formationsRes, articlesRes, jobsRes, resourcesRes] = await Promise.all([
             fetchPublicServices({ perPage: 500 }).catch(() => ({ data: [] })),
             fetchPublicFormations({ perPage: 500 }).catch(() => ({ data: [] })),
             fetchPublicArticles({ perPage: 500 }).catch(() => ({ data: [] })),
@@ -106,7 +106,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           }
 
           // Ressources
-          for (const r of ressourcesRes.data) {
+          for (const r of resourcesRes.data) {
             entries.push({
               path: `/tools/ressources/${r.slug}`,
               lastmod: TODAY,
@@ -114,6 +114,7 @@ export const Route = createFileRoute("/sitemap.xml")({
               priority: "0.7",
             });
           }
+
         } catch {
           // Ignorer les erreurs d'API pour continuer de servir le sitemap des pages statiques
         }
