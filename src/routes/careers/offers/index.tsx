@@ -1,12 +1,14 @@
 import { createFileRoute, useNavigate, useSearch } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { zodValidator } from "@tanstack/zod-adapter";
 import { SiteShell } from "@/components/site/SiteShell";
 import { Pagination } from "@/components/site/Pagination";
 import { SITE } from "@/data/site";
+import { buildShareUrl } from "@/lib/share/build-share-url";
 import { JOB_CONTRACT_TYPES, type JobContractType } from "@/data/jobs";
-import { useJobOffersStore } from "@/stores/useJobsStore";
+import { fetchPublicJobOffers, useJobOffersStore } from "@/stores/useJobsStore";
+import { prefetchPublicResources, PublicResourcePrefetchProvider } from "@/stores/public-resource-prefetch";
 import {
   CareersHomeHeader,
   CareersHomeSearchBar,
@@ -32,6 +34,34 @@ const careersSearchSchema = z.object({
 
 export const Route = createFileRoute("/careers/offers/")({
   validateSearch: zodValidator(careersSearchSchema),
+  loaderDeps: ({ search }) => ({
+    contractType: search.contractType,
+    sortBy: search.sortBy,
+    sortDir: search.sortDir,
+    query: search.query,
+    page: search.page,
+    perPage: search.perPage,
+  }),
+  loader: async ({ deps }) => {
+    const params = {
+      contractType: deps.contractType,
+      sortBy: deps.sortBy,
+      sortDir: deps.sortDir,
+      query: deps.query,
+      page: deps.page,
+      perPage: deps.perPage,
+    };
+
+    return {
+      prefetchedResources: await prefetchPublicResources([
+        {
+          resourceKey: "job-offers",
+          params,
+          fetch: () => fetchPublicJobOffers(params),
+        },
+      ]),
+    };
+  },
   head: () => ({
     meta: [
       { title: `Carrières | ${SITE.name}` },
@@ -40,13 +70,23 @@ export const Route = createFileRoute("/careers/offers/")({
         content: `Découvrez les offres d'emploi ouvertes chez ${SITE.name} et postulez en ligne.`,
       },
       { property: "og:title", content: `Carrières | ${SITE.name}` },
-      { property: "og:url", content: "/careers/offers" },
+      { property: "og:url", content: buildShareUrl("/careers/offers") },
     ],
+    links: [{ rel: "canonical", href: buildShareUrl("/careers/offers") }],
   }),
   component: CareersPage,
 });
 
 function CareersPage() {
+  const { prefetchedResources } = Route.useLoaderData();
+  return (
+    <PublicResourcePrefetchProvider data={prefetchedResources}>
+      <CareersPageContent />
+    </PublicResourcePrefetchProvider>
+  );
+}
+
+function CareersPageContent() {
   const { contractType, sortBy, sortDir, query, page, perPage } = useSearch({
     from: "/careers/offers/",
   });
@@ -56,8 +96,14 @@ function CareersPage() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const hasMounted = useRef(false);
 
   useEffect(() => {
+    if (!hasMounted.current) {
+      hasMounted.current = true;
+      return;
+    }
+
     setIsLoading(true);
     const timer = setTimeout(() => setIsLoading(false), 400);
     return () => clearTimeout(timer);
