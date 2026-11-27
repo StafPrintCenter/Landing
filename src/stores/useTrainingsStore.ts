@@ -2,7 +2,7 @@ import { createResourceStore } from "./createResourceStore";
 import { resolveApiUrl } from "@/lib/api/resolve-url";
 import { parseApiError } from "@/lib/api/error";
 import { type APIFormation } from "@/data/trainings";
-import type { APITrainingRegistration, CreateTrainingRegistrationParams, TrainingRegistrationSchedule, TrainingRegistrationErrorReason, } from "@/data/trainings";
+import type { APITrainingRegistration, CreateTrainingRegistrationParams, TrainingRegistrationErrorReason, } from "@/data/trainings";
 
 type RegistrationResponse = { data: APITrainingRegistration };
 
