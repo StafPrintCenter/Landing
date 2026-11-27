@@ -30,7 +30,6 @@ export const Route = createFileRoute("/tools/ressources/$slug/")({
         ? [
           { title },
           { name: "description", content: description },
-          { name: "robots", content: "noindex" },
           { property: "og:type", content: "website" },
           { property: "og:title", content: title },
           { property: "og:description", content: description },
@@ -45,7 +44,7 @@ export const Route = createFileRoute("/tools/ressources/$slug/")({
           { name: "twitter:title", content: title },
           { name: "twitter:description", content: description },
         ]
-        : [{ title }, { name: "robots", content: "noindex" }],
+        : [{ title }],
       links: [{ rel: "canonical", href: buildShareUrl(url) }],
     };
   },
