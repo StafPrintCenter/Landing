@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate, useSearch } from "@tanstack/react-router"
 import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { zodValidator } from "@tanstack/zod-adapter";
+import { shuffleFaqs } from "@/data/faqs";
 import { Pagination, paginate } from "@/components/site/Pagination";
 import { SiteShell } from "@/components/site/SiteShell";
 import { fetchPublicResources, useResourcesStore } from "@/stores/useResourcesStore";
@@ -38,6 +39,8 @@ const resourceSearchSchema = z.object({
   perPage: z.number().catch(9).default(9),
 });
 
+const RESOURCE_FAQ_CATEGORIES = new Set(["Conseils", "Actus"]);
+
 export const Route = createFileRoute("/tools/ressources/")({
   validateSearch: zodValidator(resourceSearchSchema),
   loaderDeps: ({ search }) => ({
@@ -55,9 +58,10 @@ export const Route = createFileRoute("/tools/ressources/")({
     };
     const allResourcesParams = {};
     const faqParams = { perPage: 50 };
-
-    return {
-      prefetchedResources: await prefetchPublicResources([
+    const faqRequest = fetchPublicFaqs(faqParams);
+    const [faqResponse, prefetchedResources] = await Promise.all([
+      faqRequest.catch(() => undefined),
+      prefetchPublicResources([
         {
           resourceKey: "resources",
           params: listParams,
@@ -71,9 +75,18 @@ export const Route = createFileRoute("/tools/ressources/")({
         {
           resourceKey: "faqs",
           params: faqParams,
-          fetch: () => fetchPublicFaqs(faqParams),
+          fetch: () => faqRequest,
         },
       ]),
+    ]);
+
+    return {
+      prefetchedResources,
+      selectedFaqIds: shuffleFaqs(
+        (faqResponse?.data ?? []).filter((faq) => RESOURCE_FAQ_CATEGORIES.has(faq.category)),
+      )
+        .slice(0, 4)
+        .map((faq) => faq.id),
     };
   },
   head: () => ({
@@ -90,15 +103,15 @@ export const Route = createFileRoute("/tools/ressources/")({
 });
 
 function ResourcesPage() {
-  const { prefetchedResources } = Route.useLoaderData();
+  const { prefetchedResources, selectedFaqIds } = Route.useLoaderData();
   return (
     <PublicResourcePrefetchProvider data={prefetchedResources}>
-      <ResourcesPageContent />
+      <ResourcesPageContent selectedFaqIds={selectedFaqIds} />
     </PublicResourcePrefetchProvider>
   );
 }
 
-function ResourcesPageContent() {
+function ResourcesPageContent({ selectedFaqIds }: { selectedFaqIds: string[] }) {
   const { category, price, sortBy, sortDir, query, page, perPage } = useSearch({ from: "/tools/ressources/" });
   const navigate = useNavigate({ from: "/tools/ressources/" });
 
@@ -209,7 +222,7 @@ function ResourcesPageContent() {
         )}
       </section>
 
-      <ResourceHomeFAQ />
+      <ResourceHomeFAQ selectedFaqIds={selectedFaqIds} />
 
       <ResourceHomeMobileSheet
         isOpen={filtersOpen}

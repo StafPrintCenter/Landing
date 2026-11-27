@@ -8,27 +8,18 @@ import { ServiceHomeCta } from "./Cta";
 import { ServiceBriefCta } from "./BriefCta";
 import type { APIFaq } from "@/data/faqs";
 
-const SERVICE_FAQ_EXCLUDED_CATEGORIES = new Set(["formation", "formations", "conseils", "actus"]);
-
-export function ServiceHomeFAQ() {
+export function ServiceHomeFAQ({ selectedFaqIds }: { selectedFaqIds: string[] }) {
   const [open, setOpen] = useState<number | null>(0);
   const { faqs, isLoading } = useFaqsStore({ perPage: 50 });
 
   const selectedFaqs = useMemo(() => {
-    const serviceFaqs = faqs.filter(
-      (faq) => !SERVICE_FAQ_EXCLUDED_CATEGORIES.has(faq.category.toLowerCase()),
-    );
-
-    const grouped = serviceFaqs.reduce<Record<string, APIFaq[]>>((acc, faq) => {
-      if (!acc[faq.category]) {
-        acc[faq.category] = [];
-      }
-      acc[faq.category].push(faq);
-      return acc;
-    }, {});
-
-    return Object.values(grouped).map((items) => items[0]);
-  }, [faqs]);
+    const faqsById = new Map(faqs.map((faq) => [faq.id, faq]));
+    return selectedFaqIds.reduce<APIFaq[]>((selected, id) => {
+      const faq = faqsById.get(id);
+      if (faq) selected.push(faq);
+      return selected;
+    }, []);
+  }, [faqs, selectedFaqIds]);
 
   const isDataLoading = isLoading;
 

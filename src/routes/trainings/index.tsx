@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate, useSearch } from "@tanstack/react-router"
 import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { SiteShell } from "@/components/site/SiteShell";
+import { shuffleFaqs } from "@/data/faqs";
 import { SITE } from "@/data/site";
 import { buildShareUrl } from "@/lib/share/build-share-url";
 import { FORMATION_THEMES } from "@/data/trainings";
@@ -56,9 +57,10 @@ export const Route = createFileRoute("/trainings/")({
       perPage: deps.perPage,
     };
     const faqParams = { category: "Formation", perPage: 50 };
-
-    return {
-      prefetchedResources: await prefetchPublicResources([
+    const faqRequest = fetchPublicFaqs(faqParams);
+    const [faqResponse, prefetchedResources] = await Promise.all([
+      faqRequest.catch(() => undefined),
+      prefetchPublicResources([
         {
           resourceKey: "formations",
           params: listParams,
@@ -67,9 +69,16 @@ export const Route = createFileRoute("/trainings/")({
         {
           resourceKey: "faqs",
           params: faqParams,
-          fetch: () => fetchPublicFaqs(faqParams),
+          fetch: () => faqRequest,
         },
       ]),
+    ]);
+
+    return {
+      prefetchedResources,
+      selectedFaqIds: shuffleFaqs(faqResponse?.data ?? [])
+        .slice(0, 4)
+        .map((faq) => faq.id),
     };
   },
   head: () => ({
@@ -83,15 +92,15 @@ export const Route = createFileRoute("/trainings/")({
 });
 
 function FormationsPage() {
-  const { prefetchedResources } = Route.useLoaderData();
+  const { prefetchedResources, selectedFaqIds } = Route.useLoaderData();
   return (
     <PublicResourcePrefetchProvider data={prefetchedResources}>
-      <FormationsPageContent />
+      <FormationsPageContent selectedFaqIds={selectedFaqIds} />
     </PublicResourcePrefetchProvider>
   );
 }
 
-function FormationsPageContent() {
+function FormationsPageContent({ selectedFaqIds }: { selectedFaqIds: string[] }) {
   const { theme, sortBy, sortDir, query, availableOnly, page, perPage } = useSearch({ from: "/trainings/" });
   const navigate = useNavigate({ from: "/trainings/" });
 
@@ -197,7 +206,7 @@ function FormationsPageContent() {
         )}
       </section>
 
-      <FormationHomeFAQ />
+      <FormationHomeFAQ selectedFaqIds={selectedFaqIds} />
 
       {/* Tiroir de filtres mobile */}
       <FormationHomeMobileSheet

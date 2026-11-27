@@ -2,18 +2,24 @@ import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Minus, Plus } from "lucide-react";
 import { getDisciplineColorClass } from "@/data/categories";
+import type { APIFaq } from "@/data/faqs";
 import { useFaqsStore } from "@/stores/useFaqsStore";
 import { Reveal } from "@/components/site/Reveal";
 import { ResourceHomeCta } from "./Cta";
 
-const RESOURCE_FAQ_CATEGORIES = new Set(["Conseils", "Actus"]);
-
-export function ResourceHomeFAQ() {
+export function ResourceHomeFAQ({ selectedFaqIds }: { selectedFaqIds: string[] }) {
   const [open, setOpen] = useState<number | null>(0);
   const { faqs, isLoading, isError, error } = useFaqsStore({ perPage: 50 });
   const selectedFaqs = useMemo(
-    () => faqs.filter((faq) => RESOURCE_FAQ_CATEGORIES.has(faq.category)).slice(0, 4),
-    [faqs],
+    () => {
+      const faqsById = new Map(faqs.map((faq) => [faq.id, faq]));
+      return selectedFaqIds.reduce<APIFaq[]>((selected, id) => {
+        const faq = faqsById.get(id);
+        if (faq) selected.push(faq);
+        return selected;
+      }, []);
+    },
+    [faqs, selectedFaqIds],
   );
 
   const isDataLoading = isLoading;

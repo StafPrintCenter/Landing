@@ -1,14 +1,22 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { useFaqsStore } from "@/stores/useFaqsStore";
 import { FormationHomeCta } from "./Cta";
+import type { APIFaq } from "@/data/faqs";
 
-export function FormationHomeFAQ() {
+export function FormationHomeFAQ({ selectedFaqIds }: { selectedFaqIds: string[] }) {
   const [open, setOpen] = useState<number | null>(0);
   const { faqs, isLoading } = useFaqsStore({ category: "Formation", perPage: 50 });
-  const selectedFaqs = faqs.slice(0, 4);
+  const selectedFaqs = useMemo(() => {
+    const faqsById = new Map(faqs.map((faq) => [faq.id, faq]));
+    return selectedFaqIds.reduce<APIFaq[]>((selected, id) => {
+      const faq = faqsById.get(id);
+      if (faq) selected.push(faq);
+      return selected;
+    }, []);
+  }, [faqs, selectedFaqIds]);
   const isDataLoading = isLoading;
 
   return (

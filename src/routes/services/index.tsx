@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate, useSearch } from "@tanstack/react-router"
 import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { zodValidator } from "@tanstack/zod-adapter";
+import { shuffleFaqs, type APIFaq } from "@/data/faqs";
 import { SITE } from "@/data/site";
 import { SiteShell } from "@/components/site/SiteShell";
 import { fetchPublicServices, useServicesStore } from "@/stores/useServicesStore";
@@ -26,6 +27,22 @@ import {
 } from "@/components/pages/services/home";
 
 const CATEGORY_VALUES = SERVICE_CATEGORIES.map((c) => c.value);
+const SERVICE_FAQ_EXCLUDED_CATEGORIES = new Set(["formation", "formations", "conseils", "actus"]);
+
+function selectServiceFaqs(faqs: APIFaq[]): APIFaq[] {
+  const grouped = faqs
+    .filter((faq) => !SERVICE_FAQ_EXCLUDED_CATEGORIES.has(faq.category.toLowerCase()))
+    .reduce<Record<string, APIFaq[]>>((acc, faq) => {
+      (acc[faq.category] ??= []).push(faq);
+      return acc;
+    }, {});
+
+  const onePerCategory = Object.values(grouped)
+    .map((items) => shuffleFaqs(items)[0])
+    .filter((faq): faq is APIFaq => faq !== undefined);
+
+  return shuffleFaqs(onePerCategory);
+}
 
 const servicesSearchSchema = z.object({
   category: z.enum(["Tout", ...CATEGORY_VALUES] as [string, ...string[]]).catch("Tout").default("Tout"),
@@ -57,9 +74,10 @@ export const Route = createFileRoute("/services/")({
     };
     const allServicesParams = { perPage: 100 };
     const faqParams = { perPage: 50 };
-
-    return {
-      prefetchedResources: await prefetchPublicResources([
+    const faqRequest = fetchPublicFaqs(faqParams);
+    const [faqResponse, prefetchedResources] = await Promise.all([
+      faqRequest.catch(() => undefined),
+      prefetchPublicResources([
         {
           resourceKey: "services",
           params: listParams,
@@ -73,9 +91,14 @@ export const Route = createFileRoute("/services/")({
         {
           resourceKey: "faqs",
           params: faqParams,
-          fetch: () => fetchPublicFaqs(faqParams),
+          fetch: () => faqRequest,
         },
       ]),
+    ]);
+
+    return {
+      prefetchedResources,
+      selectedFaqIds: selectServiceFaqs(faqResponse?.data ?? []).map((faq) => faq.id),
     };
   },
   head: () => ({
@@ -92,15 +115,15 @@ export const Route = createFileRoute("/services/")({
 });
 
 function ServicesPage() {
-  const { prefetchedResources } = Route.useLoaderData();
+  const { prefetchedResources, selectedFaqIds } = Route.useLoaderData();
   return (
     <PublicResourcePrefetchProvider data={prefetchedResources}>
-      <ServicesPageContent />
+      <ServicesPageContent selectedFaqIds={selectedFaqIds} />
     </PublicResourcePrefetchProvider>
   );
 }
 
-function ServicesPageContent() {
+function ServicesPageContent({ selectedFaqIds }: { selectedFaqIds: string[] }) {
   const { category, sortBy, sortDir, query, page, perPage } = useSearch({ from: "/services/" });
   const navigate = useNavigate({ from: "/services/" });
   const { services: processedList, meta, isLoading: storeLoading } = useServicesStore({ category, sortBy, sortDir, query, page, perPage });
@@ -193,7 +216,7 @@ function ServicesPageContent() {
       </section>
 
       {/* Section FAQ & CTA latéral */}
-      <ServiceHomeFAQ />
+      <ServiceHomeFAQ selectedFaqIds={selectedFaqIds} />
 
       {/* Tiroir mobile */}
       <ServiceHomeMobileSheet
