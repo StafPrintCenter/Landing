@@ -1,11 +1,13 @@
 import { createFileRoute, useNavigate, useSearch } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { zodValidator } from "@tanstack/zod-adapter";
 import { SiteShell } from "@/components/site/SiteShell";
 import { PROJECT_CATEGORIES, type ProjectCategory, type APIProject } from "@/data/projects";
-import { useProjectsStore, fetchProjectById } from "@/stores/useProjectsStore";
+import { fetchProjectById, fetchPublicProjects, useProjectsStore } from "@/stores/useProjectsStore";
 import { SITE } from "@/data/site";
+import { buildShareUrl } from "@/lib/share/build-share-url";
+import { prefetchPublicResources, PublicResourcePrefetchProvider } from "@/stores/public-resource-prefetch";
 import { useUI } from "@/store/ui";
 import { Pagination } from "@/components/site/Pagination";
 import {
@@ -35,18 +37,57 @@ const realisationsSearchSchema = z.object({
 
 export const Route = createFileRoute("/projects/")({
   validateSearch: zodValidator(realisationsSearchSchema),
+  loaderDeps: ({ search }) => ({
+    category: search.category,
+    sortBy: search.sortBy,
+    sortDir: search.sortDir,
+    query: search.query,
+    page: search.page,
+    perPage: search.perPage,
+  }),
+  loader: async ({ deps }) => {
+    const params = {
+      category: deps.category,
+      sortBy: deps.sortBy,
+      sortDir: deps.sortDir,
+      query: deps.query,
+      page: deps.page,
+      perPage: deps.perPage,
+    };
+
+    return {
+      prefetchedResources: await prefetchPublicResources([
+        {
+          resourceKey: "projects",
+          params,
+          fetch: () => fetchPublicProjects(params),
+        },
+      ]),
+    };
+  },
   head: () => ({
     meta: [
       { title: `Réalisations | ${SITE.name}` },
       { name: "description", content: "Portfolio complet : design graphique, impression, sites web, vidéos et formations réalisés à Porto-Novo et au Bénin." },
       { property: "og:title", content: `Portfolio - ${SITE.name}` },
       { property: "og:description", content: "Découvrez nos projets récents : design, impression, web, vidéo." },
+      { property: "og:url", content: buildShareUrl("/projects") },
     ],
+    links: [{ rel: "canonical", href: buildShareUrl("/projects") }],
   }),
   component: RealisationsPage,
 });
 
 function RealisationsPage() {
+  const { prefetchedResources } = Route.useLoaderData();
+  return (
+    <PublicResourcePrefetchProvider data={prefetchedResources}>
+      <RealisationsPageContent />
+    </PublicResourcePrefetchProvider>
+  );
+}
+
+function RealisationsPageContent() {
   const { category, sortBy, sortDir, query, page, perPage, open } = useSearch({ from: "/projects/" });
   const navigate = useNavigate({ from: "/projects/" });
 
@@ -57,8 +98,14 @@ function RealisationsPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [singleProject, setSingleProject] = useState<APIProject | null>(null);
+  const hasMounted = useRef(false);
 
   useEffect(() => {
+    if (!hasMounted.current) {
+      hasMounted.current = true;
+      return;
+    }
+
     setIsLoading(true);
     const timer = setTimeout(() => setIsLoading(false), 400);
     return () => clearTimeout(timer);
