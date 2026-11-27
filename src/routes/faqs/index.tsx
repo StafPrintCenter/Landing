@@ -1,11 +1,13 @@
 import { createFileRoute, useNavigate, useSearch } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { zodValidator } from "@tanstack/zod-adapter";
 import { SiteShell } from "@/components/site/SiteShell";
 import { DISCIPLINES } from "@/data/categories";
-import { useFaqsStore } from "@/stores/useFaqsStore";
+import { fetchPublicFaqs, useFaqsStore } from "@/stores/useFaqsStore";
 import { SITE } from "@/data/site";
+import { buildShareUrl } from "@/lib/share/build-share-url";
+import { prefetchPublicResources, PublicResourcePrefetchProvider } from "@/stores/public-resource-prefetch";
 import { Pagination } from "@/components/site/Pagination";
 import {
   FaqHomeHeader,
@@ -33,18 +35,56 @@ const faqsSearchSchema = z.object({
 
 export const Route = createFileRoute("/faqs/")({
   validateSearch: zodValidator(faqsSearchSchema),
+  loaderDeps: ({ search }) => ({
+    category: search.category,
+    sortBy: search.sortBy,
+    sortDir: search.sortDir,
+    query: search.query,
+    page: search.page,
+    perPage: search.perPage,
+  }),
+  loader: async ({ deps }) => {
+    const params = {
+      category: deps.category,
+      sortBy: deps.sortBy,
+      sortDir: deps.sortDir,
+      query: deps.query,
+      page: deps.page,
+      perPage: deps.perPage,
+    };
+
+    return {
+      prefetchedResources: await prefetchPublicResources([
+        {
+          resourceKey: "faqs",
+          params,
+          fetch: () => fetchPublicFaqs(params),
+        },
+      ]),
+    };
+  },
   head: () => ({
     meta: [
       { title: `FAQ | ${SITE.name}` },
       { name: "description", content: `Toutes les réponses à vos questions sur les services, formations et réalisations de ${SITE.name}.` },
       { property: "og:title", content: `FAQ | ${SITE.name}` },
-      { property: "og:url", content: "/faqs" },
+      { property: "og:url", content: buildShareUrl("/faqs") },
     ],
+    links: [{ rel: "canonical", href: buildShareUrl("/faqs") }],
   }),
   component: FaqsPage,
 });
 
 function FaqsPage() {
+  const { prefetchedResources } = Route.useLoaderData();
+  return (
+    <PublicResourcePrefetchProvider data={prefetchedResources}>
+      <FaqsPageContent />
+    </PublicResourcePrefetchProvider>
+  );
+}
+
+function FaqsPageContent() {
   const { category, sortBy, sortDir, query, page, perPage, open } = useSearch({ from: "/faqs/" });
   const navigate = useNavigate({ from: "/faqs/" });
 
@@ -52,8 +92,14 @@ function FaqsPage() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const hasMounted = useRef(false);
 
   useEffect(() => {
+    if (!hasMounted.current) {
+      hasMounted.current = true;
+      return;
+    }
+
     setIsLoading(true);
     const timer = setTimeout(() => setIsLoading(false), 400);
     return () => clearTimeout(timer);
