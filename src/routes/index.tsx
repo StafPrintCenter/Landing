@@ -2,6 +2,18 @@ import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 import { SITE } from "@/data/site";
 import { SiteShell } from "@/components/site/SiteShell";
+import { buildShareUrl } from "@/lib/share/build-share-url";
+import {
+  prefetchPublicResources,
+  PublicResourcePrefetchProvider,
+} from "@/stores/public-resource-prefetch";
+import { fetchPublicArticles } from "@/stores/useArticlesStore";
+import { fetchPublicFormations } from "@/stores/useTrainingsStore";
+import { fetchPublicProjects } from "@/stores/useProjectsStore";
+import { fetchPublicResources } from "@/stores/useResourcesStore";
+import { fetchPublicServices } from "@/stores/useServicesStore";
+import { fetchPublicStats } from "@/stores/useStatsStore";
+import { fetchPublicTestimonials } from "@/stores/useTestimonialsStore";
 import {
   Hero,
   Stats,
